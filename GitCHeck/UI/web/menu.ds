@@ -1,0 +1,82 @@
+menu
+{
+
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Department_Students
+				{
+					displayname = "Department Students"
+					icon = "business-chart-bar-32"
+					page Department_Students
+					{
+						icon = "business-chart-bar-32"
+					}
+				}
+				section Staff_Details
+				{
+					displayname = "Staff Details"
+					icon = "holidays-sickle"
+					form  Staff_Details
+					{
+						icon = "holidays-sickle"
+					}
+					report Staff_Details_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		
+}

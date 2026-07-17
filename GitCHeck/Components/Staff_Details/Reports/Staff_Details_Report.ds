@@ -1,0 +1,12 @@
+default list Staff_Details_Report
+{
+
+			displayName = "Staff Details Report"
+			show all rows from Staff_Details    
+			(
+				Name
+				Age
+				Dept
+			)
+		
+}

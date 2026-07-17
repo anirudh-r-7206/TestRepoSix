@@ -1,0 +1,11 @@
+<page linkname = "Department_Students" displayname = "Department Students"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<chart elementName='Students_By_Department_Chart' title='Students by Department' titleSize='18px' boldTitle='true' titleColor='#222326' type='Column' xtitle='Department' ytitle='Number of Students' bgColor='#FFFFFF' theme='theme1' legendPos='none' heightType='custom' heightValue='420px' appLinkName='thisapp' formLinkName='Staff_Details' xfield='Dept' yfields='count:Name' yAxisInterval='1' quickFilters='Dept' showDataLabel='true' underlyingReport='Staff_Details_Report' /> </column>
+		</row>
+	</layout>
+</zml>
+</content>
