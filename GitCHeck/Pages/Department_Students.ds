@@ -4,7 +4,53 @@
 	<layout>
 		<row>
 			<column width='100%'>
-				<chart elementName='Students_By_Department_Chart' title='Students by Department' titleSize='18px' boldTitle='true' titleColor='#222326' type='Column' xtitle='Department' ytitle='Number of Students' bgColor='#FFFFFF' theme='theme1' legendPos='none' heightType='custom' heightValue='420px' appLinkName='thisapp' formLinkName='Staff_Details' xfield='Dept' yfields='count:Name' yAxisInterval='1' quickFilters='Dept' showDataLabel='true' underlyingReport='Staff_Details_Report' /> </column>
+				<chart elementName='Students_By_Department_Chart' title='Students by Department' titleSize='18px' boldTitle='true' titleColor='#222326' type='Column' xtitle='Department' ytitle='Number of Students' bgColor='#FFFFFF' theme='theme1' legendPos='none' heightType='custom' heightValue='420px' appLinkName='thisapp' formLinkName='Staff_Details' xfield='Dept' yfields='count:Name' yAxisInterval='1' quickFilters='Dept' showDataLabel='true' underlyingReport='Staff_Details_Report' />
+			</column>
+		</row>
+		<row>
+			<column width='100%'>
+				<board bgColor="#FFFFFF" bgColorType="solid" padding="0px" elementName="Average Age by Department" layoutType="grid" items="3" appLinkName="thisapp" formLinkName="Staff_Details" groupBy="Dept" rankBy="Age" rankOrder="highestToLowest" rankAggregate="avg" limit="15">
+					<boardHeader>
+						<pr width="fill" height="fill">
+							<pc paddingTop="14px" paddingLeft="15px" paddingRight="15px" paddingBottom="14px" width="100%" hAlign="left" vAlign="middle">
+								<pr width="auto" height="auto">
+									<pc>
+										<text color="#222326" size="18px" bold="true" type="Text" value="Average Age by Department" />
+									</pc>
+								</pr>
+							</pc>
+						</pr>
+					</boardHeader>
+					<boardLayout paddingRight="15px" paddingBottom="14px" paddingLeft="15px" paddingTop="2px" itemGap="10px">
+						<pr width="fill" height="fill">
+							<pc padding="14px" borderColor="#F2F2F2" borderWidth="1px" width="100%" hAlign="left" vAlign="middle" cornerRadius="12px" bgColor="#FFFFFF">
+								<pr width="auto" height="auto">
+									<pc padding="5px">
+										<pr>
+											<pc>
+												<image marginBottom="10px" color="#222326" bgColor="#F7F7FB" width="40px" height="40px" type="icon" value="users-single-03" size="20px" cornerRadius="20px" iconType="outline" />
+											</pc>
+										</pr>
+										<pr>
+											<pc>
+												<text marginBottom="8px" color="#222326" size="16px" type="boardData" lineHeight="22" numOfLines="1" value="groupedField" />
+											</pc>
+										</pr>
+										<pr>
+											<pc>
+												<text color="theme" size="24px" bold="true" type="boardData" lineHeight="30" numOfLines="1" value="rankAggregate" />
+											</pc>
+											<pc>
+												<text marginLeft="6px" color="#555555" size="14px" type="Text" value="avg age" />
+											</pc>
+										</pr>
+									</pc>
+								</pr>
+							</pc>
+						</pr>
+					</boardLayout>
+				</board>
+			</column>
 		</row>
 	</layout>
 </zml>
