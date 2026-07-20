@@ -16,11 +16,7 @@ content
 			</column>
 		</row>
 	</layout>
-</zml>"
-script
-{
-/* Write your script logic here. You can assign values to the page variables you've created in the previous tab. Enter 'input.' to list the created page variables. */
-input.Template_Type="PO
+</zml>
 </content>
 <script>
 /* Write your script logic here. You can assign values to the page variables you've created in the previous tab. Enter 'input.' to list the created page variables. */
