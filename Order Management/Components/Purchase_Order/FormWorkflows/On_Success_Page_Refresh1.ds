@@ -1,0 +1,34 @@
+On_Success_Page_Refresh1 as "On Success - Page Refresh"
+{
+
+				type =  form
+				form = Purchase_Order
+
+				record event = on add or edit
+					status = inactive
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Factory_Address1 = if(input.Factory_Address != null,input.Factory_Address.Factory_Address,"");
+										input.Factory_Company_Name = input.Factory_Address.Company_Name;
+										input.Factory_Contact_Person = if(input.Factory_Address.Contact_Person1.first_name.isEmpty(),"",input.Factory_Address.Contact_Person1.first_name) + if(input.Factory_Address.Contact_Person1.last_name.isEmpty(),""," " + input.Factory_Address.Contact_Person1.last_name);
+										input.Factory_Email = input.Factory_Address.Factory_Email;
+										input.Factory_Phone = input.Factory_Address.Factory_Phone;
+										//
+										input.Delivery_Address1 = if(input.Delivery_Address != null,input.Delivery_Address.Address,"");
+										input.Buyer_Company_Name = input.Delivery_Address.Company_Name;
+										input.Buyer_Contact_Person = if(input.Delivery_Address.Contact_Person1.first_name.isEmpty(),"",input.Delivery_Address.Contact_Person1.first_name) + if(input.Delivery_Address.Contact_Person1.last_name.isEmpty(),""," " + input.Delivery_Address.Contact_Person1.last_name);
+										input.Buyer_Email = input.Delivery_Address.Email;
+										input.Buyer_Phone = input.Delivery_Address.Phone_Number;
+										// Page Refresh
+										// openUrl("#Script:page.refresh","same window");
+						)
+					}
+				}
+
+			
+}

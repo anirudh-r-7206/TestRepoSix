@@ -1,0 +1,65 @@
+report Size_Charts
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Image
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Image
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Delete 
+							)
+						)
+				)
+			
+}

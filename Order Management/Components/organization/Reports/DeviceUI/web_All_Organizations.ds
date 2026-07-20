@@ -1,0 +1,56 @@
+report All_Organizations
+{
+
+				quickview
+				(
+					layout
+					(
+		 				type = Custom
+		 				selectedlayout = "Custom Layout 1"
+	     				recordsperrow = 2
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Organization_Name as "Org Name"
+								Phone_Number as "Phone"
+								Address
+								Logo
+								Email
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						)
+				)
+			
+}

@@ -1,0 +1,28 @@
+<page linkname = "PO_Template" parameters = "int PO_ID, string Template_Type" displayname = "PO_Template"/>
+<content>
+<zml webDeviceConfig='{\"layout\":{\"displayType\":\"plain\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='html_snippet' elementName='HTML Snippet' bgColor=\"#FFFFFF\">
+          <![CDATA[htmlpage html_snippet()
+content
+			<%{%>
+            <file name:HTML_Snippet.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>"
+script
+{
+/* Write your script logic here. You can assign values to the page variables you've created in the previous tab. Enter 'input.' to list the created page variables. */
+input.Template_Type="PO
+</content>
+<script>
+/* Write your script logic here. You can assign values to the page variables you've created in the previous tab. Enter 'input.' to list the created page variables. */
+				input.Template_Type = "PO";
+</script>

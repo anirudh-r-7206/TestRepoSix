@@ -1,0 +1,18 @@
+Active_Country as "Active Country"
+{
+
+				type =  functions
+				form = Add_Country
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						input.Status = "Active";
+					)
+					}
+				}
+			
+}

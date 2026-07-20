@@ -1,0 +1,19 @@
+Select_Supplier as "Select Supplier"
+{
+
+				type =  functions
+				form = Order_Request
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						// openUrl("#Form:Order_Request/record-edit/#Report:All_Order_Requests?ID=" + input.ID,"popup window");
+										openURL("#Form:Order_Request?recLinkID=" + input.ID + "&viewLinkName=All_Order_Requests","popup window");
+					)
+					}
+				}
+			
+}

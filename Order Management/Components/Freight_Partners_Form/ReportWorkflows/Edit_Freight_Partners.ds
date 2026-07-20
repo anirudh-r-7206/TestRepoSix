@@ -1,0 +1,11 @@
+Edit_Freight_Partners as "Edit Freight Partners"
+{
+
+				type =  functions
+				form = Freight_Partners_Form
+				execution type = for each record	
+				on start
+				{
+				}
+			
+}

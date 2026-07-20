@@ -1,0 +1,197 @@
+<%
+	get_PO = Purchase_Order[ID == input.PO_ID];
+	get_PO_Items = Purchase_LineItems[Purchase_Order == input.PO_ID];
+	get_Buyer = Buyers_Master[ID == get_PO.Customer_Name.Associated_Buyer];
+	get_Org = organization[ID != 0];
+	// 	print_URL = "https://creatorapp.zoho.com/export" + zoho.appuri + "print/PO_Template/?PO_ID=" + input.PO_ID + "&isc5page=true";
+	// 	pdf_URL = "https://creatorapp.zoho.com/export" + zoho.appuri + "pdf/PO_Template/?PO_ID=" + input.PO_ID + "&isc5page=true";
+	%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<%=thisapp.Style.PO_Templet_Style()%>
+	<style>
+	.page_Buttons {
+		padding-top: 18px;
+	}
+	form[name="Print_and_PDF_Button"] .label-left{
+		width: 100%;
+	}
+	form[name="Print_and_PDF_Button"] .formContainer {
+		padding: 0 !important;
+	}
+	form[name="Print_and_PDF_Button"] .form-group.zc-decisionbox-field-group {
+		margin: 0 !important;
+	}
+	form[name="Print_and_PDF_Button"] .decision-box-field.form-field.clearfix {
+		display: none;
+	}
+	form[name="Print_and_PDF_Button"] .formColumn.first-column
+	{
+		display: flex;
+		align-items: center;
+		justify-content: end;
+		gap: 10px;
+	}
+	form[name="Print_and_PDF_Button"] label.form-label.decision-box-label {
+		color: #fff !important;
+		padding: 10px 20px !important;
+		background-color: var(--primary_color);
+		border-radius: 8px;
+		margin: 0px !important;
+	}
+	
+	.zc-footer-wrapper{
+		display: none;
+	}
+	@media print {
+		  /* Specific margins for different sides */
+		 @page {
+			margin-top: 40px;
+			margin-bottom: 40px;
+			margin-left: 10px;
+			margin-right: 10px;
+			size: A4 landscape;
+		 }
+		 .page_Buttons{
+			 display: none;
+		 }
+		 .page{
+			  padding: 0px;
+		 }
+	}
+	</style>
+</head>
+
+<body>
+	<div class="page_Buttons">
+		<div elName='zc-component' formLinkName='Print_and_PDF_Button' params='zc_Header=false&amp;zc_SuccMsg=Data Added Successfully!&amp;zc_SubmitVal=Submit&amp;zc_ResetVal=Reset&Template=PO&Purchase_Order=<%=input.PO_ID%>'></div>
+	</div>
+    <div class="page">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+			<img src=<%=thisapp.Publish_URL.Org_IMG()%> >
+<p>
+                    <strong><%=get_Buyer.Buyer_Organisation%></strong><br>
+                    <%=get_Buyer.Office_Address.address_line_1%>, <%=get_Buyer.Office_Address.address_line_2%><br>
+					<%=get_Buyer.Office_Address.district_city%>, <%=get_Buyer.Office_Address.state_province%><br>
+					<%=get_Buyer.Office_Address.postal_Code%>, <%=get_Buyer.Office_Address.country%><br>
+                    <%=get_Buyer.Primary_Email%>
+                </p>
+            </div>
+            <div class="title">
+                <h2>Purchase Order <%=get_PO.PO_Number%></h2>
+                <p><strong>Date : <%=zoho.currentdate%></strong></p>
+            </div>
+        </div>
+
+        <!-- Seller / Ship / Summary -->
+        <div class="info-section">
+		
+			<div class="box">
+                <h4>Delivery Address</h4>
+                <div class="box_Content">
+					<p><b>Attn:</b> <%=if(get_PO.Buyer_Contact_Person.isEmpty(),"---",get_PO.Buyer_Contact_Person)%></p>
+					<p><b><%=if(get_PO.Buyer_Company_Name.isEmpty(),"---",get_PO.Buyer_Company_Name)%></b></p>
+                    <p>
+					<%=if(get_PO.Delivery_Address1.address_line_1.isEmpty(),"---",get_PO.Delivery_Address1.address_line_1)%>, <%=if(get_PO.Delivery_Address1.address_line_2.isEmpty(),"---",get_PO.Delivery_Address1.address_line_2)%><br>
+					<%=if(get_PO.Delivery_Address1.district_city.isEmpty(),"---",get_PO.Delivery_Address1.district_city)%>, <%=if(get_PO.Delivery_Address1.state_province.isEmpty(),"---",get_PO.Delivery_Address1.state_province)%><br>
+					<%=if(get_PO.Delivery_Address1.postal_Code.isEmpty(),"---",get_PO.Delivery_Address1.postal_Code)%>, <%=if(get_PO.Delivery_Address1.country.isEmpty(),"---",get_PO.Delivery_Address1.country)%><br>
+                    </p>
+					<p><%=if(get_PO.Buyer_Phone.isEmpty(),"---",get_PO.Buyer_Phone)%></p>
+					<p><%=if(get_PO.Buyer_Email.isEmpty(),"---",get_PO.Buyer_Email)%></p>
+                </div>
+            </div>
+			
+            <div class="box">
+                <h4>Factory</h4>
+				<div class="box_Content">
+					<p><b>Attn:</b> <%=if(get_PO.Factory_Contact_Person.isEmpty(),"---",get_PO.Factory_Contact_Person)%></p>
+					<p><b><%=if(get_PO.Factory_Company_Name.isEmpty(),"---",get_PO.Factory_Company_Name)%></b></p>
+                    <p>
+					<%=if(get_PO.Factory_Address1.address_line_1.isempty(),"---",get_PO.Factory_Address1.address_line_1)%>, <%=if(get_PO.Factory_Address1.address_line_2.isEmpty(),"---",get_PO.Factory_Address1.address_line_2)%><br>
+					<%=if(get_PO.Factory_Address1.district_city.isEmpty(),"---",get_PO.Factory_Address1.district_city)%>, <%=if(get_PO.Factory_Address1.state_province.isEmpty(),"---",get_PO.Factory_Address1.state_province)%><br>
+					<%=if(get_PO.Factory_Address1.postal_Code.isEmpty(),"---",get_PO.Factory_Address1.postal_Code)%>, <%=if(get_PO.Factory_Address1.country.isEmpty(),"---",get_PO.Factory_Address1.country)%><br>
+                    </p>
+					<p><%=if(get_PO.Factory_Phone.isEmpty(),"---",get_PO.Factory_Phone)%></p>
+					<p><%=if(get_PO.Factory_Email.isEmpty(),"---",get_PO.Factory_Email)%></p>
+                </div>
+            </div>
+
+            <div class="box">
+                <h4>Summary</h4>
+                <table class="summary">
+                <!--    
+					<tr>
+                       <td>Customer</td>
+                        <td><%=get_PO.Customer_Name.User_Name%></td>
+                    </tr>
+					 -->
+                    <tr>
+                        <td>Payment Terms</td>
+                        <td><%=get_PO.Buyer_Organisation.Payment_Terms%></td>
+                    </tr>
+                    <tr>
+                        <td>Currency</td>
+                        <td>USD</td>
+                    </tr>
+                    <tr>
+                        <td>Total Cost</td>
+                        <td><%=thisapp.Page.PO_Currency_Convert(get_PO.Total_Purchase_Price.round(2))%></td>
+                    </tr>
+                    <tr>
+                        <td>Total Qty</td>
+						<td><%=thisapp.Page.PO_Currency_Convert(get_PO_Items.sum(Quantity))%></td>
+                    </tr>
+                    <tr>
+                        <td>COO</td>
+						<td><%=if(get_PO.Supplier.Country != null,get_PO.Supplier.Country.Country_Name.upper(),"---")%></td>
+                    </tr>
+                    <tr>
+                        <td>Freight Method</td>
+						<td><%=get_PO.Transport_Mode.upper()%></td>
+                    </tr>
+                    <tr>
+                        <td>Incoterms</td>
+                        <td><%=get_PO.Incoterms%></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Order Table -->
+		<%=thisapp.Page.PO_Templet_Table(input.PO_ID,"PO")%>
+		
+ 		<!-- Comments Section -->
+        <table class="comments-table">
+            <tr>
+                <td class="comments-label">Comments:</td>
+                <td class="comments-content">
+                    <%=get_PO.Comments%>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Signature Section -->
+        <table class="signature-table">
+            <tr>
+                <td>Name</td>
+            </tr>
+            <tr>
+                <td>Position</td>
+            </tr>
+            <tr>
+                <td>Company Stamp</td>
+            </tr>
+            <tr>
+                <td>Signature</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

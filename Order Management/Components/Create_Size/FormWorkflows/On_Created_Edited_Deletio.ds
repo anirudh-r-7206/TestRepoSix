@@ -1,0 +1,30 @@
+On_Created_Edited_Deletio as "On Created & Edited - Deletion of a row"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on add or edit
+
+				on delete row of Size_Chart_Details
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											currentRegionList = input.Size_Chart_Details.Region_New.getall();
+										currentRegionList.removeAll(row.Region_New);
+										allRegions = Add_Region[ID != null].ID.getAll();
+										allRegions.removeAll(currentRegionList);
+										for each  size in input.Size_Chart_Details
+										{
+											oldRegion = size.Region_New;
+											size.Region_New:ui.add(allRegions);
+											size.Region_New=oldRegion;
+										}
+						)
+					}
+				}
+
+			
+}

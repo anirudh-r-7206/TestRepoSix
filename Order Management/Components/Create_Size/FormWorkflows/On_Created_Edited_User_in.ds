@@ -1,0 +1,29 @@
+On_Created_Edited_User_in as "On Created & Edited - User input of Region"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on add or edit
+
+				on user input of Size_Chart_Details.Region
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											currentRegionList = input.Size_Chart_Details.Region.getall();
+										allRegions = Add_Country[ID != null].ID.getAll();
+										allRegions.removeAll(currentRegionList);
+										for each  size in input.Size_Chart_Details
+										{
+											oldRegion = size.Region;
+											size.Region:ui.add(allRegions);
+											size.Region=oldRegion;
+										}
+						)
+					}
+				}
+
+			
+}

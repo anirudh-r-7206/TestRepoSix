@@ -1,0 +1,39 @@
+Deactivate_Buyer_User as "Deactivate Buyer User"
+{
+
+				type =  functions
+				form = Create_User
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						UserList = thisapp.Deactivate_Records.Deactivate_User();
+										if(!UserList.contains(input.ID))
+										{
+											try 
+											{
+												if(input.Persona_Role in {"Sodexo Team","Buyer","Administrator","Developer","Factory Team"})
+												{
+													Delete_User = thisapp.permissions.deleteUser(input.Email);
+												}
+												// Change Status
+												input.Status = "Inactive";
+												input.Portal_Access_Enabled = false;
+												success message "User deactivated successfully.";
+											}	catch (e)
+											{
+												success message "Unable to deactivate the user. Please contact the application administrator.";
+											}
+										}
+										else
+										{
+											success message "User has active orders. Hence, the user cannot be Deactivated";
+										}
+					)
+					}
+				}
+			
+}

@@ -1,0 +1,22 @@
+Convert_into_Uppercase as "Convert into Uppercase"
+{
+
+				type =  form
+				form = Add_Region
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											conUC = input.Region.toUpperCase();
+										input.Region = conUC;
+						)
+					}
+				}
+
+			
+}

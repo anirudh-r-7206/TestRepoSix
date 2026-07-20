@@ -1,0 +1,18 @@
+Disable_fields7 as "Disable fields"
+{
+
+				type =  form
+				form = Add_Colors
+
+				record event = on edit
+
+				field rules
+				{
+					actions 
+					{
+						disable Color_Code,Color_Name;
+					}
+				}
+
+			
+}

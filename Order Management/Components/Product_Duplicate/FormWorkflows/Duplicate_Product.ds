@@ -1,0 +1,99 @@
+Duplicate_Product as "Duplicate Product"
+{
+
+				type =  form
+				form = Product_Duplicate
+				button = Submit
+				on click
+				{
+					actions 
+					{
+					on click
+					(
+						// 
+										get_Images = Add_Product[ID == input.Product].Product_Picture;
+										Product_Img = Collection();
+										for each  pro_Img in get_Images
+										{
+											image_Map = Add_Product.Product_Picture();
+											image_Map.Image=pro_Img.Image;
+											image_Map.Set_Primary=pro_Img.Set_Primary;
+											Product_Img.insert(image_Map);
+										}
+										if(input.Variant_Type == "Size" && input.Size != null)
+										{
+											for each  siz in input.Size
+											{
+												ProductID = if(input.Product.Style_Code == null,"",input.Product.Style_Code.Style_Code) + "-" + siz.Size;
+												// 		+ if(input.Product.Style_Colour == null,"","-" + input.Product.Style_Colour.Color_Code) 
+												product_Sub_Code = input.Product.Style_Code.Style_Code + "-" + siz.Size;
+												// 		 "-" + input.Product.Style_Colour.Color_Code +
+												insert_Product = insert into Add_Product
+												[
+													Added_User=zoho.loginuser
+													Style_ID=ProductID
+													Style_Name=input.Product.Style_Name
+													Style_Range=input.Product.Style_Range
+													Product_Weight=input.Product.Product_Weight
+													Gender=input.Product.Gender
+													Product_Description=input.Product.Product_Description
+													Wardrobe=input.Product.Wardrobe
+													Style_Category=input.Product.Style_Category
+													Style_Code=input.Product.Style_Code
+													Style_Colour=input.Product.Style_Colour
+													Size_Set=siz
+													Fabric_Code=input.Product.Fabric_Code
+													HS_Code_USA=input.Product.HS_Code_USA
+													HS_Code_EU=input.Product.HS_Code_EU
+													HS_Code_APAC=input.Product.HS_Code_APAC
+													Technical_File=input.Product.Technical_File
+													CBM=input.Product.CBM
+													Product_Picture=Product_Img
+													Product_Sub_Code=product_Sub_Code
+													Primary_Image=input.Product.Primary_Image
+													Status=input.Product.Status
+												];
+											}
+										}
+										else if(input.Variant_Type == "Color" && input.Style != null)
+										{
+											for each  color in input.Style
+											{
+												ProductID = color.Style_Code + if(input.Product.Size_Set == null,"","-" + input.Product.Size_Set.Size);
+												// 		"-" + color.Product_Colour.Color_Code +
+												product_Sub_Code = color.Style_Code + "-" + input.Product.Size_Set.Size;
+												// 		"-" + color.Product_Colour.Color_Code +
+												get_Fabric_Code = Fabric_Form[Colour_Code == color.Product_Colour && Fabric_Master_Code == input.Product.Fabric_Code.Fabric_Master_Code];
+												insert_Product = insert into Add_Product
+												[
+													Added_User=zoho.loginuser
+													Style_ID=ProductID
+													Style_Name=input.Product.Style_Name
+													Style_Range=input.Product.Style_Range
+													Product_Weight=input.Product.Product_Weight
+													Gender=input.Product.Gender
+													Product_Description=input.Product.Product_Description
+													Wardrobe=input.Product.Wardrobe
+													Style_Category=input.Product.Style_Category
+													Style_Code=color
+													Style_Colour=color.Product_Colour
+													Size_Set=input.Product.Size_Set
+													Fabric_Code=if(get_Fabric_Code != null,get_Fabric_Code.ID,"")
+													HS_Code_USA=input.Product.HS_Code_USA
+													HS_Code_EU=input.Product.HS_Code_EU
+													HS_Code_APAC=input.Product.HS_Code_APAC
+													Technical_File=input.Product.Technical_File
+													CBM=input.Product.CBM
+													Product_Picture=Product_Img
+													Product_Sub_Code=product_Sub_Code
+													Primary_Image=input.Product.Primary_Image
+													Status=input.Product.Status
+												];
+											}
+										}
+										openUrl("#Script:page.refresh","same window");
+					)
+					}
+				}
+			
+}

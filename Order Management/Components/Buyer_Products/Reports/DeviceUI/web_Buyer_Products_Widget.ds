@@ -1,0 +1,143 @@
+report Buyer_Products_Widget
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Style_ID as "Style ID"
+								Buyer_Product_Mapping.Factory_Allocated as "Factory Allocated"
+								Colors
+								Size
+								Sell_Price as "QO Unit Price"
+								Buy_Price as "PO Unit Price"
+								HS_Name as "HS Code Region"
+								HS_Code as "HS Code"
+								Style_ID.Primary_Image as "Primary Image"
+								Style_Name as "Style Name"
+								Product_ID as "Product ID"
+								Colors.Color_Name as "Color Name"
+								Buyer_Product_Mapping as "Buyer Product Mapping"
+								Style_Description as "Style Description"
+								Price_Validity as "Price Validity"
+								Style_ID.Style_Colour as "Style Colour"
+								Colors.Hex_Color_Code as "Hex Color Code"
+								Style_ID.Style_Master_Code as "Style Master Code"
+								Size.Size as "Universal Size"
+								Size.Chart_Details as "Chart Details"
+								Style_ID.Product_Description as "Fabric Description"
+								Buyer_Product_Mapping.Buy_Currency as "Buy Currency"
+								Style_Name.Style_Category as "Style Category"
+								Style_ID.Wardrobe as "Wardrobe"
+								Category_Id as "Category Id"
+								Wardrobe_Id as "Wardrobe Id"
+								Style_ID.ID as "ID"
+								Size.Size_Order as "Size Order"
+								Style_ID.Gender as "Gender"
+								Style_ID.Style_Code as "Style Code"
+								Buyer_Product_Mapping.Buyer as "Buyer"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							"Duplicate Product"
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							"Duplicate Product"
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Product_ID as "Product ID"
+								Style_ID as "Style ID"
+								Style_Name as "Style Name"
+								Style_Description as "Style Description"
+								Colors
+								Size
+								Sell_Price as "QO Unit Price"
+								Buy_Price as "PO Unit Price"
+								HS_Name as "HS Code Region"
+								HS_Code as "HS Code"
+								Style_ID.Product_Description as "Fabric Description"
+								Style_Name.Style_Category as "Style Category"
+								Wardrobe_Id as "Wardrobe Id"
+								Category_Id as "Category Id"
+							)
+						)
+						datablock2
+						(
+		     				title = "Buyer Product Mapping"
+		     				related field = Buyer_Product_Mapping
+							fields
+							(
+								Buyer
+								Buy_Currency as "Buy Currency"
+								Filter_Product as "Filter Product"
+								Factory_Allocated as "Factory Allocated"
+								Sell_Currency as "Sell Currency"
+							)
+						)
+						datablock3
+						(
+		     				title = "Style ID"
+		     				related field = Style_ID
+							fields
+							(
+								Style_ID as "Style ID"
+								Style_Name as "Style Name"
+								Style_Range as "Style Range"
+								Product_Weight as "Product Weight"
+								Gender
+								HS_Code_USA as "HS Code USA"
+								HS_Code_EU as "HS Code EU "
+								Wardrobe
+								Style_Category as "Style Category"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								"Duplicate Product"
+								Delete 
+							)
+						)
+				)
+			
+}

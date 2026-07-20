@@ -1,0 +1,40 @@
+Delete_Selected_Users as "Delete Selected Users"
+{
+
+				type =  functions
+				form = Create_User
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						deleteUserList = thisapp.Delete_Records.Delete_Users();
+										if(!deleteUserList.contains(input.ID))
+										{
+											// Remove Permissions
+											try 
+											{
+												if(input.Persona_Role in {"Sodexo Team","Buyer","Factory Team"})
+												{
+													Delete_User = thisapp.permissions.deleteUser(input.Email);
+												}
+												// 		else if(input.Persona_Role in {"Factory Team"})
+												// 		{
+												// 			delete_Portal = thisapp.portal.deleteUser(input.Email);
+												// 		}
+												// Delete User
+												delete from Create_User[ID == input.ID];
+												success message "User deleted successfully.";
+											}
+											catch (e)
+											{
+												success message "Unable to delete the user. Please contact the application administrator.";
+											}
+										}
+					)
+					}
+				}
+			
+}

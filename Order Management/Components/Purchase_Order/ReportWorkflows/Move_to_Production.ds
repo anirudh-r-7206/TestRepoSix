@@ -1,0 +1,51 @@
+Move_to_Production as "Move_to_Production"
+{
+
+				type =  functions
+				form = Purchase_Order
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+										if(get_User.count() > 0)
+										{
+											input.Order_Status = "In Production";
+											get_Order_Request = Order_Request[ID == input.Order_Request];
+											total_Request_Count = Purchase_Order[Order_Request == input.Order_Request];
+											complete_Request_Count = Purchase_Order[Order_Request == input.Order_Request && Order_Status in {"In Production","Completed"}];
+											if(get_Order_Request.count() > 0 && total_Request_Count == complete_Request_Count)
+											{
+												get_Order_Request.Status="In Production";
+												//	Oredr Request Status History
+												HistoryPush = insert into History
+												[
+													Added_User=zoho.loginuser
+													Order_ID=input.Order_Request
+													Raised_By=get_User.ID
+													Status=input.Order_Status
+													Comments="Order Request " + input.Order_Request.Order_ID + " has been moved to '" + input.Order_Status + "' by " + get_User.User_Name + "."
+												];
+											}
+											PO_History = insert into History
+											[
+												Added_User=zoho.loginuser
+												Purchase_Order_ID=input.ID
+												Raised_By=get_User.ID
+												Status=input.Order_Status
+												Comments="Purchase Order " + input.PO_Number + " has been moved to '" + input.Order_Status + "' by " + get_User.User_Name + "."
+											];
+											thisapp.Send_Mail.Email_Template(input.ID,"In_Production");
+										}
+										else
+										{
+											success message "You are not an active user. Please contact the administrator for access.";
+										}
+					)
+					}
+				}
+			
+}

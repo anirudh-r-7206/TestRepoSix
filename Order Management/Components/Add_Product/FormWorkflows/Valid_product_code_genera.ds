@@ -1,0 +1,35 @@
+Valid_product_code_genera as "Valid product code generate"
+{
+
+				type =  form
+				form = Add_Product
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Style_ID = input.Style_Code.Style_Code + "-" + input.Size_Set.Size;
+										// "-" + input.Style_Colour.Color_Code 
+										primary_Count = 0;
+										for each  pic in input.Product_Picture
+										{
+											if(pic.Set_Primary == true)
+											{
+												primary_Count = primary_Count + 1;
+											}
+										}
+										if(primary_Count == 0)
+										{
+											alert "Please select one primary image.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			
+}

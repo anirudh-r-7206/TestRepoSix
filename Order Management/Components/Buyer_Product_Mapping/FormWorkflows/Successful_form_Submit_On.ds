@@ -1,0 +1,44 @@
+Successful_form_Submit_On as "Successful form Submit - On Add"
+{
+
+				type =  form
+				form = Buyer_Product_Mapping
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											wardrobe_json = Map();
+										for each  product in input.Style_Details
+										{
+											wardrobe = product.Style_ID.Wardrobe;
+											category = product.Style_ID.Style_Category;
+											cat_list = wardrobe_json.get(wardrobe);
+											if(cat_list == null)
+											{
+												cat_list = List();
+											}
+											cat_list.add(category);
+											wardrobe_json.put(wardrobe,cat_list.distinct());
+										}
+										for each  rec in wardrobe_json.keys()
+										{
+											war_cat_list = wardrobe_json.get(rec);
+											insert into Buyer_Mapping_Wardrobes
+											[
+												Added_User=zoho.loginuser
+												Buyer_Product_Mapping=input.ID
+												Product_Category=war_cat_list
+												Wardrobe=rec
+											]
+										}
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,32 @@
+Filter_Products3 as "Filter Products"
+{
+
+				type =  form
+				form = Buyer_Filter
+
+				record event = on add
+
+				on user input of Select_Supplier
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Select_Supplier != null)
+										{
+											get_User = Create_User[Email == thisapp.Dev.get_User_Email() && Status == "Active"];
+											if(get_User.count() > 0)
+											{
+												openUrl("#Page:Buyer_Cart_Page?zc_LoadIn=embed-BuyerCart&Supplier=" + input.Select_Supplier,"same window");
+											}
+										}
+										else
+										{
+											openUrl("#Page:Buyer_Cart_Page?zc_LoadIn=embed-BuyerCart","same window");
+										}
+						)
+					}
+				}
+
+			
+}

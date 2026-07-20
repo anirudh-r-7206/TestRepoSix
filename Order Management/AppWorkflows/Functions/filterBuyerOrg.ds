@@ -1,0 +1,11 @@
+int Filters.filterBuyerOrg(string buyerEmail)
+{
+
+                 	userRec = Create_User[Email == buyerEmail];
+                 	if(userRec.User_Type == "Buyer")
+                 	{
+                 		buyerOrg = userRec.Associated_Buyer.ID;
+                 	}
+                 	return buyerOrg;
+                 
+}

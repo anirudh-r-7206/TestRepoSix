@@ -1,0 +1,800 @@
+menu
+{
+
+			unused
+			{
+				form  Add_Colors
+				{
+					icon = "design-2-form"
+				}
+				form  Add_Country
+				{
+					icon = "food-whisk"
+				}
+				form  Add_Suppliers
+				{
+					icon = "users-2-b-add"
+				}
+				form  Product_Category
+				{
+					icon = "design-web-design"
+				}
+				form  Create_Size
+				{
+					icon = "food-whisk"
+				}
+				form  Size_Chart_Mapping
+				{
+					icon = "business-hierarchy-53"
+				}
+				form  Wardrobe
+				{
+					icon = "furniture-wardrobe"
+				}
+				form  Freight_Partners_Form
+				{
+					icon = "design-2-form"
+				}
+				form  Fabric_Form
+				{
+					icon = "design-2-form"
+				}
+				form  Style
+				{
+					icon = "design-web-design"
+				}
+				form  Currency_Conversion_Rates
+				{
+					icon = "business-round-yen"
+				}
+				form  Rate_Conversion_History
+				{
+					icon = "tech-desktop"
+				}
+				form  Add_Product
+				{
+					icon = "design-2-group"
+				}
+				form  Packaging_Details
+				{
+					icon = "shopping-gift"
+				}
+				form  Buyers_Master
+				{
+					icon = "sport-crown"
+				}
+				form  Create_User
+				{
+					icon = "users-2-woman"
+				}
+				report All_Size_Chart_Mappings
+				{
+					icon = "tech-desktop"
+				}
+				report All_Packaging_Details
+				{
+					icon = "tech-desktop"
+				}
+				form  Purchase_LineItems
+				{
+					icon = "shopping-tag-sale"
+				}
+				report Purchase_LineItems_Report
+				{
+					icon = "tech-desktop"
+				}
+				form  Order_Details
+				{
+					icon = "shopping-basket-edit"
+				}
+				report All_Order_Details
+				{
+					icon = "tech-desktop"
+				}
+				form  Order_Request
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  Purchase_Order
+				{
+					icon = "shopping-basket-edit"
+				}
+				page PO_Template
+				{
+					icon = "tech-desktop"
+				}
+				page QO_Template
+				{
+					icon = "tech-desktop"
+				}
+				form  organization
+				{
+					icon = "design-2-filter-organization"
+				}
+				systemcomponent
+				{
+					type = localization
+					displayname = "Language Selection"
+					icon = "education-language"
+				}
+				systemcomponent
+				{
+					type = connection
+					displayname = "Integrations"
+					icon = "tech-2-connection"
+				}
+				systemcomponent
+				{
+					type = approval
+					approval status = pending
+					displayname = "Pending Tasks"
+					icon = "ui-2-hourglass"
+				}
+				systemcomponent
+				{
+					type = approval
+					approval status = completed
+					displayname = "Completed Tasks"
+					icon = "design-todo"
+				}
+				report Rate_Conversion_History_Report
+				{
+					icon = "design-2-form"
+				}
+				form  PO_QO_template
+				{
+					icon = "tech-desktop"
+				}
+				form  Print_and_PDF_Button
+				{
+					icon = "tech-desktop"
+				}
+				report PO_QO_template_Report
+				{
+					icon = "tech-desktop"
+				}
+				report Active_Products
+				{
+					icon = "shopping-gift"
+				}
+				form  Buyer_Order
+				{
+					icon = "tech-desktop"
+				}
+				report My_Cart_Details
+				{
+					icon = "shopping-basket-edit"
+				}
+				page Cart_Page
+				{
+					icon = "shopping-cart"
+				}
+				page Product_Catalogue_Cart_Page
+				{
+					icon = "design-design-dev"
+				}
+				form  History
+				{
+					icon = "education-molecule"
+				}
+				page Alert_Message
+				{
+					icon = "weather-sun-cloud-light"
+				}
+				report All_Histories
+				{
+					icon = "tech-desktop"
+				}
+				form  Product_Code_Master
+				{
+					icon = "design-paper-dev"
+				}
+				form  Buyer_Products
+				{
+					icon = "shopping-cart-simple-in"
+				}
+				report All_Buyer_Products
+				{
+					icon = "tech-desktop"
+				}
+				report gender
+				{
+					icon = "tech-2-mobile-landscape"
+				}
+				report gender1
+				{
+					icon = "tech-2-mobile-landscape"
+				}
+				report Sodexo
+				{
+					icon = "tech-desktop"
+				}
+				report Fabric
+				{
+					icon = "objects-wool-ball"
+				}
+				report Order_Request_Admin
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  Product_Duplicate
+				{
+					icon = "tech-desktop"
+				}
+				page Size_Chart_Page
+				{
+					icon = "shopping-chart"
+				}
+				report Purchase_Orders_Admin
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  Currency
+				{
+					icon = "business-round-yen"
+				}
+				page Patch_Update
+				{
+					icon = "education-flask"
+				}
+				form  Buyer_Cart_Detail
+				{
+					icon = "tech-desktop"
+				}
+				page Product_Cart_Details
+				{
+					icon = "shopping-cart-simple"
+				}
+				page Dynamic_Product_Image
+				{
+					icon = "media-1-focus-circle"
+				}
+				report Buyer_Products1
+				{
+					icon = "tech-2-p-add"
+				}
+				page Buyer_Cart_Page
+				{
+					icon = "shopping-cart"
+				}
+				page Buyer_Cart_Detail_Page
+				{
+					icon = "design-webpage"
+				}
+				form  Buyer_Filter
+				{
+					icon = "tech-desktop"
+				}
+				form  Buyer_product_duplicate
+				{
+					icon = "tech-desktop"
+				}
+				form  Buyer_Product_Mapping
+				{
+					icon = "shopping-cart-simple-in"
+				}
+				page Buyer_Product_Mapping_Page
+				{
+					icon = "design-web-design"
+				}
+				report Buyer_Product_Mapping_Report
+				{
+					icon = "tech-desktop"
+				}
+				report Mapped_Buyer_Products_Admin
+				{
+					icon = "shopping-cart-simple-in"
+				}
+				form  Factory_Details_Subform
+				{
+					icon = "business-factory"
+				}
+				report Factory_Details_Subform_Report
+				{
+					icon = "tech-desktop"
+				}
+				form  Buyer_Contact_Person_Details
+				{
+					icon = "users-2-woman"
+				}
+				report All_Buter_Contact_Person_Details
+				{
+					icon = "tech-desktop"
+				}
+				report Pending_Amendments
+				{
+					icon = "education-board-51"
+				}
+				report Production_Orders
+				{
+					icon = "shopping-basket-edit"
+				}
+				report All_Order_Requests1
+				{
+					icon = "shopping-basket-edit"
+				}
+				report My_Order_Requests
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  Email_Template
+				{
+					icon = "ui-1-email-84"
+				}
+				form  Size_Chart
+				{
+					icon = "shopping-chart"
+				}
+				report All_Size_Charts
+				{
+					icon = "tech-desktop"
+				}
+				report My_Purchase_Orders
+				{
+					icon = "shopping-basket-edit"
+				}
+				report All_Purchase_Orders
+				{
+					icon = "design-2-form"
+				}
+				report Awaiting_Action
+				{
+					icon = "shopping-basket-edit"
+				}
+				report All_Currency_Conversion_Rates
+				{
+					icon = "business-percentage-39"
+				}
+				page Cart_Main_Page
+				{
+					icon = "shopping-cart-simple"
+				}
+				report All_Order_Requests
+				{
+					icon = "files-archive-paper"
+				}
+				page External
+				{
+					icon = "design-usb"
+				}
+				report Suppliers_Widget
+				{
+					icon = "users-2-b-add"
+				}
+				report Wardrobes_Widget
+				{
+					icon = "furniture-wardrobe"
+				}
+				report Buyer_Products_Widget
+				{
+					icon = "shopping-cart-simple-in"
+				}
+				report Cart_Details_Widget
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  Trigger_Form
+				{
+					icon = "design-2-form"
+				}
+				report All_Triggers
+				{
+					icon = "tech-desktop"
+				}
+				report Buyer_Products_Widget_Grouped
+				{
+					icon = "shopping-cart-simple-in"
+				}
+				report My_Basket_Widget
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  Error_Log_Form
+				{
+					icon = "design-2-form"
+				}
+				report All_Error_Logs
+				{
+					icon = "tech-desktop"
+				}
+				report Purchase_Order_detail_view
+				{
+					icon = "shopping-basket-edit"
+				}
+				report Sizes_Widget
+				{
+					icon = "food-whisk"
+				}
+				form  Buyer_Mapping_Wardrobes
+				{
+					icon = "design-web-design"
+				}
+				report All_Buyer_Mapping_Wardrobes
+				{
+					icon = "tech-desktop"
+				}
+				form  Copy_of_Purchase_LineItems
+				{
+					icon = "tech-desktop"
+				}
+				report Copy_of_Purchase_LineItems_Report
+				{
+					icon = "tech-desktop"
+				}
+				form  Copy_of_Purchase_Order
+				{
+					icon = "tech-desktop"
+				}
+				report Copy_of_Purchase_Order_Report
+				{
+					icon = "tech-desktop"
+				}
+				form  Add_Region
+				{
+					icon = "design-paper-dev"
+				}
+				page Review_Page
+				{
+					icon = "education-board-51"
+				}
+				form  Bulk_Update
+				{
+					icon = "tech-desktop"
+				}
+				form  Bulk_Edit_Tigger
+				{
+					icon = "shopping-bag-edit"
+				}
+				report Bulk_Edit_Tigger_Report
+				{
+					icon = "tech-desktop"
+				}
+				form  Alert_References
+				{
+					icon = "tech-desktop"
+				}
+				page Purchase_Order_Details
+				{
+					icon = "shopping-basket-edit"
+				}
+				form  PO_Style_Search
+				{
+					icon = "tech-desktop"
+				}
+				page Buyer_Main_Cart_Page
+				{
+					icon = "shopping-cart-simple"
+				}
+				page Request_Details
+				{
+					icon = "users-2-contacts-44"
+				}
+				page Test_Page
+				{
+					icon = "education-flask"
+				}
+				report Active_Users
+				{
+					icon = "location-explore-user"
+				}
+				report Active_Suppliers
+				{
+					icon = "location-explore-user"
+				}
+				report Active_Buyers
+				{
+					icon = "users-multiple-19"
+				}
+				page QO_Template_V2
+				{
+					icon = "business-chart-pie-35"
+				}
+				form  Additional_Charges_Form
+				{
+					icon = "tech-mobile-recharger-09"
+				}
+				report Additional_Charges_Form_Report
+				{
+					icon = "tech-desktop"
+				}
+				form  Charge_Type_Form
+				{
+					icon = "design-2-form"
+				}
+				page POTemplate
+				{
+					icon = "shopping-receipt-list-42"
+				}
+				page QOTemplate
+				{
+					icon = "tech-desktop"
+				}
+				form  Order_Request_Update
+				{
+					icon = "tech-desktop"
+				}
+				page My_Basket_Summary
+				{
+					icon = "shopping-basket"
+				}
+				report Buyer_Users_Report
+				{
+					icon = "users-2-woman"
+				}
+				report Supplier_Users_Report
+				{
+					icon = "users-2-woman"
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			space Order_Hub
+			{
+				displayname = "Order Hub"
+				icon = "shopping-list"
+
+				section Catalogue
+				{
+					displayname = "Catalogue"
+					icon = "design-collection"
+					report Products_Report
+					{
+						icon = "shopping-box-3d-50"
+					}
+				}
+				section Raise_Order
+				{
+					displayname = "Raise Order"
+					icon = "shopping-cart-add"
+					page Product_Catalogue
+					{
+						icon = "business-cheque"
+					}
+					page Buyer_Cart
+					{
+						icon = "shopping-cart-simple"
+					}
+				}
+				section Orders
+				{
+					displayname = "Orders"
+					icon = "shopping-delivery-fast"
+					page All_Order_Requests_Page
+					{
+						icon = "shopping-mobile-cart"
+					}
+					page My_Basket_Page
+					{
+						icon = "shopping-basket"
+					}
+					page My_Purchase_Orders_Page
+					{
+						icon = "shopping-list"
+					}
+					page Pending_Approval_Page
+					{
+						icon = "ui-2-hourglass"
+					}
+					page Pending_Amendments_Page
+					{
+						icon = "ui-2-hourglass"
+					}
+					page Awaiting_Action_Page
+					{
+						icon = "ui-2-time"
+					}
+					page Purchase_Orders_Page
+					{
+						icon = "shopping-list"
+					}
+					page Production_Orders_Page
+					{
+						icon = "shopping-list"
+					}
+				}
+			}
+			space Users
+			{
+				displayname = "Users"
+				icon = "users-parent"
+
+				section Users
+				{
+					displayname = "Users"
+					icon = "users-single-01"
+					report SSA_and_Admin_Users
+					{
+						icon = "users-single-01"
+					}
+				}
+				section Suppliers1
+				{
+					displayname = "Suppliers"
+					icon = "business-businessman-03"
+					report All_Suppliers
+					{
+						icon = "media-1-polaroid-user"
+					}
+					page Supplier_Users
+					{
+						icon = "users-2-woman"
+					}
+				}
+				section Buyers
+				{
+					displayname = "Buyers"
+					icon = "shopping-cart-simple-in"
+					report Buyers_Report
+					{
+						icon = "shopping-cart-simple-in"
+					}
+					page Buyer_Users
+					{
+						icon = "users-2-woman"
+					}
+					page Buyer_Product_Mapping1
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Email_Templates
+				{
+					displayname = "Email Templates"
+					icon = "ui-1-email-84"
+					report All_Email_Templates
+					{
+						icon = "shopping-newsletter"
+					}
+				}
+				section Awaiting_Approvals
+				{
+					displayname = "Awaiting Approvals"
+					icon = "ui-2-time"
+					report Awaiting_User_Approvals
+					{
+						icon = "users-single-01"
+					}
+					report Awaiting_Supplier_Approvals
+					{
+						icon = "media-1-polaroid-user"
+					}
+					report Awaiting_Approvals
+					{
+						icon = "shopping-cart-simple-in"
+					}
+				}
+			}
+			space Setup
+			{
+				displayname = "Setup"
+				icon = "ui-1-settings-gear-63"
+
+				section Order_Masters
+				{
+					displayname = "Order Masters"
+					icon = "shopping-delivery-fast"
+					report All_Countries
+					{
+						icon = "location-map-pin"
+					}
+					report All_Regions
+					{
+						icon = "location-pin-copy"
+					}
+					report All_Freight_Partners
+					{
+						icon = "users-badge-13"
+					}
+					report Charge_Types
+					{
+						icon = "tech-desktop"
+					}
+					report All_Currency
+					{
+						icon = "shopping-bitcoin"
+					}
+				}
+				section Product_Masters
+				{
+					displayname = "Product Masters"
+					icon = "shopping-box-3d-67"
+					report All_Colors
+					{
+						icon = "design-palette"
+					}
+					report All_Product_Code_Masters
+					{
+						icon = "design-paper-dev"
+					}
+					report All_Fabrics
+					{
+						icon = "clothes-scarf"
+					}
+					report All_Styles
+					{
+						icon = "design-pantone"
+					}
+					report All_Product_Categories
+					{
+						icon = "business-hierarchy-56"
+					}
+					report All_Sizes
+					{
+						icon = "design-measure-17"
+					}
+					report Size_Charts
+					{
+						icon = "shopping-chart"
+					}
+					report All_Wardrobes
+					{
+						icon = "furniture-door"
+					}
+				}
+				section Organizations
+				{
+					displayname = "Organizations"
+					icon = "design-2-filter-organization"
+					report All_Organizations
+					{
+						icon = "design-2-filter-organization"
+					}
+				}
+			}
+			space Under_Development
+			{
+				displayname = "Under Development"
+				icon = "design-window-dev"
+
+				section Dashboards
+				{
+					displayname = "Dashboards"
+					icon = "design-2-layout-11"
+					page Main_Dashboard
+					{
+						icon = "design-2-microsoft"
+					}
+					page User_Dashboard
+					{
+						icon = "users-2-woman"
+					}
+					page Buyer_Dashboard
+					{
+						icon = "shopping-cart-simple-in"
+					}
+					page Factory_Dashboard
+					{
+						icon = "business-factory"
+					}
+					page Main_Dashboard_V2
+					{
+						icon = "ui-1-dashboard-half"
+					}
+					page User_Dashboard_V2
+					{
+						icon = "users-2-woman"
+					}
+					page Buyer_Dashboard_V2
+					{
+						icon = "ui-1-dashboard-half"
+					}
+					page Factory_Dashboard_V2
+					{
+						icon = "business-factory"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+					show = {space,section,component}
+				}
+			}
+		
+}

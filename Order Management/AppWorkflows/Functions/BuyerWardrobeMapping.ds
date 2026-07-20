@@ -1,0 +1,25 @@
+void BuyerWardrobeMapping()
+{
+
+                 	fetBuyer = Buyers_Master[Status == "Active"];
+                 	for each  buyer in fetBuyer
+                 	{
+                 		fetBuyerProduct = Buyer_Mapping_Wardrobes[Buyer_Product_Mapping.Buyer == buyer.ID].Wardrobe.getAll();
+                 		oldWardrobe = fetBuyer.Wardrobe;
+                 		missingWardrobe = List();
+                 		for each  pro in fetBuyerProduct
+                 		{
+                 			if(!oldWardrobe.contains(pro))
+                 			{
+                 				missingWardrobe.add(pro);
+                 			}
+                 		}
+                 		if(missingWardrobe.size() > 0)
+                 		{
+                 			oldWardrobe.add(missingWardrobe);
+                 			buyer.Wardrobe=oldWardrobe;
+                 			buyer.Wardrobe1=oldWardrobe;
+                 		}
+                 	}
+                 
+}

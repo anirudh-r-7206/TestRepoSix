@@ -1,0 +1,29 @@
+Autopopulate_Size_Order as "Autopopulate Size Order"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on add
+
+				on user input of Gender
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Size_Order = null;
+										if(input.Gender.isEmpty() == false || input.Gender != null)
+										{
+											fetSize = Create_Size[Gender == input.Gender];
+											if(fetSize.count(ID) == 0)
+											{
+												input.Size_Order = 1;
+											}
+										}
+						)
+					}
+				}
+
+			
+}

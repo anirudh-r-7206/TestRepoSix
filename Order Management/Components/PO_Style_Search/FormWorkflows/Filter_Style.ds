@@ -1,0 +1,24 @@
+Filter_Style as "Filter Style"
+{
+
+				type =  form
+				form = PO_Style_Search
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Purchase_Order;
+										get_Style = input.Purchase_Order.Purchase_LineItems.Product.Style_Code.getall();
+										get_Style_Master = Style[ID in get_Style].Product_Code.getAll();
+										input.Search_Style:ui.add(get_Style_Master);
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,18 @@
+Hide_show1 as "Hide & show"
+{
+
+				type =  form
+				form = Wardrobe
+
+				record event = on add or edit
+
+				field rules
+				{
+					actions 
+					{
+						hide Hidden_Section;
+					}
+				}
+
+			
+}

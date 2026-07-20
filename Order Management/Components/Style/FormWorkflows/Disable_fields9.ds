@@ -1,0 +1,18 @@
+Disable_fields9 as "Disable fields"
+{
+
+				type =  form
+				form = Style
+
+				record event = on edit
+
+				field rules
+				{
+					actions 
+					{
+						disable Style_Category,Style_Code,Product_Colour,Product_Code;
+					}
+				}
+
+			
+}

@@ -1,0 +1,53 @@
+default list Purchase_LineItems_Report
+{
+
+			displayName = "Purchase LineItems Report"
+			show all rows from Purchase_LineItems    
+			(
+				Product as "Style ID"
+				Product_Color as "Product Color"
+				Product_Size as "Product Size"
+				Quantity
+				Purchase_Price as "Purchase Price"
+				Selling_Price as "Selling Price"
+				Purchase_Price_Sub_Total as "Purchase Price Sub Total"
+				Selling_Price_Sub_Total as "Selling Price Sub Total"
+				Purchase_Order as "Purchase Order"
+				Description
+				Style_Code as "Style Code"
+				Product_Size.Size_Order as "Size Order"
+				HS_Code as "HS Code"
+				Fabric_Composition as "Fabric Composition"
+				Size_Order as "Size Order"
+			)
+			group by
+			(
+				Style_Code ascending
+			)
+			sort by
+			(
+				Product_Size.Size_Order ascending
+			)
+			custom actions
+			(
+				"Edit "
+				(
+	  			workflow = Edit_PO_Items
+				show action in view header = true
+				show action in edit record menu = true
+				)
+				"Delete "
+				(
+	  			workflow = Delete_Line_Item
+				show action in edit record menu = true
+				condition = (ID == thisapp.Filters.deletePurchaselineItem())
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to remove the selected line item from the Purchase Order? Once deleted, the item details cannot be recovered."
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+			)
+		
+}

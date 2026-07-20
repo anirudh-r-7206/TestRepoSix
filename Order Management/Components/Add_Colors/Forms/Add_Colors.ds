@@ -1,0 +1,81 @@
+form Add_Colors
+{
+
+			displayname = "Add Colors"
+			success message = "Test Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Color_Name
+			(
+    			type = text
+				displayname = "Color Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have unique Color_Code
+			(
+    			type = text
+				displayname = "Color Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have unique Hex_Color_Code
+			(
+    			type = text
+				displayname = "Hex Color Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Active","Inactive"}
+				initial value = "Active"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "<div> <br /></div>"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

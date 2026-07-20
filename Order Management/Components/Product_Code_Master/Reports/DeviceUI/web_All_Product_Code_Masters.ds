@@ -1,0 +1,64 @@
+report All_Product_Code_Masters
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Product_Code as "Product Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						record
+						(
+							"Edit "
+							"Delete "
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+							"Edit "
+							"Delete "
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Product_Code as "Product Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								"Edit "
+								"Delete "
+							)
+						)
+				)
+			
+}

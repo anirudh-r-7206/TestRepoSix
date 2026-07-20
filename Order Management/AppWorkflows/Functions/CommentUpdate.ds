@@ -1,0 +1,10 @@
+void OneTime.CommentUpdate()
+{
+
+                 	fetPO = Purchase_Order[Comments == null || Comments == ""];
+                 	for each  po in fetPO
+                 	{
+                 		po.Comments=po.Comments11;
+                 	}
+                 
+}

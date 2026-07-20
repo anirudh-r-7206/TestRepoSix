@@ -1,0 +1,80 @@
+form Wardrobe
+{
+
+			success message = "Wardrobe Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Wardrobe_Name
+			(
+    			type = text
+				displayname = "Wardrobe Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Product_Category
+			(
+				type = list	
+				displayname = "Product Category"
+				values  = Product_Category.ID
+    			bidirectional = Wardrobe
+    			displayformat = [Product_Category]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Hidden_Section
+			(
+				type = section
+				displayname = "Hidden Section"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Product_Category1
+			(
+				type = list	
+				displayname = "Product Category old  value"
+				values  = Product_Category.ID
+    			displayformat = [Product_Category]
+				sortorder = ascending
+				height = 60px
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

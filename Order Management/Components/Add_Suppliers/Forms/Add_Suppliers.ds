@@ -1,0 +1,380 @@
+form Add_Suppliers
+{
+
+			displayname = "Add Suppliers"
+			success message = "Supplier Created Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Supplier_Organisation
+			(
+    			type = text
+				displayname = "Supplier Organisation"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Supplier_type
+			(
+				type = picklist
+				displayname = " Supplier type"
+				maxchar = 100
+				values = {"Factory","Fabrics","Others"}
+				initial value = "Factory"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Country
+			(
+				type = picklist	
+				values  = Add_Country[Status == "Active"].ID
+    			displayformat = [Country_Name]
+				allow new entries
+				[
+					displayname = "Add Country"
+				]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ERP_System
+			(
+				type = picklist
+				displayname = "ERP System"
+				maxchar = 100
+				values = {"SAP B1","MAAQ"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Factory_Address
+			(
+    			type = address
+				displayname = "Invoice Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Contact_Person_1
+			(
+				type = section
+				displayname = "Primary Contact Details"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			must have Contact_Person2
+			(
+    			type = name
+				displayname = "Contact Person"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Person
+			(
+    			type = text
+				displayname = "Contact Person1"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			must have unique Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 2
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			must have Phone
+			(
+    			type = phonenumber
+				displayname = "Phone "
+	 			row = 2
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Need_App_Access
+			(
+    			type = checkbox
+				displayname = "Need App Access"
+				initial value = true
+	 			row = 2
+	 			column = 3   
+				width = medium
+			)
+			Secondary_Contact_Details
+			(
+				type = section
+				displayname = "Secondary Contact Details"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Contact_Person3
+			(
+    			type = name
+				displayname = "Contact Person"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 3
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Person1
+			(
+    			type = text
+				displayname = "Contact_Person2"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Email1
+			(
+    			type = email
+				displayname = "Email"
+				maxchar = 80
+	 			row = 3
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 3
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Need_App_Access1
+			(
+    			type = checkbox
+				displayname = "Need App Access "
+				initial value = false
+	 			row = 3
+	 			column = 3   
+				width = medium
+			)
+			must have Factory_Details
+			(
+				type = grid
+				displayname = "Factory Details"
+				values  = Factory_Details_Subform.ID
+    			bidirectional = Add_Suppliers
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Hide_Section
+			(
+				type = section
+				displayname = "Hide Section"
+				visibility = true
+	 			row = 5
+	 			column = 0   
+				width = medium
+			)
+			unique Supplier_Code
+			(
+    			type = text
+				displayname = "Supplier Code"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Active","Inactive"}
+				initial value = "Inactive"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Approval_Status
+			(
+				type = picklist
+				displayname = "Approval Status"
+				maxchar = 100
+				values = {"Pending","Approved","Rejected"}
+				initial value = "Pending"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Create_User_Employee_External_ID
+			(
+				type = list	
+				displayname = "Create User - Employee/External ID"
+				values  = Create_User.ID
+    			bidirectional = Associated_Factory
+    			displayformat = [ID]
+				height = 60px
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Buyers_Master_Buyer_Name
+			(
+				type = list	
+				displayname = "Buyers Master - Buyer Name"
+				values  = Buyers_Master.ID
+    			displayformat = [Buyer_Code + " - " + Buyer_Organisation]
+				height = 60px
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Primary_email_old
+			(
+    			type = email
+				displayname = "Primary email old"
+				maxchar = 80
+	 			row = 5
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Secondary_email_old
+			(
+    			type = email
+				displayname = "Secondary email old"
+				maxchar = 80
+	 			row = 5
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Add"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

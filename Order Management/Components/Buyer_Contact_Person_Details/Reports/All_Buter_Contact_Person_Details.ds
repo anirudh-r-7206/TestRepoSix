@@ -1,0 +1,25 @@
+default list All_Buter_Contact_Person_Details
+{
+
+			displayName = "All Buter Contact Person Details"
+			show all rows from Buyer_Contact_Person_Details    
+			(
+				Contact_Person as "Contact Person"
+				Email
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+				)
+				Country
+				Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Buyers_Master as "Buyers Master"
+				Need_App_Access as "Need App Access"
+				Email_old as "Email old"
+				Contact_Person1  as "Contact Person"
+				Company_Name as "Company Name"
+			)
+		
+}

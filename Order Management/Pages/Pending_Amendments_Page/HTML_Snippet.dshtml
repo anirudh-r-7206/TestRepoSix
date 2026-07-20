@@ -1,0 +1,4 @@
+<style>
+	
+	</style>
+	<div elName='zc-component' name="editPO" style="height: calc(100vh - 70px) !important;" viewLinkName='Pending_Amendments' params='zc_Header=true&zc_AddRec=false&zc_MoreAction=false'></div>

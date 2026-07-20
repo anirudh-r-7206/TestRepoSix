@@ -1,0 +1,75 @@
+Generate_product_sub_code2 as "Generate product sub code"
+{
+
+				type =  form
+				form = Add_Product
+
+				record event = on add or edit
+
+				on user input of Style_Colour
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Style_ID = if(input.Style_Code == null,"",input.Style_Code.Style_Code) + if(input.Size_Set == null,"","-" + input.Size_Set.Size);
+										// + if(input.Style_Colour == null,"","-" + input.Style_Colour.Color_Code) 
+										// Fabric Lookup
+										get_Fabric_Code = Fabric_Form[Colour_Code == input.Style_Colour && Status == "Active"].ID.getAll();
+										input.Fabric_Code:ui.add(get_Fabric_Code);
+										// 
+										if(input.Style_Category != null && !input.Gender.isEmpty())
+										{
+											get_One_Size = Create_Size[Product_Category == input.Style_Category && Gender == input.Gender && Status == "Active" && Size.contains("One Size")];
+											getAll_Size = Create_Size[Product_Category == input.Style_Category && Gender == input.Gender && Status == "Active"].ID.getAll();
+											if(getAll_Size.size() > 0)
+											{
+												get_Product_Size = Add_Product[Wardrobe == input.Wardrobe && Style_Category == input.Style_Category && Style_Code == input.Style_Code && Style_Colour == input.Style_Colour].Size_Set.getAll();
+												get_Product_One_Size = Add_Product[Wardrobe == input.Wardrobe && Style_Category == input.Style_Category && Style_Code == input.Style_Code && Style_Colour == input.Style_Colour && Size_Set.Size.contains("One Size")];
+												getAll_Size.removeAll(get_Product_Size);
+												if(get_Product_One_Size.count(ID) > 0)
+												{
+													clear Size_Set;
+												}
+												else
+												{
+													if(get_Product_Size.size() > 0)
+													{
+														getAll_Size.removeElement(get_One_Size.ID);
+													}
+													if(input.Size_Set != null)
+													{
+														this_Rec_Size = Add_Product[ID == input.ID];
+														if(this_Rec_Size.count() > 0)
+														{
+															old_Size = input.Size_Set;
+															getAll_Size.add(old_Size);
+														}
+														input.Size_Set:ui.add(getAll_Size.distinct());
+														input.Size_Set = old_Size;
+													}
+													else
+													{
+														input.Size_Set:ui.add(getAll_Size);
+													}
+													if(input.Gender == "Unisex" && get_Product_Size.size() == 0)
+													{
+														input.Size_Set = get_One_Size.ID;
+													}
+												}
+											}
+											else
+											{
+												clear Size_Set;
+											}
+										}
+										else
+										{
+											clear Size_Set;
+										}
+						)
+					}
+				}
+
+			
+}

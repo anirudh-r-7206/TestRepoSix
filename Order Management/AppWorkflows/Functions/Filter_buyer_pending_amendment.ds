@@ -1,0 +1,8 @@
+list Filters.Filter_buyer_pending_amendment()
+{
+
+                 	get_Pending_Amendment_QO = History[Approval_Status in {"Pending","Approved"} || (Purchase_Order_ID.Record_is_Edited == false && Purchase_Order_ID.Enable_Edit == true)].Purchase_Order_ID.getAll().distinct();
+                 	// 	info get_Pending_Amendment_QO;
+                 	return get_Pending_Amendment_QO;
+                 
+}

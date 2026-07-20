@@ -1,0 +1,68 @@
+Send_mail_and_status_upda as "Send mail and status update"
+{
+
+				type =  form
+				form = Purchase_Order
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Factory_Address1 = if(input.Factory_Address != null,input.Factory_Address.Factory_Address,"");
+										input.Factory_Company_Name = input.Factory_Address.Company_Name;
+										input.Factory_Contact_Person = if(input.Factory_Address.Contact_Person1.first_name.isEmpty(),"",input.Factory_Address.Contact_Person1.first_name) + if(input.Factory_Address.Contact_Person1.last_name.isEmpty(),""," " + input.Factory_Address.Contact_Person1.last_name);
+										input.Factory_Email = input.Factory_Address.Factory_Email;
+										input.Factory_Phone = input.Factory_Address.Factory_Phone;
+										//
+										input.Delivery_Address1 = if(input.Delivery_Address != null,input.Delivery_Address.Address,"");
+										input.Buyer_Company_Name = input.Delivery_Address.Company_Name;
+										input.Buyer_Contact_Person = if(input.Delivery_Address.Contact_Person1.first_name.isEmpty(),"",input.Delivery_Address.Contact_Person1.first_name) + if(input.Delivery_Address.Contact_Person1.last_name.isEmpty(),""," " + input.Delivery_Address.Contact_Person1.last_name);
+										input.Buyer_Email = input.Delivery_Address.Email;
+										input.Buyer_Phone = input.Delivery_Address.Phone_Number;
+										get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+										// if(input.Order_Status == "Awaiting QO Generation")
+										// {
+										// 	input.Order_Status = "Awaiting Buyer Review";
+										// 	thisapp.Send_Mail.Send_Mail_to_Buyer_Review(input.ID,"Review");
+										// }
+										// else if(input.Order_Status == "Amendment Requested (Buyer)")
+										// {
+										// 	input.Order_Status = "Awaiting Buyer Review";
+										// 	thisapp.Send_Mail.Send_Mail_to_Buyer_Review(input.ID,"Review");
+										// }
+										// else if(input.Order_Status == "Amendment Requested (Factory)")
+										// {
+										// 	input.Order_Status = "Awaiting Factory Review";
+										// get_History = History[Purchase_Order_ID == input.ID && Status in {"Awaiting Production"}];
+										// // input.Order_Status = "Awaiting Buyer Review";
+										// thisapp.Send_Mail.Send_Mail_to_Buyer_Review(input.ID,"Review");
+										// if(get_History.count() > 0)
+										// {
+										// 	thisapp.Send_Mail.Send_Mail_to_Factory_Review(input.ID,"Review");
+										// }
+										// // }
+										// if(get_User.count() > 0 && input.Record_is_Edited == false)
+										// {
+										// 	PO_History = insert into History
+										// 	[
+										// 		Added_User=zoho.loginuser
+										// 		Purchase_Order_ID=input.ID
+										// 		Raised_By=get_User.ID
+										// 		Status=input.Order_Status
+										// 		Comments="Purchase Order " + input.QO_Number + " has been moved to '" + input.Order_Status + "' by " + get_User.User_Name + "."
+										// 	];
+										// }
+										input.Record_is_Edited = true;
+										success message "Purchase Order Updated Successfully";
+										// thisapp.PageRefresh();
+										openUrl("#Page:Purchase_Order_Details?zc_LoadIn=embed-editPO&PO_ID=" + input.ID,"same window");
+						)
+					}
+				}
+
+			
+}

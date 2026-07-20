@@ -1,0 +1,7 @@
+void PageRefresh()
+{
+
+                 	// Page Refresh
+                 	openUrl("#Script:page.refresh","same window");
+                 
+}

@@ -1,0 +1,37 @@
+Update_Status as "Update Status"
+{
+
+				type =  form
+				form = Order_Request_Update
+				button = Submit
+				on click
+				{
+					actions 
+					{
+					on click
+					(
+						fetOrder = Order_Request[ID == input.Order_Request];
+										if(fetOrder.count() > 0)
+										{
+											fetOrder.Order_Reference=if(!input.Order_Reference.isEmpty(),input.Order_Reference,"");
+											fetOrder.Delivery_Address=input.Delivery_Address;
+											fetOrder.Transport_Mode=input.Transport_Mode;
+											fetOrder.Comments=if(!input.Comments.isEmpty(),input.Comments,"");
+											fetOrder.Status="Awaiting QO Generation";
+											get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+											HistoryPush = insert into History
+											[
+												Added_User=zoho.loginuser
+												Order_ID=input.Order_Request
+												Raised_By=get_User.ID
+												Status=fetOrder.Status
+												Comments="Order Request " + fetOrder.Order_ID + " has been moved to '" + fetOrder.Status + "' by " + get_User.User_Name + "."
+											];
+											thisapp.Send_Mail.Email_Template(input.Order_Request,"Buyer_Order_Submit");
+										}
+										openUrl("#Page:My_Basket_Page","same window");
+					)
+					}
+				}
+			
+}

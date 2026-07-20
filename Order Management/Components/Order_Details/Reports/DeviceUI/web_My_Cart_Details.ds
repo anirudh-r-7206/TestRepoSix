@@ -1,0 +1,59 @@
+report My_Cart_Details
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Product
+								Product_Color as "Product Color"
+								Product_Size as "Product Size"
+								Quantity
+								Sub_Total as "Sub Total"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						record
+						(
+							"Remove from Cart"
+							Edit   	   
+    					)
+						)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Product
+								Product_Color as "Product Color"
+								Product_Size as "Product Size"
+								Quantity
+								Sub_Total as "Sub Total"
+								Description as "Description "
+								Order_Request as "Order Request"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			
+}

@@ -1,0 +1,50 @@
+Valid_Delivery_person_ema as "Valid Delivery person email"
+{
+
+				type =  form
+				form = Buyers_Master
+
+				record event = on add or edit
+
+				on user input of Delivery_Person_Details.Email
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(row.Email != null && row.Email != "")
+										{
+											fetUser = Create_User[Email.equalsIgnoreCase(row.Email)];
+											if(fetUser.count() > 0)
+											{
+												if(fetUser.User_Type != "Buyer")
+												{
+													alert "This email is already associated with factory or internal user.";
+													row.Email=null;
+												}
+												else if(fetUser.User_Type == "Buyer" && fetUser.Associated_Buyer != input.ID)
+												{
+													alert "This email is already linked to another Buyer.";
+													row.Email=null;
+												}
+											}
+											else
+											{
+												if(!thisapp.permissions.profileForUser(row.Email).isEmpty())
+												{
+													alert "This email is already mapped to a different user profile.";
+													row.Email=null;
+												}
+												else if(thisapp.permissions.adminEmailIds().containsIgnoreCase(row.Email))
+												{
+													alert "User email IDs cannot be used as Buyer email IDs.";
+													row.Email=null;
+												}
+											}
+										}
+						)
+					}
+				}
+
+			
+}

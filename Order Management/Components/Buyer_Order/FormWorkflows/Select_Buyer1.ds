@@ -1,0 +1,41 @@
+Select_Buyer1 as "Select Buyer"
+{
+
+				type =  form
+				form = Buyer_Order
+
+				record event = on add
+
+				on user input of Select_Buyer
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Select_Buyer != null)
+										{
+											get_factory = Buyer_Product_Mapping[Buyer == input.Select_Buyer && Factory_Allocated.Status == "Active"].Factory_Allocated.getAll();
+											input.Select_Factory:ui.add(get_factory);
+											get_Order_Buyer = Order_Request[Buyer_Organisation == input.Select_Buyer && Order_By.Email == zoho.loginuserid && Status == "Awaiting QO Generation" && Last_Order == true];
+											if(get_Order_Buyer.count() > 0)
+											{
+												input.Select_Factory = get_Order_Buyer.Factory;
+											}
+											openUrl("#Page:Product_Catalogue_Cart_Page?zc_LoadIn=embed-Cart_Products&Buyer_ID=" + input.Select_Buyer,"same window");
+										}
+										else
+										{
+											get_Sodexo_Orders = Order_Request[Order_By.Email == zoho.loginuserid && Status == "Awaiting QO Generation"];
+											// 	get_Sodexo_Orders = Order_Request[Order_By.Email == zoho.loginuserid && Status == "Submitted"];
+											for each  SO_Order in get_Sodexo_Orders
+											{
+												SO_Order.Last_Order=false;
+											}
+											openUrl("#Script:page.refresh","same window");
+										}
+						)
+					}
+				}
+
+			
+}

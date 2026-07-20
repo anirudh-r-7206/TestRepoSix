@@ -1,0 +1,95 @@
+Update_Old_Email_Details as "Update Old Email Details"
+{
+
+				type =  form
+				form = Add_Suppliers
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											primaryLower = input.Email.toLowerCase();
+										input.Email = primaryLower;
+										secordLower = input.Email1.toLowerCase();
+										input.Email1 = secordLower;
+										for each  fact in input.Factory_Details
+										{
+											factLower = fact.Factory_Email.toLowerCase();
+											fact.Factory_Email=factLower;
+										}
+										// ─── Primary Contact ──────────────────────────────────────────────
+										if(input.Email != input.Primary_email_old && input.Need_App_Access || input.Need_App_Access == false)
+										{
+											thisapp.handleUserChange(input.Primary_email_old,input.Email,input.Contact_Person2.first_name,input.Contact_Person2.last_name,input.Phone,input.ID,"Factory",input.Need_App_Access);
+										}
+										else if(input.Email == input.Primary_email_old && input.Need_App_Access)
+										{
+											if(thisapp.permissions.profileForUser(input.Email) != "Factory")
+											{
+												thisapp.handleUserChange(input.Primary_email_old,input.Email,input.Contact_Person2.first_name,input.Contact_Person2.last_name,input.Phone,input.ID,"Factory",input.Need_App_Access);
+											}
+										}
+										else if(input.Email == input.Primary_email_old && input.Need_App_Access == false)
+										{
+											if(thisapp.permissions.profileForUser(input.Email) == "Factory")
+											{
+												thisapp.portal.deleteUser(input.Email);
+											}
+										}
+										// ─── Secondary Contact ────────────────────────────────────────────
+										if(input.Email1 != input.Secondary_email_old && input.Need_App_Access1 || input.Need_App_Access1 == false)
+										{
+											thisapp.handleUserChange(input.Secondary_email_old,input.Email1,input.Contact_Person3.first_name,input.Contact_Person3.last_name,input.Phone_Number,input.ID,"Factory",input.Need_App_Access1);
+										}
+										else if(input.Email1 == input.Secondary_email_old && input.Need_App_Access1)
+										{
+											if(thisapp.permissions.profileForUser(input.Email1) != "Factory")
+											{
+												thisapp.handleUserChange(input.Secondary_email_old,input.Email1,input.Contact_Person3.first_name,input.Contact_Person3.last_name,input.Phone_Number,input.ID,"Factory",input.Need_App_Access1);
+											}
+										}
+										else if(input.Email1 == input.Secondary_email_old && input.Need_App_Access1 == false)
+										{
+											if(thisapp.permissions.profileForUser(input.Email1) == "Factory")
+											{
+												thisapp.portal.deleteUser(input.Email1);
+											}
+										}
+										// ─── Factory Details Contacts ─────────────────────────────────────
+										for each  fact in input.Factory_Details
+										{
+											if(fact.Factory_Email != fact.Factory_Email_old && fact.Need_App_Access || fact.Need_App_Access == false)
+											{
+												thisapp.handleUserChange(fact.Factory_Email_old,fact.Factory_Email,fact.Contact_Person1.first_name,fact.Contact_Person1.last_name,fact.Factory_Phone,input.ID,"Factory",fact.Need_App_Access);
+											}
+											else if(fact.Factory_Email == fact.Factory_Email_old && fact.Need_App_Access)
+											{
+												if(thisapp.permissions.profileForUser(fact.Factory_Email) != "Factory")
+												{
+													thisapp.handleUserChange(fact.Factory_Email_old,fact.Factory_Email,fact.Contact_Person1.first_name,fact.Contact_Person1.last_name,fact.Factory_Phone,input.ID,"Factory",fact.Need_App_Access);
+												}
+											}
+											else if(fact.Factory_Email == fact.Factory_Email_old && fact.Need_App_Access == false)
+											{
+												if(thisapp.permissions.profileForUser(fact.Factory_Email) == "Factory")
+												{
+													thisapp.portal.deleteUser(fact.Factory_Email);
+												}
+											}
+										}
+										input.Primary_email_old = input.Email;
+										input.Secondary_email_old = input.Email1;
+										for each  fact in input.Factory_Details
+										{
+											fact.Factory_Email_old=fact.Factory_Email;
+										}
+						)
+					}
+				}
+
+			
+}

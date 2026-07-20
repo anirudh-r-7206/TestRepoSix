@@ -1,0 +1,188 @@
+<%
+	no_Data = "";
+	get_Wardrobes = list();
+	get_Categories = list();
+	get_Buyer = Create_User[Email == thisapp.Dev.get_User_Email() && Status == "Active" && User_Type == "Buyer"];
+	get_Order_Buyer = Order_Request[Order_By.Email == thisapp.Dev.get_User_Email() && Factory == input.Supplier && Status == "Pending"];
+	CartCount = (get_Order_Buyer.Order_details.ID.getall()).size();
+	if(get_Buyer.count() > 0 && input.Supplier != null)
+	{
+		get_Buyer_Org = Buyers_Master[ID == get_Buyer.Associated_Buyer && Status == "Active"];
+		if(get_Buyer_Org.count() > 0)
+		{
+			get_Stye_Codes = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Buyer_Org.ID && Buyer_Product_Mapping.Factory_Allocated == input.Supplier];
+			if(get_Stye_Codes.count() > 0)
+			{
+				// get Wardrobes
+				get_Wardrobes = (get_Stye_Codes.Style_ID.Wardrobe.getall()).distinct();
+				if(input.Wardrobe == null)
+				{
+					input.Wardrobe = get_Wardrobes.get(0);
+				}
+			}
+			else
+			{
+				no_Data = "No products are assigned to this buyer.";
+			}
+		}
+		else
+		{
+			no_Data = "Buyer organization not found or inactive.";
+		}
+	}
+	else if(get_Buyer.count() > 0)
+	{
+		no_Data = "Please select a supplier before adding the product to your cart.";
+	}
+	else
+	{
+		no_Data = "You do not have access to this page. Please contact your application admin.";
+	}
+	// 	get Category
+	if(input.Wardrobe != null)
+	{
+		get_Wardrobe_Products = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Buyer_Org.ID && Buyer_Product_Mapping.Factory_Allocated == input.Supplier && Style_ID.Wardrobe == input.Wardrobe];
+		if(get_Wardrobe_Products.count() > 0)
+		{
+			get_Categories = (get_Wardrobe_Products.Style_ID.Style_Category.getall()).distinct();
+			if(input.Category == null)
+			{
+				input.Category = get_Categories.get(0);
+			}
+		}
+	}
+	%>
+<html>
+<head>
+	<style>
+		<%=thisapp.Style.Cart_Page_Style()%>
+		
+		div#zppagesLive, div#elementsContainer, div#row_1 {
+			height: 100% !important;
+		}
+		.Layout.elemContainment {
+		height: calc(100% - 16px) !important;
+		}
+		[pagelinkname="Buyer_Cart_Page"] .Layout.elemContainment {
+			height: calc(100% - 1.5rem);
+		}
+		.nav_Head {
+			display: flex;
+			gap: 25px;
+			justify-content: space-between;
+			border-bottom: 1px solid #e8e3dc;
+		}
+		.cartSection {
+			height: 42px;
+			width: 42px;
+			top: 8px;
+			right: 24px;
+			z-index: 99;
+		}
+		.cartRow {
+			border: 1px solid #cbcbdc;
+			color: rgba(0, 0, 0, 0.7);
+			background: #fff;
+			height: 40px;
+			position: relative;
+			border-radius: 8px;
+		}
+		.cartCount {
+			width: 18px;
+			height: 16px;
+			padding-top: 1px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 10px;
+			color: #fff;
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			background: var(--theme_brand_color);
+			border-radius: 50%;
+		}
+		.cartIcon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 40px;
+		}
+		
+		.prod-img-wrapper {
+    		background: #D9D9D9;
+			border-radius: 10px;
+		}
+		
+	</style>
+</head>
+
+<body>
+    <div class="overAll_Div">
+<%
+	if(no_Data.isEmpty())
+	{
+		%>
+<!-- Wardrobe Tabs -->
+	<div class="nav_Head">
+        <nav class="wardrobe-nav">
+<%
+		for each  war in get_Wardrobes
+		{
+			get_wardrobe = Wardrobe[ID == war];
+			%>
+<a href="#Page:Buyer_Cart_Page?zc_LoadIn=embed-BuyerCart&Supplier=<%=input.Supplier%>&Wardrobe=<%=get_wardrobe.ID%>"class=<%=if(input.Wardrobe == get_wardrobe.ID,"active","")%>><%=get_wardrobe.Wardrobe_Name%></a>
+<%
+		}
+		%>
+</nav>
+		<a href="#Page:Buyer_Cart_Detail_Page?zc_LoadIn=dialog&Supplier=<%=input.Supplier%>" class="cartSection">
+			<div class="cartRow">
+				<div class="cartCount"><%=CartCount%></div>
+				<div class="cartIcon">
+					<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="rgb(113 113 140)"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>
+				</div>
+			</div>	
+		</a>
+	</div>
+        <!-- Category Pills -->
+        <div class="category-bar">
+<%
+		for each  cat in get_Categories
+		{
+			get_Category = Product_Category[ID == cat];
+			%>
+<a href="#Page:Buyer_Cart_Page?zc_LoadIn=embed-BuyerCart&Supplier=<%=input.Supplier%>&Wardrobe=<%=input.Wardrobe%>&Category=<%=get_Category.ID%>" class="pill <%=if(input.Category == get_Category.ID,'active','')%>"><%=get_Category.Product_Category%></a>
+<%
+		}
+		%>
+</div>
+
+        <!-- Scrollable Grid Wrapper -->
+        <div class="grid-wrapper">
+            <div class="product-grid">
+				<%=thisapp.Page.Buyer_Product_List(input.Supplier,input.Wardrobe,input.Category)%>
+               <!-- <a href="#" class="product-card">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80" alt="Product" />
+                    <div class="product-info">
+                        <div class="product-name">Product Name</div>
+                        <div class="product-sku">1001</div>
+                        <div class="product-price">Starting at : <strong>100.00</strong></div>
+                    </div>
+                </a> -->
+				
+            </div>
+        </div>
+<%
+	}
+	else
+	{
+		%>
+<div class="noData"><%=no_Data%></div>
+<%
+	}
+	%>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+string numberFormatter(float currency)
+{
+
+                 	numStr = currency.toString();
+                 	formatted_value = numStr.replaceAll("(?<!\.\d)(?<=\d)(?=(?:\d\d\d)+\b)",",");
+                 	if(!formatted_value.contains("."))
+                 	{
+                 		formatted_value = formatted_value + ".00";
+                 	}
+                 	return formatted_value;
+                 
+}

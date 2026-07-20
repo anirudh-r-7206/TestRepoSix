@@ -1,0 +1,34 @@
+Calculate_Price1 as "Calculate Price"
+{
+
+				type =  form
+				form = Copy_of_Purchase_Order
+
+				record event = on add or edit
+
+				on user input of Copy_Purchase_LineItems.Quantity
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(row.Quantity <= 0)
+										{
+											alert "Quantity must be greater than 0.";
+											row.Quantity=null;
+										}
+										else if(row.Product != null && row.Quantity > 0)
+										{
+											get_product_Price = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Customer_Name.Associated_Buyer && Style_ID == row.Product && Buyer_Product_Mapping.Factory_Allocated == input.Supplier];
+											row.Selling_Price_Sub_Total=if(get_product_Price.count(ID) > 0,get_product_Price.Sell_Price,0) * row.Quantity;
+											row.Purchase_Price_Sub_Total=row.Purchase_Price * row.Quantity;
+										}
+										input.Total_Selling_Price = input.Copy_Purchase_LineItems.sum(Selling_Price_Sub_Total);
+										input.Total_Purchase_Price = input.Copy_Purchase_LineItems.sum(Purchase_Price_Sub_Total);
+										input.Total_Quantity = input.Copy_Purchase_LineItems.sum(Quantity);
+						)
+					}
+				}
+
+			
+}

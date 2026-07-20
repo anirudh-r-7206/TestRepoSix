@@ -1,0 +1,22 @@
+Populate_Style_Code as "Populate Style Code"
+{
+
+				type =  form
+				form = Product_Duplicate
+
+				record event = on add
+
+				on user input of Colors
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											get_Color_Code = Style[Product_Code == input.Product.Style_Code.Product_Code && Product_Colour in input.Colors].ID.getAll();
+										input.Style = get_Color_Code;
+						)
+					}
+				}
+
+			
+}

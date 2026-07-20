@@ -1,0 +1,21 @@
+Hide_Show_Field as "Hide & Show Field"
+{
+
+				type =  form
+				form = Print_and_PDF_Button
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Hide_Section;
+						)
+					}
+				}
+
+			
+}

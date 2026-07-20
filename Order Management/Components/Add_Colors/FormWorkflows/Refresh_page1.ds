@@ -1,0 +1,21 @@
+Refresh_page1 as "Refresh page"
+{
+
+				type =  form
+				form = Add_Colors
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											thisapp.PageRefresh();
+						)
+					}
+				}
+
+			
+}

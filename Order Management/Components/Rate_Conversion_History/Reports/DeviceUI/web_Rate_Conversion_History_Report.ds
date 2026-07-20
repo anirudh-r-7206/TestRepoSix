@@ -1,0 +1,83 @@
+report Rate_Conversion_History_Report
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Style_Name as "Style Name"
+								Currency
+								Conversion_Rate as "Conversion Rate"
+								Currency_Conversion_Rates as "Currency Conversion Rates"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Add 
+								Print 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Print   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Style_Name as "Style Name"
+								Currency
+								Conversion_Rate as "Conversion Rate"
+								Currency_Conversion_Rates as "Currency Conversion Rates"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Print 
+								Delete 
+							)
+						)
+				)
+			
+}

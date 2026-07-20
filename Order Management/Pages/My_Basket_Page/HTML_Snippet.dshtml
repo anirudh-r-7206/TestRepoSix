@@ -1,0 +1,8 @@
+<%
+	param_value = "zc_AddRec=false";
+	if(input.supplierId != null)
+	{
+		param_value = "Status=Pending&Factory.ID=" + input.supplierId;
+	}
+	%>
+<div class='report' elName='zc-component' style="height:calc(100vh - 70px);" viewLinkName='My_Order_Requests' params='<%=param_value%>'></div>

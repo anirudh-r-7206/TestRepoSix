@@ -1,0 +1,11 @@
+list Delete_Records.Delete_Styles()
+{
+
+                 	Style_List = List();
+                 	// 	get_From_Currency = Currency_Conversion_Rates[ID != 0];
+                 	// 	Style_List.addAll(get_From_Currency.Style_Name.getall());
+                 	get_Product = Add_Product[ID != 0];
+                 	Style_List.addAll(get_Product.Style_Code.getall());
+                 	return Style_List.distinct();
+                 
+}

@@ -1,0 +1,23 @@
+Delete_PO_and_QO_File as "Delete PO and QO File"
+{
+
+				type =  schedule
+					status = inactive
+				start = "2026-01-12 23:55:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						delete from PO_QO_template[ID != 0];
+										delete from Buyer_Products[Buyer_Product_Mapping == null];
+										delete from Order_Details[Order_Request == null];
+										delete from Purchase_LineItems[Purchase_Order == null];
+					)
+					}
+				}
+			
+}

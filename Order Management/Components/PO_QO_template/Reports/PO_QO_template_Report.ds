@@ -1,0 +1,11 @@
+default list PO_QO_template_Report
+{
+
+			displayName = "PO & QO template Report"
+			show all rows from PO_QO_template    
+			(
+				File_upload as "File upload"
+				Purchase_Order as "Purchase Order"
+			)
+		
+}

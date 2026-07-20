@@ -1,0 +1,118 @@
+Generate_PO_Amendment_Req as "Generate PO - Amendment Request"
+{
+
+				type =  functions
+				form = History
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						//	Update PO
+										get_PO = Purchase_Order[ID == input.Purchase_Order_ID];
+										addnCharge = 0;
+										for each  chargeRow in get_PO.Additional_Charges
+										{
+											if(chargeRow.Paid_By == "Buyer")
+											{
+												addnCharge = addnCharge + ifnull(chargeRow.Amount1,0);
+											}
+										}
+										if(input.Copy_of_Purchase_Order != null && input.Approval_Status == "Approved")
+										{
+											get_PO.Order_Reference=input.Copy_of_Purchase_Order.Order_Reference;
+											get_PO.Order_Type=input.Copy_of_Purchase_Order.Order_Type;
+											get_PO.PO_Date=input.Copy_of_Purchase_Order.PO_Date;
+											get_PO.Delivery_Date=input.Copy_of_Purchase_Order.Delivery_Date;
+											get_PO.Supplier=input.Copy_of_Purchase_Order.Supplier;
+											get_PO.Payment_Terms=input.Copy_of_Purchase_Order.Payment_Terms;
+											get_PO.Order_Request=input.Copy_of_Purchase_Order.Order_Request;
+											get_PO.Transport_Mode=input.Copy_of_Purchase_Order.Transport_Mode;
+											get_PO.Factory_Address=input.Copy_of_Purchase_Order.Factory_Address;
+											get_PO.Delivery_Address=input.Copy_of_Purchase_Order.Delivery_Address;
+											get_PO.Selling_Currency=input.Copy_of_Purchase_Order.Selling_Currency;
+											get_PO.Purchase_Currency=input.Copy_of_Purchase_Order.Purchase_Currency;
+											get_PO.Total_Selling_Price=input.Copy_of_Purchase_Order.Total_Selling_Price + addnCharge;
+											get_PO.Total_Purchase_Price=input.Copy_of_Purchase_Order.Total_Purchase_Price;
+											get_PO.Total_Quantity=input.Copy_of_Purchase_Order.Total_Quantity;
+											get_PO.Buyer_Organisation=input.Copy_of_Purchase_Order.Buyer_Organisation;
+											get_PO.Customer_Name=input.Copy_of_Purchase_Order.Customer_Name;
+											get_PO.Country=input.Copy_of_Purchase_Order.Country;
+											get_PO.Freight_Forwarder=input.Copy_of_Purchase_Order.Freight_Forwarder;
+											get_PO.Delivery_Contact=input.Copy_of_Purchase_Order.Delivery_Contact;
+											get_PO.Incoterms=input.Copy_of_Purchase_Order.Incoterms;
+											get_PO.Comments=input.Copy_of_Purchase_Order.Comments;
+											get_PO.Purchase_LineItems.clear();
+											Copy_PO_Items = input.Copy_of_Purchase_Order.Copy_Purchase_LineItems;
+											for each  po_Item in Copy_PO_Items
+											{
+												copy_Items = Purchase_Order.Purchase_LineItems();
+												copy_Items.S_No=po_Item.S_No;
+												copy_Items.Product=po_Item.Product;
+												copy_Items.Style_Code=po_Item.Style_Code;
+												copy_Items.Product_Color=po_Item.Product_Color;
+												copy_Items.Product_Size=po_Item.Product_Size;
+												copy_Items.Description=po_Item.Description;
+												copy_Items.Quantity=po_Item.Quantity;
+												copy_Items.Selling_Price=po_Item.Selling_Price;
+												copy_Items.Purchase_Price=po_Item.Purchase_Price;
+												copy_Items.Selling_Price_Sub_Total=po_Item.Selling_Price_Sub_Total;
+												copy_Items.Purchase_Price_Sub_Total=po_Item.Purchase_Price_Sub_Total;
+												get_PO.Purchase_LineItems.insert(copy_Items);
+											}
+										}
+										Complete_Amendment = History[Purchase_Order_ID == input.Purchase_Order_ID && Approval_Status == "Approved"];
+										for each  amend in Complete_Amendment
+										{
+											amend.Approval_Status="Completed";
+										}
+										get_Factory_History = History[Purchase_Order_ID == input.Purchase_Order_ID && Status == "Awaiting Factory Review"];
+										get_PO = Purchase_Order[ID == input.Purchase_Order_ID];
+										// if(input.Status == "Amendment Requested (Factory)" || input.Status == "Awaiting Factory Review" || get_Factory_History.count() <= 0)
+										// {
+										newStatus = "Awaiting Buyer Review";
+										// }
+										// else
+										// {
+										// 	newStatus = "Awaiting Factory Review";
+										// }
+										if(get_PO.count() > 0)
+										{
+											get_PO.Order_Status=newStatus;
+											get_PO.Enable_Edit=false;
+											get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+											PO_History = insert into History
+											[
+												Added_User=zoho.loginuser
+												Purchase_Order_ID=get_PO.ID
+												Raised_By=get_User.ID
+												Status=newStatus
+												Comments="Purchase Order " + get_PO.PO_Number + " has been moved to '" + get_PO.Order_Status + "' by " + get_User.User_Name + "."
+											];
+											// 	thisapp.Send_Mail.Send_Mail_to_Factory_Review(get_PO.ID,"Review");
+										}
+										// if(newStatus == "Awaiting Buyer Review")
+										// {
+										// 	thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Buyer_Review");
+										// }
+										// else
+										// {
+										// 	thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Factory_Review");
+										// }
+										// if(input.On_behalf_of == "Buyer")
+										// {
+										thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Update_PO");
+										// }
+										if(input.On_behalf_of == "Factory")
+										{
+											thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Update_PO_Factory");
+										}
+										delete from Copy_of_Purchase_Order[ID == input.Copy_of_Purchase_Order];
+										delete from Copy_of_Purchase_LineItems[Copy_of_Purchase_Order == null];
+					)
+					}
+				}
+			
+}

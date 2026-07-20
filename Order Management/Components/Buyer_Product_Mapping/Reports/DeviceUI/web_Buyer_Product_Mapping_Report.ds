@@ -1,0 +1,110 @@
+report Buyer_Product_Mapping_Report
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Buyer
+								Factory_Allocated.Supplier_Code as "Supplier Code"
+								Factory_Allocated as "Supplier Allocated"
+								Factory_Allocated.Supplier_type as " Supplier type"
+								Sell_Currency as "Sell Currency"
+								Buy_Currency as "Buy Currency"
+								"View Mapped Products"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						record
+						(
+							Edit   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Buyer
+								Factory_Allocated as "Supplier Allocated"
+								Sell_Currency as "Sell Currency"
+								Buy_Currency as "Buy Currency"
+							)
+						)
+						datablock2
+						(
+		     				title = "Buyer"
+		     				related field = Buyer
+							fields
+							(
+								Buyer_Organisation as "Buyer Organisation"
+								Buyer_Type as "Buyer Type"
+								Buyer_Code as "Buyer Code"
+								Country
+								Region
+							)
+						)
+						datablock3
+						(
+		     				title = "Factory Allocated"
+		     				related field = Factory_Allocated
+							fields
+							(
+								Supplier_Organisation as "Supplier Organisation"
+								Supplier_Code as "Supplier Code"
+								Supplier_type as " Supplier type"
+								Country
+							)
+						)
+						datablock4
+						(
+							layout type = -1
+		     				title = "Product Details"
+		     				related field = Style_Details
+							fields
+							(
+								Product_ID as "Product ID"
+								Style_ID as "Style ID"
+								Colors
+								Size
+								Sell_Price as "QO Unit Price"
+								Buy_Price as "PO Unit Price"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			
+}

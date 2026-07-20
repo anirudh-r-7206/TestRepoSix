@@ -1,0 +1,19 @@
+default list All_Histories
+{
+
+			displayName = "All Histories"
+			show all rows from History    
+			(
+				Order_ID as "Order ID"
+				Purchase_Order_ID as "Purchase Order ID"
+				Raised_By as "Raised By"
+				Status
+				Comments
+				Approval_Status as "Approval Status"
+				On_behalf_of as "On behalf of"
+				QO_Viewed as "QO Viewed"
+				Copy_of_Purchase_Order as "Copy of Purchase Order"
+				File_upload as "File upload"
+			)
+		
+}

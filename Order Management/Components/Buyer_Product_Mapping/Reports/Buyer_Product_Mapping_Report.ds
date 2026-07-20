@@ -1,0 +1,25 @@
+default list Buyer_Product_Mapping_Report
+{
+
+			displayName = "Buyer Product Mapping"
+			show all rows from Buyer_Product_Mapping    
+			(
+				Buyer
+				Factory_Allocated as "Supplier Allocated"
+				Factory_Allocated.Supplier_type as " Supplier type"
+				Factory_Allocated.Supplier_Code as "Supplier Code"
+				custom action "View Mapped Products"
+				(
+	  			workflow = View_Product
+				show action in edit record menu = true
+				column header = "View Mapped Products"
+				)
+				Buy_Currency as "Buy Currency"
+				Sell_Currency as "Sell Currency"
+			)
+			group by
+			(
+				Buyer ascending
+			)
+		
+}

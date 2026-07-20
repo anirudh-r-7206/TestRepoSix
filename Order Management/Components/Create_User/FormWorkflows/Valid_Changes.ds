@@ -1,0 +1,30 @@
+Valid_Changes as "Valid Changes"
+{
+
+				type =  form
+				form = Create_User
+
+				record event = on edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Status != old.Status)
+										{
+											alert "Status cannot be changed.";
+											cancel submit;
+										}
+										if(input.Persona_Role != old.Persona_Role)
+										{
+											input.Status = "Inactive";
+											Delete_User = thisapp.permissions.deleteUser(input.Email);
+										}
+						)
+					}
+				}
+
+			
+}

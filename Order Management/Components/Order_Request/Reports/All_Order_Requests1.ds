@@ -1,0 +1,84 @@
+list All_Order_Requests1
+{
+
+			displayName = "All Order Requests"
+			show all rows from Order_Request    
+			(
+				Order_ID as "Order ID"
+				Cart_Total as "Cart Total "
+				Status
+				custom action "Generate QO"
+				(
+	  			workflow = Generate_QO
+				show action in edit record menu = true
+				column header = "Generate QO"
+				condition = (Status == "Awaiting QO Generation" && Cart_Total > 0)
+				)
+				Buyer_Name as "Buyer Name"
+				Order_By as "Order By"
+				Buyer_Organisation as "Buyer Organisation"
+				Factory
+				custom action "Select Supplier"
+				(
+	  			workflow = Select_Supplier
+				show action in edit record menu = true
+				column header = "Select Supplier"
+				condition = (Status == "Awaiting Supplier Selection")
+				)
+				Total_Quantity as "Total Quantity"
+				Order_Reference as "Order Reference"
+				Delivery_Address as "Delivery Address"
+				Transport_Mode as "Transport Mode"
+				Comments
+			)
+			sort by
+			(
+				Order_ID descending
+			)
+			conditional formatting
+			(
+				"Pending"
+				{
+				condition = (Status == "Pending")
+				fields = [Status]
+				format = "color:#398ef3;"
+				}
+				"Completed"
+				{
+				condition = (Status == "Completed")
+				fields = [Status]
+				format = "color:#5dc35a;"
+				}
+				"In Production"
+				{
+				condition = (Status == "In Production")
+				fields = [Status]
+				format = "color:#a811cc;background-color:#ffffff;"
+				}
+				"Closed"
+				{
+				condition = (Status == "Closed")
+				fields = [Status]
+				format = "color:#ef1616;"
+				}
+				"Awaiting PO"
+				{
+				condition = (Status == "Awaiting QO Generation")
+				fields = [Status]
+				format = "color:#efb116;"
+				}
+				"Validation Pending"
+				{
+				condition = (Status == "Validation Pending")
+				fields = [Status]
+				format = "color:#38d7bb;"
+				}
+				"Awaiting Supplier Selection"
+				{
+				condition = (Status == "Awaiting Supplier Selection")
+				fields = [Status]
+				format = "color:#aaaaaa;"
+				}
+			)
+		
+}

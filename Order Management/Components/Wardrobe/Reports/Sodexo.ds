@@ -1,0 +1,26 @@
+list Sodexo
+{
+
+			displayName = "Sodexo"
+			show all rows from Wardrobe    
+			(
+				Wardrobe_Name as "Wardrobe Name"
+				Product_Category as "Product Category"
+			)
+			custom actions
+			(
+				"Delete Wardrobes"
+				(
+	  			workflow = Delete_Selected_Wardrobes
+				show action in edit record menu = true
+				condition = (ID != thisapp.Delete_Records.Delete_Wardrobes())
+				confirmation before execution
+				(
+					message for multiple records = "Are you sure you want to delete wardrobes for the selected ${record_count} records?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+			)
+		
+}

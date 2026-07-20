@@ -1,0 +1,33 @@
+Filter_Products_by_row_ad1 as "Filter Products by row added"
+{
+
+				type =  form
+				form = Buyer_Product_Mapping
+
+				record event = on add or edit
+
+				on add row of Style_Details
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											enable row.Style_ID;
+										if(input.Factory_Allocated != null)
+										{
+											get_Factory_Product = Add_Product[Wardrobe in input.Buyer.Wardrobe && Status == "Approved"].ID.getAll();
+											get_sub_Product = input.Style_Details.Style_ID.getall();
+											get_Factory_Product.removeAll(get_sub_Product);
+											row.Style_ID:ui.add(get_Factory_Product);
+										}
+										else
+										{
+											input.Style_Details.clear();
+											alert "Please choose an factory allocated before adding a product.";
+										}
+						)
+					}
+				}
+
+			
+}

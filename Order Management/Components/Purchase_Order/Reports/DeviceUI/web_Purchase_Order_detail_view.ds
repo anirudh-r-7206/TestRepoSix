@@ -1,0 +1,114 @@
+report Purchase_Order_detail_view
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								PO_Number as "PO Number"
+								PO_Date as "PO Date"
+								Order_Request as "Order Request"
+								Supplier
+								Total_Purchase_Price as "Total Purchase Price"
+								Order_Status as "Order Status"
+								"View PO"
+								"View QO"
+								"Completed"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Delete 
+							)
+						record
+						(
+							Delete   	   
+							Edit   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+							Delete   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								PO_Number as "PO Number"
+								Order_Type as "Order Type "
+								Order_Reference as "Order Reference"
+								Payment_Terms as "Payment Terms"
+								Supplier
+								Buyer_Organisation as "Buyer Organisation"
+								Country
+								Total_Purchase_Price as "Total Purchase Price"
+								Total_Selling_Price as "Total Selling Price"
+								Factory_Address1 as "Factory Address"
+								Delivery_Address1 as "Delivery Address"
+							)
+						)
+						datablock2
+						(
+		     				title = "Supplier"
+		     				related field = Supplier
+							fields
+							(
+								Supplier_Organisation as "Supplier Organisation"
+								Supplier_type as " Supplier type"
+								Country
+								ERP_System as "ERP System"
+								Factory_Address as "Invoice Address"
+								Contact_Person2 as "Contact Person"
+								Contact_Person as "Contact Person1"
+							)
+						)
+						datablock3
+						(
+		     				title = "Order Request"
+		     				related field = Order_Request
+							fields
+							(
+								Buyer_Organisation as "Buyer Organisation"
+								Buyer_Name as "Buyer Name"
+								Factory
+								Cart_Total as "Cart Total "
+								Purchase_Order as "Purchase Order"
+								Selling_Currency as "Selling Currency"
+								Search_Style_Code as "Search Style Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						)
+				)
+			
+}

@@ -1,0 +1,97 @@
+form Buyer_product_duplicate
+{
+
+			displayname = "Buyer Product Duplicate"
+			store data in zc = false
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Buyer_Product_Mapping
+			(
+				type = picklist	
+				displayname = "Buyer Product Mapping"
+				values  = Buyer_Product_Mapping.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Buyer_Products
+			(
+				type = picklist	
+				displayname = "Buyer Products"
+				values  = Buyer_Products.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Product
+			(
+				type = picklist	
+				values  = Add_Product.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "Add your Note here ..."
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Variant_Type
+			(
+				type = radiobuttons
+				displayname = "Variant Type"
+				maxchar = 100
+				values = {"Size","Color"}
+				layout = 2
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Size
+			(
+				type = list	
+				values  = Create_Size.ID
+    			displayformat = [Size]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Colors
+			(
+				type = list	
+				values  = Add_Colors.ID
+    			displayformat = [Color_Name]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				Submit
+				(
+   					type = submit
+   					displayname = "Submit"
+				)
+			}
+		
+}

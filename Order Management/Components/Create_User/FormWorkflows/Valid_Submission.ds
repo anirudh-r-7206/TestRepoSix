@@ -1,0 +1,35 @@
+Valid_Submission as "Valid Submission"
+{
+
+				type =  form
+				form = Create_User
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Persona_Role == "Buyer" && input.Associated_Buyer == null)
+										{
+											alert(Associated_Buyer,"This field is mandatory. Select a value.");
+											cancel submit;
+										}
+										else if(input.Persona_Role == "Factory Team" && input.Associated_Factory == null)
+										{
+											alert(Associated_Factory,"This field is mandatory. Select a value.");
+											cancel submit;
+										}
+										else if(input.Persona_Role == "Factory Team" && input.Employee_External_ID == null || input.Employee_External_ID.isEmpty() == true)
+										{
+											alert "Employee External ID is required for Factory Team users.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			
+}

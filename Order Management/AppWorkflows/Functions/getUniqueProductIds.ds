@@ -1,0 +1,9 @@
+list helpers.getUniqueProductIds()
+{
+
+                 	get_Buyer = Create_User[Email == zoho.loginuserid && Status == "Active" && User_Type == "Buyer"];
+                 	buyer_mappings = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Buyer.Associated_Buyer].ID.getAll();
+                 	// && Size.Size_Order == 0 || Size.Size_Order == 1
+                 	return buyer_mappings;
+                 
+}

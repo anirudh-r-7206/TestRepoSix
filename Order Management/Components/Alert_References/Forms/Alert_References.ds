@@ -1,0 +1,148 @@
+form Alert_References
+{
+
+			displayname = "Alert References"
+			store data in zc = false
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Notes
+			(
+    			type = plaintext
+				value = "<div> <br /></div>"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Hidden
+			(
+				type = section
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Create_Size
+			(
+				type = picklist	
+				displayname = "Create Size"
+				values  = Create_Size.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Product_Code_Master
+			(
+				type = picklist	
+				displayname = "Product Code Master"
+				values  = Product_Code_Master.ID
+    			displayformat = [Product_Code]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Wardrobe
+			(
+				type = picklist	
+				values  = Wardrobe.ID
+    			displayformat = [Wardrobe_Name]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Add_Colors
+			(
+				type = picklist	
+				displayname = "Add Colors"
+				values  = Add_Colors.ID
+    			displayformat = [Color_Code]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Style
+			(
+				type = picklist	
+				values  = Style.ID
+    			displayformat = [Style_Code]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Product_Category
+			(
+				type = picklist	
+				displayname = "Product Category"
+				values  = Product_Category.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Add_Country
+			(
+				type = picklist	
+				displayname = "Add Country"
+				values  = Add_Country.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Freight_Partners_Form
+			(
+				type = picklist	
+				displayname = "Freight Partners Form"
+				values  = Freight_Partners_Form.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Add_Product
+			(
+				type = picklist	
+				displayname = "Add Product"
+				values  = Add_Product.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Currency
+			(
+				type = picklist	
+				values  = Currency.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Fabric_Form
+			(
+				type = picklist	
+				displayname = "Fabric Form"
+				values  = Fabric_Form.ID
+    			displayformat = [Fabric_Code]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+		
+}

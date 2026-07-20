@@ -1,0 +1,48 @@
+form Buyer_Order
+{
+
+			displayname = "Buyer Order"
+			store data in zc = false
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Select_Buyer
+			(
+				type = picklist	
+				displayname = "Select Buyer"
+				values  = Buyers_Master.ID
+    			displayformat = [Buyer_Organisation]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = small
+			)
+			Select_Factory
+			(
+				type = picklist	
+				displayname = "Select Factory"
+				values  = Add_Suppliers.ID
+    			displayformat = [Supplier_Organisation]
+				sortorder = ascending
+	 			row = 1
+	 			column = 2   
+				width = small
+			)
+			Select_Style_Code
+			(
+				type = picklist	
+				displayname = "Select Style Code"
+				values  = Style.ID
+    			displayformat = [Style_Code]
+				sortorder = ascending
+	 			row = 1
+	 			column = 3   
+				width = small
+			)
+	
+		
+}

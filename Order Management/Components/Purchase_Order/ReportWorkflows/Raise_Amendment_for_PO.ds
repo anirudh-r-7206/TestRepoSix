@@ -1,0 +1,30 @@
+Raise_Amendment_for_PO as "Raise Amendment for PO"
+{
+
+				type =  functions
+				form = Purchase_Order
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						pendingRequests = History[Purchase_Order_ID == input.ID && Approval_Status == "Pending" || (Approval_Status == "Approved" && Purchase_Order_ID.Enable_Edit == true && Purchase_Order_ID.Record_is_Edited == false)];
+										if(pendingRequests.count() > 0)
+										{
+											openUrl("#Page:Alert_Message?Message_Type=Ammendment_request_reject&PO_ID=" + input.ID,"popup window");
+										}
+										else
+										{
+											get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+											if(get_User.count() > 0)
+											{
+												openUrl("#Form:History?Purchase_Order_ID=" + input.ID + "&Raised_By=" + get_User.ID + "&Status=Amendment / Cancellation Required","popup window","height=<height>,width=<width>");
+											}
+										}
+					)
+					}
+				}
+			
+}

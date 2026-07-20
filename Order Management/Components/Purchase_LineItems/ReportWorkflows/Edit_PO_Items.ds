@@ -1,0 +1,19 @@
+Edit_PO_Items as "Edit PO Items"
+{
+
+				type =  functions
+				form = Purchase_LineItems
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						openUrl("#Form:Purchase_LineItems?zc_LoadIn=embed-editPO&zc_Header=false&recLinkID=" + input.ID + "&viewLinkName=Purchase_LineItems_Report","same window");
+										// openUrl("#Page:Purchase_Order_Details?zc_LoadIn=embed-editPO&PO_ID=" + input.Purchase_Order_ID+"&back_Page=Amendment","same window");
+					)
+					}
+				}
+			
+}

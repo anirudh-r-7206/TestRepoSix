@@ -1,0 +1,120 @@
+<%
+	// 	fetEmp = Employee[Mail_ID.equalsIgnoreCase(zoho.loginuserid)];
+	get_Order_Buyer = Order_Request[Buyer_Organisation == input.Buyer_ID && Factory == input.Suppliyer_ID && Order_By.Email == zoho.loginuserid && Status == "Awaiting QO Generation"];
+	input.CartCount = thisapp.Page.CartQuantity(input.Buyer_ID,input.Suppliyer_ID);
+	%>
+<style>
+		.popupbox-wrapper:not(.zc-alert-popup-wrapper) .popupbox {
+			width: 80% !important;
+			overflow: unset !important;
+		}
+		.overAllDiv {
+			height: calc(100vh - 110px);
+			/*padding: 10px;*/
+			background: var(--teritiary_bg_color);
+			display: flex;
+			flex-direction: column;
+			/*gap: 15px;*/
+		}
+		.CartReportSection {
+			height: calc(100% - 70px);
+		}
+		.HeaderSectionUser{
+			position: absolute;
+			z-index: 1;
+			width: calc(100% - 100px);
+			top: 0px;
+		}
+		.back_Product{
+			display: flex;
+    		align-items: center;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		a.back_Product:hover {
+			background-color: #eaeaea;
+		}
+		.HeaderSectionUser, .ButtonsSection {
+			height: 35px;
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #fff;
+			border-radius: 10px;
+		}
+		.HeaderSection{
+			width: calc(100% - 70px);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.UserName, .ItemsCount {
+			margin: 0px;
+			font-size: 16px;
+			font-weight: 600;
+		}
+		.ProceedBtn, .ResetBtn {
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 16px;
+			background: var(--theme_brand_color);
+			border: 1px solid #ffffff;
+			border-radius: 25px;
+		}
+		/* Report Style */
+		[viewLinkName='My_Cart_Details'] .record-container .scroll-fix {
+			padding-top: 10px;
+		}
+		[viewLinkName='My_Cart_Details'] .record-container.record-container-fix {
+			padding: 0;
+		}
+		[viewLinkName='My_Cart_Details'] .gridpad.gridpad-table {
+			background: var(--theme_light_bg_color);
+		}
+		[viewlinkname="My_Cart_Details"] .zc-pb-tile-card.zc-pb-tile-cnt-wrapper{
+			border-radius: 10px !important;
+		}
+		[viewlinkname="My_Cart_Details"] .view-header, [viewlinkname="My_Cart_Details"] .col-sm-4.zc-reportoptionheader {
+			padding-right: 10px !important;
+		}
+		[viewlinkname="My_Cart_Details"] {
+			height: 100% !important;
+		}
+		form[name="Order_Details"] .formContainer {
+			padding-left: 14px !important;
+		}
+<%
+	if(input.CartCount == 0)
+	{
+		%>
+.ProceedBtn {
+				display: none;
+			}
+<%
+	}
+	%>
+</style>
+	<div class="overAllDiv">
+		<div class="HeaderSectionUser">
+			<a class="back_Product" href="#Script:page.refresh">
+				<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="var(--primary_color)"><path d="M400-240 160-480l240-240 56 58-142 142h486v80H314l142 142-56 58Z"/></svg>
+				Back
+			</a>
+			<div class="HeaderSection">
+				<p class="UserName"><%=get_Order_Buyer.Buyer_Name.User_Name%>'s Cart Details</p>
+				<p class="ItemsCount" style="padding-right: 20px;">Total Quantity : <%=if(input.CartCount != null,input.CartCount,"0")%>, Total Amount : <%=get_Order_Buyer.Selling_Currency.Symbol%> <%=if(input.get_Order_Buyer != null,thisapp.numberFormatter(get_Order_Buyer.Cart_Total),"0.00")%></p>
+			</div>
+		</div>
+		<div class="CartReportSection">
+			<div elName='zc-component' name='CartView' viewLinkName='My_Cart_Details' params='zc_Header=true&zc_Footer=false&zc_AddRec=false&zc_MoreAction=false&zc_ReportName=false&zc_Search=true&Order_Request=<%=get_Order_Buyer.Order_ID%>'></div>
+		</div>
+		<div class="ButtonsSection" style="height: 50px; justify-content: center; gap: 15px;">
+			<a class="ProceedBtn" href="#Form:Purchase_Order?zc_LoadIn=embed-cartPage&Order_Request=<%=get_Order_Buyer.ID%>" style="width: 150px;">Generate QO</a>
+			<a class="ResetBtn" href="#Page:Product_Catalogue_Cart_Page?zc_LoadIn=embed-cartPage&Buyer_ID=<%=input.Buyer_ID%>&Suppliyer_ID=<%=input.Suppliyer_ID%>&DeleteCart=Delete" style="width: 110px;">Reset Cart</a>
+		</div>
+		
+	</div>

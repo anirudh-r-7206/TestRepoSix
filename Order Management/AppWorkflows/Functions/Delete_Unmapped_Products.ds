@@ -1,0 +1,6 @@
+void Delete_Records.Delete_Unmapped_Products()
+{
+
+                 	delete from Buyer_Products[Buyer_Product_Mapping == null];
+                 
+}

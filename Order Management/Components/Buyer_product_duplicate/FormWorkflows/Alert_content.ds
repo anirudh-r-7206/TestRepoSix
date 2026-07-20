@@ -1,0 +1,21 @@
+Alert_content as "Alert content"
+{
+
+				type =  form
+				form = Buyer_product_duplicate
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.plain = "<div style=\"font-size: 16px; font-weight: 600; text-align: center; padding: 10px;\">You are about to duplicate " + input.Product.Style_ID + " (" + input.Buyer_Product_Mapping.Factory_Allocated.Supplier_Code + "-" + input.Buyer_Product_Mapping.Buyer.Buyer_Code + ").<br>What would you like to duplicate?</div>";
+						)
+					}
+				}
+
+			
+}

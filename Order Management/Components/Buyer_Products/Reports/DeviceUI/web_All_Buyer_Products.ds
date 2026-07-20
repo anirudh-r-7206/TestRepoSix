@@ -1,0 +1,88 @@
+report All_Buyer_Products
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Style_ID as "Style ID"
+								Colors
+								Size
+								Sell_Price as "QO Unit Price"
+								Buy_Price as "PO Unit Price"
+								HS_Name as "HS Code Region"
+								HS_Code as "HS Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								"Edit "
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							"Duplicate Product"
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							"Duplicate Product"
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Product_ID as "Product ID"
+								Style_ID as "Style ID"
+								Style_Name as "Style Name"
+								Style_Description as "Style Description"
+								Colors
+								Size
+								Sell_Price as "QO Unit Price"
+								Buy_Price as "PO Unit Price"
+								HS_Name as "HS Code Region"
+								HS_Code as "HS Code"
+								Style_Master_Code as "Style Master Code"
+								Wardrobe_Name as "Wardrobe Name"
+								Category
+								Wardrobe_Data as "Wardrobe Data"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								"Duplicate Product"
+								Delete 
+							)
+						)
+				)
+			
+}

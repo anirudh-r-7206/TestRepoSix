@@ -1,0 +1,21 @@
+Generate_Style_Code1 as "Generate Style Code"
+{
+
+				type =  form
+				form = Style
+
+				record event = on add or edit
+
+				on user input of Product_Colour
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Style_Code = if(input.Product_Code != null,input.Product_Code.Product_Code,"") + "-" + if(input.Product_Colour != null,input.Product_Colour.Color_Code,"");
+						)
+					}
+				}
+
+			
+}

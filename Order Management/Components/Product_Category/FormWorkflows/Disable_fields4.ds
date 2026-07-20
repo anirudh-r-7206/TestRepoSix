@@ -1,0 +1,18 @@
+Disable_fields4 as "Disable fields"
+{
+
+				type =  form
+				form = Product_Category
+
+				record event = on edit
+
+				field rules
+				{
+					actions 
+					{
+						disable Product_Category;
+					}
+				}
+
+			
+}

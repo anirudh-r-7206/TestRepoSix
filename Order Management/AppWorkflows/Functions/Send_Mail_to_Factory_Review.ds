@@ -1,0 +1,42 @@
+void Send_Mail.Send_Mail_to_Factory_Review(int PO_ID, string type)
+{
+
+                 	// 	type = {"Review","Production"};
+                 	// 	FileList = List();
+                 	// 	get_PO = Purchase_Order[ID == input.PO_ID];
+                 	// 	QO_url = "https://creatorapp.zohopublic.com" + zoho.appuri + "pdf/QO_Template/rWrsGFz2zwSR1fSYAeXhfR2SKx5uKF0yzvHTJXHp6ZdetJuPBp9tpSTZjkgvU8gGSXfHYHOE2GDYm46rV5Hkh4x6jarmt7VexNrb?isc5page=true&QO_ID=" + input.PO_ID;
+                 	// 	QO_resp = invokeurl
+                 	// 	[
+                 	// 		url :QO_url
+                 	// 		type :GET
+                 	// 	];
+                 	// 	QO_resp.setFileName(get_PO.QO_Number + ".pdf");
+                 	// 	FileList.add(QO_resp);
+                 	// 	PO_url = "https://creatorapp.zohopublic.com" + zoho.appuri + "pdf/PO_Template/ZPgVFGJ7HEAXS7jbXJ0meNqM0tftmxjXAnPvPeTzUf0Hsv2u6XvjKMjpksKJMpTa0XeKpkpdJ2JA1UmBFgwKXvZVv3VKSkJjQE2U?isc5page=true&PO_ID=" + input.PO_ID;
+                 	// 	PO_resp = invokeurl
+                 	// 	[
+                 	// 		url :PO_url
+                 	// 		type :GET
+                 	// 	];
+                 	// 	PO_resp.setFileName(get_PO.PO_Number + ".pdf");
+                 	// 	FileList.add(PO_resp);
+                 	// 	msg = "";
+                 	// 	if(input.type == "Review")
+                 	// 	{
+                 	// 		get_Factory_User = Create_User[Associated_Factory == get_PO.Supplier && Status == "Active"];
+                 	// 		msg = " <p>An order has been submitted and is currently <b>Awaiting Factory Review</b>.</p> <p>Please review the order details, specifications, and feasibility, and take the required action at your earliest convenience.</p> <p> <a href='https://creatorapp.zoho.com" + zoho.appuri + "#Form:History?Purchase_Order_ID=" + get_PO.ID + "&Raised_By=" + get_Factory_User.ID + " 'style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a> </p> <p>If any changes or clarifications are required, please update the order accordingly.</p> <p>Regards,<br/> Order Management Team</p>";
+                 	// 	}
+                 	// 	else
+                 	// 	{
+                 	// 		msg = "<p>The order review has been completed and the order has now moved to <b>Awaiting Production</b>.</p>";
+                 	// 	}
+                 	// 	sendmail
+                 	// 	[
+                 	// 		from :zoho.adminuserid
+                 	// 		to :"hemanathantesting@gmail.com"
+                 	// 		subject :"Awaiting Review"
+                 	// 		message :"<p>Hello " + get_PO.Supplier.Supplier_Organisation + ",</p>" + msg
+                 	// 		Attachments :file:FileList
+                 	// 	]
+                 
+}

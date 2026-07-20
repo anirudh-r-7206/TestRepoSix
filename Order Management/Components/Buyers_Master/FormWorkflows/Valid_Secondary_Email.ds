@@ -1,0 +1,86 @@
+Valid_Secondary_Email as "Valid Secondary Email"
+{
+
+				type =  form
+				form = Buyers_Master
+
+				record event = on add or edit
+
+				on user input of Person_2_Email
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Person_2_Email != null && input.Person_2_Email != "")
+										{
+											duplicate_Email = false;
+											if(!input.Primary_Email.isEmpty())
+											{
+												if(input.Primary_Email.equalsIgnoreCase(input.Person_2_Email))
+												{
+													duplicate_Email = true;
+												}
+											}
+											for each  focal in input.Focal_Details_Subform
+											{
+												if(!focal.Email.isEmpty())
+												{
+													if(focal.Email.equalsIgnoreCase(input.Person_2_Email))
+													{
+														duplicate_Email = true;
+													}
+												}
+											}
+											if(duplicate_Email == true)
+											{
+												alert "This email address has already been added. Duplicate email addresses are not allowed.";
+												input.Person_2_Email = null;
+											}
+											else
+											{
+												fetUser = Create_User[Email.equalsIgnoreCase(input.Person_2_Email)];
+												if(fetUser.count() > 0)
+												{
+													if(fetUser.User_Type != "Buyer")
+													{
+														alert "This email is already associated with factory or internal user.";
+														input.Person_2_Email = null;
+													}
+													else if(fetUser.User_Type == "Buyer" && fetUser.Associated_Buyer != input.ID)
+													{
+														alert "This email is already linked to another Buyer.";
+														input.Person_2_Email = null;
+													}
+												}
+												else
+												{
+													if(!thisapp.permissions.profileForUser(input.Person_2_Email).isEmpty())
+													{
+														alert "This email is already mapped to a different user profile.";
+														input.Person_2_Email = null;
+													}
+													else if(thisapp.permissions.adminEmailIds().containsIgnoreCase(input.Person_2_Email))
+													{
+														alert "User email IDs cannot be used as Buyer email IDs.";
+														input.Person_2_Email = null;
+													}
+												}
+											}
+										}
+										if(input.Person_2_Email != null)
+										{
+											for each  delivery in input.Delivery_Person_Details
+											{
+												if(input.Person_2_Email.equalsIgnoreCase(delivery.Email))
+												{
+													delivery.Need_App_Access=input.Need_App_Access1;
+												}
+											}
+										}
+						)
+					}
+				}
+
+			
+}

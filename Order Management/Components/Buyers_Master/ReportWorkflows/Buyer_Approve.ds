@@ -1,0 +1,20 @@
+Buyer_Approve as "Buyer Approve"
+{
+
+				type =  functions
+				form = Buyers_Master
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						// Status Approve
+										input.Approval_Status = "Approved";
+										input.Status = "Active";
+					)
+					}
+				}
+			
+}

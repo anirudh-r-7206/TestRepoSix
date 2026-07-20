@@ -1,0 +1,10 @@
+list Size_Charts
+{
+
+			displayName = "Size Charts"
+			show all rows from Size_Chart    
+			(
+				Image
+			)
+		
+}

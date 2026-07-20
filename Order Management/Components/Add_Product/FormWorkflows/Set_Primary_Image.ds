@@ -1,0 +1,28 @@
+Set_Primary_Image as "Set Primary Image"
+{
+
+				type =  form
+				form = Add_Product
+
+				record event = on add or edit
+
+				on user input of Product_Picture.Set_Primary
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(row.Set_Primary == true)
+										{
+											for each  pic in input.Product_Picture
+											{
+												pic.Set_Primary=false;
+											}
+											row.Set_Primary=true;
+										}
+						)
+					}
+				}
+
+			
+}

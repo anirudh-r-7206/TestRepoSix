@@ -1,0 +1,38 @@
+On_User_Calculate_Sub_Tot as "On User - Calculate Sub Total"
+{
+
+				type =  form
+				form = Order_Details
+
+				record event = on edit
+					status = inactive
+
+				on user input of Quantity
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Quantity != null)
+										{
+											if(input.Quantity <= 0)
+											{
+												alert "Quantity value must be more than zero.";
+												input.Quantity = null;
+											}
+											else if(input.Product != null)
+											{
+												get_Product_Price = Buyer_Products[Buyer_Product_Mapping.Buyer == input.ID && Style_ID == input.Product];
+												input.Sub_Total = input.Quantity * if(get_Product_Price.count(ID) > 0,get_Product_Price.Sell_Price,0);
+											}
+										}
+										else
+										{
+											input.Sub_Total = null;
+										}
+						)
+					}
+				}
+
+			
+}

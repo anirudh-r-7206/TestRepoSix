@@ -1,0 +1,173 @@
+list Purchase_Orders_Admin
+{
+
+			displayName = "Purchase Orders - Admin"
+			show all rows from Purchase_Order    
+			(
+				Order_Reference as "Order Reference"
+				PO_Date as "PO Date"
+				(
+					width = 122px
+				)
+				Order_Type as "Order Type "
+				(
+					width = 134px
+				)
+				Order_Status as "Order Status"
+				(
+					width = 141px
+				)
+				Purchase_Currency1 as "Purchase Currency old"
+				Delivery_Date as "Ex-Factory date"
+				(
+					width = 149px
+				)
+				Selling_Currency1 as "Selling Currency old"
+				Selling_Terms as "Selling Terms"
+				Delivery_Contact as "Delivery Contact "
+				Freight_Forwarder as "Freight Forwarder"
+				Incoterms as "Incoterm"
+				Order_Request as "Order Request"
+				(
+					width = 155px
+				)
+				PO_Number as "PO Number"
+				(
+					width = 164px
+				)
+				Total_Purchase_Price as "Total Purchase Price"
+				(
+					width = 173px
+				)
+				Total_Selling_Price as "Total Selling Price"
+				QO_Number as "QO Number"
+				custom action "View PO"
+				(
+	  			workflow = View_PO
+				show action in edit record menu = true
+				column header = "View PO"
+				)
+				custom action "View QO"
+				(
+	  			workflow = View_QO
+				show action in edit record menu = true
+				column header = "View QO"
+				)
+				Country
+				custom action "Generate QO"
+				(
+	  			workflow = Generate_PO1
+				show action in edit record menu = true
+				column header = "Generate QO"
+				condition = (Order_Status == "Awaiting QO Generation")
+				)
+				custom action "Move to Production"
+				(
+	  			workflow = Move_to_Production
+				show action in edit record menu = true
+				column header = "Move to Production"
+				condition = (Order_Status == "Awaiting Production")
+				)
+				custom action "Completed"
+				(
+	  			workflow = Complete_PO
+				show action in edit record menu = true
+				column header = "Completed"
+				condition = (Order_Status == "In Production")
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to complete this purchase order?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				Supplier
+				Added_Time as "Added Time"
+				Modified_Time as "Modified Time"
+				Payment_Terms as "Payment Terms"
+				Factory_Address as "Factory Address"
+				Delivery_Address1  as "Delivery Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Factory_Address1  as "Factory Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Factory_Contact_Person as "Factory Contact Person"
+				Buyer_Contact_Person as "Buyer Contact Person"
+				Buyer_Comment as "Buyer Comment"
+				Comments
+				Additional_Charges.Purchase_Order as "Additional Charges"
+			)
+			sort by
+			(
+				PO_Number descending
+			)
+			custom actions
+			(
+				"Edit PO"
+				(
+	  			workflow = Edit_PO
+				show action in edit record menu = true
+				)
+			)
+			conditional formatting
+			(
+				"Completed"
+				{
+				condition = (Order_Status == "Completed")
+				fields = [Order_Status]
+				format = "color:#16a34a;"
+				}
+				"Awaiting QO Generation"
+				{
+				condition = (Order_Status == "Awaiting QO Generation")
+				fields = [Order_Status]
+				format = "color:#3b82f6;"
+				}
+				"Awaiting Buyer Review"
+				{
+				condition = (Order_Status == "Awaiting Buyer Review")
+				fields = [Order_Status]
+				format = "color:#f59e0b;"
+				}
+				"Amendment Requested (Buyer)"
+				{
+				condition = (Order_Status == "Amendment Requested (Buyer)")
+				fields = [Order_Status]
+				format = "color:#ea580c;"
+				}
+				"Awaiting PO Generation"
+				{
+				condition = (Order_Status == "Awaiting PO Generation")
+				fields = [Order_Status]
+				format = "color:#eab308;"
+				}
+				"Awaiting Factory Review"
+				{
+				condition = (Order_Status == "Awaiting Factory Review")
+				fields = [Order_Status]
+				format = "color:#f59e0b;"
+				}
+				"Amendment Requested (Factory)"
+				{
+				condition = (Order_Status == "Amendment Requested (Factory)")
+				fields = [Order_Status]
+				format = "color:#ea580c;"
+				}
+				"Awaiting Production"
+				{
+				condition = (Order_Status == "Awaiting Production")
+				fields = [Order_Status]
+				format = "color:#6366f1;"
+				}
+				"In Production"
+				{
+				condition = (Order_Status == "In Production")
+				fields = [Order_Status]
+				format = "color:#a811cc;"
+				}
+			)
+		
+}

@@ -1,0 +1,45 @@
+void OneTime.Size_Sort_Value()
+{
+
+                 	get_Size = Create_Size[ID != 0];
+                 	for each  siz in get_Size
+                 	{
+                 		if(siz.Size.containsIgnoreCase("One size"))
+                 		{
+                 			siz.Size_Order=0;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("2xs"))
+                 		{
+                 			siz.Size_Order=1;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("xs"))
+                 		{
+                 			siz.Size_Order=2;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("s"))
+                 		{
+                 			siz.Size_Order=3;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("m"))
+                 		{
+                 			siz.Size_Order=4;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("l"))
+                 		{
+                 			siz.Size_Order=5;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("xl"))
+                 		{
+                 			siz.Size_Order=6;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("xxl"))
+                 		{
+                 			siz.Size_Order=7;
+                 		}
+                 		else if(siz.Size.containsIgnoreCase("xxxl"))
+                 		{
+                 			siz.Size_Order=8;
+                 		}
+                 	}
+                 
+}

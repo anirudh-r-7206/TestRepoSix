@@ -1,0 +1,10 @@
+default custom Charge_Types
+{
+
+			displayName = "Charge Types"
+			show all rows from Charge_Type_Form    
+			(
+				Charge_Type as "Charge Type"
+			)
+		
+}

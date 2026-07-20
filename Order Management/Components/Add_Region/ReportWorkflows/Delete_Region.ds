@@ -1,0 +1,18 @@
+Delete_Region as "Delete Region"
+{
+
+				type =  functions
+				form = Add_Region
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						delete from Add_Region[ID == input.ID];
+					)
+					}
+				}
+			
+}

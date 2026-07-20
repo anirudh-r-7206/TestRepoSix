@@ -1,0 +1,9 @@
+void defaultFunction()
+{
+
+                 	resp = insert into Bulk_Edit_Tigger
+                 	[
+                 		Added_User=zoho.loginuser
+                 	];
+                 
+}

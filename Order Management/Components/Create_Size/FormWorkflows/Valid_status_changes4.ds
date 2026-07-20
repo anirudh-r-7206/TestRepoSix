@@ -1,0 +1,48 @@
+Valid_status_changes4 as "Valid status changes"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Status != old.Status)
+										{
+											alert "Status cannot be changed.";
+											cancel submit;
+										}
+										get_Removed_Category = old.Product_Category;
+										get_Removed_Category.removeAll(input.Product_Category);
+										mapped_Category = list();
+										cat_Name = "";
+										if(get_Removed_Category.size() > 0)
+										{
+											cat_Name = cat_Name + "[";
+											for each  cat in get_Removed_Category
+											{
+												get_Product = Add_Product[Style_Category == cat && Size_Set == input.ID];
+												if(get_Product.count() > 0)
+												{
+													mapped_Category.add(cat);
+													cat_Name = cat_Name + Product_Category[ID == cat].Product_Category + ",";
+												}
+											}
+											cat_Name_List = cat_Name.removeLastOccurence(",") + "]";
+										}
+										if(mapped_Category.size() > 0)
+										{
+											alert "The following categories are already used by products and cannot be removed: " + cat_Name_List + ". Please keep them selected.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			
+}

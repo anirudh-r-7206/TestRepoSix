@@ -1,0 +1,111 @@
+On_Success_Update_Status as "On Success - Update Status"
+{
+
+				type =  form
+				form = History
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											//
+										if(Raised_By != null && Purchase_Order_ID != null)
+										{
+											fetPO = Purchase_Order[ID == input.Purchase_Order_ID];
+											fetPO.Enable_Edit=false;
+											fetPO.Record_is_Edited=false;
+											if(Raised_By.User_Type == "Buyer" || Raised_By.User_Type != "Factory" && input.On_behalf_of == "Buyer")
+											{
+												if(input.Status == "Approved")
+												{
+													input.Status = "Awaiting Factory Review";
+													fetPO.Order_Status="Awaiting Factory Review";
+													thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Factory_Review");
+													thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Approved_by_Buyer");
+													if(Raised_By.User_Type == "Buyer")
+													{
+														openUrl("#Page:Alert_Message?PO_ID=" + input.Purchase_Order_ID.PO_Number + "&Message_Type=PO_Generation","popup window");
+													}
+													else
+													{
+														thisapp.PageRefresh();
+													}
+												}
+												else if(input.Status == "Amendment / Cancellation Required")
+												{
+													input.Status = "Amendment Requested (Buyer)";
+													input.Approval_Status = "Pending";
+													if(input.Purchase_Order_ID.Order_Status == "Awaiting Buyer Review")
+													{
+														fetPO.Order_Status="Amendment Requested (Buyer)";
+													}
+													thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Buyer_Amendment");
+													thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Buyer_Amendment_Request_Raised");
+													if(Raised_By.User_Type == "Buyer")
+													{
+														openUrl("#Page:Alert_Message?PO_ID=" + input.Purchase_Order_ID.PO_Number + "&Message_Type=Buyer_Request","popup window");
+													}
+													else
+													{
+														thisapp.PageRefresh();
+													}
+												}
+											}
+											else if(Raised_By.User_Type == "Factory" || Raised_By.User_Type != "Buyer" && input.On_behalf_of == "Factory")
+											{
+												if(input.Status == "Move to Production")
+												{
+													get_History = History[Purchase_Order_ID == input.Purchase_Order_ID && Status in {"In Production"}];
+													if(get_History.count() > 0)
+													{
+														input.Status = "In Production";
+														fetPO.Order_Status="In Production";
+														thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"In_Production");
+													}
+													else
+													{
+														input.Status = "Awaiting Production";
+														fetPO.Order_Status="Awaiting Production";
+														thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Move_to_Production");
+													}
+													if(Raised_By.User_Type == "Factory")
+													{
+														openUrl("#Page:Alert_Message?PO_ID=" + input.Purchase_Order_ID.PO_Number + "&Message_Type=Production","popup window");
+													}
+													else
+													{
+														thisapp.PageRefresh();
+													}
+												}
+												else if(input.Status == "Amendment / Cancellation Required")
+												{
+													input.Status = "Amendment Requested (Factory)";
+													input.Approval_Status = "Pending";
+													if(input.Purchase_Order_ID.Order_Status == "Awaiting Factory Review")
+													{
+														fetPO.Order_Status="Amendment Requested (Factory)";
+													}
+													thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Factory_Amendment");
+													thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Factory_Amendment_Request_Raised");
+													if(Raised_By.User_Type == "Factory")
+													{
+														openUrl("#Page:Alert_Message?PO_ID=" + input.Purchase_Order_ID.PO_Number + "&Message_Type=Factory_Request","popup window");
+													}
+													else
+													{
+														thisapp.PageRefresh();
+													}
+												}
+											}
+										}
+										success message "Review added successfully.";
+						)
+					}
+				}
+
+			
+}

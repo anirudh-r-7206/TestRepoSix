@@ -1,0 +1,30 @@
+Filter_PO_Line_Items as "Filter PO Line Items"
+{
+
+				type =  form
+				form = PO_Style_Search
+
+				record event = on add
+
+				on user input of Search_Style
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Search_Style != null)
+										{
+											get_Style = input.Purchase_Order.Purchase_LineItems.Product.Style_Code.getall();
+											get_Style_Code = Style[ID in get_Style && Product_Code == input.Search_Style].Style_Code.getAll();
+											openUrl("#Report:Purchase_LineItems_Report?zc_LoadIn=embed-POitems&zc_Header=false&Purchase_Order=" + input.Purchase_Order.PO_Number + "&Style_Code=[" + get_Style_Code + "]","same window");
+										}
+										else
+										{
+											openUrl("#Report:Purchase_LineItems_Report?zc_LoadIn=embed-POitems&zc_Header=false&Purchase_Order=" + input.Purchase_Order.PO_Number,"same window");
+										}
+						)
+					}
+				}
+
+			
+}

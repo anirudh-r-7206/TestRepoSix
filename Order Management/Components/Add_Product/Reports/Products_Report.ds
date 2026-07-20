@@ -1,0 +1,147 @@
+default list Products_Report
+{
+
+			displayName = "Products"
+			show all rows from Add_Product    
+			(
+				Style_Code as "Style Code"
+				Style_Colour as "Colours"
+				Style_Range as "Style Range"
+				Style_Name as "Styles"
+				Style_Category as "Style Categories"
+				Gender
+				(
+					width = 87px
+				)
+				Size_Set as "Sizes"
+				(
+					width = 137px
+				)
+				Fabric_Code as "Fabric Colour Code"
+				HS_Code_EU as "HS Code EU "
+				HS_Code_USA as "HS Code USA"
+				HS_Code_APAC as "HS Code APAC"
+				Product_Weight as "Product Weight"
+				(
+					width = 187px
+				)
+				Status as "Status "
+				(
+					width = 136px
+				)
+				Wardrobe as "Wardrobes"
+				(
+					width = 186px
+				)
+				CBM
+				Product_Picture.Image as "Product Picture"
+				Product_Description as "Fabric Description"
+				(
+					width = 285px
+				)
+				Product_Sub_Code as "Product Sub Code"
+				Style_ID as "Style ID"
+				Primary_Image as "Style Image"
+				(
+					width = 197px
+				)
+				Fabric_Code.Fabric_Name as "Fabrics"
+				Size_Set.Size_Order as "Size Order"
+				Style_Code.Style_Description as "Style Description"
+				Style_Master_Code as "Style Master Code"
+			)
+			filters
+			(
+				Status
+				Wardrobe
+				Style_Category
+			)
+			group by
+			(
+				properties
+    			(
+  	    			display record count = true
+   				)
+				Style_Category ascending
+				Style_Master_Code ascending
+			)
+			sort by
+			(
+				Size_Set.Size_Order ascending
+			)
+			custom actions
+			(
+				"Discontinue"
+				(
+	  			workflow = Discontinue_Product_Catal
+				show action in view header = true
+				execute action for collection of records
+				condition = (Status == "Approved")
+				confirmation before execution
+				(
+					message for multiple records = "Are you sure you want to discontinue the selected ${record_count} records?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				"Approve "
+				(
+	  			workflow = Approve_Product_Catalog
+				show action in view header = true
+				execute action for collection of records
+				condition = (Status == "Discontinued")
+				confirmation before execution
+				(
+					message for multiple records = "Are you sure you want to Approve  for the selected ${record_count} records?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				"Delete Products"
+				(
+	  			workflow = Delete_Products
+				show action in view header = true
+				show action in edit record menu = true
+				condition = (ID != thisapp.Delete_Records.Delete_Product_catalog())
+				)
+				"Duplicate Product"
+				(
+	  			workflow = Duplicate_Products
+				show action in edit record menu = true
+				)
+				"Edit "
+				(
+	  			workflow = Edit_Product
+				show action in view header = true
+				show action in edit record menu = true
+				)
+				"Delete "
+				(
+	  			workflow = Delete_Product
+				show action in view header = true
+				show action in edit record menu = true
+				confirmation before execution
+				(
+					message for individual record = "Execute the Delete Product action for this record?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+			)
+			conditional formatting
+			(
+				"Approved"
+				{
+				condition = (Status == "Approved")
+				fields = [Status]
+				format = "color:#5dc35a;"
+				}
+				"Discontinued"
+				{
+				condition = (Status == "Discontinued")
+				fields = [Status]
+				format = "color:#cc1111;"
+				}
+			)
+		
+}

@@ -1,0 +1,29 @@
+<style>
+	div[pagelinkname="Main_Dashboard"], [pagelinkname="Main_Dashboard"] div#elementsContainer{
+		height: 100%;
+	}
+	/* div#html_snippet5 {
+		height: 100% !important;
+	} */
+	[pagelinkname="Main_Dashboard"] .Layout.elemContainment {
+		height: calc(100% - 1.5rem);
+	}
+	div#row_3 {
+		min-height: 400px;
+		height: calc(100% - 455px);
+	}
+	/* [pagelinkname="Buyer_Dashboard"] .zc-pb-tile-card {
+		overflow: unset;
+	}
+	[viewlinkname="My_Order_Requests"] .zc-new-report-header.row.zc-fixed-header{
+		border-radius: 16px;
+	}
+	[viewlinkname="My_Order_Requests"] .zc-reports-footer-sec.zc-mfooter-search-icon
+	{
+		border-radius: 0 0 16px 16px !important;
+		border-left: none;
+		border-right: none;
+	} */
+</style>
+
+<div elName='zc-component' name="myOrder" style="height: 100%;" viewLinkName='All_Purchase_Orders' params='zc_Header=true&zc_MoreAction=false&zc_AddRec=false'></div>

@@ -1,0 +1,101 @@
+Update_old_Email_Detail as "Update old Email Detail"
+{
+
+				type =  form
+				form = Buyers_Master
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Wardrobe1 = input.Wardrobe;
+										primaryLower = input.Primary_Email.toLowerCase();
+										input.Primary_Email = primaryLower;
+										secondLower = input.Person_2_Email.toLowerCase();
+										input.Person_2_Email = secondLower;
+										for each  rec in input.Delivery_Person_Details
+										{
+											recLower = rec.Email.toLowerCase();
+											rec.Email=recLower;
+										}
+										for each  focal in input.Focal_Details_Subform
+										{
+											focalLower = focal.Email.toLowerCase();
+											focal.Email=focalLower;
+										}
+										// // ─── Primary Contact ──────────────────────────────────────────────
+										// if(input.Primary_Email != input.Primary_email_old && input.Need_App_Access || input.Need_App_Access == false)
+										// {
+										// 	thisapp.handleUserChange(input.Primary_email_old,input.Primary_Email,input.Primary_Name1.first_name,input.Primary_Name1.last_name,input.Primary_Phone,input.ID,"Buyer",input.Need_App_Access);
+										// }
+										// else if(input.Primary_Email == input.Primary_email_old && input.Need_App_Access)
+										// {
+										// 	if(thisapp.permissions.profileForUser(input.Primary_Email) != "Buyer")
+										// 	{
+										// 		thisapp.handleUserChange(input.Primary_email_old,input.Primary_Email,input.Primary_Name1.first_name,input.Primary_Name1.last_name,input.Primary_Phone,input.ID,"Buyer",input.Need_App_Access);
+										// 	}
+										// }
+										// else if(input.Primary_Email == input.Primary_email_old && input.Need_App_Access == false)
+										// {
+										// 	if(thisapp.permissions.profileForUser(input.Primary_Email) == "Buyer")
+										// 	{
+										// 		thisapp.portal.deleteUser(input.Primary_Email);
+										// 	}
+										// }
+										// // ─── Secondary Contact ────────────────────────────────────────────
+										// if(input.Person_2_Email != input.Secondary_email_old && input.Need_App_Access1 || input.Need_App_Access1 == false)
+										// {
+										// 	thisapp.handleUserChange(input.Secondary_email_old,input.Person_2_Email,input.Person_2_Name1.first_name,input.Person_2_Name1.last_name,input.Person_2_Phone,input.ID,"Buyer",input.Need_App_Access1);
+										// }
+										// else if(input.Person_2_Email == input.Secondary_email_old && input.Need_App_Access1)
+										// {
+										// 	if(thisapp.permissions.profileForUser(input.Person_2_Email) != "Factory")
+										// 	{
+										// 		thisapp.handleUserChange(input.Secondary_email_old,input.Person_2_Email,input.Person_2_Name1.first_name,input.Person_2_Name1.last_name,input.Person_2_Phone,input.ID,"Buyer",input.Need_App_Access1);
+										// 	}
+										// }
+										// else if(input.Person_2_Email == input.Secondary_email_old && input.Need_App_Access1 == false)
+										// {
+										// 	if(thisapp.permissions.profileForUser(input.Person_2_Email) == "Buyer")
+										// 	{
+										// 		thisapp.portal.deleteUser(input.Person_2_Email);
+										// 	}
+										// }
+										// // ─── Factory Details Contacts ─────────────────────────────────────
+										// for each  fact in input.Delivery_Person_Details
+										// {
+										// 	if(fact.Email != fact.Email_old && fact.Need_App_Access || fact.Need_App_Access == false)
+										// 	{
+										// 		thisapp.handleUserChange(fact.Email_old,fact.Email,fact.Contact_Person1.first_name,fact.Contact_Person1.last_name,fact.Phone_Number,input.ID,"Buyer",fact.Need_App_Access);
+										// 	}
+										// 	else if(fact.Email == fact.Email_old && fact.Need_App_Access)
+										// 	{
+										// 		if(thisapp.permissions.profileForUser(fact.Email) != "Buyer")
+										// 		{
+										// 			thisapp.handleUserChange(fact.Email_old,fact.Email,fact.Contact_Person1.first_name,fact.Contact_Person1.last_name,fact.Phone_Number,input.ID,"Buyer",fact.Need_App_Access);
+										// 		}
+										// 	}
+										// 	else if(fact.Email == fact.Email_old && fact.Need_App_Access == false)
+										// 	{
+										// 		if(thisapp.permissions.profileForUser(fact.Email) == "Buyer")
+										// 		{
+										// 			thisapp.portal.deleteUser(fact.Email);
+										// 		}
+										// 	}
+										// }
+										input.Primary_email_old = input.Primary_Email;
+										input.Secondary_email_old = input.Person_2_Email;
+										for each  fact in input.Delivery_Person_Details
+										{
+											fact.Email_old=fact.Email;
+										}
+						)
+					}
+				}
+
+			
+}

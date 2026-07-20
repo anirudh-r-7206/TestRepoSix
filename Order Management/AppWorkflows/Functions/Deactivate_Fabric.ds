@@ -1,0 +1,9 @@
+list Deactivate_Records.Deactivate_Fabric()
+{
+
+                 	Fabric_List = List();
+                 	get_Fabric = Add_Product[Status == "Approved"];
+                 	Fabric_List.addAll(get_Fabric.Fabric_Code.getall());
+                 	return Fabric_List.distinct();
+                 
+}

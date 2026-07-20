@@ -1,0 +1,42 @@
+Delete_Line_Item1 as "Delete Line Item"
+{
+
+				type =  functions
+				form = Copy_of_Purchase_LineItems
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						get_PO = Copy_of_Purchase_Order[ID == input.Copy_of_Purchase_Order];
+										fetPO = Purchase_Order[ID == get_PO.Purchase_Order];
+										fetPO.Record_is_Edited=true;
+										if(get_PO.count() > 0)
+										{
+											get_Buy_Price = 0;
+											get_Sell_Price = 0;
+											get_Qty = 0;
+											po_Price_List = get_PO.Copy_Purchase_LineItems;
+											for each  po_Price in po_Price_List
+											{
+												if(po_Price.ID != input.ID)
+												{
+													get_Buy_Price = get_Buy_Price + po_Price.Purchase_Price_Sub_Total;
+													get_Sell_Price = get_Sell_Price + po_Price.Selling_Price_Sub_Total;
+													get_Qty = get_Qty + po_Price.Quantity;
+													get_PO_Item = Purchase_LineItems[ID == po_Price.ID];
+												}
+											}
+											get_PO.Total_Purchase_Price=get_Buy_Price;
+											get_PO.Total_Selling_Price=get_Sell_Price;
+											get_PO.Total_Quantity=get_Qty;
+										}
+										delete from Copy_of_Purchase_LineItems[ID == input.ID];
+										openUrl("#Page:Purchase_Order_Details?zc_LoadIn=embed-editPO&PO_ID=" + get_PO.Purchase_Order,"same window");
+					)
+					}
+				}
+			
+}

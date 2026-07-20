@@ -1,0 +1,13 @@
+<%
+	get_User = Create_User[Email == input.Email];
+	if(get_User.Status = "Active")
+	{
+		openURL("#Form:History?Purchase_Order_ID=" + input.PO_ID + "&Status=Amendment / Cancellation Required","same window");
+	}
+	if(get_User.Status == "Inactive")
+	{
+		%>
+<div elName='zc-component' formLinkName='History' params='zc_Header=true&zc_SuccMsg=Data Added Successfully!&zc_SubmitVal=Submit&zc_ResetVal=Reset&privateLink=DxeCjF3mG8NWx87CBmqAe172J3k102hRWa9POQ1PCJTOFKWhV49ZXp1jnDuGNn0VYVJUB51qsHZ3j7MUCfbmJUU4vwdjmm5xa8qD?Purchase_Order_ID=<%=input.PO_ID%>&&Status=Amendment / Cancellation Required&Raised_By=<%=input.Email%>'></div>
+<%
+	}
+%>

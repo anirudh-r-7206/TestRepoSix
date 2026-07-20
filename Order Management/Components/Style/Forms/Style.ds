@@ -1,0 +1,108 @@
+form Style
+{
+
+			success message = "Style Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Style_Code
+			(
+    			type = text
+				displayname = "Style Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Product_Code
+			(
+				type = picklist	
+				displayname = "Style Master Code"
+				values  = Product_Code_Master.ID
+    			displayformat = [Product_Code]
+				allow new entries
+				[
+					displayname = "Add Product Code"
+				]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Product_Colour
+			(
+				type = picklist	
+				displayname = "Style Colour"
+				values  = Add_Colors.ID
+    			displayformat = [Color_Name + " - " + Color_Code]
+				allow new entries
+				[
+					displayname = "Add Colors"
+				]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Style_Name
+			(
+    			type = text
+				displayname = "Style Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Style_Category
+			(
+				type = picklist	
+				displayname = "Style Category"
+				values  = Product_Category.ID
+    			bidirectional = Style
+    			displayformat = [Product_Category]
+				allow new entries
+				[
+					displayname = "Add New Category"
+				]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Style_Description
+			(
+    			type = textarea
+				displayname = "Style Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

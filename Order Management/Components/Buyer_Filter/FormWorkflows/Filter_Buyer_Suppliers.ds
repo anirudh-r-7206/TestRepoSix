@@ -1,0 +1,26 @@
+Filter_Buyer_Suppliers as "Filter Buyer Suppliers"
+{
+
+				type =  form
+				form = Buyer_Filter
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											get_User = Create_User[Email == thisapp.Dev.get_User_Email() && Status == "Active"];
+										if(get_User.count() > 0)
+										{
+											get_Suppliers = Buyer_Product_Mapping[Buyer == get_User.Associated_Buyer].Factory_Allocated.getAll();
+											input.Select_Supplier:ui.add(get_Suppliers);
+										}
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,45 @@
+On_Success_ID_Generation_ as "On Success - ID Generation & History Push"
+{
+
+				type =  form
+				form = Order_Request
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											fetBuyerProduct = Buyer_Product_Mapping[Buyer == input.Buyer_Name && Factory_Allocated == input.Factory];
+										if(fetBuyerProduct.count() > 0)
+										{
+											input.Selling_Currency = fetBuyerProduct.Sell_Currency;
+										}
+										// Order ID Generation
+										input.Order_ID = "OR" + input.Auto_Number;
+										input.Total_Quantity = input.Order_details.sum(Quantity);
+										get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+										input.Order_By = get_User.ID;
+										if(get_User.User_Type == "Internal" || get_User.User_Type == "Admin")
+										{
+											input.Status = "Awaiting QO Generation";
+										}
+										// History Push
+										HistoryPush = insert into History
+										[
+											Added_User=zoho.loginuser
+											Order_ID=input.ID
+											Raised_By=get_User.ID
+											Status="Pending"
+											Comments="Order Request " + input.Order_ID + " has been raised by " + if(input.Order_By != null,input.Order_By.User_Name,input.Buyer_Name.User_Name) + "."
+										];
+										// Page Refresh
+										thisapp.PageRefresh();
+						)
+					}
+				}
+
+			
+}

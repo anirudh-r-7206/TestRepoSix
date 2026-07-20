@@ -1,0 +1,231 @@
+"Buyer"
+{
+
+				name = "Buyer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission. - Duplicate\n"
+				ModulePermissions
+				{
+					Product_Category
+					{
+						allFieldsVisible= true 
+					}
+					Add_Product
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Cart_Detail
+					{
+						allFieldsVisible= true 
+					}
+					Packaging_Details
+					{
+						allFieldsVisible= true 
+					}
+					Create_Size
+					{
+						allFieldsVisible= true 
+					}
+					History
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Bulk_Update
+					{
+						allFieldsVisible= true 
+					}
+					Purchase_LineItems
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Products
+					{
+						allFieldsVisible= true 
+					}
+					Fabric_Form
+					{
+						allFieldsVisible= true 
+					}
+					Product_Code_Master
+					{
+						allFieldsVisible= true 
+					}
+					Currency
+					{
+						allFieldsVisible= true 
+					}
+					Rate_Conversion_History
+					{
+						allFieldsVisible= true 
+					}
+					Style
+					{
+						allFieldsVisible= true 
+					}
+					Email_Template
+					{
+						allFieldsVisible= true 
+					}
+					Factory_Details_Subform
+					{
+						allFieldsVisible= true 
+					}
+					Bulk_Edit_Tigger
+					{
+						allFieldsVisible= true 
+					}
+					Add_Suppliers
+					{
+						allFieldsVisible= true 
+					}
+					Wardrobe
+					{
+						allFieldsVisible= true 
+					}
+					Error_Log_Form
+					{
+						allFieldsVisible= true 
+					}
+					Create_User
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Mapping_Wardrobes
+					{
+						allFieldsVisible= true 
+					}
+					PO_Style_Search
+					{
+						allFieldsVisible= true 
+					}
+					Add_Region
+					{
+						allFieldsVisible= true 
+					}
+					Product_Duplicate
+					{
+						allFieldsVisible= true 
+					}
+					Size_Chart
+					{
+						allFieldsVisible= true 
+					}
+					Add_Colors
+					{
+						allFieldsVisible= true 
+					}
+					Add_Country
+					{
+						allFieldsVisible= true 
+					}
+					Alert_References
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Order
+					{
+						allFieldsVisible= true 
+					}
+					Order_Details
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Order_Details={"View"}
+						}
+					}
+					Currency_Conversion_Rates
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Filter
+					{
+						allFieldsVisible= true 
+					}
+					Copy_of_Purchase_Order
+					{
+						allFieldsVisible= true 
+					}
+					PO_QO_template
+					{
+						allFieldsVisible= true 
+					}
+					Buyers_Master
+					{
+						allFieldsVisible= true 
+					}
+					Size_Chart_Mapping
+					{
+						allFieldsVisible= true 
+					}
+					Order_Request
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							My_Order_Requests={"View","Edit"}
+						}
+					}
+					Print_and_PDF_Button
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Contact_Person_Details
+					{
+						allFieldsVisible= true 
+					}
+					Copy_of_Purchase_LineItems
+					{
+						allFieldsVisible= true 
+					}
+					Trigger_Form
+					{
+						allFieldsVisible= true 
+					}
+					organization
+					{
+						allFieldsVisible= true 
+					}
+					Purchase_Order
+					{
+						allFieldsVisible= true 
+					}
+					Freight_Partners_Form
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_Product_Mapping
+					{
+						allFieldsVisible= true 
+					}
+					Buyer_product_duplicate
+					{
+						allFieldsVisible= true 
+					}
+					PO_Template
+					{
+						enabled = tab
+					}
+					QO_Template
+					{
+						enabled = tab
+					}
+					Alert_Message
+					{
+						enabled = tab
+					}
+					Buyer_Dashboard
+					{
+						enabled = tab
+					}
+					Buyer_Dashboard_V2
+					{
+						enabled = tab
+					}
+				}
+			
+}

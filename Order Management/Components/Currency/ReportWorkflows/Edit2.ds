@@ -1,0 +1,29 @@
+Edit2 as "Edit"
+{
+
+				type =  functions
+				form = Currency
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						reference = thisapp.References.Currency(input.ID);
+										if(reference.trim() != "" && reference != null)
+										{
+											url = "#Form:Alert_References?zc_Header=false&Currency=" + input.ID;
+											window = "popup window";
+										}
+										else
+										{
+											url = "#Form:Currency?zc_NextUrl=#Script:page.refresh&zc_LoadIn=dialog&viewLinkName=All_Currency&recLinkID=" + input.ID;
+											window = "same window";
+										}
+										openUrl(url,window);
+					)
+					}
+				}
+			
+}

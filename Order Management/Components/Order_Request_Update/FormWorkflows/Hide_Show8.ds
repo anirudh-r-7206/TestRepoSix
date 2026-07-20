@@ -1,0 +1,26 @@
+Hide_Show8 as "Hide & Show"
+{
+
+				type =  form
+				form = Order_Request_Update
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Buyers_Organisation;
+										disable Order_Request;
+										if(input.Order_Request != null)
+										{
+											input.Buyers_Organisation = input.Order_Request.Buyer_Organisation;
+										}
+						)
+					}
+				}
+
+			
+}

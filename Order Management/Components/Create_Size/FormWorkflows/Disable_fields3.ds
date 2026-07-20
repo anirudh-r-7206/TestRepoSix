@@ -1,0 +1,18 @@
+Disable_fields3 as "Disable fields"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on edit
+
+				field rules
+				{
+					actions 
+					{
+						disable Gender,Size;
+					}
+				}
+
+			
+}

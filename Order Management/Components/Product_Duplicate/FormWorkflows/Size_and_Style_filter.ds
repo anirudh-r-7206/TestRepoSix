@@ -1,0 +1,64 @@
+Size_and_Style_filter as "Size and Style filter"
+{
+
+				type =  form
+				form = Product_Duplicate
+
+				record event = on add
+
+				on user input of Variant_Type
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											clear Size;
+										clear Style;
+										clear Colors;
+										if(input.Product != null)
+										{
+											if(input.Variant_Type == "Size")
+											{
+												getAll_Size = Create_Size[Product_Category == input.Product.Style_Category && Gender == input.Product.Gender && Status == "Active"].ID.getAll();
+												get_Product_Size = Add_Product[Wardrobe == input.Product.Wardrobe && Style_Category == input.Product.Style_Category && Style_Code == input.Product.Style_Code && Style_Colour == input.Product.Style_Colour].Size_Set.getAll();
+												get_Product_One_Size = Add_Product[Wardrobe == input.Product.Wardrobe && Style_Category == input.Product.Style_Category && Style_Code == input.Product.Style_Code && Style_Colour == input.Product.Style_Colour && Size_Set.Size.contains("One Size")];
+												getAll_Size.removeAll(get_Product_Size);
+												if(get_Product_One_Size.count(ID) > 0)
+												{
+													clear Size;
+												}
+												else
+												{
+													if(get_Product_Size.size() > 0)
+													{
+														get_One_Size = Create_Size[Product_Category == input.Product.Style_Category && Status == "Active" && Size.contains("One Size")];
+														getAll_Size.removeAll(get_One_Size.ID.getall());
+													}
+													input.Size:ui.add(getAll_Size);
+												}
+											}
+											else if(Variant_Type == "Color")
+											{
+												get_Color_Code = Style[Product_Code == input.Product.Style_Code.Product_Code].Product_Colour.getAll();
+												get_Product_Color = Add_Product[Wardrobe == input.Product.Wardrobe && Style_Category == input.Product.Style_Category && Style_Code.Product_Code == input.Product.Style_Code.Product_Code].Style_Colour.getAll();
+												get_Color_Code.removeAll(get_Product_Color);
+												// 
+												get_Fabric_Code = Fabric_Form[Fabric_Master_Code == input.Product.Fabric_Code.Fabric_Master_Code && Status == "Active"].Colour_Code.getAll();
+												color_List = List();
+												for each  co_List in get_Color_Code
+												{
+													if(get_Fabric_Code.contains(co_List))
+													{
+														color_List.add(co_List);
+													}
+												}
+												// 		
+												input.Colors:ui.add(color_List);
+											}
+										}
+						)
+					}
+				}
+
+			
+}

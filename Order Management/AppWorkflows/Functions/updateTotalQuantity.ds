@@ -1,0 +1,11 @@
+void OneTime.updateTotalQuantity()
+{
+
+                 	fetOrder = Order_Request[Total_Quantity == null];
+                 	for each  order in fetOrder
+                 	{
+                 		fetOrderDetail = Order_Details[Order_Request == order.ID];
+                 		order.Total_Quantity=fetOrderDetail.sum(Quantity);
+                 	}
+                 
+}

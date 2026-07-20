@@ -1,0 +1,37 @@
+<page linkname = "Factory_Dashboard" displayname = "Factory Dashboard"/>
+<content>
+<zml webDeviceConfig='{\"layout\":{\"displayType\":\"card\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'>
+	<layout>
+		<row>
+			<column width='25%'>
+				<file name:Panel.ds/>
+			</column>
+			<column width='25%'>
+				<file name:Panel_1.ds/>
+			</column>
+			<column width='25%'>
+				<file name:Panel_2.ds/>
+			</column>
+			<column width='25%'>
+				<file name:Panel_3.ds/>
+			</column>
+		</row>
+		<row>
+			<column width='100%'>
+				<dsp id='html_snippet51' elementName='HTML Snippet' bgColor=\"#FFFFFF\">
+          <![CDATA[htmlpage html_snippet51()
+content
+			<%{%>
+            <file name:HTML_Snippet.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>
+<script>
+/* Write your script logic here. You can assign values to the page variables you've created in the previous tab. Enter 'input.' to list the created page variables. */
+</script>

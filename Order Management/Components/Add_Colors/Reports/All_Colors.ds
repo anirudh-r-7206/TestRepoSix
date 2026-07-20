@@ -1,0 +1,82 @@
+default list All_Colors
+{
+
+			displayName = "Colors"
+			show all rows from Add_Colors    
+			(
+				Color_Name as "Color Name"
+				Color_Code as "Color Code"
+				Status
+				Hex_Color_Code as "Hex Color Code"
+			)
+			custom actions
+			(
+				"Activate"
+				(
+	  			workflow = Activate_Color
+				show action in view header = true
+				show action in edit record menu = true
+				condition = (Status == "Inactive")
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to activate this color?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				"Delete Colors"
+				(
+	  			workflow = Delete_Color
+				show action in view header = true
+				show action in edit record menu = true
+				condition = (ID != thisapp.Delete_Records.Delete_Colors())
+				)
+				"Deactivate"
+				(
+	  			workflow = Deactive_Color
+				show action in view header = true
+				show action in edit record menu = true
+				condition = (Status == "Active")
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to deactivate this color?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				"Edit "
+				(
+	  			workflow = Edit_Color1
+				show action in view header = true
+				show action in edit record menu = true
+				)
+				"Delete "
+				(
+	  			workflow = Delete_Color1
+				show action in view header = true
+				show action in edit record menu = true
+				confirmation before execution
+				(
+					message for individual record = "Execute the Delete Color action for this record?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+			)
+			conditional formatting
+			(
+				"Active"
+				{
+				condition = (Status == "Active")
+				fields = [Status]
+				format = "color:#5dc35a;"
+				}
+				"Inactive"
+				{
+				condition = (Status == "Inactive")
+				fields = [Status]
+				format = "color:#ef1616;"
+				}
+			)
+		
+}

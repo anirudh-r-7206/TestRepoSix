@@ -1,0 +1,11 @@
+Delete_Wardrobe as "Delete Wardrobe"
+{
+
+				type =  functions
+				form = Wardrobe
+				execution type = for each record	
+				on start
+				{
+				}
+			
+}

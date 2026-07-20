@@ -1,0 +1,42 @@
+Hide_Show5 as "Hide & Show"
+{
+
+				type =  form
+				form = Bulk_Update
+
+				record event = on add
+
+				on user input of Action_Type
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide PO_Unit_Pricing;
+										hide QO_Unit_Pricing;
+										if(input.Action_Type == {"PO Unit Pricing","QO Unit Pricing"})
+										{
+											show PO_Unit_Pricing;
+											show QO_Unit_Pricing;
+										}
+										else if(input.Action_Type == "QO Unit Pricing")
+										{
+											show QO_Unit_Pricing;
+											input.PO_Unit_Pricing = null;
+										}
+										else if(input.Action_Type == "PO Unit Pricing")
+										{
+											show PO_Unit_Pricing;
+											input.QO_Unit_Pricing = null;
+										}
+										else
+										{
+											input.PO_Unit_Pricing = null;
+											input.QO_Unit_Pricing = null;
+										}
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,52 @@
+Hide_Show_fields14 as "Hide & Show fields"
+{
+
+				type =  form
+				form = Copy_of_Purchase_Order
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Copy_Purchase_LineItems.S_No;
+										hide Hide_Section;
+										// 
+										disable PO_Date;
+										disable Purchase_Currency;
+										disable Selling_Currency;
+										// disable Customer_Name;
+										disable Customer_Name;
+										disable Country;
+										hide Copy_Purchase_LineItems.Style_Code;
+										hide Copy_Purchase_LineItems.Product_Color;
+										hide Copy_Purchase_LineItems.Product_Size;
+										disable Copy_Purchase_LineItems.Purchase_Price;
+										disable Copy_Purchase_LineItems.Selling_Price;
+										disable Copy_Purchase_LineItems.Purchase_Price_Sub_Total;
+										disable Copy_Purchase_LineItems.Selling_Price_Sub_Total;
+										hide Copy_Purchase_LineItems.HS_Code;
+										hide Copy_Purchase_LineItems.Fabric_Composition;
+										disable Total_Purchase_Price;
+										disable Total_Selling_Price;
+										// disable Buyer_Comment;
+										// 
+										Address = "";
+										if(input.Factory_Address != null)
+										{
+											Address = Address + "<b>Factory Address :</b><br><div style='padding-left: 30px;'>" + if(input.Factory_Address.Factory_Address.address_line_1 != null,input.Factory_Address.Factory_Address.address_line_1,"---") + "<br>" + if(input.Factory_Address.Factory_Address.address_line_2 != null,input.Factory_Address.Factory_Address.address_line_2,"---") + "<br>" + if(input.Factory_Address.Factory_Address.district_city != null,input.Factory_Address.Factory_Address.district_city,"---") + ", " + if(input.Factory_Address.Factory_Address.state_province != null,input.Factory_Address.Factory_Address.state_province,"---") + " - " + if(input.Factory_Address.Factory_Address.postal_Code != null,input.Factory_Address.Factory_Address.postal_Code,"---") + "<br>" + if(input.Factory_Address.Factory_Address.country != null,input.Factory_Address.Factory_Address.country,"---") + "</div><br><br>";
+										}
+										if(input.Delivery_Address != null)
+										{
+											Address = Address + "<b>Delivery Address :</b> <br><div style='padding-left: 30px;'>" + if(input.Delivery_Address.Address.address_line_1 != null,input.Delivery_Address.Address.address_line_1,"---") + "<br>" + if(input.Delivery_Address.Address.address_line_2 != null,input.Delivery_Address.Address.address_line_2,"---") + "<br>" + if(input.Delivery_Address.Address.district_city != null,input.Delivery_Address.Address.district_city,"---") + ", " + if(input.Delivery_Address.Address.state_province != null,input.Delivery_Address.Address.state_province,"---") + " - " + if(input.Delivery_Address.Address.postal_Code != null,input.Delivery_Address.Address.postal_Code,"---") + "<br>" + if(input.Delivery_Address.Address.country != null,input.Delivery_Address.Address.country,"---") + "</div>";
+										}
+										input.Address_Details = Address;
+						)
+					}
+				}
+
+			
+}

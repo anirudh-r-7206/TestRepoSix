@@ -1,0 +1,37 @@
+form PO_Style_Search
+{
+
+			displayname = "PO Style Search"
+			store data in zc = false
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Purchase_Order
+			(
+				type = picklist	
+				displayname = "Purchase Order"
+				values  = Purchase_Order.ID
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = small
+			)
+			Search_Style
+			(
+				type = picklist	
+				displayname = "Search Style"
+				values  = Product_Code_Master.ID
+    			displayformat = [Product_Code]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = 200px
+			)
+	
+		
+}

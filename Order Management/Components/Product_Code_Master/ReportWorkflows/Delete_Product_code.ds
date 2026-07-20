@@ -1,0 +1,28 @@
+Delete_Product_code as "Delete Product code"
+{
+
+				type =  functions
+				form = Product_Code_Master
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						reference = thisapp.References.ProductCodeMaster(input.ID);
+										if(reference.trim() != "" && reference != null)
+										{
+											url = "#Form:Alert_References?zc_Header=false&Product_Code_Master=" + input.ID + "&zc_NextUrl=#Script:page.refresh";
+											window = "popup window";
+											openUrl(url,window);
+										}
+										else
+										{
+											delete from Product_Code_Master[ID == input.ID];
+										}
+					)
+					}
+				}
+			
+}

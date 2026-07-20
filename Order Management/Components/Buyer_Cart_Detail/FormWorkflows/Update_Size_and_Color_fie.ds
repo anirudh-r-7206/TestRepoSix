@@ -1,0 +1,31 @@
+Update_Size_and_Color_fie as "Update Size and Color field option"
+{
+
+				type =  form
+				form = Buyer_Cart_Detail
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											get_Buyer = Create_User[Email == thisapp.Dev.get_User_Email() && Status == "Active"];
+										get_style = Style[Product_Code == input.Product_Code];
+										get_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Buyer.Associated_Buyer && Buyer_Product_Mapping.Factory_Allocated == input.Supplier && Style_ID.Style_Code in get_style.ID.getall() && Style_ID.Wardrobe == input.Wardrobe && Style_ID.Style_Category == input.Product_Category];
+										clear Size;
+										if(get_Product.count() > 0)
+										{
+											input.Product_Style = "<div class=\"product-details\"><div class=\"product_name\">" + get_Product.Style_ID.Style_Name + "</div> <div class=\"product_price\">$" + (get_Product.Sell_Price.getall()).smallest() + "</div> <div class=\"product-description\"> " + if(!get_Product.Style_Description.isEmpty(),get_Product.Style_Description,"") + " </div></div>";
+											buyer_Size = get_Product.Style_ID.Size_Set.getall();
+											input.Size:ui.add(buyer_Size);
+											input.Size = buyer_Size.get(0);
+										}
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,38 @@
+Auto_populate_request_id as "Auto populate request id"
+{
+
+				type =  form
+				form = Purchase_Order
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Order_Request != null)
+										{
+											order_ID = input.Order_Request;
+											// 	supplier_Value = input.Supplier_old;
+											// 	input.Order_Request:ui.add(get_Orders);
+											input.Order_Request = order_ID;
+											input.Buyer_Organisation = input.Order_Request.Buyer_Organisation;
+											input.Customer_Name = input.Order_Request.Buyer_Name;
+											input.Country = input.Order_Request.Buyer_Name.Associated_Buyer.Country;
+											input.Purchase_Currency = input.Order_Request.Buyer_Name.Associated_Buyer.Currency;
+											input.Supplier = input.Order_Request.Factory;
+											// 	input.Delivery_Address = if(input.Order_Request.Delivery_Address != null,input.Delivery_Address,null);
+											input.Transport_Mode = if(!Order_Request.Transport_Mode.isEmpty(),input.Order_Request.Transport_Mode,null);
+											input.Order_Reference = if(!Order_Request.Order_Reference.isEmpty(),input.Order_Request.Order_Reference,input.Order_Request.Order_ID);
+											input.Buyer_Comment = if(!Order_Request.Comments.isEmpty(),input.Order_Request.Comments,null);
+											disable Supplier;
+										}
+										input.Delivery_Date = zoho.currentdate.addDay(60);
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,8 @@
+void OneTime.updateSizePOLineItem()
+{
+
+                 	targetRec = Purchase_LineItems[ID == 4908788000000450382];
+                 	prodID = Add_Product[ID == targetRec.Product];
+                 	targetRec.Product_Size=prodID.Size_Set;
+                 
+}

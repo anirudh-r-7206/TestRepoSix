@@ -1,0 +1,91 @@
+Approve_Buyer_request as "Approve - Buyer request"
+{
+
+				type =  functions
+				form = History
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						get_PO = Purchase_Order[ID == input.Purchase_Order_ID];
+										get_PO.Enable_Edit=true;
+										//	Copy Purchase Order
+										copy_PO_LineItems = Collection();
+										PO_Items = input.Purchase_Order_ID.Purchase_LineItems;
+										for each  po_Item in PO_Items
+										{
+											copy_Items = Copy_of_Purchase_Order.Copy_Purchase_LineItems();
+											copy_Items.S_No=po_Item.S_No;
+											copy_Items.Product=po_Item.Product;
+											copy_Items.Style_Code=po_Item.Style_Code;
+											copy_Items.Product_Color=po_Item.Product_Color;
+											copy_Items.Product_Size=po_Item.Product_Size;
+											copy_Items.Description=po_Item.Description;
+											copy_Items.Quantity=po_Item.Quantity;
+											copy_Items.Selling_Price=po_Item.Selling_Price;
+											copy_Items.Purchase_Price=po_Item.Purchase_Price;
+											copy_Items.Selling_Price_Sub_Total=po_Item.Selling_Price_Sub_Total;
+											copy_Items.Purchase_Price_Sub_Total=po_Item.Purchase_Price_Sub_Total;
+											copy_PO_LineItems.insert(copy_Items);
+										}
+										Copy_PO = insert into Copy_of_Purchase_Order
+										[
+											Added_User=zoho.loginuser
+											Order_Reference=input.Purchase_Order_ID.Order_Reference
+											Order_Type=input.Purchase_Order_ID.Order_Type
+											PO_Date=input.Purchase_Order_ID.PO_Date
+											Delivery_Date=input.Purchase_Order_ID.Delivery_Date
+											Supplier=input.Purchase_Order_ID.Supplier
+											Payment_Terms=input.Purchase_Order_ID.Payment_Terms
+											Order_Request=input.Purchase_Order_ID.Order_Request
+											Transport_Mode=input.Purchase_Order_ID.Transport_Mode
+											Factory_Address=input.Purchase_Order_ID.Factory_Address
+											Delivery_Address=input.Purchase_Order_ID.Delivery_Address
+											Selling_Currency=input.Purchase_Order_ID.Selling_Currency
+											Purchase_Currency=input.Purchase_Order_ID.Purchase_Currency
+											Total_Selling_Price=input.Purchase_Order_ID.Total_Selling_Price
+											Total_Purchase_Price=input.Purchase_Order_ID.Total_Purchase_Price
+											Total_Quantity=input.Purchase_Order_ID.Total_Quantity
+											Buyer_Organisation=input.Purchase_Order_ID.Buyer_Organisation
+											Customer_Name=input.Purchase_Order_ID.Customer_Name
+											Country=input.Purchase_Order_ID.Country
+											Freight_Forwarder=input.Purchase_Order_ID.Freight_Forwarder
+											Delivery_Contact=input.Purchase_Order_ID.Delivery_Contact
+											Incoterms=input.Purchase_Order_ID.Incoterms
+											Order_Status=input.Purchase_Order_ID.Order_Status
+											Comments=input.Purchase_Order_ID.Comments
+											Copy_Purchase_LineItems=copy_PO_LineItems
+											Purchase_Order=get_PO.ID
+										];
+										input.Copy_of_Purchase_Order = Copy_PO;
+										input.Approval_Status = "Approved";
+										// if(input.Status == "Amendment Requested (Buyer)")
+										// {
+										// 	thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Buyer_Amendment_Approved");
+										// }
+										// else
+										// {
+										// 	thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Factory_Amendment_Approved");
+										// }
+										get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+										if(get_User.count() > 0)
+										{
+											PO_History = insert into History
+											[
+												Added_User=zoho.loginuser
+												Purchase_Order_ID=input.Purchase_Order_ID
+												Raised_By=get_User.ID
+												Status=get_PO.Order_Status
+												Comments="The amendment for Quotation Order " + get_PO.QO_Number + " has been approved by " + get_User.User_Name + "."
+											];
+										}
+										thisapp.PageRefresh();
+										// openUrl("#Form:Purchase_Order?recLinkID=" + input.Purchase_Order_ID + "&viewLinkName=All_Purchase_Orders","popup window");
+					)
+					}
+				}
+			
+}

@@ -1,0 +1,33 @@
+Check_Reference_ID as "Check Reference ID"
+{
+
+				type =  form
+				form = Purchase_Order
+
+				record event = on add or edit
+
+				on user input of Order_Reference
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Order_Reference != input.Order_Request.Order_ID && input.Order_Reference != input.Order_Request.Order_Reference)
+										{
+											if(input.Order_Reference.startsWithignorecase("OR"))
+											{
+												// 		remove_OR = input.Order_Reference.removeFirstOccurence("OR").getAlpha();
+												// 		if(remove_OR.isEmpty())
+												// 		{
+												alert "Enter a valid reference number.";
+												input.Order_Reference = if(!Order_Request.Order_Reference.isEmpty(),input.Order_Request.Order_Reference,input.Order_Request.Order_ID);
+												// 		}
+											}
+										}
+										// info "User input of Order Reference : " + input.Order_Reference;
+						)
+					}
+				}
+
+			
+}

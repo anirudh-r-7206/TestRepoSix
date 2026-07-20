@@ -1,0 +1,70 @@
+void Dev.Insert_Factory_to_User()
+{
+
+                 	//	Create Factory Users
+                 	get_Supliers = Add_Suppliers[ID != 0];
+                 	for each  factory in get_Supliers
+                 	{
+                 		get_Primary_Supplier = Create_User[Email.equalsIgnoreCase(factory.Email)];
+                 		if(get_Primary_Supplier.count() <= 0 && !factory.Contact_Person2.first_name.isEmpty() && !factory.Contact_Person2.last_name.isEmpty() && !factory.Email.isEmpty() && !factory.Phone.isEmpty())
+                 		{
+                 			insert into Create_User
+                 			[
+                 				Added_User=zoho.loginuser
+                 				User_Name.first_name=factory.Contact_Person2.first_name
+                 				User_Name.last_name=factory.Contact_Person2.last_name
+                 				Email=factory.Email.toLowerCase()
+                 				Mobile_Number=factory.Phone
+                 				User_Type="Factory"
+                 				Persona_Role="Factory Team"
+                 				From_Supplier_Buyer=true
+                 				Need_App_Access=factory.Need_App_Access
+                 				Associated_Factory=factory.ID
+                 				Approval_Status="Pending"
+                 				Status="Inactive"
+                 			]
+                 		}
+                 		get_Secondary_Supplier = Create_User[Email.equalsIgnoreCase(factory.Email1)];
+                 		if(get_Secondary_Supplier.count() <= 0 && !factory.Contact_Person3.first_name.isEmpty() && !factory.Contact_Person3.last_name.isEmpty() && !factory.Email1.isEmpty() && !factory.Phone_Number.isEmpty())
+                 		{
+                 			insert into Create_User
+                 			[
+                 				Added_User=zoho.loginuser
+                 				User_Name.first_name=factory.Contact_Person3.first_name
+                 				User_Name.last_name=factory.Contact_Person3.last_name
+                 				Email=factory.Email1.toLowerCase()
+                 				Mobile_Number=factory.Phone_Number
+                 				User_Type="Factory"
+                 				Persona_Role="Factory Team"
+                 				From_Supplier_Buyer=true
+                 				Need_App_Access=factory.Need_App_Access1
+                 				Associated_Factory=factory.ID
+                 				Approval_Status="Pending"
+                 				Status="Inactive"
+                 			]
+                 		}
+                 		for each  factory_Detail in factory.Factory_Details
+                 		{
+                 			get_Factory_Detail_User = Create_User[Email.equalsIgnoreCase(factory_Detail.Factory_Email)];
+                 			if(get_Factory_Detail_User.count() <= 0 && !factory_Detail.Contact_Person1.first_name.isEmpty() && !factory_Detail.Contact_Person1.last_name.isEmpty() && !factory_Detail.Factory_Email.isEmpty() && !factory_Detail.Factory_Phone.isEmpty())
+                 			{
+                 				insert into Create_User
+                 				[
+                 					Added_User=zoho.loginuser
+                 					User_Name.first_name=factory_Detail.Contact_Person1.first_name
+                 					User_Name.last_name=factory_Detail.Contact_Person1.last_name
+                 					Email=factory_Detail.Factory_Email.toLowerCase()
+                 					Mobile_Number=factory_Detail.Factory_Phone
+                 					User_Type="Factory"
+                 					Persona_Role="Factory Team"
+                 					Associated_Factory=factory.ID
+                 					From_Supplier_Buyer=true
+                 					Need_App_Access=factory_Detail.Need_App_Access
+                 					Approval_Status="Pending"
+                 					Status="Inactive"
+                 				]
+                 			}
+                 		}
+                 	}
+                 
+}

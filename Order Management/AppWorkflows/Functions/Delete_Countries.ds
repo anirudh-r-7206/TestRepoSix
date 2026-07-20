@@ -1,0 +1,13 @@
+list Delete_Records.Delete_Countries()
+{
+
+                 	country_List = List();
+                 	get_Supplier_Countries = Add_Suppliers[ID != 0];
+                 	country_List.addAll(get_Supplier_Countries.Country.getall());
+                 	get_Buyer_Countries = Buyers_Master[ID != 0];
+                 	country_List.addAll(get_Buyer_Countries.Country.getall());
+                 	get_PO_Countries = Purchase_Order[ID != 0];
+                 	country_List.addAll(get_PO_Countries.Country.getall());
+                 	return country_List.distinct();
+                 
+}

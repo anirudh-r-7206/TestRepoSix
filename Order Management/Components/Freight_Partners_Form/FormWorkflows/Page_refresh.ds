@@ -1,0 +1,21 @@
+Page_refresh as "Page refresh"
+{
+
+				type =  form
+				form = Freight_Partners_Form
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											thisapp.PageRefresh();
+						)
+					}
+				}
+
+			
+}

@@ -1,0 +1,50 @@
+Filter_Product as "Filter Product"
+{
+
+				type =  form
+				form = Purchase_Order
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// disable Order_Reference;
+										disable Supplier;
+										disable Order_Request;
+										disable Delivery_Date;
+										// Hide Unwanted Fields
+										hide Purchase_LineItems;
+										hide Selling_Terms;
+										hide Transport_Mode;
+										hide Delivery_Contact;
+										show Freight_Forwarder;
+										show Incoterms;
+										// 
+										// if(input.Buyer_Organisation != null)
+										// {
+										// 	get_Buyer_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == input.Supplier];
+										// 	get_Product = get_Buyer_Product.Style_ID.getall();
+										// }
+										// else
+										// {
+										// 	get_Product = Add_Product[ID != 0 && Status == "Approved"].ID.getAll();
+										// }
+										// get_Product.removeAll(input.Purchase_LineItems.Product.getall());
+										// for each  purchase in input.Purchase_LineItems
+										// {
+										// 	old_Product = purchase.Product;
+										// 	add_sub_Product = get_Product;
+										// 	add_sub_Product.add(old_Product);
+										// 	purchase.Product:ui.add(add_sub_Product);
+										// 	purchase.Product=old_Product;
+										// }
+						)
+					}
+				}
+
+			
+}

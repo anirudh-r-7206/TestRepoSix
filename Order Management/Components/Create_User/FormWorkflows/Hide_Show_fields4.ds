@@ -1,0 +1,50 @@
+Hide_Show_fields4 as "Hide & Show fields"
+{
+
+				type =  form
+				form = Create_User
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											disable Status;
+										disable Persona_Role;
+										hide Associated_Buyer;
+										hide Associated_Factory;
+										hide Hide_Section;
+										hide Primary_Email;
+										hide Permissions;
+										if(input.User_Type == null || input.User_Type == "")
+										{
+											userTypeList = {"Internal","Admin"};
+											input.User_Type:ui.add(userTypeList);
+										}
+										else
+										{
+											disable User_Type;
+											input.Persona_Role = if(input.User_Type == "Buyer","Buyer","Factory Team");
+											show Permissions;
+										}
+										if(input.Persona_Role == "Buyer")
+										{
+											show Associated_Buyer;
+										}
+										else if(input.Persona_Role == "Factory Team")
+										{
+											show Associated_Factory;
+										}
+										else if(input.User_Type in {"Internal","Admin"})
+										{
+											show Primary_Email;
+										}
+						)
+					}
+				}
+
+			
+}

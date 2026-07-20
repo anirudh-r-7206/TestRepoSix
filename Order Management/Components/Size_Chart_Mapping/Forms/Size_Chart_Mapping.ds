@@ -1,0 +1,81 @@
+form Size_Chart_Mapping
+{
+
+			displayname = "Size Chart Mapping"
+			success message = "Size Chart Mapping Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Size
+			(
+				type = picklist	
+				values  = Create_Size[Status == "Active"].ID
+    			bidirectional = Size_Chart_Details
+    			displayformat = [Size]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Region
+			(
+				type = list	
+				values  = Add_Country[Status == "Active"].ID
+    			displayformat = [Country_Name]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Region_New
+			(
+				type = list	
+				displayname = "Region New"
+				values  = Add_Region.ID
+    			displayformat = [Region]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Size_Name
+			(
+    			type = text
+				displayname = "Size Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

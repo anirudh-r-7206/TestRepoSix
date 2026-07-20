@@ -1,0 +1,118 @@
+User_Activate as "User Activate"
+{
+
+				type =  functions
+				form = Create_User
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						if(input.Approval_Status = "Approved")
+										{
+											try 
+											{
+												if(input.Persona_Role == "Sodexo Team")
+												{
+													Assign_User = thisapp.permissions.assignUserInProfile(input.Email,"Sodexo Team",true);
+													input.Status = "Active";
+													input.Portal_Access_Enabled = if(input.From_Supplier_Buyer && input.Need_App_Access,true,if(input.From_Supplier_Buyer == false,true,false));
+													success message "User Added Successfuly";
+												}
+												else if(input.Persona_Role == "Buyer")
+												{
+													// 		Assign_Portal = thisapp.portal.assignUserInProfile(input.Email,"Buyer");
+													if(input.Associated_Buyer.Approval_Status != "Approved")
+													{
+														if(input.Associated_Buyer.Approval_Status == "Pending")
+														{
+															openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Buyer_Not_Approved","popup window");
+														}
+														else if(input.Associated_Buyer.Approval_Status == "Rejected")
+														{
+															openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Buyer_Rejected","popup window");
+														}
+													}
+													else if(input.Associated_Buyer.Approval_Status == "Approved")
+													{
+														if(input.Associated_Buyer.Status == "Inactive")
+														{
+															openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Buyer_Inactive","popup window");
+														}
+														else if(input.Associated_Buyer.Status == "Active")
+														{
+															if(input.Need_App_Access == true)
+															{
+																Assign_Portal = thisapp.permissions.assignUserInProfile(input.Email,"Buyer",true);
+																input.Portal_Access_Enabled = true;
+															}
+															input.Status = "Active";
+															input.Approval_Status = "Approved";
+															success message "User Added Successfuly";
+														}
+													}
+												}
+												else if(input.Persona_Role == "Factory Team")
+												{
+													if(input.Associated_Factory.Approval_Status != "Approved")
+													{
+														if(input.Associated_Factory.Approval_Status == "Pending")
+														{
+															openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Supplier_Not_Approved","popup window");
+														}
+														else if(input.Associated_Factory.Approval_Status == "Rejected")
+														{
+															openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Supplier_Rejected","popup window");
+														}
+													}
+													else if(input.Associated_Factory.Approval_Status == "Approved")
+													{
+														if(input.Associated_Factory.Status == "Inactive")
+														{
+															openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Supplier_Inactive","popup window");
+														}
+														else if(input.Associated_Factory.Status == "Active")
+														{
+															if(input.Need_App_Access == true)
+															{
+																Assign_Portal = thisapp.permissions.assignUserInProfile(input.Email,"Factory",true);
+																input.Portal_Access_Enabled = true;
+															}
+															input.Status = "Active";
+															input.Approval_Status = "Approved";
+															success message "User Added Successfuly";
+														}
+													}
+													// 		Assign_Portal = thisapp.permissions.assignUserInProfile(input.Email,"Factory");
+												}
+												else if(input.Persona_Role in {"Administrator","Developer"})
+												{
+													get_User_Permission = thisapp.permissions.profileForUser(input.Email);
+													if(get_User_Permission.isEmpty())
+													{
+														Assign_Portal = thisapp.permissions.assignUserInProfile(input.Email,"App-Administrator",true);
+														input.Portal_Access_Enabled = true;
+														success message "User Added Successfuly";
+													}
+													else
+													{
+														success message "User already has App access";
+													}
+													input.Status = "Active";
+												}
+											}	catch (e)
+											{
+												success message "Failed to add user due to a system error. Please contact the administrator.";
+											}
+										}
+										else
+										{
+											success message "The User Account is yet to be Approved. Please Approve the User to provide access.";
+										}
+					)
+					}
+				}
+			
+}

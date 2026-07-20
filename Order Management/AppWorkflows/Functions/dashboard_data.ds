@@ -1,0 +1,101 @@
+map Page.dashboard_data(string type)
+{
+
+                 	data_Map = Map();
+                 	if(type == "userData")
+                 	{
+                 		data_Map.put("Total_Request",Order_Request[ID != 0].count());
+                 		data_Map.put("Month_Request",Order_Request[Added_Time >= zoho.currentdate.toStartOfMonth() && Added_Time <= zoho.currentdate.eomonth(0)].count());
+                 		data_Map.put("Total_PO",Purchase_Order[ID != 0].count());
+                 		data_Map.put("Month_PO",Purchase_Order[Added_Time >= zoho.currentdate.toStartOfMonth() && Added_Time <= zoho.currentdate.eomonth(0)].count());
+                 		data_Map.put("Awaiting_Request",Order_Request[Status == "Awaiting QO Generation"].count());
+                 		data_Map.put("Pending_Request",Order_Request[Status == "Pending"].count());
+                 		data_Map.put("Buyer_Amendment",History[Status == "Amendment Requested (Buyer)" && Approval_Status in {"Pending","Approved"}].count());
+                 		data_Map.put("Factory_Amendment",History[Status == "Amendment Requested (Factory)" && Approval_Status in {"Pending","Approved"}].count());
+                 		//
+                 		Total_PO = Purchase_Order[ID != 0].count();
+                 		get_Buyer_Review_PO = Purchase_Order[Order_Status == "Awaiting Buyer Review"].count();
+                 		get_Buyer_Amendment_PO = Purchase_Order[Order_Status == "Amendment Requested (Buyer)"].count();
+                 		get_Factory_Review_PO = Purchase_Order[Order_Status == "Awaiting Factory Review"].count();
+                 		get_Factory_Amendment_PO = Purchase_Order[Order_Status == "Amendment Requested (Factory)"].count();
+                 		get_Awaiting_Production_PO = Purchase_Order[Order_Status == "Awaiting Production"].count();
+                 		get_In_Production_PO = Purchase_Order[Order_Status == "In Production"].count();
+                 		get_Cancelled_PO = Purchase_Order[Order_Status == "Cancelled"].count();
+                 		get_Completed_PO = Purchase_Order[Order_Status == "Completed"].count();
+                 		//
+                 		data_Map.put("Buyer_Revew",get_Buyer_Review_PO);
+                 		data_Map.put("Buyer_Amendment_Requested",get_Buyer_Amendment_PO);
+                 		data_Map.put("Factory_Revew",get_Factory_Review_PO);
+                 		data_Map.put("Factory_Amendment_Requested",get_Factory_Amendment_PO);
+                 		data_Map.put("Awaiting_Production",get_Awaiting_Production_PO);
+                 		data_Map.put("In_Production",get_In_Production_PO);
+                 		data_Map.put("Cancelled",get_Cancelled_PO);
+                 		data_Map.put("Completed",get_Completed_PO);
+                 		//
+                 		data_Map.put("Buyer_Revew_Percentage",(get_Buyer_Review_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Buyer_Amendment_Requested_Percentage",(get_Buyer_Amendment_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Factory_Revew_Percentage",(get_Factory_Review_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Factory_Amendment_Requested_Percentage",(get_Factory_Amendment_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Awaiting_Production_Percentage",(get_Awaiting_Production_PO / Total_PO * 100).round(2));
+                 		data_Map.put("In_Production_Percentage",(get_In_Production_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Cancelled_Percentage",(get_Cancelled_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Completed_Percentage",(get_Completed_PO / Total_PO * 100).round(2));
+                 	}
+                 	else if(type == "adminData")
+                 	{
+                 		data_Map.put("Total_Users",Create_User[ID != 0].count());
+                 		data_Map.put("Active_Users",Create_User[Status == "Active"].count());
+                 		data_Map.put("Total_Buyer",Buyers_Master[ID != 0].count());
+                 		data_Map.put("Total_Buyer_Users",Create_User[Status == "Active" && User_Type == "Buyer" && Associated_Buyer != null].count());
+                 		data_Map.put("Total_Factory",Add_Suppliers[ID != 0].count());
+                 		data_Map.put("Total_Factory_User",Create_User[Status == "Active" && User_Type == "Factory" && Associated_Factory != null].count());
+                 		data_Map.put("PO_Sell_Amount",thisapp.Page.PO_Currency_Convert(Purchase_Order[Added_Time >= zoho.currentdate.toStartOfMonth() && Added_Time <= zoho.currentdate.eomonth(0)].sum(Total_Selling_Price)));
+                 		data_Map.put("PO_Buy_Amount",thisapp.Page.PO_Currency_Convert(Purchase_Order[Added_Time >= zoho.currentdate.toStartOfMonth() && Added_Time <= zoho.currentdate.eomonth(0)].sum(Total_Purchase_Price)));
+                 		//
+                 		Total_PO = Purchase_Order[ID != 0].count();
+                 		get_Buyer_Review_PO = Purchase_Order[Order_Status == "Awaiting Buyer Review"].count();
+                 		get_Buyer_Amendment_PO = Purchase_Order[Order_Status == "Amendment Requested (Buyer)"].count();
+                 		get_Factory_Review_PO = Purchase_Order[Order_Status == "Awaiting Factory Review"].count();
+                 		get_Factory_Amendment_PO = Purchase_Order[Order_Status == "Amendment Requested (Factory)"].count();
+                 		get_Awaiting_Production_PO = Purchase_Order[Order_Status == "Awaiting Production"].count();
+                 		get_In_Production_PO = Purchase_Order[Order_Status == "In Production"].count();
+                 		get_Cancelled_PO = Purchase_Order[Order_Status == "Cancelled"].count();
+                 		get_Completed_PO = Purchase_Order[Order_Status == "Completed"].count();
+                 		//
+                 		data_Map.put("Buyer_Revew",get_Buyer_Review_PO);
+                 		data_Map.put("Buyer_Amendment_Requested",get_Buyer_Amendment_PO);
+                 		data_Map.put("Factory_Revew",get_Factory_Review_PO);
+                 		data_Map.put("Factory_Amendment_Requested",get_Factory_Amendment_PO);
+                 		data_Map.put("Awaiting_Production",get_Awaiting_Production_PO);
+                 		data_Map.put("In_Production",get_In_Production_PO);
+                 		data_Map.put("Cancelled",get_Cancelled_PO);
+                 		data_Map.put("Completed",get_Completed_PO);
+                 		//
+                 		data_Map.put("Buyer_Revew_Percentage",(get_Buyer_Review_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Buyer_Amendment_Requested_Percentage",(get_Buyer_Amendment_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Factory_Revew_Percentage",(get_Factory_Review_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Factory_Amendment_Requested_Percentage",(get_Factory_Amendment_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Awaiting_Production_Percentage",(get_Awaiting_Production_PO / Total_PO * 100).round(2));
+                 		data_Map.put("In_Production_Percentage",(get_In_Production_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Cancelled_Percentage",(get_Cancelled_PO / Total_PO * 100).round(2));
+                 		data_Map.put("Completed_Percentage",(get_Completed_PO / Total_PO * 100).round(2));
+                 	}
+                 	else if(type == "buyerData")
+                 	{
+                 		get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+                 		data_Map.put("Total_Request",Order_Request[Buyer_Name.Email == zoho.loginuserid && Status != "Cancelled"].count());
+                 		data_Map.put("Pending_Request",Order_Request[Buyer_Name.Email == zoho.loginuserid && Status == "Pending"].count());
+                 		data_Map.put("InProgress_Request",Order_Request[Buyer_Name.Email == zoho.loginuserid && Status in {"Validation Pending","In Transit","Approved"}].count());
+                 		data_Map.put("Completed_Request",Order_Request[Buyer_Name.Email == zoho.loginuserid && Status == "Completed"].count());
+                 	}
+                 	else if(type == "factoryData")
+                 	{
+                 		get_User = thisapp.Filters.Factory_Product_Filter();
+                 		data_Map.put("Total_Orders",Purchase_Order[Supplier.ID == get_User].count());
+                 		data_Map.put("Awaiting_Production",Purchase_Order[Supplier.ID == get_User && Order_Status == "Awaiting Production"].count());
+                 		data_Map.put("In_Production",Purchase_Order[Supplier.ID == get_User && Order_Status == "In Production"].count());
+                 		data_Map.put("Completed_Orders",Purchase_Order[Supplier.ID == get_User && Order_Status == "Completed"].count());
+                 	}
+                 	return data_Map;
+                 
+}

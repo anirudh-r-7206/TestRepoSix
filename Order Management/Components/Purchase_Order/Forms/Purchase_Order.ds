@@ -1,0 +1,657 @@
+form Purchase_Order
+{
+
+			displayname = "Purchase Order"
+			success message = "Purchase Order Created Successfully"
+			Order_Details
+			(
+				type = section
+				displayname = "Order Details"
+				visibility = true
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Order_Reference
+			(
+    			type = text
+				displayname = "Order Reference"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			PO_Date
+			(
+    			type = date
+				displayname = "PO Date"
+				initial value = "${zoho.currentdate}"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Supplier
+			(
+				type = picklist	
+				values  = Add_Suppliers.ID
+    			displayformat = [" " + Supplier_Organisation]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Order_Request
+			(
+				type = picklist	
+				displayname = "Order Request"
+				values  = Order_Request.ID
+    			displayformat = [Order_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Factory_Address
+			(
+				type = picklist	
+				displayname = "Factory Address"
+				values  = Factory_Details_Subform[Add_Suppliers.ID == input.Supplier].ID
+    			displayformat = [" " + Factory_Address.address_line_1 + " " + Factory_Address.address_line_2 + " " + Factory_Address.district_city + " " + Factory_Address.state_province]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Buyer_Comment
+			(
+    			type = textarea
+				displayname = "Buyer Comment"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Order_Type
+			(
+				type = picklist
+				displayname = "Order Type "
+				maxchar = 100
+				values = {"Bulk","Forecast","Ad hoc","SM"}
+				initial value = "Bulk"
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			must have Delivery_Date
+			(
+    			type = date
+				displayname = "Ex-Factory date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			must have Payment_Terms
+			(
+				type = picklist
+				displayname = "Payment Terms"
+				maxchar = 100
+				values = {"30","60","90"}
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			must have Transport_Mode
+			(
+				type = picklist
+				displayname = "Transport Mode"
+				maxchar = 100
+				values = {"SEA","AIR","ROAD"}
+				initial value = "SEA"
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			must have Delivery_Address
+			(
+				type = picklist	
+				displayname = "Delivery Address"
+				values  = Buyer_Contact_Person_Details[Buyers_Master.ID == input.Buyer_Organisation].ID
+    			displayformat = [" " + Address.address_line_1 + " " + Address.address_line_2 + " " + Address.district_city + " " + Address.state_province]
+				sortorder = ascending
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			Address_Details
+			(
+    			type = plaintext
+				value = "<div> <br /></div>"
+	 			row = 1
+	 			column = 3   
+				width = medium
+			)
+			Currency_Info
+			(
+				type = section
+				displayname = "Currency Info"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			must have Selling_Currency
+			(
+				type = picklist	
+				displayname = "Selling Currency"
+				values  = Currency.ID
+    			displayformat = [Currency_Name]
+				allow new entries
+				[
+					displayname = "Add New Currency "
+				]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			must have Purchase_Currency
+			(
+				type = picklist	
+				displayname = "Purchase Currency"
+				values  = Currency.ID
+    			displayformat = [Currency_Name]
+				allow new entries
+				[
+					displayname = "Add New Currency "
+				]
+				sortorder = ascending
+	 			row = 2
+	 			column = 2   
+				width = medium
+			)
+			must have Purchase_LineItems
+			(
+				type = grid
+				displayname = "Purchase LineItems"
+				values  = Purchase_LineItems.ID
+    			bidirectional = Purchase_Order
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Additional_Charges
+			(
+				type = grid
+				displayname = "Additional Charges"
+				values  = Additional_Charges_Form.ID
+    			bidirectional = Purchase_Order
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+	 			row = 5
+	 			column = 0   
+				width = medium
+			)
+			Total_Selling_Price
+			(
+				type = decimal
+				displayname = "Total Selling Price"
+				format = commadotwestern
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Total_Quantity
+			(
+				type = number
+				displayname = "Total Quantity"
+				format = commadotwestern
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Total_Purchase_Price
+			(
+				type = decimal
+				displayname = "Total Purchase Price"
+				format = commadotwestern
+	 			row = 5
+	 			column = 2   
+				width = medium
+			)
+			Customer_Details
+			(
+				type = section
+				displayname = "Customer Details"
+				visibility = true
+	 			row = 6
+	 			column = 0   
+				width = medium
+			)
+			must have Buyer_Organisation
+			(
+				type = picklist	
+				displayname = "Buyer Organisation"
+				values  = Buyers_Master.ID
+    			displayformat = [Buyer_Organisation]
+				sortorder = ascending
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			must have Country
+			(
+				type = picklist	
+				values  = Add_Country.ID
+    			displayformat = [Country_Name]
+				sortorder = ascending
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			Delivery_Contact
+			(
+    			type = text
+				displayname = "Delivery Contact "
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			must have Customer_Name
+			(
+				type = picklist	
+				displayname = "Customer Name"
+				values  = Create_User[User_Type == "Buyer"].ID
+    			displayformat = [" " + User_Name.prefix + " " + User_Name.first_name + " " + User_Name.last_name + " " + User_Name.suffix]
+				sortorder = ascending
+	 			row = 6
+	 			column = 2   
+				width = medium
+			)
+			Freight_Forwarder
+			(
+				type = picklist	
+				displayname = "Freight Forwarder"
+				values  = Freight_Partners_Form.ID
+    			displayformat = [Freight_Partners_Name]
+				sortorder = ascending
+	 			row = 6
+	 			column = 2   
+				width = medium
+			)
+			Incoterms
+			(
+				type = picklist
+				displayname = "Incoterm"
+				maxchar = 100
+				values = {"FOB","CIF","DAP","DDP"}
+	 			row = 6
+	 			column = 2   
+				width = medium
+			)
+			Comments
+			(
+    			type = richtext
+				height = 200px
+				toolbar = enable
+				[
+					style, font-color, background-color, link, bullets-and-numbering, 
+					font-size : {1, 2, 3, 4, 5, 6, 7}
+				]
+	 			row = 6
+	 			column = 2   
+				width = medium
+			)
+			Hide_Section
+			(
+				type = section
+				displayname = "Hide Section"
+				visibility = true
+	 			row = 7
+	 			column = 0   
+				width = medium
+			)
+			PO_Number
+			(
+    			type = formula
+				displayname = "PO Number"
+				value =  "PO" + input.ID_Generator
+				visibility = false
+				display type = text
+				format = plaintext
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			ID_Generator
+			(
+    			type = autonumber
+				displayname = "ID Generator"
+				start index = 2000
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Supplier_old
+			(
+				type = picklist	
+				displayname = "Supplier old"
+				values  = Create_User.ID
+    			displayformat = [" " + User_Name.prefix + " " + User_Name.first_name + " " + User_Name.last_name + " " + User_Name.suffix]
+				sortorder = ascending
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Enable_Edit
+			(
+    			type = checkbox
+				displayname = "Enable Edit"
+				initial value = false
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Purchase_Currency1
+			(
+				type = picklist
+				displayname = "Purchase Currency old"
+				maxchar = 100
+				values = {"USD","EUR","GBP","SGD"}
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Comments11
+			(
+    			type = textarea
+				displayname = "Comments"
+				height = 100px
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Factory_Address1
+			(
+    			type = address
+				displayname = "Factory Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 7
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Factory_Company_Name
+			(
+    			type = text
+				displayname = "Factory Company Name"
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Factory_Contact_Person
+			(
+    			type = text
+				displayname = "Factory Contact Person"
+	 			row = 7
+	 			column = 1   
+				width = medium
+			)
+			Factory_Email
+			(
+    			type = email
+				displayname = "Factory Email"
+				maxchar = 80
+	 			row = 7
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Factory_Phone
+			(
+    			type = phonenumber
+				displayname = "Factory Phone"
+	 			row = 7
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			QO_Number
+			(
+    			type = formula
+				displayname = "QO Number"
+				value =  "QO" + input.ID_Generator
+				visibility = false
+				display type = text
+				format = plaintext
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Order_Status
+			(
+				type = picklist
+				displayname = "Order Status"
+				maxchar = 100
+				values = {"Awaiting QO Generation","Awaiting Buyer Review","Amendment Requested (Buyer)","Awaiting PO Generation","Awaiting Factory Review","Amendment Requested (Factory)","Awaiting Production","In Production","Completed","Cancelled"}
+				initial value = "Awaiting Buyer Review"
+				sortorder = ascending
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Order_Review_ID
+			(
+				type = list	
+				displayname = "Order Review - ID"
+				values  = History.ID
+    			bidirectional = Purchase_Order_ID
+    			displayformat = [ID]
+				height = 60px
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Record_is_Edited
+			(
+    			type = checkbox
+				displayname = "Record is Edited"
+				initial value = false
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Selling_Currency1
+			(
+				type = picklist
+				displayname = "Selling Currency old"
+				maxchar = 100
+				values = {"EUR","USD","GBP","SGD"}
+				initial value = "EUR"
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Selling_Terms
+			(
+				type = picklist
+				displayname = "Selling Terms"
+				maxchar = 100
+				values = {"COD"}
+				initial value = "COD"
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Delivery_Address1
+			(
+    			type = address
+				displayname = "Delivery Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 7
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Buyer_Company_Name
+			(
+    			type = text
+				displayname = "Buyer Company Name"
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Buyer_Contact_Person
+			(
+    			type = text
+				displayname = "Buyer Contact Person"
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Buyer_Email
+			(
+    			type = email
+				displayname = "Buyer Email"
+				maxchar = 80
+	 			row = 7
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Buyer_Phone
+			(
+    			type = phonenumber
+				displayname = "Buyer Phone"
+	 			row = 7
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		print template
+			{
+				PO_Record_Template
+				{
+							displayname = "PO Record Template"
+							content = {"pageNumberOption":null,"orientation":"null","images":[{"fileName":"","imageId":"","imageType":"","fileId":""},{"fileName":"","imageId":"","imageType":"","fileId":""},{"fileName":"","imageId":"","imageType":"","fileId":""}],"imageId":"","isFooterEnabled":true,"footer":{"imageId":"","elements":[{"type":"columns","element":{"split":"100","id":"u_elem_1374075400000006","elemStyle":"padding: 0 15px","collayouts":[{"colElements":[{"type":"text","element":{"id":"u_elem_1374076900000006","fields":[],"content":"<div style=\"\">\n   <p><br /><\/p>\n  <\/div>"}}],"style":""}]}}],"style":"display: block; border-color: rgb(255, 255, 255); background-color: rgb(255, 255, 255)","bgImg":""},"containerStyle":"","templateStyle":"text-align: left; width: 793.92px; margin: 0px auto; padding: 0px","version":"2","layout":"1","mainLayout":[{"elements":[{"type":"columns","element":{"split":"46,54","id":"u_elem_1374071","elemStyle":"","collayouts":[{"colElements":[{"id":"u_elem_1577066799999997","type":"fields","element":{"valueStyle":"width: 50%","valueTextStyle":"","fieldLayoutType":"2","labelText":"PO Date","wrapperStyle":"","labelStyle":"width: 50%","Label_Name":"PO_Date","labelTextStyle":""}}],"style":""},{"colElements":[{"id":"u_elem_1665855400000006","type":"lookupfields","element":{"valueStyle":"width: 50%","valueTextStyle":"","fieldLayoutType":"2","related_Form":"Buyers_Master","labelText":"Buyer Organisation","wrapperStyle":"","labelStyle":"width: 50%","Label_Name":"Buyer_Organisation","refFields":[{"fieldLayoutType":"2","labelText":"ID","Label_Name":"ID"}],"labelTextStyle":""}}],"style":""}]}},{"type":"columns","element":{"split":"46,54","id":"u_elem_1374071200000003","elemStyle":"","collayouts":[{"colElements":[{"id":"u_elem_1582854600000009","type":"fields","element":{"valueStyle":"width: 50%","valueTextStyle":"","fieldLayoutType":"2","labelText":"QO Number","wrapperStyle":"","labelStyle":"width: 50%","Label_Name":"QO_Number","labelTextStyle":""}},{"id":"u_elem_1593656400000006","type":"lookupfields","element":{"valueStyle":"width: 50%","valueTextStyle":"","fieldLayoutType":"2","related_Form":"Order_Request","labelText":"Order Request","wrapperStyle":"","labelStyle":"width: 50%","Label_Name":"Order_Request","refFields":[{"fieldLayoutType":"2","labelText":"ID","labelStyle":"","Label_Name":"ID"}],"labelTextStyle":""}}],"style":""},{"colElements":[{"id":"u_elem_1657423900000006","type":"lookupfields","element":{"valueStyle":"width: 50%","valueTextStyle":"","fieldLayoutType":"2","related_Form":"Buyer_Contact_Person_Details","labelText":"Delivery Address","wrapperStyle":"","labelStyle":"width: 50%","Label_Name":"Delivery_Address","refFields":[{"fieldLayoutType":"2","labelText":"ID","Label_Name":"ID"}],"labelTextStyle":""}},{"id":"u_elem_1759324900000006","type":"lookupfields","element":{"valueStyle":"width: 50%","valueTextStyle":"","fieldLayoutType":"2","related_Form":"Factory_Details_Subform","labelText":"Factory Address","wrapperStyle":"","labelStyle":"width: 50%","Label_Name":"Factory_Address","refFields":[{"fieldLayoutType":"2","labelText":"ID","Label_Name":"ID"}],"labelTextStyle":""}}],"style":""}]}},{"type":"columns","element":{"split":"100","id":"u_elem_1374073299999997","elemStyle":"","collayouts":[{"colElements":[{"id":"u_elem_14301283585872687","type":"lookupfields","element":{"valueStyle":"width: 50%; border-right: 1px solid rgb(221, 221, 221); border-left: 1px solid rgb(221, 221, 221); border-top: 1px solid rgb(221, 221, 221)","valueTextStyle":"text-align: center","fieldLayoutType":"1","refFormID":"-1","Select_Related_Field":true,"labelText":"SubForm","wrapperStyle":"padding: 0 30px","labelStyle":"width: 50%; display: none","refFields":[{"valueStyle":"text-align: left; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 8px 13px","fieldLayoutType":"2","labelText":"Sl.No","labelStyle":"text-align: left; color: rgb(255, 255, 255); background-color: rgb(45, 89, 148); width: 15%; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 5px 9px","Select_Field":true,"formCompId":"0"},{"valueStyle":"text-align: left; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 8px 13px","fieldLayoutType":"2","labelText":"Product Name","labelStyle":"text-align: left; color: rgb(255, 255, 255); background-color: rgb(45, 89, 148); width: 25%; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 5px 9px","Select_Field":true,"formCompId":"0"},{"valueStyle":"text-align: left; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 8px 13px","fieldLayoutType":"2","labelText":"Price Per Unit","labelStyle":"text-align: left; color: rgb(255, 255, 255); background-color: rgb(45, 89, 148); width: 20%; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 5px 9px","Select_Field":true,"formCompId":"0"},{"valueStyle":"text-align: left; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 8px 13px","fieldLayoutType":"2","labelText":"Quantity","labelStyle":"text-align: left; color: rgb(255, 255, 255); background-color: rgb(45, 89, 148); width: 20%; border-right: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); padding: 5px 9px","Select_Field":true,"formCompId":"0"},{"valueStyle":"text-align: left; border-bottom: 1px solid rgb(221, 221, 221); padding: 8px 13px","fieldLayoutType":"2","labelText":"Total Price","labelStyle":"text-align: left; color: rgb(255, 255, 255); background-color: rgb(45, 89, 148); width: 20%; border-bottom: 1px solid rgb(221, 221, 221); padding: 5px 9px","Select_Field":true,"formCompId":"0"}],"formCompId":"-1","labelTextStyle":"text-align: center"}}],"style":""}]}},{"type":"columns","element":{"split":"50,50","id":"u_elem_1374073299999997","elemStyle":"padding: 0 30px","collayouts":[{"colElements":[{"type":"text","element":{"id":"u_elem_1374074799999997","fields":[],"content":"<div style=\"\">\n   <p><br /><\/p>\n  <\/div>"}}],"style":""},{"colElements":[{"type":"columns","element":{"split":"20,40,40","id":"u_elem_1374074799999997","elemStyle":"","collayouts":[{"colElements":[{"type":"text","element":{"id":"u_elem_1374075299999997","fields":[],"content":"<div style=\"\">\n   <p\n      style=\"text-align: center; font-size: 13px; padding: 15px 0\"><font color=\"#2d5994\"><b>Total<\/b><\/font><\/p>\n  <\/div>"}}],"style":""},{"colElements":[{"id":"u_elem_14301283585895537","type":"fields","element":{"valueStyle":"width: 50%","valueTextStyle":"text-align: left; font-weight: bold; color: rgb(45, 89, 148); padding: 0 8px","fieldLayoutType":"1","labelText":"Total Quantity","wrapperStyle":"padding: 10px 0","labelStyle":"width: 50%; display: none","Label_Name":"Total_Quantity","labelTextStyle":""}}],"style":""},{"colElements":[{"id":"u_elem_14301283585901167","type":"fields","element":{"valueStyle":"width: 50%","valueTextStyle":"font-weight: bold; text-align: left; color: rgb(45, 89, 148); padding: 0 7px","fieldLayoutType":"1","labelText":"Total Purchase Price","wrapperStyle":"padding: 10px 0","labelStyle":"width: 50%; display: none","Label_Name":"Total_Purchase_Price","labelTextStyle":""}}],"style":""}]}}],"style":""}]}},{"type":"columns","element":{"split":"100","id":"u_elem_1374075400000006","elemStyle":"","collayouts":[{"colElements":[{"type":"text","element":{"id":"u_elem_1374075400000006","fields":[],"content":"<div style=\"\">\n   <p><br /><\/p>\n  <\/div>"}}],"style":""}]}}],"id":1}],"resize":"A4","header":{"imageId":"","elements":[{"type":"columns","element":{"split":"100","id":"u_elem_1374069900000006","elemStyle":"border-width: 0px; border-style: solid; border-color: rgb(45, 89, 148)","collayouts":[{"colElements":[{"type":"text","element":{"id":"u_elem_1374070700000003","fields":[],"content":"<div style=\"\">\n   <h1 style=\"padding-bottom: 0px\"><font color=\"#2d5994\">Purchase Order<\/font><\/h1>\n  <\/div>"}},{"id":"u_elem_14301283585978838","type":"fields","element":{"valueStyle":"width: 50%","valueTextStyle":"font-size: 16px; padding-top: 0px","fieldLayoutType":"1","labelText":"PO Number","wrapperStyle":"","labelStyle":"width: 50%; display: none","Label_Name":"PO_Number","labelTextStyle":""}}],"style":""}]}},{"type":"columns","element":{"split":"100","id":"u_elem_1374070900000006","elemStyle":"","collayouts":[{"colElements":[{"type":"text","element":{"id":"u_elem_1374070799999997","fields":[],"content":"<div style=\"border-bottom: 1px solid rgb(45, 89, 148); border-top-color: rgb(45, 89, 148); border-right-color: rgb(45, 89, 148); border-left-color: rgb(45, 89, 148)\">\n   <p><br /><\/p>\n  <\/div>"}}],"style":""}]}}],"style":"display: block; background-color: rgb(255, 255, 255); border-color: rgb(255, 255, 255)","bgImg":""},"themeFont":"lato","isHeaderEnabled":true}
+				}
+			}
+		
+}

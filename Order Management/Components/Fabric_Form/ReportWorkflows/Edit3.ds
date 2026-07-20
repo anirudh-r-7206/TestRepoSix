@@ -1,0 +1,29 @@
+Edit3 as "Edit"
+{
+
+				type =  functions
+				form = Fabric_Form
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						// reference = thisapp.References.Fabrics(input.ID);
+										// if(reference.trim() != "" && reference != null)
+										// {
+										// 	url = "#Form:Alert_References?zc_Header=false&Fabric_Form=" + input.ID;
+										// 	window = "popup window";
+										// }
+										// else
+										// {
+										url = "#Form:Fabric_Form?zc_NextUrl=#Script:page.refresh&zc_LoadIn=dialog&viewLinkName=All_Fabrics&recLinkID=" + input.ID;
+										window = "same window";
+										// }
+										openUrl(url,window);
+					)
+					}
+				}
+			
+}

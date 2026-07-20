@@ -1,0 +1,26 @@
+Populate_Fabric_Code as "Populate Fabric Code"
+{
+
+				type =  form
+				form = Fabric_Form
+
+				record event = on add or edit
+
+				on user input of Fabric_Master_Code
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Colour_Code = null;
+										get_Colors = Add_Colors[Status == "Active"].ID.getAll();
+										get_Fab_Colors = Fabric_Form[Fabric_Master_Code == input.Fabric_Master_Code].Colour_Code.getAll();
+										get_Colors.removeAll(get_Fab_Colors);
+										input.Colour_Code:ui.add(get_Colors);
+										input.Fabric_Code = if(!input.Fabric_Master_Code.isEmpty(),input.Fabric_Master_Code,"") + "-" + if(input.Colour_Code != null,input.Colour_Code.Color_Code,"");
+						)
+					}
+				}
+
+			
+}

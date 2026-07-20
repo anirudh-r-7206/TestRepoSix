@@ -1,0 +1,55 @@
+report All_Currency
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Symbol
+								Currency_Name as "Currency Name"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Currency_Name as "Currency Name"
+								Symbol
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								"Delete Currency"
+							)
+						)
+				)
+			
+}

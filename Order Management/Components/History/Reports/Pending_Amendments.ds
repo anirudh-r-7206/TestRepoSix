@@ -1,0 +1,97 @@
+list Pending_Amendments
+{
+
+			displayName = "Pending Amendments"
+			show all rows from History  [Status == "Amendment Requested (Buyer)" || Status == "Amendment Requested (Factory)" && Approval_Status is not null && Approval_Status == "Pending" || Approval_Status == "Approved" && Purchase_Order_ID.Order_Status != "Cancelled" && Purchase_Order_ID.Order_Status != "Completed"]  
+			(
+				Raised_By as "Raised By"
+				Status
+				Comments
+				Approval_Status as "Approval Status"
+				custom action "Approve"
+				(
+	  			workflow = Approve_Buyer_request
+				show action in edit record menu = true
+				column header = "Approve"
+				condition = (Approval_Status == "Pending" && Purchase_Order_ID.Order_Status != "Cancelled" && QO_Viewed == true)
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to approve this request?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				custom action "Reject"
+				(
+	  			workflow = Reject_Buyer_request
+				show action in edit record menu = true
+				column header = "Reject"
+				condition = (Approval_Status != "Completed" && Purchase_Order_ID.Order_Status != "Cancelled" && QO_Viewed == true)
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to reject this request?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				custom action "Edit QO"
+				(
+	  			workflow = Edit_QO
+				show action in edit record menu = true
+				column header = "Edit QO"
+				condition = (Purchase_Order_ID.Enable_Edit == true && Purchase_Order_ID.Order_Status != "Cancelled")
+				)
+				Purchase_Order_ID.QO_Number as "QO Number"
+				custom action "Generate/Update PO"
+				(
+	  			workflow = Generate_PO_Amendment_Req
+				show action in edit record menu = true
+				column header = "Generate/Update PO"
+				condition = (Purchase_Order_ID.Record_is_Edited == true)
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to generate the PO?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				custom action "View QO"
+				(
+	  			workflow = View_QO_in_Amendment
+				show action in edit record menu = true
+				column header = "View QO"
+				)
+				Added_Time as "Added Time"
+				Purchase_Order_ID.PO_Number as "PO Number"
+				Purchase_Order_ID.Order_Type as "Order Type "
+				Purchase_Order_ID.Order_Reference as "Order Reference"
+				Purchase_Order_ID.Buyer_Organisation as "Buyer Organisation"
+				Purchase_Order_ID.Supplier
+				Purchase_Order_ID.Total_Quantity as "Total Quantity"
+				Purchase_Order_ID.Incoterms as "Incoterm"
+				Purchase_Order_ID.Total_Selling_Price as "Total Selling Price"
+				Purchase_Order_ID.Selling_Currency as "Selling Currency"
+				Purchase_Order_ID.Purchase_Currency as "Purchase Currency"
+				Purchase_Order_ID.Total_Purchase_Price as "Total Purchase Price"
+			)
+			sort by
+			(
+				Added_Time descending
+			)
+			custom actions
+			(
+				"Send to Buyer"
+				(
+	  			workflow = Send_to_Buyer
+				show action in edit record menu = true
+				condition = (Approval_Status == "Approved" && Purchase_Order_ID.Order_Status == "Awaiting Buyer Review" && Purchase_Order_ID.Order_Status != "Cancelled")
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to send the updated QO back to the buyer?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+			)
+		
+}

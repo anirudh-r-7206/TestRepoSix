@@ -1,0 +1,38 @@
+Deletion_on_success_scrip as "Deletion on success scripts"
+{
+
+				type =  form
+				form = Buyer_Products
+
+				record event = on delete
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											fetch_wardrobe = Buyer_Mapping_Wardrobes[Buyer_Product_Mapping == input.Buyer_Product_Mapping && Wardrobe == input.Style_ID.Wardrobe];
+										if(fetch_wardrobe.count() > 0)
+										{
+											current_categories = Buyer_Products[ID != input.ID && Buyer_Product_Mapping == input.Buyer_Product_Mapping && Style_ID.Wardrobe == input.Style_ID.Wardrobe && Style_ID.Style_Category == input.Style_ID.Style_Category];
+											if(current_categories.count() == 0)
+											{
+												all_product_categories = fetch_wardrobe.Product_Category.ID.getall();
+												all_product_categories.removeElement(input.Category_Id);
+												if(all_product_categories.size() == 0)
+												{
+													delete from Buyer_Mapping_Wardrobes[Buyer_Product_Mapping == input.Buyer_Product_Mapping && Wardrobe == input.Style_ID.Wardrobe];
+												}
+												else
+												{
+													fetch_wardrobe.Product_Category=all_product_categories;
+												}
+											}
+										}
+						)
+					}
+				}
+
+			
+}

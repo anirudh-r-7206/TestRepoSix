@@ -1,0 +1,23 @@
+Hide_Show_fields3 as "Hide & Show fields"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Status;
+										hide Hidden_Section;
+										hide Size_Chart_Details.Region;
+						)
+					}
+				}
+
+			
+}

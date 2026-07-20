@@ -1,0 +1,23 @@
+Field_Rules3 as "Field Rules"
+{
+
+				type =  form
+				form = Order_Details
+
+				record event = on edit
+					status = inactive
+
+				field rules
+				{
+					actions 
+					{
+						disable Product,Description,Product_Color,Product_Size,Sub_Total;
+					}
+					actions 
+					{
+						hide Order_Request;
+					}
+				}
+
+			
+}

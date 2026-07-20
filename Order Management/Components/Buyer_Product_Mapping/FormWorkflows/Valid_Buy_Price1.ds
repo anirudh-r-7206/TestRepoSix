@@ -1,0 +1,25 @@
+Valid_Buy_Price1 as "Valid Buy Price"
+{
+
+				type =  form
+				form = Buyer_Product_Mapping
+
+				record event = on add or edit
+
+				on user input of Style_Details.Buy_Price
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(row.Buy_Price <= 0)
+										{
+											alert "Buy price must be greater than 0.";
+											row.Buy_Price=null;
+										}
+						)
+					}
+				}
+
+			
+}

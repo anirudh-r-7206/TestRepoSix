@@ -1,0 +1,13 @@
+void Discontinue_Product_Catalog(Add_Product Ids)
+{
+
+                 	for each  id in Ids
+                 	{
+                 		get_Catalog = Add_Product[ID == id.ID];
+                 		if(get_Catalog.count(ID) > 0)
+                 		{
+                 			get_Catalog.Status="Discontinued";
+                 		}
+                 	}
+                 
+}

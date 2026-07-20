@@ -1,0 +1,132 @@
+report Copy_of_Purchase_Order_Report
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Order_Reference as "Order Reference"
+								PO_Date as "PO Date"
+								Supplier
+								Order_Request as "Order Request"
+								Factory_Address as "Factory Address"
+								Order_Type as "Order Type "
+								Delivery_Date as "Ex-Factory date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Order_Reference as "Order Reference"
+								PO_Date as "PO Date"
+								Supplier
+								Order_Request as "Order Request"
+								Factory_Address as "Factory Address"
+								Order_Type as "Order Type "
+								Delivery_Date as "Ex-Factory date"
+								Payment_Terms as "Payment Terms"
+								Transport_Mode as "Transport Mode"
+								Delivery_Address as "Delivery Address"
+								Selling_Currency as "Selling Currency"
+								Purchase_Currency as "Purchase Currency"
+								Total_Selling_Price as "Total Selling Price"
+								Total_Quantity as "Total Quantity"
+								Total_Purchase_Price as "Total Purchase Price"
+								Buyer_Organisation as "Buyer Organisation"
+								Country
+								Delivery_Contact as "Delivery Contact "
+								Customer_Name as "Customer Name"
+								Freight_Forwarder as "Freight Forwarder"
+								Incoterms as "Incoterms "
+								Comments
+								PO_Number as "PO Number"
+								ID_Generator as "ID Generator"
+								Supplier_old as "Supplier"
+								Enable_Edit as "Enable Edit"
+								Purchase_Currency1 as "Purchase Currency"
+								Comments11 as "Comments"
+								QO_Number as "QO Number"
+								Order_Status as "Order Status"
+								Order_Review_ID as "Order Review - ID"
+								Record_is_Edited as "Record is Edited"
+								Selling_Currency1 as "Selling Currency "
+								Selling_Terms as "Selling Terms"
+							)
+						)
+						datablock2
+						(
+							layout type = -1
+		     				title = "Copy of Purchase LineItems"
+		     				related field = Copy_of_Purchase_LineItems.Copy_of_Purchase_Order
+							fields
+							(
+								Copy_of_Purchase_Order as "Copy of Purchase Order"
+								S_No as "S.No"
+								Product as "Style ID"
+								Style_Code as "Style Code"
+								Product_Color as "Product Color"
+								Product_Size as "Product Size"
+								Description
+								Quantity
+								Selling_Price as "Selling Price"
+								Purchase_Price as "Purchase Price"
+								Selling_Price_Sub_Total as "Selling Price Sub Total"
+								Purchase_Price_Sub_Total as "Purchase Price Sub Total"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			
+}

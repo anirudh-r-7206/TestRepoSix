@@ -1,0 +1,36 @@
+Update_Cost1 as "Update Cost"
+{
+
+				type =  form
+				form = Purchase_Order
+
+				record event = on add or edit
+
+				on user input of Additional_Charges.Amount1
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(row.Paid_By != null && row.Amount1 != null)
+										{
+											addnCharge = 0;
+											for each  chargeRow in input.Additional_Charges
+											{
+												if(chargeRow.Paid_By == "Buyer")
+												{
+													addnCharge = addnCharge + ifnull(chargeRow.Amount1,0);
+												}
+											}
+											input.Total_Selling_Price = input.Purchase_LineItems.sum(Selling_Price_Sub_Total) + addnCharge;
+										}
+										else
+										{
+											input.Total_Selling_Price = input.Purchase_LineItems.sum(Selling_Price_Sub_Total);
+										}
+						)
+					}
+				}
+
+			
+}

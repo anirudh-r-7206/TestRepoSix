@@ -1,0 +1,26 @@
+On_deletion as "On deletion"
+{
+
+				type =  form
+				form = Order_Details
+
+				record event = on delete
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											fetCart = Order_Request[ID == input.Order_Request];
+										if(fetCart.count() > 0)
+										{
+											SubFormRows = fetCart.Order_details;
+											fetCart.Cart_Total=SubFormRows.sum(Sub_Total);
+										}
+						)
+					}
+				}
+
+			
+}

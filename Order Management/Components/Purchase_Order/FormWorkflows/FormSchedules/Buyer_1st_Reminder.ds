@@ -1,0 +1,19 @@
+Buyer_1st_Reminder as "Buyer_1st_Reminder"
+{
+
+				type =  schedule
+				form = Purchase_Order[Order_Status == "Awaiting Buyer Review"]
+				start = after 48 hours from Modified_Time
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						thisapp.Send_Mail.Email_Template(input.ID,"Buyer_1st_Reminder");
+					)
+					}
+				}
+			
+}

@@ -1,0 +1,157 @@
+list Production_Orders
+{
+
+			displayName = "Production Orders"
+			show all rows from Purchase_Order  [Supplier.Email == zoho.loginuserid || (Supplier.ID == thisapp.Filters.Factory_Product_Filter() && Order_Status != "Cancelled")]  
+			(
+				Order_Reference as "Order Reference"
+				PO_Date as "PO Date"
+				Order_Type as "Order Type "
+				Order_Status as "Order Status"
+				Delivery_Date as "Ex-Factory date"
+				Delivery_Contact as "Delivery Contact "
+				Freight_Forwarder as "Freight Forwarder"
+				Incoterms as "Incoterm"
+				Order_Request as "Order Request"
+				PO_Number as "PO Number"
+				Total_Purchase_Price as "Total Purchase Price"
+				Total_Selling_Price as "Total Selling Price"
+				QO_Number as "QO Number"
+				custom action "View PO"
+				(
+	  			workflow = View_PO
+				show action in edit record menu = true
+				column header = "View PO"
+				condition = (Order_Status == "Awaiting Factory Review" || Order_Status == "Amendment Requested (Factory)" || Order_Status == "Awaiting Production" || Order_Status == "In Production" || Order_Status == "Completed")
+				)
+				custom action "View QO"
+				(
+	  			workflow = View_QO
+				show action in edit record menu = true
+				column header = "View QO"
+				condition = (Order_Status != "Awaiting QO Generation")
+				)
+				Country
+				custom action "Generate QO"
+				(
+	  			workflow = Generate_PO1
+				show action in edit record menu = true
+				column header = "Generate QO"
+				condition = (Order_Status == "Awaiting QO Generation")
+				)
+				custom action "Edit PO"
+				(
+	  			workflow = Edit_PO
+				show action in edit record menu = true
+				column header = "Edit PO"
+				condition = (Order_Status == "Amendment Requested (Buyer)" || Order_Status == "Amendment Requested (Factory)")
+				)
+				Supplier
+				custom action "Raise Amendment"
+				(
+	  			workflow = Factory_Review
+				show action in edit record menu = true
+				column header = "Raise Amendment"
+				condition = (Order_Status != "Completed" && ID != thisapp.Filters.Filter_buyer_pending_amendment() && Order_Status != "Cancelled")
+				)
+				custom action "Approve"
+				(
+	  			workflow = Approved_by_Factory
+				show action in edit record menu = true
+				column header = "Approve"
+				condition = (ID != thisapp.Filters.Filter_buyer_pending_amendment() && Order_Status == "Awaiting Factory Review")
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to approve order  ${PO_Number} ?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				Factory_Address1  as "Factory Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Delivery_Address1  as "Delivery Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Selling_Currency as "Selling Currency"
+				Purchase_Currency as "Purchase Currency"
+				Buyer_Organisation as "Buyer Organisation"
+				Total_Quantity as "Total Quantity"
+			)
+			custom actions
+			(
+				"Move to Production"
+				(
+	  			workflow = Move_to_Production
+				show action in view header = true
+				show action in edit record menu = true
+				condition = (Order_Status == "Awaiting Production" && Order_Status != "Cancelled")
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to start production for this purchase order?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+			)
+			conditional formatting
+			(
+				"Awaiting Buyer Review"
+				{
+				condition = (Order_Status == "Awaiting Buyer Review")
+				fields = [Order_Status]
+				format = "color:#f59e0b;"
+				}
+				"Amendment Requested (Buyer)"
+				{
+				condition = (Order_Status == "Amendment Requested (Buyer)")
+				fields = [Order_Status]
+				format = "color:#ea580c;"
+				}
+				"Awaiting PO Generation"
+				{
+				condition = (Order_Status == "Awaiting PO Generation")
+				fields = [Order_Status]
+				format = "color:#eab308;"
+				}
+				"Awaiting Factory Review"
+				{
+				condition = (Order_Status == "Awaiting Factory Review")
+				fields = [Order_Status]
+				format = "color:#f59e0b;"
+				}
+				"Amendment Requested (Factory)"
+				{
+				condition = (Order_Status == "Amendment Requested (Factory)")
+				fields = [Order_Status]
+				format = "color:#ea580c;"
+				}
+				"Awaiting Production"
+				{
+				condition = (Order_Status == "Awaiting Production")
+				fields = [Order_Status]
+				format = "color:#6366f1;"
+				}
+				"In Production"
+				{
+				condition = (Order_Status == "In Production")
+				fields = [Order_Status]
+				format = "color:#15803d;"
+				}
+				"Approved"
+				{
+				condition = (Order_Status == "Approved")
+				fields = [Order_Status]
+				format = "color:#16a34a;"
+				}
+				"Awaiting QO Generation"
+				{
+				condition = (Order_Status == "Awaiting QO Generation")
+				fields = [Order_Status]
+				format = "color:#3b82f6;"
+				}
+			)
+		
+}

@@ -1,0 +1,29 @@
+Edit_Freight_Partners1 as "Edit  Freight Partners"
+{
+
+				type =  functions
+				form = Freight_Partners_Form
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						reference = thisapp.References.FreightPartners(input.ID);
+										if(reference.trim() != "" && reference != null)
+										{
+											url = "#Form:Alert_References?zc_Header=false&Freight_Partners_Form=" + input.ID;
+											window = "popup window";
+										}
+										else
+										{
+											url = "#Form:Freight_Partners_Form?zc_LoadIn=dialog&viewLinkName=All_Freight_Partners&recLinkID=" + input.ID;
+											window = "same window";
+										}
+										openUrl(url,window);
+					)
+					}
+				}
+			
+}

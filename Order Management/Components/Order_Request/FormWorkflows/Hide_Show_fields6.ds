@@ -1,0 +1,32 @@
+Hide_Show_fields6 as "Hide & Show fields"
+{
+
+				type =  form
+				form = Order_Request
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Hide_Section;
+										hide Order_ID;
+										// Disable Fields
+										// disable Buyer;
+										disable Cart_Total;
+										disable Order_details.Product;
+										disable Order_details.Sub_Total;
+										disable Order_details.Product_Color;
+										disable Order_details.Product_Size;
+										disable Order_details.Description;
+										hide Order_details.Supplier;
+										input.plain = "<style>.popupbox{overflow-y: auto !important;} .zcform_Order_Request .label-left .second-column{ width: 420px !important;} .sizeChartLink:hover{ text-decoration: underline !important; } .sizeChartLink{ text-decoration: underline;} </style><a class='sizeChartLink' href='#Page:Size_Chart_Page?zc_LoadIn=dialog'>Size Chart</a>";
+						)
+					}
+				}
+
+			
+}

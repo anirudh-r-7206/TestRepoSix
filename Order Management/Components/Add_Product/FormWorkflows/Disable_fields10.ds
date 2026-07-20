@@ -1,0 +1,27 @@
+Disable_fields10 as "Disable fields"
+{
+
+				type =  form
+				form = Add_Product
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											disable Wardrobe;
+										disable Style_Category;
+										disable Style_Code;
+										disable Style_Name;
+										disable Gender;
+										disable Size_Set;
+										disable Product_Weight;
+						)
+					}
+				}
+
+			
+}

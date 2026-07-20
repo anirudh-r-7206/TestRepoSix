@@ -1,0 +1,34 @@
+<panel elementName='Panel 1'>
+					<pr width='fill' height='fill'>
+						<pc padding='0px' bgColor='#FFFFFF' action='OpenReport' parameters='zc_MoreAction=false&amp;zc_AddRec=false' componentLinkName='All_Order_Requests' target='popup' popupWidth='80%' popupHeight='80%' width='100%' hAlign='center' vAlign='middle'>
+							<pr width='fill' height='fill'>
+								<pc paddingTop='17px' paddingLeft='17px' paddingRight='0px' paddingBottom='17px' bgColor='transparent' bgColorType='noFill' width='30%' hAlign='center'>
+									<pr width='auto' height='auto'>
+										<pc>
+											<image marginLeft='0px' marginRight='7px' marginBottom='0px' marginTop='0px' color='#FFFFFF' bgColor='#F5C36C' width='52px' height='52px' type='icon' value='loader-refresh' size='24px' cornerRadius='26px' iconType='outline' /> </pc>
+									</pr>
+								</pc>
+								<pc padding='10px' bgColor='#FFFFFF' width='70%' hAlign='center' vAlign='middle' cornerRadius='0px'>
+									<pr width='auto' height='auto'>
+										<pc padding='5px' hAlign='left'>
+											<pr>
+												<pc hAlign='left'>
+													<text margin='0px' padding='0px' color='#333333' size='16px' type='Text' bgColor='transparent' bgColorType='noFill' cornerRadius='0px' borderColor='#333333' borderWidth='0px' value='Pending Approvals'>
+													</text>
+
+												</pc>
+											</pr>
+											<pr>
+												<pc hAlign='left'>
+													<text marginLeft='0px' marginRight='0px' marginBottom='0px' marginTop='2px' padding='0px' color='#2A70E7' size='36px' bold='true' type='Form Data' bgColor='transparent' bgColorType='noFill' cornerRadius='0px' displayType='actual' thousandsSeperator='LOCALE' decimalSeperator='DOT' numberScale='none' criteria='Status == &quot;Awaiting QO Generation&quot;' value='thisapp.Order_Request.ID.count'>
+													</text>
+
+												</pc>
+											</pr>
+										</pc>
+									</pr>
+								</pc>
+							</pr>
+						</pc>
+					</pr>
+</panel>

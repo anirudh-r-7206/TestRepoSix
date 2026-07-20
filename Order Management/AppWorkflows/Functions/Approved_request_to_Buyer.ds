@@ -1,0 +1,15 @@
+void Send_Mail.Approved_request_to_Buyer(int PO_ID)
+{
+
+                 	// 	get_PO = Purchase_Order[ID == input.PO_ID];
+                 	// 	msg = "Dear "+get_PO.Buyer_Organisation.Buyer_Organisation+",<br><br>Your request for Purchase Order ["+get_PO.QO_Number+"] has been approved and moved to the next stage.<br><br>Best regards,<br>Order Management Team";
+                 	// 	sendmail
+                 	//     [
+                 	//     	from: zoho.adminuserid
+                 	//     	to: get_PO.Buyer_Organisation.Primary_Email
+                 	//     	subject: "Your Request Has Been Approved"
+                 	//     	message: msg
+                 	//     ]
+                 	// 	buyerNotification = zoho.pushNotification(get_PO.Buyer_Organisation.Primary_Email, "Your Request Has Been Approved", msg, "My_Purchase_Orders", PO_ID);
+                 
+}

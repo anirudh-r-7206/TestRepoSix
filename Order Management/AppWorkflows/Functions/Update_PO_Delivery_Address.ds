@@ -1,0 +1,19 @@
+void OneTime.Update_PO_Delivery_Address()
+{
+
+                 	QO_List = {"QO2035","QO2036","QO2040","QO2042","QO2037","QO2043","QO2044","QO2045","QO2046","QO2038","QO2047","QO2048","QO2049","QO2050","QO2051","QO2052","QO2079","QO2080","QO2081","QO2082","QO2083","QO2084","QO2055","QO2056","QO2057","QO2058","QO2059","QO2060","QO2061","QO2062","QO2063","QO2064","QO2065","QO2066","QO2067","QO2068","QO2069","QO2070","QO2071","QO2111","QO2072","QO2073","QO2112","QO2074","QO2075","QO2085","QO2086","QO2087","QO2088","QO2089","QO2090","QO2091","QO2092","QO2093","QO2094","QO2095","QO2096","QO2098","QO2099","QO2100","QO2101","QO2102","QO2103","QO2104","QO2105","QO2106","QO2107","QO2108","QO2109","QO2110","QO2156","QO2157","QO2158"};
+                 	// 		QO_List = {"QO2090", "QO2089"};
+                 	//4908788000000620139
+                 	for each  QO in QO_List
+                 	{
+                 		get_PO = Purchase_Order[QO_Number == QO];
+                 		get_Delivery_Adderss = Buyer_Contact_Person_Details[ID == 4908788000000620139];
+                 		get_PO.Delivery_Address=get_Delivery_Adderss.ID;
+                 		get_PO.Delivery_Address1=get_Delivery_Adderss.Address;
+                 		get_PO.Buyer_Company_Name=get_Delivery_Adderss.Company_Name;
+                 		get_PO.Buyer_Contact_Person=get_Delivery_Adderss.Contact_Person1.first_name + " " + get_Delivery_Adderss.Contact_Person1.last_name;
+                 		get_PO.Buyer_Email=get_Delivery_Adderss.Email;
+                 		get_PO.Buyer_Phone=get_Delivery_Adderss.Phone_Number;
+                 	}
+                 
+}

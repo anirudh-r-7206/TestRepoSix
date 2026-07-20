@@ -1,0 +1,24 @@
+Autopopulate_Wardrobe as "Autopopulate Wardrobe"
+{
+
+				type =  form
+				form = Product_Category
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Wardrobe.size() > 0 && input.Wardrobe1.size())
+										{
+											input.Wardrobe1 = input.Wardrobe;
+										}
+						)
+					}
+				}
+
+			
+}

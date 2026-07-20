@@ -1,0 +1,24 @@
+Auto_populate_the_product as "Auto populate the product category old value"
+{
+
+				type =  form
+				form = Create_Size
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Product_Category.size() > 0 && input.Product_Category1.size() == 0)
+										{
+											input.Product_Category1 = input.Product_Category;
+										}
+						)
+					}
+				}
+
+			
+}

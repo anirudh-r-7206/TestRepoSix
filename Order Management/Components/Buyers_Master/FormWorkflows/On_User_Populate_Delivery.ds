@@ -1,0 +1,30 @@
+On_User_Populate_Delivery as "On User - Populate Delivery Address"
+{
+
+				type =  form
+				form = Buyers_Master
+
+				record event = on add or edit
+
+				on user input of Same_as_previous_selectable
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Same_as_previous_selectable == true && !input.Office_Address.isEmpty())
+										{
+											input.Delivery_Address = input.Office_Address;
+											disable Delivery_Address;
+										}
+										else
+										{
+											input.Delivery_Address = null;
+											enable Delivery_Address;
+										}
+						)
+					}
+				}
+
+			
+}

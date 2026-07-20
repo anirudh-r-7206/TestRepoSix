@@ -1,0 +1,81 @@
+form Add_Country
+{
+
+			title 
+    		{
+				displayname = "Add Country"
+    			on add = "Create Country"
+   	 			on edit = "Create Country"
+			}
+			success message = "Country Created Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Country_Name
+			(
+    			type = text
+				displayname = "Country Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Region_Code
+			(
+    			type = text
+				displayname = "Region Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Region_Code_New
+			(
+				type = picklist	
+				displayname = "Region Code New"
+				values  = Add_Region.ID
+    			displayformat = [Region]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Active","Inactive"}
+				initial value = "Active"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Create"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

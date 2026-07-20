@@ -1,0 +1,11 @@
+list Delete_Records.Delete_Wardrobes()
+{
+
+                 	Wardrobes_List = List();
+                 	get_From_Products = Add_Product[ID != 0];
+                 	Wardrobes_List.addAll(get_From_Products.Wardrobe.getall());
+                 	get_From_Buyers = Buyers_Master[ID != 0];
+                 	Wardrobes_List.addAll(get_From_Buyers.Wardrobe.getall());
+                 	return Wardrobes_List.distinct();
+                 
+}

@@ -1,0 +1,16 @@
+list styleMastercodeReportFilter()
+{
+
+                 	masterCodeList = {};
+                 	fetStyle = Style[ID != null];
+                 	if(fetStyle.count() > 0)
+                 	{
+                 		masterCodeList = Product_Code_Master[ID != fetStyle.Product_Code.getall()].ID.getAll();
+                 	}
+                 	else
+                 	{
+                 		masterCodeList = Product_Code_Master[ID != null].ID.getAll();
+                 	}
+                 	return masterCodeList;
+                 
+}

@@ -1,0 +1,572 @@
+form Buyers_Master
+{
+
+			displayname = "Buyers Master"
+			success message = "Buyer Created Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Buyer_Organisation
+			(
+    			type = text
+				displayname = "Buyer Organisation"
+	 			row = 1
+	 			column = 1   
+				width = small
+			)
+			must have Region
+			(
+				type = list	
+				values = {"APMEA","EU","NORAM","LATAM","OTHERS"}
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = small
+			)
+			Buyer_Code
+			(
+    			type = text
+				displayname = "Buyer Code"
+	 			row = 1
+	 			column = 1   
+				width = small
+			)
+			must have Buyer_Type
+			(
+				type = picklist
+				displayname = "Buyer Type"
+				maxchar = 100
+				values = {"Sodexo Affiliate","External"}
+	 			row = 1
+	 			column = 2   
+				width = small
+			)
+			must have HS_Code_Region
+			(
+				type = picklist
+				displayname = "HS Code Region"
+				maxchar = 100
+				values = {"USA/CAN","EU","APAC"}
+	 			row = 1
+	 			column = 2   
+				width = small
+			)
+			Contact_Person_1
+			(
+				type = section
+				displayname = "Primary Contact"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			must have Primary_Name1
+			(
+    			type = name
+				displayname = "Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Primary_Name
+			(
+    			type = text
+				displayname = "Name"
+	 			row = 2
+	 			column = 1   
+				width = small
+			)
+			must have unique Primary_Email
+			(
+    			type = email
+				displayname = "Email"
+				maxchar = 80
+	 			row = 2
+	 			column = 2   
+				width = small
+				personal data = true
+			)
+			must have Primary_Phone
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 2
+	 			column = 2   
+				width = small
+				personal data = true
+			)
+			Need_App_Access
+			(
+    			type = checkbox
+				displayname = "Need App Access"
+				initial value = true
+	 			row = 2
+	 			column = 3   
+				width = medium
+			)
+			Contact_Person_2
+			(
+				type = section
+				displayname = "Contact Person 2"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Person_2_Name1
+			(
+    			type = name
+				displayname = "Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 3
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Person_2_Name
+			(
+    			type = text
+				displayname = "Name"
+	 			row = 3
+	 			column = 1   
+				width = small
+			)
+			Person_2_Email
+			(
+    			type = email
+				displayname = "Email"
+				maxchar = 80
+	 			row = 3
+	 			column = 2   
+				width = small
+				personal data = true
+			)
+			Person_2_Phone
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 3
+	 			column = 2   
+				width = small
+				personal data = true
+			)
+			Need_App_Access1
+			(
+    			type = checkbox
+				displayname = "Need App Access"
+				initial value = false
+	 			row = 3
+	 			column = 3   
+				width = medium
+			)
+			Focal_Details_Subform
+			(
+				type = grid
+				displayname = "Focal Details"
+				must have Name
+				(
+    				type = text
+					width = medium
+				)
+				must have Email
+				(
+    				type = email
+					maxchar = 80
+					width = medium
+					personal data = true
+				)
+				Phone_Number
+				(
+    				type = phonenumber
+					displayname = "Phone"
+					width = medium
+					personal data = true
+				)
+				must have Role
+				(
+					type = picklist
+					maxchar = 100
+					values = {"Supply Management","Finance","Logistics","Management"}
+					others option = true
+					width = medium
+				)
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			must have Delivery_Person_Details
+			(
+				type = grid
+				displayname = "Delivery Person Details"
+				values  = Buyer_Contact_Person_Details.ID
+    			bidirectional = Buyers_Master
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Buyer_Users
+			(
+				type = grid
+				displayname = "Buyer Users"
+				values  = Create_User.ID
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			Focal_Details
+			(
+				type = section
+				displayname = "Focal Details"
+	 			row = 7
+	 			column = 0   
+				width = medium
+			)
+			must have Wardrobe
+			(
+				type = list	
+				values  = Wardrobe.ID
+    			displayformat = [Wardrobe_Name]
+				allow new entries
+				[
+					displayname = "Add Wardrobe"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 7
+	 			column = 1   
+				width = small
+			)
+			must have Country
+			(
+				type = picklist	
+				values  = Add_Country[Status == "Active"].ID
+    			displayformat = [Country_Name]
+				allow new entries
+				[
+					displayname = "Add Country"
+				]
+				sortorder = ascending
+	 			row = 7
+	 			column = 1   
+				width = small
+			)
+			Product_Range
+			(
+				type = picklist
+				displayname = "Product Range"
+				maxchar = 100
+				values = {"Europe","Global"}
+	 			row = 7
+	 			column = 1   
+				width = small
+			)
+			HS_Code_Allocation
+			(
+				type = picklist
+				displayname = "HS Code Allocation"
+				maxchar = 100
+				values = {"EU","USA/CAN","APAC"}
+	 			row = 7
+	 			column = 1   
+				width = small
+			)
+			must have Currency
+			(
+				type = picklist	
+				values  = Currency.ID
+    			displayformat = [Currency_Name]
+				allow new entries
+				[
+					displayname = "Add Currency"
+				]
+				sortorder = ascending
+	 			row = 7
+	 			column = 1   
+				width = small
+			)
+			must have Payment_Terms
+			(
+				type = picklist
+				displayname = "Payment Terms"
+				maxchar = 100
+				values = {"30","60","90"}
+	 			row = 7
+	 			column = 1   
+				width = small
+			)
+			must have Office_Address
+			(
+    			type = address
+				displayname = "Invoice Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 7
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Same_as_previous_selectable
+			(
+    			type = checkbox
+				displayname = "Same as Office Address"
+				initial value = false
+	 			row = 7
+	 			column = 2   
+				width = medium
+			)
+			Delivery_Address
+			(
+    			type = address
+				displayname = "Delivery Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 7
+	 			column = 2   
+				width = medium
+				personal data = true
+			)
+			Currency1
+			(
+				type = picklist
+				displayname = "Currency"
+				maxchar = 100
+				values = {"SGD","EUR","USD","GBP"}
+	 			row = 7
+	 			column = 2   
+				width = small
+			)
+			Hide_Section
+			(
+				type = section
+				displayname = "Hide Section"
+				visibility = true
+	 			row = 8
+	 			column = 0   
+				width = medium
+			)
+			Create_User_Employee_External_ID
+			(
+				type = list	
+				displayname = "Create User - Employee/External ID"
+				values  = Create_User.ID
+    			bidirectional = Associated_Buyer
+    			displayformat = [User_Name.first_name + " " + User_Name.last_name + " - " + Email + " - " + Status]
+				height = 60px
+	 			row = 8
+	 			column = 1   
+				width = small
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Active","Inactive"}
+				initial value = "Inactive"
+	 			row = 8
+	 			column = 1   
+				width = small
+			)
+			Approval_Status
+			(
+				type = picklist
+				displayname = "Approval Status"
+				maxchar = 100
+				values = {"Pending","Approved","Rejected"}
+				initial value = "Pending"
+	 			row = 8
+	 			column = 1   
+				width = small
+			)
+			Primary_email_old
+			(
+    			type = email
+				displayname = "Primary email old"
+				maxchar = 80
+	 			row = 8
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Secondary_email_old
+			(
+    			type = email
+				displayname = "Secondary email old"
+				maxchar = 80
+	 			row = 8
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Wardrobe1
+			(
+				type = list	
+				displayname = "Wardrobe"
+				values  = Wardrobe.ID
+    			displayformat = [Wardrobe_Name]
+				sortorder = ascending
+				height = 60px
+	 			row = 8
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		
+}

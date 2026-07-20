@@ -1,0 +1,25 @@
+Hide_Show as "Hide & Show"
+{
+
+				type =  form
+				form = Wardrobe
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											disable Wardrobe_Name;
+										if(input.Product_Category.size() > 0 && input.Product_Category1.size() == 0)
+										{
+											input.Product_Category1 = input.Product_Category;
+										}
+						)
+					}
+				}
+
+			
+}
