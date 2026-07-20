@@ -1,0 +1,61 @@
+<page linkname = "Subject_Student_Count" displayname = "Subject Student Count"/>
+<content>
+<zml>
+  <layout>
+    <row>
+      <column width='100%'>
+        <board bgColor='#FFFFFF' bgColorType='solid' padding='0px' elementName='Subject Count Board' layoutType='grid' items='3' appLinkName='thisapp' formLinkName='Students' rankBy='Name' rankOrder='highestToLowest' rankAggregate='count' limit='15' groupBy='Subjects'>
+          <boardHeader>
+            <pr width='fill' height='fill'>
+              <pc paddingTop='14px' paddingLeft='15px' paddingRight='15px' paddingBottom='14px' width='100%' hAlign='left' vAlign='middle'>
+                <pr width='auto' height='auto'>
+                  <pc>
+                    <text color='#000000' size='17px' bold='true' type='Text' value='Students by Subject'>
+                    </text>
+
+                  </pc>
+                </pr>
+              </pc>
+            </pr>
+          </boardHeader>
+          <boardLayout paddingRight='15px' paddingBottom='14px' paddingLeft='15px' paddingTop='2px' itemGap='10px'>
+            <pr width='fill' height='fill'>
+              <pc padding='12px' bgColor='#FFFFFF' borderColor='#F2F2F2' borderWidth='1px' width='100%' hAlign='left' vAlign='middle' cornerRadius='12px'>
+                <pr width='auto' height='auto'>
+                  <pc padding='5px'>
+                    <pr>
+                      <pc>
+                        <image marginBottom='10px' borderWidth='0px' color='#000000' bgColor='#F7F7FB' width='40px' height='40px' type='icon' value='education-books-46' size='22px' cornerRadius='20px' iconType='outline' /> </pc>
+                    </pr>
+                    <pr>
+                      <pc>
+                        <text marginBottom='10px' color='#000000' size='16px' type='boardData' lineHeight='22' numOfLines='1' value='groupedField'>
+                        </text>
+
+                      </pc>
+                    </pr>
+                    <pr>
+                      <pc>
+                        <text color='theme' size='24px' bold='true' type='boardData' lineHeight='30' numOfLines='1' value='rankAggregate'>
+                        </text>
+
+                      </pc>
+                    </pr>
+                    <pr>
+                      <pc>
+                        <text color='#555555' size='13px' type='Text' value='students'>
+                        </text>
+
+                      </pc>
+                    </pr>
+                  </pc>
+                </pr>
+              </pc>
+            </pr>
+          </boardLayout>
+        </board>
+      </column>
+    </row>
+  </layout>
+</zml>
+</content>

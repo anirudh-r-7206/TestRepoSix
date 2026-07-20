@@ -1,0 +1,12 @@
+default list Students_Report
+{
+
+			displayName = "Students Report"
+			show all rows from Students    
+			(
+				Name
+				Subjects
+				BirthDay
+			)
+		
+}
