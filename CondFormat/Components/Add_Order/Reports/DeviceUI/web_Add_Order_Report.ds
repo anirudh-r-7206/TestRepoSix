@@ -1,0 +1,81 @@
+report Add_Order_Report
+{
+
+				quickview
+				(
+					layout
+					(
+		 				type = Custom
+		 				selectedlayout = "QVByMe"
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+	 					type = 1
+						datablock1
+						(
+							layout type = -6
+		     				title = "Overview"
+							fields
+							(
+								Single_Line as "Single Line"
+								Name as "Dept"
+								Added_User as "Added User"
+								Added_Time as "Added Time"
+								Modified_User as "Modified User"
+								Modified_Time as "Modified Time"
+								ID
+								Single_Line as "Single Line"
+								Single_Line as "Single Line"
+								Single_Line as "Single Line"
+								Single_Line as "Single Line"
+								Age
+								Age
+								Name as "Dept"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			
+}
