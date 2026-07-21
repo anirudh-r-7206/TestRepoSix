@@ -92,15 +92,6 @@
 								All_Subjects={"View","Edit"}
 							}
 						}
-						Year_Level
-						{
-							enabled= Create,Viewall,Modifyall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								All_Year_Levels={"View","Edit"}
-							}
-						}
 						Accreditation
 						{
 							enabled= Create,Viewall,Modifyall,Tab 

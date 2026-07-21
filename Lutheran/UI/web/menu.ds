@@ -51,7 +51,6 @@ menu
 	        report Training_Completion_Request_Import_Report { icon = "files-upload" }
 	        report All_Subjects { icon = "business-books" }
 	        report All_Campuses { icon = "business-building" }
-	        report All_Year_Levels { icon = "text-list-numbers" }
 	        report All_Approval_Configurations { icon = "design-todo" }
 	        report All_Qualification_Types { icon = "education-paper-diploma" }
 	        report All_Organisation_Infos { icon = "business-building" }
