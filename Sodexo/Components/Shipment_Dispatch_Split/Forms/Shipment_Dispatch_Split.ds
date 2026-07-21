@@ -1,0 +1,140 @@
+form Shipment_Dispatch_Split
+{
+
+		    displayname = "Shipment Dispatch Split"
+		    success message = "Shipment dispatch split saved successfully."
+		    Section
+		    (
+		        type = section
+		        row = 1
+		        column = 0
+		        width = medium
+		    )
+		    must have Shipment_Dispatch
+		    (
+		        type = picklist
+		        displayname = "Shipment Dispatch"
+		        values = Shipment_Dispatch.ID
+		        displayformat = [Shipment_Reference]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    must have Purchase_Order
+		    (
+		        type = picklist
+		        displayname = "PO / QO"
+		        values = Purchase_Order.ID
+		        displayformat = [PO_Number]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    PO_Number_Display
+		    (
+		        type = text
+		        displayname = "PO Number"
+		        maxchar = 100
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    QO_Number_Display
+		    (
+		        type = text
+		        displayname = "QO Number"
+		        maxchar = 100
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Split_Status
+		    (
+		        type = picklist
+		        displayname = "Split Status"
+		        values = {"Draft","Confirmed","Cancelled"}
+		        initial value = "Draft"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Split_Quantity
+		    (
+		        type = number
+		        displayname = "Split Quantity"
+		        initial value = 0
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Split_QO_Value
+		    (
+		        type = decimal
+		        displayname = "Split QO Value"
+		        decimalplace = 2
+		        initial value = 0
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Split_PO_Value
+		    (
+		        type = decimal
+		        displayname = "Split PO Value"
+		        decimalplace = 2
+		        initial value = 0
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Transport_Mode
+		    (
+		        type = picklist
+		        displayname = "PO Transport Mode"
+		        values = {"SEA","AIR","ROAD"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Notes
+		    (
+		        type = textarea
+		        height = 100px
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		
+		    actions
+		    {
+		        on add
+		        {
+		            submit
+		            (
+		                type = submit
+		                displayname = "Submit"
+		            )
+		            reset
+		            (
+		                type = reset
+		                displayname = "Reset"
+		            )
+		        }
+		        on edit
+		        {
+		            update
+		            (
+		                type = submit
+		                displayname = "Update"
+		            )
+		            cancel
+		            (
+		                type = cancel
+		                displayname = "Cancel"
+		            )
+		        }
+		    }
+		
+}

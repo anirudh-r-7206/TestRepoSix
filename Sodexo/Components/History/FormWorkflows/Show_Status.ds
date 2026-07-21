@@ -1,0 +1,39 @@
+Show_Status as "Show Status"
+{
+
+			
+							type =  form
+							form = History
+			
+							record event = on add
+			
+							on user input of On_behalf_of
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(Raised_By.User_Type not in {"Buyer","Factory"})
+													{
+														show Status;
+														enable Status;
+														if(On_behalf_of == "Buyer")
+														{
+															input.Status:ui.add({"Amendment / Cancellation Required"});
+															input.Status = "Amendment / Cancellation Required";
+															disable Status;
+														}
+														else if(input.On_behalf_of == "Factory")
+														{
+															input.Status:ui.add({"Amendment / Cancellation Required"});
+															input.Status = "Amendment / Cancellation Required";
+															disable Status;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

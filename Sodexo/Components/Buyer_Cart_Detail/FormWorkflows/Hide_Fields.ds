@@ -1,0 +1,20 @@
+Hide_Fields as "Hide Fields"
+{
+
+			
+							type =  form
+							form = Buyer_Cart_Detail
+			
+							record event = on add
+			
+							field rules
+							{
+								actions 
+								{
+									hide Product_Category,Product_Code,Wardrobe,Colour,Supplier;
+								}
+							}
+			
+						
+			
+}

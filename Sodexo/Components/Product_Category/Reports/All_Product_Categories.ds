@@ -1,0 +1,84 @@
+default list All_Product_Categories
+{
+
+		
+					displayName = "Style Categories"
+					show all rows from Product_Category    
+					(
+						Product_Category as "Product Category"
+						Status
+						Wardrobe
+						Style
+					)
+					custom actions
+					(
+						"Activate"
+						(
+			  			workflow = Active_Product_Categotry
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Inactive")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to activate this category?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Deactivate"
+						(
+			  			workflow = Deactivate_Product_Catego
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Active")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to deactivate this category?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Delete Product Categories"
+						(
+			  			workflow = Delete_Selected_Product_C
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (ID != thisapp.Delete_Records.Delete_Product_Categories())
+						)
+						"Edit "
+						(
+			  			workflow = Edit_Product_category
+						show action in view header = true
+						show action in edit record menu = true
+						)
+						"Delete "
+						(
+			  			workflow = Delete_Product_Category
+						show action in view header = true
+						show action in edit record menu = true
+						confirmation before execution
+						(
+							message for individual record = "Execute the Delete Product Category action for this record?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+					conditional formatting
+					(
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#5dc35a;"
+						}
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+					)
+				
+		
+}

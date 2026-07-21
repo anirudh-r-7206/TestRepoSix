@@ -1,0 +1,85 @@
+report Buyer_Users_Report
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Associated_Buyer.Buyer_Type as "Buyer Type"
+										Associated_Buyer as "Buyer Organisation"
+										Employee_External_ID as "Employee/External ID"
+										User_Name as "User Name"
+										Email
+										Mobile_Number as "Mobile Number"
+										Status as "Status "
+										Need_App_Access as "Provided App Access"
+										Send_Notifications_Only as "Send Notifications Only"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								record
+								(
+									"Activate Buyer User"
+									"Deactivate Buyer User"
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									"Activate Buyer User"
+									"Deactivate Buyer User"
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										User_Name as "User Name"
+										Email
+										User_Type as "User Type"
+										Employee_External_ID as "Employee/External ID"
+										Mobile_Number as "Mobile Number"
+										Persona_Role as "Persona/Role"
+										Associated_Buyer as "Buyer Organisation"
+										Remarks as "Remarks "
+										Approval_Status as "Approval Status"
+										Status as "Status "
+										Need_App_Access as "Provided App Access"
+										Portal_Access_Enabled as "Portal Access Enabled"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										"Activate Buyer User"
+										"Deactivate Buyer User"
+									)
+								)
+						)
+					
+		
+}

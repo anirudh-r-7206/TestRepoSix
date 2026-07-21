@@ -1,0 +1,24 @@
+Field_Rules1 as "Field Rules"
+{
+
+			
+							type =  form
+							form = Purchase_Order
+			
+							record event = on add or edit
+			
+							field rules
+							{
+								actions 
+								{
+									hide Order_Status,Purchase_Currency1,Selling_Currency1;
+								}
+								actions 
+								{
+									disable Buyer_Organisation,Order_Request;
+								}
+							}
+			
+						
+			
+}

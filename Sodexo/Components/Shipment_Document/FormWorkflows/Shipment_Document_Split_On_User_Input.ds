@@ -1,0 +1,23 @@
+Shipment_Document_Split_On_User_Input as "Copy Shipment Document Context"
+{
+
+			    type = form
+			    form = Shipment_Document
+			    record event = on add or edit
+			
+			    on user input of Shipment_Dispatch_Split
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch_Split != null)
+			                {
+			                    input.Shipment_Dispatch = input.Shipment_Dispatch_Split.Shipment_Dispatch;
+			                    input.Purchase_Order = input.Shipment_Dispatch_Split.Purchase_Order;
+			                }
+			            )
+			        }
+			    }
+			
+}

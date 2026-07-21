@@ -1,0 +1,78 @@
+report All_Packaging_Details
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Carton_Measurement as "Carton Measurement"
+										Quantity_Per_Carton as "Quantity Per Carton"
+										Weight_Per_Carton as "Weight Per Carton"
+										Product
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Carton_Measurement as "Carton Measurement"
+										Quantity_Per_Carton as "Quantity Per Carton"
+										Weight_Per_Carton as "Weight Per Carton"
+										Product
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		
+}

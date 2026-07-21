@@ -1,0 +1,116 @@
+report All_Order_Requests
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Order_ID as "Order ID"
+										Buyer_Organisation as "Buyer Organisation"
+										Buyer_Name as "Buyer Name"
+										Factory
+										Order_By as "Order By"
+										Cart_Total as "Cart Total "
+										Status
+										"Generate QO"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Order_ID as "Order ID"
+										Buyer_Organisation as "Buyer Organisation"
+										Buyer_Name as "Buyer Name"
+										Factory
+										Order_By as "Order By"
+										Total_Quantity as "Total Quantity"
+										Cart_Total as "Cart Total "
+										Status
+									)
+								)
+								datablock3
+								(
+									layout type = -1
+				     				title = "Order details"
+				     				related field = Order_details
+									fields
+									(
+										Product
+										Product_Color as "Product Color"
+										Product_Size as "Product Size"
+										Description as "Description "
+										Quantity
+										Sub_Total as "Sub Total"
+									)
+								)
+								datablock4
+								(
+				     				title = "Buyer"
+				     				related field = Buyer_Name
+									fields
+									(
+										Employee_External_ID as "Employee/External ID"
+										User_Name as "User Name"
+										User_Type as "User Type"
+										Email
+										Mobile_Number as "Mobile Number"
+										Persona_Role as "Persona/Role"
+										Status as "Status "
+									)
+								)
+								datablock5
+								(
+									layout type = -1
+				     				title = "Order History"
+				     				related field = Order_Review_ID
+									fields
+									(
+										Added_Time as "Added Time"
+										Raised_By as "Raised By"
+										Status
+										Comments
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

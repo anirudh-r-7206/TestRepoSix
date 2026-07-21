@@ -1,0 +1,113 @@
+form Buyer_Product_Mapping
+{
+
+		
+					displayname = "Buyer Product Mapping"
+					success message = "Data Added Successfully!"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Buyer
+					(
+						type = picklist	
+						values  = Buyers_Master[Status == "Active"].ID
+		    			displayformat = [Buyer_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Sell_Currency
+					(
+						type = picklist	
+						displayname = "Sell Currency"
+						values  = Currency.ID
+		    			displayformat = [Currency_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Filter_Product
+					(
+		    			type = checkbox
+						displayname = "Filter Product"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Factory_Allocated
+					(
+						type = picklist	
+						displayname = "Factory Allocated"
+						values  = Add_Suppliers.ID
+		    			displayformat = [Supplier_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					must have Buy_Currency
+					(
+						type = picklist	
+						displayname = "Buy Currency"
+						values  = Currency.ID
+		    			displayformat = [Currency_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					must have Style_Details
+					(
+						type = grid
+						displayname = "Style Details"
+						values  = Buyer_Products.ID
+		    			bidirectional = Buyer_Product_Mapping
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Wardrobes_and_Categories
+					(
+						type = grid
+						displayname = "Wardrobes and Categories"
+						values  = Buyer_Mapping_Wardrobes.ID
+		    			bidirectional = Buyer_Product_Mapping
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

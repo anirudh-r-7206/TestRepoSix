@@ -1,0 +1,28 @@
+Update_selling_Currency as "Update selling Currency"
+{
+
+			
+							type =  form
+							form = Order_Request
+			
+							record event = on add or edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetBuyerProduct = Buyer_Product_Mapping[Buyer == input.Buyer_Name && Factory_Allocated == input.Factory];
+													if(fetBuyerProduct.count() > 0)
+													{
+														input.Selling_Currency = fetBuyerProduct.Sell_Currency;
+													}
+													input.Total_Quantity = input.Order_details.sum(Quantity);
+									)
+								}
+							}
+			
+						
+			
+}

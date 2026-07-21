@@ -1,0 +1,30 @@
+Delete_Product_Category as "Delete Product Category"
+{
+
+			
+							type =  functions
+							form = Product_Category
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									reference = thisapp.References.ProductCategory(input.ID);
+													if(reference.trim() != "" && reference != null)
+													{
+														url = "#Form:Alert_References?zc_Header=false&Product_Category=" + input.ID;
+														window = "popup window";
+														openUrl(url,window);
+													}
+													else
+													{
+														delete from Product_Category[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

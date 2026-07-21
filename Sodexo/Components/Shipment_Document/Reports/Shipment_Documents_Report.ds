@@ -1,0 +1,28 @@
+default list Shipment_Documents_Report
+{
+
+		    displayName = "Shipment Documents"
+		    show all rows from Shipment_Document
+		    (
+		        Shipment_Dispatch as "Shipment Dispatch"
+		        Shipment_Dispatch_Split as "Shipment Dispatch Split"
+		        Purchase_Order as "PO / QO"
+		        Document_Type as "Document Type"
+		        Document_File as "Document File"
+		        Source
+		        Uploaded_By_Role as "Uploaded By Role"
+		        Added_Time as "Added Time"
+		    )
+		    filters
+		    (
+		        Document_Type
+		        Source
+		        Uploaded_By_Role
+		        Purchase_Order
+		    )
+		    sort by
+		    (
+		        Added_Time descending
+		    )
+		
+}

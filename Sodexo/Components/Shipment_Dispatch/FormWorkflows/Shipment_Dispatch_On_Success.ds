@@ -1,0 +1,37 @@
+Shipment_Dispatch_On_Success as "Shipment Dispatch On Success"
+{
+
+			    type = form
+			    form = Shipment_Dispatch
+			    record event = on add or edit
+			
+			    on success
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                thisapp.Shipment_Recalculate(input.ID);
+			                splitRows = Shipment_Dispatch_Split[Shipment_Dispatch == input.ID];
+			                poIds = List();
+			                for each  splitRow in splitRows
+			                {
+			                    if(splitRow.Purchase_Order != null && !poIds.contains(splitRow.Purchase_Order.ID))
+			                    {
+			                        poIds.add(splitRow.Purchase_Order.ID);
+			                    }
+			                }
+			                for each  poId in poIds
+			                {
+			                    thisapp.Update_PO_Shipment_Summary(poId);
+			                }
+			                settingRec = Shipment_Settings[ID != 0];
+			                if(settingRec.count() > 0 && settingRec.Buyer_Update_Channel == "Email + Dashboard")
+			                {
+			                    thisapp.Send_Shipment_Milestone_Update(input.ID);
+			                }
+			            )
+			        }
+			    }
+			
+}

@@ -1,0 +1,15 @@
+int Shipment_Get_Transit_Days(int buyerId, int supplierId, string transitMode)
+{
+
+			    transitDays = 0;
+			    if(buyerId != null && supplierId != null && transitMode != null && transitMode.trim() != "")
+			    {
+			        transitRec = Shipment_Transit_Time[Buyer == buyerId && Supplier == supplierId && Transit_Mode == transitMode];
+			        if(transitRec != null && transitRec.count() > 0)
+			        {
+			            transitDays = ifnull(transitRec.Transit_Days,0);
+			        }
+			    }
+			    return transitDays;
+			
+}

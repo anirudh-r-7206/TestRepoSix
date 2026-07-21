@@ -1,0 +1,23 @@
+Update_wardrobe_old_value as "Update wardrobe old value"
+{
+
+			
+							type =  form
+							form = Product_Category
+			
+							record event = on add or edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														input.Wardrobe1 = input.Wardrobe;
+									)
+								}
+							}
+			
+						
+			
+}

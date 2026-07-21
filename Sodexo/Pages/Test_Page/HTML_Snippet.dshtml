@@ -1,0 +1,9 @@
+<style>
+	div#zppagesLive[pagelinkname="Awaiting_Action_Page"], [pagelinkname="Awaiting_Action_Page"] div#elementsContainer, [pagelinkname="Awaiting_Action_Page"] div#row_2, [pagelinkname="Awaiting_Action_Page"] div#row_1 {
+		height: 100%;
+	}
+	[pagelinkname="Awaiting_Action_Page"] .Layout.elemContainment {
+			height: calc(100% - 16px);
+		}
+	</style>
+<div elName='zc-component' name="editPO" style="height: 100%;" viewLinkName='Awaiting_Action' params='zc_Header=true&zc_AddRec=false&zc_ShowAs=false'></div>

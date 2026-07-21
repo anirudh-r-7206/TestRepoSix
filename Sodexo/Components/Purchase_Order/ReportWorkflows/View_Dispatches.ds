@@ -1,0 +1,19 @@
+View_Dispatches as "View Dispatches"
+{
+
+			    type = functions
+			    form = Purchase_Order
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                openUrl("#Report:Shipment_Dispatch_Split_Report?Purchase_Order=" + input.PO_Number,"same window");
+			            )
+			        }
+			    }
+			
+}

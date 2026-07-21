@@ -1,0 +1,59 @@
+Disable_fields as "Disable fields"
+{
+
+			
+							type =  form
+							form = Buyer_Product_Mapping
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														disable Buyer;
+													disable Factory_Allocated;
+													// disable Style_Details;
+													hide Style_Details;
+													// get_Factory_Product = Add_Product[Status == "Approved"].ID.getAll();
+													// get_sub_Product = input.Style_Details.Style_ID.getall();
+													// get_Factory_Product.removeAll(get_sub_Product);
+													// get_Factory_Product.removeElement(row.Style_ID);
+													// for each  purchase in input.Style_Details
+													// {
+													// 	old_Product = purchase.Style_ID;
+													// 	add_sub_Product = get_Factory_Product;
+													// 	add_sub_Product.add(old_Product);
+													// 	purchase.Style_ID:ui.add(add_sub_Product);
+													// 	purchase.Style_ID=old_Product;
+													// }
+													// ============================
+													// get_Factory_Product = Add_Product[Status == "Approved"].ID.getAll();
+													// get_sub_Product = input.Style_Details.Style_ID.getall();
+													// get_Factory_Product.removeAll(get_sub_Product);
+													// for each pro in get_Factory_Product
+													// {
+													// 	get_product = Add_Product[ID == pro];
+													// 	ProductID=get_product.Style_ID + "-" + input.Factory_Allocated.Supplier_Code + "-" + input.Buyer.Buyer_Code;
+													// 	insert_product = Buyer_Product_Mapping.Style_Details();
+													// 	insert_product.Style_ID=get_product.ID;
+													// 	insert_product.Style_Name=get_product.ID;
+													// 	insert_product.Style_Description=get_product.Style_Code.Style_Description;
+													// 	insert_product.Product_ID=ProductID;
+													// 	insert_product.Colors=get_product.Style_Colour;
+													// 	insert_product.Size=get_product.Size_Set;
+													// 	insert_product.Buy_Price=100;
+													// 	insert_product.Sell_Price=200;
+													// 	insert_product.HS_Name="USA";
+													// 	insert_product.HS_Code=2345;
+													// 	input.Style_Details.insert(insert_product);
+													// }
+									)
+								}
+							}
+			
+						
+			
+}

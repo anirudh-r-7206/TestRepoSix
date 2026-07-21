@@ -1,0 +1,21 @@
+list Filters.deletePurchaselineItem()
+{
+
+			
+			                 	fetPurchase = Copy_of_Purchase_Order[ID != null];
+			                 	lineItem = List();
+			                 	if(fetPurchase.count() > 0)
+			                 	{
+			                 		for each  purchase in fetPurchase
+			                 		{
+			                 			fetLineItem = Copy_of_Purchase_LineItems[Copy_of_Purchase_Order == purchase.ID];
+			                 			if(fetLineItem.count() > 1)
+			                 			{
+			                 				lineItem.addAll(fetLineItem.ID.getall());
+			                 			}
+			                 		}
+			                 	}
+			                 	return lineItem;
+			                 
+			
+}

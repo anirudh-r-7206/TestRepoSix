@@ -1,0 +1,13 @@
+list Deactivate_Records.Deactivate_Suppliers()
+{
+
+			
+			                 	Supplier_List = List();
+			                 	get_User_Suppliers = Create_User[Status == "Active"];
+			                 	Supplier_List.addAll(get_User_Suppliers.Associated_Factory.getall());
+			                 	get_Buyer_Suppliers = Buyer_Product_Mapping[Buyer.Status == "Active"];
+			                 	Supplier_List.addAll(get_Buyer_Suppliers.Factory_Allocated.getall());
+			                 	return Supplier_List.distinct();
+			                 
+			
+}

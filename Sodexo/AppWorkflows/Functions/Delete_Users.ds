@@ -1,0 +1,14 @@
+list Delete_Records.Delete_Users()
+{
+
+			
+			                 	Users_List = List();
+			                 	get_From_Order_Request = Order_Request[ID != 0];
+			                 	Users_List.addAll(get_From_Order_Request.Buyer_Name.getall());
+			                 	get_From_PO = Purchase_Order[ID != 0];
+			                 	Users_List.addAll(get_From_PO.Customer_Name.getall());
+			                 	Users_List.addAll(get_From_PO.Supplier_old.getall());
+			                 	return Users_List.distinct();
+			                 
+			
+}

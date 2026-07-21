@@ -1,0 +1,21 @@
+string Publish_URL.Org_IMG()
+{
+
+			
+			                 	get_Org = organization[ID != 0];
+			                 	imagelnk = "";
+			                 	if(get_Org.count(ID) > 0)
+			                 	{
+			                 		get_Org_ID = get_Org.ID;
+			                 		// 		get_Org_ID = 4908788000000203063;
+			                 		// https://creatorapp.zohopublic.com/sodexo/order-management-sodexo-v2/report-perma/All_Organizations/vCMr1zBHqwtyTZ4mjDaBJWqjeKrYY9W9WEU3PVYXfP8OAO4BSBWRd7YUgQNMzuzBWN1sgNKhZ5E1sbfpxTSN1PwnfFmaCDry0JQd
+			                 		fileName = get_Org.Logo.getSuffix("image/").getPrefix("\" lowqual");
+			                 		return "https://creatorapp.zohopublic.com" + zoho.appuri + "report/All_Organizations/" + get_Org_ID + "/Logo/download-file/vCMr1zBHqwtyTZ4mjDaBJWqjeKrYY9W9WEU3PVYXfP8OAO4BSBWRd7YUgQNMzuzBWN1sgNKhZ5E1sbfpxTSN1PwnfFmaCDry0JQd?filepath=/" + fileName;
+			                 	}
+			                 	else
+			                 	{
+			                 		return "";
+			                 	}
+			                 
+			
+}

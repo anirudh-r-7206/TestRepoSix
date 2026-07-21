@@ -1,0 +1,69 @@
+Delete_row_to_calculate_C as "Delete row to calculate Cost"
+{
+
+			
+							type =  form
+							form = Purchase_Order
+			
+							record event = on add or edit
+			
+							on delete row of Purchase_LineItems
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Customer_Name != null)
+													{
+														get_Buyer_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Customer_Name.Associated_Buyer && Buyer_Product_Mapping.Factory_Allocated == input.Supplier];
+														get_Product = get_Buyer_Product.Style_ID.getall();
+													}
+													else
+													{
+														get_Product = Add_Product[ID != 0 && Status == "Approved"].ID.getAll();
+													}
+													purchase_Cost = 0;
+													selling_Cost = 0;
+													total_Qty = 0;
+													for each  purchase in input.Purchase_LineItems
+													{
+														get_Product.removeAll(input.Purchase_LineItems.Product.getall());
+														get_Product.add(row.Product);
+														if(purchase.S_No != row.S_No)
+														{
+															old_Product = purchase.Product;
+															add_sub_Product = get_Product;
+															add_sub_Product.add(old_Product);
+															purchase.Product:ui.add(add_sub_Product);
+															purchase.Product=old_Product;
+														}
+														if(purchase.S_No != row.S_No && purchase.Product != null && purchase.Quantity != null)
+														{
+															purchase_Cost = purchase_Cost + purchase.Purchase_Price_Sub_Total;
+															selling_Cost = selling_Cost + purchase.Selling_Price_Sub_Total;
+															total_Qty = total_Qty + purchase.Quantity;
+														}
+														if(purchase.S_No > row.S_No)
+														{
+															purchase.S_No=purchase.S_No - 1;
+														}
+													}
+													input.Total_Quantity = total_Qty;
+													input.Total_Purchase_Price = purchase_Cost;
+													//additional charges addition
+													addnCharge = 0;
+													for each  chargeRow in input.Additional_Charges
+													{
+														if(chargeRow.Paid_By == "Buyer")
+														{
+															addnCharge = addnCharge + ifnull(chargeRow.Amount1,0);
+														}
+													}
+													input.Total_Selling_Price = selling_Cost + addnCharge;
+									)
+								}
+							}
+			
+						
+			
+}

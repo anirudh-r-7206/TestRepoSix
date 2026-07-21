@@ -1,0 +1,29 @@
+Filter_Factory as "Filter Factory"
+{
+
+			
+							type =  form
+							form = Buyer_Product_Mapping
+			
+							record event = on add
+			
+							on user input of Buyer
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Buyer != null)
+													{
+														get_Supplier = Add_Suppliers[Supplier_type == "Factory" && Status == "Active"].ID.getAll();
+														get_mapped_Supplier = Buyer_Product_Mapping[Buyer == input.Buyer].Factory_Allocated.getAll();
+														get_Supplier.removeAll(get_mapped_Supplier);
+														input.Factory_Allocated:ui.add(get_Supplier);
+													}
+									)
+								}
+							}
+			
+						
+			
+}

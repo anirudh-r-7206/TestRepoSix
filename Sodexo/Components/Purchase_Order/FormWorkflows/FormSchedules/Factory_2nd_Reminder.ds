@@ -1,0 +1,21 @@
+Factory_2nd_Reminder as "Factory_2nd_Reminder"
+{
+
+			
+							type =  schedule
+							form = Purchase_Order[Order_Status == "Awaiting Factory Review"]
+							start = after 96 hours from Modified_Time
+							time zone = "Asia/Kolkata"
+							on start
+							{
+								actions 
+								{
+								on load
+								(
+									thisapp.Send_Mail.Email_Template(input.ID,"Factory_2nd_Reminder");
+								)
+								}
+							}
+						
+			
+}

@@ -1,0 +1,25 @@
+void Send_Shipment_Milestone_Update(int dispatchId)
+{
+
+			    dispatchRec = Shipment_Dispatch[ID == dispatchId];
+			    settingRec = Shipment_Settings[ID != 0];
+			    if(dispatchRec != null && dispatchRec.count() > 0 && settingRec != null && settingRec.count() > 0 && settingRec.Buyer_Update_Channel == "Email + Dashboard")
+			    {
+			        recipients = settingRec.Reminder_Recipients;
+			        if(recipients != null && recipients.trim() != "")
+			        {
+			            sendmail
+			            [
+			                from : zoho.adminuserid
+			                to : recipients
+			                subject : "Shipment milestone update - " + dispatchRec.Shipment_Reference
+			                message : "Shipment " + dispatchRec.Shipment_Reference + " is currently " + ifnull(dispatchRec.Shipment_Status,"Pending") + ". Estimated delivery: " + ifnull(dispatchRec.Estimated_Delivery_Date,"-") + "."
+			            ]
+			            update Shipment_Dispatch[ID == dispatchId]
+			            [
+			                Buyer_Update_Last_Sent_Date = zoho.currentdate
+			            ];
+			        }
+			    }
+			
+}

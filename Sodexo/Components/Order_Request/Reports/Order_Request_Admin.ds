@@ -1,0 +1,20 @@
+list Order_Request_Admin
+{
+
+		
+					displayName = "Order Request - Admin"
+					show all rows from Order_Request    
+					(
+						Buyer_Name as "Buyer Name"
+						Cart_Total as "Cart Total "
+						Order_Review_ID as "Order Review - ID"
+						Order_ID as "Order ID"
+						Order_By as "Order By"
+						Last_Order as "Last Order"
+						Status
+						Auto_Number as "Auto Number"
+						Added_Time as "Added Time"
+					)
+				
+		
+}

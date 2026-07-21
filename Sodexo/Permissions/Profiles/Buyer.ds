@@ -1,0 +1,328 @@
+"Buyer"
+{
+
+	
+					name = "Buyer"
+					type = Customer_Portal
+					permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This is the default profile having only add and view permission. - Duplicate\n"
+					ModulePermissions
+					{
+						Product_Category
+						{
+							allFieldsVisible= true 
+						}
+						Add_Product
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Cart_Detail
+						{
+							allFieldsVisible= true 
+						}
+						Packaging_Details
+						{
+							allFieldsVisible= true 
+						}
+						Create_Size
+						{
+							allFieldsVisible= true 
+						}
+						History
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Bulk_Update
+						{
+							allFieldsVisible= true 
+						}
+						Purchase_LineItems
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Products
+						{
+							allFieldsVisible= true 
+						}
+						Fabric_Form
+						{
+							allFieldsVisible= true 
+						}
+						Product_Code_Master
+						{
+							allFieldsVisible= true 
+						}
+						Currency
+						{
+							allFieldsVisible= true 
+						}
+						Rate_Conversion_History
+						{
+							allFieldsVisible= true 
+						}
+						Style
+						{
+							allFieldsVisible= true 
+						}
+						Email_Template
+						{
+							allFieldsVisible= true 
+						}
+						Factory_Details_Subform
+						{
+							allFieldsVisible= true 
+						}
+						Bulk_Edit_Tigger
+						{
+							allFieldsVisible= true 
+						}
+						Add_Suppliers
+						{
+							allFieldsVisible= true 
+						}
+						Wardrobe
+						{
+							allFieldsVisible= true 
+						}
+						Error_Log_Form
+						{
+							allFieldsVisible= true 
+						}
+						Create_User
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Mapping_Wardrobes
+						{
+							allFieldsVisible= true 
+						}
+						PO_Style_Search
+						{
+							allFieldsVisible= true 
+						}
+						Add_Region
+						{
+							allFieldsVisible= true 
+						}
+						Product_Duplicate
+						{
+							allFieldsVisible= true 
+						}
+						Size_Chart
+						{
+							allFieldsVisible= true 
+						}
+						Add_Colors
+						{
+							allFieldsVisible= true 
+						}
+						Add_Country
+						{
+							allFieldsVisible= true 
+						}
+						Alert_References
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Order
+						{
+							allFieldsVisible= true 
+						}
+						Order_Details
+						{
+							enabled= Create,Viewall,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Order_Details={"View"}
+							}
+						}
+						Currency_Conversion_Rates
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Filter
+						{
+							allFieldsVisible= true 
+						}
+						Copy_of_Purchase_Order
+						{
+							allFieldsVisible= true 
+						}
+						PO_QO_template
+						{
+							allFieldsVisible= true 
+						}
+						Buyers_Master
+						{
+							allFieldsVisible= true 
+						}
+						Size_Chart_Mapping
+						{
+							allFieldsVisible= true 
+						}
+						Order_Request
+						{
+							enabled= Create,Viewall,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								My_Order_Requests={"View","Edit"}
+							}
+						}
+						Print_and_PDF_Button
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Contact_Person_Details
+						{
+							allFieldsVisible= true 
+						}
+						Copy_of_Purchase_LineItems
+						{
+							allFieldsVisible= true 
+						}
+						Trigger_Form
+						{
+							allFieldsVisible= true 
+						}
+						organization
+						{
+							allFieldsVisible= true 
+						}
+						Purchase_Order
+						{
+							allFieldsVisible= true 
+						}
+						Freight_Partners_Form
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_Product_Mapping
+						{
+							allFieldsVisible= true 
+						}
+						Buyer_product_duplicate
+						{
+							allFieldsVisible= true 
+						}
+						PO_Template
+						{
+							enabled = tab
+						}
+						QO_Template
+						{
+							enabled = tab
+						}
+						Alert_Message
+						{
+							enabled = tab
+						}
+						Buyer_Dashboard
+						{
+							enabled = tab
+						}
+						Buyer_Dashboard_V2
+						{
+							enabled = tab
+						}
+						Shipment_Dispatch
+						{
+							enabled= Viewall,Search,Tab
+							allFieldsVisible= false
+							ReportPermissions
+							{
+								Milestone_Update_to_Buyer={"View"}
+							}
+							FieldPermissions
+							{
+								Shipment_Reference{visibility:true,readonly:true}
+								Dispatch_Status{visibility:true,readonly:true}
+								Buyer{visibility:true,readonly:true}
+								Supplier{visibility:true,readonly:true}
+								Transit_Mode{visibility:true,readonly:true}
+								Shipment_Status{visibility:true,readonly:true}
+								Production_Status{visibility:true,readonly:true}
+								Estimated_ExFactory_Date{visibility:true,readonly:true}
+								Actual_ExFactory_Date{visibility:true,readonly:true}
+								ETD_Date{visibility:true,readonly:true}
+								ETA_Date{visibility:true,readonly:true}
+								Estimated_Delivery_Date{visibility:true,readonly:true}
+								Actual_Delivery_Date{visibility:true,readonly:true}
+								Payment_Status{visibility:true,readonly:true}
+								KPI_Status{visibility:true,readonly:true}
+								Comments{visibility:true,readonly:true}
+								Freight_Forwarder{visibility:false}
+								Forwarder_Booking_ID{visibility:false}
+								Forwarder_Transport_Mode{visibility:false}
+								ATD_Date{visibility:false}
+								ATA_Date{visibility:false}
+								Payment_Terms_Days{visibility:false}
+								Expected_Payment_Date{visibility:false}
+								Last_Payment_Reminder_Date{visibility:false}
+								Last_Payment_Reminder_Offset{visibility:false}
+								ExFactory_Variance_Days{visibility:false}
+								ETD_Variance_Days{visibility:false}
+								ETA_Variance_Days{visibility:false}
+								Delivery_Variance_Days{visibility:false}
+								Total_Lead_Time_Days{visibility:false}
+								Forwarder_Last_Sync_Time{visibility:false}
+								Forwarder_Last_Response{visibility:false}
+								API_Source_Reference{visibility:false}
+								Buyer_Update_Last_Sent_Date{visibility:false}
+								Cancellation_Reason{visibility:false}
+								Cancelled_On{visibility:false}
+								Cancelled_By{visibility:false}
+							}
+						}
+						Shipment_Dispatch_Split
+						{
+							enabled= Viewall,Search,Tab
+							allFieldsVisible= false
+							ReportPermissions
+							{
+								Shipment_Dispatch_Split_Report={"View"}
+							}
+							FieldPermissions
+							{
+								Shipment_Dispatch{visibility:true,readonly:true}
+								Purchase_Order{visibility:true,readonly:true}
+								PO_Number_Display{visibility:true,readonly:true}
+								QO_Number_Display{visibility:true,readonly:true}
+								Split_Status{visibility:true,readonly:true}
+								Split_Quantity{visibility:true,readonly:true}
+								Split_QO_Value{visibility:true,readonly:true}
+								Split_PO_Value{visibility:true,readonly:true}
+								Transport_Mode{visibility:true,readonly:true}
+								Notes{visibility:false}
+							}
+						}
+						Shipment_Document
+						{
+							enabled= Viewall,Search,Tab
+							allFieldsVisible= false
+							ReportPermissions
+							{
+								Shipment_Documents_Report={"View"}
+							}
+							FieldPermissions
+							{
+								Shipment_Dispatch{visibility:true,readonly:true}
+								Shipment_Dispatch_Split{visibility:true,readonly:true}
+								Purchase_Order{visibility:true,readonly:true}
+								Document_Type{visibility:true,readonly:true}
+								Document_File{visibility:true,readonly:true}
+								Source{visibility:true,readonly:true}
+								Uploaded_By_Role{visibility:true,readonly:true}
+								Notes{visibility:false}
+							}
+						}
+						Buyer_Shipment_Updates
+						{
+							enabled = tab
+						}
+					}
+				
+	
+}

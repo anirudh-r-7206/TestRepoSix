@@ -1,0 +1,20 @@
+Sync_Forwarder_Now as "Sync Forwarder Now"
+{
+
+			    type = functions
+			    form = Shipment_Dispatch
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                syncResponse = thisapp.Forwarder_Fetch_Milestone(input.ID);
+			                openUrl("#Page:Alert_Message?Message_Type=Shipment&Message_Content1=Forwarder API is not configured yet. Manual backup fields remain available.","popup window");
+			            )
+			        }
+			    }
+			
+}

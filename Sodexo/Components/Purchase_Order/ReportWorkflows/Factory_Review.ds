@@ -1,0 +1,24 @@
+Factory_Review as "Factory Review"
+{
+
+			
+							type =  functions
+							form = Purchase_Order
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+													if(get_User.count() > 0)
+													{
+														openUrl("#Form:History?Purchase_Order_ID=" + input.ID + "&Raised_By=" + get_User.ID + "&Status=Amendment / Cancellation Required","popup window","height=<height>,width=<width>");
+													}
+								)
+								}
+							}
+						
+			
+}

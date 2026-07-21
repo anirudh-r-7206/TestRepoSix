@@ -1,0 +1,13 @@
+default list All_Triggers
+{
+
+		
+					displayName = "All Triggers"
+					show all rows from Trigger_Form    
+					(
+						Action_field as "Action"
+						Supplier_ID as "Supplier ID"
+					)
+				
+		
+}

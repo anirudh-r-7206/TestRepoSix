@@ -1,0 +1,28 @@
+Remove_from_Cart as "Remove from Cart"
+{
+
+			
+							type =  functions
+							form = Order_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// Reduce Total Amount
+													fetcart = Order_Request[ID == input.Order_Request];
+													fetcart.Cart_Total=fetcart.Cart_Total - input.Sub_Total;
+													// Delete Cart Details
+													delete from Order_Details[ID == input.ID];
+													// Page Refresh
+													openUrl("#Page:Cart_Page?zc_LoadIn=embed-cartPage&Buyer_ID=" + input.Order_Request.Buyer_Organisation + "&Suppliyer_ID=" + input.Order_Request.Factory,"parent window");
+													// openUrl("#Report:My_Cart_Details?zc_LoadIn=embed-CartView&zc_Header=true&zc_Footer=false&zc_AddRec=false&zc_MoreAction=false&zc_ReportName=false&zc_Search=true&Order_Request=" + input.Order_Request.Order_ID,"same window");
+													// thisapp.PageRefresh();
+								)
+								}
+							}
+						
+			
+}

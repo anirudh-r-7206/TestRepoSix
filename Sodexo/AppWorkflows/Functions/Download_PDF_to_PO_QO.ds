@@ -1,0 +1,42 @@
+void Publish_URL.Download_PDF_to_PO_QO(int id, string type)
+{
+
+			
+			                 	get_PO = Purchase_Order[ID == input.id];
+			                 	// 	https://creatorapp.zohopublic.com/sodexo/order-management-sodexo-v2/page-perma/PO_Template/FUCnB3TwzbeFgNPFmPk7FvAwZdpkzM2Py0BxxajRsZFMtTq0YdDs6gWRKFHOZMsafHTsSs87U0ZJ1QNA3HSVBKpNKG1pGPT1ksnf
+			                 	// 	https://creatorapp.zohopublic.com/sodexo/order-management-sodexo-v2/page-perma/QO_Template/QDh30qgtrRTBZsA2h23vf60vFMTP5TV2KwNENauuVHZNOkNjzZYjEkZ4QuzzEPY5HC593PtvCdtmuROS60AM2OHmUa2BQHYe3dQ6
+			                 	// https://creatorapp.zohopublic.com/sodexo/order-management-sodexo-v2/page-perma/POTemplate/3xuz5kZKKWwWOmMXa9rr2RrzuxKyKzg1XV3Zupn8AgMkm1REx9hJFurSd7zzNqB81MYC3sWdZFOfwWRrPwEz8WrzawY3GPh98xCJ
+			                 	// https://creatorapp.zohopublic.com/sodexo/order-management-sodexo-v2/page-perma/QOTemplate/Z3FtHtuGumY3mvg93tymj5qK6RVCzp9GbVzdxOujxz5TGn7xHbUxf30CDHSyAPBwTWA66FBnJkV7kpYxgzQEG2YQ7pxPDmed9me0
+			                 	if(type == "PO")
+			                 	{
+			                 		url = "https://creatorapp.zohopublic.com" + thisapp.Publish_URL.AppURI() + "pdf/POTemplate/3xuz5kZKKWwWOmMXa9rr2RrzuxKyKzg1XV3Zupn8AgMkm1REx9hJFurSd7zzNqB81MYC3sWdZFOfwWRrPwEz8WrzawY3GPh98xCJ?isc5page=true&Po_ID=" + input.id + "&pageorientation=landscape";
+			                 		resp = invokeurl
+			                 		[
+			                 			url :url
+			                 			type :GET
+			                 		];
+			                 		filee = resp;
+			                 		filee.setFileName(get_PO.PO_Number + ".pdf");
+			                 	}
+			                 	else
+			                 	{
+			                 		url = "https://creatorapp.zohopublic.com" + thisapp.Publish_URL.AppURI() + "pdf/QOTemplate/Z3FtHtuGumY3mvg93tymj5qK6RVCzp9GbVzdxOujxz5TGn7xHbUxf30CDHSyAPBwTWA66FBnJkV7kpYxgzQEG2YQ7pxPDmed9me0?isc5page=true&QO_ID=" + input.id + "&pageorientation=landscape";
+			                 		resp = invokeurl
+			                 		[
+			                 			url :url
+			                 			type :GET
+			                 		];
+			                 		filee = resp;
+			                 		filee.setFileName(get_PO.QO_Number + ".pdf");
+			                 	}
+			                 	rs = insert into PO_QO_template
+			                 	[
+			                 		Added_User=zoho.loginuser
+			                 		File_upload=filee
+			                 		Purchase_Order=input.id
+			                 	];
+			                 	fetchFile = PO_QO_template[ID == rs];
+			                 	openUrl("https://creator.zoho.com/file" + zoho.appuri + "PO_QO_template_Report/" + fetchFile.ID + "/File_upload/download?filepath=/" + fetchFile.File_upload,"new window");
+			                 
+			
+}

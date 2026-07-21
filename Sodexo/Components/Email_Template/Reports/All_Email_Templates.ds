@@ -1,0 +1,17 @@
+default list All_Email_Templates
+{
+
+		
+					displayName = "All Email Templates"
+					show all rows from Email_Template    
+					(
+						Template_Name as "Template Name"
+						Notification_Type as "Notification Type"
+						Subject_field as "Subject"
+						Message_Content as "Message Content"
+						Additional_CC_Emails as "Additional CC Emails"
+						In_App_Message_Content as "In-App Message Content"
+					)
+				
+		
+}

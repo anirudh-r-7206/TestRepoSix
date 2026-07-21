@@ -1,0 +1,82 @@
+report SSA_and_Admin_Users
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Employee_External_ID as "Employee/External ID"
+										User_Type as "User Type"
+										User_Name as "User Name"
+										Email
+										Mobile_Number as "Mobile Number"
+										Status as "Status "
+										Primary_Email as "Primary Email"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								record
+								(
+									"Activate"
+									"Deactivate"
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									"Activate"
+									"Deactivate"
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+									fields
+									(
+										Employee_External_ID as "Employee/External ID"
+										User_Name as "User Name"
+										User_Type as "User Type"
+										Email
+										Mobile_Number as "Mobile Number"
+										Primary_Email as "Primary Email"
+										Remarks as "Remarks "
+										Approval_Status as "Approval Status"
+										Status as "Status "
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										"Activate"
+										"Deactivate"
+										Edit 
+									)
+								)
+						)
+					
+		
+}

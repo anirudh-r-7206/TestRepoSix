@@ -1,0 +1,73 @@
+void handleUserChange(string oldEmail, string newEmail, string userFirstName, string userSecondName, string mobile, int ID1, string module, bool access)
+{
+
+			
+			                 	if(newEmail != oldEmail)
+			                 	{
+			                 		// ─── Deactivate old record ───────────────────────
+			                 		fetUser = Create_User[Email == oldEmail];
+			                 		if(fetUser.count() > 0)
+			                 		{
+			                 			fetUser.Status="Inactive";
+			                 			fetUser.Portal_Access_Enabled=false;
+			                 			fetUser.Need_App_Access=false;
+			                 			thisapp.portal.deleteUser(oldEmail);
+			                 		}
+			                 		// ─── Set module-specific fields ──────────────────
+			                 		userType = if(module == "Factory","Factory","Buyer");
+			                 		personaRole = if(module == "Factory","Factory Team","Buyer");
+			                 		assocFactory = if(module == "Factory",ID1,null);
+			                 		assocBuyer = if(module == "Buyer",ID1,null);
+			                 		// ─── Check if new email already exists ───────────
+			                 		fetUser1 = Create_User[Email == newEmail];
+			                 		if(fetUser1.count() == 0)
+			                 		{
+			                 			// Insert new user
+			                 			insert into Create_User
+			                 			[
+			                 				Added_User=zoho.loginuser
+			                 				User_Name.first_name=userFirstName
+			                 				User_Name.last_name=userSecondName
+			                 				Email=newEmail
+			                 				User_Type=userType
+			                 				Mobile_Number=mobile
+			                 				Persona_Role=personaRole
+			                 				Associated_Factory=assocFactory
+			                 				Associated_Buyer=assocBuyer
+			                 				Approval_Status="Pending"
+			                 				Status="Inactive"
+			                 				Need_App_Access=access
+			                 				From_Supplier_Buyer=true
+			                 			]
+			                 		}
+			                 		else
+			                 		{
+			                 			// Update existing user if same type but different association
+			                 			if(fetUser1.User_Type == module)
+			                 			{
+			                 				if(module == "Factory")
+			                 				{
+			                 					if(fetUser1.Associated_Factory != ID1)
+			                 					{
+			                 						fetUser1.Associated_Factory=ID1;
+			                 					}
+			                 					fetUser1.Approval_Status="Pending";
+			                 					fetUser1.Need_App_Access=access;
+			                 					From_Supplier_Buyer = true;
+			                 				}
+			                 				else if(module == "Buyer")
+			                 				{
+			                 					if(fetUser1.Associated_Buyer != ID1)
+			                 					{
+			                 						fetUser1.Associated_Buyer=ID1;
+			                 					}
+			                 					fetUser1.Approval_Status="Pending";
+			                 					fetUser1.Need_App_Access=access;
+			                 					From_Supplier_Buyer = true;
+			                 				}
+			                 			}
+			                 		}
+			                 	}
+			                 
+			
+}

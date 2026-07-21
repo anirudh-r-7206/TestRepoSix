@@ -1,0 +1,28 @@
+Filter_product1 as "Filter product"
+{
+
+			
+							type =  form
+							form = Buyer_Products
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetBuyer = Buyers_Master[ID == input.Buyer_Product_Mapping.Buyer].Wardrobe.getAll();
+													get_Product = Add_Product[Wardrobe in fetBuyer && Status == "Approved"].ID.getAll();
+													get_sub_Product = input.Buyer_Product_Mapping.Style_Details.Style_ID.getall();
+													get_Product.removeAll(get_sub_Product);
+													input.Style_ID:ui.add(get_Product);
+													input.HS_Name = input.Buyer_Product_Mapping.Buyer.HS_Code_Region;
+									)
+								}
+							}
+			
+						
+			
+}

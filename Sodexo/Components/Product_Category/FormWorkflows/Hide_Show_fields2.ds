@@ -1,0 +1,38 @@
+Hide_Show_fields2 as "Hide & Show fields"
+{
+
+			
+							type =  form
+							form = Product_Category
+			
+							record event = on add or edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														//
+													hide Hide_Section;
+													get_Style = Style[ID != 0].ID.getAll();
+													get_Category_Style = Product_Category[ID != 0].Style.getAll();
+													get_Style.removeAll(get_Category_Style);
+													if(input.Style != null)
+													{
+														old_Style = input.Style;
+														get_Style.addAll(input.Style);
+														input.Style:ui.add(get_Style);
+														input.Style = old_Style;
+													}
+													else
+													{
+														input.Style:ui.add(get_Style);
+													}
+									)
+								}
+							}
+			
+						
+			
+}

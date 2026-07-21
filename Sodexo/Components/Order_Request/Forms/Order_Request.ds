@@ -1,0 +1,256 @@
+form Order_Request
+{
+
+		
+					displayname = "Order Request"
+					success message = "Order Request Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Buyer_Organisation
+					(
+						type = picklist	
+						displayname = "Buyer Organisation"
+						values  = Buyers_Master.ID
+		    			displayformat = [Buyer_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = small
+					)
+					must have Buyer_Name
+					(
+						type = picklist	
+						displayname = "Buyer Name"
+						values  = Create_User.ID
+		    			displayformat = [" " + User_Name.first_name + " " + User_Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = small
+					)
+					must have Factory
+					(
+						type = picklist	
+						values  = Add_Suppliers.ID
+		    			displayformat = [Supplier_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = small
+					)
+					plain
+					(
+		    			type = plaintext
+						value = "Add your Note here ..."
+			 			row = 1
+			 			column = 3   
+						width = medium
+					)
+					Order_details
+					(
+						type = grid
+						displayname = "Order details"
+						values  = Order_Details.ID
+		    			bidirectional = Order_Request
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Section1
+					(
+						type = section
+						displayname = "Section"
+			 			row = 3
+			 			column = 0   
+						width = medium
+					)
+					Cart_Total
+					(
+						type = decimal
+						displayname = "Cart Total "
+						format = commadotwestern
+						initial value = 0
+			 			row = 3
+			 			column = 1   
+						width = small
+					)
+					Hide_Section
+					(
+						type = section
+						displayname = "Hide Section"
+						visibility = true
+			 			row = 4
+			 			column = 0   
+						width = medium
+					)
+					Purchase_Order
+					(
+						type = picklist	
+						displayname = "Purchase Order"
+						values  = Purchase_Order.ID
+		    			displayformat = [QO_Number]
+						sortorder = ascending
+			 			row = 4
+			 			column = 1   
+						width = small
+					)
+					Selling_Currency
+					(
+						type = picklist	
+						displayname = "Selling Currency"
+						values  = Currency.ID
+		    			displayformat = [Currency_Name]
+						sortorder = ascending
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Search_Style_Code
+					(
+						type = picklist	
+						displayname = "Search Style Code"
+						values  = Style.ID
+		    			displayformat = [Style_Code]
+						sortorder = ascending
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Order_Review_ID
+					(
+						type = list	
+						displayname = "Order Review - ID"
+						values  = History.ID
+		    			bidirectional = Order_ID
+		    			displayformat = [ID]
+						height = 60px
+			 			row = 4
+			 			column = 1   
+						width = small
+					)
+					Order_ID
+					(
+		    			type = text
+						displayname = "Order ID"
+			 			row = 4
+			 			column = 1   
+						width = small
+					)
+					Order_By
+					(
+						type = picklist	
+						displayname = "Order By"
+						values  = Create_User.ID
+		    			displayformat = [" " + User_Name.prefix + " " + User_Name.first_name + " " + User_Name.last_name + " " + User_Name.suffix]
+						sortorder = ascending
+			 			row = 4
+			 			column = 1   
+						width = small
+					)
+					Last_Order
+					(
+		    			type = checkbox
+						displayname = "Last Order"
+						initial value = false
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Status
+					(
+						type = picklist
+						maxchar = 100
+						values = {"Pending","Awaiting Supplier Selection","Awaiting QO Generation","Validation Pending","In Production","In Transit","Completed","Cancelled"}
+						initial value = "Pending"
+			 			row = 4
+			 			column = 1   
+						width = small
+					)
+					Auto_Number
+					(
+		    			type = autonumber
+						displayname = "Auto Number"
+						start index = 1001
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Total_Quantity
+					(
+						type = number
+						displayname = "Total Quantity"
+						initial value = 0
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Order_Reference
+					(
+		    			type = text
+						displayname = "Order Reference"
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Delivery_Address
+					(
+						type = picklist	
+						displayname = "Delivery Address"
+						values  = Buyer_Contact_Person_Details[Buyers_Master.ID == input.Buyer_Organisation].ID
+		    			displayformat = [" " + Address.address_line_1 + " " + Address.address_line_2 + " " + Address.district_city + " " + Address.state_province]
+						sortorder = ascending
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Transport_Mode
+					(
+						type = picklist
+						displayname = "Transport Mode"
+						maxchar = 100
+						values = {"SEA","AIR","ROAD"}
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Comments
+					(
+		    			type = textarea
+						height = 100px
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

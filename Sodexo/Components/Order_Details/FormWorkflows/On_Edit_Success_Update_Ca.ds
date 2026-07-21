@@ -1,0 +1,33 @@
+On_Edit_Success_Update_Ca as "On Edit Success - Update Cart Total"
+{
+
+			
+							type =  form
+							form = Order_Details
+			
+							record event = on edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetCart = Order_Request[ID == input.Order_Request];
+													if(fetCart.count() > 0)
+													{
+														fetBuyerProduct = Buyer_Product_Mapping[Buyer == fetCart.Buyer_Organisation && Factory_Allocated == fetCart.Factory];
+														SubFormRows = fetCart.Order_details;
+														fetCart.Selling_Currency=if(fetBuyerProduct.count() > 0,fetBuyerProduct.Sell_Currency,null);
+														fetCart.Cart_Total=SubFormRows.sum(Sub_Total);
+														fetOrderDetail = Order_Details[Order_Request == fetCart.ID];
+														fetCart.Total_Quantity=fetOrderDetail.sum(Quantity);
+													}
+													success message "Cart Updated Successfully!";
+									)
+								}
+							}
+			
+						
+			
+}

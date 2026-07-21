@@ -1,0 +1,23 @@
+Delete_Purchase_Line_Item as "Delete Purchase Line Items"
+{
+
+			
+							type =  form
+							form = Purchase_Order
+			
+							record event = on delete
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														delete from Purchase_LineItems[Purchase_Order == null || Purchase_Order == input.ID];
+									)
+								}
+							}
+			
+						
+			
+}

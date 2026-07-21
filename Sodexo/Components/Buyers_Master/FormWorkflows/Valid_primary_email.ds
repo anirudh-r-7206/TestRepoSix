@@ -1,0 +1,85 @@
+Valid_primary_email as "Valid primary email"
+{
+
+			
+							type =  form
+							form = Buyers_Master
+			
+							record event = on add or edit
+			
+							on user input of Primary_Email
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Primary_Email != null && input.Primary_Email != "")
+													{
+														duplicate_Email = false;
+														if(!input.Person_2_Email.isEmpty())
+														{
+															if(input.Primary_Email.equalsIgnoreCase(input.Person_2_Email))
+															{
+																duplicate_Email = true;
+															}
+														}
+														for each  focal in input.Focal_Details_Subform
+														{
+															if(!focal.Email.isEmpty())
+															{
+																if(focal.Email.equalsIgnoreCase(input.Primary_Email))
+																{
+																	duplicate_Email = true;
+																}
+															}
+														}
+														// for each  Del in input.Delivery_Person_Details
+														// {
+														// 	if(Del.Email.equalsIgnoreCase(input.Primary_Email))
+														// 	{
+														// 		duplicate_Email = true;
+														// 	}
+														// }
+														if(duplicate_Email == true)
+														{
+															alert "This email address has already been added. Duplicate email addresses are not allowed.";
+															input.Primary_Email = null;
+														}
+														else
+														{
+															fetUser = Create_User[Email.equalsIgnoreCase(input.Primary_Email)];
+															if(fetUser.count() > 0)
+															{
+																if(fetUser.User_Type != "Buyer")
+																{
+																	alert "This email is already associated with factory or internal user.";
+																	input.Primary_Email = null;
+																}
+																else if(fetUser.User_Type == "Buyer" && fetUser.Associated_Buyer != input.ID)
+																{
+																	alert "This email is already linked to another Buyer.";
+																	input.Primary_Email = null;
+																}
+															}
+															else
+															{
+																if(!thisapp.permissions.profileForUser(input.Primary_Email).isEmpty())
+																{
+																	alert "This email is already mapped to a different user profile.";
+																	input.Primary_Email = null;
+																}
+																else if(thisapp.permissions.adminEmailIds().containsIgnoreCase(input.Primary_Email))
+																{
+																	alert "User email IDs cannot be used as Buyer email IDs.";
+																	input.Primary_Email = null;
+																}
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

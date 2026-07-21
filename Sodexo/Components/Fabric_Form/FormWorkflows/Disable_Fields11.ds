@@ -1,0 +1,28 @@
+Disable_Fields11 as "Disable Fields"
+{
+
+			
+							type =  form
+							form = Fabric_Form
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														get_Fab_List = thisapp.Delete_Records.Delete_Fabrics();
+													enable Fabric_Name;
+													if(input.ID in get_Fab_List)
+													{
+														disable Fabric_Name;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,29 @@
+Valid_deletion as "Valid deletion"
+{
+
+			
+							type =  form
+							form = Buyer_Products
+			
+							record event = on delete
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														get_PO = Purchase_LineItems[Purchase_Order.Buyer_Organisation == input.Buyer_Product_Mapping.Buyer && Purchase_Order.Supplier == input.Buyer_Product_Mapping.Factory_Allocated && Product == input.Style_ID];
+													get_Order = Order_Details[Order_Request.Buyer_Organisation == input.Buyer_Product_Mapping.Buyer && Order_Request.Factory == input.Buyer_Product_Mapping.Factory_Allocated && Product == input.Style_ID];
+													if(get_PO.count() > 0 || get_Order.count() > 0)
+													{
+														alert "Cannot delete this record as a Purchase Order or Order Request is linked to it.";
+														cancel delete;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

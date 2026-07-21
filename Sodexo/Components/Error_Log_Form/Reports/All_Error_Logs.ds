@@ -1,0 +1,16 @@
+default list All_Error_Logs
+{
+
+		
+					displayName = "All Error Logs"
+					show all rows from Error_Log_Form    
+					(
+						Form_Name as "Form Name"
+						Comment
+						Rec_ID as "Rec ID"
+						Added_Time as "Added Time"
+						Added_User as "Added User"
+					)
+				
+		
+}

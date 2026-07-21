@@ -1,0 +1,33 @@
+Shipment_Dispatch_On_Load as "Shipment Dispatch On Load"
+{
+
+			    type = form
+			    form = Shipment_Dispatch
+			    record event = on add or edit
+			
+			    on load
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                disable ETD_Date, ETA_Date, Estimated_Delivery_Date, Expected_Payment_Date;
+			                disable Last_Payment_Reminder_Date, Last_Payment_Reminder_Offset;
+			                disable ExFactory_Variance_Days, ETD_Variance_Days, ETA_Variance_Days, Delivery_Variance_Days, Total_Lead_Time_Days, KPI_Status;
+			                disable Forwarder_Last_Sync_Time, Forwarder_Last_Response, API_Source_Reference, Buyer_Update_Last_Sent_Date;
+			                disable Cancelled_On, Cancelled_By;
+			                if(input.Dispatch_Status == "Confirmed")
+			                {
+			                    disable Shipment_Reference, Dispatch_Status, Buyer, Supplier, Freight_Forwarder, Forwarder_Booking_ID, Forwarder_Transport_Mode, Transit_Mode;
+			                }
+			                if(input.Dispatch_Status == "Cancelled")
+			                {
+			                    disable Shipment_Reference, Dispatch_Status, Buyer, Supplier, Freight_Forwarder, Forwarder_Booking_ID, Forwarder_Transport_Mode, Transit_Mode, Shipment_Status;
+			                    disable Production_Status, Estimated_ExFactory_Date, Actual_ExFactory_Date, Quality_Control_Date, Quality_Control_Result, Invoice_Upload, Packing_List_Upload;
+			                    disable ATD_Date, ATA_Date, Actual_Delivery_Date, Payment_Terms_Days, Payment_Status, Cancellation_Reason, Comments;
+			                }
+			            )
+			        }
+			    }
+			
+}

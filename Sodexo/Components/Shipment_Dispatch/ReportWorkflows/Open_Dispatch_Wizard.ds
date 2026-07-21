@@ -1,0 +1,19 @@
+Open_Dispatch_Wizard as "Open Dispatch Wizard"
+{
+
+			    type = functions
+			    form = Shipment_Dispatch
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                openUrl("#Page:Shipment_Dispatch_Wizard?Dispatch_ID=" + input.ID,"same window");
+			            )
+			        }
+			    }
+			
+}

@@ -1,0 +1,76 @@
+Primary_Email_Duplication as "Primary Email Duplication Validation"
+{
+
+			
+							type =  form
+							form = Add_Suppliers
+			
+							record event = on add or edit
+			
+							on user input of Email
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Email != null && input.Email != "")
+													{
+														duplicate_Email = false;
+														if(input.Email.equalsIgnoreCase(input.Email1))
+														{
+															duplicate_Email = true;
+														}
+														if(duplicate_Email == true)
+														{
+															alert "This email address has already been added. Duplicate email addresses are not allowed.";
+															input.Email = null;
+														}
+														// 	if(duplicate_Email == false)
+														else
+														{
+															fetUser = Create_User[Email.equalsIgnoreCase(input.Email)];
+															if(fetUser.count() > 0)
+															{
+																if(fetUser.User_Type != "Factory")
+																{
+																	alert "This email is already associated with buyer or internal user.";
+																	input.Email = null;
+																}
+																else if(fetUser.User_Type == "Factory" && fetUser.Associated_Factory != input.ID)
+																{
+																	alert "This email is already linked to another factory.";
+																	input.Email = null;
+																}
+															}
+															else
+															{
+																if(!thisapp.permissions.profileForUser(input.Email).isEmpty())
+																{
+																	alert "This email is already mapped to a different user profile.";
+																	input.Email = null;
+																}
+																else if(thisapp.permissions.adminEmailIds().containsIgnoreCase(input.Email))
+																{
+																	alert "User email IDs cannot be used as factory email IDs.";
+																	input.Email = null;
+																}
+															}
+														}
+													}
+													if(input.Email != null)
+													{
+														for each  factory in input.Factory_Details
+														{
+															if(input.Email.equalsIgnoreCase(factory.Factory_Email))
+															{
+																factory.Need_App_Access=input.Need_App_Access;
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

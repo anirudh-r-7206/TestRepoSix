@@ -1,0 +1,83 @@
+report Shipment_Dispatch_Split_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                    Purchase_Order as "PO / QO"
+		                    PO_Number_Display as "PO Number"
+		                    QO_Number_Display as "QO Number"
+		                    Split_Status as "Split Status"
+		                    Split_Quantity as "Split Quantity"
+		                    Transport_Mode as "PO Transport Mode"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                Delete
+		            )
+		            record
+		            (
+		                Edit
+		                Delete
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                Delete
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                    Purchase_Order as "PO / QO"
+		                    PO_Number_Display as "PO Number"
+		                    QO_Number_Display as "QO Number"
+		                    Split_Status as "Split Status"
+		                    Split_Quantity as "Split Quantity"
+		                    Split_QO_Value as "Split QO Value"
+		                    Split_PO_Value as "Split PO Value"
+		                    Transport_Mode as "PO Transport Mode"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                Delete
+		            )
+		        )
+		    )
+		
+}

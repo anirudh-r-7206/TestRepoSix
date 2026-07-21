@@ -1,0 +1,200 @@
+form Buyer_Contact_Person_Details
+{
+
+		
+					displayname = "Buyer Contact Person Details"
+					success message = "Buter Contact Person Detail Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Buyers_Master
+					(
+						type = picklist	
+						displayname = "Buyers Master"
+						values  = Buyers_Master.ID
+		    			bidirectional = Delivery_Person_Details
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Company_Name
+					(
+		    			type = text
+						displayname = "Company Name"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Contact_Person1
+					(
+		    			type = name
+						displayname = "Contact Person"
+		     			prefix
+		     			(
+			     			 type = prefix
+			     			 displayname ="Prefix"
+			     			 visibility = false
+			     			 value = {"Mr.","Mrs.","Ms."}
+		     			) 
+		     			first_name
+		     			(
+			     			 type = first_name
+			     			 displayname ="First Name"
+		     			) 
+		     			last_name
+		     			(
+			     			 type = last_name
+			     			 displayname ="Last Name"
+		     			) 
+		     			suffix
+		     			(
+			     			 type = suffix
+			     			 displayname ="Suffix"
+			     			 visibility = false
+		     			) 
+			 			row = 1
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					Contact_Person
+					(
+		    			type = text
+						displayname = "Contact Person"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Email
+					(
+		    			type = email
+						maxchar = 80
+			 			row = 1
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					Email_old
+					(
+		    			type = email
+						displayname = "Email old"
+						maxchar = 80
+			 			row = 1
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					Need_App_Access
+					(
+		    			type = checkbox
+						displayname = "Need App Access"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Phone_Number
+					(
+		    			type = phonenumber
+						displayname = "Phone"
+			 			row = 1
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					must have Country
+					(
+						type = picklist	
+						values  = Add_Country.ID
+		    			displayformat = [Country_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Address
+					(
+		    			type = address
+		     			capture_coordinates = true
+		     			adjust_using_map = false
+		     			address_line_1
+		     			(
+			     			  type = address_line_1
+			     			  displayname = "Address Line 1"
+		     			) 
+		     			address_line_2
+		     			(
+			     			  type = address_line_2
+			     			  displayname = "Address Line 2"
+		     			) 
+		     			district_city
+		     			(
+			     			  type = district_city
+			     			  displayname = "City / District"
+		     			) 
+		     			state_province
+		     			(
+			     			  type = state_province
+			     			  displayname = "State / Province"
+		     			) 
+		     			postal_Code
+		     			(
+			     			  type = postal_Code
+			     			  displayname = "Postal Code"
+		     			) 
+		     			country
+		     			(
+			     			  type = country
+			     			  displayname = "Country"
+		     			) 
+		     			latitude
+		     			(
+			     			  type = latitude
+			     			  displayname = "latitude"
+			     			 visibility = false
+		     			) 
+		     			longitude
+		     			(
+			     			  type = longitude
+			     			  displayname = "longitude"
+			     			 visibility = false
+		     			) 
+			 			row = 1
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

@@ -1,0 +1,184 @@
+list Purchase_Order_detail_view
+{
+
+		
+					displayName = "Purchase Order detail view"
+					show all rows from Purchase_Order    
+					(
+						Order_Reference as "Order Reference"
+						PO_Date as "PO Date"
+						(
+							width = 122px
+						)
+						Order_Type as "Order Type "
+						(
+							width = 134px
+						)
+						Order_Status as "Order Status"
+						(
+							width = 141px
+						)
+						Order_Request as "Order Request"
+						(
+							width = 155px
+						)
+						PO_Number as "PO Number"
+						(
+							width = 164px
+						)
+						Total_Purchase_Price as "Total Purchase Price"
+						(
+							width = 173px
+						)
+						Total_Selling_Price as "Total Selling Price"
+						Base_Purchase_Price_Total as "Total Purchase Price (Excluding Additional Cost)"
+						Base_Selling_Price_Total as "Total Selling Price (Excluding Additional Cost)"
+						Shipment_Tracking_Status as "Shipment Tracking Status"
+						Shipment_Dispatch_Count as "Shipment Dispatch Count"
+						Latest_Estimated_Delivery_Date as "Latest Estimated Delivery Date"
+						Latest_Actual_Delivery_Date as "Latest Actual Delivery Date"
+						custom action "Create Dispatch"
+						(
+			  			workflow = Create_Dispatch
+						show action in edit record menu = true
+						column header = "Create Dispatch"
+						condition = (Order_Status == "In Production" || Order_Status == "Completed")
+						)
+						custom action "Add to Dispatch"
+						(
+			  			workflow = Add_to_Dispatch
+						show action in edit record menu = true
+						column header = "Add to Dispatch"
+						condition = (Order_Status == "In Production" || Order_Status == "Completed")
+						)
+						custom action "View Dispatches"
+						(
+			  			workflow = View_Dispatches
+						show action in edit record menu = true
+						column header = "View Dispatches"
+						condition = (Shipment_Dispatch_Count > 0)
+						)
+						custom action "View PO"
+						(
+			  			workflow = View_PO
+						show action in edit record menu = true
+						column header = "View PO"
+						)
+						custom action "View QO"
+						(
+			  			workflow = View_QO
+						show action in edit record menu = true
+						column header = "View QO"
+						)
+						Country
+						custom action "Generate QO"
+						(
+			  			workflow = Generate_PO1
+						show action in edit record menu = true
+						column header = "Generate QO"
+						condition = (Order_Status == "Awaiting QO Generation")
+						)
+						custom action "Move to Production"
+						(
+			  			workflow = Move_to_Production
+						show action in edit record menu = true
+						column header = "Move to Production"
+						condition = (Order_Status == "Awaiting Production")
+						)
+						custom action "Completed"
+						(
+			  			workflow = Complete_PO
+						show action in edit record menu = true
+						column header = "Completed"
+						condition = (Order_Status == "In Production")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to complete this purchase order?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						Supplier
+						Buyer_Organisation as "Buyer Organisation"
+						Payment_Terms as "Payment Terms"
+						Factory_Address1  as "Factory Address"
+			 			(
+			      			enable = Link_to_Map,Show_As_Text
+			 			)
+						Delivery_Address1  as "Delivery Address"
+			 			(
+			      			enable = Link_to_Map,Show_As_Text
+			 			)
+					)
+					sort by
+					(
+						PO_Number descending
+					)
+					custom actions
+					(
+						"Edit PO"
+						(
+			  			workflow = Edit_PO
+						show action in edit record menu = true
+						)
+					)
+					conditional formatting
+					(
+						"Completed"
+						{
+						condition = (Order_Status == "Completed")
+						fields = [Order_Status]
+						format = "color:#16a34a;"
+						}
+						"Awaiting QO Generation"
+						{
+						condition = (Order_Status == "Awaiting QO Generation")
+						fields = [Order_Status]
+						format = "color:#3b82f6;"
+						}
+						"Awaiting Buyer Review"
+						{
+						condition = (Order_Status == "Awaiting Buyer Review")
+						fields = [Order_Status]
+						format = "color:#f59e0b;"
+						}
+						"Amendment Requested (Buyer)"
+						{
+						condition = (Order_Status == "Amendment Requested (Buyer)")
+						fields = [Order_Status]
+						format = "color:#ea580c;"
+						}
+						"Awaiting PO Generation"
+						{
+						condition = (Order_Status == "Awaiting PO Generation")
+						fields = [Order_Status]
+						format = "color:#eab308;"
+						}
+						"Awaiting Factory Review"
+						{
+						condition = (Order_Status == "Awaiting Factory Review")
+						fields = [Order_Status]
+						format = "color:#f59e0b;"
+						}
+						"Amendment Requested (Factory)"
+						{
+						condition = (Order_Status == "Amendment Requested (Factory)")
+						fields = [Order_Status]
+						format = "color:#ea580c;"
+						}
+						"Awaiting Production"
+						{
+						condition = (Order_Status == "Awaiting Production")
+						fields = [Order_Status]
+						format = "color:#6366f1;"
+						}
+						"In Production"
+						{
+						condition = (Order_Status == "In Production")
+						fields = [Order_Status]
+						format = "color:#a811cc;"
+						}
+					)
+				
+		
+}

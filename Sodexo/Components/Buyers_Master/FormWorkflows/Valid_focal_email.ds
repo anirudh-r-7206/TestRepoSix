@@ -1,0 +1,91 @@
+Valid_focal_email as "Valid focal email"
+{
+
+			
+							type =  form
+							form = Buyers_Master
+			
+							record event = on add or edit
+			
+							on user input of Focal_Details_Subform.Email
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														duplicate_Email = false;
+													if(!row.Email.isEmpty())
+													{
+														focal_Count = 0;
+														for each  focal in input.Focal_Details_Subform
+														{
+															focal_Count = focal_Count + 1;
+															if(focal.Email.equalsIgnoreCase(input.Person_2_Email) || focal.Email.equalsIgnoreCase(input.Primary_Email))
+															{
+																// 		alert "Duplicate email not allowed.";
+																duplicate_Email = true;
+																focal.Email=null;
+															}
+															sub_Focal_Count = 0;
+															for each  subFocal in input.Focal_Details_Subform
+															{
+																sub_Focal_Count = sub_Focal_Count + 1;
+																if(focal_Count != sub_Focal_Count && focal.Email.equalsIgnoreCase(subFocal.Email))
+																{
+																	// 			alert "Duplicate email not allowed.";
+																	duplicate_Email = true;
+																	subFocal.Email=null;
+																}
+															}
+															// 	for each  del in input.Delivery_Person_Details
+															// 	{
+															// 		if(focal.Email.equalsIgnoreCase(del.Email))
+															// 		{
+															// 			// 			alert "Duplicate email not allowed.";
+															// 			duplicate_Email = true;
+															// 			subFocal.Email=null;
+															// 		}
+															// 	}
+														}
+														if(duplicate_Email == false)
+														{
+															fetUser = Create_User[Email.equalsIgnoreCase(row.Email)];
+															if(fetUser.count() > 0)
+															{
+																if(fetUser.User_Type != "Buyer")
+																{
+																	alert "This email is already associated with factory or internal user.";
+																	row.Email=null;
+																}
+																else if(fetUser.User_Type == "Buyer" && fetUser.Associated_Buyer != input.ID)
+																{
+																	alert "This email is already linked to another Buyer.";
+																	row.Email=null;
+																}
+															}
+															else
+															{
+																if(!thisapp.permissions.profileForUser(row.Email).isEmpty())
+																{
+																	alert "This email is already mapped to a different user profile.";
+																	row.Email=null;
+																}
+																else if(thisapp.permissions.adminEmailIds().containsIgnoreCase(row.Email))
+																{
+																	alert "User email IDs cannot be used as Buyer email IDs.";
+																	row.Email=null;
+																}
+															}
+														}
+													}
+													if(duplicate_Email == true)
+													{
+														alert "This email address has already been added. Duplicate email addresses are not allowed.";
+													}
+									)
+								}
+							}
+			
+						
+			
+}

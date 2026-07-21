@@ -1,0 +1,37 @@
+Hide_show2 as "Hide & show"
+{
+
+			
+							type =  form
+							form = Add_Suppliers
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Email != null && input.Primary_email_old == null)
+													{
+														input.Primary_email_old = input.Email;
+													}
+													if(input.Email1 != null && input.Secondary_email_old == null)
+													{
+														input.Secondary_email_old = input.Email1;
+													}
+													for each  fact in input.Factory_Details
+													{
+														if(fact.Factory_Email != null && fact.Factory_Email_old == null)
+														{
+															fact.Factory_Email_old=fact.Factory_Email;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

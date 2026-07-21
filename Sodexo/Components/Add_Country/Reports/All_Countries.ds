@@ -1,0 +1,82 @@
+default list All_Countries
+{
+
+		
+					displayName = "Countries"
+					show all rows from Add_Country    
+					(
+						Country_Name as "Country Name"
+						Status
+						Region_Code as "Region Code"
+						Region_Code_New as "Region Code New"
+					)
+					custom actions
+					(
+						"Delete Countries"
+						(
+			  			workflow = Delete_Selected_Countries
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (ID != thisapp.Delete_Records.Delete_Countries())
+						)
+						"Activate"
+						(
+			  			workflow = Active_Country
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Inactive")
+						confirmation before execution
+						(
+							message for individual record = "Do you want to activate this country?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Deactivate"
+						(
+			  			workflow = Deactivate_Country
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Active")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to deactivate this country?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Edit Country"
+						(
+			  			workflow = Edit1
+						show action in view header = true
+						)
+						"Delete Country"
+						(
+			  			workflow = Delete_workflow
+						show action in view header = true
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to delete this item? This action cannot be undone."
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+					conditional formatting
+					(
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#5dc35a;"
+						}
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+					)
+				
+		
+}

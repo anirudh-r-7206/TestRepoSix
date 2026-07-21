@@ -1,0 +1,31 @@
+Edit as "Edit"
+{
+
+			
+							type =  functions
+							form = Create_Size
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// reference = thisapp.References.Size(input.ID);
+													// if(reference.trim() != "" && reference != null)
+													// {
+													// 	url = "#Form:Alert_References?zc_Header=false&Create_Size=" + input.ID;
+													// 	window = "popup window";
+													// }
+													// else
+													// {
+													url = "#Form:Create_Size?zc_NextUrl=#Script:page.refresh&zc_LoadIn=dialog&viewLinkName=All_Sizes&recLinkID=" + input.ID;
+													window = "same window";
+													// }
+													openUrl(url,window);
+								)
+								}
+							}
+						
+			
+}

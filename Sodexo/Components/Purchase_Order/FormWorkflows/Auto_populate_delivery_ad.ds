@@ -1,0 +1,25 @@
+Auto_populate_delivery_ad as "Auto populate delivery address"
+{
+
+			
+							type =  form
+							form = Purchase_Order
+			
+							record event = on add
+			
+							on user input of Buyer_Organisation
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetBuyerContact = Buyer_Contact_Person_Details[Buyers_Master == input.Buyer_Organisation];
+													input.Delivery_Address:ui.add(fetBuyerContact.ID.getall());
+													input.Delivery_Address = input.Order_Request.Delivery_Address;
+									)
+								}
+							}
+			
+						
+			
+}

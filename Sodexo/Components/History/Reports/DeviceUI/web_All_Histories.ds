@@ -1,0 +1,89 @@
+report All_Histories
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Order_ID as "Order ID"
+										Purchase_Order_ID as "Purchase Order ID"
+										Raised_By as "Raised By"
+										Status
+										File_upload as "File upload"
+										Comments
+										Approval_Status as "Approval Status"
+										On_behalf_of as "On behalf of"
+										Copy_of_Purchase_Order as "Copy of Purchase Order"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Order_ID as "Order ID"
+										Purchase_Order_ID as "Purchase Order ID"
+										Raised_By as "Raised By"
+										Status
+										Comments
+										Approval_Status as "Approval Status"
+										On_behalf_of as "On behalf of"
+										QO_Viewed as "QO Viewed"
+										Copy_of_Purchase_Order as "Copy of Purchase Order"
+										File_upload as "File upload"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		
+}

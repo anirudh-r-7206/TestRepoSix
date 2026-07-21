@@ -1,0 +1,26 @@
+Send_to_Buyer as "Send to Buyer"
+{
+
+			
+							type =  functions
+							form = History
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// input.Approval_Status = "Completed";
+													// if(Purchase_Order_ID.Order_Status == "Amendment Requested (Buyer)")
+													// {
+													// 	fetch_QO = Purchase_Order[ID == input.Purchase_Order_ID];
+													// 	fetch_QO.Order_Status="Awaiting PO Generation";
+													thisapp.Send_Mail.Send_Mail_to_Buyer_Review(input.Purchase_Order_ID,"Review");
+													// }
+								)
+								}
+							}
+						
+			
+}

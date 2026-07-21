@@ -1,0 +1,279 @@
+<%
+	input.QO_ID = 4908788000000468095;
+	get_PO = Purchase_Order[ID == input.QO_ID];
+	get_PO_Items = Purchase_LineItems[Purchase_Order == input.QO_ID];
+	get_Buyer = Buyers_Master[ID == get_PO.Buyer_Organisation];
+	%>
+<html>
+<head>
+		<style>
+		form[name="Print_and_PDF_Button"].label-left{
+			width: 100% !important;
+			background-color: #000000 !important;
+			border-radius: 0 !important;
+		}
+		form[name="Print_and_PDF_Button"] .label-left{
+			width: 100%;
+			
+		}
+		form[name="Print_and_PDF_Button"] .formContainer {
+			padding: 0 !important;
+		}
+		form[name="Print_and_PDF_Button"] .form-group.zc-decisionbox-field-group, form[name="Print_and_PDF_Button"] .zc-form-scroll-wrapper {
+			margin: 0 !important;
+		}
+		form[name="Print_and_PDF_Button"] .decision-box-field.form-field.clearfix {
+			display: none;
+		}
+		form[name="Print_and_PDF_Button"] .formColumn.first-column
+		{
+			display: flex;
+			align-items: center;
+			justify-content: end;
+			gap: 10px;
+		}
+		form[name="Print_and_PDF_Button"] label.form-label.decision-box-label {
+			color: #fff !important;
+			padding: 10px 20px !important;
+			background-color: var(--primary_color);
+			border-radius: 8px;
+			margin: 0px !important;
+		}
+
+		.zc-footer-wrapper{
+			display: none;
+		}
+		@media print {
+		  /* Specific margins for different sides */
+		  @page {
+			margin-top: 40px;
+			margin-bottom: 40px;
+			margin-left: 10px;
+			margin-right: 10px;
+			size: A4 landscape;
+		  }
+		   .action-bar{
+			 display: none !important;
+		 }
+		  .page{
+			  padding: 0px;
+		  }
+		}
+	<%=thisapp.Style.PO_V2_Templet_Style()%>
+	</style>
+</head>
+
+<body>
+
+		<div class="po-container">
+				<div class="header">
+						<div class="logo-area">
+				<!-- <img src="https://profile.zoho.com/file?ot=30&ID=910537807&t=serviceorg&nocache=1780989705840" > -->
+				<img src=<%=thisapp.Publish_URL.Org_IMG()%> >
+						</div>
+						<div class="action-bar">
+				<div elName='zc-component' formLinkName='Print_and_PDF_Button' params='zc_Header=false&amp;zc_SuccMsg=Data Added Successfully!&amp;zc_SubmitVal=Submit&amp;zc_ResetVal=Reset&Template=QO_V2&Purchase_Order=<%=input.QO_ID%>'></div>
+						</div>
+				</div>
+
+				<div class="po-meta-row">
+						<div>
+								<div class="title-tag">Quotation Order</div>
+								<h1 class="po-number"><%=get_PO.QO_Number%></h1>
+								<div class="date-info">Issued <%=zoho.currentdate%></div>
+						</div>
+						<div class="totals-summary">
+						</div>
+				</div>
+
+				<hr class="divider">
+
+				<div class="parties-grid">
+						<div class="party-col">
+								<h2 class="party-title">Supplier</h2>
+								<div class="party-name"><%=if(get_PO.Supplier.Supplier_Organisation.isEmpty(),"---",get_PO.Supplier.Supplier_Organisation)%></div>
+								<p class="party-details">
+										<%=if(get_PO.Supplier.Factory_Address.isEmpty(),"---",get_PO.Supplier.Factory_Address)%><br>
+										<%=if(get_PO.Supplier.Contact_Person2.isEmpty(),"---",get_PO.Supplier.Contact_Person2)%><br>
+										<%=if(get_PO.Supplier.Phone.isEmpty(),"---",get_PO.Supplier.Phone)%><br>
+										<%=if(get_PO.Supplier.Email.isEmpty(),"---",get_PO.Supplier.Email)%>
+								</p>
+						</div>
+						<div class="party-col">
+								<h2 class="party-title">Buyer</h2>
+								<div class="party-name"><%=if(get_PO.Buyer_Organisation.Buyer_Organisation.isEmpty(),"---",get_PO.Buyer_Organisation.Buyer_Organisation)%></div>
+								<p class="party-details">
+										<%=if(get_PO.Buyer_Organisation.Office_Address.isEmpty(),"---",get_PO.Buyer_Organisation.Office_Address)%><br>
+										<%=if(get_PO.Buyer_Organisation.Primary_Name1.isEmpty(),"---",get_PO.Buyer_Organisation.Primary_Name1)%><br>
+										<%=if(get_PO.Buyer_Organisation.Primary_Phone.isEmpty(),"---",get_PO.Buyer_Organisation.Primary_Phone)%><br>
+										<%=if(get_PO.Buyer_Organisation.Primary_Email.isEmpty(),"---",get_PO.Buyer_Organisation.Primary_Email)%>
+								</p>
+						</div>
+				</div>
+
+				<hr class="divider">
+
+				<div class="logistics-grid">
+						<div class="summary-box">
+								<h3 class="sec-heading">SUMMARY</h3>
+								<table class="summary-table">
+										<tr>
+												<td>Payment Terms</td>
+												<td>:</td>
+												<td><strong><%=get_PO.Customer_Name.Associated_Buyer.Payment_Terms%></strong></td>
+										</tr>
+										<tr>
+												<td>Due Date</td>
+												<td>:</td>
+												<td><strong><%=get_PO.Delivery_Date%></strong></td>
+										</tr>
+										<tr>
+												<td>Total Qty</td>
+												<td>:</td>
+												<td><strong><%=thisapp.Page.PO_Currency_Convert(get_PO_Items.sum(Quantity))%></strong></td>
+										</tr>
+										<tr>
+												<td>Total cost</td>
+												<td>:</td>
+												<td><strong><%=thisapp.Page.PO_Currency_Convert(get_PO.Total_Selling_Price.round(2))%></strong></td>
+										</tr>
+										<tr>
+												<td>Freight</td>
+												<td>:</td>
+												<td><strong><%=get_PO.Transport_Mode.upper()%></strong></td>
+										</tr>
+										<tr>
+												<td>Incoterms</td>
+												<td>:</td>
+												<td><strong><%=get_PO.Incoterms%></strong></td>
+										</tr>
+										<tr>
+												<td>Currency</td>
+												<td>:</td>
+												<td><strong><%=get_PO.Buyer_Organisation.Currency.Currency_Name%></strong></td>
+										</tr>
+										<tr>
+												<td>COO</td>
+												<td>:</td>
+												<td><strong><%=if(get_PO.Supplier.Country != null,get_PO.Supplier.Country.Country_Name.upper(),"---")%></strong></td>
+										</tr>
+								</table>
+						</div>
+
+						<div class="addresses-box">
+								<div class="address-block">
+										<h3 class="sec-heading">Factory</h3>
+										<p class="addr-text">
+												<strong>ATTN :</strong> <%=if(get_PO.Factory_Contact_Person.isEmpty(),"---",get_PO.Factory_Contact_Person)%><br>
+												<strong><%=if(get_PO.Factory_Company_Name.isEmpty(),"---",get_PO.Factory_Company_Name)%></strong><br>
+												<span class="muted-text"><%=if(get_PO.Factory_Address1.address_line_1.isempty(),"---",get_PO.Factory_Address1.address_line_1)%>, <%=if(get_PO.Factory_Address1.address_line_2.isEmpty(),"---",get_PO.Factory_Address1.address_line_2)%>,<%=if(get_PO.Factory_Address1.district_city.isEmpty(),"---",get_PO.Factory_Address1.district_city)%>, <%=if(get_PO.Factory_Address1.state_province.isEmpty(),"---",get_PO.Factory_Address1.state_province)%>,<%=if(get_PO.Factory_Address1.postal_Code.isEmpty(),"---",get_PO.Factory_Address1.postal_Code)%>, <%=if(get_PO.Factory_Address1.country.isEmpty(),"---",get_PO.Factory_Address1.country)%></span><br>
+												<%=if(get_PO.Factory_Phone.isEmpty(),"---",get_PO.Factory_Phone)%><br>
+												<%=if(get_PO.Factory_Email.isEmpty(),"---",get_PO.Factory_Email)%>
+										</p>
+								</div>
+
+								<div class="address-block" style="margin-top: 25px;">
+										<h3 class="sec-heading">Delivery Address</h3>
+										<p class="addr-text">
+												<strong>ATTN :</strong> <%=if(get_PO.Buyer_Contact_Person.isEmpty(),"---",get_PO.Buyer_Contact_Person)%><br>
+						<strong><%=if(get_PO.Buyer_Company_Name.isEmpty(),"---",get_PO.Buyer_Company_Name)%><strong></br>
+												<span class="muted-text"><%=if(get_PO.Delivery_Address1.address_line_1.isEmpty(),"---",get_PO.Delivery_Address1.address_line_1)%>, <%=if(get_PO.Delivery_Address1.address_line_2.isEmpty(),"---",get_PO.Delivery_Address1.address_line_2)%>,<%=if(get_PO.Delivery_Address1.district_city.isEmpty(),"---",get_PO.Delivery_Address1.district_city)%>, <%=if(get_PO.Delivery_Address1.state_province.isEmpty(),"---",get_PO.Delivery_Address1.state_province)%>,<%=if(get_PO.Delivery_Address1.postal_Code.isEmpty(),"---",get_PO.Delivery_Address1.postal_Code)%>, <%=if(get_PO.Delivery_Address1.country.isEmpty(),"---",get_PO.Delivery_Address1.country)%></span><br>
+												<%=if(get_PO.Buyer_Phone.isEmpty(),"---",get_PO.Buyer_Phone)%><br>
+												<%=if(get_PO.Buyer_Email.isEmpty(),"---",get_PO.Buyer_Email)%>
+										</p>
+								</div>
+						</div>
+				</div>
+
+				<div class="order-info-section">
+		<%=thisapp.Page.PO_V2_Templet_Table(input.QO_ID,"QO")%>
+				<!--    <table class="items-table">
+								<thead>
+										<tr>
+												<th style="width: 3%;">#</th>
+												<th style="width: 10%;">Style Name</th>
+												<th style="width: 8%;">Style code</th>
+												<th style="width: 6%;">Colour</th>
+												<th style="width: 8%;">Size</th>
+												<th style="width: 6%;">Gender</th>
+												<th style="width: 32%;">Fabric Composition</th>
+												<th style="width: 10%;">HS CODE</th>
+												<th style="width: 4%;">Qty</th>
+												<th style="width: 13%;">Unit Price (Purchase price)</th>
+												<th style="width: 10%; text-align: right;">Total</th>
+										</tr>
+								</thead>
+								<tbody>
+										<tr>
+												<td>1</td>
+												<td class="font-medium">Antiviral N5 spenic</td>
+												<td>20/5/01</td>
+												<td>Denim</td>
+												<td>One size</td>
+												<td>Unisex</td>
+												<td class="desc-text">Soft, breathable, and comfortable fabric made from cotton fibers, ideal
+														for daily wear and summer clothing.</td>
+												<td>bx374865</td>
+												<td>20</td>
+												<td>400.00</td>
+												<td style="text-align: right;" class="font-medium">3,000.00</td>
+										</tr>
+										<tr>
+												<td>2</td>
+												<td class="font-medium">Kitchen wash paper</td>
+												<td>20/2/02</td>
+												<td>Denim</td>
+												<td>One size</td>
+												<td>Unisex</td>
+												<td class="desc-text">Soft, breathable, and comfortable fabric made from cotton fibers, ideal
+														for daily wear and summer clothing.</td>
+												<td>bx374865</td>
+												<td>20</td>
+												<td>100.00</td>
+												<td style="text-align: right;" class="font-medium">3,000.00</td>
+										</tr>
+										<tr class="row-subtotal">
+												<td colspan="8" class="font-semibold">Sub Total</td>
+												<td class="font-bold">40</td>
+												<td></td>
+												<td style="text-align: right;" class="font-bold">3,000.00</td>
+										</tr>
+										<tr class="row-grandtotal">
+												<td colspan="8" class="font-bold">Grand Total</td>
+												<td class="font-bold">40</td>
+												<td></td>
+												<td style="text-align: right;" class="font-bold">7,000.00</td>
+										</tr>
+								</tbody>
+						</table> -->
+				</div>
+
+				<div class="footer-signoff">
+						<div class="signature-form">
+								<div class="form-line">
+										<span class="label">Name</span>
+										<div class="line-input"></div>
+								</div>
+								<div class="form-line">
+										<span class="label">Position</span>
+										<div class="line-input"></div>
+								</div>
+								<div class="form-line">
+										<span class="label">Company Stamp</span>
+										<div class="line-input"></div>
+								</div>
+								<div class="form-line">
+										<span class="label">Signature</span>
+										<div class="line-input"></div>
+								</div>
+						</div>
+
+						<div class="comments-box">
+						</div>
+				</div>
+
+		</div>
+
+</body>
+
+</html>

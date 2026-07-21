@@ -1,0 +1,20 @@
+Edit_PO_Item as "Edit PO Item"
+{
+
+			
+							type =  functions
+							form = Copy_of_Purchase_LineItems
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:Copy_of_Purchase_LineItems?zc_LoadIn=embed-editPO&zc_Header=false&recLinkID=" + input.ID + "&viewLinkName=Copy_of_Purchase_LineItems_Report","same window");
+								)
+								}
+							}
+						
+			
+}

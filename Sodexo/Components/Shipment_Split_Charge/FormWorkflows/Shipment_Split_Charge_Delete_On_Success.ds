@@ -1,0 +1,26 @@
+Shipment_Split_Charge_Delete_On_Success as "Shipment Split Charge Delete On Success"
+{
+
+			    type = form
+			    form = Shipment_Split_Charge
+			    record event = on delete
+			
+			    on success
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch != null)
+			                {
+			                    thisapp.Shipment_Recalculate(input.Shipment_Dispatch);
+			                }
+			                if(input.Purchase_Order != null)
+			                {
+			                    thisapp.Update_PO_Shipment_Summary(input.Purchase_Order);
+			                }
+			            )
+			        }
+			    }
+			
+}

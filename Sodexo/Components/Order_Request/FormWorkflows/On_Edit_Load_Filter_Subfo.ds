@@ -1,0 +1,64 @@
+On_Edit_Load_Filter_Subfo as "On Edit Load - Filter Subform Products"
+{
+
+			
+							type =  form
+							form = Order_Request
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														// get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+													// if(get_User.User_Type != "Buyer")
+													// {
+													// 	show Order_details.Supplier;
+													// }
+													disable Buyer_Organisation;
+													disable Buyer_Name;
+													hide Factory;
+													get_Buyer_Master = Buyers_Master[ID == input.Buyer_Name.Associated_Buyer && Status == "Active"];
+													// get_Product = Add_Product[Supplier_Name == get_Buyer_Master.Factory_Allocated && Wardrobe in get_Buyer_Master.Wardrobe && Status == "Approved"];
+													// get_All_product = get_Product.ID.getall();
+													get_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == input.Factory];
+													get_All_product = get_Product.Style_ID.getall();
+													get_All_product.removeAll(input.Order_details.Product.getall());
+													for each  order in input.Order_details
+													{
+														// 	get_Supplier_rec = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation && Style_ID == order.Product];
+														// 	get_Spl = get_Supplier_rec.Buyer_Product_Mapping.Factory_Allocated.getall();
+														// 	old_Supplier = order.Supplier;
+														// 	order.Supplier:ui.add(get_Spl);
+														// 	order.Supplier=old_Supplier;
+														// 	if(order.Supplier == null && get_Spl.size() == 1)
+														// 	{
+														// 		order.Supplier=get_Spl.get(0);
+														// 	}
+														// 	
+														// 	if(order.Supplier != null)
+														// 	{
+														// 		get_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == order.Supplier];
+														// 	}
+														// 	else
+														// 	{
+														// 		get_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation];
+														// 	}
+														// 	get_All_product = get_Product.Style_ID.getall();
+														// 	get_All_product.removeAll(input.Order_details.Product.getall());
+														old_Product = order.Product;
+														add_sub_Product = get_All_product;
+														add_sub_Product.add(old_Product);
+														order.Product:ui.add(add_sub_Product);
+														order.Product=old_Product;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

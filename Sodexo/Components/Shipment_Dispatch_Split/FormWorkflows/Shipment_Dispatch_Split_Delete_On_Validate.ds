@@ -1,0 +1,23 @@
+Shipment_Dispatch_Split_Delete_On_Validate as "Validate Shipment Dispatch Split Delete"
+{
+
+			    type = form
+			    form = Shipment_Dispatch_Split
+			    record event = on delete
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch != null && input.Shipment_Dispatch.Dispatch_Status != "Draft")
+			                {
+			                    alert "Split rows cannot be deleted after the dispatch is confirmed or cancelled.";
+			                    cancel delete;
+			                }
+			            )
+			        }
+			    }
+			
+}

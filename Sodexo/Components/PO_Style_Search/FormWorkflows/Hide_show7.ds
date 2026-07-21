@@ -1,0 +1,20 @@
+Hide_show7 as "Hide & show"
+{
+
+			
+							type =  form
+							form = PO_Style_Search
+			
+							record event = on add
+			
+							field rules
+							{
+								actions 
+								{
+									hide Purchase_Order;
+								}
+							}
+			
+						
+			
+}

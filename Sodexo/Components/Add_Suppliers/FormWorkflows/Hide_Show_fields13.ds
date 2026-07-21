@@ -1,0 +1,20 @@
+Hide_Show_fields13 as "Hide & Show fields"
+{
+
+			
+							type =  form
+							form = Add_Suppliers
+			
+							record event = on edit
+			
+							field rules
+							{
+								actions 
+								{
+									disable Supplier_type,Supplier_Organisation,Country;
+								}
+							}
+			
+						
+			
+}

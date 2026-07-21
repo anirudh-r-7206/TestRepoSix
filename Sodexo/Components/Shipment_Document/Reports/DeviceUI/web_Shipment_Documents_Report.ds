@@ -1,0 +1,83 @@
+report Shipment_Documents_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                    Shipment_Dispatch_Split as "Shipment Dispatch Split"
+		                    Purchase_Order as "PO / QO"
+		                    Document_Type as "Document Type"
+		                    Document_File as "Document File"
+		                    Source
+		                    Uploaded_By_Role as "Uploaded By Role"
+		                    Added_Time as "Added Time"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                Delete
+		            )
+		            record
+		            (
+		                Edit
+		                Delete
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                Delete
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                    Shipment_Dispatch_Split as "Shipment Dispatch Split"
+		                    Purchase_Order as "PO / QO"
+		                    Document_Type as "Document Type"
+		                    Document_File as "Document File"
+		                    Source
+		                    Uploaded_By_Role as "Uploaded By Role"
+		                    Added_Time as "Added Time"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                Delete
+		            )
+		        )
+		    )
+		
+}

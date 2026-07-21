@@ -1,0 +1,15 @@
+default list All_Size_Chart_Mappings
+{
+
+		
+					displayName = "Size Chart Mappings"
+					show all rows from Size_Chart_Mapping    
+					(
+						Region
+						Size
+						Size_Name as "Size Name"
+						Region_New as "Region New"
+					)
+				
+		
+}

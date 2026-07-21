@@ -1,0 +1,24 @@
+Generate_product_sub_code as "Generate product sub code"
+{
+
+			
+							type =  form
+							form = Add_Product
+			
+							record event = on add
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														input.Product_Sub_Code = input.Style_Code.Style_Code + "-" + input.Style_Colour.Color_Code + "-" + input.Size_Set.Size;
+													// input.Product_Sub_Code_2 = input.Cat_NO + "-" + input.Supplier_Name.Supplier_Code + "-" + input.Product_Colour.Color_Code;
+									)
+								}
+							}
+			
+						
+			
+}

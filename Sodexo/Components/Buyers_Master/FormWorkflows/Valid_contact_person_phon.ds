@@ -1,0 +1,27 @@
+Valid_contact_person_phon as "Valid contact person phone"
+{
+
+			
+							type =  form
+							form = Buyers_Master
+			
+							record event = on add or edit
+			
+							on user input of Person_2_Phone
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Person_2_Phone == input.Primary_Phone)
+													{
+														alert "Duplicate phone number not allowed.";
+														input.Person_2_Phone = null;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

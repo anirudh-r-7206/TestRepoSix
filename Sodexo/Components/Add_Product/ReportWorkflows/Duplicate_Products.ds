@@ -1,0 +1,20 @@
+Duplicate_Products as "Duplicate Products"
+{
+
+			
+							type =  functions
+							form = Add_Product
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:Product_Duplicate?Product=" + input.ID,"popup window","height=<height>,width=<width>");
+								)
+								}
+							}
+						
+			
+}

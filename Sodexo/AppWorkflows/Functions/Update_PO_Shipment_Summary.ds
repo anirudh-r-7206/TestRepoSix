@@ -1,0 +1,71 @@
+void Update_PO_Shipment_Summary(int purchaseOrderId)
+{
+
+			    poRec = Purchase_Order[ID == purchaseOrderId];
+			    if(poRec != null && poRec.count() > 0)
+			    {
+			        splitRows = Shipment_Dispatch_Split[Purchase_Order == purchaseOrderId && Split_Status != "Cancelled"];
+			        dispatchCount = 0;
+			        dispatchIds = List();
+			        splitQty = 0;
+			        splitQOValue = 0.0;
+			        splitPOValue = 0.0;
+			        latestEstimated = null;
+			        latestActual = null;
+			        statusSummary = "No Shipment";
+			        for each  splitRow in splitRows
+			        {
+			            splitQty = splitQty + ifnull(splitRow.Split_Quantity,0);
+			            splitQOValue = splitQOValue + ifnull(splitRow.Split_QO_Value,0.0);
+			            splitPOValue = splitPOValue + ifnull(splitRow.Split_PO_Value,0.0);
+			            if(splitRow.Shipment_Dispatch != null && !dispatchIds.contains(splitRow.Shipment_Dispatch.ID))
+			            {
+			                dispatchIds.add(splitRow.Shipment_Dispatch.ID);
+			                dispatchCount = dispatchCount + 1;
+			                dispatchRec = Shipment_Dispatch[ID == splitRow.Shipment_Dispatch.ID];
+			                if(dispatchRec.Dispatch_Status != "Cancelled")
+			                {
+			                    if(dispatchRec.Estimated_Delivery_Date != null && (latestEstimated == null || dispatchRec.Estimated_Delivery_Date > latestEstimated))
+			                    {
+			                        latestEstimated = dispatchRec.Estimated_Delivery_Date;
+			                    }
+			                    if(dispatchRec.Actual_Delivery_Date != null && (latestActual == null || dispatchRec.Actual_Delivery_Date > latestActual))
+			                    {
+			                        latestActual = dispatchRec.Actual_Delivery_Date;
+			                    }
+			                    if(dispatchRec.Shipment_Status == "Delivered")
+			                    {
+			                        statusSummary = "Delivered";
+			                    }
+			                    else if(dispatchRec.Shipment_Status == "In Transit")
+			                    {
+			                        statusSummary = "In Transit";
+			                    }
+			                    else if(dispatchRec.Shipment_Status != null && dispatchRec.Shipment_Status != "")
+			                    {
+			                        if(statusSummary == "No Shipment")
+			                        {
+			                            statusSummary = "Booked";
+			                        }
+			                        else if(statusSummary != "Delivered" && statusSummary != "In Transit")
+			                        {
+			                            statusSummary = "Partially Shipped";
+			                        }
+			                    }
+			                }
+			            }
+			        }
+			        update Purchase_Order[ID == purchaseOrderId]
+			        [
+			            Shipment_Tracking_Status = statusSummary
+			            Shipment_Dispatch_Count = dispatchCount
+			            Latest_Estimated_Delivery_Date = latestEstimated
+			            Latest_Actual_Delivery_Date = latestActual
+			            Has_Split_Shipments = dispatchCount > 1
+			            Split_Quantity_Total = splitQty
+			            Split_QO_Value_Total = splitQOValue
+			            Split_PO_Value_Total = splitPOValue
+			        ];
+			    }
+			
+}

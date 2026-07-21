@@ -1,0 +1,80 @@
+Reject_Buyer_request as "Reject - Buyer request"
+{
+
+			
+							type =  functions
+							form = History
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									get_PO = Purchase_Order[ID == input.Purchase_Order_ID];
+													QO_OP = "";
+													get_Production_History = History[Purchase_Order_ID == input.Purchase_Order_ID && Status in {"In Production"}];
+													get_Awaiting_Production = History[Purchase_Order_ID == input.Purchase_Order_ID && Status in {"Awaiting Production"}];
+													get_FactoryHistory = History[Purchase_Order_ID == input.Purchase_Order_ID && Status in {"Awaiting Factory Review"}];
+													if(input.Status == "Amendment Requested (Buyer)")
+													{
+														QO_OP = "Quotation Order " + get_PO.QO_Number;
+														// 	if(get_Production_History.count() > 0)
+														// 	{
+														// 		get_PO.Order_Status="In Production";
+														// 		thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"In_Production");
+														// 	}
+														// 	else if(get_Awaiting_Production.count() > 0)
+														// 	{
+														// 		get_PO.Order_Status=if(get_PO.Order_Type == "Bulk" || get_PO.Order_Type == "SM","In Production","Awaiting Production");
+														// 		thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Move_to_Production");
+														// 	}
+														// 	else
+														// 	{
+														if(get_PO.Order_Status == "Amendment Requested (Buyer)")
+														{
+															get_PO.Order_Status="Awaiting Buyer Review";
+															thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Buyer_Review");
+														}
+														// 	}
+														thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Amendment_Request_Rejected_Buyer");
+													}
+													else if(input.Status == "Amendment Requested (Factory)")
+													{
+														QO_OP = "Purchase Order " + get_PO.PO_Number;
+														// 	if(get_Production_History.count() > 0)
+														// 	{
+														// 		get_PO.Order_Status="In Production";
+														// 		thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"In_Production");
+														// 	}
+														if(get_PO.Order_Status == "Amendment Requested (Factory)")
+														{
+															get_PO.Order_Status="Awaiting Factory Review";
+															thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Factory_Review");
+														}
+														thisapp.Send_Mail.Email_Template(input.Purchase_Order_ID,"Amendment_Request_Rejected_Factory");
+													}
+													get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+													if(get_User.count() > 0)
+													{
+														PO_History = insert into History
+														[
+															Added_User=zoho.loginuser
+															Purchase_Order_ID=input.Purchase_Order_ID
+															Raised_By=get_User.ID
+															Status=get_PO.Order_Status
+															Comments="Your request has been rejected. " + QO_OP + " has been moved to '" + get_PO.Order_Status + "' by " + get_User.User_Name + "."
+														];
+													}
+													get_PO.Enable_Edit=false;
+													input.Approval_Status = "Rejected";
+													delete from Purchase_LineItems[Purchase_Order == null];
+													delete from Copy_of_Purchase_Order[ID == input.Copy_of_Purchase_Order];
+													delete from Copy_of_Purchase_LineItems[Copy_of_Purchase_Order == null];
+													success message "Request has been rejected successfully.";
+								)
+								}
+							}
+						
+			
+}

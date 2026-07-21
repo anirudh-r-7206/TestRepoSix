@@ -1,0 +1,26 @@
+Hide_show3 as "Hide & show"
+{
+
+			
+							type =  form
+							form = Add_Product
+			
+							record event = on add or edit
+			
+							on user input of Style_Category
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Style_Category == null)
+													{
+														input.Style_Name = null;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

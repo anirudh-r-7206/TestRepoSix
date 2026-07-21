@@ -1,0 +1,122 @@
+form Shipment_Document
+{
+
+		    displayname = "Shipment Document"
+		    success message = "Shipment document saved successfully."
+		    Section
+		    (
+		        type = section
+		        row = 1
+		        column = 0
+		        width = medium
+		    )
+		    must have Shipment_Dispatch
+		    (
+		        type = picklist
+		        displayname = "Shipment Dispatch"
+		        values = Shipment_Dispatch.ID
+		        displayformat = [Shipment_Reference]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Shipment_Dispatch_Split
+		    (
+		        type = picklist
+		        displayname = "Shipment Dispatch Split"
+		        values = Shipment_Dispatch_Split.ID
+		        displayformat = [PO_Number_Display]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Purchase_Order
+		    (
+		        type = picklist
+		        displayname = "PO / QO"
+		        values = Purchase_Order.ID
+		        displayformat = [PO_Number]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    must have Document_Type
+		    (
+		        type = picklist
+		        displayname = "Document Type"
+		        values = {"Freight","Duty","Miscellaneous","Invoice","Packing List","Other"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    must have Document_File
+		    (
+		        type = upload file
+		        displayname = "Document File"
+		        file count = 1
+		        browse = local_drive, google_docs, zoho_docs
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Source
+		    (
+		        type = picklist
+		        values = {"Manual","API"}
+		        initial value = "Manual"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Uploaded_By_Role
+		    (
+		        type = picklist
+		        displayname = "Uploaded By Role"
+		        values = {"Factory","SSA Admin","Forwarder API"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Notes
+		    (
+		        type = textarea
+		        height = 100px
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		
+		    actions
+		    {
+		        on add
+		        {
+		            submit
+		            (
+		                type = submit
+		                displayname = "Submit"
+		            )
+		            reset
+		            (
+		                type = reset
+		                displayname = "Reset"
+		            )
+		        }
+		        on edit
+		        {
+		            update
+		            (
+		                type = submit
+		                displayname = "Update"
+		            )
+		            cancel
+		            (
+		                type = cancel
+		                displayname = "Cancel"
+		            )
+		        }
+		    }
+		
+}

@@ -1,0 +1,86 @@
+report Awaiting_User_Approvals
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										User_Name as "User Name"
+										Email
+										Employee_External_ID as "Employee/External ID"
+										User_Type as "User Type"
+										Approval_Status as "Approval Status"
+										"Approve"
+										"Reject"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										"Approve"
+										"Reject"
+									)
+								record
+								(
+									"Approve"
+									"Reject"
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									"Approve"
+									"Reject"
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+									fields
+									(
+										Employee_External_ID as "Employee/External ID"
+										User_Name as "User Name"
+										Email
+										Mobile_Number as "Mobile Number"
+										User_Type as "User Type"
+										Persona_Role as "Persona/Role"
+										Associated_Buyer as "Associated Buyer"
+										Associated_Factory as "Associated Factory "
+										Portal_Access_Enabled as "Portal Access"
+										Remarks as "Remarks "
+										Status as "Status "
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										"Approve"
+										"Reject"
+									)
+								)
+						)
+					
+		
+}

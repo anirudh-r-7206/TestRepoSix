@@ -1,0 +1,17 @@
+list Delete_Records.Delete_Size()
+{
+
+			
+			                 	size_List = List();
+			                 	get_Size_Map = Size_Chart_Mapping[ID != 0];
+			                 	size_List.addAll(get_Size_Map.Size.getall());
+			                 	get_Product_Size = Add_Product[ID != 0];
+			                 	size_List.addAll(get_Product_Size.Size_Set.getall());
+			                 	get_Order_Size = Order_Details[ID != 0];
+			                 	size_List.addAll(get_Order_Size.Product_Size.getall());
+			                 	get_Purchase_Size = Purchase_LineItems[ID != 0];
+			                 	size_List.addAll(get_Purchase_Size.Product_Size.getall());
+			                 	return size_List.distinct();
+			                 
+			
+}

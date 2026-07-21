@@ -1,0 +1,20 @@
+View_PO as "View PO"
+{
+
+			
+							type =  functions
+							form = Purchase_Order
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Page:POTemplate?Po_ID=" + input.ID,"popup window");
+								)
+								}
+							}
+						
+			
+}

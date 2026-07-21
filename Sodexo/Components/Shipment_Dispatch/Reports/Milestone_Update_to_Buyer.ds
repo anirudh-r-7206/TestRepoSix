@@ -1,0 +1,33 @@
+list Milestone_Update_to_Buyer
+{
+
+		    displayName = "Milestone Update to Buyer"
+		    show all rows from Shipment_Dispatch [Dispatch_Status != "Cancelled"]
+		    (
+		        Shipment_Reference as "Shipment Reference"
+		        Transit_Mode as "Transit Mode"
+		        Shipment_Status as "Shipment Status"
+		        Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		        Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		        ETD_Date as "ETD"
+		        ETA_Date as "ETA"
+		        Estimated_Delivery_Date as "Estimated Delivery Date"
+		        Actual_Delivery_Date as "Actual Delivery Date"
+		        Payment_Status as "Payment Status"
+		        KPI_Status as "KPI Status"
+		        Buyer
+		    )
+		    filters
+		    (
+		        Buyer
+		        Transit_Mode
+		        Shipment_Status
+		        Payment_Status
+		        KPI_Status
+		    )
+		    sort by
+		    (
+		        Estimated_Delivery_Date descending
+		    )
+		
+}

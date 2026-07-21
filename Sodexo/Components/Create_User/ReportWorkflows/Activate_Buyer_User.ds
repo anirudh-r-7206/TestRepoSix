@@ -1,0 +1,61 @@
+Activate_Buyer_User as "Activate Buyer User"
+{
+
+			
+							type =  functions
+							form = Create_User
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									try 
+													{
+														if(input.Associated_Buyer.Approval_Status != "Approved")
+														{
+															if(input.Associated_Buyer.Approval_Status == "Pending")
+															{
+																openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Buyer_Not_Approved","popup window");
+															}
+															else if(input.Associated_Buyer.Approval_Status == "Rejected")
+															{
+																openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Buyer_Rejected","popup window");
+															}
+														}
+														else if(input.Associated_Buyer.Approval_Status == "Approved")
+														{
+															if(input.Associated_Buyer.Status == "Inactive")
+															{
+																openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=Buyer_Inactive","popup window");
+															}
+															else if(input.Associated_Buyer.Status == "Active")
+															{
+																if(input.Approval_Status == "Approved")
+																{
+																	if(input.Need_App_Access == true)
+																	{
+																		Assign_Portal = thisapp.permissions.assignUserInProfile(input.Email,"Buyer",true);
+																		input.Portal_Access_Enabled = true;
+																	}
+																	input.Status = "Active";
+																	input.Approval_Status = "Approved";
+																	success message "User Added Successfuly";
+																}
+																else
+																{
+																	openUrl("#Page:Alert_Message?User_ID=" + input.ID + "&Message_Type=User_Inactive","popup window");
+																}
+															}
+														}
+													}catch (e)
+													{
+														success message "Failed to add user due to a system error. Please contact the administrator.";
+													}
+								)
+								}
+							}
+						
+			
+}

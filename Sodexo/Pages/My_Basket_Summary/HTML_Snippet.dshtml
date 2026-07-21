@@ -1,0 +1,29 @@
+<%
+	resp = "https://creatorapp.zoho.com" + zoho.appuri + "record-summary/My_Order_Requests/" + input.ID1;
+	fetOrder = Order_Request[ID == input.ID1];
+	%>
+<style>
+	.jsoverall{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.jsSubmit{
+		margin-right: 55px;
+		background: #4548d9;
+		color: #fff;
+		padding: 8px;
+		border-radius: 8px;
+		margin-top: 10px;
+}
+	}
+	</style>
+<div style="height:calc(100vh - 70px);">
+<div class="jsoverall">
+	<a href="#Page:My_Basket_Page?supplierId=<%=fetOrder.Factory%>" style="display: flex; gap: 5px; align-items: center; padding: 10px 0 0 10px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M15.833 10H4.167M4.167 10l5-5m-5 5 5 5" stroke="#2b3797" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> Go to My Basket</a>
+<a href="#Form:Order_Request_Update?Order_Request=<%=input.ID1%>&zc_LoadIn=dialog" class="jsSubmit">Submit</a> 
+</div>
+<iframe name='zohoview' height='100%' width='100%' frameborder='0' scrolling='Auto' src='<%=resp%>' ></iframe>
+</div>

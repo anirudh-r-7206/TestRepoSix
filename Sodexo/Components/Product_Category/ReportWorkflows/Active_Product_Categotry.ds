@@ -1,0 +1,20 @@
+Active_Product_Categotry as "Active Product Categotry"
+{
+
+			
+							type =  functions
+							form = Product_Category
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									input.Status = "Active";
+								)
+								}
+							}
+						
+			
+}

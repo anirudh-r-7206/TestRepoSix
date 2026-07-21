@@ -1,0 +1,37 @@
+Transit_Mode_On_User_Input as "Recalculate Shipment Schedule"
+{
+
+			    type = form
+			    form = Shipment_Dispatch
+			    record event = on add or edit
+			
+			    on user input of Transit_Mode
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Estimated_ExFactory_Date != null)
+			                {
+			                    input.ETD_Date = input.Estimated_ExFactory_Date.addDay(7);
+			                }
+			                if(input.Buyer != null && input.Supplier != null && input.Transit_Mode != null && input.Transit_Mode != "" && input.ETD_Date != null)
+			                {
+			                    transitDays = thisapp.Shipment_Get_Transit_Days(input.Buyer,input.Supplier,input.Transit_Mode);
+			                    if(transitDays > 0)
+			                    {
+			                        input.ETA_Date = input.ETD_Date.addDay(transitDays);
+			                        settingRec = Shipment_Settings[ID != 0];
+			                        deliveryOffset = 10;
+			                        if(settingRec.count() > 0 && ifnull(settingRec.Estimated_Delivery_Offset_Days,0) > 0)
+			                        {
+			                            deliveryOffset = settingRec.Estimated_Delivery_Offset_Days;
+			                        }
+			                        input.Estimated_Delivery_Date = input.ETA_Date.addDay(deliveryOffset);
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

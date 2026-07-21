@@ -1,0 +1,15 @@
+list Delete_Records.Delete_Suppliers()
+{
+
+			
+			                 	Supplier_List = List();
+			                 	get_User_Suppliers = Create_User[ID != 0];
+			                 	Supplier_List.addAll(get_User_Suppliers.Associated_Factory.getall());
+			                 	get_Buyer_Suppliers = Buyer_Product_Mapping[ID != 0];
+			                 	Supplier_List.addAll(get_Buyer_Suppliers.Factory_Allocated.getall());
+			                 	get_Order_Supplier = Order_Request[ID != 0];
+			                 	Supplier_List.addAll(get_Order_Supplier.Factory.getall());
+			                 	return Supplier_List.distinct();
+			                 
+			
+}

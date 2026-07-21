@@ -1,0 +1,235 @@
+forms
+{
+
+	
+				form Add_Colors
+				{
+					label placement = left
+				}
+				form Add_Country
+				{
+					label placement = left
+				}
+				form Add_Product
+				{
+					label placement = left
+				}
+				form Add_Region
+				{
+					label placement = left
+				}
+				form Add_Suppliers
+				{
+					label placement = left
+				}
+				form Additional_Charges_Form
+				{
+					label placement = left
+				}
+				form Alert_References
+				{
+					label placement = left
+				}
+				form Bulk_Edit_Tigger
+				{
+					label placement = left
+				}
+				form Bulk_Update
+				{
+					label placement = left
+				}
+				form Buyer_Cart_Detail
+				{
+					label placement = top
+				}
+				form Buyer_Contact_Person_Details
+				{
+					label placement = left
+				}
+				form Buyer_Filter
+				{
+					label placement = labelinplace
+				}
+				form Buyer_Mapping_Wardrobes
+				{
+					label placement = left
+				}
+				form Buyer_Order
+				{
+					label placement = labelinplace
+				}
+				form Buyer_product_duplicate
+				{
+					label placement = left
+				}
+				form Buyer_Product_Mapping
+				{
+					label placement = left
+				}
+				form Buyer_Products
+				{
+					label placement = left
+				}
+				form Buyers_Master
+				{
+					label placement = left
+				}
+				form Charge_Type_Form
+				{
+					label placement = left
+				}
+				form Copy_of_Purchase_LineItems
+				{
+					label placement = left
+				}
+				form Copy_of_Purchase_Order
+				{
+					label placement = left
+				}
+				form Create_Size
+				{
+					label placement = left
+				}
+				form Create_User
+				{
+					label placement = left
+				}
+				form Currency
+				{
+					label placement = left
+				}
+				form Currency_Conversion_Rates
+				{
+					label placement = left
+				}
+				form Email_Template
+				{
+					label placement = left
+				}
+				form Error_Log_Form
+				{
+					label placement = left
+				}
+				form Fabric_Form
+				{
+					label placement = left
+				}
+				form Factory_Details_Subform
+				{
+					label placement = left
+				}
+				form Freight_Partners_Form
+				{
+					label placement = left
+				}
+				form Order_Details
+				{
+					label placement = left
+				}
+				form Order_Request
+				{
+					label placement = left
+				}
+				form Order_Request_Update
+				{
+					label placement = left
+				}
+				form History
+				{
+					label placement = left
+				}
+				form organization
+				{
+					label placement = left
+				}
+				form Packaging_Details
+				{
+					label placement = left
+				}
+				form PO_QO_template
+				{
+					label placement = left
+				}
+				form PO_Style_Search
+				{
+					label placement = labelinplace
+				}
+				form Print_and_PDF_Button
+				{
+					label placement = left
+				}
+				form Product_Category
+				{
+					label placement = left
+				}
+				form Product_Code_Master
+				{
+					label placement = left
+				}
+				form Product_Duplicate
+				{
+					label placement = left
+				}
+				form Purchase_LineItems
+				{
+					label placement = left
+				}
+				form Purchase_Order
+				{
+					label placement = left
+				}
+				form Rate_Conversion_History
+				{
+					label placement = left
+				}
+				form Size_Chart
+				{
+					label placement = left
+				}
+				form Size_Chart_Mapping
+				{
+					label placement = left
+				}
+				form Style
+				{
+					label placement = left
+				}
+				form Trigger_Form
+				{
+					label placement = left
+				}
+				form Wardrobe
+				{
+					label placement = left
+				}
+				form Shipment_Settings
+				{
+					label placement = left
+				}
+				form Shipment_Transit_Time
+				{
+					label placement = left
+				}
+				form Shipment_Dispatch
+				{
+					label placement = left
+				}
+				form Shipment_Dispatch_Split
+				{
+					label placement = left
+				}
+				form Shipment_Split_Charge
+				{
+					label placement = left
+				}
+				form Shipment_Document
+				{
+					label placement = left
+				}
+				form Add_Users
+				{
+					label placement = left
+				}
+			
+	
+}

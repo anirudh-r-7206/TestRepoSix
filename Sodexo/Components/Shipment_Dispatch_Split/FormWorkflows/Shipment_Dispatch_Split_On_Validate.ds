@@ -1,0 +1,71 @@
+Shipment_Dispatch_Split_On_Validate as "Validate Shipment Dispatch Split"
+{
+
+			    type = form
+			    form = Shipment_Dispatch_Split
+			    record event = on add or edit
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch == null || input.Purchase_Order == null)
+			                {
+			                    alert "Shipment Dispatch and PO / QO are required.";
+			                    cancel submit;
+			                }
+			                if(input.Shipment_Dispatch.Dispatch_Status != "Draft")
+			                {
+			                    alert "Split rows cannot be added or changed after the dispatch is confirmed or cancelled.";
+			                    cancel submit;
+			                }
+			                if(input.Purchase_Order.Buyer_Organisation.ID != input.Shipment_Dispatch.Buyer.ID || input.Purchase_Order.Supplier.ID != input.Shipment_Dispatch.Supplier.ID)
+			                {
+			                    alert "Selected PO / QO must match the dispatch Buyer and Supplier.";
+			                    cancel submit;
+			                }
+			                if(input.Split_Status == null || input.Split_Status == "")
+			                {
+			                    input.Split_Status = "Draft";
+			                }
+			                if(ifnull(input.Split_Quantity,0) < 0 || ifnull(input.Split_QO_Value,0.0) < 0 || ifnull(input.Split_PO_Value,0.0) < 0)
+			                {
+			                    alert "Split quantity and values cannot be negative.";
+			                    cancel submit;
+			                }
+			                if(ifnull(input.Split_Quantity,0) == 0 && ifnull(input.Split_QO_Value,0.0) == 0 && ifnull(input.Split_PO_Value,0.0) == 0)
+			                {
+			                    alert "Enter at least one split quantity or value.";
+			                    cancel submit;
+			                }
+			                input.PO_Number_Display = input.Purchase_Order.PO_Number;
+			                input.QO_Number_Display = input.Purchase_Order.QO_Number;
+			                input.Transport_Mode = input.Purchase_Order.Transport_Mode;
+			                existingQty = Shipment_Dispatch_Split[ID != input.ID && Purchase_Order == input.Purchase_Order && Split_Status != "Cancelled"].sum(Split_Quantity);
+			                existingQOValue = Shipment_Dispatch_Split[ID != input.ID && Purchase_Order == input.Purchase_Order && Split_Status != "Cancelled"].sum(Split_QO_Value);
+			                existingPOValue = Shipment_Dispatch_Split[ID != input.ID && Purchase_Order == input.Purchase_Order && Split_Status != "Cancelled"].sum(Split_PO_Value);
+			                totalQty = ifnull(existingQty,0) + ifnull(input.Split_Quantity,0);
+			                totalQOValue = ifnull(existingQOValue,0.0) + ifnull(input.Split_QO_Value,0.0);
+			                totalPOValue = ifnull(existingPOValue,0.0) + ifnull(input.Split_PO_Value,0.0);
+			                if(totalQty > ifnull(input.Purchase_Order.Total_Quantity,0))
+			                {
+			                    alert "Split quantity exceeds the PO / QO total quantity.";
+			                    cancel submit;
+			                }
+			                if(totalQOValue > ifnull(input.Purchase_Order.Base_Selling_Price_Total,0.0))
+			                {
+			                    alert "Split QO value exceeds the PO / QO base selling value.";
+			                    cancel submit;
+			                }
+			                if(totalPOValue > ifnull(input.Purchase_Order.Base_Purchase_Price_Total,0.0))
+			                {
+			                    alert "Split PO value exceeds the PO / QO base purchase value.";
+			                    cancel submit;
+			                }
+			            )
+			        }
+			    }
+			
+}

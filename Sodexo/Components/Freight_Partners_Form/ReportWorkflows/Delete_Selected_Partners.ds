@@ -1,0 +1,25 @@
+Delete_Selected_Partners as "Delete Selected Partners"
+{
+
+			
+							type =  functions
+							form = Freight_Partners_Form
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									PartnersList = thisapp.Delete_Records.Delete_Partners();
+													if(!PartnersList.contains(input.ID))
+													{
+														// your logic here
+														delete from Freight_Partners_Form[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

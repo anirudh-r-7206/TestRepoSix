@@ -1,0 +1,56 @@
+On_Validate_Generate_Buye as "On Validate - Generate Buyer Code"
+{
+
+			
+							type =  form
+							form = Buyers_Master
+			
+							record event = on add
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Buyer_Type = "Sodexo Affiliate")
+													{
+														fetBuyer = Buyers_Master[Buyer_Type == "Sodexo Affiliate"] sort by Added_Time desc;
+														if(fetBuyer.count(ID) > 0)
+														{
+															id_number = fetBuyer.Buyer_Code;
+															id_number = id_number.getsuffix("SDX").toNumber() + 1;
+															id_number = id_number.leftpad(4).replaceAll(" ","0");
+															input.Buyer_Code = "SDX" + id_number;
+														}
+														else
+														{
+															id_number = 1;
+															id_number = id_number.leftPad(4).replaceAll(" ","0");
+															input.Buyer_Code = "SDX" + id_number;
+														}
+													}
+													else
+													{
+														fetBuyer = Buyers_Master[Buyer_Type != "Sodexo Affiliate"] sort by Added_Time desc;
+														if(fetBuyer.count(ID) > 0)
+														{
+															id_number = fetBuyer.Buyer_Code;
+															id_number = id_number.getsuffix("EX").toNumber() + 1;
+															id_number = id_number.leftpad(4).replaceAll(" ","0");
+															input.Buyer_Code = "EX" + id_number;
+														}
+														else
+														{
+															id_number = 1;
+															id_number = id_number.leftPad(4).replaceAll(" ","0");
+															input.Buyer_Code = "EX" + id_number;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

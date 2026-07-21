@@ -1,0 +1,31 @@
+default list Shipment_Split_Charge_Report
+{
+
+		    displayName = "Shipment Split Charges"
+		    show all rows from Shipment_Split_Charge
+		    (
+		        Shipment_Dispatch as "Shipment Dispatch"
+		        Shipment_Dispatch_Split as "Shipment Dispatch Split"
+		        Purchase_Order as "PO / QO"
+		        Charge_Category as "Charge Category"
+		        Currency
+		        Amount
+		        (
+		            display = total
+		        )
+		        Paid_By as "Paid By"
+		        Source
+		    )
+		    filters
+		    (
+		        Shipment_Dispatch
+		        Purchase_Order
+		        Charge_Category
+		        Paid_By
+		    )
+		    sort by
+		    (
+		        Shipment_Dispatch ascending
+		    )
+		
+}

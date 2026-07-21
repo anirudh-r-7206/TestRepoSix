@@ -1,0 +1,20 @@
+<page linkname = "Buyer_Shipment_Updates" displayname = "Buyer Shipment Updates"/>
+<content>
+<zml webDeviceConfig='{\"layout\":{\"displayType\":\"plain\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='Buyer_Shipment_Updates_HTML' elementName='Buyer_Shipment_Updates_HTML'>
+          <![CDATA[htmlpage Buyer_Shipment_Updates_HTML()
+						content
+			<%{%>
+            <file name:Buyer_Shipment_Updates_HTML.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

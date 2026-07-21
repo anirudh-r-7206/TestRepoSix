@@ -1,0 +1,17 @@
+list Delete_Records.Delete_Currency()
+{
+
+			
+			                 	Currency_List = List();
+			                 	get_Buyer_Currency = Buyers_Master[ID != 0];
+			                 	Currency_List.addAll(get_Buyer_Currency.Currency.getall());
+			                 	get_PO_Currency = Purchase_Order[ID != 0];
+			                 	Currency_List.addAll(get_PO_Currency.Purchase_Currency.getall());
+			                 	Currency_List.addAll(get_PO_Currency.Selling_Currency.getall());
+			                 	buyer_Mapping_Currency = Buyer_Product_Mapping[ID != 0];
+			                 	Currency_List.addAll(buyer_Mapping_Currency.Buy_Currency.getall());
+			                 	Currency_List.addAll(buyer_Mapping_Currency.Sell_Currency.getall());
+			                 	return Currency_List.distinct();
+			                 
+			
+}

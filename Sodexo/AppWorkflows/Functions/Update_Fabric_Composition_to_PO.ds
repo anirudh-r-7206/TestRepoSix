@@ -1,0 +1,26 @@
+void OneTime.Update_Fabric_Composition_to_PO()
+{
+
+			
+			                 	try 
+			                 	{
+			                 		for each  PO_Items in Purchase_LineItems[Purchase_Order != null && Fabric_Composition.isEmpty()]
+			                 		{
+			                 			get_PO_Item = Purchase_LineItems[ID == PO_Items.ID];
+			                 			get_Fabric = Fabric_Form[ID == get_PO_Item.Product.Fabric_Code];
+			                 			get_PO_Item.Fabric_Composition=if(get_Fabric.count(ID) > 0,get_Fabric.Fabric_Composition,"");
+			                 		}
+			                 	}
+			                 	catch (e)
+			                 	{
+			                 		sendmail
+			                 		[
+			                 			from :zoho.adminuserid
+			                 			to :"dylfa.d+zcjscom@zohotest.com"
+			                 			subject :"Error - `OneTime.Update_HS_Code_to_PO` function."
+			                 			message :e
+			                 		]
+			                 	}
+			                 
+			
+}

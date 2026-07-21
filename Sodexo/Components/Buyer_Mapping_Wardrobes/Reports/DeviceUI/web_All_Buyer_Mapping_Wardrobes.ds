@@ -1,0 +1,79 @@
+report All_Buyer_Mapping_Wardrobes
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										ID
+										Buyer_Product_Mapping.Buyer as "Buyer"
+										Buyer_Product_Mapping.Factory_Allocated as "Factory Allocated"
+										Wardrobe
+										Product_Category as "Product Category"
+										Buyer_Product_Mapping as "Buyer Product Mapping"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Wardrobe
+										Product_Category as "Product Category"
+										Buyer_Product_Mapping as "Buyer Product Mapping"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		
+}

@@ -1,0 +1,105 @@
+report Awaiting_Approvals
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Buyer_Code as "Buyer Code"
+										Buyer_Type as "Buyer Type"
+										Buyer_Organisation as "Buyer Organisation"
+										Region
+										Country
+										Approval_Status as "Approval Status"
+										Currency
+										"Approve"
+										"Reject"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								record
+								(
+									"Approve"
+									"Reject"
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									"Approve"
+									"Reject"
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Buyer_Code as "Buyer Code"
+										Buyer_Organisation as "Buyer Organisation"
+										Buyer_Type as "Buyer Type"
+										Region
+										Primary_Name1 as "Name"
+										Primary_Email as "Email"
+										Primary_Phone as "Phone"
+										Office_Address as "Invoice Address"
+										Product_Range as "Product Range"
+										Wardrobe
+										Country
+										HS_Code_Allocation as "HS Code Allocation"
+										Payment_Terms as "Payment Terms"
+										Currency1 as "Currency"
+										Approval_Status as "Approval Status"
+									)
+								)
+								datablock2
+								(
+									layout type = -1
+				     				title = "Delivery Person Details"
+				     				related field = Delivery_Person_Details
+									fields
+									(
+										Company_Name as "Company Name"
+										Contact_Person as "Contact Person"
+										Email
+										Phone_Number as "Phone"
+										Need_App_Access as "Need App Access"
+										Address
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										"Approve"
+										"Reject"
+									)
+								)
+						)
+					
+		
+}

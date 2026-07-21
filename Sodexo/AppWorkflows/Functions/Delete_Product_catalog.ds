@@ -1,0 +1,15 @@
+list Delete_Records.Delete_Product_catalog()
+{
+
+			
+			                 	product_List = List();
+			                 	get_Order_Product = Order_Details[ID != 0];
+			                 	product_List.addAll(get_Order_Product.Product.getall());
+			                 	get_Purchase_Product = Purchase_LineItems[ID != 0];
+			                 	product_List.addAll(get_Purchase_Product.Product.getall());
+			                 	get_Buyer_Product = Buyer_Products[ID != 0 && Buyer_Product_Mapping != null];
+			                 	product_List.addAll(get_Buyer_Product.Style_ID.getall());
+			                 	return product_List.distinct();
+			                 
+			
+}

@@ -1,0 +1,86 @@
+<%
+	get_Buyer_Product_Mapping = Buyer_Product_Mapping[ID == input.map_ID];
+	Buyer_Name = get_Buyer_Product_Mapping.Buyer.Buyer_Organisation;
+	Factory_Name = get_Buyer_Product_Mapping.Factory_Allocated.Supplier_Organisation;
+	%>
+<style>
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.buyer_OverAll_container *::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.buyer_OverAll_container * {
+	  -ms-overflow-style: none;  /* IE and Edge */
+	  scrollbar-width: none;  /* Firefox */
+	}
+	.ht_clone_top.handsontable {
+		width: 100% !important;
+	}
+	.wtHolder {
+		width: 100% !important;
+	}
+	.buyer_OverAll_container {
+		height: 100%;
+		position: relative;
+	}
+	.col-sm-4.zc-reportoptionheader {
+		margin-right: 30px;
+	}
+	a.add_Product {
+		position: absolute;
+		top: 11px;
+		right: 12px;
+		z-index: 99;
+		cursor: var(--zc-cursor-pointer);
+		height: 34px;
+		line-height: normal;
+		min-width: 34px;
+		padding: 8px 5px;
+		width: 34px;
+		font-size: 22px;
+		border-radius: var(--input_radius);
+		color: var(--primary_bg_text_color);
+		background-color: var(--primary_color);
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	/*span.zc-view-name {
+		margin-left: 40px;
+	}*/
+	.back_Product{
+		display: flex;
+		align-items: center;
+		position: absolute;
+		z-index: 1;
+		top: 17px;
+	}
+	[viewlinkname="All_Buyer_Products"], [pagelinkname="Buyer_Product_Mapping_Page"]#zppagesLive, [pagelinkname="Buyer_Product_Mapping_Page"] div#elementsContainer, [pagelinkname="Buyer_Product_Mapping_Page"] div#row_1 {
+		height: 100% !important;
+	}
+	[pagelinkname="Buyer_Product_Mapping_Page"] .Layout.elemContainment{
+		height: calc(100% - 16px);
+	}
+	span.zc-view-name:after {
+		content: "(Buyer: <%=Buyer_Name%>, Factory: <%=Factory_Name%>)";
+		margin-left: 10px;
+	}
+
+	[viewlinkname="All_Buyer_Products"] span.zc-view-name {
+			margin-left: 35px;
+	}
+	[viewlinkname="All_Buyer_Products"] ul.view-options.pull-left.view-options-menufix.zc-report-newheader {
+		z-index: 10;
+		background-color: #fff;
+	}
+</style>
+<div class="buyer_OverAll_container">
+	<a class="back_Product" href="#Script:page.refresh">
+	<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="var(--primary_color)"><path d="M400-240 160-480l240-240 56 58-142 142h486v80H314l142 142-56 58Z"/></svg>
+		Back
+	</a>
+	<a class="add_Product" href="#Form:Buyer_Products?zc_LoadIn=dialog&Buyer_Product_Mapping=<%=input.map_ID%>&zc_NextUrl=#Script:page.parent.close">+</a>
+	<div elName='zc-component' viewLinkName='All_Buyer_Products' params='zc_Header=true&zc_MoreAction=false&zc_AddRec=false&Buyer_Product_Mapping=<%=input.map_ID%>'></div>
+</div>

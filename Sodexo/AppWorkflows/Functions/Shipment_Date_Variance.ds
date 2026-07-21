@@ -1,0 +1,11 @@
+int Shipment_Date_Variance(date estimatedDate, date actualDate)
+{
+
+			    varianceDays = 0;
+			    if(estimatedDate != null && actualDate != null)
+			    {
+			        varianceDays = actualDate.daysBetween(estimatedDate) * -1;
+			    }
+			    return varianceDays;
+			
+}

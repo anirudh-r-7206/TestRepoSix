@@ -1,0 +1,23 @@
+Clear_Color_Code as "Clear Color Code"
+{
+
+			
+							type =  form
+							form = Style
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														clear Product_Colour;
+									)
+								}
+							}
+			
+						
+			
+}

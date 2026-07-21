@@ -1,0 +1,19 @@
+Purchase_Order_Recalculate_Totals_On_Success as "Recalculate PO Shipment Totals"
+{
+
+			    type = form
+			    form = Purchase_Order
+			    record event = on add or edit
+			
+			    on success
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                thisapp.Recalculate_PO_Shipment_Totals(input.ID);
+			            )
+			        }
+			    }
+			
+}

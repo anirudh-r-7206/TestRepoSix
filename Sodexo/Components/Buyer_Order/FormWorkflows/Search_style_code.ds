@@ -1,0 +1,32 @@
+Search_style_code as "Search style code"
+{
+
+			
+							type =  form
+							form = Buyer_Order
+			
+							record event = on add
+			
+							on user input of Select_Style_Code
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Select_Buyer != null && input.Select_Factory != null)
+													{
+														get_Order_Buyer = Order_Request[Buyer_Organisation == input.Select_Buyer && Factory == input.Select_Factory && Order_By.Email == zoho.loginuserid && Status == "Awaiting QO Generation"];
+														// 		get_Order_Buyer = Order_Request[Buyer_Organisation == input.Select_Buyer && Factory == input.Select_Factory && Order_By.Email == zoho.loginuserid && Status == "Submitted"];
+														if(get_Order_Buyer.count() > 0)
+														{
+															get_Order_Buyer.Search_Style_Code=input.Select_Style_Code;
+														}
+														openUrl("#Page:Product_Catalogue_Cart_Page?zc_LoadIn=embed-Cart_Products&Buyer_ID=" + input.Select_Buyer + "&Suppliyer_ID=" + input.Select_Factory,"same window");
+													}
+									)
+								}
+							}
+			
+						
+			
+}

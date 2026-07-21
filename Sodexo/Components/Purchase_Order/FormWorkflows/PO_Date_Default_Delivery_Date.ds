@@ -1,0 +1,22 @@
+PO_Date_Default_Delivery_Date as "Default Delivery Date from PO Date"
+{
+
+			    type = form
+			    form = Purchase_Order
+			    record event = on add
+			
+			    on user input of PO_Date
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Delivery_Date == null && input.PO_Date != null)
+			                {
+			                    input.Delivery_Date = input.PO_Date.addDay(60);
+			                }
+			            )
+			        }
+			    }
+			
+}

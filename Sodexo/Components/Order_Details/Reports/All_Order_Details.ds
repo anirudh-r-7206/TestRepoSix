@@ -1,0 +1,19 @@
+default list All_Order_Details
+{
+
+		
+					displayName = "All Order Details"
+					show all rows from Order_Details    
+					(
+						Product
+						Product_Color as "Product Color"
+						Product_Size as "Product Size"
+						Quantity
+						Sub_Total as "Sub Total"
+						Description as "Description "
+						Order_Request as "Order Request"
+						Supplier
+					)
+				
+		
+}

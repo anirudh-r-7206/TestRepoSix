@@ -1,0 +1,27 @@
+default list Transit_Time_Mapping_Report
+{
+
+		    displayName = "Transit Time Mapping"
+		    show all rows from Shipment_Transit_Time
+		    (
+		        Buyer
+		        Supplier
+		        Transit_Mode as "Transit Mode"
+		        Transit_Days as "Transit Days"
+		        Status
+		        Combination_Key as "Combination Key"
+		    )
+		    filters
+		    (
+		        Buyer
+		        Supplier
+		        Transit_Mode
+		        Status
+		    )
+		    sort by
+		    (
+		        Buyer ascending
+		        Supplier ascending
+		    )
+		
+}

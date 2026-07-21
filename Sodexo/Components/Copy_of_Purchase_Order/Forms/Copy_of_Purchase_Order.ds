@@ -1,0 +1,463 @@
+form Copy_of_Purchase_Order
+{
+
+		
+					displayname = "Copy of Purchase Order"
+					success message = "Purchase Order Created Successfully"
+					Order_Details
+					(
+						type = section
+						displayname = "Order Details"
+						visibility = true
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Order_Reference
+					(
+		    			type = text
+						displayname = "Order Reference"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					PO_Date
+					(
+		    			type = date
+						displayname = "PO Date"
+						initial value = "${zoho.currentdate}"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Supplier
+					(
+						type = picklist	
+						values  = Add_Suppliers.ID
+		    			displayformat = [" " + Supplier_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Order_Request
+					(
+						type = picklist	
+						displayname = "Order Request"
+						values  = Order_Request.ID
+		    			displayformat = [Order_ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Factory_Address
+					(
+						type = picklist	
+						displayname = "Factory Address"
+						values  = Factory_Details_Subform[Add_Suppliers.ID == input.Supplier].ID
+		    			displayformat = [" " + Factory_Address.address_line_1 + " " + Factory_Address.address_line_2 + " " + Factory_Address.district_city + " " + Factory_Address.state_province]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Order_Type
+					(
+						type = picklist
+						displayname = "Order Type "
+						maxchar = 100
+						values = {"Bulk","Forecast","Ad hoc","SM"}
+						initial value = "Bulk"
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					must have Delivery_Date
+					(
+		    			type = date
+						displayname = "Ex-Factory date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					must have Payment_Terms
+					(
+						type = picklist
+						displayname = "Payment Terms"
+						maxchar = 100
+						values = {"30","60","90"}
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					must have Transport_Mode
+					(
+						type = picklist
+						displayname = "Transport Mode"
+						maxchar = 100
+						values = {"SEA","AIR","ROAD"}
+						initial value = "SEA"
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					must have Delivery_Address
+					(
+						type = picklist	
+						displayname = "Delivery Address"
+						values  = Buyer_Contact_Person_Details[Buyers_Master.ID == input.Buyer_Organisation].ID
+		    			displayformat = [" " + Address.address_line_1 + " " + Address.address_line_2 + " " + Address.district_city + " " + Address.state_province]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					Address_Details
+					(
+		    			type = plaintext
+						value = "<div> <br /></div>"
+			 			row = 1
+			 			column = 3   
+						width = medium
+					)
+					Currency_Info
+					(
+						type = section
+						displayname = "Currency Info"
+						visibility = true
+			 			row = 2
+			 			column = 0   
+						width = medium
+					)
+					must have Selling_Currency
+					(
+						type = picklist	
+						displayname = "Selling Currency"
+						values  = Currency.ID
+		    			displayformat = [Currency_Name]
+						allow new entries
+						[
+							displayname = "Add New Currency "
+						]
+						sortorder = ascending
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					must have Purchase_Currency
+					(
+						type = picklist	
+						displayname = "Purchase Currency"
+						values  = Currency.ID
+		    			displayformat = [Currency_Name]
+						allow new entries
+						[
+							displayname = "Add New Currency "
+						]
+						sortorder = ascending
+			 			row = 2
+			 			column = 2   
+						width = medium
+					)
+					must have Copy_Purchase_LineItems
+					(
+						type = grid
+						displayname = "Purchase LineItems"
+						values  = Copy_of_Purchase_LineItems.ID
+		    			bidirectional = Copy_of_Purchase_Order
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Section1
+					(
+						type = section
+						displayname = "Section"
+			 			row = 4
+			 			column = 0   
+						width = medium
+					)
+					Total_Selling_Price
+					(
+						type = decimal
+						displayname = "Total Selling Price"
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Total_Quantity
+					(
+						type = number
+						displayname = "Total Quantity"
+			 			row = 4
+			 			column = 1   
+						width = medium
+					)
+					Total_Purchase_Price
+					(
+						type = decimal
+						displayname = "Total Purchase Price"
+			 			row = 4
+			 			column = 2   
+						width = medium
+					)
+					Customer_Details
+					(
+						type = section
+						displayname = "Customer Details"
+						visibility = true
+			 			row = 5
+			 			column = 0   
+						width = medium
+					)
+					must have Buyer_Organisation
+					(
+						type = picklist	
+						displayname = "Buyer Organisation"
+						values  = Buyers_Master.ID
+		    			displayformat = [Buyer_Organisation]
+						sortorder = ascending
+			 			row = 5
+			 			column = 1   
+						width = medium
+					)
+					must have Country
+					(
+						type = picklist	
+						values  = Add_Country.ID
+		    			displayformat = [Country_Name]
+						sortorder = ascending
+			 			row = 5
+			 			column = 1   
+						width = medium
+					)
+					Delivery_Contact
+					(
+		    			type = text
+						displayname = "Delivery Contact "
+			 			row = 5
+			 			column = 1   
+						width = medium
+					)
+					must have Customer_Name
+					(
+						type = picklist	
+						displayname = "Customer Name"
+						values  = Create_User[User_Type == "Buyer"].ID
+		    			displayformat = [" " + User_Name.prefix + " " + User_Name.first_name + " " + User_Name.last_name + " " + User_Name.suffix]
+						sortorder = ascending
+			 			row = 5
+			 			column = 2   
+						width = medium
+					)
+					Freight_Forwarder
+					(
+						type = picklist	
+						displayname = "Freight Forwarder"
+						values  = Freight_Partners_Form.ID
+		    			displayformat = [Freight_Partners_Name]
+						sortorder = ascending
+			 			row = 5
+			 			column = 2   
+						width = medium
+					)
+					Incoterms
+					(
+						type = picklist
+						displayname = "Incoterms "
+						maxchar = 100
+						values = {"FOB","CIF","DAP","DDP"}
+			 			row = 5
+			 			column = 2   
+						width = medium
+					)
+					Comments
+					(
+		    			type = richtext
+						height = 200px
+						toolbar = enable
+						[
+							style, font-color, background-color, link, bullets-and-numbering, 
+							font-size : {1, 2, 3, 4, 5, 6, 7}
+						]
+			 			row = 5
+			 			column = 2   
+						width = medium
+					)
+					Hide_Section
+					(
+						type = section
+						displayname = "Hide Section"
+						visibility = true
+			 			row = 6
+			 			column = 0   
+						width = medium
+					)
+					PO_Number
+					(
+		    			type = formula
+						displayname = "PO Number"
+						value =  "PO" + input.ID_Generator
+						visibility = false
+						display type = text
+						format = plaintext
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					ID_Generator
+					(
+		    			type = autonumber
+						displayname = "ID Generator"
+						start index = 2000
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					Supplier_old
+					(
+						type = picklist	
+						displayname = "Supplier"
+						values  = Create_User.ID
+		    			displayformat = [" " + User_Name.prefix + " " + User_Name.first_name + " " + User_Name.last_name + " " + User_Name.suffix]
+						sortorder = ascending
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					Enable_Edit
+					(
+		    			type = checkbox
+						displayname = "Enable Edit"
+						initial value = false
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					Purchase_Currency1
+					(
+						type = picklist
+						displayname = "Purchase Currency"
+						maxchar = 100
+						values = {"USD","EUR","GBP","SGD"}
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					Comments11
+					(
+		    			type = textarea
+						displayname = "Comments"
+						height = 100px
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					Purchase_Order
+					(
+						type = picklist	
+						displayname = "Purchase Order"
+						values  = Purchase_Order.ID
+		    			displayformat = [PO_Number]
+						sortorder = ascending
+			 			row = 6
+			 			column = 1   
+						width = medium
+					)
+					QO_Number
+					(
+		    			type = formula
+						displayname = "QO Number"
+						value =  "QO" + input.ID_Generator
+						visibility = false
+						display type = text
+						format = plaintext
+			 			row = 6
+			 			column = 2   
+						width = medium
+					)
+					Order_Status
+					(
+						type = picklist
+						displayname = "Order Status"
+						maxchar = 100
+						values = {"Awaiting QO Generation","Awaiting Buyer Review","Amendment Requested (Buyer)","Awaiting PO Generation","Awaiting Factory Review","Amendment Requested (Factory)","Awaiting Production","In Production","Completed","Cancelled"}
+						initial value = "Awaiting Buyer Review"
+						sortorder = ascending
+			 			row = 6
+			 			column = 2   
+						width = medium
+					)
+					Order_Review_ID
+					(
+						type = list	
+						displayname = "Order Review - ID"
+						values  = History.ID
+		    			displayformat = [ID]
+						height = 60px
+			 			row = 6
+			 			column = 2   
+						width = medium
+					)
+					Record_is_Edited
+					(
+		    			type = checkbox
+						displayname = "Record is Edited"
+						initial value = false
+			 			row = 6
+			 			column = 2   
+						width = medium
+					)
+					Selling_Currency1
+					(
+						type = picklist
+						displayname = "Selling Currency "
+						maxchar = 100
+						values = {"EUR","USD","GBP","SGD"}
+						initial value = "EUR"
+			 			row = 6
+			 			column = 2   
+						width = medium
+					)
+					Selling_Terms
+					(
+						type = picklist
+						displayname = "Selling Terms"
+						maxchar = 100
+						values = {"COD"}
+						initial value = "COD"
+			 			row = 6
+			 			column = 2   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

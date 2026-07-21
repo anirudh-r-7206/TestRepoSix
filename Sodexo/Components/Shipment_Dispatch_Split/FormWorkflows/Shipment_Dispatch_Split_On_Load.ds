@@ -1,0 +1,23 @@
+Shipment_Dispatch_Split_On_Load as "Shipment Dispatch Split On Load"
+{
+
+			    type = form
+			    form = Shipment_Dispatch_Split
+			    record event = on add or edit
+			
+			    on load
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                disable PO_Number_Display, QO_Number_Display, Transport_Mode;
+			                if(input.Shipment_Dispatch != null && input.Shipment_Dispatch.Dispatch_Status != "Draft")
+			                {
+			                    disable Shipment_Dispatch, Purchase_Order, PO_Number_Display, QO_Number_Display, Split_Status, Split_Quantity, Split_QO_Value, Split_PO_Value, Transport_Mode, Notes;
+			                }
+			            )
+			        }
+			    }
+			
+}

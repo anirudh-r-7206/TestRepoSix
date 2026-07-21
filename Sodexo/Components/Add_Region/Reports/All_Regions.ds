@@ -1,0 +1,28 @@
+default list All_Regions
+{
+
+		
+					displayName = "Regions"
+					show all rows from Add_Region    
+					(
+						Region
+					)
+					custom actions
+					(
+						"Delete "
+						(
+			  			workflow = Delete_Region
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (ID == thisapp.regionDeleteFilter())
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to delete this region?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+				
+		
+}

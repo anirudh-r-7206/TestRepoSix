@@ -1,0 +1,11 @@
+list Delete_Records.Delete_Fabrics()
+{
+
+			
+			                 	Fabric_List = List();
+			                 	get_Fabric = Add_Product[ID != 0];
+			                 	Fabric_List.addAll(get_Fabric.Fabric_Code.getall());
+			                 	return Fabric_List.distinct();
+			                 
+			
+}

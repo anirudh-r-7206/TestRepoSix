@@ -1,0 +1,20 @@
+<page linkname = "Shipment_KPI_Dashboard" displayname = "Shipment KPI Dashboard"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='Shipment_KPI_Dashboard_HTML' elementName='Shipment_KPI_Dashboard_HTML'>
+          <![CDATA[htmlpage Shipment_KPI_Dashboard_HTML()
+						 content
+			<%{%>
+            <file name:Shipment_KPI_Dashboard_HTML.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

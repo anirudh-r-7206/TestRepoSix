@@ -1,0 +1,38 @@
+Shipment_Document_On_Validate as "Validate Shipment Document"
+{
+
+			    type = form
+			    form = Shipment_Document
+			    record event = on add or edit
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch == null || input.Document_Type == null || input.Document_Type == "" || input.Document_File == null)
+			                {
+			                    alert "Shipment Dispatch, Document Type, and Document File are required.";
+			                    cancel submit;
+			                }
+			                fileName = input.Document_File.getSuffix(".").toLowerCase();
+			                if(input.Document_Type == "Invoice" && !fileName.contains("pdf"))
+			                {
+			                    alert "Invoice documents must be PDF files.";
+			                    cancel submit;
+			                }
+			                if(input.Document_Type == "Packing List" && !fileName.contains("xls"))
+			                {
+			                    alert "Packing List documents must be XLS or XLSX files.";
+			                    cancel submit;
+			                }
+			                if(input.Source == null || input.Source == "")
+			                {
+			                    input.Source = "Manual";
+			                }
+			            )
+			        }
+			    }
+			
+}

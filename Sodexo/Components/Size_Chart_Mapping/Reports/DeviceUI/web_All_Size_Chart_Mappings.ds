@@ -1,0 +1,63 @@
+report All_Size_Chart_Mappings
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Size
+										Region
+										Size_Name as "Size Name"
+										Region_New as "Region New"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Region
+										Size
+										Size_Name as "Size Name"
+										Region_New as "Region New"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

@@ -1,0 +1,17 @@
+Discontinue_Product_Catal as "Discontinue Product Catalog"
+{
+
+			
+							type =  functions
+							form = Add_Product
+							execution type = collection of records	
+							on start
+							{
+								actions 
+								{
+									thisapp.Discontinue_Product_Catalog(Add_Product);
+								}
+							}
+						
+			
+}

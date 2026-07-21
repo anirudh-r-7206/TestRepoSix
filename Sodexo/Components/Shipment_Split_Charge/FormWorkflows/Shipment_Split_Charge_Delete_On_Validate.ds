@@ -1,0 +1,28 @@
+Shipment_Split_Charge_Delete_On_Validate as "Validate Shipment Split Charge Delete"
+{
+
+			    type = form
+			    form = Shipment_Split_Charge
+			    record event = on delete
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch != null && input.Shipment_Dispatch.Payment_Status == "Fully Paid")
+			                {
+			                    alert "Charges cannot be deleted after shipment payment is fully paid.";
+			                    cancel delete;
+			                }
+			                if(input.Shipment_Dispatch != null && input.Shipment_Dispatch.Dispatch_Status == "Cancelled")
+			                {
+			                    alert "Charges cannot be deleted for a cancelled shipment.";
+			                    cancel delete;
+			                }
+			            )
+			        }
+			    }
+			
+}

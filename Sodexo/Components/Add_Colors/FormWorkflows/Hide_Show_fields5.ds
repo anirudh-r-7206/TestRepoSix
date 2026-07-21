@@ -1,0 +1,23 @@
+Hide_Show_fields5 as "Hide & Show fields"
+{
+
+			
+							type =  form
+							form = Add_Colors
+			
+							record event = on add or edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide Status;
+									)
+								}
+							}
+			
+						
+			
+}

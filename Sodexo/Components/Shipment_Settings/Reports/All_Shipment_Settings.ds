@@ -1,0 +1,24 @@
+default list All_Shipment_Settings
+{
+
+		    displayName = "Shipment Settings"
+		    show all rows from Shipment_Settings
+		    (
+		        Setting_Name as "Setting Name"
+		        Estimated_Delivery_Offset_Days as "Estimated Delivery Offset Days"
+		        KPI_Amber_Threshold_Days as "KPI Amber Threshold Days"
+		        KPI_Red_Threshold_Days as "KPI Red Threshold Days"
+		        Buyer_Cost_Visibility as "Buyer Cost Visibility"
+		        Buyer_Update_Channel as "Buyer Update Channel"
+		        Payment_Reminder_Offsets as "Payment Reminder Offsets"
+		        Reminder_Recipients as "Reminder Recipients"
+		        Forwarder_API_Poll_Enabled as "Forwarder API Poll Enabled"
+		        Forwarder_API_Base_URL as "Forwarder API Base URL"
+		        Notes
+		    )
+		    sort by
+		    (
+		        Setting_Name ascending
+		    )
+		
+}

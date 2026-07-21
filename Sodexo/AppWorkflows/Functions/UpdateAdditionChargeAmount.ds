@@ -1,0 +1,15 @@
+void OneTime.UpdateAdditionChargeAmount()
+{
+
+			
+			                 	fetAddition = Additional_Charges_Form[Amount1 == null];
+			                 	for each  rec in fetAddition
+			                 	{
+			                 		if(rec.Amount != null)
+			                 		{
+			                 			rec.Amount1=rec.Amount;
+			                 		}
+			                 	}
+			                 
+			
+}

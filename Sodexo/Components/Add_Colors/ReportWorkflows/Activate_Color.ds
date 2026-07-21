@@ -1,0 +1,20 @@
+Activate_Color as "Activate Color"
+{
+
+			
+							type =  functions
+							form = Add_Colors
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									input.Status = "Active";
+								)
+								}
+							}
+						
+			
+}

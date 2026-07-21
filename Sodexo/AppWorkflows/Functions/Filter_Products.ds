@@ -1,0 +1,24 @@
+list Filters.Filter_Products()
+{
+
+			
+			                 	get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+			                 	get_Select_Product = Order_Details[Order_Request.Order_By == get_User.ID && Order_Request.Status == "Awaiting QO Generation" && Order_Request.Last_Order == true];
+			                 	get_Select_Order = Order_Request[Order_By == get_User.ID && Status == "Awaiting QO Generation" && Last_Order == true];
+			                 	// 	get_Select_Product = Order_Details[Order_Request.Order_By == get_User.ID && Order_Request.Status == "Submitted" && Order_Request.Last_Order == true];
+			                 	// 	get_Select_Order = Order_Request[Order_By == get_User.ID && Status == "Submitted" && Last_Order == true ];
+			                 	info get_Select_Order.Search_Style_Code;
+			                 	if(get_Select_Order.Search_Style_Code != null)
+			                 	{
+			                 		get_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Select_Order.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == get_Select_Order.Factory && Style_ID.Style_Code == get_Select_Order.Search_Style_Code].Style_ID.getAll();
+			                 	}
+			                 	else
+			                 	{
+			                 		get_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Select_Order.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == get_Select_Order.Factory].Style_ID.getAll();
+			                 	}
+			                 	get_Product.removeAll(get_Select_Product.Product.getall());
+			                 	// 	info get_Product.size();
+			                 	return get_Product;
+			                 
+			
+}

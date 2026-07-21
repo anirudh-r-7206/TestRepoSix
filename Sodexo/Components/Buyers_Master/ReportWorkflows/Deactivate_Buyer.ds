@@ -1,0 +1,28 @@
+Deactivate_Buyer as "Deactivate Buyer"
+{
+
+			
+							type =  functions
+							form = Buyers_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									BuyerList = thisapp.Deactivate_Records.Deactivate_Buyer();
+													if(BuyerList.contains(input.ID))
+													{
+														success message "You can’t deactivate this buyer because they’re already in deactivated user list.";
+													}
+													else
+													{
+														input.Status = "Inactive";
+													}
+								)
+								}
+							}
+						
+			
+}

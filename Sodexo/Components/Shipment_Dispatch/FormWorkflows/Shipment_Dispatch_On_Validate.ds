@@ -1,0 +1,71 @@
+Shipment_Dispatch_On_Validate as "Validate Shipment Dispatch"
+{
+
+			    type = form
+			    form = Shipment_Dispatch
+			    record event = on add or edit
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Dispatch_Status == null || input.Dispatch_Status == "")
+			                {
+			                    input.Dispatch_Status = "Draft";
+			                }
+			                if(input.Dispatch_Status == "Confirmed")
+			                {
+			                    if(input.Buyer == null || input.Supplier == null || input.Transit_Mode == null || input.Transit_Mode == "" || input.Estimated_ExFactory_Date == null || input.Freight_Forwarder == null || input.Forwarder_Booking_ID == null || input.Forwarder_Booking_ID.trim() == "")
+			                    {
+			                        alert "Buyer, Supplier, Transit Mode, Estimated Ex-Factory Date, Freight Forwarder, and Forwarder Booking ID are required before confirmation.";
+			                        cancel submit;
+			                    }
+			                    splitRows = Shipment_Dispatch_Split[Shipment_Dispatch == input.ID && Split_Status != "Cancelled"];
+			                    if(splitRows.count() == 0)
+			                    {
+			                        alert "At least one dispatch split row is required before confirmation.";
+			                        cancel submit;
+			                    }
+			                    transitDays = thisapp.Shipment_Get_Transit_Days(input.Buyer,input.Supplier,input.Transit_Mode);
+			                    if(transitDays <= 0)
+			                    {
+			                        alert "Transit time mapping is missing for the selected Buyer, Supplier, and Transit Mode.";
+			                        cancel submit;
+			                    }
+			                }
+			                if(input.Invoice_Upload != null && !input.Invoice_Upload.getSuffix(".").toLowerCase().contains("pdf"))
+			                {
+			                    alert "Invoice Upload must be a PDF file.";
+			                    cancel submit;
+			                }
+			                if(input.Packing_List_Upload != null)
+			                {
+			                    packingName = input.Packing_List_Upload.getSuffix(".").toLowerCase();
+			                    if(!packingName.contains("xls"))
+			                    {
+			                        alert "Packing List Upload must be an XLS or XLSX file.";
+			                        cancel submit;
+			                    }
+			                }
+			                if(input.Dispatch_Status == "Cancelled")
+			                {
+			                    if(input.ATD_Date != null)
+			                    {
+			                        alert "A shipment cannot be cancelled after ATD is captured.";
+			                        cancel submit;
+			                    }
+			                    if(input.Cancellation_Reason == null || input.Cancellation_Reason.trim() == "")
+			                    {
+			                        alert "Cancellation Reason is required to cancel a shipment.";
+			                        cancel submit;
+			                    }
+			                    input.Cancelled_On = zoho.currenttime;
+			                    input.Cancelled_By = zoho.loginuserid;
+			                }
+			            )
+			        }
+			    }
+			
+}

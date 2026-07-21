@@ -1,0 +1,47 @@
+Shipment_Split_Charge_On_Validate as "Validate Shipment Split Charge"
+{
+
+			    type = form
+			    form = Shipment_Split_Charge
+			    record event = on add or edit
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch_Split == null || input.Charge_Category == null || input.Charge_Category == "" || input.Currency == null || input.Paid_By == null || input.Paid_By == "")
+			                {
+			                    alert "Shipment Dispatch Split, Charge Category, Currency, and Paid By are required.";
+			                    cancel submit;
+			                }
+			                input.Shipment_Dispatch = input.Shipment_Dispatch_Split.Shipment_Dispatch;
+			                input.Purchase_Order = input.Shipment_Dispatch_Split.Purchase_Order;
+			                if(ifnull(input.Amount,0.0) < 0)
+			                {
+			                    alert "Amount cannot be negative.";
+			                    cancel submit;
+			                }
+			                if(input.Shipment_Dispatch != null)
+			                {
+			                    if(input.Shipment_Dispatch.Payment_Status == "Fully Paid")
+			                    {
+			                        alert "Charges cannot be changed after shipment payment is fully paid.";
+			                        cancel submit;
+			                    }
+			                    if(input.Shipment_Dispatch.Dispatch_Status == "Cancelled")
+			                    {
+			                        alert "Charges cannot be changed for a cancelled shipment.";
+			                        cancel submit;
+			                    }
+			                }
+			                if(input.Source == null || input.Source == "")
+			                {
+			                    input.Source = "Manual";
+			                }
+			            )
+			        }
+			    }
+			
+}

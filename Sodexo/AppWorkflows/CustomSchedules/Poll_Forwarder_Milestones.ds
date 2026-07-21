@@ -1,0 +1,28 @@
+Poll_Forwarder_Milestones as "Poll Forwarder Milestones"
+{
+
+			    type = schedule
+			    status = inactive
+			    start = "2026-01-01 01:00:00"
+			    frequency = daily
+			    time zone = "Asia/Kolkata"
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on load
+			            (
+			                settingRec = Shipment_Settings[ID != 0];
+			                if(settingRec != null && settingRec.count() > 0 && settingRec.Forwarder_API_Poll_Enabled == true)
+			                {
+			                    for each  dispatchRec in Shipment_Dispatch[Dispatch_Status == "Confirmed" && Forwarder_Booking_ID != null && Shipment_Status != "Delivered"]
+			                    {
+			                        thisapp.Forwarder_Fetch_Milestone(dispatchRec.ID);
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

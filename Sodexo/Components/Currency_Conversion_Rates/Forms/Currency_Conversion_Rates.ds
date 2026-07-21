@@ -1,0 +1,85 @@
+form Currency_Conversion_Rates
+{
+
+		
+					displayname = "Currency Conversion Rates"
+					success message = "Currency Conversion Rate Added Successfully"
+					Rate_Conversion_History_ID
+					(
+						type = list	
+						displayname = "Rate Conversion History - ID"
+						values  = Rate_Conversion_History.ID
+		    			bidirectional = Currency_Conversion_Rates
+		    			displayformat = [ID]
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Style_Name
+					(
+						type = picklist	
+						displayname = "Style Name"
+						values  = Style.ID
+		    			displayformat = [Style_Name]
+						allow new entries
+						[
+							displayname = "Add New"
+						]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Currency
+					(
+						type = picklist
+						maxchar = 100
+						values = {"Euros","USD"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Conversion_Rate
+					(
+						type = decimal
+						displayname = "Conversion Rate"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

@@ -1,0 +1,32 @@
+Show_Factory_address_in_n1 as "Show Factory address in note field"
+{
+
+			
+							type =  form
+							form = Copy_of_Purchase_Order
+			
+							record event = on add or edit
+			
+							on user input of Factory_Address
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														Address = "";
+													if(input.Factory_Address != null)
+													{
+														Address = Address + "<b>Factory Address :</b><br><div style='padding-left: 30px;'>" + if(input.Factory_Address.Factory_Address.address_line_1 != null,input.Factory_Address.Factory_Address.address_line_1,"---") + "<br>" + if(input.Factory_Address.Factory_Address.address_line_2 != null,input.Factory_Address.Factory_Address.address_line_2,"---") + "<br>" + if(input.Factory_Address.Factory_Address.district_city != null,input.Factory_Address.Factory_Address.district_city,"---") + ", " + if(input.Factory_Address.Factory_Address.state_province != null,input.Factory_Address.Factory_Address.state_province,"---") + " - " + if(input.Factory_Address.Factory_Address.postal_Code != null,input.Factory_Address.Factory_Address.postal_Code,"---") + "<br>" + if(input.Factory_Address.Factory_Address.country != null,input.Factory_Address.Factory_Address.country,"---") + "</div><br><br>";
+													}
+													if(input.Delivery_Address != null)
+													{
+														Address = Address + "<b>Delivery Address :</b> <br><div style='padding-left: 30px;'>" + if(input.Delivery_Address.Address.address_line_1 != null,input.Delivery_Address.Address.address_line_1,"---") + "<br>" + if(input.Delivery_Address.Address.address_line_2 != null,input.Delivery_Address.Address.address_line_2,"---") + "<br>" + if(input.Delivery_Address.Address.district_city != null,input.Delivery_Address.Address.district_city,"---") + ", " + if(input.Delivery_Address.Address.state_province != null,input.Delivery_Address.Address.state_province,"---") + " - " + if(input.Delivery_Address.Address.postal_Code != null,input.Delivery_Address.Address.postal_Code,"---") + "<br>" + if(input.Delivery_Address.Address.country != null,input.Delivery_Address.Address.country,"---") + "</div>";
+													}
+													input.Address_Details = Address;
+									)
+								}
+							}
+			
+						
+			
+}

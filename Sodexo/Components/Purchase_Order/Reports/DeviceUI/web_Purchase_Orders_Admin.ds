@@ -1,0 +1,181 @@
+report Purchase_Orders_Admin
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Buyer_Contact_Person as "Buyer Contact Person"
+										Factory_Contact_Person as "Factory Contact Person"
+										PO_Number as "PO Number"
+										PO_Date as "PO Date"
+										Order_Request as "Order Request"
+										Supplier
+										Total_Purchase_Price as "Total Purchase Price"
+										Payment_Terms as "Payment Terms"
+										Order_Status as "Order Status"
+										Shipment_Tracking_Status as "Shipment Tracking Status"
+										Shipment_Dispatch_Count as "Shipment Dispatch Count"
+										Latest_Estimated_Delivery_Date as "Latest Estimated Delivery Date"
+										Latest_Actual_Delivery_Date as "Latest Actual Delivery Date"
+										"View PO"
+										"View QO"
+										"Completed"
+										Modified_Time as "Modified Time"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Delete 
+									)
+								record
+								(
+									Delete   	   
+									Edit   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+									Delete   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										PO_Number as "PO Number"
+										PO_Date as "PO Date"
+										Order_Request as "Order Request"
+										Order_Type as "Order Type "
+										Order_Reference as "Order Reference"
+										Supplier
+										Delivery_Date as "Ex-Factory date"
+										QO_Number as "QO Number"
+										Purchase_Currency1 as "Purchase Currency old"
+										Selling_Currency1 as "Selling Currency old"
+										Selling_Terms as "Selling Terms"
+										Delivery_Contact as "Delivery Contact "
+										Freight_Forwarder as "Freight Forwarder"
+										Incoterms as "Incoterm"
+										Country
+										Total_Purchase_Price as "Total Purchase Price"
+										Total_Selling_Price as "Total Selling Price"
+										Order_Status as "Order Status"
+										Added_Time as "Added Time"
+										Factory_Address as "Factory Address"
+										Factory_Address1 as "Factory Address"
+										Delivery_Address1 as "Delivery Address"
+										Buyer_Comment as "Buyer Comment"
+										Comments
+										Additional_Charges.Purchase_Order as "Additional Charges"
+									)
+								)
+								datablock4
+								(
+									layout type = -1
+				     				title = "Purchase LineItems"
+				     				related field = Purchase_LineItems
+									fields
+									(
+										Product as "Style ID"
+										Style_Code as "Style Code"
+										Product_Color as "Product Color"
+										Product_Size as "Product Size"
+										Description
+										Quantity
+										Purchase_Price as "Purchase Price"
+										Selling_Price as "Selling Price"
+										Purchase_Price_Sub_Total as "Purchase Price Sub Total"
+										Selling_Price_Sub_Total as "Selling Price Sub Total"
+									)
+								)
+								datablock6
+								(
+				     				title = "Order Request"
+				     				related field = Order_Request
+									fields
+									(
+										Order_ID as "Order ID"
+										Buyer_Name as "Buyer Name"
+										Cart_Total as "Cart Total "
+										Status
+									)
+								)
+								datablock5
+								(
+				     				title = "Supplier"
+				     				related field = Supplier_old
+									fields
+									(
+										Employee_External_ID as "Employee/External ID"
+										User_Name as "User Name"
+										User_Type as "User Type"
+										Email
+										Mobile_Number as "Mobile Number"
+										Persona_Role as "Persona/Role"
+										Status as "Status "
+									)
+								)
+								datablock7
+								(
+									layout type = -1
+				     				title = "Purchase History"
+				     				related field = Order_Review_ID
+									fields
+									(
+										Added_Time as "Added Time"
+										Raised_By as "Raised By"
+										Status
+										Comments
+									)
+								)
+								datablock8
+								(
+									layout type = -1
+				     				title = "Additional Charges"
+				     				related field = Additional_Charges_Form.Purchase_Order
+									fields
+									(
+										Charge_Type as "Charge Type"
+										Description
+										Paid_By as "Paid By"
+										Currency
+										Amount1 as "Amount"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
+						)
+					
+		
+}

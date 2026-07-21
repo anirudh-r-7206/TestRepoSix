@@ -1,0 +1,154 @@
+form History
+{
+
+		
+					displayname = "Order Review"
+					success message = "History Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Order_ID
+					(
+						type = picklist	
+						displayname = "Order ID"
+						values  = Order_Request.ID
+		    			bidirectional = Order_Review_ID
+		    			displayformat = [Order_ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Purchase_Order_ID
+					(
+						type = picklist	
+						displayname = "Purchase Order ID"
+						values  = Purchase_Order.ID
+		    			bidirectional = Order_Review_ID
+		    			displayformat = [PO_Number]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Raised_By
+					(
+						type = picklist	
+						displayname = "Raised By"
+						values  = Create_User.ID
+		    			displayformat = [" " + User_Name.prefix + " " + User_Name.first_name + " " + User_Name.last_name + " " + User_Name.suffix]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					On_behalf_of
+					(
+						type = radiobuttons
+						displayname = "On behalf of"
+						maxchar = 100
+						values = {"Buyer","Factory"}
+						layout = 2
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Status
+					(
+						type = radiobuttons
+						maxchar = 100
+						values = {"Pending","Submitted","Validation Pending","Intransit","Completed","Awaiting Buyer Review","Amendment Requested (Buyer)","Awaiting PO Generation","Awaiting Factory Review","Amendment Requested (Factory)","Awaiting Production","In Production","Amendment / Cancellation Required"}
+						layout = 2
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Comments
+					(
+		    			type = textarea
+						height = 100px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Approval_Status
+					(
+						type = picklist
+						displayname = "Approval Status"
+						maxchar = 100
+						values = {"Pending","Approved","Rejected","Completed"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					QO_Viewed
+					(
+		    			type = checkbox
+						displayname = "QO Viewed"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Copy_of_Purchase_Order
+					(
+						type = picklist	
+						displayname = "Copy of Purchase Order"
+						values  = Copy_of_Purchase_Order.ID
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Hide_Section
+					(
+						type = section
+						displayname = "Hide Section"
+						visibility = true
+			 			row = 2
+			 			column = 0   
+						width = medium
+					)
+					File_upload
+					(
+		    			type = upload file
+						displayname = "File upload"
+		    			file count = 10
+						browse = local_drive
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

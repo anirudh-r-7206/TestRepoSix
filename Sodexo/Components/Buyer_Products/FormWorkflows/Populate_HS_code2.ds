@@ -1,0 +1,35 @@
+Populate_HS_code2 as "Populate HS code"
+{
+
+			
+							type =  form
+							form = Buyer_Products
+			
+							record event = on add or edit
+			
+							on user input of HS_Name
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														input.HS_Code = null;
+													if(input.HS_Name == "USA")
+													{
+														input.HS_Code = input.Style_ID.HS_Code_USA;
+													}
+													else if(input.HS_Name == "EU")
+													{
+														input.HS_Code = input.Style_ID.HS_Code_EU;
+													}
+													else if(input.HS_Name == "APAC")
+													{
+														input.HS_Code = input.Style_ID.HS_Code_APAC;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

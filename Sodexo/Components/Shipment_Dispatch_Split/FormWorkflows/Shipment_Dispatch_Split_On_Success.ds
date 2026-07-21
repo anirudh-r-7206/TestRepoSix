@@ -1,0 +1,26 @@
+Shipment_Dispatch_Split_On_Success as "Shipment Dispatch Split On Success"
+{
+
+			    type = form
+			    form = Shipment_Dispatch_Split
+			    record event = on add or edit
+			
+			    on success
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Purchase_Order != null)
+			                {
+			                    thisapp.Update_PO_Shipment_Summary(input.Purchase_Order.ID);
+			                }
+			                if(input.Shipment_Dispatch != null)
+			                {
+			                    thisapp.Shipment_Recalculate(input.Shipment_Dispatch.ID);
+			                }
+			            )
+			        }
+			    }
+			
+}

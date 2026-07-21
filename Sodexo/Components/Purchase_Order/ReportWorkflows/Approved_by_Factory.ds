@@ -1,0 +1,36 @@
+Approved_by_Factory as "Approved by Factory"
+{
+
+			
+							type =  functions
+							form = Purchase_Order
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									input.Order_Status = if(input.Order_Type == "Bulk" || input.Order_Type == "SM","In Production","Awaiting Production");
+													// Order History Push
+													get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+													if(get_User.count() > 0)
+													{
+														HistoryPush = insert into History
+														[
+															Added_User=zoho.loginuser
+															Purchase_Order_ID=input.ID
+															Raised_By=get_User.ID
+															Status=input.Order_Status
+															Comments="Purchase Order " + input.PO_Number + " has been moved to '" + input.Order_Status + "' by " + get_User.User_Name + "."
+														];
+													}
+													thisapp.Send_Mail.Email_Template(input.ID,"Buyer_QO_Completed");
+													thisapp.Send_Mail.Email_Template(input.ID,"Move_to_Production");
+													openUrl("#Page:Alert_Message?PO_ID=" + input.PO_Number + "&Message_Type=Production","popup window");
+								)
+								}
+							}
+						
+			
+}

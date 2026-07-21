@@ -1,0 +1,50 @@
+Valid_status_changes3 as "Valid status changes"
+{
+
+			
+							type =  form
+							form = Product_Category
+			
+							record event = on edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Status != old.Status)
+													{
+														alert "Status cannot be changed.";
+														cancel submit;
+													}
+													get_Removed_Wardrobe = old.Wardrobe;
+													get_Removed_Wardrobe.removeAll(input.Wardrobe);
+													mapped_Wardrobe = list();
+													wardrobe_Name = "";
+													if(get_Removed_Wardrobe.size() > 0)
+													{
+														wardrobe_Name = wardrobe_Name + "[";
+														for each  war in get_Removed_Wardrobe
+														{
+															get_Product = Add_Product[Wardrobe == war && Style_Category == input.ID];
+															if(get_Product.count() > 0)
+															{
+																mapped_Wardrobe.add(war);
+																wardrobe_Name = wardrobe_Name + Wardrobe[ID == war].Wardrobe_Name + ",";
+															}
+														}
+														wardrobe_Name_List = wardrobe_Name.removeLastOccurence(",") + "]";
+													}
+													if(mapped_Wardrobe.size() > 0)
+													{
+														alert "The following wardrobes are already used by products and cannot be removed: " + wardrobe_Name_List + ". Please keep them selected.";
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

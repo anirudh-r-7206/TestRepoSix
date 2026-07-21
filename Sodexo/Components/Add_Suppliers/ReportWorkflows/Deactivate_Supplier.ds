@@ -1,0 +1,28 @@
+Deactivate_Supplier as "Deactivate Supplier"
+{
+
+			
+							type =  functions
+							form = Add_Suppliers
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									SupplierList = thisapp.Deactivate_Records.Deactivate_Suppliers();
+													if(SupplierList.contains(input.ID))
+													{
+														success message "You can’t deactivate this supplier.";
+													}
+													else
+													{
+														input.Status = "Inactive";
+													}
+								)
+								}
+							}
+						
+			
+}

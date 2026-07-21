@@ -1,0 +1,109 @@
+form Additional_Charges_Form
+{
+
+		
+					displayname = "Additional Charges Form"
+					success message = "Data Added Successfully!"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Purchase_Order
+					(
+						type = picklist	
+						displayname = "Purchase Order"
+						values  = Purchase_Order.ID
+		    			bidirectional = Additional_Charges
+		    			displayformat = [PO_Number]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Charge_Type
+					(
+						type = picklist	
+						displayname = "Charge Type"
+						values  = Charge_Type_Form.ID
+		    			displayformat = [Charge_Type]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Description
+					(
+		    			type = textarea
+						height = 100px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Paid_By
+					(
+						type = picklist
+						displayname = "Paid By"
+						maxchar = 100
+						values = {"Buyer","Supplier","Sodexo Team"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Currency
+					(
+						type = picklist	
+						values  = Currency.ID
+		    			displayformat = [Currency_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Amount1
+					(
+						type = decimal
+						displayname = "Amount"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Amount
+					(
+						displayname = "Amount - Old"
+						type = SGD
+						format = commadotwestern
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

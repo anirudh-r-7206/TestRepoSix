@@ -1,0 +1,483 @@
+<%
+get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+buyerOrgId = 0;
+buyerOrgName = "";
+isBuyerMapped = false;
+if(get_User.count() > 0 && get_User.Associated_Buyer != null)
+{
+		buyerOrgId = get_User.Associated_Buyer.ID;
+		buyerOrgName = ifnull(get_User.Associated_Buyer.Buyer_Organisation,"Buyer organization");
+		isBuyerMapped = true;
+}
+settingsRec = Shipment_Settings[ID != 0];
+buyerCostVisible = false;
+if(settingsRec.count() > 0 && settingsRec.Buyer_Cost_Visibility == true)
+{
+		buyerCostVisible = true;
+}
+%>
+<style>
+/* ===== zcs-global.css - included once for this page, compacted to utilities used by this segment ===== */
+:root { --zcs-theme-brand-color: var(--zcs_brand_color); --zcs-light-bg-color: var(--zcs_brand_light_color); --zcs-page-bg-color: #F3F3F4; --zcs-primary-text-color: var(--zcs_primary_text_color); --zcs-secondary-text-color: var(--zcs_secondary_text_color); --zcs-teritiary-text-color: var(--zcs_tertiary_text_color); --zcs-border-color: var(--zcs_tertiary_border_color); --zcs-white-color: #FFFFFF; --zcs-black-color: #000000; }
+.zcs-card { background-color: var(--zcs-white-color); border: 1px solid var(--zcs_tertiary_border_color); border-radius: 12px; }
+a { text-decoration: none; }
+.zcs-row { display: flex; flex-wrap: wrap; }
+.zcs-flex { display: flex; }
+.zcs-inline-flex { display: inline-flex; }
+.zcs-direction-column { flex-direction: column; }
+.zcs-row-nowrap { flex-wrap: nowrap; }
+.zcs-col-common { flex: 1 1 0%; }
+.zcs-no-shrink { flex-shrink: 0; }
+.zcs-align-items-center { align-items: center; }
+.zcs-align-items-start { align-items: flex-start; }
+.zcs-justify-center { justify-content: center; }
+.zcs-justify-space-between { justify-content: space-between; }
+.zcs-gap-4 { gap: .25rem; --column-gap: .25rem; }
+.zcs-gap-6 { gap: .375rem; --column-gap: .375rem; }
+.zcs-gap-8 { gap: .5rem; --column-gap: .5rem; }
+.zcs-gap-10 { gap: .625rem; --column-gap: .625rem; }
+.zcs-gap-12 { gap: .75rem; --column-gap: .75rem; }
+.zcs-gap-16 { gap: 1rem; --column-gap: 1rem; }
+.zcs-gap-20 { gap: 1.25rem; --column-gap: 1.25rem; }
+.zcs-p-0 { padding: 0; }
+.zcs-p-8 { padding: .5rem; }
+.zcs-p-10 { padding: .625rem; }
+.zcs-p-16 { padding: 1rem; }
+.zcs-p-20 { padding: 1.25rem; }
+.zcs-p-24 { padding: 1.5rem; }
+.zcs-px-10 { padding-left: .625rem; padding-right: .625rem; }
+.zcs-px-12 { padding-left: .75rem; padding-right: .75rem; }
+.zcs-px-16 { padding-left: 1rem; padding-right: 1rem; }
+.zcs-py-2 { padding-top: .125rem; padding-bottom: .125rem; }
+.zcs-py-4 { padding-top: .25rem; padding-bottom: .25rem; }
+.zcs-py-8 { padding-top: .5rem; padding-bottom: .5rem; }
+.zcs-m-0 { margin: 0; }
+.zcs-mt-8 { margin-top: .5rem; }
+.zcs-mt-12 { margin-top: .75rem; }
+.zcs-mt-16 { margin-top: 1rem; }
+.zcs-mb-4 { margin-bottom: .25rem; }
+.zcs-mb-8 { margin-bottom: .5rem; }
+.zcs-mb-12 { margin-bottom: .75rem; }
+.zcs-w-full { width: 100%; }
+.zcs-font-11 { font-size: .6875rem; }
+.zcs-font-12 { font-size: .75rem; }
+.zcs-font-13 { font-size: .8125rem; }
+.zcs-font-14 { font-size: .875rem; }
+.zcs-font-15 { font-size: .9375rem; }
+.zcs-font-16 { font-size: 1rem; }
+.zcs-font-18 { font-size: 1.125rem; }
+.zcs-font-20 { font-size: 1.25rem; }
+.zcs-font-24 { font-size: 1.5rem; }
+.zcs-font-normal { font-weight: 400; }
+.zcs-font-medium { font-weight: 500; }
+.zcs-font-semibold { font-weight: 600; }
+.zcs-font-bold { font-weight: 700; }
+.zcs-lh-body { line-height: 1.5; }
+.zcs-lh-heading { line-height: 1.25; }
+.zcs-uppercase { text-transform: uppercase; }
+.zcs-rounded-sm { border-radius: .25rem; }
+.zcs-rounded-md { border-radius: .375rem; }
+.zcs-rounded-lg { border-radius: .5rem; }
+.zcs-rounded-xl { border-radius: .75rem; }
+.zcs-rounded-half { border-radius: 50%; }
+.zcs-box-border { box-sizing: border-box; }
+.zcs-text-left { text-align: left; }
+.zcs-text-center { text-align: center; }
+.zcs-text-right { text-align: right; }
+.zcs-relative { position: relative; }
+.zcs-absolute { position: absolute; }
+.zcs-sticky { position: sticky; }
+.zcs-color-primary { color: var(--zcs-primary-text-color); }
+.zcs-color-secondary { color: var(--zcs-secondary-text-color); }
+.zcs-color-tertiary { color: var(--zcs-teritiary-text-color); }
+.zcs-color-white { color: var(--zcs-white-color); }
+.zcs-color-theme { color: var(--zcs-theme-brand-color); }
+.zcs-overflow-auto { overflow: auto; }
+
+/* ===== card-template-default.css - adapted to full-width shipment cards ===== */
+.zcs-template-card { width: 100%; height: auto; overflow: visible; }
+.zcs-card-header { border-bottom: 1px solid var(--zcs_tertiary_border_color); }
+.zcs-template-card-badge { top: 0; right: 0; background-color: var(--theme_brand_color); border-bottom-left-radius: 32px; }
+.zcs-card-content { width: 100%; }
+.zcs-template-card .zcs-card-footer { display: none; }
+.zcs-template-card .zcs-card-action { background-color: var(--zcs-white-color); }
+
+/* ===== badge-badge-with-icon.css ===== */
+.zcs-badge { width: auto; }
+.zcs-badge-filled-outline, .zcs-badge-outline { border: 1px solid; }
+.zcs-badge-filled-outline.zcs-badge-theme { background-color: var(--zcs_component_hover_color); border-color: var(--zcs_brand_color); color: var(--zcs_brand_color); }
+.zcs-badge-filled-outline.zcs-badge-green { background-color: #E4FCF3; border-color: #179E6C; color: #179E6C; }
+.zcs-badge-filled-outline.zcs-badge-red { background-color: #FDE3E6; border-color: #FE455D; color: #FE455D; }
+.zcs-badge-filled-outline.zcs-badge-grey { background-color: #e8e8e8; border-color: #242424; color: #242424; }
+.zcs-badge-filled-outline.zcs-badge-yellow { background-color: #FCF4E6; border-color: #FAAE13; color: #b8770d; }
+.zcs-badge-filled-outline.zcs-badge-blue { background-color: #E8EFFF; border-color: #2A6FFC; color: #2A6FFC; }
+.zcs-badge-filled-outline.zcs-badge-orange { background-color: #F8F0EB; border-color: #F4660C; color: #F4660C; }
+
+/* ===== table-simple-table.css ===== */
+:root { --zcs-thead-color: #F9FAFE; --zcs-tr-h-color: #F9FAFE; --zcs-tgroup-color: #F1F2F8; --zcs-tgroup-h-color: #F1F2F8; }
+.zcs-table-wrapper { border: 1px solid var(--zcs_tertiary_border_color); background-color: var(--zcs-white-color); overflow: auto; }
+.zcs-table-wrapper table { line-height: normal; border-collapse: collapse; }
+.zcs-table-wrapper table thead { top: 0; }
+.zcs-table-wrapper table thead tr th { background-color: var(--zcs-thead-color); box-shadow: 0 -1px 0 0 var(--zcs_tertiary_border_color) inset; white-space: nowrap; }
+.zcs-table-wrapper table thead tr.zcs-tspace th { background-color: var(--zcs-white-color); box-shadow: none; }
+.zcs-table-wrapper table tbody tr td { border-top: 1px solid var(--zcs_tertiary_border_color); }
+.zcs-table-wrapper table tbody tr:first-child td { border-color: transparent; }
+.zcs-table-wrapper table tbody tr:hover td { background-color: var(--zcs-tr-h-color); }
+.zcs-table-wrapper table tbody tr td.zcs-green, .zcs-table-wrapper table tbody tr td .zcs-green { color: #179e6c; }
+.zcs-table-wrapper table tbody tr td.zcs-red, .zcs-table-wrapper table tbody tr td .zcs-red { color: #fe455d; }
+.zcs-table-wrapper table tbody tr td.zcs-yellow, .zcs-table-wrapper table tbody tr td .zcs-yellow { color: #b8770d; }
+.zcs-table-wrapper table tbody tr td.zcs-l_blue, .zcs-table-wrapper table tbody tr td .zcs-l_blue { color: #1094c5; }
+
+/* ===== stepper-completed.css ===== */
+.zcs-stepper-status { width: 32px; height: 32px; background-color: var(--zcs_brand_color); border: 4px solid var(--zcs-white-color); }
+.zcs-stepper-count { border: 1px solid var(--zcs_tertiary_border_color); display: none; }
+.zcs-stepper-icon.zcs-stepper-failed { display: none; }
+.zcs-stepper-level { display: none; background-color: var(--zcs_brand_color); }
+.zcs-stepper:not(:last-child):before { content: ''; width: 100%; height: 1px; border-top: 1px solid var(--zcs_brand_color); box-sizing: border-box; position: absolute; top: calc((32px - 1px) / 2); left: 50%; }
+.zcs-stepper-active .zcs-stepper-status { border: 1px solid var(--zcs_brand_color); outline: 4px solid var(--zcs-white-color); background-color: var(--zcs-white-color); }
+.zcs-stepper-active .zcs-stepper-count { display: flex; border-width: 0; color: var(--zcs_brand_color); }
+.zcs-stepper-active .zcs-stepper-icon { display: none; }
+.zcs-stepper-active .zcs-stepper-text { font-weight: 500; color: var(--zcs_brand_color); }
+.zcs-stepper.zcs-stepper-active:before, .zcs-stepper.zcs-stepper-active~.zcs-stepper:before { border-color: var(--zcs_tertiary_border_color); }
+.zcs-stepper-active~.zcs-stepper .zcs-stepper-status { background-color: var(--zcs-white-color); }
+.zcs-stepper-active~.zcs-stepper .zcs-stepper-count { display: flex; }
+.zcs-stepper-active~.zcs-stepper .zcs-stepper-icon { display: none; }
+.zcs-stepper-active~.zcs-stepper .zcs-stepper-text { color: var(--zcs_tertiary_text_color); }
+
+/* ===== button-primary-outline-button-no-icon.css ===== */
+.zcs-button { width: auto; min-width: 5rem; min-height: 36px; }
+.zcs-primary-outline-button { border: 1px solid var(--zcs_brand_color); background-color: var(--zcs-white-color); color: var(--zcs_brand_color); }
+.zcs-primary-outline-button:hover { background-color: var(--zcs_component_hover_color); border-color: var(--zcs_brand_color); color: var(--zcs_brand_color); }
+
+/* ===== Buyer Shipment Updates page styles ===== */
+.bsu-page { min-height: 100%; background: var(--zcs-page-bg-color); padding: 24px; box-sizing: border-box; color: var(--zcs-primary-text-color); }
+.bsu-shell { max-width: 1280px; margin: 0 auto; }
+.bsu-hero { background: linear-gradient(135deg, var(--zcs_brand_color), var(--zcs_brand_dark_color)); color: var(--zcs_brand_foreground_color); border-radius: 18px; padding: 24px; box-sizing: border-box; }
+.bsu-hero h1 { margin: 0; font-size: 28px; line-height: 1.2; font-weight: 700; color: var(--zcs_brand_foreground_color); }
+.bsu-hero p { margin: 8px 0 0; color: var(--zcs_brand_foreground_color); opacity: .9; }
+.bsu-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.bsu-summary-card { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.24); border-radius: 14px; padding: 14px; color: var(--zcs_brand_foreground_color); }
+.bsu-summary-card span { display: block; font-size: 12px; opacity: .86; }
+.bsu-summary-card strong { display: block; margin-top: 2px; font-size: 24px; line-height: 1.1; }
+.bsu-toolbar { margin: 16px 0; padding: 16px; }
+.bsu-search-wrap { display: flex; align-items: center; gap: 10px; min-width: 320px; flex: 1 1 auto; border: 1px solid var(--zcs_tertiary_border_color); background: var(--zcs-white-color); border-radius: 10px; padding: 0 12px; }
+.bsu-search-wrap i { color: var(--zcs_brand_color); }
+.bsu-search-wrap input { width: 100%; min-height: 42px; border: 0; outline: none; background: transparent; color: var(--zcs-primary-text-color); font-size: 14px; }
+.bsu-card-stack { display: grid; gap: 16px; }
+.bsu-card-title { padding-right: 120px; word-break: break-word; }
+.bsu-field-grid { display: grid; grid-template-columns: repeat(5, minmax(130px, 1fr)); gap: 10px; }
+.bsu-field { border: 1px solid var(--zcs_tertiary_border_color); border-radius: 10px; padding: 10px; background: #FBFCFF; min-height: 64px; }
+.bsu-field-label { display: block; color: var(--zcs-secondary-text-color); font-size: 11px; line-height: 1.3; text-transform: uppercase; letter-spacing: .03em; }
+.bsu-field-value { display: block; color: var(--zcs-primary-text-color); font-size: 14px; margin-top: 5px; word-break: break-word; }
+.bsu-section-title { display: flex; align-items: center; gap: 8px; margin: 18px 0 10px; font-size: 15px; font-weight: 600; color: var(--zcs-primary-text-color); }
+.bsu-section-title i { color: var(--zcs_brand_color); }
+.bsu-stepper-card { padding: 16px 12px 6px; border: 1px solid var(--zcs_tertiary_border_color); border-radius: 12px; background: #FFFFFF; }
+.bsu-cost-note { margin-top: 12px; border: 1px dashed var(--zcs_brand_color); color: var(--zcs_brand_color); background: var(--zcs_brand_light_color); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+.bsu-muted-note { color: var(--zcs-secondary-text-color); font-size: 13px; }
+.bsu-empty { padding: 32px; text-align: center; }
+.bsu-empty i { color: var(--zcs_brand_color); font-size: 32px; }
+.bsu-report { margin-top: 18px; padding: 0; overflow: hidden; }
+.bsu-report-head { padding: 16px 20px; border-bottom: 1px solid var(--zcs_tertiary_border_color); }
+.bsu-report-frame { min-height: 520px; padding: 8px; background: #FFFFFF; }
+.bsu-hidden { display: none !important; }
+.bsu-no-results { display: none; margin-top: 16px; }
+.bsu-safe-banner { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: #F9FAFE; border: 1px solid var(--zcs_tertiary_border_color); color: var(--zcs-secondary-text-color); }
+@media (max-width: 980px) { .bsu-field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bsu-summary { grid-template-columns: 1fr; } }
+@media (max-width: 575px) { .bsu-page { padding: 12px; } .bsu-hero h1 { font-size: 22px; } .bsu-field-grid { grid-template-columns: 1fr; } .bsu-toolbar > .zcs-flex { flex-direction: column; align-items: stretch; } .bsu-search-wrap { min-width: 0; } .bsu-card-title { padding-right: 0; } .zcs-stepper-wrapper ul { flex-direction: column; gap: 24px; } .zcs-stepper-wrapper ul .zcs-stepper { flex-direction: row; gap: 16px; text-align: left; } .zcs-stepper:not(:last-child):before { width: 1px; height: 100%; border-left: 1px solid var(--zcs_brand_color); border-top: 0; left: calc((32px - 1px) / 2); } }
+</style>
+
+<div class="bsu-page">
+	<div class="bsu-shell">
+<% if(isBuyerMapped == false) { %>
+		<div class="zcs-card bsu-empty">
+			<i class="zc-li-outline users-1-single-02"></i>
+			<h2 class="zcs-font-20 zcs-font-semibold zcs-color-primary zcs-m-0 zcs-mt-12">Buyer organization not found</h2>
+			<p class="zcs-font-14 zcs-color-secondary zcs-m-0 zcs-mt-8">Your active user profile is not linked to a buyer organization. Shipment updates are filtered by buyer organization, not record owner.</p>
+		</div>
+<% } else { 
+		shipmentRows = Shipment_Dispatch[Buyer == buyerOrgId && Dispatch_Status != "Cancelled"];
+		totalShipments = shipmentRows.count();
+		lateShipments = Shipment_Dispatch[Buyer == buyerOrgId && Dispatch_Status != "Cancelled" && KPI_Status == "Late"].count();
+		delayedShipments = Shipment_Dispatch[Buyer == buyerOrgId && Dispatch_Status != "Cancelled" && KPI_Status == "Minor Slip"].count();
+%>
+		<section class="bsu-hero">
+			<div class="zcs-flex zcs-justify-space-between zcs-align-items-start zcs-gap-16">
+				<div>
+					<h1>Buyer Shipment Updates</h1>
+					<p>Showing shipment progress for <strong><%=buyerOrgName%></strong>. Costs and charge rows are hidden by default.</p>
+				</div>
+				<div class='zcs-badge zcs-badge-filled-outline zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-box-border zcs-badge-theme'>
+					<i class='zcs-badge-icon zcs-no-shrink zc-li-outline business-2-chart-bar-32'></i>
+					<span class='zcs-badge-text zcs-font-14 zcs-font-normal zcs-lh-body'>Buyer filtered</span>
+				</div>
+			</div>
+			<div class="bsu-summary">
+				<div class="bsu-summary-card"><span>Total shipments</span><strong><%=totalShipments%></strong></div>
+				<div class="bsu-summary-card"><span>Delayed</span><strong><%=delayedShipments%></strong></div>
+				<div class="bsu-summary-card"><span>Late</span><strong><%=lateShipments%></strong></div>
+			</div>
+		</section>
+
+		<section class="zcs-card bsu-toolbar">
+			<div class="zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-12">
+				<label class="bsu-search-wrap" for="bsuSearch">
+					<i class="zc-li-outline ui-1-zoom"></i>
+					<input id="bsuSearch" type="search" placeholder="Search shipment reference, PO number, or QO number" autocomplete="off" />
+				</label>
+				<a id="bsuClearSearch" class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-16 zcs-py-8 zcs-rounded-md zcs-box-border zcs-font-14 zcs-font-normal zcs-lh-body' href='javascript:void(0);'>
+					<span class='zcs-button-text'>Clear filter</span>
+				</a>
+			</div>
+			<div class="bsu-safe-banner zcs-font-13">
+				<span class="zcs-inline-flex zcs-align-items-center zcs-gap-8"><i class="zc-li-outline ui-1-lock"></i> Buyer-safe view: no freight charge or cost rows are shown by default.</span>
+			</div>
+		</section>
+
+		<div class="bsu-card-stack" id="bsuShipmentList">
+<% if(totalShipments == 0) { %>
+			<div class="zcs-card bsu-empty">
+				<i class="zc-li-outline transportation-delivery"></i>
+				<h2 class="zcs-font-20 zcs-font-semibold zcs-color-primary zcs-m-0 zcs-mt-12">No shipment updates yet</h2>
+				<p class="zcs-font-14 zcs-color-secondary zcs-m-0 zcs-mt-8">There are no non-cancelled shipments linked to your buyer organization.</p>
+			</div>
+<% } else { 
+		for each shipment in Shipment_Dispatch[Buyer == buyerOrgId && Dispatch_Status != "Cancelled"] sort by Estimated_Delivery_Date desc
+		{
+				splitRows = Shipment_Dispatch_Split[Shipment_Dispatch == shipment.ID && Split_Status != "Cancelled"];
+				searchData = ifnull(shipment.Shipment_Reference,"");
+				for each splitSearch in splitRows
+				{
+						searchData = searchData + " " + ifnull(splitSearch.PO_Number_Display,"") + " " + ifnull(splitSearch.QO_Number_Display,"") + " " + ifnull(splitSearch.Purchase_Order.PO_Number,"") + " " + ifnull(splitSearch.Purchase_Order.QO_Number,"");
+				}
+				kpiStatus = ifnull(shipment.KPI_Status,"On Track");
+				kpiBadgeClass = "zcs-badge-green";
+				kpiBadgeIcon = "ui-1-check-circle-08";
+				kpiBadgeText = kpiStatus;
+				if(kpiStatus == "Late")
+				{
+						kpiBadgeClass = "zcs-badge-red";
+						kpiBadgeIcon = "ui-2-time";
+						kpiBadgeText = "Late";
+				}
+				else if(kpiStatus == "Minor Slip")
+				{
+						kpiBadgeClass = "zcs-badge-yellow";
+						kpiBadgeIcon = "ui-2-alert";
+						kpiBadgeText = "Delayed";
+				}
+				else if(kpiStatus == "Complete")
+				{
+						kpiBadgeClass = "zcs-badge-blue";
+						kpiBadgeIcon = "ui-1-check-circle-08";
+						kpiBadgeText = "Complete";
+				}
+				stepIndex = 1;
+				if(shipment.Production_Status == "Completed" || shipment.Actual_ExFactory_Date != null || shipment.ETD_Date != null || shipment.ETA_Date != null || shipment.Actual_Delivery_Date != null)
+				{
+						stepIndex = 2;
+				}
+				if(shipment.Actual_ExFactory_Date != null || shipment.ATD_Date != null || shipment.ETA_Date != null || shipment.Actual_Delivery_Date != null)
+				{
+						stepIndex = 3;
+				}
+				if(shipment.ATA_Date != null || shipment.Actual_Delivery_Date != null || shipment.Shipment_Status == "Delivered")
+				{
+						stepIndex = 4;
+				}
+				if(shipment.Actual_Delivery_Date != null || shipment.Shipment_Status == "Delivered")
+				{
+						stepIndex = 5;
+				}
+				if(stepIndex <= 1)
+				{
+						step1Class = " zcs-stepper-active";
+						step2Class = "";
+						step3Class = "";
+						step4Class = "";
+						step5Class = "";
+				}
+				else if(stepIndex == 2)
+				{
+						step1Class = "";
+						step2Class = " zcs-stepper-active";
+						step3Class = "";
+						step4Class = "";
+						step5Class = "";
+				}
+				else if(stepIndex == 3)
+				{
+						step1Class = "";
+						step2Class = "";
+						step3Class = " zcs-stepper-active";
+						step4Class = "";
+						step5Class = "";
+				}
+				else if(stepIndex == 4)
+				{
+						step1Class = "";
+						step2Class = "";
+						step3Class = "";
+						step4Class = " zcs-stepper-active";
+						step5Class = "";
+				}
+				else
+				{
+						step1Class = "";
+						step2Class = "";
+						step3Class = "";
+						step4Class = "";
+						step5Class = " zcs-stepper-active";
+				}
+%>
+			<article class="zcs-template-card zcs-card zcs-flex zcs-direction-column zcs-relative buyer-shipment-card">
+				<div class="zcs-card-header zcs-p-16 zcs-box-border zcs-relative">
+					<div class="zcs-flex zcs-justify-space-between zcs-align-items-start zcs-gap-12">
+						<div class="bsu-card-title">
+							<h2 class="zcs-font-20 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0"><%=ifnull(shipment.Shipment_Reference,"Shipment reference not set")%></h2>
+							<div class="zcs-flex zcs-row zcs-align-items-center zcs-gap-8 zcs-mt-8">
+								<div class='zcs-badge zcs-badge-filled-outline zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-box-border zcs-badge-grey'>
+									<i class='zcs-badge-icon zcs-no-shrink zc-li-outline transportation-truck-front'></i>
+									<span class='zcs-badge-text zcs-font-13 zcs-font-normal zcs-lh-body'><%=ifnull(shipment.Transit_Mode,"Mode pending")%></span>
+								</div>
+								<div class='zcs-badge zcs-badge-filled-outline zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-box-border zcs-badge-blue'>
+									<i class='zcs-badge-icon zcs-no-shrink zc-li-outline arrows-1-refresh-69'></i>
+									<span class='zcs-badge-text zcs-font-13 zcs-font-normal zcs-lh-body'><%=ifnull(shipment.Shipment_Status,"Status pending")%></span>
+								</div>
+								<div class='zcs-badge zcs-badge-filled-outline zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-box-border <%=kpiBadgeClass%>'>
+									<i class='zcs-badge-icon zcs-no-shrink zc-li-outline <%=kpiBadgeIcon%>'></i>
+									<span class='zcs-badge-text zcs-font-13 zcs-font-normal zcs-lh-body'><%=kpiBadgeText%></span>
+								</div>
+							</div>
+						</div>
+						<span class='zcs-template-card-badge zcs-px-16 zcs-py-4 zcs-box-border zcs-font-11 zcs-font-normal zcs-lh-body zcs-color-white zcs-uppercase zcs-absolute'>Dispatch</span>
+					</div>
+				</div>
+				<div class="zcs-card-content zcs-col-common zcs-p-16 zcs-box-border">
+					<div class="bsu-field-grid">
+						<div class="bsu-field"><span class="bsu-field-label">Estimated Ex-Factory</span><span class="bsu-field-value"><%=ifnull(shipment.Estimated_ExFactory_Date,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">Actual Ex-Factory</span><span class="bsu-field-value"><%=ifnull(shipment.Actual_ExFactory_Date,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">ETD</span><span class="bsu-field-value"><%=ifnull(shipment.ETD_Date,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">ETA</span><span class="bsu-field-value"><%=ifnull(shipment.ETA_Date,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">Estimated Delivery</span><span class="bsu-field-value"><%=ifnull(shipment.Estimated_Delivery_Date,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">Actual Delivery</span><span class="bsu-field-value"><%=ifnull(shipment.Actual_Delivery_Date,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">Payment Status</span><span class="bsu-field-value"><%=ifnull(shipment.Payment_Status,"Not set")%></span></div>
+						<div class="bsu-field"><span class="bsu-field-label">KPI Status</span><span class="bsu-field-value"><%=kpiStatus%></span></div>
+					</div>
+
+					<div class="bsu-section-title"><i class="zc-li-outline arrows-1-resize-h"></i><span>Milestone progress</span></div>
+					<div class="bsu-stepper-card">
+						<div class='zcs-stepper-wrapper'>
+							<ul class='zcs-flex zcs-gap-8 zcs-p-0 zcs-m-0'>
+								<li class='zcs-stepper<%=step1Class%> zcs-col-common zcs-flex zcs-direction-column zcs-align-items-center zcs-gap-4 zcs-text-center zcs-relative'>
+									<div class='zcs-stepper-status zcs-flex zcs-direction-column zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-text-center zcs-relative zcs-box-border'><h6 class='zcs-stepper-count zcs-col-common zcs-w-full zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-font-12 zcs-font-semibold zcs-lh-body zcs-color-tertiary zcs-m-0 zcs-box-border'>1</h6><i class='zcs-stepper-icon zcs-stepper-passed zcs-font-18 zcs-font-bold zcs-color-white zc-li-outline ui-1-check-small'></i><i class='zcs-stepper-icon zcs-stepper-failed zcs-font-18 zcs-color-white zc-li-outline ui-1-circle-remove'></i><span class='zcs-stepper-level zcs-rounded-half' style='width: 0%; height: 0%;'> </span></div>
+									<span class='zcs-stepper-text zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'>In Production</span>
+								</li>
+								<li class='zcs-stepper<%=step2Class%> zcs-col-common zcs-flex zcs-direction-column zcs-align-items-center zcs-gap-4 zcs-text-center zcs-relative'>
+									<div class='zcs-stepper-status zcs-flex zcs-direction-column zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-text-center zcs-relative zcs-box-border'><h6 class='zcs-stepper-count zcs-col-common zcs-w-full zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-font-12 zcs-font-semibold zcs-lh-body zcs-color-tertiary zcs-m-0 zcs-box-border'>2</h6><i class='zcs-stepper-icon zcs-stepper-passed zcs-font-18 zcs-font-bold zcs-color-white zc-li-outline ui-1-check-small'></i><i class='zcs-stepper-icon zcs-stepper-failed zcs-font-18 zcs-color-white zc-li-outline ui-1-circle-remove'></i><span class='zcs-stepper-level zcs-rounded-half' style='width: 0%; height: 0%;'> </span></div>
+									<span class='zcs-stepper-text zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'>Ex-Factory</span>
+								</li>
+								<li class='zcs-stepper<%=step3Class%> zcs-col-common zcs-flex zcs-direction-column zcs-align-items-center zcs-gap-4 zcs-text-center zcs-relative'>
+									<div class='zcs-stepper-status zcs-flex zcs-direction-column zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-text-center zcs-relative zcs-box-border'><h6 class='zcs-stepper-count zcs-col-common zcs-w-full zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-font-12 zcs-font-semibold zcs-lh-body zcs-color-tertiary zcs-m-0 zcs-box-border'>3</h6><i class='zcs-stepper-icon zcs-stepper-passed zcs-font-18 zcs-font-bold zcs-color-white zc-li-outline ui-1-check-small'></i><i class='zcs-stepper-icon zcs-stepper-failed zcs-font-18 zcs-color-white zc-li-outline ui-1-circle-remove'></i><span class='zcs-stepper-level zcs-rounded-half' style='width: 0%; height: 0%;'> </span></div>
+									<span class='zcs-stepper-text zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'>ETD</span>
+								</li>
+								<li class='zcs-stepper<%=step4Class%> zcs-col-common zcs-flex zcs-direction-column zcs-align-items-center zcs-gap-4 zcs-text-center zcs-relative'>
+									<div class='zcs-stepper-status zcs-flex zcs-direction-column zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-text-center zcs-relative zcs-box-border'><h6 class='zcs-stepper-count zcs-col-common zcs-w-full zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-font-12 zcs-font-semibold zcs-lh-body zcs-color-tertiary zcs-m-0 zcs-box-border'>4</h6><i class='zcs-stepper-icon zcs-stepper-passed zcs-font-18 zcs-font-bold zcs-color-white zc-li-outline ui-1-check-small'></i><i class='zcs-stepper-icon zcs-stepper-failed zcs-font-18 zcs-color-white zc-li-outline ui-1-circle-remove'></i><span class='zcs-stepper-level zcs-rounded-half' style='width: 0%; height: 0%;'> </span></div>
+									<span class='zcs-stepper-text zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'>ETA</span>
+								</li>
+								<li class='zcs-stepper<%=step5Class%> zcs-col-common zcs-flex zcs-direction-column zcs-align-items-center zcs-gap-4 zcs-text-center zcs-relative'>
+									<div class='zcs-stepper-status zcs-flex zcs-direction-column zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-text-center zcs-relative zcs-box-border'><h6 class='zcs-stepper-count zcs-col-common zcs-w-full zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-half zcs-font-12 zcs-font-semibold zcs-lh-body zcs-color-tertiary zcs-m-0 zcs-box-border'>5</h6><i class='zcs-stepper-icon zcs-stepper-passed zcs-font-18 zcs-font-bold zcs-color-white zc-li-outline ui-1-check-small'></i><i class='zcs-stepper-icon zcs-stepper-failed zcs-font-18 zcs-color-white zc-li-outline ui-1-circle-remove'></i><span class='zcs-stepper-level zcs-rounded-half' style='width: 0%; height: 0%;'> </span></div>
+									<span class='zcs-stepper-text zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'>Delivery</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="bsu-section-title"><i class="zc-li-outline files-2-archive-content"></i><span>PO / QO split details</span></div>
+<% if(splitRows.count() == 0) { %>
+					<div class="bsu-muted-note">No active split rows are linked to this shipment.</div>
+<% } else { %>
+					<div class='zcs-table-wrapper zcs-rounded-sm zcs-box-border zcs-relative'>
+						<table class='zcs-w-full'>
+							<thead class='zcs-sticky'>
+								<tr>
+									<th class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-medium zcs-lh-body zcs-color-primary'>PO / QO reference</th>
+									<th class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-lh-body zcs-color-primary'>Split quantity</th>
+									<th class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-lh-body zcs-color-primary'>Split QO value</th>
+									<th class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-lh-body zcs-color-primary'>Split PO value</th>
+									<th class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-medium zcs-lh-body zcs-color-primary'>PO Transport Mode</th>
+								</tr>
+								<tr class='zcs-tspace'><th class='zcs-p-2 zcs-box-border' colspan='5'> </th></tr>
+							</thead>
+							<tbody>
+<% for each splitRow in splitRows
+	 {
+			poRef = ifnull(splitRow.PO_Number_Display,ifnull(splitRow.Purchase_Order.PO_Number,"-"));
+			qoRef = ifnull(splitRow.QO_Number_Display,ifnull(splitRow.Purchase_Order.QO_Number,"-"));
+%>
+								<tr>
+									<td class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'><span class="zcs-font-semibold"><%=poRef%></span><br><span class="zcs-color-secondary zcs-font-13"><%=qoRef%></span></td>
+									<td class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'><%=ifnull(splitRow.Split_Quantity,0)%></td>
+									<td class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'><%=ifnull(splitRow.Split_QO_Value,0)%></td>
+									<td class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'><%=ifnull(splitRow.Split_PO_Value,0)%></td>
+									<td class='zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-primary'><%=ifnull(splitRow.Transport_Mode,"-")%></td>
+								</tr>
+<% } %>
+							</tbody>
+						</table>
+					</div>
+<% } %>
+<% if(buyerCostVisible == true) { %>
+					<div class="bsu-cost-note"><i class="zc-li-outline ui-1-lock"></i> Buyer cost visibility is enabled in shipment settings, but buyer-safe charge summaries remain hidden here until buyer charge permissions are explicitly enabled.</div>
+<% } %>
+				</div>
+			</article>
+<%  }
+	 } %>
+		</div>
+
+		<div class="zcs-card bsu-empty bsu-no-results" id="bsuNoResults">
+			<i class="zc-li-outline ui-1-zoom"></i>
+			<h2 class="zcs-font-20 zcs-font-semibold zcs-color-primary zcs-m-0 zcs-mt-12">No matching shipments</h2>
+			<p class="zcs-font-14 zcs-color-secondary zcs-m-0 zcs-mt-8">Try another shipment reference, PO number, or QO number.</p>
+		</div>
+
+		<section class="zcs-card bsu-report">
+			<div class="bsu-report-head zcs-flex zcs-justify-space-between zcs-align-items-center zcs-gap-12">
+				<div>
+					<h2 class="zcs-font-18 zcs-font-semibold zcs-color-primary zcs-m-0">Milestone Update to Buyer report</h2>
+					<p class="zcs-font-13 zcs-color-secondary zcs-m-0 zcs-mt-8">Embedded report filtered to your buyer organization.</p>
+				</div>
+				<div class='zcs-badge zcs-badge-filled-outline zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-box-border zcs-badge-theme'>
+					<i class='zcs-badge-icon zcs-no-shrink zc-li-outline ui-1-lock'></i>
+					<span class='zcs-badge-text zcs-font-13 zcs-font-normal zcs-lh-body'>Buyer criteria</span>
+				</div>
+			</div>
+			<div class="bsu-report-frame">
+				<div zc-component="report" zc-linkname="Milestone_Update_to_Buyer" zc-criteria="Buyer == <%=buyerOrgId%>" zc-height="520px"></div>
+			</div>
+		</section>
+<% } %>
+	</div>
+</div>
+
+<script>
+(function() {
+	var input = document.getElementById('bsuSearch');
+	var clear = document.getElementById('bsuClearSearch');
+	var cards = Array.prototype.slice.call(document.querySelectorAll('.buyer-shipment-card'));
+	var empty = document.getElementById('bsuNoResults');
+	function runFilter() {
+		var term = input ? String(input.value || '').toLowerCase().trim() : '';
+		var visible = 0;
+		cards.forEach(function(card) {
+			var haystack = String(card.textContent || '').toLowerCase();
+			var show = term === '' || haystack.indexOf(term) >= 0;
+			card.classList.toggle('bsu-hidden', !show);
+			if (show) { visible += 1; }
+		});
+		if (empty) { empty.style.display = (term !== '' && visible === 0) ? 'block' : 'none'; }
+	}
+	if (input) { input.addEventListener('input', runFilter); }
+	if (clear) { clear.addEventListener('click', function() { if (input) { input.value = ''; } runFilter(); }); }
+})();
+</script>

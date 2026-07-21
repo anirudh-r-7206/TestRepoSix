@@ -1,0 +1,20 @@
+Edit_QO as "Edit QO"
+{
+
+			
+							type =  functions
+							form = History
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Page:Purchase_Order_Details?zc_LoadIn=embed-editPO&PO_ID=" + input.Purchase_Order_ID,"same window");
+								)
+								}
+							}
+						
+			
+}

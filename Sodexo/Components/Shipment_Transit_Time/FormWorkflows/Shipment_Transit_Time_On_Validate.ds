@@ -1,0 +1,45 @@
+Shipment_Transit_Time_On_Validate as "Validate Transit Time Mapping"
+{
+
+			    type = form
+			    form = Shipment_Transit_Time
+			    record event = on add or edit
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Buyer == null)
+			                {
+			                    alert "Buyer is required.";
+			                    cancel submit;
+			                }
+			                if(input.Supplier == null)
+			                {
+			                    alert "Supplier is required.";
+			                    cancel submit;
+			                }
+			                if(input.Transit_Mode == null || input.Transit_Mode == "")
+			                {
+			                    alert "Transit Mode is required.";
+			                    cancel submit;
+			                }
+			                if(ifnull(input.Transit_Days,0) <= 0)
+			                {
+			                    alert "Transit Days must be greater than zero.";
+			                    cancel submit;
+			                }
+			                input.Combination_Key = input.Buyer.toString() + "-" + input.Supplier.toString() + "-" + input.Transit_Mode;
+			                duplicateMapping = Shipment_Transit_Time[ID != input.ID && Buyer == input.Buyer && Supplier == input.Supplier && Transit_Mode == input.Transit_Mode];
+			                if(duplicateMapping.count() > 0)
+			                {
+			                    alert "Only one transit time record is allowed for each Buyer, Supplier, and Transit Mode combination.";
+			                    cancel submit;
+			                }
+			            )
+			        }
+			    }
+			
+}

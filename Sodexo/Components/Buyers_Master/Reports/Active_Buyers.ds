@@ -1,0 +1,118 @@
+custom Active_Buyers
+{
+
+		
+					displayName = "Active Buyers"
+					show all rows from Buyers_Master  [Status == "Active"]  
+					(
+						Buyer_Code as "Buyer Code"
+						Buyer_Type as "Buyer Type"
+						Region
+						Office_Address  as "Invoice Address"
+			 			(
+			      			enable = Link_to_Map,Show_As_Text
+			 			)
+						custom action "Raise Order"
+						(
+			  			workflow = Raise_Order
+						show action in edit record menu = true
+						column header = "Raise Order"
+						condition = (Approval_Status == "Approved" && Status == "Active")
+						)
+						custom action "Delete Buyer"
+						(
+			  			workflow = Delete_Selected_Buyers
+						show action in view header = true
+						show action in edit record menu = true
+						column header = "Delete Buyer"
+						condition = (ID != thisapp.Buyer.Order_Request_Buyers())
+						)
+						Product_Range as "Product Range"
+						Wardrobe
+						Country
+						Approval_Status as "Approval Status"
+						HS_Code_Allocation as "HS Code Allocation"
+						Payment_Terms as "Payment Terms"
+						Primary_Email as "Email"
+						Primary_Phone as "Phone"
+						(
+							displayformat = plainnumber 
+						)
+						Person_2_Email as "Email"
+						Person_2_Phone as "Phone"
+						(
+							displayformat = plainnumber 
+						)
+						Status
+						Buyer_Organisation as "Buyer Organisation"
+						Currency
+						Primary_Name1  as "Name"
+						Person_2_Name1  as "Name"
+					)
+					filters
+					(
+						Approval_Status
+						Region
+					)
+					custom actions
+					(
+						"Reject"
+						(
+			  			workflow = Buyer_Reject
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Approval_Status == "Pending")
+						)
+						"Activate"
+						(
+			  			workflow = Activate_Buyers
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Inactive")
+						)
+						"Delete Buyers"
+						(
+			  			workflow = Delete_Selected_Buyers1
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (ID != thisapp.Delete_Records.Delete_Buyers())
+						)
+						"Deactivate"
+						(
+			  			workflow = Deactivate_Buyer
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Active" && Approval_Status == "Approved" && ID != thisapp.Deactivate_Records.Deactivate_Buyer())
+						confirmation before execution
+						(
+							message for individual record = "Do you want to proceed with deactivating this buyer?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Approve"
+						(
+			  			workflow = Buyer_Approve
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Approval_Status == "Pending")
+						)
+					)
+					conditional formatting
+					(
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#5dc35a;"
+						}
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+					)
+				
+		
+}

@@ -1,0 +1,35 @@
+string Page.PO_V2_Templet_Table(int Po_ID, string type)
+{
+
+			
+			                 	// 	Po_ID = 4908788000000427128;
+			                 	get_PO = Purchase_Order[ID == input.Po_ID];
+			                 	get_Po_Cat_No = (get_PO.Purchase_LineItems.Style_Code.getall()).distinct();
+			                 	//	Table Header 
+			                 	// 	(" + if(input.type == "PO","Purchase Price","Selling Price") + ")
+			                 	// 	<tr> <th colspan=\"11\" class=\"order-title\">Order Information</th> </tr>
+			                 	PO_Table = "<table class=\"items-table\"> <thead>  <th style=\"width: 3%;\">#</th> <th style=\"width: 10%;\">Style Name</th> <th style=\"width: 8%;\">Style code</th> <th style=\"width: 6%;\">Colour</th> <th style=\"width: 8%;\">Size</th> <th style=\"width: 6%;\">Gender</th> <th style=\"width: 32%;\">Fabric Composition</th> <th style=\"width: 10%;\">HS CODE</th> <th style=\"width: 4%;\">Qty</th> <th style=\"width: 13%;\">Unit Price</th> <th style=\"width: 10%; text-align: right;\">Total</th> </thead>";
+			                 	// Table Body
+			                 	PO_Table = PO_Table + "<tbody>";
+			                 	s_No = 0;
+			                 	total_Qty = 0;
+			                 	for each  catNO in get_Po_Cat_No
+			                 	{
+			                 		s_No = s_No + 1;
+			                 		get_Cat_Items = Purchase_LineItems[Purchase_Order == input.Po_ID && Style_Code == catNO] sort by Size_Order;
+			                 		for each  Items in get_Cat_Items
+			                 		{
+			                 			// 			s_No = s_No + 1;
+			                 			get_Buyer_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == get_PO.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == get_PO.Supplier && Style_ID == Items.Product];
+			                 			// 			if(get_Buyer_Product.count(ID) > 0,get_Buyer_Product.HS_Code,"")
+			                 			PO_Table = PO_Table + "<tr> <td>" + s_No + "</td> <td class=\"font-medium\">" + get_Cat_Items.Product.Style_Code.Style_Name + "</td> <td>" + catNO + "</td> <td>" + Items.Product_Color.Color_Name + "</td> <td>" + Items.Product_Size.Size + "</td> <td>" + Items.Product.Gender + "</td> <td class=\"desc-text\">" + if(!Items.Fabric_Composition.isEmpty(),Items.Fabric_Composition,"") + "</td> <td>" + if(!Items.HS_Code,Items.HS_Code,"") + "</td> <td class=\"t_right\">" + thisapp.Page.PO_Currency_Convert(Items.Quantity) + "</td> <td class=\"t_right\">" + thisapp.Page.PO_Currency_Convert(if(input.type == "PO",Items.Purchase_Price,Items.Selling_Price)) + "</td> <td class=\"t_right font-medium\">" + thisapp.Page.PO_Currency_Convert(if(input.type == "PO",Items.Purchase_Price_Sub_Total,Items.Selling_Price_Sub_Total)) + "</td> </tr>";
+			                 		}
+			                 		total_Qty = total_Qty + get_Cat_Items.sum(Quantity);
+			                 		PO_Table = PO_Table + "<tr class=\"row-subtotal\"> <td colspan=\"8\" class=\"text_Left text_Bold font-semibold\">Sub Total</td> <td class=\"text_Bold t_right font-bold\">" + thisapp.Page.PO_Currency_Convert(get_Cat_Items.sum(Quantity)) + "</td> <td></td> <td class=\"text_Bold t_right font-bold\">" + thisapp.Page.PO_Currency_Convert(if(input.type == "PO",get_Cat_Items.sum(Purchase_Price_Sub_Total).round(2),get_Cat_Items.sum(Selling_Price_Sub_Total).round(2))) + "</td> </tr>";
+			                 	}
+			                 	PO_Table = PO_Table + "<tr class=\"row-grandtotal\"> <td colspan=\"8\" class=\"text_Left text_Bold font-bold\">Grand Total</td> <td class=\"text_Bold t_right font-bold\">" + thisapp.Page.PO_Currency_Convert(total_Qty) + "</td> <td></td> <td class=\"text_Bold t_right font-bold\">" + if(input.type == "PO",thisapp.Page.PO_Currency_Convert(get_PO.Total_Purchase_Price.round(2)),thisapp.Page.PO_Currency_Convert(get_PO.Total_Selling_Price.round(2))) + "</td> </tr>";
+			                 	PO_Table = PO_Table + "</tbody> </table>";
+			                 	return PO_Table;
+			                 
+			
+}

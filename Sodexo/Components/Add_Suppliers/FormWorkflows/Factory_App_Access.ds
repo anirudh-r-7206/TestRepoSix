@@ -1,0 +1,33 @@
+Factory_App_Access as "Factory App Access"
+{
+
+			
+							type =  form
+							form = Add_Suppliers
+			
+							record event = on add or edit
+			
+							on user input of Factory_Details.Need_App_Access
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(row.Factory_Email != null)
+													{
+														if(input.Email.equalsIgnoreCase(row.Factory_Email))
+														{
+															input.Need_App_Access = row.Need_App_Access;
+														}
+														if(input.Email1.equalsIgnoreCase(row.Factory_Email))
+														{
+															input.Need_App_Access1 = row.Need_App_Access;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

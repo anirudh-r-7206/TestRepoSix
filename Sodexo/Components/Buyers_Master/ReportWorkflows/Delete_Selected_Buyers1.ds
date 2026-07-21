@@ -1,0 +1,25 @@
+Delete_Selected_Buyers1 as "Delete Selected Buyers"
+{
+
+			
+							type =  functions
+							form = Buyers_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									deleteBuyerList = thisapp.Delete_Records.Delete_Buyers();
+													if(!deleteBuyerList.contains(input.ID))
+													{
+														// your logic here
+														delete from Buyers_Master[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

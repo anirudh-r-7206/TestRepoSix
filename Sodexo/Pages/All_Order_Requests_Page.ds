@@ -1,0 +1,20 @@
+<page linkname = "All_Order_Requests_Page" displayname = "All Order Requests"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='html_snippet25' elementName='HTML Snippet' bgColor=\"#FFFFFF\">
+          <![CDATA[htmlpage html_snippet25()
+content
+			<%{%>
+            <file name:HTML_Snippet.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

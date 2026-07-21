@@ -1,0 +1,21 @@
+Activate_Buyers as "Activate Buyers"
+{
+
+			
+							type =  functions
+							form = Buyers_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// 
+													input.Status = "Active";
+								)
+								}
+							}
+						
+			
+}

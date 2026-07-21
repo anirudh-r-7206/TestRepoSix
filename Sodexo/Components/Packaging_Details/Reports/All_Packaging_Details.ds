@@ -1,0 +1,15 @@
+default list All_Packaging_Details
+{
+
+		
+					displayName = "Packaging Details"
+					show all rows from Packaging_Details    
+					(
+						Carton_Measurement as "Carton Measurement"
+						Quantity_Per_Carton as "Quantity Per Carton"
+						Weight_Per_Carton as "Weight Per Carton"
+						Product
+					)
+				
+		
+}

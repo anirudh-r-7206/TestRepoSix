@@ -1,0 +1,22 @@
+void Recalculate_PO_Shipment_Totals(int purchaseOrderId)
+{
+
+			    poRec = Purchase_Order[ID == purchaseOrderId];
+			    if(poRec != null && poRec.count() > 0)
+			    {
+			        basePurchase = Purchase_LineItems[Purchase_Order == purchaseOrderId].sum(Purchase_Price_Sub_Total);
+			        baseSelling = Purchase_LineItems[Purchase_Order == purchaseOrderId].sum(Selling_Price_Sub_Total);
+			        totalQty = Purchase_LineItems[Purchase_Order == purchaseOrderId].sum(Quantity);
+			        additionalAmount = Additional_Charges_Form[Purchase_Order == purchaseOrderId].sum(Amount1);
+			        update Purchase_Order[ID == purchaseOrderId]
+			        [
+			            Base_Purchase_Price_Total = ifnull(basePurchase,0.0)
+			            Base_Selling_Price_Total = ifnull(baseSelling,0.0)
+			            Total_Quantity = ifnull(totalQty,0)
+			            Purchase_Price_Including_Additional_Cost = ifnull(basePurchase,0.0) + ifnull(additionalAmount,0.0)
+			            Selling_Price_Including_Additional_Cost = ifnull(baseSelling,0.0) + ifnull(additionalAmount,0.0)
+			        ];
+			        thisapp.Update_PO_Shipment_Summary(purchaseOrderId);
+			    }
+			
+}

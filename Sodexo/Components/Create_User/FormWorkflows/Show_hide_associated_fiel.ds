@@ -1,0 +1,32 @@
+Show_hide_associated_fiel as "Show/hide associated field - On Create"
+{
+
+			
+							type =  form
+							form = Create_User
+			
+							record event = on add
+			
+							on user input of Persona_Role
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide Associated_Buyer;
+													hide Associated_Factory;
+													if(input.Persona_Role == "Buyer")
+													{
+														show Associated_Buyer;
+													}
+													else if(input.Persona_Role == "Factory Team")
+													{
+														show Associated_Factory;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

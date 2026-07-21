@@ -1,0 +1,13 @@
+default list Bulk_Edit_Tigger_Report
+{
+
+		
+					displayName = "Bulk Edit Tigger Report"
+					show all rows from Bulk_Edit_Tigger    
+					(
+						Buyer_Product_Mapping as "Buyer Product Mapping"
+						Buyer_Products as "Buyer Products"
+					)
+				
+		
+}

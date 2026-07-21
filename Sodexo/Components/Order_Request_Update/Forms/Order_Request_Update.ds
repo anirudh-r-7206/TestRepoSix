@@ -1,0 +1,84 @@
+form Order_Request_Update
+{
+
+		
+					displayname = "Order Request Update"
+					store data in zc = false
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Order_Request
+					(
+						type = picklist	
+						displayname = "Order Request"
+						values  = Order_Request.ID
+		    			displayformat = [Order_ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Buyers_Organisation
+					(
+						type = picklist	
+						displayname = "Buyers Organisation"
+						values  = Buyers_Master.ID
+		    			displayformat = [Buyer_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Order_Reference
+					(
+		    			type = text
+						displayname = "Order Reference"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Transport_Mode
+					(
+						type = picklist
+						displayname = "Transport Mode"
+						maxchar = 100
+						values = {"SEA","AIR","ROAD"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Delivery_Address
+					(
+						type = picklist	
+						displayname = "Delivery Address"
+						values  = Buyer_Contact_Person_Details[Buyers_Master.ID == input.Buyers_Organisation].ID
+		    			displayformat = [" " + Address.address_line_1 + " " + Address.address_line_2 + " " + Address.district_city + " " + Address.state_province]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Comments
+					(
+		    			type = textarea
+						height = 100px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						Submit
+						(
+		   					type = submit
+		   					displayname = "Submit"
+						)
+					}
+				
+		
+}

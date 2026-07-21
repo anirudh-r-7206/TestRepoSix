@@ -1,0 +1,24 @@
+void afterShip.getTracking()
+{
+
+			
+			                 	//asat_641daf7faa4640dca570a858a87d49b8
+			                 	headerMap = Map();
+			                 	headerMap.put("as-api-key","asat_641daf7faa4640dca570a858a87d49b8");
+			                 	headerMap.put("Content-Type","application/json");
+			                 	dataMap = Map();
+			                 	trackingMap = Map();
+			                 	trackingMap.put("slug","testing-courier");
+			                 	trackingMap.put("tracking_number","ITOD-3-6436426452526");
+			                 	dataMap.put("tracking",trackingMap);
+			                 	getTracking = invokeurl
+			                 	[
+			                 		url :"https://api.aftership.com/tracking/2026-01/trackings"
+			                 		type :POST
+			                 		parameters:trackingMap.tostring()
+			                 		headers:headerMap
+			                 	];
+			                 	info getTracking;
+			                 
+			
+}

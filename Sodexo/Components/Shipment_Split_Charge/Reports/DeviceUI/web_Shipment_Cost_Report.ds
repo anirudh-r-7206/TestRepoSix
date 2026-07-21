@@ -1,0 +1,73 @@
+report Shipment_Cost_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                    Charge_Category as "Charge Category"
+		                    Currency
+		                    Amount
+		                    Paid_By as "Paid By"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		            )
+		            record
+		            (
+		                Edit
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                    Charge_Category as "Charge Category"
+		                    Currency
+		                    Amount
+		                    Paid_By as "Paid By"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		            )
+		        )
+		    )
+		
+}

@@ -1,0 +1,10 @@
+void Delete_Records.Delete_Cart_Details(int buyer_ID, int sub_ID)
+{
+
+			
+			                 	get_Order_Buyer = Order_Request[Buyer_Organisation == input.buyer_ID && Factory == input.sub_ID && Order_By.Email == zoho.loginuserid && Status == "Awaiting QO Generation"];
+			                 	get_Order_Buyer.Cart_Total=0;
+			                 	delete from Order_Details[Order_Request == get_Order_Buyer.ID];
+			                 
+			
+}

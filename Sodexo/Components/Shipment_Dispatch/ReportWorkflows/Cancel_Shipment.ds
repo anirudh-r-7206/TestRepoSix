@@ -1,0 +1,26 @@
+Cancel_Shipment as "Cancel Shipment"
+{
+
+			    type = functions
+			    form = Shipment_Dispatch
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                if(input.ATD_Date != null)
+			                {
+			                    openUrl("#Page:Alert_Message?Message_Type=Shipment&Message_Content1=Shipment cannot be cancelled after ATD is captured.","popup window");
+			                }
+			                else
+			                {
+			                    openUrl("#Form:Shipment_Dispatch?zc_LoadIn=dialog&viewLinkName=Shipment_Report&recLinkID=" + input.ID,"same window");
+			                }
+			            )
+			        }
+			    }
+			
+}

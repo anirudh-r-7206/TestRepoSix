@@ -1,0 +1,32 @@
+On_Load_Populate_Product_ as "On Load - Populate Product Details"
+{
+
+			
+							type =  form
+							form = Order_Details
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Product != null)
+													{
+														fetProduct = Add_Product[ID == input.Product];
+														if(fetProduct.count() > 0)
+														{
+															input.Description = fetProduct.Product_Description;
+															input.Product_Color = fetProduct.Style_Colour;
+															input.Product_Size = fetProduct.Size_Set;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

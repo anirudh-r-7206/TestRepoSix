@@ -1,0 +1,30 @@
+default custom All_Organizations
+{
+
+		
+					displayName = "Organizations"
+					show all rows from organization    
+					(
+						Organization_Name as "Org Name"
+						Phone_Number as "Phone"
+						(
+							displayformat = plainnumber 
+						)
+						Address 
+			 			(
+			      			enable = Link_to_Map,Show_As_Text
+			 			)
+						Logo
+						Email
+					)
+					customlayouts
+					(
+						template
+			 			(
+			 	  			displayname="Custom Layout 1"
+			 	  			content="<panel  \n >\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '0px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '100%'\n		hAlign = 'left'\n		vAlign = 'top'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		paddingTop = '17px'\n	paddingLeft = '17px'\n	paddingRight = '0px'\n	paddingBottom = '17px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '35%'\n		hAlign = 'center'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<image  \n		marginLeft = '0px'\n	marginRight = '10px' \n	marginBottom = '0px'\n	marginTop = '0px'\n\n    borderColor = '#FFFFFF'\n    borderWidth = '0px'\n	color = '#FFFFFF'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	width = '100%'\n	height = '100%'\n	type = 'field'\n	value = 'Logo'\n	cornerRadius = '0px'\n/>\n</pc>\n</pr>\n</pc><pc \n		padding = '17px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '65%'\n		hAlign = 'left'\n		vAlign = 'top'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<pr \n	>\n	<pc \n	\n>\n	<text \n\n	margin = '0px'\n	padding = '0px'\n	color = '#000000'\n	size = '20px'\n	bold = 'true' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '28'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Organization_Name'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '10px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '3'\n\n\n\n\n\n	  value = 'Address'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '10px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Email'\n>\n</text>\n\n</pc><pc \n	\n>\n	<text \n\n	marginLeft = '10px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '10px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Phone_Number'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>"
+			    		)
+					)
+				
+		
+}

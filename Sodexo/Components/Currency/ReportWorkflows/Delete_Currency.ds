@@ -1,0 +1,30 @@
+Delete_Currency as "Delete Currency"
+{
+
+			
+							type =  functions
+							form = Currency
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									reference = thisapp.References.Currency(input.ID);
+													if(reference.trim() != "" && reference != null)
+													{
+														url = "#Form:Alert_References?zc_Header=false&Currency=" + input.ID;
+														window = "popup window";
+														openUrl(url,window);
+													}
+													else
+													{
+														delete from Currency[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

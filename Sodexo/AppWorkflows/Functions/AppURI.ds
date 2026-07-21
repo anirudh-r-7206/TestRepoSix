@@ -1,0 +1,15 @@
+string Publish_URL.AppURI()
+{
+
+			
+			                 	if(zoho.appuri.contains("environment"))
+			                 	{
+			                 		return "/sodexo/order-management-sodexo-v2/";
+			                 	}
+			                 	else
+			                 	{
+			                 		return zoho.appuri;
+			                 	}
+			                 
+			
+}

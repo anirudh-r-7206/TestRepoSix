@@ -1,0 +1,48 @@
+Validate_Product_Category2 as "Validate Product Category"
+{
+
+			
+							type =  form
+							form = Wardrobe
+			
+							record event = on edit
+			
+							on user input of Product_Category
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														get_Removed_Category = input.Product_Category1;
+													get_Removed_Category.removeAll(input.Product_Category);
+													mapped_Category = list();
+													cat_Name = "";
+													OldProList = List();
+													OldProList.addAll(input.Product_Category);
+													if(get_Removed_Category.size() > 0)
+													{
+														cat_Name = cat_Name + "[";
+														for each  cat in get_Removed_Category
+														{
+															get_Product = Add_Product[Style_Category == cat && Wardrobe == input.ID];
+															if(get_Product.count() > 0)
+															{
+																mapped_Category.add(cat);
+																cat_Name = cat_Name + Product_Category[ID == cat].Product_Category + ",";
+																OldProList.add(cat);
+															}
+														}
+														cat_Name_List = cat_Name.removeLastOccurence(",") + "]";
+													}
+													if(mapped_Category.size() > 0)
+													{
+														alert "The following categories are already used by products and cannot be removed: " + cat_Name_List + ". Please keep them selected.";
+														input.Product_Category = OldProList;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

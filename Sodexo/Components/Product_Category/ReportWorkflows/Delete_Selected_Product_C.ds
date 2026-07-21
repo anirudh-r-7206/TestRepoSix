@@ -1,0 +1,25 @@
+Delete_Selected_Product_C as "Delete Selected Product Categories"
+{
+
+			
+							type =  functions
+							form = Product_Category
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									deleteProductCategoryList = thisapp.Delete_Records.Delete_Product_Categories();
+													if(!deleteProductCategoryList.contains(input.ID))
+													{
+														// your logic here
+														delete from Product_Category[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

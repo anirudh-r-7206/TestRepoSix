@@ -1,0 +1,87 @@
+report All_Buter_Contact_Person_Details
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Contact_Person as "Contact Person"
+										Email
+										Phone_Number as "Phone"
+										Country
+										Address
+										Buyers_Master as "Buyers Master"
+										Need_App_Access as "Need App Access"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Contact_Person as "Contact Person"
+										Email
+										Phone_Number as "Phone"
+										Country
+										Address
+										Buyers_Master as "Buyers Master"
+										Need_App_Access as "Need App Access"
+										Email_old as "Email old"
+										Contact_Person1 as "Contact Person"
+										Company_Name as "Company Name"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		
+}

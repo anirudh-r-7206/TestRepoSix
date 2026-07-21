@@ -1,0 +1,102 @@
+report My_Order_Requests
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Added_Time as "Order Date"
+										Buyer_Organisation as "Buyer Organisation"
+										Order_ID as "Order ID"
+										Buyer_Name as "Buyer Name"
+										Factory as "Supplier"
+										Order_By as "Order By"
+										Selling_Currency as "Currency"
+										Total_Quantity as "Total Quantity"
+										Cart_Total as "Total Price"
+										Status
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+			 					type = 2
+								datablock1
+								(
+									layout type = -6
+				     				title = "Overview"
+									fields
+									(
+										Order_ID as "Order ID"
+										Buyer_Organisation as "Buyer Organisation"
+										Buyer_Name as "Buyer Name"
+										Selling_Currency as "Currency"
+										Cart_Total as "Total Price"
+										Total_Quantity as "Total Quantity"
+										Status
+										Buyer_Name.Employee_External_ID as "Employee/External ID"
+										Buyer_Name.User_Name as "User Name"
+										Buyer_Name.User_Type as "User Type"
+										Buyer_Organisation.Primary_Email as "Email"
+										Buyer_Name.Mobile_Number as "Mobile Number"
+										Buyer_Name.Persona_Role as "Persona/Role"
+										Delivery_Address as "Delivery Address"
+										Order_Reference as "Order Reference"
+										Transport_Mode as "Transport Mode"
+										Comments
+									)
+								)
+								datablock2
+								(
+									layout type = -1
+				     				title = "Order details"
+				     				related field = Order_details
+									fields
+									(
+										Product.Primary_Image as "Image"
+										Product.Style_Name as "Style Name"
+										Product.Style_Code as "Style Code"
+										Product.Style_Colour as "Style Colour"
+										Product_Size as "Size"
+										Quantity
+										Sub_Total as "Total"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										"Submit"
+									)
+								)
+						)
+					
+		
+}

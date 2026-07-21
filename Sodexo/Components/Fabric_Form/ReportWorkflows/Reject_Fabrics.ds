@@ -1,0 +1,20 @@
+Reject_Fabrics as "Reject Fabrics"
+{
+
+			
+							type =  functions
+							form = Fabric_Form
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									input.Status = "Rejected";
+								)
+								}
+							}
+						
+			
+}

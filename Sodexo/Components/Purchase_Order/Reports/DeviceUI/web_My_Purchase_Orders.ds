@@ -1,0 +1,171 @@
+report My_Purchase_Orders
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										QO_Number as "QO Number"
+										PO_Date as "PO Date"
+										Order_Type as "Order Type "
+										Order_Reference as "Order Reference"
+										Buyer_Organisation as "Buyer Organisation"
+										Supplier
+										Total_Quantity as "Total Quantity"
+										Incoterms as "Incoterm"
+										Selling_Currency as "Currency"
+										Total_Selling_Price as "Total Price"
+										Order_Status as "Order Status"
+										Shipment_Tracking_Status as "Shipment Tracking Status"
+										Latest_Estimated_Delivery_Date as "Latest Estimated Delivery Date"
+										Latest_Actual_Delivery_Date as "Latest Actual Delivery Date"
+										"View QO"
+										"Approve"
+										"Raise Amendment"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										PO_Date as "PO Date"
+										Supplier
+										Order_Request as "Order Request"
+										Order_Type as "Order Type "
+										Order_Reference as "Order Reference"
+										Delivery_Date as "Ex-Factory date"
+										QO_Number as "QO Number"
+										Selling_Currency as "Currency"
+										Purchase_Currency as "Purchase Currency"
+										Delivery_Contact as "Delivery Contact "
+										Freight_Forwarder as "Freight Forwarder"
+										Incoterms as "Incoterm"
+										Country
+										Total_Selling_Price as "Total Price"
+										Factory_Address1 as "Factory Address"
+										Delivery_Address1 as "Delivery Address"
+										Order_Status as "Order Status"
+									)
+								)
+								datablock4
+								(
+									layout type = -1
+				     				title = "Purchase LineItems"
+				     				related field = Purchase_LineItems
+									fields
+									(
+										Product as "Style ID"
+										Style_Code as "Style Code"
+										Product_Color as "Product Color"
+										Product_Size as "Product Size"
+										Description
+										Quantity
+										Selling_Price as "Selling Price"
+										Selling_Price_Sub_Total as "Selling Price Sub Total"
+									)
+								)
+								datablock6
+								(
+				     				title = "Order Request"
+				     				related field = Order_Request
+									fields
+									(
+										Order_ID as "Order ID"
+										Buyer_Name as "Buyer Name"
+										Status
+									)
+								)
+								datablock8
+								(
+				     				title = "Supplier Details"
+				     				related field = Supplier
+									fields
+									(
+										Supplier_Organisation as "Supplier Organisation"
+										Supplier_type as " Supplier type"
+										Contact_Person2 as "Contact Person"
+										Email
+										Phone as "Phone "
+										Factory_Address as "Invoice Address"
+										Country
+									)
+								)
+								datablock9
+								(
+				     				title = "Factory Details"
+									fields
+									(
+										Factory_Company_Name as "Company Name"
+										Factory_Contact_Person as "Contact Person"
+										Factory_Address1 as "Factory Address"
+										Factory_Email as "Email"
+										Factory_Phone as "Phone"
+									)
+								)
+								datablock10
+								(
+				     				title = "Delivery Details"
+									fields
+									(
+										Buyer_Company_Name as "Company Name"
+										Buyer_Contact_Person as "Contact Person"
+										Delivery_Address1 as "Delivery Address"
+										Buyer_Email as "Email"
+										Buyer_Phone as "Phone"
+									)
+								)
+								datablock7
+								(
+									layout type = -1
+				     				title = "Purchase History"
+				     				related field = Order_Review_ID
+									fields
+									(
+										Added_Time as "Added Time"
+										Raised_By as "Raised By"
+										Status
+										Comments
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

@@ -1,0 +1,30 @@
+Deactivate_Fabrics as "Deactivate Fabrics"
+{
+
+			
+							type =  functions
+							form = Fabric_Form
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									reference = thisapp.References.Fabrics(input.ID);
+													if(reference.trim() != "" && reference != null)
+													{
+														url = "#Form:Alert_References?zc_Header=false&Fabric_Form=" + input.ID;
+														window = "popup window";
+														openUrl(url,window);
+													}
+													else
+													{
+														input.Status = "Inactive";
+													}
+								)
+								}
+							}
+						
+			
+}

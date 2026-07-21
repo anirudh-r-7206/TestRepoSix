@@ -1,0 +1,41 @@
+Payment_Reminder_Schedule as "Payment Reminder Schedule"
+{
+
+			    type = schedule
+			    status = inactive
+			    start = "2026-01-01 09:00:00"
+			    frequency = daily
+			    time zone = "Asia/Kolkata"
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on load
+			            (
+			                settingRec = Shipment_Settings[ID != 0];
+			                if(settingRec != null && settingRec.count() > 0 && settingRec.Payment_Reminder_Offsets != null && settingRec.Payment_Reminder_Offsets.trim() != "")
+			                {
+			                    offsetList = settingRec.Payment_Reminder_Offsets.toList(",");
+			                    for each  offsetText in offsetList
+			                    {
+			                        cleanOffset = offsetText.trim();
+			                        if(cleanOffset != "")
+			                        {
+			                            offsetDays = cleanOffset.toLong();
+			                            reminderDate = zoho.currentdate.addDay(offsetDays);
+			                            for each  dispatchRec in Shipment_Dispatch[Dispatch_Status == "Confirmed" && Payment_Status != "Fully Paid" && Expected_Payment_Date == reminderDate]
+			                            {
+			                                if(dispatchRec.Last_Payment_Reminder_Date != zoho.currentdate || ifnull(dispatchRec.Last_Payment_Reminder_Offset,-1) != offsetDays)
+			                                {
+			                                    thisapp.Send_Payment_Reminder(dispatchRec.ID,cleanOffset);
+			                                }
+			                            }
+			                        }
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

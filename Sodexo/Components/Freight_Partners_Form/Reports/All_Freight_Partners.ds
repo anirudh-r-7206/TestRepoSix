@@ -1,0 +1,39 @@
+default list All_Freight_Partners
+{
+
+		
+					displayName = "Freight Partners"
+					show all rows from Freight_Partners_Form    
+					(
+						Freight_Partners_Name as "Freight Partners Name"
+					)
+					custom actions
+					(
+						"Delete Partners"
+						(
+			  			workflow = Delete_Selected_Partners
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (ID != thisapp.Delete_Records.Delete_Partners())
+						)
+						"Edit  Freight Partners"
+						(
+			  			workflow = Edit_Freight_Partners1
+						show action in view header = true
+						show action in edit record menu = true
+						)
+						"Delete  Freight Partners"
+						(
+			  			workflow = Delete_Freight_Partners
+						show action in view header = true
+						confirmation before execution
+						(
+							message for individual record = "Execute the Delete  Freight Partners action for this record?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+				
+		
+}

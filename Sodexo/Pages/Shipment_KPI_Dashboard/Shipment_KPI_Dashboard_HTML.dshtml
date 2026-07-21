@@ -1,0 +1,536 @@
+<%
+settings = Shipment_Settings[ID != 0];
+amberThreshold = 7;
+redThreshold = 8;
+if(settings != null && settings.count() > 0)
+{
+		amberThreshold = ifnull(settings.KPI_Amber_Threshold_Days,7);
+		redThreshold = ifnull(settings.KPI_Red_Threshold_Days,8);
+}
+allDispatches = Shipment_Dispatch[ID != 0];
+totalDispatches = allDispatches.count();
+activeCount = Shipment_Dispatch[Dispatch_Status == "Confirmed" && Shipment_Status != "Delivered"].count();
+inTransitCount = Shipment_Dispatch[Dispatch_Status == "Confirmed" && Shipment_Status == "In Transit"].count();
+deliveredCount = Shipment_Dispatch[Shipment_Status == "Delivered"].count();
+cancelledCount = Shipment_Dispatch[Dispatch_Status == "Cancelled"].count();
+lateCount = Shipment_Dispatch[Dispatch_Status == "Confirmed" && Shipment_Status != "Delivered" && (KPI_Status == "Late" || ExFactory_Variance_Days >= redThreshold || ETD_Variance_Days >= redThreshold || ETA_Variance_Days >= redThreshold || Delivery_Variance_Days >= redThreshold)].count();
+paymentDueCount = Shipment_Dispatch[Payment_Status != "Fully Paid" && Expected_Payment_Date != null && Expected_Payment_Date <= zoho.currentdate.addDay(14)].count();
+bookedCount = Shipment_Dispatch[Shipment_Status == "Booked"].count();
+progressCount = Shipment_Dispatch[Shipment_Status == "In Progress"].count();
+pickedCount = Shipment_Dispatch[Shipment_Status == "Picked"].count();
+inTransitStatusCount = Shipment_Dispatch[Shipment_Status == "In Transit"].count();
+deliveredStatusCount = Shipment_Dispatch[Shipment_Status == "Delivered"].count();
+fclCount = Shipment_Dispatch[Transit_Mode == "FCL"].count();
+lclCount = Shipment_Dispatch[Transit_Mode == "LCL"].count();
+airCount = Shipment_Dispatch[Transit_Mode == "AIR"].count();
+cepCount = Shipment_Dispatch[Transit_Mode == "CEP"].count();
+bookedPct = 0;
+progressPct = 0;
+pickedPct = 0;
+inTransitPct = 0;
+deliveredPct = 0;
+fclPct = 0;
+lclPct = 0;
+airPct = 0;
+cepPct = 0;
+if(totalDispatches > 0)
+{
+		bookedPct = (bookedCount * 100) / totalDispatches;
+		progressPct = (progressCount * 100) / totalDispatches;
+		pickedPct = (pickedCount * 100) / totalDispatches;
+		inTransitPct = (inTransitStatusCount * 100) / totalDispatches;
+		deliveredPct = (deliveredStatusCount * 100) / totalDispatches;
+		fclPct = (fclCount * 100) / totalDispatches;
+		lclPct = (lclCount * 100) / totalDispatches;
+		airPct = (airCount * 100) / totalDispatches;
+		cepPct = (cepCount * 100) / totalDispatches;
+}
+exAmber = 0;
+exRed = 0;
+etdAmber = 0;
+etdRed = 0;
+etaAmber = 0;
+etaRed = 0;
+deliveryAmber = 0;
+deliveryRed = 0;
+maxExFactory = 0;
+maxETD = 0;
+maxETA = 0;
+maxDelivery = 0;
+for each dispatchRec in allDispatches
+{
+		exVar = ifnull(dispatchRec.ExFactory_Variance_Days,0);
+		etdVar = ifnull(dispatchRec.ETD_Variance_Days,0);
+		etaVar = ifnull(dispatchRec.ETA_Variance_Days,0);
+		delVar = ifnull(dispatchRec.Delivery_Variance_Days,0);
+		if(exVar >= redThreshold)
+		{
+				exRed = exRed + 1;
+		}
+		else if(exVar >= amberThreshold)
+		{
+				exAmber = exAmber + 1;
+		}
+		if(etdVar >= redThreshold)
+		{
+				etdRed = etdRed + 1;
+		}
+		else if(etdVar >= amberThreshold)
+		{
+				etdAmber = etdAmber + 1;
+		}
+		if(etaVar >= redThreshold)
+		{
+				etaRed = etaRed + 1;
+		}
+		else if(etaVar >= amberThreshold)
+		{
+				etaAmber = etaAmber + 1;
+		}
+		if(delVar >= redThreshold)
+		{
+				deliveryRed = deliveryRed + 1;
+		}
+		else if(delVar >= amberThreshold)
+		{
+				deliveryAmber = deliveryAmber + 1;
+		}
+		if(exVar > maxExFactory)
+		{
+				maxExFactory = exVar;
+		}
+		if(etdVar > maxETD)
+		{
+				maxETD = etdVar;
+		}
+		if(etaVar > maxETA)
+		{
+				maxETA = etaVar;
+		}
+		if(delVar > maxDelivery)
+		{
+				maxDelivery = delVar;
+		}
+}
+missingTransitCount = 0;
+missingDocsCount = 0;
+for each dispatchRec in Shipment_Dispatch[Dispatch_Status == "Confirmed" && Shipment_Status != "Delivered"]
+{
+		if(dispatchRec.Buyer != null && dispatchRec.Supplier != null && dispatchRec.Transit_Mode != null && dispatchRec.Transit_Mode != "")
+		{
+				if(thisapp.Shipment_Get_Transit_Days(dispatchRec.Buyer.ID,dispatchRec.Supplier.ID,dispatchRec.Transit_Mode) == 0)
+				{
+						missingTransitCount = missingTransitCount + 1;
+				}
+		}
+		docCount = Shipment_Document[Shipment_Dispatch == dispatchRec.ID].count();
+		if(docCount == 0 && dispatchRec.Invoice_Upload == null && dispatchRec.Packing_List_Upload == null)
+		{
+				missingDocsCount = missingDocsCount + 1;
+		}
+}
+failedQCCount = Shipment_Dispatch[Quality_Control_Result == "Fail"].count();
+missingATDCount = Shipment_Dispatch[Dispatch_Status == "Confirmed" && ETD_Date != null && ETD_Date < zoho.currentdate && ATD_Date == null].count();
+missingATACount = Shipment_Dispatch[Dispatch_Status == "Confirmed" && ETA_Date != null && ETA_Date < zoho.currentdate && ATA_Date == null].count();
+lateDeliveryCount = Shipment_Dispatch[Dispatch_Status == "Confirmed" && Shipment_Status != "Delivered" && Estimated_Delivery_Date != null && Estimated_Delivery_Date < zoho.currentdate && Actual_Delivery_Date == null].count();
+editableChargeCount = 0;
+for each chargeRec in Shipment_Split_Charge[ID != 0]
+{
+		if(chargeRec.Shipment_Dispatch != null && chargeRec.Shipment_Dispatch.Payment_Status != "Fully Paid")
+		{
+				editableChargeCount = editableChargeCount + 1;
+		}
+}
+%>
+<style>
+/* ===== zcs-global.css (included once for this page; compacted to utilities used by this dashboard) ===== */
+:root { --zcs-theme-brand-color: var(--zcs_brand_color); --zcs-light-bg-color: var(--zcs_brand_light_color); --zcs-page-bg-color: #F3F3F4; --zcs-primary-text-color: var(--zcs_primary_text_color); --zcs-secondary-text-color: var(--zcs_secondary_text_color); --zcs-teritiary-text-color: var(--zcs_tertiary_text_color); --zcs-border-color: var(--zcs_tertiary_border_color); --zcs-white-color: #FFFFFF; --zcs-black-color: #000000; --zcs-red-color:#FE455D; --zcs-green-color:#179E6C; --zcs-yellow-color:#B8770D; --zcs-blue-color:#2A6FFC; font-size:16px; line-height:1.5; --column-gap:0px; }
+a { text-decoration:none; }
+.zcs-card { background-color:var(--zcs-white-color); border:1px solid var(--zcs_tertiary_border_color); border-radius:12px; }
+.zcs-row { display:flex; flex-wrap:wrap; }
+.zcs-flex { display:flex; }
+.zcs-inline-flex { display:inline-flex; }
+.zcs-direction-column { flex-direction:column; }
+.zcs-align-items-center { align-items:center; }
+.zcs-align-items-start { align-items:flex-start; }
+.zcs-justify-center { justify-content:center; }
+.zcs-justify-space-between { justify-content:space-between; }
+.zcs-gap-4 { gap:.25rem; --column-gap:.25rem; }
+.zcs-gap-6 { gap:.375rem; --column-gap:.375rem; }
+.zcs-gap-8 { gap:.5rem; --column-gap:.5rem; }
+.zcs-gap-10 { gap:.625rem; --column-gap:.625rem; }
+.zcs-gap-12 { gap:.75rem; --column-gap:.75rem; }
+.zcs-gap-16 { gap:1rem; --column-gap:1rem; }
+.zcs-gap-20 { gap:1.25rem; --column-gap:1.25rem; }
+.zcs-gap-24 { gap:1.5rem; --column-gap:1.5rem; }
+.zcs-col-2 { flex:0 0 calc(16.666% - var(--column-gap)); max-width:calc(16.666% - var(--column-gap)); }
+.zcs-col-3 { flex:0 0 calc(25% - var(--column-gap)); max-width:calc(25% - var(--column-gap)); }
+.zcs-col-4 { flex:0 0 calc(33.333% - var(--column-gap)); max-width:calc(33.333% - var(--column-gap)); }
+.zcs-col-5 { flex:0 0 calc(41.666% - var(--column-gap)); max-width:calc(41.666% - var(--column-gap)); }
+.zcs-col-6 { flex:0 0 calc(50% - var(--column-gap)); max-width:calc(50% - var(--column-gap)); }
+.zcs-col-7 { flex:0 0 calc(58.333% - var(--column-gap)); max-width:calc(58.333% - var(--column-gap)); }
+.zcs-col-8 { flex:0 0 calc(66.666% - var(--column-gap)); max-width:calc(66.666% - var(--column-gap)); }
+.zcs-col-12 { flex:0 0 100%; max-width:100%; }
+.zcs-col-common { flex:1 1 0%; }
+.zcs-w-full { width:100%; }
+.zcs-wh-full { width:100%; height:100%; }
+.zcs-p-0 { padding:0; } .zcs-p-8 { padding:.5rem; } .zcs-p-12 { padding:.75rem; } .zcs-p-16 { padding:1rem; } .zcs-p-20 { padding:1.25rem; } .zcs-p-24 { padding:1.5rem; }
+.zcs-px-8 { padding-left:.5rem; padding-right:.5rem; } .zcs-px-10 { padding-left:.625rem; padding-right:.625rem; } .zcs-px-12 { padding-left:.75rem; padding-right:.75rem; } .zcs-px-16 { padding-left:1rem; padding-right:1rem; } .zcs-px-30 { padding-left:1.875rem; padding-right:1.875rem; }
+.zcs-py-2 { padding-top:.125rem; padding-bottom:.125rem; } .zcs-py-4 { padding-top:.25rem; padding-bottom:.25rem; } .zcs-py-5 { padding-top:.3125rem; padding-bottom:.3125rem; } .zcs-py-8 { padding-top:.5rem; padding-bottom:.5rem; } .zcs-py-10 { padding-top:.625rem; padding-bottom:.625rem; } .zcs-py-12 { padding-top:.75rem; padding-bottom:.75rem; } .zcs-py-16 { padding-top:1rem; padding-bottom:1rem; } .zcs-py-24 { padding-top:1.5rem; padding-bottom:1.5rem; }
+.zcs-m-0 { margin:0; }
+.zcs-font-11 { font-size:.6875rem; } .zcs-font-12 { font-size:.75rem; } .zcs-font-13 { font-size:.8125rem; } .zcs-font-14 { font-size:.875rem; } .zcs-font-15 { font-size:.9375rem; } .zcs-font-16 { font-size:1rem; } .zcs-font-18 { font-size:1.125rem; } .zcs-font-20 { font-size:1.25rem; } .zcs-font-22 { font-size:1.375rem; } .zcs-font-24 { font-size:1.5rem; }
+.zcs-font-normal { font-weight:400; } .zcs-font-medium { font-weight:500; } .zcs-font-semibold { font-weight:600; } .zcs-font-bold { font-weight:700; }
+.zcs-lh-body { line-height:1.5; } .zcs-lh-heading { line-height:1.25; }
+.zcs-color-theme { color:var(--zcs_brand_color); } .zcs-color-primary { color:var(--zcs_primary_text_color); } .zcs-color-secondary { color:var(--zcs_secondary_text_color); } .zcs-color-tertiary { color:var(--zcs_tertiary_text_color); } .zcs-color-white { color:#fff; }
+.zcs-text-left { text-align:left; } .zcs-text-right { text-align:right; } .zcs-text-center { text-align:center; }
+.zcs-rounded-sm { border-radius:4px; } .zcs-rounded-md { border-radius:6px; } .zcs-rounded-lg { border-radius:8px; } .zcs-rounded-xl { border-radius:12px; }
+.zcs-box-border { box-sizing:border-box; } .zcs-relative { position:relative; } .zcs-sticky { position:sticky; } .zcs-overflow-auto { overflow:auto; } .zcs-ellipsis { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+/* ===== ZCS component CSS: layout-dashboard / buttons / badge / table / legend / progress / quick-actions ===== */
+.zcs-page-container { background-color:var(--zcs-page-bg-color); min-height:100%; }
+.zcs-page-container-inner { min-height:100%; }
+.zcs-page-header { background:linear-gradient(135deg, var(--zcs_brand_color), var(--zcs_brand_dark_color)); border-radius:14px; color:var(--zcs_brand_foreground_color); box-shadow:0 10px 26px rgba(0,0,0,.10); }
+.zcs-page-header .zcs-color-primary, .zcs-page-header .zcs-color-tertiary { color:var(--zcs_brand_foreground_color); }
+.zcs-button { width:auto; min-width:5rem; min-height:36px; transition:.2s linear all; }
+.zcs-primary-button { background-color:var(--zcs_brand_color); color:var(--zcs_brand_foreground_color); }
+.zcs-primary-outline-button { border:1px solid var(--zcs_brand_color); background-color:var(--zcs-white-color); color:var(--zcs_brand_color); }
+.zcs-primary-button:hover { background-color:var(--zcs_brand_dark_color); color:var(--zcs_brand_foreground_color); }
+.zcs-primary-outline-button:hover { background-color:var(--zcs_component_hover_color); color:var(--zcs_brand_color); }
+.zcs-button-icon { width:16px; max-height:16px; }
+.zcs-panel-wrapper ul li, .zcs-quick-action-item, .zcs-legend-wrapper li { list-style-type:none; }
+.zcs-panel { border:1px solid var(--zcs_tertiary_border_color); box-shadow:0 2px 8px 0 #F2F2F6; background-color:var(--zcs-white-color); }
+.zcs-panel-icon-wrapper { width:40px; height:40px; }
+.zcs-panel-icon { width:24px; height:24px; line-height:24px; }
+.zcs-panel.zcs-panel-green .zcs-panel-icon-wrapper { background-color:#E4FCF3; color:#179E6C; }
+.zcs-panel.zcs-panel-yellow .zcs-panel-icon-wrapper { background-color:#FCF4E6; color:#B8770D; }
+.zcs-panel.zcs-panel-red .zcs-panel-icon-wrapper { background-color:#FDE3E6; color:#FE455D; }
+.zcs-panel.zcs-panel-d_blue .zcs-panel-icon-wrapper { background-color:#EAF2FF; color:#1652BB; }
+.zcs-panel.zcs-panel-l_blue .zcs-panel-icon-wrapper { background-color:#E8EFFF; color:#2A6FFC; }
+.zcs-panel.zcs-panel-orange .zcs-panel-icon-wrapper { background-color:#F8F0EB; color:#F4660C; }
+.zcs-panel.zcs-panel-grey .zcs-panel-icon-wrapper { background-color:#F5F8FA; color:#092441; }
+.zcs-panel:hover { border-color:var(--zcs_brand_color); background-image:linear-gradient(rgb(253 253 255 / 10%), #f7f9ff); }
+.zcs-badge { width:auto; }
+.zcs-badge-filled { border:1px solid transparent; }
+.zcs-badge-green { background:#179E6C; border-color:#179E6C; color:#fff; }
+.zcs-badge-red { background:#FE455D; border-color:#FE455D; color:#fff; }
+.zcs-badge-grey { background:#242424; border-color:#242424; color:#fff; }
+.zcs-badge-yellow { background:#FAAE13; border-color:#FAAE13; color:#fff; }
+.zcs-badge-blue { background:#2A6FFC; border-color:#2A6FFC; color:#fff; }
+.zcs-badge-orange { background:#F4660C; border-color:#F4660C; color:#fff; }
+.zcs-table-wrapper { border:1px solid var(--zcs_tertiary_border_color); background:var(--zcs-white-color); overflow:auto; max-height:430px; }
+.zcs-table-wrapper table { line-height:normal; border-collapse:collapse; min-width:900px; }
+.zcs-table-wrapper table thead { top:0; z-index:1; }
+.zcs-table-wrapper table thead tr th { background:#F9FAFE; box-shadow:0 -1px 0 0 var(--zcs_tertiary_border_color) inset; white-space:nowrap; }
+.zcs-table-wrapper table tbody tr td { border-top:1px solid var(--zcs_tertiary_border_color); vertical-align:top; }
+.zcs-table-wrapper table tbody tr:hover td { background:#F9FAFE; }
+.zcs-progress-bar { height:8px; background-color:var(--zcs_component_hover_color); overflow:hidden; }
+.zcs-progress-bar-indicator { height:inherit; border-radius:inherit; background-color:var(--zcs_brand_color); }
+.zcs-legend-wrapper li label { min-width:120px; }
+.zcs-legend-wrapper li label:before { content:''; display:inline-block; vertical-align:top; width:12px; height:12px; margin:4px 12px; border-radius:50%; }
+.zcs-legend-wrapper li:nth-child(1) label:before { background-color:#FECE56; }
+.zcs-legend-wrapper li:nth-child(2) label:before { background-color:#36A2EB; }
+.zcs-legend-wrapper li:nth-child(3) label:before { background-color:#FF6283; }
+.zcs-legend-wrapper li:nth-child(4) label:before { background-color:#28CC97; }
+.zcs-quick-action-item.zcs-card:hover { border-color:var(--zcs_brand_color); }
+.zcs-quick-action-item:hover .zcs-quick-action-link { color:var(--zcs_brand_color); }
+/* Dashboard-specific */
+.ship-dashboard .section-title { margin-bottom:12px; }
+.ship-dashboard .report-link-grid { display:grid; grid-template-columns:repeat(4,minmax(180px,1fr)); gap:10px; }
+.ship-dashboard .dist-row { display:grid; grid-template-columns:135px 1fr 44px; align-items:center; gap:10px; margin-bottom:12px; }
+.ship-dashboard .dist-track { height:9px; background:var(--zcs_component_hover_color); border-radius:999px; overflow:hidden; }
+.ship-dashboard .dist-fill { height:100%; background:var(--zcs_brand_color); border-radius:999px; }
+.ship-dashboard .variance-grid { display:grid; grid-template-columns:repeat(4,minmax(180px,1fr)); gap:12px; }
+.ship-dashboard .exception-grid { display:grid; grid-template-columns:repeat(3,minmax(220px,1fr)); gap:12px; }
+.ship-dashboard .exception-card { border-left:4px solid var(--zcs_brand_color); }
+.ship-dashboard .exception-card.red { border-left-color:#FE455D; }
+.ship-dashboard .exception-card.yellow { border-left-color:#FAAE13; }
+.ship-dashboard .native-report { min-height:420px; border:1px solid var(--zcs_tertiary_border_color); border-radius:12px; overflow:hidden; background:#fff; }
+.ship-dashboard .note { color:var(--zcs_tertiary_text_color); }
+@media (max-width: 1280px) { .ship-dashboard .report-link-grid { grid-template-columns:repeat(3,1fr); } .ship-dashboard .exception-grid { grid-template-columns:repeat(2,1fr); } .ship-dashboard .variance-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width: 768px) { .zcs-col-sm-6 { flex:0 0 calc(50% - var(--column-gap)); max-width:calc(50% - var(--column-gap)); } .zcs-col-xs-12 { flex:0 0 100%; max-width:100%; } .zcs-page-container-inner { padding:16px 20px; gap:12px; } .ship-dashboard .report-link-grid, .ship-dashboard .exception-grid, .ship-dashboard .variance-grid { grid-template-columns:1fr; } .zcs-page-header { flex-direction:column; align-items:flex-start; } }
+</style>
+<div class='ship-dashboard zcs-page-container zcs-commonview zcs-wh-full'>
+		<div class='zcs-page-container-inner zcs-wh-full zcs-flex zcs-direction-column zcs-gap-20 zcs-px-30 zcs-py-24 zcs-box-border'>
+				<div class='zcs-page-header zcs-w-full zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-16 zcs-px-30 zcs-py-24 zcs-box-border'>
+						<div class='zcs-flex zcs-direction-column zcs-gap-6 zcs-ellipsis'>
+								<h5 class='zcs-font-22 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-ellipsis zcs-m-0'>Shipment KPI Dashboard</h5>
+								<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Internal shipment operations command center for dispatch status, milestone variance, split value, costs, exceptions, and payment follow-up.</p>
+						</div>
+						<a href='#Report:Shipment_KPI_Report' class='zcs-button zcs-primary-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-16 zcs-py-8 zcs-rounded-md zcs-box-border zcs-font-14 zcs-font-normal zcs-lh-body'>
+								<i class='zcs-button-icon zc-li-outline business-chart-bar-32'></i>
+								<span class='zcs-button-text'>Open KPI Report</span>
+						</a>
+				</div>
+
+				<div class='zcs-panel-wrapper'>
+						<ul class='zcs-row zcs-justify-space-between zcs-gap-16 zcs-p-0 zcs-m-0'>
+								<li class='zcs-col-2 zcs-col-sm-6 zcs-col-xs-12'>
+										<div class='zcs-panel zcs-panel-d_blue zcs-wh-full zcs-flex zcs-direction-column zcs-gap-8 zcs-rounded-lg zcs-p-16 zcs-box-border'>
+												<div class='zcs-flex zcs-align-items-center zcs-gap-10'><div class='zcs-panel-icon-wrapper zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-lg'><i class='zcs-panel-icon zcs-font-24 zc-li-outline arrows-4-restore'></i></div><h4 class='zcs-font-24 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'><%=activeCount%></h4></div>
+												<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Active dispatches</p>
+										</div>
+								</li>
+								<li class='zcs-col-2 zcs-col-sm-6 zcs-col-xs-12'>
+										<div class='zcs-panel zcs-panel-l_blue zcs-wh-full zcs-flex zcs-direction-column zcs-gap-8 zcs-rounded-lg zcs-p-16 zcs-box-border'>
+												<div class='zcs-flex zcs-align-items-center zcs-gap-10'><div class='zcs-panel-icon-wrapper zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-lg'><i class='zcs-panel-icon zcs-font-24 zc-li-outline loader-dots-06'></i></div><h4 class='zcs-font-24 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'><%=inTransitCount%></h4></div>
+												<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>In-transit</p>
+										</div>
+								</li>
+								<li class='zcs-col-2 zcs-col-sm-6 zcs-col-xs-12'>
+										<div class='zcs-panel zcs-panel-green zcs-wh-full zcs-flex zcs-direction-column zcs-gap-8 zcs-rounded-lg zcs-p-16 zcs-box-border'>
+												<div class='zcs-flex zcs-align-items-center zcs-gap-10'><div class='zcs-panel-icon-wrapper zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-lg'><i class='zcs-panel-icon zcs-font-24 zc-li-outline ui-1-check-circle-08'></i></div><h4 class='zcs-font-24 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'><%=deliveredCount%></h4></div>
+												<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Delivered</p>
+										</div>
+								</li>
+								<li class='zcs-col-2 zcs-col-sm-6 zcs-col-xs-12'>
+										<div class='zcs-panel zcs-panel-grey zcs-wh-full zcs-flex zcs-direction-column zcs-gap-8 zcs-rounded-lg zcs-p-16 zcs-box-border'>
+												<div class='zcs-flex zcs-align-items-center zcs-gap-10'><div class='zcs-panel-icon-wrapper zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-lg'><i class='zcs-panel-icon zcs-font-24 zc-li-outline ui-1-simple-remove'></i></div><h4 class='zcs-font-24 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'><%=cancelledCount%></h4></div>
+												<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Cancelled</p>
+										</div>
+								</li>
+								<li class='zcs-col-2 zcs-col-sm-6 zcs-col-xs-12'>
+										<div class='zcs-panel zcs-panel-red zcs-wh-full zcs-flex zcs-direction-column zcs-gap-8 zcs-rounded-lg zcs-p-16 zcs-box-border'>
+												<div class='zcs-flex zcs-align-items-center zcs-gap-10'><div class='zcs-panel-icon-wrapper zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-lg'><i class='zcs-panel-icon zcs-font-24 zc-li-outline ui-3-alert'></i></div><h4 class='zcs-font-24 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'><%=lateCount%></h4></div>
+												<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Late dispatches</p>
+										</div>
+								</li>
+								<li class='zcs-col-2 zcs-col-sm-6 zcs-col-xs-12'>
+										<div class='zcs-panel zcs-panel-orange zcs-wh-full zcs-flex zcs-direction-column zcs-gap-8 zcs-rounded-lg zcs-p-16 zcs-box-border'>
+												<div class='zcs-flex zcs-align-items-center zcs-gap-10'><div class='zcs-panel-icon-wrapper zcs-flex zcs-align-items-center zcs-justify-center zcs-rounded-lg'><i class='zcs-panel-icon zcs-font-24 zc-li-outline ui-2-time'></i></div><h4 class='zcs-font-24 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'><%=paymentDueCount%></h4></div>
+												<p class='zcs-font-14 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Payments due</p>
+										</div>
+								</li>
+						</ul>
+				</div>
+
+				<div class='zcs-row zcs-gap-16'>
+						<div class='zcs-col-7 zcs-col-xs-12'>
+								<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-16 zcs-p-20 zcs-box-border'>
+										<div class='zcs-flex zcs-align-items-start zcs-justify-space-between zcs-gap-12'>
+												<div><h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Milestone variance</h5><p class='zcs-font-13 zcs-font-normal zcs-lh-body zcs-color-tertiary zcs-m-0'>Shipment_Settings thresholds: amber at <%=amberThreshold%> days, red at <%=redThreshold%> days.</p></div>
+												<a href='#Report:Shipment_KPI_Report' class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-5 zcs-rounded-md zcs-box-border zcs-font-14 zcs-font-normal zcs-lh-body'><i class='zcs-button-icon zc-li-outline ui-1-eye-17'></i><span>Details</span></a>
+										</div>
+										<div class='variance-grid'>
+												<div class='zcs-card zcs-p-16 zcs-box-border'><h6 class='zcs-font-16 zcs-font-semibold zcs-m-0 zcs-color-primary'>Ex-Factory</h6><p class='zcs-font-14 zcs-color-tertiary zcs-m-0'>Max variance: <strong><%=maxExFactory%> days</strong></p><div class='zcs-flex zcs-gap-8 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow'><span class='zcs-badge-text zcs-font-13'>Amber <%=exAmber%></span></span><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-badge-text zcs-font-13'>Red <%=exRed%></span></span></div></div>
+												<div class='zcs-card zcs-p-16 zcs-box-border'><h6 class='zcs-font-16 zcs-font-semibold zcs-m-0 zcs-color-primary'>ETD</h6><p class='zcs-font-14 zcs-color-tertiary zcs-m-0'>Max variance: <strong><%=maxETD%> days</strong></p><div class='zcs-flex zcs-gap-8 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow'><span class='zcs-badge-text zcs-font-13'>Amber <%=etdAmber%></span></span><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-badge-text zcs-font-13'>Red <%=etdRed%></span></span></div></div>
+												<div class='zcs-card zcs-p-16 zcs-box-border'><h6 class='zcs-font-16 zcs-font-semibold zcs-m-0 zcs-color-primary'>ETA</h6><p class='zcs-font-14 zcs-color-tertiary zcs-m-0'>Max variance: <strong><%=maxETA%> days</strong></p><div class='zcs-flex zcs-gap-8 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow'><span class='zcs-badge-text zcs-font-13'>Amber <%=etaAmber%></span></span><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-badge-text zcs-font-13'>Red <%=etaRed%></span></span></div></div>
+												<div class='zcs-card zcs-p-16 zcs-box-border'><h6 class='zcs-font-16 zcs-font-semibold zcs-m-0 zcs-color-primary'>Delivery</h6><p class='zcs-font-14 zcs-color-tertiary zcs-m-0'>Max variance: <strong><%=maxDelivery%> days</strong></p><div class='zcs-flex zcs-gap-8 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow'><span class='zcs-badge-text zcs-font-13'>Amber <%=deliveryAmber%></span></span><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-badge-text zcs-font-13'>Red <%=deliveryRed%></span></span></div></div>
+										</div>
+								</div>
+						</div>
+						<div class='zcs-col-5 zcs-col-xs-12'>
+								<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-16 zcs-p-20 zcs-box-border'>
+										<h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Status distribution</h5>
+										<div class='zcs-row zcs-gap-20'>
+												<div class='zcs-col-6 zcs-col-xs-12'>
+														<p class='zcs-font-14 zcs-font-semibold zcs-color-primary zcs-m-0'>By Shipment Status</p>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>Booked</span><div class='dist-track'><div class='dist-fill' style='width:<%=bookedPct%>%;'></div></div><strong class='zcs-font-13'><%=bookedCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>In Progress</span><div class='dist-track'><div class='dist-fill' style='width:<%=progressPct%>%;'></div></div><strong class='zcs-font-13'><%=progressCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>Picked</span><div class='dist-track'><div class='dist-fill' style='width:<%=pickedPct%>%;'></div></div><strong class='zcs-font-13'><%=pickedCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>In Transit</span><div class='dist-track'><div class='dist-fill' style='width:<%=inTransitPct%>%;'></div></div><strong class='zcs-font-13'><%=inTransitStatusCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>Delivered</span><div class='dist-track'><div class='dist-fill' style='width:<%=deliveredPct%>%;'></div></div><strong class='zcs-font-13'><%=deliveredStatusCount%></strong></div>
+												</div>
+												<div class='zcs-col-6 zcs-col-xs-12'>
+														<p class='zcs-font-14 zcs-font-semibold zcs-color-primary zcs-m-0'>By Transit Mode</p>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>FCL</span><div class='dist-track'><div class='dist-fill' style='width:<%=fclPct%>%;'></div></div><strong class='zcs-font-13'><%=fclCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>LCL</span><div class='dist-track'><div class='dist-fill' style='width:<%=lclPct%>%;'></div></div><strong class='zcs-font-13'><%=lclCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>AIR</span><div class='dist-track'><div class='dist-fill' style='width:<%=airPct%>%;'></div></div><strong class='zcs-font-13'><%=airCount%></strong></div>
+														<div class='dist-row'><span class='zcs-font-13 zcs-color-tertiary'>CEP</span><div class='dist-track'><div class='dist-fill' style='width:<%=cepPct%>%;'></div></div><strong class='zcs-font-13'><%=cepCount%></strong></div>
+												</div>
+										</div>
+								</div>
+						</div>
+				</div>
+
+				<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-12 zcs-p-20 zcs-box-border'>
+						<div class='zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-12'>
+								<h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Split summary by dispatch and PO / QO</h5>
+								<a href='#Report:Shipment_Dispatch_Split_Report' class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-5 zcs-rounded-md zcs-box-border zcs-font-14 zcs-font-normal zcs-lh-body'><i class='zcs-button-icon zc-li-outline files-2-doc'></i><span>Split report</span></a>
+						</div>
+						<div class='zcs-table-wrapper zcs-rounded-sm zcs-box-border zcs-relative'>
+								<table class='zcs-w-full'>
+										<thead class='zcs-sticky'><tr><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Dispatch</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>PO</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>QO</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Status</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>Qty</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>QO Value</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>PO Value</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>Remaining Qty</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>Remaining QO</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>Remaining PO</th></tr></thead>
+										<tbody>
+												<%
+												splitRowCount = 0;
+												for each splitRec in Shipment_Dispatch_Split[Split_Status != "Cancelled"] sort by Shipment_Dispatch asc
+												{
+														if(splitRowCount < 12)
+														{
+																dispatchRef = "-";
+																poNo = "-";
+																qoNo = "-";
+																remainingQty = 0;
+																remainingQO = 0.0;
+																remainingPO = 0.0;
+																if(splitRec.Shipment_Dispatch != null)
+																{
+																		dispatchRef = ifnull(splitRec.Shipment_Dispatch.Shipment_Reference,"-");
+																}
+																if(splitRec.Purchase_Order != null)
+																{
+																		poNo = ifnull(splitRec.Purchase_Order.PO_Number,"-");
+																		qoNo = ifnull(splitRec.Purchase_Order.QO_Number,"-");
+																		remainingQty = ifnull(splitRec.Purchase_Order.Total_Quantity,0) - ifnull(splitRec.Purchase_Order.Split_Quantity_Total,0);
+																		remainingQO = ifnull(splitRec.Purchase_Order.Base_Selling_Price_Total,0.0) - ifnull(splitRec.Purchase_Order.Split_QO_Value_Total,0.0);
+																		remainingPO = ifnull(splitRec.Purchase_Order.Base_Purchase_Price_Total,0.0) - ifnull(splitRec.Purchase_Order.Split_PO_Value_Total,0.0);
+																}
+																splitBadge = "zcs-badge-blue";
+																if(splitRec.Split_Status == "Confirmed" || splitRec.Split_Status == "Delivered")
+																{
+																		splitBadge = "zcs-badge-green";
+																}
+																else if(splitRec.Split_Status == "Draft")
+																{
+																		splitBadge = "zcs-badge-yellow";
+																}
+																%>
+																<tr><td class='zcs-px-16 zcs-py-8 zcs-font-14 zcs-color-primary'><%=dispatchRef%></td><td class='zcs-px-16 zcs-py-8 zcs-font-14 zcs-color-primary'><%=poNo%></td><td class='zcs-px-16 zcs-py-8 zcs-font-14 zcs-color-primary'><%=qoNo%></td><td class='zcs-px-16 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 <%=splitBadge%>'><span class='zcs-badge-text zcs-font-13'><%=ifnull(splitRec.Split_Status,"-")%></span></span></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=ifnull(splitRec.Split_Quantity,0)%></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=ifnull(splitRec.Split_QO_Value,0.0)%></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=ifnull(splitRec.Split_PO_Value,0.0)%></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=remainingQty%></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=remainingQO%></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=remainingPO%></td></tr>
+																<%
+														}
+														splitRowCount = splitRowCount + 1;
+												}
+												if(splitRowCount == 0)
+												{
+														%><tr><td colspan='10' class='zcs-px-16 zcs-py-16 zcs-font-14 zcs-color-tertiary zcs-text-center'>No split records found.</td></tr><%
+												}
+												%>
+										</tbody>
+								</table>
+						</div>
+				</div>
+
+				<div class='zcs-row zcs-gap-16'>
+						<div class='zcs-col-8 zcs-col-xs-12'>
+								<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-12 zcs-p-20 zcs-box-border'>
+										<div class='zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-12'>
+												<h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Charge summary by dispatch, PO / QO, and category</h5>
+												<a href='#Report:Shipment_Split_Charge_Report' class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-5 zcs-rounded-md zcs-box-border zcs-font-14 zcs-font-normal zcs-lh-body'><i class='zcs-button-icon zc-li-outline tech-print'></i><span>Charge report</span></a>
+										</div>
+										<div class='zcs-table-wrapper zcs-rounded-sm zcs-box-border zcs-relative'>
+												<table class='zcs-w-full'>
+														<thead class='zcs-sticky'><tr><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Dispatch</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>PO / QO</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Category</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Paid By</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Payment</th><th class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary'>Amount</th></tr></thead>
+														<tbody>
+																<%
+																chargeRowCount = 0;
+																for each costRec in Shipment_Split_Charge[ID != 0] sort by Shipment_Dispatch asc
+																{
+																		if(chargeRowCount < 12)
+																		{
+																				costDispatch = "-";
+																				costPO = "-";
+																				paymentStatus = "-";
+																				if(costRec.Shipment_Dispatch != null)
+																				{
+																						costDispatch = ifnull(costRec.Shipment_Dispatch.Shipment_Reference,"-");
+																						paymentStatus = ifnull(costRec.Shipment_Dispatch.Payment_Status,"-");
+																				}
+																				if(costRec.Purchase_Order != null)
+																				{
+																						costPO = ifnull(costRec.Purchase_Order.PO_Number,"-") + " / " + ifnull(costRec.Purchase_Order.QO_Number,"-");
+																				}
+																				paymentBadge = "zcs-badge-yellow";
+																				if(paymentStatus == "Fully Paid")
+																				{
+																						paymentBadge = "zcs-badge-green";
+																				}
+																				else if(paymentStatus == "Partially Paid")
+																				{
+																						paymentBadge = "zcs-badge-blue";
+																				}
+																				%>
+																				<tr><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=costDispatch%></td><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=costPO%></td><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=ifnull(costRec.Charge_Category,"-")%></td><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=ifnull(costRec.Paid_By,"-")%></td><td class='zcs-px-16 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 <%=paymentBadge%>'><span class='zcs-badge-text zcs-font-13'><%=paymentStatus%></span></span></td><td class='zcs-px-16 zcs-py-8 zcs-text-right zcs-font-14'><%=ifnull(costRec.Amount,0.0)%></td></tr>
+																				<%
+																		}
+																		chargeRowCount = chargeRowCount + 1;
+																}
+																if(chargeRowCount == 0)
+																{
+																		%><tr><td colspan='6' class='zcs-px-16 zcs-py-16 zcs-font-14 zcs-color-tertiary zcs-text-center'>No shipment split charges found.</td></tr><%
+																}
+																%>
+														</tbody>
+												</table>
+										</div>
+								</div>
+						</div>
+						<div class='zcs-col-4 zcs-col-xs-12'>
+								<div class='zcs-quick-actions-wrapper zcs-card zcs-flex zcs-direction-column zcs-gap-16 zcs-p-16 zcs-box-border'>
+										<h5 class='zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Report links</h5>
+										<div class='report-link-grid'>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Report'><i class='zc-li-outline files-2-doc'></i><span>Shipment Report</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_KPI_Report'><i class='zc-li-outline business-chart-bar-32'></i><span>KPI Report</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Dispatch_Split_Report'><i class='zc-li-outline design-todo'></i><span>Dispatch Split</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Split_Charge_Report'><i class='zc-li-outline tech-print'></i><span>Split Charges</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Cost_Report'><i class='zc-li-outline business-coins'></i><span>Cost Report</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Cost_By_PO'><i class='zc-li-outline business-coins'></i><span>Cost By PO</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Documents_Report'><i class='zc-li-outline files-2-doc'></i><span>Documents</span></a>
+												<a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Transit_Time_Mapping_Report'><i class='zc-li-outline location-pin-copy'></i><span>Transit Mapping</span></a>
+										</div>
+								</div>
+						</div>
+				</div>
+
+				<div class='zcs-row zcs-gap-16'>
+						<div class='zcs-col-7 zcs-col-xs-12'>
+								<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-12 zcs-p-20 zcs-box-border'>
+										<div class='zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-12'>
+												<h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Exceptions</h5>
+												<span class='zcs-font-13 zcs-color-tertiary'>Operational checks refreshed at page load.</span>
+										</div>
+										<div class='exception-grid'>
+												<div class='exception-card yellow zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Missing transit mapping</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow'><span class='zcs-font-13'><%=missingTransitCount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>Buyer, supplier, and transit mode combinations with no active transit-days mapping.</p></div>
+												<div class='exception-card red zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Failed QC</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-font-13'><%=failedQCCount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>Dispatches where Quality Control Result is Fail.</p></div>
+												<div class='exception-card yellow zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Missing documents</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow'><span class='zcs-font-13'><%=missingDocsCount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>Confirmed open dispatches without invoice, packing list, or Shipment_Document rows.</p></div>
+												<div class='exception-card red zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Missing or late ATD</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-font-13'><%=missingATDCount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>ETD has passed and ATD is not captured.</p></div>
+												<div class='exception-card red zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Missing or late ATA</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-font-13'><%=missingATACount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>ETA has passed and ATA is not captured.</p></div>
+												<div class='exception-card red zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Late delivery</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-red'><span class='zcs-font-13'><%=lateDeliveryCount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>Estimated delivery date has passed and actual delivery is blank.</p></div>
+												<div class='exception-card zcs-card zcs-p-16 zcs-box-border'><div class='zcs-flex zcs-align-items-center zcs-justify-space-between'><strong class='zcs-font-15'>Charges editable before payment</strong><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-blue'><span class='zcs-font-13'><%=editableChargeCount%></span></span></div><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>Charge rows tied to dispatches not fully paid.</p></div>
+										</div>
+								</div>
+						</div>
+						<div class='zcs-col-5 zcs-col-xs-12'>
+								<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-12 zcs-p-20 zcs-box-border'>
+										<div class='zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-12'>
+												<h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Upcoming payment reminders</h5>
+												<a href='#Report:Shipment_Report?Payment_Status=Not%20Paid' class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-5 zcs-rounded-md zcs-box-border zcs-font-14 zcs-font-normal zcs-lh-body'><i class='zcs-button-icon zc-li-outline ui-2-time'></i><span>Payments</span></a>
+										</div>
+										<div class='zcs-table-wrapper zcs-rounded-sm zcs-box-border zcs-relative'>
+												<table class='zcs-w-full'>
+														<thead class='zcs-sticky'><tr><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Dispatch</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Expected Date</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Status</th><th class='zcs-px-16 zcs-py-8 zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary'>Last Reminder</th></tr></thead>
+														<tbody>
+																<%
+																payRowCount = 0;
+																for each payRec in Shipment_Dispatch[Payment_Status != "Fully Paid" && Expected_Payment_Date != null && Expected_Payment_Date <= zoho.currentdate.addDay(30)] sort by Expected_Payment_Date asc
+																{
+																		if(payRowCount < 8)
+																		{
+																				payBadge = "zcs-badge-yellow";
+																				if(payRec.Payment_Status == "Partially Paid")
+																				{
+																						payBadge = "zcs-badge-blue";
+																				}
+																				%><tr><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=ifnull(payRec.Shipment_Reference,"-")%></td><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=payRec.Expected_Payment_Date%></td><td class='zcs-px-16 zcs-py-8'><span class='zcs-badge zcs-badge-filled zcs-inline-flex zcs-rounded-sm zcs-px-10 zcs-py-2 <%=payBadge%>'><span class='zcs-font-13'><%=ifnull(payRec.Payment_Status,"-")%></span></span></td><td class='zcs-px-16 zcs-py-8 zcs-font-14'><%=ifnull(payRec.Last_Payment_Reminder_Date,"-")%></td></tr><%
+																		}
+																		payRowCount = payRowCount + 1;
+																}
+																if(payRowCount == 0)
+																{
+																		%><tr><td colspan='4' class='zcs-px-16 zcs-py-16 zcs-font-14 zcs-color-tertiary zcs-text-center'>No payment reminders due in the next 30 days.</td></tr><%
+																}
+																%>
+														</tbody>
+												</table>
+										</div>
+								</div>
+						</div>
+				</div>
+
+				<div class='zcs-card zcs-flex zcs-direction-column zcs-gap-12 zcs-p-20 zcs-box-border'>
+						<div class='zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-12'>
+								<div><h5 class='section-title zcs-font-18 zcs-font-semibold zcs-lh-heading zcs-color-primary zcs-m-0'>Embedded KPI report</h5><p class='zcs-font-13 zcs-color-tertiary zcs-m-0'>Native report remains available for filtering, export, and record drill-down.</p></div>
+								<div class='zcs-flex zcs-gap-8'><a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Transit_Time_Mapping_Report'><i class='zc-li-outline location-pin-copy'></i><span>Transit mapping</span></a><a class='zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-gap-8 zcs-px-12 zcs-py-8 zcs-rounded-md zcs-font-14' href='#Report:Shipment_Documents_Report'><i class='zc-li-outline files-2-doc'></i><span>Documents</span></a></div>
+						</div>
+						<div class='native-report' elName='zc-component' viewLinkName='Shipment_KPI_Report' params='zc_Header=true&zc_Footer=true&zc_AddRec=false&zc_DuplRec=false&zc_RecSelect=false'></div>
+				</div>
+		</div>
+</div>

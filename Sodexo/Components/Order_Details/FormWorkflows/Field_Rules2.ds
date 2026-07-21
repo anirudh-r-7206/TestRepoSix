@@ -1,0 +1,24 @@
+Field_Rules2 as "Field Rules"
+{
+
+			
+							type =  form
+							form = Order_Details
+			
+							record event = on add or edit
+			
+							field rules
+							{
+								actions 
+								{
+									hide Order_Request,Supplier;
+								}
+								actions 
+								{
+									disable Product,Description,Product_Color,Product_Size,Sub_Total;
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,15 @@
+void OneTime.updateProductID()
+{
+
+			
+			                 	buyerProductMappingRecID = 4908788000000321037;
+			                 	fetRec = Buyer_Products[Buyer_Product_Mapping == buyerProductMappingRecID];
+			                 	buyerID = Buyer_Product_Mapping[ID == buyerProductMappingRecID].Buyer;
+			                 	buyerCode = Buyers_Master[ID == buyerID].Buyer_Code;
+			                 	for each  recs in fetRec
+			                 	{
+			                 		recs.Product_ID=recs.Product_ID.replaceFirst("EX0005",buyerCode);
+			                 	}
+			                 
+			
+}

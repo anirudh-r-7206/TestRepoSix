@@ -1,0 +1,23 @@
+Shipment_Split_Charge_On_Load as "Shipment Split Charge On Load"
+{
+
+			    type = form
+			    form = Shipment_Split_Charge
+			    record event = on add or edit
+			
+			    on load
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                disable Shipment_Dispatch, Purchase_Order, Source;
+			                if(input.Shipment_Dispatch != null && input.Shipment_Dispatch.Payment_Status == "Fully Paid")
+			                {
+			                    disable Shipment_Dispatch_Split, Charge_Category, Currency, Amount, Paid_By, Description;
+			                }
+			            )
+			        }
+			    }
+			
+}

@@ -1,0 +1,25 @@
+Delete_Selected_Fabrics as "Delete Selected Fabrics"
+{
+
+			
+							type =  functions
+							form = Fabric_Form
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									FabricList = thisapp.Delete_Records.Delete_Fabrics();
+													if(!FabricList.contains(input.ID))
+													{
+														// your logic here
+														delete from Fabric_Form[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

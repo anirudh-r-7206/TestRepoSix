@@ -1,0 +1,107 @@
+form Shipment_Transit_Time
+{
+
+		    displayname = "Shipment Transit Time"
+		    success message = "Transit time mapping saved successfully."
+		    Section
+		    (
+		        type = section
+		        row = 1
+		        column = 0
+		        width = medium
+		    )
+		    Buyer
+		    (
+		        type = picklist
+		        values = Buyers_Master.ID
+		        displayformat = [Buyer_Organisation]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Supplier
+		    (
+		        type = picklist
+		        values = Add_Suppliers.ID
+		        displayformat = [Supplier_Organisation]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Transit_Mode
+		    (
+		        type = picklist
+		        displayname = "Transit Mode"
+		        values = {"FCL","LCL","AIR","CEP"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Transit_Days
+		    (
+		        type = number
+		        displayname = "Transit Days"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Combination_Key
+		    (
+		        type = text
+		        displayname = "Combination Key"
+		        maxchar = 255
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Status
+		    (
+		        type = picklist
+		        values = {"Active","Inactive"}
+		        initial value = "Active"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Notes
+		    (
+		        type = textarea
+		        height = 100px
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		
+		    actions
+		    {
+		        on add
+		        {
+		            submit
+		            (
+		                type = submit
+		                displayname = "Submit"
+		            )
+		            reset
+		            (
+		                type = reset
+		                displayname = "Reset"
+		            )
+		        }
+		        on edit
+		        {
+		            update
+		            (
+		                type = submit
+		                displayname = "Update"
+		            )
+		            cancel
+		            (
+		                type = cancel
+		                displayname = "Cancel"
+		            )
+		        }
+		    }
+		
+}

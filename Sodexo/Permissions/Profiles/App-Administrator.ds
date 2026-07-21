@@ -1,0 +1,664 @@
+"App-Administrator"
+{
+
+	
+					name = "App-Administrator"
+					type = Users_Permissions
+					permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have write permission for all components\n"
+					ModulePermissions
+					{
+						Charge_Type_Form
+						{
+							allFieldsVisible= true 
+						}
+						Create_Size
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Sizes={"View","Edit","Delete"}
+							}
+						}
+						History
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Pending_Amendments={"View","Edit","Delete"}
+								All_Histories={"View","Edit","Delete"}
+							}
+						}
+						Fabric_Form
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Fabrics={"View","Edit","Delete"}
+							}
+						}
+						Currency
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Currency={"View","Edit","Delete"}
+							}
+						}
+						Additional_Charges_Form
+						{
+							allFieldsVisible= true 
+						}
+						Order_Request_Update
+						{
+							allFieldsVisible= true 
+						}
+						Factory_Details_Subform
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Factory_Details_Subform_Report={"View","Edit","Delete"}
+							}
+						}
+						Bulk_Edit_Tigger
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Bulk_Edit_Tigger_Report={"View","Edit","Delete"}
+							}
+						}
+						Add_Suppliers
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Suppliers={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Mapping_Wardrobes
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Buyer_Mapping_Wardrobes={"View","Edit","Delete"}
+							}
+						}
+						Product_Duplicate
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Size_Chart
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Size_Charts={"View","Edit","Delete"}
+							}
+						}
+						Alert_References
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Order_Request
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Order_Requests={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Contact_Person_Details
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Buter_Contact_Person_Details={"View","Edit","Delete"}
+							}
+						}
+						Trigger_Form
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Triggers={"View","Edit","Delete"}
+							}
+						}
+						Purchase_Order
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Purchase_Orders={"View","Edit","Delete"}
+							}
+						}
+						Freight_Partners_Form
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Freight_Partners={"View","Edit","Delete"}
+							}
+						}
+						Buyer_product_duplicate
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Product_Category
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Product_Categories={"View","Edit","Delete"}
+							}
+						}
+						Add_Product
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Products_Report={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Cart_Detail
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Packaging_Details
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Packaging_Details={"View","Edit","Delete"}
+							}
+						}
+						Bulk_Update
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Purchase_LineItems
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Purchase_LineItems_Report={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Products
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Buyer_Products={"View","Edit","Delete"}
+							}
+						}
+						Product_Code_Master
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Product_Code_Masters={"View","Edit","Delete"}
+							}
+						}
+						Rate_Conversion_History
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Rate_Conversion_History_Report={"View","Edit","Delete"}
+							}
+						}
+						Style
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Styles={"View","Edit","Delete"}
+							}
+						}
+						Email_Template
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Email_Templates={"View","Edit","Delete"}
+							}
+						}
+						Wardrobe
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Wardrobes={"View","Edit","Delete"}
+							}
+						}
+						Error_Log_Form
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Error_Logs={"View","Edit","Delete"}
+							}
+						}
+						Create_User
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Awaiting_User_Approvals={"View","Edit","Delete"}
+								SSA_and_Admin_Users={"View","Edit","Delete"}
+								Buyer_Users_Report={"View","Edit","Delete"}
+								Supplier_Users_Report={"View","Edit","Delete"}
+							}
+						}
+						PO_Style_Search
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Add_Region
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Regions={"View","Edit","Delete"}
+							}
+						}
+						Add_Colors
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Colors={"View","Edit","Delete"}
+							}
+						}
+						Add_Country
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Countries={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Order
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Order_Details
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Order_Details={"View","Edit","Delete"}
+							}
+						}
+						Currency_Conversion_Rates
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Currency_Conversion_Rates={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Filter
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Copy_of_Purchase_Order
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Copy_of_Purchase_Order_Report={"View","Edit","Delete"}
+							}
+						}
+						PO_QO_template
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								PO_QO_template_Report={"View","Edit","Delete"}
+							}
+						}
+						Buyers_Master
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Awaiting_Approvals={"View","Edit","Delete"}
+								Buyers_Report={"View","Edit","Delete"}
+							}
+						}
+						Size_Chart_Mapping
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Size_Chart_Mappings={"View","Edit","Delete"}
+							}
+						}
+						Print_and_PDF_Button
+						{
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Copy_of_Purchase_LineItems
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Copy_of_Purchase_LineItems_Report={"View","Edit","Delete"}
+							}
+						}
+						organization
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Organizations={"View","Edit","Delete"}
+							}
+						}
+						Buyer_Product_Mapping
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								Buyer_Product_Mapping_Report={"View","Edit","Delete"}
+							}
+						}
+						Cart_Page
+						{
+							enabled = tab
+						}
+						PO_Template
+						{
+							enabled = tab
+						}
+						QO_Template
+						{
+							enabled = tab
+						}
+						Product_Catalogue
+						{
+							enabled = tab
+						}
+						Product_Catalogue_Cart_Page
+						{
+							enabled = tab
+						}
+						Alert_Message
+						{
+							enabled = tab
+						}
+						Buyer_Dashboard
+						{
+							enabled = tab
+						}
+						Main_Dashboard
+						{
+							enabled = tab
+						}
+						Size_Chart_Page
+						{
+							enabled = tab
+						}
+						Patch_Update
+						{
+							enabled = tab
+						}
+						Buyer_Cart_Page
+						{
+							enabled = tab
+						}
+						Product_Cart_Details
+						{
+							enabled = tab
+						}
+						Dynamic_Product_Image
+						{
+							enabled = tab
+						}
+						Buyer_Main_Cart_Page
+						{
+							enabled = tab
+						}
+						Buyer_Cart_Detail_Page
+						{
+							enabled = tab
+						}
+						Buyer_Product_Mapping_Page
+						{
+							enabled = tab
+						}
+						Buyer_Product_Mapping1
+						{
+							enabled = tab
+						}
+						Pending_Amendments_Page
+						{
+							enabled = tab
+						}
+						Production_Orders_Page
+						{
+							enabled = tab
+						}
+						All_Order_Requests_Page
+						{
+							enabled = tab
+						}
+						My_Basket_Page
+						{
+							enabled = tab
+						}
+						My_Purchase_Orders_Page
+						{
+							enabled = tab
+						}
+						Awaiting_Action_Page
+						{
+							enabled = tab
+						}
+						Purchase_Orders_Page
+						{
+							enabled = tab
+						}
+						External
+						{
+							enabled = tab
+						}
+						Cart_Main_Page
+						{
+							enabled = tab
+						}
+						Pending_Approval_Page
+						{
+							enabled = tab
+						}
+						Buyer_Cart
+						{
+							enabled = tab
+						}
+						Factory_Dashboard
+						{
+							enabled = tab
+						}
+						Purchase_Order_Details
+						{
+							enabled = tab
+						}
+						Review_Page
+						{
+							enabled = tab
+						}
+						User_Dashboard_V2
+						{
+							enabled = tab
+						}
+						Request_Details
+						{
+							enabled = tab
+						}
+						Main_Dashboard_V2
+						{
+							enabled = tab
+						}
+						Buyer_Dashboard_V2
+						{
+							enabled = tab
+						}
+						Factory_Dashboard_V2
+						{
+							enabled = tab
+						}
+						User_Dashboard
+						{
+							enabled = tab
+						}
+						POTemplate
+						{
+							enabled = tab
+						}
+						QOTemplate
+						{
+							enabled = tab
+						}
+						Buyer_Users
+						{
+							enabled = tab
+						}
+						Supplier_Users
+						{
+							enabled = tab
+						}
+						Shipment_Settings
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								All_Shipment_Settings={"View","Edit","Delete"}
+							}
+						}
+						Shipment_Transit_Time
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								Transit_Time_Mapping_Report={"View","Edit","Delete"}
+							}
+						}
+						Shipment_Dispatch
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								Shipment_Report={"View","Edit","Delete"}
+								Production_Status_Report={"View","Edit","Delete"}
+								Shipment_KPI_Report={"View","Edit","Delete"}
+								Milestone_Update_to_Buyer={"View","Edit","Delete"}
+								Shipment_Status_Board={"View","Edit","Delete"}
+							}
+						}
+						Shipment_Dispatch_Split
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								Shipment_Dispatch_Split_Report={"View","Edit","Delete"}
+								Shipment_Split_Remaining_Report={"View","Edit","Delete"}
+							}
+						}
+						Shipment_Split_Charge
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								Shipment_Split_Charge_Report={"View","Edit","Delete"}
+								Shipment_Cost_Report={"View","Edit","Delete"}
+								Shipment_Cost_By_PO={"View","Edit","Delete"}
+							}
+						}
+						Shipment_Document
+						{
+							enabled= Create,Viewall,Modifyall,Import,Export,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								Shipment_Documents_Report={"View","Edit","Delete"}
+							}
+						}
+						Add_Users
+						{
+							enabled= Create,Tab
+							allFieldsVisible= true
+							ReportPermissions
+							{
+								All_Users={"View","Edit","Delete"}
+							}
+						}
+						Shipment_Dispatch_Wizard
+						{
+							enabled = tab
+						}
+						Shipment_KPI_Dashboard
+						{
+							enabled = tab
+						}
+						Buyer_Shipment_Updates
+						{
+							enabled = tab
+						}
+					}
+				
+	
+}

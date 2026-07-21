@@ -1,0 +1,33 @@
+list Shipment_Split_Remaining_Report
+{
+
+		    displayName = "Shipment Split Remaining"
+		    show all rows from Shipment_Dispatch_Split
+		    (
+		        Purchase_Order as "PO / QO"
+		        PO_Number_Display as "PO Number"
+		        QO_Number_Display as "QO Number"
+		        Purchase_Order.Total_Quantity as "Original Quantity"
+		        Purchase_Order.Base_Selling_Price_Total as "Base QO Value"
+		        Purchase_Order.Base_Purchase_Price_Total as "Base PO Value"
+		        Purchase_Order.Split_Quantity_Total as "Split Quantity Total"
+		        Purchase_Order.Split_QO_Value_Total as "Split QO Value Total"
+		        Purchase_Order.Split_PO_Value_Total as "Split PO Value Total"
+		        Split_Quantity as "This Split Quantity"
+		        Split_QO_Value as "This Split QO Value"
+		        Split_PO_Value as "This Split PO Value"
+		        Split_Status as "Split Status"
+		        Shipment_Dispatch as "Shipment Dispatch"
+		    )
+		    filters
+		    (
+		        Purchase_Order
+		        Split_Status
+		        Shipment_Dispatch
+		    )
+		    sort by
+		    (
+		        Purchase_Order ascending
+		    )
+		
+}

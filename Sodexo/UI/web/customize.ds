@@ -1,0 +1,24 @@
+customize
+{
+
+	
+				layout
+				{
+					theme = "theme_6"
+				}
+				font = "lato"
+				color options
+				{
+					name = "custom_color"
+					brand color = "#2b3797"
+					navigation background color = "#09103d"
+					type = "custom"
+				}
+				logo
+				{
+					preference = "company_logo"
+					placement = "left"
+				}
+			
+	
+}

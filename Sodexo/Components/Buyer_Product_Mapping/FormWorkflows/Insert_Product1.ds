@@ -1,0 +1,40 @@
+Insert_Product1 as "Insert Product"
+{
+
+			
+							type =  form
+							form = Buyer_Product_Mapping
+			
+							record event = on add or edit
+								status = inactive
+			
+							on user input of Factory_Allocated
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														// input.Product_Details.clear();
+													// if(input.Factory_Allocated != null)
+													// {
+													// 	get_Factory_Product = Add_Product[Supplier_Name == input.Factory_Allocated];
+													// 	for each  product in get_Factory_Product
+													// 	{
+													// 		sub_form = Buyer_Product_Mapping.Product_Details();
+													// 		sub_form.Product=product.ID;
+													// 		sub_form.Colors=product.Product_Colour;
+													// 		sub_form.Size=product.Size_Set;
+													// 		sub_form.Sell_Price=product.Sell_Price_in_USD;
+													// 		sub_form.Buy_Price=product.Buy_Price_in_USD;
+													// 		sub_form.Price_Validity=product.Price_Validity;
+													// 		input.Product_Details.insert(sub_form);
+													// 	}
+													// }
+													// input.Filter_Product = if(input.Filter_Product == true,false,true);
+									)
+								}
+							}
+			
+						
+			
+}

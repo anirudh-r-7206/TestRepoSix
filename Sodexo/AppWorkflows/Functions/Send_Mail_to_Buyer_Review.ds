@@ -1,0 +1,34 @@
+void Send_Mail.Send_Mail_to_Buyer_Review(int PO_ID, string type)
+{
+
+			
+			                 	// 	type = {"Review","Requested"};
+			                 	// 	get_PO = Purchase_Order[ID == input.PO_ID];
+			                 	// 	url = "https://creatorapp.zohopublic.com" + zoho.appuri + "pdf/QO_Template/rWrsGFz2zwSR1fSYAeXhfR2SKx5uKF0yzvHTJXHp6ZdetJuPBp9tpSTZjkgvU8gGSXfHYHOE2GDYm46rV5Hkh4x6jarmt7VexNrb?isc5page=true&QO_ID=" + input.PO_ID;
+			                 	// 	resp = invokeurl
+			                 	// 	[
+			                 	// 		url :url
+			                 	// 		type :GET
+			                 	// 	];
+			                 	// 	filee = resp;
+			                 	// 	filee.setFileName(get_PO.QO_Number + ".pdf");
+			                 	// 	msg = "";
+			                 	// 	if(input.type == "Review")
+			                 	// 	{
+			                 	// 		msg = " <p>An order has been submitted and is currently <b>Awaiting Your Review</b>.</p> <p>Please review the order details and take the required action at your earliest convenience.</p> <p> <a href='https://creatorapp.zoho.com" + zoho.appuri + "#Form:History?Purchase_Order_ID=" + get_PO.ID + "&Raised_By=" + get_PO.Customer_Name + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a> </p> <p>If you have any questions or require changes, please update the order accordingly.</p> <p>Regards,<br/> Order Management Team</p>";
+			                 	// 	}
+			                 	// 	else
+			                 	// 	{
+			                 	// 		msg = "<p>The order review has been completed and the order has now moved to <b>Awaiting QO Generation</b>.</p>";
+			                 	// 	}
+			                 	// 	sendmail
+			                 	// 	[
+			                 	// 		from :zoho.adminuserid
+			                 	// 		to :"hemanathantesting@gmail.com"
+			                 	// 		subject :"Awaiting Review"
+			                 	// 		message :"<p>Hello " + get_PO.Customer_Name.User_Name + ",</p>" + msg
+			                 	// 		Attachments :file:filee
+			                 	// 	]
+			                 
+			
+}

@@ -1,0 +1,84 @@
+list Buyer_Users_Report
+{
+
+		
+					displayName = "Buyer Users Report"
+					show all rows from Create_User  [User_Type == "Buyer"]  
+					(
+						User_Name  as "User Name"
+						Email
+						User_Type as "User Type"
+						Employee_External_ID as "Employee/External ID"
+						Mobile_Number as "Mobile Number"
+						(
+							displayformat = plainnumber 
+						)
+						Persona_Role as "Persona/Role"
+						Associated_Buyer as "Buyer Organisation"
+						Remarks as "Remarks "
+						Portal_Access_Enabled as "Portal Access Enabled"
+						Approval_Status as "Approval Status"
+						Status as "Status "
+						Need_App_Access as "Provided App Access"
+						(
+								displaytrue = "Yes"
+								displayfalse = "No"
+						)
+						Associated_Buyer.Buyer_Type as "Buyer Type"
+						Send_Notifications_Only as "Send Notifications Only"
+						(
+								displaytrue = "Yes"
+								displayfalse = "No"
+						)
+					)
+					group by
+					(
+						Associated_Buyer ascending
+					)
+					custom actions
+					(
+						"Activate Buyer User"
+						(
+			  			workflow = Activate_Buyer_User
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Inactive")
+						confirmation before execution
+						(
+							message for individual record = "Do you wish to Activate this Buyer User?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Deactivate Buyer User"
+						(
+			  			workflow = Deactivate_Buyer_User
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Active")
+						confirmation before execution
+						(
+							message for individual record = "Execute the Deactivate Buyer User action for this record?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+					conditional formatting
+					(
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#e64d3b;"
+						}
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#19bc9f;"
+						}
+					)
+				
+		
+}

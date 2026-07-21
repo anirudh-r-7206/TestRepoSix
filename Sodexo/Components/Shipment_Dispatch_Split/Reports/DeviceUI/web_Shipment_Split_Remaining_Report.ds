@@ -1,0 +1,79 @@
+report Shipment_Split_Remaining_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Purchase_Order as "PO / QO"
+		                    PO_Number_Display as "PO Number"
+		                    QO_Number_Display as "QO Number"
+		                    Split_Quantity as "This Split Quantity"
+		                    Split_QO_Value as "This Split QO Value"
+		                    Split_PO_Value as "This Split PO Value"
+		                    Split_Status as "Split Status"
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		            )
+		            record
+		            (
+		                Edit
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Purchase_Order as "PO / QO"
+		                    PO_Number_Display as "PO Number"
+		                    QO_Number_Display as "QO Number"
+		                    Split_Quantity as "This Split Quantity"
+		                    Split_QO_Value as "This Split QO Value"
+		                    Split_PO_Value as "This Split PO Value"
+		                    Split_Status as "Split Status"
+		                    Shipment_Dispatch as "Shipment Dispatch"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		            )
+		        )
+		    )
+		
+}

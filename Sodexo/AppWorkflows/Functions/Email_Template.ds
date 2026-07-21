@@ -1,0 +1,554 @@
+void Send_Mail.Email_Template(int QO_ID, String Template_Name)
+{
+
+			
+			                 	//	QO Email Template
+			                 	// 			QO_ID = 4908788000001014076;
+			                 	// 			Template_Name = "Buyer_QO_Cancelled";
+			                 	// 			
+			                 	get_PO = Purchase_Order[ID == input.QO_ID];
+			                 	// 	to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 	cc_Email = List();
+			                 	cc_Email.add(thisapp.Dev.Primary_SSA_Admin_Email());
+			                 	PO_File = false;
+			                 	QO_File = false;
+			                 	if(input.Template_Name == "Buyer_Order_Submit")
+			                 	{
+			                 		get_Order = Order_Request[ID == input.QO_ID];
+			                 		to_Email = get_Order.Buyer_Organisation.Primary_Email;
+			                 		//	mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_Order_Submit"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${OR_Number}",get_Order.Order_ID,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_Order.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${OR_Number}",get_Order.Order_ID,true);
+			                 			//	In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${OR_Number}",get_Order.Order_ID,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_Order.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${OR_Number}",get_Order.Order_ID,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "QO_Template")
+			                 	{
+			                 		QO_File = true;
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	QO mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "QO_Template"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			app_Msg = app_Msg.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Awaiting_PO_Generation")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Awaiting_PO_Generation"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			//	In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_Review")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		QO_File = true;
+			                 		//	mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_Review"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_Review")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		QO_File = true;
+			                 		PO_File = true;
+			                 		//	mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_Review"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:Production_Orders?zc_AddRec=false&zc_MoreAction=false&PO_Number=" + get_PO.PO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_Amendment")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_Amendment"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_Amendment")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_Amendment"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_Amendment_Approved")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_Amendment_Approved"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_Amendment_Approved")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_Amendment_Approved"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Approved_by_Buyer")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Approved_by_Buyer"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${qoNumber}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${buyerName}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${qoNumber}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${approvedDate}",zoho.currenttime.tostring(),true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${qoNumber}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${buyerName}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			app_Msg = app_Msg.replaceAll("${qoNumber}",get_PO.QO_Number,true);
+			                 			app_Msg = app_Msg.replaceAll("${approvedDate}",zoho.currenttime.tostring(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Approved_By_Internal_User")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		get_Email_Template = Email_Template[Template_Name == "Approved_By_Internal_User"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true).replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Raised_Date}",zoho.currenttime.tostring(),true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true).replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			app_Msg = app_Msg.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = app_Msg.replaceAll("${Raised_Date}",zoho.currenttime.tostring(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Move_to_Production")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Move_to_Production"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "In_Production")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "In_Production"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_QO_Completed")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_QO_Completed"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Accepted_Date}",zoho.currentdate.tostring(),true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = app_Msg.replaceAll("${Accepted_Date}",zoho.currentdate.tostring(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_PO_Completed")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_PO_Completed"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_QO_Cancelled")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_QO_Cancelled"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Cancellation_Date}",zoho.currenttime.tostring(),true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = app_Msg.replaceAll("${Cancellation_Date}",zoho.currenttime.tostring(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_PO_Cancelled")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_PO_Cancelled"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			// 			mail_Msg = mail_Msg.replaceAll("${Cancellation_Date}",zoho.currenttime.tostring(),true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			// 			app_Msg = app_Msg.replaceAll("${Cancellation_Date}",zoho.currenttime.tostring(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_1st_Reminder")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		//	 Mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_1st_Reminder"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_2nd_Reminder")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		if(get_PO.Buyer_Organisation.Person_2_Email != null)
+			                 		{
+			                 			cc_Email.add(get_PO.Buyer_Organisation.Person_2_Email);
+			                 		}
+			                 		//	 Mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_2nd_Reminder"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	 In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_3rd_Reminder")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		if(get_PO.Buyer_Organisation.Person_2_Email != null)
+			                 		{
+			                 			cc_Email.add(get_PO.Buyer_Organisation.Person_2_Email);
+			                 		}
+			                 		//	 Mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Buyer_3rd_Reminder"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	 In app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_1st_Reminder")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_1st_Reminder"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:Production_Orders?zc_AddRec=false&zc_MoreAction=false&PO_Number=" + get_PO.PO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_2nd_Reminder")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		if(get_PO.Supplier.Email1 != null)
+			                 		{
+			                 			cc_Email.add(get_PO.Supplier.Email1);
+			                 		}
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_2nd_Reminder"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:Production_Orders?zc_AddRec=false&zc_MoreAction=false&PO_Number=" + get_PO.PO_Number + "&Status=Amendment / Cancellation Required' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_3rd_Reminder")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		if(get_PO.Supplier.Email1 != null)
+			                 		{
+			                 			cc_Email.add(get_PO.Supplier.Email1);
+			                 		}
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Factory_3rd_Reminder"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:Production_Orders?zc_AddRec=false&zc_MoreAction=false&PO_Number=" + get_PO.PO_Number + "&Status=Amendment / Cancellation Required' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Buyer_Amendment_Request_Raised")
+			                 	{
+			                 		to_Email = thisapp.Dev.Primary_SSA_Admin_Email();
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Amendment_Request_Raised"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${raisedby}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${requestID}",get_PO.QO_Number,true).replaceAll("${raisedby}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${raisedon}",zoho.currenttime.toString(),true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "&Status=Amendment / Cancellation Required' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			//	Amendment in app notification
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${raisedby}",get_PO.Buyer_Organisation.Buyer_Organisation,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${requestID}",get_PO.QO_Number,true).replaceAll("${raisedby}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${raisedon}",zoho.currenttime.toString(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Factory_Amendment_Request_Raised")
+			                 	{
+			                 		to_Email = thisapp.Dev.Primary_SSA_Admin_Email();
+			                 		//	Amendment mail content
+			                 		get_Email_Template = Email_Template[Template_Name == "Amendment_Request_Raised"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${raisedby}",get_PO.Supplier.Supplier_Organisation,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${requestID}",get_PO.PO_Number,true).replaceAll("${raisedby}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${raisedon}",zoho.currenttime.toString(),true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:Production_Orders?zc_AddRec=false&zc_MoreAction=false&PO_Number=" + get_PO.PO_Number + "&Status=Amendment / Cancellation Required' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${raisedby}",get_PO.Supplier.Supplier_Organisation,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Amendment_Request_Rejected_Buyer")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		get_Email_Template = Email_Template[Template_Name == "Amendment_Request_Rejected_Buyer"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true).replaceAll("${Rejected_Date}",zoho.currenttime.toString(),true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true).replaceAll("${Rejected_Date}",zoho.currenttime.toString(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Amendment_Request_Rejected_Factory")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		get_Email_Template = Email_Template[Template_Name == "Amendment_Request_Rejected_Factory"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true).replaceAll("${Rejected_Date}",zoho.currenttime.toString(),true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true).replaceAll("${Rejected_Date}",zoho.currenttime.toString(),true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Update_PO")
+			                 	{
+			                 		to_Email = get_PO.Buyer_Organisation.Primary_Email;
+			                 		get_Email_Template = Email_Template[Template_Name == "Update_PO"];
+			                 		report_Name = "My_Purchase_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			mail_Msg = mail_Msg.replaceAll("${Review_Link}","<a href='https://creatorapp.zoho.com" + thisapp.Publish_URL.AppURI() + "#Report:My_Purchase_Orders?zc_AddRec=false&zc_MoreAction=false&QO_Number=" + get_PO.QO_Number + "' style='display:inline-block; padding:10px 18px; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:4px; font-weight:600;'> Review Order </a>",true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Buyer_Name}",get_PO.Buyer_Organisation.Buyer_Organisation,true).replaceAll("${QO_Number}",get_PO.QO_Number,true);
+			                 		}
+			                 	}
+			                 	else if(input.Template_Name == "Update_PO_Factory")
+			                 	{
+			                 		to_Email = get_PO.Supplier.Email;
+			                 		get_Email_Template = Email_Template[Template_Name == "Update_PO_Factory"];
+			                 		report_Name = "Production_Orders";
+			                 		if(get_Email_Template.count() > 0)
+			                 		{
+			                 			cc_Email.addAll(get_Email_Template.Additional_CC_Emails.Email.getall());
+			                 			mail_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			mail_Msg = get_Email_Template.Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Subject = get_Email_Template.Subject_field.replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 			app_Msg = get_Email_Template.In_App_Message_Content.replaceAll("${Factory_Name}",get_PO.Supplier.Supplier_Organisation,true).replaceAll("${PO_Number}",get_PO.PO_Number,true);
+			                 		}
+			                 	}
+			                 	FileList = List();
+			                 	// 	get_PO = Purchase_Order[ID == input.PO_ID];
+			                 	if(QO_File)
+			                 	{
+			                 		QO_url = "https://creatorapp.zohopublic.com" + thisapp.Publish_URL.AppURI() + "pdf/QOTemplate/Z3FtHtuGumY3mvg93tymj5qK6RVCzp9GbVzdxOujxz5TGn7xHbUxf30CDHSyAPBwTWA66FBnJkV7kpYxgzQEG2YQ7pxPDmed9me0?isc5page=true&QO_ID=" + input.QO_ID;
+			                 		QO_resp = invokeurl
+			                 		[
+			                 			url :QO_url
+			                 			type :GET
+			                 		];
+			                 		QO_resp.setFileName(get_PO.QO_Number + ".pdf");
+			                 		FileList.add(QO_resp);
+			                 	}
+			                 	if(PO_File)
+			                 	{
+			                 		PO_url = "https://creatorapp.zohopublic.com" + thisapp.Publish_URL.AppURI() + "pdf/POTemplate/3xuz5kZKKWwWOmMXa9rr2RrzuxKyKzg1XV3Zupn8AgMkm1REx9hJFurSd7zzNqB81MYC3sWdZFOfwWRrPwEz8WrzawY3GPh98xCJ?isc5page=true&Po_ID=" + input.QO_ID;
+			                 		PO_resp = invokeurl
+			                 		[
+			                 			url :PO_url
+			                 			type :GET
+			                 		];
+			                 		PO_resp.setFileName(get_PO.PO_Number + ".pdf");
+			                 		FileList.add(PO_resp);
+			                 	}
+			                 	if(FileList.size() > 0)
+			                 	{
+			                 		get_PO_History = History[Purchase_Order_ID == QO_ID] sort by Added_Time desc;
+			                 		get_PO_History.File_upload=FileList;
+			                 	}
+			                 	sendmail
+			                 	[
+			                 		from :zoho.adminuserid
+			                 		to :to_Email
+			                 		cc:cc_Email
+			                 		subject :mail_Subject
+			                 		message :mail_Msg
+			                 		Attachments :file:FileList
+			                 	]
+			                 	buyerNotification = zoho.pushNotification(to_Email,app_Subject,app_Msg,report_Name,QO_ID);
+			                 
+			
+}

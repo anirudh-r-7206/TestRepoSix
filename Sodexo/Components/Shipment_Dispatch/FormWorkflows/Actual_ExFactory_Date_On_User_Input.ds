@@ -1,0 +1,26 @@
+Actual_ExFactory_Date_On_User_Input as "Calculate Expected Payment Date"
+{
+
+			    type = form
+			    form = Shipment_Dispatch
+			    record event = on add or edit
+			
+			    on user input of Actual_ExFactory_Date
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Actual_ExFactory_Date != null)
+			                {
+			                    input.Production_Status = "Completed";
+			                    if(ifnull(input.Payment_Terms_Days,0) > 0)
+			                    {
+			                        input.Expected_Payment_Date = input.Actual_ExFactory_Date.addDay(input.Payment_Terms_Days);
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

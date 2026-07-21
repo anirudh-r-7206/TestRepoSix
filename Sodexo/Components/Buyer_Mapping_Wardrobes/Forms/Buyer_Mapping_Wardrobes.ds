@@ -1,0 +1,75 @@
+form Buyer_Mapping_Wardrobes
+{
+
+		
+					displayname = "Buyer Mapping Wardrobes"
+					success message = "Buyer Mapping Wardrobe Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Buyer_Product_Mapping
+					(
+						type = picklist	
+						displayname = "Buyer Product Mapping"
+						values  = Buyer_Product_Mapping.ID
+		    			bidirectional = Wardrobes_and_Categories
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Wardrobe
+					(
+						type = picklist	
+						values  = Wardrobe.ID
+		    			displayformat = [Wardrobe_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Product_Category
+					(
+						type = list	
+						displayname = "Product Category"
+						values  = Product_Category.ID
+		    			displayformat = [Product_Category]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

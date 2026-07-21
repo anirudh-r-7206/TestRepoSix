@@ -1,0 +1,219 @@
+<%
+	get_User = Create_User[Email == zoho.loginuserid];
+	%>
+<style>
+// .zc-content-loader {
+//     display: none !important;
+// }
+		.page_content_wrapper.zc-page-content-wrapper {
+			padding: 1.25rem !important;
+		}
+		.zc-pb-page-content-wrapper{
+			border-radius: 10px;
+		}
+		.OverAll_Div{
+			height: calc(100% - 20px);
+			padding: 10px;
+		}
+		.cart_Products {
+			height: calc(100% - 0px);
+			width: 100%;
+		}
+		.cart_Alert{
+			height: 100%;
+			font-size: 18px;
+			font-weight: 600;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		/* Page Height */
+		[formLinkName='Buyer_Order'] div#zppagesLive, div#elementsContainer, .Layout.elemContainment, div#row_1 {
+			height: 100%;
+			padding: 0px !important;
+		}
+		div#zppagesLive{
+			height: 100%;
+		}
+
+		/* Form Body Style */
+		.buyer_Filter {
+// 			width: 240px;
+			position: absolute;
+			top: 16px;
+			left: 20px;
+			z-index: 1;
+		}
+		.buyer_Filter.divEmbedContainer * {
+			box-sizing: border-box;
+			box-shadow: unset !important;
+		}
+		div[formlinkname="Buyer_Order"] form[name="Buyer_Order"] .formContainer .formColumn .form-group .form-label .zc-label-text,
+		div[formlinkname="Buyer_Order"] form[name="Buyer_Order"] .formContainer .formColumn .form-group .form-label {
+			max-width: 100% !important;
+		}
+		form[name="Buyer_Order"].label-inplace{
+			width: 100% !important;
+			overflow: unset !important;
+		}
+		[formLinkName='Buyer_Order'] .formContainer {
+			padding: 0px !important;
+		}
+		[formLinkName='Buyer_Order'] .row {
+			height: 100%;
+		}
+		[formLinkName='Buyer_Order'] .zcform_Buyer_Order .form-label {
+			min-width: 125px;
+			width: 125px;
+		}
+
+		/* Form Footer Style */
+		[formLinkName='Buyer_Order'] .zc-footer-wrapper {
+			display: none;
+		}
+
+		/* Report style */
+		[pagelinkname="Product_Catalogue_Cart_Page"] .zc-pb-tile-card {
+			overflow: unset;
+		}
+		[pagelinkname="Product_Catalogue_Cart_Page"] div#row_1 {
+		    border: 1px solid #e6e6e6;
+				border-radius: 10px;
+			padding-top: 8px !important;
+		}
+		
+		[viewlinkname="Active_Products"].divEmbedContainer{
+			height: 100% !important;
+		}
+		[viewlinkname="Active_Products"] .zc-reports-footer-sec {
+			border: none;
+			border-top: 1px solid #e3e3e3;
+		}
+		[viewlinkname="Active_Products"] .view-outer-wrapper .view-header .zc-reportoptionheader {
+			padding-right: 50px;
+		}
+		[viewlinkname="Active_Products"] td.zcReport_Edit.htDimmed {
+			font-weight: 600;
+			font-size: 16px !important;
+		}
+		
+		
+		.cart_Products .view-outer-wrapper .view-header .view-options{
+			padding: 0px ;	
+		}
+		.cart_Products .view-outer-wrapper .view-header .zc-reportoptionheader ul li a.zc-filter, .cart_Products .view-outer-wrapper .view-header .zc-reportoptionheader ul li a.zc-advance-search-icon
+		{
+			height: 42px;
+			width: 42px;
+			padding: 12px 5px;
+		}
+		
+		/* Cart Style */
+		.cartSection {
+			height: 42px;
+			width: 42px;
+			position: absolute;
+			top: 8px;
+			right: 24px;
+			z-index: 99;
+		}
+		.cartRow {
+			border: 1px solid #cbcbdc;
+			color: rgba(0, 0, 0, 0.7);
+			background: #fff;
+			height: 40px;
+			position: relative;
+			border-radius: 8px;
+		}
+		.cartCount {
+			width: 18px;
+			height: 16px;
+			padding-top: 1px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 10px;
+			color: #fff;
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			background: var(--theme_brand_color);
+			border-radius: 50%;
+		}
+		.cartIcon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 40px;
+		}
+		.cartRow:hover{
+			color: var(--primary_color);
+			background: var(--component_hover_color);
+	 			border: 1px solid var(--primary_color);
+		}
+		.cartRow:hover svg{
+			fill: var(--primary-color);
+		}
+		/* Popup Style */
+		.popupConentContainer {
+			width: 100% !important;
+		}
+		.OverAll_Div{
+	position: relative;   
+}
+
+.sizeChartLink{
+	    position: absolute;
+		top: 37px;
+		right: 207px;
+		z-index: 9;
+		cursor: pointer;
+		font-weight: 600;
+	    text-decoration: underline;
+}
+.sizeChartLink:hover {
+		text-decoration: underline !important;
+}
+
+	</style>
+<%
+	if(get_User.count() > 0)
+	{
+		if(get_User.Status == "Active")
+		{
+			%>
+<div class="OverAll_Div" name="cartPage">
+<a class="sizeChartLink" href="#Page:Size_Chart_Page?zc_LoadIn=dialog">Size Chart</a>
+				<div elName='zc-component' class="buyer_Filter" formLinkName='Buyer_Order' params='zc_Header=false&amp;zc_SuccMsg=Data Added Successfully!&amp;zc_SubmitVal=Submit&amp;zc_ResetVal=Reset'  style="height: 53px;">
+					<style>
+						div#pagepreloader {
+							display: block !important;
+						}
+					</style>
+				</div>
+				
+				<div class="cart_Products" name="Cart_Products">
+					<div class="cart_Alert">Please select a buyer before adding the product to your cart.</div>
+				</div>
+			</div>
+<%
+		}
+		else
+		{
+			%>
+<div class="cart_Products" name="Cart_Products">
+				<div class="cart_Alert">Please contact the administrator to approve or activate your access.</div>
+			</div>
+<%
+		}
+	}
+	else
+	{
+		openUrl("#Form:Create_User","popup window");
+		%>
+<div class="cart_Products" name="Cart_Products">
+			<div class="cart_Alert"><span> Please add your user details <a href="#Form:Create_User?zc_LoadIn=dialog">here</a> to use the Product Catalogue. </span></div>
+		</div>
+<%
+
+%>

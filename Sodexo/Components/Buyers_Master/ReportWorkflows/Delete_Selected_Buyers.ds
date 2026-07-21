@@ -1,0 +1,25 @@
+Delete_Selected_Buyers as "Delete Selected Buyers"
+{
+
+			
+							type =  functions
+							form = Buyers_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// Delate Records
+													fet_User = Create_User[Associated_Buyer == input.ID];
+													if(fet_User.count() == 0)
+													{
+														delete from Buyers_Master[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

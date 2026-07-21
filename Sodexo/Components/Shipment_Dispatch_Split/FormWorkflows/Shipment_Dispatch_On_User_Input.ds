@@ -1,0 +1,34 @@
+Shipment_Dispatch_On_User_Input as "Validate Dispatch Selection"
+{
+
+			    type = form
+			    form = Shipment_Dispatch_Split
+			    record event = on add or edit
+			
+			    on user input of Shipment_Dispatch
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Shipment_Dispatch != null && input.Shipment_Dispatch.Dispatch_Status != "Draft")
+			                {
+			                    alert "Split rows can only be added to a draft shipment dispatch.";
+			                    input.Shipment_Dispatch = null;
+			                }
+			                if(input.Shipment_Dispatch != null && input.Purchase_Order != null)
+			                {
+			                    if(input.Purchase_Order.Buyer_Organisation.ID != input.Shipment_Dispatch.Buyer.ID || input.Purchase_Order.Supplier.ID != input.Shipment_Dispatch.Supplier.ID)
+			                    {
+			                        alert "Selected PO / QO must match the dispatch Buyer and Supplier.";
+			                        input.Purchase_Order = null;
+			                        input.PO_Number_Display = "";
+			                        input.QO_Number_Display = "";
+			                        input.Transport_Mode = "";
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

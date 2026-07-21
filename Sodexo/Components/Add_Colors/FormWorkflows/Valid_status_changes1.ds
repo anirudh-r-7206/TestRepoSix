@@ -1,0 +1,27 @@
+Valid_status_changes1 as "Valid status changes"
+{
+
+			
+							type =  form
+							form = Add_Colors
+			
+							record event = on edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Status != old.Status)
+													{
+														alert "Status cannot be changed.";
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

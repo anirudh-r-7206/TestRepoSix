@@ -1,0 +1,132 @@
+form Buyer_Cart_Detail
+{
+
+		
+					displayname = "Buyer Cart Detail"
+					store data in zc = false
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Wardrobe
+					(
+						type = picklist	
+						values  = Wardrobe.ID
+		    			displayformat = [Wardrobe_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Product_Category
+					(
+						type = picklist	
+						displayname = "Product Category"
+						values  = Product_Category.ID
+		    			displayformat = [Product_Category]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Product_Code
+					(
+						type = picklist	
+						displayname = "Product Code"
+						values  = Product_Code_Master.ID
+		    			displayformat = [Product_Code]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Supplier
+					(
+						type = picklist	
+						values  = Add_Suppliers.ID
+		    			displayformat = [Supplier_Organisation]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Product_Style
+					(
+		    			type = plaintext
+						value = "<div> <br /></div>"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Size
+					(
+						type = radiobuttons	
+						displayname = "Select Size"
+						values  = Create_Size.ID
+		    			displayformat = [Size]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Colour
+					(
+						type = radiobuttons	
+						displayname = "Select Colour"
+						values  = Add_Colors.ID
+		    			displayformat = [Color_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Section1
+					(
+						type = section
+						displayname = "Section"
+			 			row = 2
+			 			column = 0   
+						width = medium
+					)
+					Decision_box1
+					(
+		    			type = checkbox
+						displayname = "+"
+						initial value = false
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Quantity
+					(
+						type = number
+						displayname = "Quantity "
+						initial value = 1
+			 			row = 2
+			 			column = 2   
+						width = medium
+					)
+					Decision_box2
+					(
+		    			type = checkbox
+						displayname = "-"
+						initial value = false
+			 			row = 2
+			 			column = 3   
+						width = medium
+					)
+			
+					actions
+					{
+						Add_to_Cart
+						(
+		   					type = submit
+		   					displayname = "Add to Cart"
+						)
+					}
+				
+		
+}

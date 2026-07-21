@@ -1,0 +1,20 @@
+<page linkname = "Pending_Amendments_Page" displayname = "Pending Amendments"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='html_snippet17' elementName='HTML Snippet' bgColor=\"#FFFFFF\">
+          <![CDATA[htmlpage html_snippet17()
+content
+			<%{%>
+            <file name:HTML_Snippet.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

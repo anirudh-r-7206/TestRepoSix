@@ -1,0 +1,86 @@
+custom Active_Users
+{
+
+		
+					displayName = "Active Users"
+					show all rows from Create_User  [Status == "Active"]  
+					(
+						Employee_External_ID as "Employee/External ID"
+						Email
+						Mobile_Number as "Mobile Number"
+						(
+							displayformat = plainnumber 
+						)
+						User_Type as "User Type"
+						Persona_Role as "Persona/Role"
+						Associated_Buyer as "Associated Buyer"
+						Associated_Factory as "Associated Factory "
+						Portal_Access_Enabled as "Portal Access"
+						(
+								displaytrue = "Enabled"
+								displayfalse = "Disabled"
+						)
+						Status as "Status "
+						Remarks as "Remarks "
+						User_Name  as "User Name"
+						custom action "Approve"
+						(
+			  			workflow = Approve_User1
+						show action in edit record menu = true
+						column header = "Approve"
+						)
+						custom action "Reject"
+						(
+			  			workflow = Reject_User
+						show action in edit record menu = true
+						column header = "Reject"
+						)
+					)
+					filters
+					(
+						Persona_Role
+						Status
+						"Activate User"  :  Status == "Active"
+						"Deactivate User"  :  Status == "Inactive"
+					)
+					custom actions
+					(
+						"Activate"
+						(
+			  			workflow = User_Activate
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Inactive")
+						)
+						"Deactivate"
+						(
+			  			workflow = User_Deactivate
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Active" && Approval_Status == "Approved" && Persona_Role != "Administrator" && ID != thisapp.Deactivate_Records.Deactivate_User())
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to deactivate this user?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+					conditional formatting
+					(
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#5dc35a;"
+						}
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+					)
+				
+		
+}

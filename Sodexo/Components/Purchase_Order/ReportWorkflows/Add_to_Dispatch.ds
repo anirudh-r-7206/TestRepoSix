@@ -1,0 +1,19 @@
+Add_to_Dispatch as "Add to Dispatch"
+{
+
+			    type = functions
+			    form = Purchase_Order
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                openUrl("#Page:Shipment_Dispatch_Wizard?Purchase_Order_ID=" + input.ID,"same window");
+			            )
+			        }
+			    }
+			
+}

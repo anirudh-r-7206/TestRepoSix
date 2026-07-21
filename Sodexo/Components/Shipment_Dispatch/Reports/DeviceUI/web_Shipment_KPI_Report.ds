@@ -1,0 +1,97 @@
+report Shipment_KPI_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Shipment_Reference as "Shipment Reference"
+		                    Dispatch_Status as "Dispatch Status"
+		                    Buyer
+		                    Supplier
+		                    Transit_Mode as "Transit Mode"
+		                    Shipment_Status as "Shipment Status"
+		                    Estimated_Delivery_Date as "Estimated Delivery Date"
+		                    Delivery_Variance_Days as "Delivery Variance Days"
+		                    KPI_Status as "KPI Status"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                "Sync Forwarder Now"
+		            )
+		            record
+		            (
+		                Edit
+		                "Sync Forwarder Now"
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                "Sync Forwarder Now"
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Shipment_Reference as "Shipment Reference"
+		                    Dispatch_Status as "Dispatch Status"
+		                    Buyer
+		                    Supplier
+		                    Transit_Mode as "Transit Mode"
+		                    Shipment_Status as "Shipment Status"
+		                    Production_Status as "Production Status"
+		                    Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		                    Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		                    ETD_Date as "ETD"
+		                    ATD_Date as "ATD"
+		                    ETA_Date as "ETA"
+		                    ATA_Date as "ATA"
+		                    Estimated_Delivery_Date as "Estimated Delivery Date"
+		                    Actual_Delivery_Date as "Actual Delivery Date"
+		                    ExFactory_Variance_Days as "Ex-Factory Variance Days"
+		                    ETD_Variance_Days as "ETD Variance Days"
+		                    ETA_Variance_Days as "ETA Variance Days"
+		                    Delivery_Variance_Days as "Delivery Variance Days"
+		                    Total_Lead_Time_Days as "Total Lead Time Days"
+		                    KPI_Status as "KPI Status"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                "Sync Forwarder Now"
+		            )
+		        )
+		    )
+		
+}

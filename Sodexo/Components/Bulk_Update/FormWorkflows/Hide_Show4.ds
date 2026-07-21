@@ -1,0 +1,25 @@
+Hide_Show4 as "Hide & Show"
+{
+
+			
+							type =  form
+							form = Bulk_Update
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide Bulk_Edit_Tigger;
+													hide QO_Unit_Pricing;
+													hide PO_Unit_Pricing;
+									)
+								}
+							}
+			
+						
+			
+}

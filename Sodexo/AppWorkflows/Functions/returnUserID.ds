@@ -1,0 +1,8 @@
+int helpers.returnUserID()
+{
+
+			
+			                 	return Create_User[Email == zoho.loginuserid && Status == "Active" && User_Type == "Buyer"].ID;
+			                 
+			
+}

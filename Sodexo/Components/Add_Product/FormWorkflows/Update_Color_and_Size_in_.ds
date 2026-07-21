@@ -1,0 +1,44 @@
+Update_Color_and_Size_in_ as "Update Color and Size in Buyer"
+{
+
+			
+							type =  form
+							form = Add_Product
+			
+							record event = on edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														for each  pro in Buyer_Products[Style_ID == input.ID]
+													{
+														pro.Colors=input.Style_Colour;
+														pro.Size=input.Size_Set;
+													}
+													for each  products in Buyer_Products[Style_ID == input.ID]
+													{
+														get_Buyer_Product = Buyer_Products[ID == products.ID];
+														if(get_Buyer_Product.HS_Name == "USA" && !input.HS_Code_USA.isEmpty())
+														{
+															get_Buyer_Product.HS_Code=input.HS_Code_USA;
+														}
+														else if(get_Buyer_Product.HS_Name == "EU" && !input.HS_Code_EU.isEmpty())
+														{
+															get_Buyer_Product.HS_Code=input.HS_Code_EU;
+														}
+														else if(get_Buyer_Product.HS_Name == "APAC" && !input.HS_Code_APAC.isEmpty())
+														{
+															get_Buyer_Product.HS_Code=input.HS_Code_APAC;
+														}
+													}
+													thisapp.PageRefresh();
+									)
+								}
+							}
+			
+						
+			
+}

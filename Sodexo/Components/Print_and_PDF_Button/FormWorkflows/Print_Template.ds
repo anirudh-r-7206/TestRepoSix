@@ -1,0 +1,38 @@
+Print_Template as "Print Template"
+{
+
+			
+							type =  form
+							form = Print_and_PDF_Button
+			
+							record event = on add
+			
+							on user input of Print
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Template == "PO_V2")
+													{
+														openUrl("https://creatorapp.zoho.com/export" + zoho.appuri + "print/POTemplate/?Po_ID=" + input.Purchase_Order + "&isc5page=true","new window");
+													}
+													else if(input.Template == "QO_V2")
+													{
+														openUrl("https://creatorapp.zoho.com/export" + zoho.appuri + "print/QOTemplate/?QO_ID=" + input.Purchase_Order + "&isc5page=true","new window");
+													}
+													else if(Template == "PO")
+													{
+														openUrl("https://creatorapp.zoho.com/export" + zoho.appuri + "print/PO_Template/?PO_ID=" + input.Purchase_Order + "&isc5page=true","new window");
+													}
+													else
+													{
+														openUrl("https://creatorapp.zoho.com/export" + zoho.appuri + "print/QO_Template/?QO_ID=" + input.Purchase_Order + "&isc5page=true","new window");
+													}
+									)
+								}
+							}
+			
+						
+			
+}

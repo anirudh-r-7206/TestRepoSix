@@ -1,0 +1,29 @@
+default list Shipment_Dispatch_Split_Report
+{
+
+		    displayName = "Shipment Dispatch Split Report"
+		    show all rows from Shipment_Dispatch_Split
+		    (
+		        Shipment_Dispatch as "Shipment Dispatch"
+		        Purchase_Order as "PO / QO"
+		        PO_Number_Display as "PO Number"
+		        QO_Number_Display as "QO Number"
+		        Split_Status as "Split Status"
+		        Split_Quantity as "Split Quantity"
+		        Split_QO_Value as "Split QO Value"
+		        Split_PO_Value as "Split PO Value"
+		        Transport_Mode as "PO Transport Mode"
+		    )
+		    filters
+		    (
+		        Shipment_Dispatch
+		        Purchase_Order
+		        Split_Status
+		        Transport_Mode
+		    )
+		    sort by
+		    (
+		        Shipment_Dispatch ascending
+		    )
+		
+}

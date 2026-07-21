@@ -1,0 +1,76 @@
+Shipment_Settings_On_Validate as "Validate Shipment Settings"
+{
+
+			    type = form
+			    form = Shipment_Settings
+			    record event = on add or edit
+			
+			    on validate
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                existingSettings = Shipment_Settings[ID != input.ID];
+			                if(existingSettings.count() > 0)
+			                {
+			                    alert "Only one Shipment Settings record is allowed.";
+			                    cancel submit;
+			                }
+			                if(ifnull(input.Estimated_Delivery_Offset_Days,0) <= 0)
+			                {
+			                    alert "Estimated Delivery Offset Days must be greater than zero.";
+			                    cancel submit;
+			                }
+			                if(ifnull(input.KPI_Amber_Threshold_Days,0) < 0)
+			                {
+			                    alert "KPI Amber Threshold Days cannot be negative.";
+			                    cancel submit;
+			                }
+			                if(ifnull(input.KPI_Red_Threshold_Days,0) < 0)
+			                {
+			                    alert "KPI Red Threshold Days cannot be negative.";
+			                    cancel submit;
+			                }
+			                if(ifnull(input.KPI_Red_Threshold_Days,0) < ifnull(input.KPI_Amber_Threshold_Days,0))
+			                {
+			                    alert "KPI Red Threshold Days must be greater than or equal to KPI Amber Threshold Days.";
+			                    cancel submit;
+			                }
+			                if(input.Payment_Reminder_Offsets != null && input.Payment_Reminder_Offsets.trim() != "")
+			                {
+			                    reminderOffsets = input.Payment_Reminder_Offsets.toList(",");
+			                    for each  offsetValue in reminderOffsets
+			                    {
+			                        cleanOffset = offsetValue.trim();
+			                        if(cleanOffset == "")
+			                        {
+			                            alert "Payment Reminder Offsets must contain comma-separated non-negative whole numbers.";
+			                            cancel submit;
+			                        }
+			                        numericOffset = cleanOffset.toLong();
+			                        if(numericOffset < 0)
+			                        {
+			                            alert "Payment Reminder Offsets cannot contain negative numbers.";
+			                            cancel submit;
+			                        }
+			                    }
+			                }
+			                if(input.Reminder_Recipients != null && input.Reminder_Recipients.trim() != "")
+			                {
+			                    recipientList = input.Reminder_Recipients.toList(",");
+			                    for each  recipientEmail in recipientList
+			                    {
+			                        cleanEmail = recipientEmail.trim();
+			                        if(cleanEmail == "" || !cleanEmail.contains("@") || !cleanEmail.contains("."))
+			                        {
+			                            alert "Reminder Recipients must contain comma-separated email addresses.";
+			                            cancel submit;
+			                        }
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

@@ -1,0 +1,32 @@
+Secondary_App_Access as "Secondary App Access"
+{
+
+			
+							type =  form
+							form = Add_Suppliers
+			
+							record event = on add or edit
+			
+							on user input of Need_App_Access1
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Email1 != null)
+													{
+														for each  factory in input.Factory_Details
+														{
+															if(input.Email1.equalsIgnoreCase(factory.Factory_Email))
+															{
+																factory.Need_App_Access=input.Need_App_Access1;
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

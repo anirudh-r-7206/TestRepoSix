@@ -1,0 +1,369 @@
+<%
+		dispatchRec = Shipment_Dispatch[ID == input.Dispatch_ID];
+		isFound = false;
+		isDraft = false;
+		isConfirmed = false;
+		isBlocked = true;
+		isChargeEditable = false;
+		validationMessage = "";
+		poRows = Purchase_Order[ID == 0];
+		splitRows = Shipment_Dispatch_Split[ID == 0];
+		allCharges = Shipment_Split_Charge[ID == 0];
+		selectedPORec = Purchase_Order[ID == 0];
+		selectedPOValid = false;
+		selectedPOWarning = "";
+		if(dispatchRec != null && dispatchRec.count() > 0)
+		{
+				isFound = true;
+				isDraft = dispatchRec.Dispatch_Status == "Draft";
+				isConfirmed = dispatchRec.Dispatch_Status == "Confirmed";
+				isBlocked = !isDraft;
+				isChargeEditable = ifnull(dispatchRec.Payment_Status,"") != "Fully Paid";
+				if(dispatchRec.Buyer != null && dispatchRec.Supplier != null)
+				{
+						poRows = Purchase_Order[Buyer_Organisation == dispatchRec.Buyer.ID && Supplier == dispatchRec.Supplier.ID] sort by PO_Number descending;
+				}
+				splitRows = Shipment_Dispatch_Split[Shipment_Dispatch == dispatchRec.ID && Split_Status != "Cancelled"] sort by Added_Time descending;
+				allCharges = Shipment_Split_Charge[Shipment_Dispatch == dispatchRec.ID] sort by Added_Time descending;
+				validationMessage = thisapp.Validate_Dispatch_Confirmation(dispatchRec.ID);
+				if(input.Purchase_Order_ID != null && input.Purchase_Order_ID > 0)
+				{
+						selectedPORec = Purchase_Order[ID == input.Purchase_Order_ID];
+						if(selectedPORec != null && selectedPORec.count() > 0)
+						{
+								if(dispatchRec.Buyer != null && dispatchRec.Supplier != null && selectedPORec.Buyer_Organisation.ID == dispatchRec.Buyer.ID && selectedPORec.Supplier.ID == dispatchRec.Supplier.ID)
+								{
+										selectedPOValid = true;
+								}
+								else
+								{
+										selectedPOWarning = "The selected PO / QO does not match this dispatch Buyer and Supplier.";
+								}
+						}
+						else
+						{
+								selectedPOWarning = "The selected PO / QO was not found.";
+						}
+				}
+		}
+%>
+<style>
+/* ZCS global utility subset for this page */
+:root { --zcs-theme-brand-color: var(--zcs_brand_color); --zcs-light-bg-color: var(--zcs_brand_light_color); --zcs-page-bg-color: #F3F3F4; --zcs-primary-text-color: var(--zcs_primary_text_color); --zcs-secondary-text-color: var(--zcs_secondary_text_color); --zcs-teritiary-text-color: var(--zcs_tertiary_text_color); --zcs-border-color: var(--zcs_tertiary_border_color); --zcs-white-color: #FFFFFF; --zcs-black-color: #000000; --zcs-primary-btn-color: var(--zcs_brand_color); --zcs-primary-btn-text-color: var(--zcs_brand_foreground_color); }
+.zcs-w-full{width:100%;}.zcs-wh-full{width:100%;height:100%;}.zcs-flex{display:flex;}.zcs-inline-flex{display:inline-flex;}.zcs-row{display:flex;flex-wrap:wrap;}.zcs-direction-column{flex-direction:column;}.zcs-align-items-center{align-items:center;}.zcs-align-items-start{align-items:flex-start;}.zcs-justify-center{justify-content:center;}.zcs-justify-space-between{justify-content:space-between;}.zcs-gap-4{gap:.25rem;}.zcs-gap-8{gap:.5rem;}.zcs-gap-12{gap:.75rem;}.zcs-gap-16{gap:1rem;}.zcs-gap-20{gap:1.25rem;}.zcs-p-8{padding:.5rem;}.zcs-p-12{padding:.75rem;}.zcs-p-16{padding:1rem;}.zcs-p-20{padding:1.25rem;}.zcs-p-24{padding:1.5rem;}.zcs-px-10{padding-left:.625rem;padding-right:.625rem;}.zcs-px-12{padding-left:.75rem;padding-right:.75rem;}.zcs-px-16{padding-left:1rem;padding-right:1rem;}.zcs-px-20{padding-left:1.25rem;padding-right:1.25rem;}.zcs-px-30{padding-left:1.875rem;padding-right:1.875rem;}.zcs-py-2{padding-top:.125rem;padding-bottom:.125rem;}.zcs-py-6{padding-top:.375rem;padding-bottom:.375rem;}.zcs-py-8{padding-top:.5rem;padding-bottom:.5rem;}.zcs-py-10{padding-top:.625rem;padding-bottom:.625rem;}.zcs-py-16{padding-top:1rem;padding-bottom:1rem;}.zcs-py-24{padding-top:1.5rem;padding-bottom:1.5rem;}.zcs-m-0{margin:0;}.zcs-mt-8{margin-top:.5rem;}.zcs-mt-10{margin-top:.625rem;}.zcs-mt-12{margin-top:.75rem;}.zcs-mt-16{margin-top:1rem;}.zcs-mt-20{margin-top:1.25rem;}.zcs-mb-0{margin-bottom:0;}.zcs-mx-0{margin-left:0;margin-right:0;}.zcs-box-border{box-sizing:border-box;}.zcs-rounded-sm{border-radius:.25rem;}.zcs-rounded-md{border-radius:.375rem;}.zcs-rounded-lg{border-radius:.5rem;}.zcs-rounded-xl{border-radius:.75rem;}.zcs-rounded-2xl{border-radius:1rem;}.zcs-font-12{font-size:.75rem;}.zcs-font-13{font-size:.8125rem;}.zcs-font-14{font-size:.875rem;}.zcs-font-15{font-size:.9375rem;}.zcs-font-16{font-size:1rem;}.zcs-font-18{font-size:1.125rem;}.zcs-font-20{font-size:1.25rem;}.zcs-font-22{font-size:1.375rem;}.zcs-font-normal{font-weight:400;}.zcs-font-medium{font-weight:500;}.zcs-font-semibold{font-weight:600;}.zcs-font-bold{font-weight:700;}.zcs-lh-body{line-height:1.5;}.zcs-lh-heading{line-height:1.25;}.zcs-color-primary{color:var(--zcs-primary-text-color);}.zcs-color-secondary{color:var(--zcs-secondary-text-color);}.zcs-color-tertiary{color:var(--zcs-teritiary-text-color);}.zcs-color-theme{color:var(--zcs-theme-brand-color);}.zcs-text-left{text-align:left;}.zcs-text-right{text-align:right;}.zcs-text-center{text-align:center;}.zcs-ellipsis{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.zcs-overflow-auto{overflow:auto;}.zcs-cursor-pointer{cursor:pointer;}.zcs-card{background:var(--zcs-white-color);border:1px solid #e7e7ee;border-radius:12px;}a{text-decoration:none;}
+/* ZCS button */
+.zcs-button{width:auto;min-width:5rem;min-height:36px;border:0;transition:all .2s ease;}.zcs-primary-button{background-color:var(--zcs_brand_color);color:var(--zcs_brand_foreground_color);}.zcs-primary-button:hover{background-color:var(--zcs_brand_dark_color);}.zcs-primary-outline-button{border:1px solid var(--zcs_brand_color);background-color:var(--zcs-white-color);color:var(--zcs_brand_color);}.zcs-primary-outline-button:hover{background-color:var(--zcs_component_hover_color);border-color:var(--zcs_brand_color);color:var(--zcs_brand_color);}.zcs-secondary-button{border:1px solid var(--zcs_primary_border_color);background-color:var(--zcs_light_grey_color);color:var(--zcs_primary_text_color);}.zcs-button-icon{width:16px;max-height:16px;}
+/* ZCS table */
+:root{--zcs-thead-color:#F9FAFE;--zcs-tr-h-color:#F9FAFE;}.zcs-table-wrapper{border:1px solid var(--zcs_tertiary_border_color);background:var(--zcs-white-color);overflow:auto;}.zcs-table-wrapper table{line-height:normal;border-collapse:collapse;min-width:960px;}.zcs-table-wrapper table thead{top:0;}.zcs-table-wrapper table thead tr th{background:var(--zcs-thead-color);box-shadow:0 -1px 0 0 var(--zcs_tertiary_border_color) inset;white-space:nowrap;}.zcs-table-wrapper table tbody tr td{border-top:1px solid var(--zcs_tertiary_border_color);vertical-align:top;}.zcs-table-wrapper table tbody tr:hover td{background:var(--zcs-tr-h-color);}.zcs-table-wrapper table tbody tr.sdw-selected td{background:var(--zcs_brand_light_color);}
+/* ZCS badge */
+.zcs-badge{width:auto;}.zcs-badge-filled{border:1px solid transparent;}.zcs-badge-filled.zcs-badge-theme{background:var(--zcs_brand_color);border-color:var(--zcs_brand_color);color:var(--zcs-white-color);}.zcs-badge-filled.zcs-badge-green{background:#179E6C;border-color:#179E6C;color:#fff;}.zcs-badge-filled.zcs-badge-red{background:#FE455D;border-color:#FE455D;color:#fff;}.zcs-badge-filled.zcs-badge-grey{background:#242424;border-color:#242424;color:#fff;}.zcs-badge-filled.zcs-badge-yellow{background:#FAAE13;border-color:#FAAE13;color:#fff;}.zcs-badge-filled.zcs-badge-blue{background:#2A6FFC;border-color:#2A6FFC;color:#fff;}.zcs-badge-filled.zcs-badge-orange{background:#F4660C;border-color:#F4660C;color:#fff;}
+/* Page-specific layout */
+.sdw-shell{min-height:100vh;background:var(--zcs-page-bg-color);color:var(--zcs-primary-text-color);font-family:inherit;}.sdw-page-header{background:var(--zcs-white-color);border-bottom:1px solid var(--zcs_tertiary_border_color);position:sticky;top:0;z-index:5;}.sdw-content{padding:20px;}.sdw-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;}.sdw-col-12{grid-column:span 12;}.sdw-col-8{grid-column:span 8;}.sdw-col-6{grid-column:span 6;}.sdw-col-4{grid-column:span 4;}.sdw-col-3{grid-column:span 3;}.sdw-card{background:var(--zcs-white-color);border:1px solid var(--zcs_tertiary_border_color);border-radius:12px;box-sizing:border-box;}.sdw-kpi{min-height:88px;}.sdw-label{font-size:12px;color:var(--zcs_secondary_text_color);text-transform:uppercase;letter-spacing:.03em;}.sdw-value{font-size:15px;color:var(--zcs_primary_text_color);font-weight:600;}.sdw-muted{color:var(--zcs_secondary_text_color);}.sdw-alert{border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;}.sdw-alert-info{background:#EEF6FF;color:#09598E;border:1px solid #BBDFFF;}.sdw-alert-warn{background:#FFF7E6;color:#8A5A00;border:1px solid #F9D58A;}.sdw-alert-block{background:#FDECEF;color:#B42338;border:1px solid #F5B5BF;}.sdw-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}.sdw-search{border:1px solid var(--zcs_tertiary_border_color);background:var(--zcs-white-color);border-radius:8px;min-width:260px;height:36px;padding:0 12px 0 36px;color:var(--zcs_primary_text_color);}.sdw-search-wrap{position:relative;}.sdw-search-wrap i{position:absolute;left:12px;top:10px;color:var(--zcs_secondary_text_color);}.sdw-detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}.sdw-detail-item{padding:12px;border:1px solid var(--zcs_tertiary_border_color);border-radius:10px;background:#fff;}.sdw-embedded-form{border:1px dashed var(--zcs_brand_color);border-radius:12px;padding:12px;background:#fff;min-height:320px;}.sdw-split-card{border:1px solid var(--zcs_tertiary_border_color);border-radius:12px;background:#fff;margin-bottom:16px;overflow:hidden;}.sdw-split-head{background:#F9FAFE;padding:14px 16px;border-bottom:1px solid var(--zcs_tertiary_border_color);display:flex;justify-content:space-between;gap:12px;align-items:center;}.sdw-charge-area{padding:16px;}.sdw-action-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}.sdw-mini-table{width:100%;border-collapse:collapse;}.sdw-mini-table th,.sdw-mini-table td{border-bottom:1px solid var(--zcs_tertiary_border_color);padding:8px;text-align:left;font-size:13px;}.sdw-mini-table th{background:#F9FAFE;color:var(--zcs_secondary_text_color);font-weight:600;}.sdw-empty{padding:28px;text-align:center;color:var(--zcs_secondary_text_color);}.sdw-report-shell{height:170px;border:1px solid var(--zcs_tertiary_border_color);border-radius:10px;overflow:auto;background:#fff;}@media(max-width:992px){.sdw-col-8,.sdw-col-6,.sdw-col-4,.sdw-col-3{grid-column:span 12;}.sdw-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.sdw-content{padding:12px;}.sdw-page-header{position:static;}}@media(max-width:576px){.sdw-detail-grid{grid-template-columns:1fr;}.sdw-search{min-width:100%;}.sdw-page-header{padding:12px;}.sdw-page-header .zcs-button-text{display:none;}}
+</style>
+<div class="sdw-shell">
+<% if(!isFound) { %>
+		<div class="sdw-content">
+				<div class="sdw-card sdw-empty">
+						<i class="zc-li-outline ui-1-ban" style="font-size:40px;color:var(--zcs_brand_color);"></i>
+						<h3 class="zcs-font-20 zcs-font-semibold zcs-color-primary zcs-mt-16 zcs-mb-0">Shipment dispatch not found</h3>
+						<p class="zcs-font-14 zcs-color-secondary zcs-mt-8">The Dispatch_ID parameter did not match a shipment header. Open this wizard from a draft shipment dispatch record.</p>
+						<div class="zcs-flex zcs-justify-center zcs-gap-12 zcs-mt-20">
+								<a class="zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-16 zcs-py-8 zcs-rounded-md zcs-box-border zcs-font-14" href="#Report:Shipment_Report">
+										<i class="zcs-button-icon zc-li-outline arrows-1-tail-left"></i><span class="zcs-button-text">Open Shipment Report</span>
+								</a>
+						</div>
+				</div>
+		</div>
+<% } else { 
+		statusClass = "zcs-badge-blue";
+		if(isDraft){ statusClass = "zcs-badge-yellow"; }
+		else if(isConfirmed){ statusClass = "zcs-badge-green"; }
+		else if(dispatchRec.Dispatch_Status == "Cancelled"){ statusClass = "zcs-badge-red"; }
+		headerEditUrl = "#Form:Shipment_Dispatch?recLinkID=" + dispatchRec.ID + "&amp;viewLinkName=Shipment_Report&amp;zc_LoadIn=dialog&amp;zc_Header=true";
+		headerReportUrl = "#Report:Shipment_Report?ID=" + dispatchRec.ID + "&amp;zc_LoadIn=dialog&amp;zc_Header=true";
+%>
+		<div class="sdw-page-header zcs-w-full zcs-flex zcs-align-items-center zcs-justify-space-between zcs-gap-8 zcs-px-30 zcs-py-16 zcs-box-border">
+				<div class="zcs-flex zcs-align-items-center zcs-gap-12 zcs-ellipsis">
+						<a href="#Report:Shipment_Report" class="zcs-color-tertiary" title="Back to Shipment Report"><i class="zcs-font-22 zc-li-outline arrows-1-tail-left"></i></a>
+						<div class="zcs-flex zcs-direction-column zcs-gap-4 zcs-ellipsis">
+								<h5 class="zcs-font-18 zcs-font-medium zcs-lh-heading zcs-color-primary zcs-ellipsis zcs-m-0">Shipment Dispatch Wizard</h5>
+								<span class="zcs-font-13 zcs-color-secondary zcs-ellipsis"><%=ifnull(dispatchRec.Shipment_Reference,"Shipment Dispatch")%></span>
+						</div>
+						<div class="zcs-badge zcs-badge-filled zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-box-border <%=statusClass%>">
+								<span class="zcs-badge-text zcs-font-13 zcs-font-normal zcs-lh-body"><%=dispatchRec.Dispatch_Status%></span>
+						</div>
+				</div>
+				<div class="sdw-action-row">
+						<a class="zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-16 zcs-py-8 zcs-rounded-md zcs-box-border zcs-font-14" href="<%=headerEditUrl%>">
+								<i class="zcs-button-icon zc-li-outline ui-1-edit-72"></i><span class="zcs-button-text">Header Form</span>
+						</a>
+						<a class="zcs-button zcs-primary-outline-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-16 zcs-py-8 zcs-rounded-md zcs-box-border zcs-font-14" href="<%=headerReportUrl%>">
+								<i class="zcs-button-icon zc-li-outline ui-2-window-paragraph"></i><span class="zcs-button-text">Record Actions</span>
+						</a>
+				</div>
+		</div>
+		<div class="sdw-content">
+				<% if(!isDraft && !isConfirmed) { %>
+						<div class="sdw-alert sdw-alert-block zcs-mb-0">
+								<i class="zc-li-outline ui-1-ban zcs-font-18"></i>
+								<div><strong>Wizard blocked.</strong> This dispatch is <%=dispatchRec.Dispatch_Status%>. Split and charge editing are only available while Draft; confirmed dispatches are read-only except eligible charge updates.</div>
+						</div>
+				<% } else if(isConfirmed) { %>
+						<div class="sdw-alert sdw-alert-info">
+								<i class="zc-li-outline ui-1-check-circle-08 zcs-font-18"></i>
+								<div><strong>Confirmed dispatch.</strong> Split rows are locked read-only. Charge editing links are shown only when payment status is not Fully Paid.</div>
+						</div>
+				<% } else { %>
+						<div class="sdw-alert sdw-alert-warn">
+								<i class="zc-li-outline ui-2-time zcs-font-18"></i>
+								<div><strong>Draft dispatch.</strong> Edit the header, select PO / QO rows, save draft split rows, add charges, then confirm after validation passes.</div>
+						</div>
+				<% } %>
+
+				<div class="sdw-grid zcs-mt-16">
+						<div class="sdw-col-3 sdw-card sdw-kpi zcs-p-16">
+								<div class="sdw-label">PO / QO candidates</div>
+								<div class="sdw-value zcs-font-20 zcs-mt-8"><%=poRows.count()%></div>
+						</div>
+						<div class="sdw-col-3 sdw-card sdw-kpi zcs-p-16">
+								<div class="sdw-label">Split rows</div>
+								<div class="sdw-value zcs-font-20 zcs-mt-8"><%=splitRows.count()%></div>
+						</div>
+						<div class="sdw-col-3 sdw-card sdw-kpi zcs-p-16">
+								<div class="sdw-label">Charge rows</div>
+								<div class="sdw-value zcs-font-20 zcs-mt-8"><%=allCharges.count()%></div>
+						</div>
+						<div class="sdw-col-3 sdw-card sdw-kpi zcs-p-16">
+								<div class="sdw-label">Payment status</div>
+								<div class="sdw-value zcs-font-16 zcs-mt-8"><%=ifnull(dispatchRec.Payment_Status,"Not set")%></div>
+						</div>
+
+						<div class="sdw-col-12 sdw-card zcs-p-16">
+								<div class="sdw-section-title">
+										<div>
+												<h3 class="zcs-font-18 zcs-font-semibold zcs-m-0">Dispatch header</h3>
+												<p class="zcs-font-14 zcs-color-secondary zcs-mt-8 zcs-mb-0">Core shipment fields used by confirmation validation.</p>
+										</div>
+										<% if(isDraft) { %>
+												<span class="zcs-badge zcs-badge-filled zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-rounded-sm zcs-px-10 zcs-py-2 zcs-badge-yellow zcs-font-13">Editable until confirmation</span>
+										<% } %>
+								</div>
+								<div class="sdw-detail-grid">
+										<div class="sdw-detail-item"><div class="sdw-label">Buyer</div><div class="sdw-value"><%=ifnull(dispatchRec.Buyer.Buyer_Organisation,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Supplier</div><div class="sdw-value"><%=ifnull(dispatchRec.Supplier.Supplier_Organisation,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Transit mode</div><div class="sdw-value"><%=ifnull(dispatchRec.Transit_Mode,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Estimated Ex-Factory</div><div class="sdw-value"><%=ifnull(dispatchRec.Estimated_ExFactory_Date,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Freight forwarder</div><div class="sdw-value"><%=ifnull(dispatchRec.Freight_Forwarder,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Forwarder booking</div><div class="sdw-value"><%=ifnull(dispatchRec.Forwarder_Booking_ID,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Shipment status</div><div class="sdw-value"><%=ifnull(dispatchRec.Shipment_Status,"-")%></div></div>
+										<div class="sdw-detail-item"><div class="sdw-label">Expected payment</div><div class="sdw-value"><%=ifnull(dispatchRec.Expected_Payment_Date,"-")%></div></div>
+								</div>
+								<% if(isDraft) { %>
+										<div class="zcs-mt-16">
+												<div elName='zc-component' class="sdw-embedded-form" formLinkName='Shipment_Dispatch' params='recLinkID=<%=dispatchRec.ID%>&viewLinkName=Shipment_Report&zc_Header=false&zc_Focus=false&zc_SubmitVal=Save Header&zc_ResetVal=Cancel&zc_SuccMsg=Draft header saved.'>Loading shipment header form...</div>
+										</div>
+								<% } %>
+						</div>
+
+						<% if(isDraft) { %>
+						<div class="sdw-col-12 sdw-card zcs-p-16">
+								<div class="sdw-section-title">
+										<div>
+												<h3 class="zcs-font-18 zcs-font-semibold zcs-m-0">PO / QO search and select</h3>
+												<p class="zcs-font-14 zcs-color-secondary zcs-mt-8 zcs-mb-0">Purchase_Order is the single lookup source. Rows are filtered to this dispatch Buyer and Supplier.</p>
+										</div>
+										<div class="sdw-search-wrap">
+												<i class="zc-li-outline ui-1-zoom"></i>
+												<input id="sdwPoSearch" class="sdw-search" type="search" placeholder="Search PO, QO, mode" oninput="sdwFilterPoRows(this.value)">
+										</div>
+								</div>
+								<% if(poRows.count() == 0) { %>
+										<div class="sdw-empty">No Purchase_Order records match the dispatch Buyer and Supplier.</div>
+								<% } else { %>
+										<div class="zcs-table-wrapper zcs-rounded-sm zcs-box-border zcs-relative">
+												<table class="zcs-w-full" id="sdwPoTable">
+														<thead class="zcs-sticky"><tr>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary">PO Number</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary">QO Number</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary">PO Transport Mode</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary">Base Qty</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary">Remaining Qty</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary">Remaining QO</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-right zcs-font-14 zcs-font-medium zcs-color-primary">Remaining PO</th>
+																<th class="zcs-px-16 zcs-py-8 zcs-box-border zcs-text-left zcs-font-14 zcs-font-medium zcs-color-primary">Action</th>
+														</tr></thead>
+														<tbody>
+														<% for each poRec in poRows { 
+																poSplitQty = Shipment_Dispatch_Split[Purchase_Order == poRec.ID && Split_Status != "Cancelled"].sum(Split_Quantity);
+																poSplitQO = Shipment_Dispatch_Split[Purchase_Order == poRec.ID && Split_Status != "Cancelled"].sum(Split_QO_Value);
+																poSplitPO = Shipment_Dispatch_Split[Purchase_Order == poRec.ID && Split_Status != "Cancelled"].sum(Split_PO_Value);
+																remQty = ifnull(poRec.Total_Quantity,0) - ifnull(poSplitQty,0);
+																remQO = ifnull(poRec.Base_Selling_Price_Total,0) - ifnull(poSplitQO,0);
+																remPO = ifnull(poRec.Base_Purchase_Price_Total,0) - ifnull(poSplitPO,0);
+																rowClass = "";
+																if(selectedPOValid && selectedPORec.ID == poRec.ID){ rowClass = "sdw-selected"; }
+																selectUrl = "#Page:Shipment_Dispatch_Wizard?Dispatch_ID=" + dispatchRec.ID + "&amp;Purchase_Order_ID=" + poRec.ID;
+														%>
+																<tr class="<%=rowClass%>" data-sdw-po="<%=ifnull(poRec.PO_Number,"")%> <%=ifnull(poRec.QO_Number,"")%> <%=ifnull(poRec.Transport_Mode,"")%>">
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-color-primary"><%=ifnull(poRec.PO_Number,"-")%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-color-primary"><%=ifnull(poRec.QO_Number,"-")%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-color-primary"><%=ifnull(poRec.Transport_Mode,"-")%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-text-right zcs-color-primary"><%=ifnull(poRec.Total_Quantity,0)%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-text-right zcs-color-primary"><%=remQty%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-text-right zcs-color-primary"><%=remQO%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14 zcs-text-right zcs-color-primary"><%=remPO%></td>
+																		<td class="zcs-px-16 zcs-py-8 zcs-font-14">
+																				<a class="zcs-button zcs-primary-outline-button zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-6 zcs-rounded-md zcs-box-border zcs-font-13" href="<%=selectUrl%>">
+																						<i class="zcs-button-icon zc-li-outline ui-1-simple-add"></i><span>Select</span>
+																				</a>
+																		</td>
+																</tr>
+														<% } %>
+														</tbody>
+												</table>
+										</div>
+								<% } %>
+						</div>
+						<% } %>
+
+						<% if(isDraft && selectedPOWarning != "") { %>
+								<div class="sdw-col-12 sdw-alert sdw-alert-block"><i class="zc-li-outline ui-1-ban zcs-font-18"></i><div><%=selectedPOWarning%></div></div>
+						<% } %>
+						<% if(isDraft && selectedPOValid) { 
+								poNum = ifnull(selectedPORec.PO_Number,"");
+								qoNum = ifnull(selectedPORec.QO_Number,"");
+								transMode = ifnull(selectedPORec.Transport_Mode,"");
+						%>
+						<div class="sdw-col-12 sdw-card zcs-p-16">
+								<div class="sdw-section-title">
+										<div>
+												<h3 class="zcs-font-18 zcs-font-semibold zcs-m-0">Save draft split row</h3>
+												<p class="zcs-font-14 zcs-color-secondary zcs-mt-8 zcs-mb-0">Selected PO / QO: <strong><%=poNum%></strong> / <strong><%=qoNum%></strong>. Enter Split Quantity, Split QO Value, Split PO Value and save.</p>
+										</div>
+								</div>
+								<div elName='zc-component' class="sdw-embedded-form" formLinkName='Shipment_Dispatch_Split' params='Shipment_Dispatch=<%=dispatchRec.ID%>&Purchase_Order=<%=selectedPORec.ID%>&PO_Number_Display=<%=encodeURL(poNum)%>&QO_Number_Display=<%=encodeURL(qoNum)%>&Transport_Mode=<%=encodeURL(transMode)%>&Split_Status=Draft&zc_Header=false&zc_Focus=false&zc_SubmitVal=Save Draft Split&zc_ResetVal=Reset&zc_SuccMsg=Draft split saved.'>Loading split form...</div>
+						</div>
+						<% } %>
+
+						<div class="sdw-col-12 sdw-card zcs-p-16">
+								<div class="sdw-section-title">
+										<div>
+												<h3 class="zcs-font-18 zcs-font-semibold zcs-m-0">Selected and draft split rows</h3>
+												<p class="zcs-font-14 zcs-color-secondary zcs-mt-8 zcs-mb-0">Shows copied PO / QO numbers, PO Transport Mode, split values, charges and remaining PO / QO balances.</p>
+										</div>
+								</div>
+								<% if(splitRows.count() == 0) { %>
+										<div class="sdw-empty">No split rows have been added to this dispatch yet.</div>
+								<% } else { %>
+										<% for each splitRow in splitRows { 
+												poForSplit = splitRow.Purchase_Order;
+												totalSplitQty = Shipment_Dispatch_Split[Purchase_Order == poForSplit.ID && Split_Status != "Cancelled"].sum(Split_Quantity);
+												totalSplitQO = Shipment_Dispatch_Split[Purchase_Order == poForSplit.ID && Split_Status != "Cancelled"].sum(Split_QO_Value);
+												totalSplitPO = Shipment_Dispatch_Split[Purchase_Order == poForSplit.ID && Split_Status != "Cancelled"].sum(Split_PO_Value);
+												remSplitQty = ifnull(poForSplit.Total_Quantity,0) - ifnull(totalSplitQty,0);
+												remSplitQO = ifnull(poForSplit.Base_Selling_Price_Total,0) - ifnull(totalSplitQO,0);
+												remSplitPO = ifnull(poForSplit.Base_Purchase_Price_Total,0) - ifnull(totalSplitPO,0);
+												charges = Shipment_Split_Charge[Shipment_Dispatch_Split == splitRow.ID] sort by Added_Time descending;
+												editSplitUrl = "#Form:Shipment_Dispatch_Split?recLinkID=" + splitRow.ID + "&amp;viewLinkName=Shipment_Dispatch_Split_Report&amp;zc_LoadIn=dialog&amp;zc_Header=true";
+												addChargeUrl = "#Form:Shipment_Split_Charge?Shipment_Dispatch=" + dispatchRec.ID + "&amp;Shipment_Dispatch_Split=" + splitRow.ID + "&amp;Purchase_Order=" + poForSplit.ID + "&amp;Source=Manual&amp;zc_LoadIn=dialog&amp;zc_Header=true";
+												chargeLinksAllowed = isDraft || (isConfirmed && isChargeEditable);
+										%>
+										<div class="sdw-split-card">
+												<div class="sdw-split-head">
+														<div>
+																<div class="zcs-font-16 zcs-font-semibold zcs-color-primary"><%=ifnull(splitRow.PO_Number_Display,poForSplit.PO_Number)%> / <%=ifnull(splitRow.QO_Number_Display,poForSplit.QO_Number)%></div>
+																<div class="zcs-font-13 zcs-color-secondary">PO Transport Mode: <%=ifnull(splitRow.Transport_Mode,poForSplit.Transport_Mode)%> | Split Status: <%=ifnull(splitRow.Split_Status,"Draft")%></div>
+														</div>
+														<div class="sdw-action-row">
+																<% if(isDraft) { %>
+																		<a class="zcs-button zcs-primary-outline-button zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-6 zcs-rounded-md zcs-font-13" href="<%=editSplitUrl%>"><i class="zc-li-outline ui-1-edit-72"></i><span>Edit Split</span></a>
+																<% } %>
+																<% if(chargeLinksAllowed) { %>
+																		<a class="zcs-button zcs-primary-button zcs-inline-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-12 zcs-py-6 zcs-rounded-md zcs-font-13" href="<%=addChargeUrl%>"><i class="zc-li-outline ui-1-simple-add"></i><span>Add Charge</span></a>
+																<% } %>
+														</div>
+												</div>
+												<div class="zcs-p-16">
+														<div class="sdw-detail-grid">
+																<div class="sdw-detail-item"><div class="sdw-label">Split Quantity</div><div class="sdw-value"><%=ifnull(splitRow.Split_Quantity,0)%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Split QO Value</div><div class="sdw-value"><%=ifnull(splitRow.Split_QO_Value,0)%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Split PO Value</div><div class="sdw-value"><%=ifnull(splitRow.Split_PO_Value,0)%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Charge rows</div><div class="sdw-value"><%=charges.count()%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Remaining Quantity</div><div class="sdw-value"><%=remSplitQty%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Remaining QO Value</div><div class="sdw-value"><%=remSplitQO%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Remaining PO Value</div><div class="sdw-value"><%=remSplitPO%></div></div>
+																<div class="sdw-detail-item"><div class="sdw-label">Base totals</div><div class="sdw-value"><%=ifnull(poForSplit.Total_Quantity,0)%> qty</div></div>
+														</div>
+												</div>
+												<div class="sdw-charge-area">
+														<h4 class="zcs-font-16 zcs-font-semibold zcs-m-0">Charges for this split row</h4>
+														<% if(charges.count() == 0) { %>
+																<div class="sdw-empty">No charge rows for this split yet.</div>
+														<% } else { %>
+																<div class="zcs-overflow-auto zcs-mt-12">
+																		<table class="sdw-mini-table">
+																				<thead><tr><th>Charge Category</th><th>Currency</th><th>Amount</th><th>Paid By</th><th>Description</th><th>Action</th></tr></thead>
+																				<tbody>
+																				<% for each chargeRow in charges { 
+																						editChargeUrl = "#Form:Shipment_Split_Charge?recLinkID=" + chargeRow.ID + "&amp;viewLinkName=Shipment_Split_Charge_Report&amp;zc_LoadIn=dialog&amp;zc_Header=true";
+																				%>
+																						<tr>
+																								<td><%=ifnull(chargeRow.Charge_Category,"-")%></td>
+																								<td><%=ifnull(chargeRow.Currency.Currency_Name,"-")%></td>
+																								<td><%=ifnull(chargeRow.Amount,0)%></td>
+																								<td><%=ifnull(chargeRow.Paid_By,"-")%></td>
+																								<td><%=ifnull(chargeRow.Description,"-")%></td>
+																								<td>
+																										<% if(chargeLinksAllowed) { %>
+																												<a class="zcs-color-theme zcs-font-13" href="<%=editChargeUrl%>"><i class="zc-li-outline ui-1-edit-72"></i> Edit</a>
+																										<% } else { %>
+																												<span class="zcs-color-secondary zcs-font-13">Read only</span>
+																										<% } %>
+																								</td>
+																						</tr>
+																				<% } %>
+																				</tbody>
+																		</table>
+																</div>
+														<% } %>
+												</div>
+										</div>
+										<% } %>
+								<% } %>
+						</div>
+
+						<div class="sdw-col-12 sdw-card zcs-p-16">
+								<div class="sdw-section-title">
+										<div>
+												<h3 class="zcs-font-18 zcs-font-semibold zcs-m-0">Confirmation validation</h3>
+												<p class="zcs-font-14 zcs-color-secondary zcs-mt-8 zcs-mb-0">Validation calls Validate_Dispatch_Confirmation. It hard-stops missing core shipment fields, missing split rows and oversplit quantity, base QO value and base PO value.</p>
+										</div>
+										<% if(isDraft) { %>
+												<a class="zcs-button zcs-primary-button zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-16 zcs-py-8 zcs-rounded-md zcs-box-border zcs-font-14" href="<%=headerReportUrl%>">
+														<i class="zcs-button-icon zc-li-outline ui-1-check-circle-08"></i><span class="zcs-button-text">Confirm from Shipment Report</span>
+												</a>
+										<% } %>
+								</div>
+								<% if(validationMessage != "") { %>
+										<div class="sdw-alert sdw-alert-block"><i class="zc-li-outline ui-1-ban zcs-font-18"></i><div><strong>Cannot confirm yet.</strong> <%=validationMessage%></div></div>
+								<% } else { %>
+										<div class="sdw-alert sdw-alert-info"><i class="zc-li-outline ui-1-check-circle-08 zcs-font-18"></i><div><strong>Validation passed.</strong> Use the Confirm Dispatch action in the embedded shipment action report below to mark the dispatch and split rows Confirmed.</div></div>
+								<% } %>
+								<div class="sdw-report-shell zcs-mt-16">
+										<div elName='zc-component' viewLinkName='Shipment_Report' params='ID=<%=dispatchRec.ID%>&zc_Header=false&zc_Footer=false&zc_AddRec=false&zc_Search=false&zc_ColMenu=false&zc_Filter=false&zc_RecSelect=false'>Loading confirmation action report...</div>
+								</div>
+						</div>
+				</div>
+		</div>
+<% } %>
+</div>
+<script>
+function sdwFilterPoRows(value) {
+		var needle = (value || '').toLowerCase();
+		var rows = document.querySelectorAll('#sdwPoTable tbody tr');
+		for (var i = 0; i < rows.length; i++) {
+				var hay = (rows[i].getAttribute('data-sdw-po') || '').toLowerCase();
+				rows[i].style.display = hay.indexOf(needle) >= 0 ? '' : 'none';
+		}
+}
+</script>

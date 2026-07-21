@@ -1,0 +1,74 @@
+Change_Role as "Change Role"
+{
+
+			
+							type =  form
+							form = Create_User
+			
+							record event = on add or edit
+			
+							on user input of User_Type
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide Primary_Email;
+													input.Primary_Email = false;
+													input.Persona_Role = null;
+													if(!input.User_Type.isEmpty())
+													{
+														if(input.User_Type == "Admin")
+														{
+															get_user = Create_User[Persona_Role == "Administrator"];
+															if(get_user.count(ID) == 0)
+															{
+																input.Persona_Role = "Administrator";
+															}
+															else
+															{
+																input.Persona_Role = "Developer";
+															}
+															show Primary_Email;
+														}
+														else if(input.User_Type == "Internal")
+														{
+															input.Persona_Role = "Sodexo Team";
+															show Primary_Email;
+														}
+														else if(input.User_Type == "Buyer")
+														{
+															get_Buyer = Buyers_Master[Status == "Active"];
+															if(get_Buyer.count() > 0)
+															{
+																input.Persona_Role = "Buyer";
+															}
+															else
+															{
+																alert "No active buyer found.";
+																input.Persona_Role = null;
+																input.User_Type = null;
+															}
+														}
+														else if(input.User_Type == "Factory")
+														{
+															get_factory = Add_Suppliers[Supplier_type == "Factory" && Status == "Active"];
+															if(get_factory.count() > 0)
+															{
+																input.Persona_Role = "Factory Team";
+															}
+															else
+															{
+																alert "No active factory found.";
+																input.Persona_Role = null;
+																input.User_Type = null;
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

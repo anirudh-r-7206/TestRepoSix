@@ -1,0 +1,79 @@
+report Transit_Time_Mapping_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Buyer
+		                    Supplier
+		                    Transit_Mode as "Transit Mode"
+		                    Transit_Days as "Transit Days"
+		                    Status
+		                    Combination_Key as "Combination Key"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                Delete
+		            )
+		            record
+		            (
+		                Edit
+		                Delete
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                Delete
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Buyer
+		                    Supplier
+		                    Transit_Mode as "Transit Mode"
+		                    Transit_Days as "Transit Days"
+		                    Status
+		                    Combination_Key as "Combination Key"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		                Delete
+		            )
+		        )
+		    )
+		
+}

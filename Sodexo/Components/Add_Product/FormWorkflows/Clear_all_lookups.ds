@@ -1,0 +1,26 @@
+Clear_all_lookups as "Clear all lookups"
+{
+
+			
+							type =  form
+							form = Add_Product
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														clear Style_Category;
+													clear Style_Code;
+													clear Size_Set;
+													clear Fabric_Code;
+									)
+								}
+							}
+			
+						
+			
+}

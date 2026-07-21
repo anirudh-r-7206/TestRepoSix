@@ -1,0 +1,88 @@
+void Dev.Add_Currency_To_Currency_Lookup()
+{
+
+			
+			                 	try 
+			                 	{
+			                 		// 	Buyer Currency
+			                 		Buyer_Invalid_Currecy = List();
+			                 		purchase_Order_Currency = List();
+			                 		get_EUR_Currency = Currency[Currency_Name.equalsIgnoreCase("EURO")];
+			                 		get_Buyer = Buyers_Master[ID != 0 && Currency == null || HS_Code_Region == null];
+			                 		for each  buyer in get_Buyer
+			                 		{
+			                 			if(buyer.Currency == null)
+			                 			{
+			                 				get_Buyer_Currency = Currency[Currency_Name.equalsIgnoreCase(buyer.Currency1)];
+			                 				if(get_Buyer_Currency.count() > 0)
+			                 				{
+			                 					buyer.Currency=get_Buyer_Currency.ID;
+			                 				}
+			                 				else if(get_Buyer_Currency.count() == 0 && buyer.Currency1 == "EUR")
+			                 				{
+			                 					buyer.Currency=get_EUR_Currency.ID;
+			                 				}
+			                 				else
+			                 				{
+			                 					Buyer_Invalid_Currecy.add(buyer.Currency1);
+			                 				}
+			                 			}
+			                 			else
+			                 			{
+			                 				buyer.HS_Code_Region=buyer.HS_Code_Allocation;
+			                 			}
+			                 		}
+			                 		// 	Purchase Order Currency
+			                 		get_PO = Purchase_Order[Purchase_Currency == null || Selling_Currency == null];
+			                 		for each  po in get_PO
+			                 		{
+			                 			get_PO_Currency = Currency[Currency_Name.equalsIgnoreCase(po.Purchase_Currency1)];
+			                 			if(get_PO_Currency.count() > 0)
+			                 			{
+			                 				po.Purchase_Currency=get_PO_Currency.ID;
+			                 			}
+			                 			else if(get_PO_Currency.count() == 0 && po.Purchase_Currency1 == "EUR")
+			                 			{
+			                 				po.Purchase_Currency=get_EUR_Currency.ID;
+			                 			}
+			                 			else
+			                 			{
+			                 				purchase_Order_Currency.add(po.Purchase_Currency1);
+			                 			}
+			                 			get_PO_Sell_Currency = Currency[Currency_Name.equalsIgnoreCase(po.Selling_Currency1)];
+			                 			if(get_PO_Sell_Currency.count() > 0)
+			                 			{
+			                 				po.Selling_Currency=get_PO_Sell_Currency.ID;
+			                 			}
+			                 			else if(get_PO_Sell_Currency.count() == 0 && po.Selling_Currency1 == "EUR")
+			                 			{
+			                 				po.Selling_Currency=get_EUR_Currency.ID;
+			                 			}
+			                 			else
+			                 			{
+			                 				purchase_Order_Currency.add(po.Selling_Currency1);
+			                 			}
+			                 		}
+			                 		if(purchase_Order_Currency.size() > 0 || Buyer_Invalid_Currecy.size() > 0)
+			                 		{
+			                 			sendmail
+			                 			[
+			                 				from :zoho.adminuserid
+			                 				to :"dylfa.d+zcjscom@zohotest.com"
+			                 				subject :"Invalid Currency"
+			                 				message :"Buyer Currency : " + Buyer_Invalid_Currecy + "<br><br>Purchase Order Currency : " + purchase_Order_Currency
+			                 			]
+			                 		}
+			                 	}	catch (e)
+			                 	{
+			                 		sendmail
+			                 		[
+			                 			from :zoho.adminuserid
+			                 			to :"dylfa.d+zcjscom@zohotest.com"
+			                 			subject :"Add_Currency_To_Currency_Lookup Function error"
+			                 			message :e
+			                 		]
+			                 	}
+			                 
+			
+}

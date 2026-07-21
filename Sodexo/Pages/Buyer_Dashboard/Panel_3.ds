@@ -1,0 +1,34 @@
+<panel elementName='Panel 3'>
+					<pr width='fill' height='fill'>
+						<pc padding='0px' bgColor='#FFFFFF' action='OpenURL' url='#Report:My_Order_Requests?zc_LoadIn=embed-myOrder&amp;Status=Completed&amp;zc_MoreAction=false&amp;zc_AddRec=false' target='same-window' width='100%' hAlign='center' vAlign='middle'>
+							<pr width='fill' height='fill'>
+								<pc paddingTop='17px' paddingLeft='17px' paddingRight='0px' paddingBottom='17px' bgColor='transparent' bgColorType='noFill' width='30%' hAlign='center'>
+									<pr width='auto' height='auto'>
+										<pc>
+											<image marginLeft='0px' marginRight='7px' marginBottom='0px' marginTop='0px' color='#FFFFFF' bgColor='#62CC89' width='52px' height='52px' type='icon' value='ui-1-check-simple' size='24px' cornerRadius='26px' iconType='outline' /> </pc>
+									</pr>
+								</pc>
+								<pc padding='10px' bgColor='#FFFFFF' width='70%' hAlign='center' vAlign='middle' cornerRadius='0px'>
+									<pr width='auto' height='auto'>
+										<pc padding='5px' hAlign='left'>
+											<pr>
+												<pc hAlign='left'>
+													<text margin='0px' padding='0px' color='#333333' size='16px' type='Text' bgColor='transparent' bgColorType='noFill' cornerRadius='0px' value='Completed'>
+													</text>
+
+												</pc>
+											</pr>
+											<pr>
+												<pc hAlign='left'>
+													<text marginLeft='0px' marginRight='0px' marginBottom='0px' marginTop='2px' padding='0px' color='#2A70E7' size='36px' bold='true' type='Form Data' bgColor='transparent' bgColorType='noFill' cornerRadius='0px' displayType='actual' thousandsSeperator='LOCALE' decimalSeperator='DOT' numberScale='none' criteria='Buyer_Name.Email == zoho.loginuserid &amp;&amp; Status == &quot;Completed&quot;' value='thisapp.Order_Request.ID.count'>
+													</text>
+
+												</pc>
+											</pr>
+										</pc>
+									</pr>
+								</pc>
+							</pr>
+						</pc>
+					</pr>
+</panel>

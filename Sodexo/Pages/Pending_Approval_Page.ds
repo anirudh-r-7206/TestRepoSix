@@ -1,0 +1,20 @@
+<page linkname = "Pending_Approval_Page" displayname = "Pending Approval"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='html_snippet26' elementName='HTML Snippet' bgColor=\"#FFFFFF\">
+          <![CDATA[htmlpage html_snippet26()
+content
+			<%{%>
+            <file name:HTML_Snippet.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

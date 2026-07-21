@@ -1,0 +1,40 @@
+string Page.PO_Currency_Convert(float Amount)
+{
+
+			
+			                 	amtStr = input.Amount;
+			                 	parts = amtStr.toList(".");
+			                 	intPart = parts.get(0).toList("");
+			                 	decPart = "";
+			                 	if(parts.size() > 1)
+			                 	{
+			                 		decPart = parts.get(1);
+			                 	}
+			                 	formattedInt = "";
+			                 	count = 0;
+			                 	intPart_Size = intPart.size() - 1;
+			                 	for each  ch in intPart
+			                 	{
+			                 		if(intPart.get(intPart_Size) != "")
+			                 		{
+			                 			if(count == 3)
+			                 			{
+			                 				formattedInt = "," + formattedInt;
+			                 				count = 0;
+			                 			}
+			                 			formattedInt = intPart.get(intPart_Size) + formattedInt;
+			                 			count = count + 1;
+			                 		}
+			                 		intPart_Size = intPart_Size - 1;
+			                 	}
+			                 	if(decPart != "")
+			                 	{
+			                 		return formattedInt + "." + decPart;
+			                 	}
+			                 	else
+			                 	{
+			                 		return formattedInt;
+			                 	}
+			                 
+			
+}

@@ -1,0 +1,23 @@
+Populate_Fabric_Code1 as "Populate Fabric Code"
+{
+
+			
+							type =  form
+							form = Fabric_Form
+			
+							record event = on add or edit
+			
+							on user input of Colour_Code
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														input.Fabric_Code = if(!input.Fabric_Master_Code.isEmpty(),input.Fabric_Master_Code,"") + "-" + if(input.Colour_Code != null,input.Colour_Code.Color_Code,"");
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,17 @@
+list Deactivate_Records.Deactivate_Country()
+{
+
+			
+			                 	country_List = List();
+			                 	get_Supplier_Countries = Add_Suppliers[ID != 0 && Status == "Active"];
+			                 	country_List.addAll(get_Supplier_Countries.Country.getall());
+			                 	get_SizeChart_Countries = Size_Chart_Mapping[ID != 0];
+			                 	country_List.addAll(get_SizeChart_Countries.Region_New.getall());
+			                 	get_Buyer_Countries = Buyers_Master[ID != 0 && Status == "Active"];
+			                 	country_List.addAll(get_Buyer_Countries.Country.getall());
+			                 	get_PO_Countries = Purchase_Order[ID != 0 && Order_Status not in {"Awaiting Production","In Production","Completed"}];
+			                 	country_List.addAll(get_PO_Countries.Country.getall());
+			                 	return country_List.distinct();
+			                 
+			
+}

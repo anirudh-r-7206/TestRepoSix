@@ -1,0 +1,25 @@
+Delete_Color as "Delete Color"
+{
+
+			
+							type =  functions
+							form = Add_Colors
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									deleteColorList = thisapp.Delete_Records.Delete_Colors();
+													if(!deleteColorList.contains(input.ID))
+													{
+														// your logic here
+														delete from Add_Colors[ID == input.ID];
+													}
+								)
+								}
+							}
+						
+			
+}

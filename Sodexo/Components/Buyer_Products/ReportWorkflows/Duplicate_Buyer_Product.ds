@@ -1,0 +1,20 @@
+Duplicate_Buyer_Product as "Duplicate Buyer Product"
+{
+
+			
+							type =  functions
+							form = Buyer_Products
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:Buyer_product_duplicate?zc_LoadIn=dialog&zc_Header=false&Buyer_Product_Mapping=" + input.Buyer_Product_Mapping + "&Product=" + input.Style_ID + "&Buyer_Products=" + input.ID,"popup window","height=<height>,width=<width>");
+								)
+								}
+							}
+						
+			
+}

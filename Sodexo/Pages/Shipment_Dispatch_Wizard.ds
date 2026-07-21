@@ -1,0 +1,20 @@
+<page linkname = "Shipment_Dispatch_Wizard" parameters = "int Dispatch_ID, int Purchase_Order_ID" displayname = "Shipment Dispatch Wizard"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='Shipment_Dispatch_Wizard_Snippet' elementName='Shipment_Dispatch_Wizard_Snippet'>
+          <![CDATA[htmlpage Shipment_Dispatch_Wizard_Snippet()
+						content
+			<%{%>
+            <file name:Shipment_Dispatch_Wizard_Snippet.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

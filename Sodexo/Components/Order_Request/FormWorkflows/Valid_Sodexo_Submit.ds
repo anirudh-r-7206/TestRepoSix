@@ -1,0 +1,34 @@
+Valid_Sodexo_Submit as "Valid Sodexo Submit"
+{
+
+			
+							type =  form
+							form = Order_Request
+			
+							record event = on edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														// get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+													// if(get_User.User_Type != "Buyer")
+													// {
+													// 	for each  details in input.Order_details
+													// 	{
+													// 		if(details.Supplier == null)
+													// 		{
+													// 			alert "Please select a supplier to submit the request.";
+													// 			cancel submit;
+													// 		}
+													// 	}
+													// }
+									)
+								}
+							}
+			
+						
+			
+}

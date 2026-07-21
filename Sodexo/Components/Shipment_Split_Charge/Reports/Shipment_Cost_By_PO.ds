@@ -1,0 +1,38 @@
+list Shipment_Cost_By_PO
+{
+
+		    displayName = "Shipment Cost by PO/QO"
+		    show all rows from Shipment_Split_Charge
+		    (
+		        Purchase_Order as "PO / QO"
+		        Shipment_Dispatch as "Shipment Dispatch"
+		        Charge_Category as "Charge Category"
+		        Currency
+		        Amount
+		        (
+		            display = total
+		        )
+		        Paid_By as "Paid By"
+		    )
+		    filters
+		    (
+		        Purchase_Order
+		        Shipment_Dispatch
+		        Charge_Category
+		        Paid_By
+		    )
+		    group by
+		    (
+		        properties
+		        (
+		            display record count = true
+		        )
+		        Purchase_Order ascending
+		        Charge_Category ascending
+		    )
+		    sort by
+		    (
+		        Purchase_Order ascending
+		    )
+		
+}

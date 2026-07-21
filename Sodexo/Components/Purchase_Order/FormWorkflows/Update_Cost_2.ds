@@ -1,0 +1,49 @@
+Update_Cost_2 as "Update Cost 2"
+{
+
+			
+							type =  form
+							form = Purchase_Order
+			
+							record event = on add or edit
+			
+							on user input of Additional_Charges.Paid_By
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														// Set the charge-row currency based on who pays
+													// buyerMappingRec = Buyer_Product_Mapping[Buyer == input.Buyer_Organisation && Factory_Allocated == input.Supplier];
+													if(row.Paid_By == "Buyer")
+													{
+														row.Currency=input.Selling_Currency;
+														disable row.Currency;
+													}
+													else if(row.Paid_By == "Supplier")
+													{
+														row.Currency=input.Purchase_Currency;
+														disable row.Currency;
+													}
+													else
+													{
+														row.Currency=null;
+														enable row.Currency;
+													}
+													// Recompute selling total = line items + all Buyer-paid charges
+													addnCharge = 0;
+													for each  chargeRow in input.Additional_Charges
+													{
+														if(chargeRow.Paid_By == "Buyer")
+														{
+															addnCharge = addnCharge + ifnull(chargeRow.Amount1,0);
+														}
+													}
+													input.Total_Selling_Price = input.Purchase_LineItems.sum(Selling_Price_Sub_Total) + addnCharge;
+									)
+								}
+							}
+			
+						
+			
+}

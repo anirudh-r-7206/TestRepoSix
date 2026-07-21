@@ -1,0 +1,52 @@
+Update_the_pricing_detail as "Update the pricing detail"
+{
+
+			
+							type =  form
+							form = Bulk_Update
+							button = Submit
+							on click
+							{
+								actions 
+								{
+								on click
+								(
+									// ─── Validate based on Action Type ───────────────────────────────
+													isPO = input.Action_Type == "PO Unit Pricing";
+													isQO = input.Action_Type == "QO Unit Pricing";
+													poMissing = input.PO_Unit_Pricing == null;
+													qoMissing = input.QO_Unit_Pricing == null;
+													updatedCount = 0;
+													// ─── Validation ───────────────────────────────────────────────────
+													if(isPO && poMissing)
+													{
+														openUrl("#Page:Alert_Message?Message_Type=bulkUpdate&Message_Content1=PO Unit Pricing value is required. Please enter a value before updating.","popup window");
+													}
+													else if(isQO && qoMissing)
+													{
+														openUrl("#Page:Alert_Message?Message_Type=bulkUpdate&Message_Content1=QO Unit Pricing value is required. Please enter a value before updating.","popup window");
+													}
+													else
+													{
+														// ─── Update Records ───────────────────────────────────────────
+														fetBuyer = Buyer_Products[ID == input.Bulk_Edit_Tigger.Buyer_Products];
+														for each  rec in fetBuyer
+														{
+															if(isPO)
+															{
+																rec.Buy_Price=input.PO_Unit_Pricing;
+															}
+															if(isQO)
+															{
+																rec.Sell_Price=input.QO_Unit_Pricing;
+															}
+															updatedCount = updatedCount + 1;
+														}
+														openUrl("#Page:Buyer_Product_Mapping_Page?zc_LoadIn=embed-BuyerProducts&map_ID=" + fetBuyer.Buyer_Product_Mapping,"same window");
+													}
+								)
+								}
+							}
+						
+			
+}

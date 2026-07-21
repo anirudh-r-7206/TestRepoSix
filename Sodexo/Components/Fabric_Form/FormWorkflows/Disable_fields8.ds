@@ -1,0 +1,20 @@
+Disable_fields8 as "Disable fields"
+{
+
+			
+							type =  form
+							form = Fabric_Form
+			
+							record event = on edit
+			
+							field rules
+							{
+								actions 
+								{
+									disable Fabric_Master_Code,Colour_Code;
+								}
+							}
+			
+						
+			
+}

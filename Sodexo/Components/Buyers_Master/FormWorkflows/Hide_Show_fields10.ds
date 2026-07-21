@@ -1,0 +1,42 @@
+Hide_Show_fields10 as "Hide & Show fields"
+{
+
+			
+							type =  form
+							form = Buyers_Master
+			
+							record event = on add or edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide Primary_email_old;
+													hide Secondary_email_old;
+													hide Delivery_Person_Details.Email_old;
+													hide Primary_Name;
+													hide Person_2_Name;
+													hide Delivery_Person_Details.Contact_Person;
+													hide HS_Code_Allocation;
+													// hide Buyer_Users.User_Type;
+													// hide Buyer_Users.Persona_Role;
+													// hide Buyer_Users.Primary_Email;
+													// hide Buyer_Users.Associated_Factory ;
+													// hide Buyer_Users.Portal_Access_Enabled ;
+													// disable Buyer_Users.Approval_Status ;
+													// disable Buyer_Users.Status ;
+													// hide Buyer_Users.From_Supplier_Buyer;
+													// hide Buyer_Users.Associated_Buyers;
+													hide Need_App_Access;
+													hide Need_App_Access1;
+													hide Buyer_Users;
+													hide Delivery_Person_Details.Need_App_Access;
+									)
+								}
+							}
+			
+						
+			
+}

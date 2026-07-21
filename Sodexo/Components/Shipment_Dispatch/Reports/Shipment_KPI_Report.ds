@@ -1,0 +1,70 @@
+list Shipment_KPI_Report
+{
+
+		    displayName = "KPI - Estimate vs Actual"
+		    show all rows from Shipment_Dispatch
+		    (
+		        Shipment_Reference as "Shipment Reference"
+		        Dispatch_Status as "Dispatch Status"
+		        Buyer
+		        Supplier
+		        Transit_Mode as "Transit Mode"
+		        Shipment_Status as "Shipment Status"
+		        Production_Status as "Production Status"
+		        Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		        Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		        ETD_Date as "ETD"
+		        ATD_Date as "ATD"
+		        ETA_Date as "ETA"
+		        ATA_Date as "ATA"
+		        Estimated_Delivery_Date as "Estimated Delivery Date"
+		        Actual_Delivery_Date as "Actual Delivery Date"
+		        ExFactory_Variance_Days as "Ex-Factory Variance Days"
+		        ETD_Variance_Days as "ETD Variance Days"
+		        ETA_Variance_Days as "ETA Variance Days"
+		        Delivery_Variance_Days as "Delivery Variance Days"
+		        Total_Lead_Time_Days as "Total Lead Time Days"
+		        KPI_Status as "KPI Status"
+		        custom action "Sync Forwarder Now"
+		        (
+		            workflow = Sync_Forwarder_Now
+		            show action in edit record menu = true
+		            success message = "Forwarder sync requested."
+		            condition = (Dispatch_Status == "Confirmed" && Shipment_Status != "Delivered")
+		        )
+		    )
+		    filters
+		    (
+		        Dispatch_Status
+		        Buyer
+		        Supplier
+		        KPI_Status
+		        Transit_Mode
+		    )
+		    sort by
+		    (
+		        Estimated_Delivery_Date descending
+		    )
+		    conditional formatting
+		    (
+		        "On Track"
+		        {
+		            condition = (KPI_Status == "On Track" || KPI_Status == "Complete")
+		            fields = [KPI_Status]
+		            format = "color:#16a34a;"
+		        }
+		        "Minor Slip"
+		        {
+		            condition = (KPI_Status == "Minor Slip")
+		            fields = [KPI_Status]
+		            format = "color:#f59e0b;"
+		        }
+		        "Late"
+		        {
+		            condition = (KPI_Status == "Late")
+		            fields = [KPI_Status]
+		            format = "color:#dc2626;"
+		        }
+		    )
+		
+}

@@ -1,0 +1,13 @@
+list Deactivate_Records.Deactivate_Color()
+{
+
+			
+			                 	color_List = List();
+			                 	get_Prpduct_Colors = Add_Product[Status == "Approved"];
+			                 	color_List.addAll(get_Prpduct_Colors.Style_Colour.getall());
+			                 	get_Fabric_Color = Fabric_Form[Status in {"Pending","Active"}];
+			                 	color_List.addAll(get_Fabric_Color.Colour_Code.getall());
+			                 	return color_List.distinct();
+			                 
+			
+}

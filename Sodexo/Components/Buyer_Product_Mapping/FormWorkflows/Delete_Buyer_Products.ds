@@ -1,0 +1,23 @@
+Delete_Buyer_Products as "Delete Buyer Products"
+{
+
+			
+							type =  form
+							form = Buyer_Product_Mapping
+			
+							record event = on delete
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														delete from Buyer_Products[Buyer_Product_Mapping == null || Buyer_Product_Mapping == input.ID];
+									)
+								}
+							}
+			
+						
+			
+}

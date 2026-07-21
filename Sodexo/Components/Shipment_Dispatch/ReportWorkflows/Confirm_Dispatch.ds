@@ -1,0 +1,49 @@
+Confirm_Dispatch as "Confirm Dispatch"
+{
+
+			    type = functions
+			    form = Shipment_Dispatch
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                validationMessage = thisapp.Validate_Dispatch_Confirmation(input.ID);
+			                if(validationMessage != "")
+			                {
+			                    openUrl("#Page:Alert_Message?Message_Type=Shipment&Message_Content1=" + validationMessage,"popup window");
+			                }
+			                else
+			                {
+			                    update Shipment_Dispatch[ID == input.ID]
+			                    [
+			                        Dispatch_Status = "Confirmed"
+			                    ];
+			                    update Shipment_Dispatch_Split[Shipment_Dispatch == input.ID && Split_Status != "Cancelled"]
+			                    [
+			                        Split_Status = "Confirmed"
+			                    ];
+			                    thisapp.Shipment_Recalculate(input.ID);
+			                    splitRows = Shipment_Dispatch_Split[Shipment_Dispatch == input.ID];
+			                    poIds = List();
+			                    for each  splitRow in splitRows
+			                    {
+			                        if(splitRow.Purchase_Order != null && !poIds.contains(splitRow.Purchase_Order.ID))
+			                        {
+			                            poIds.add(splitRow.Purchase_Order.ID);
+			                        }
+			                    }
+			                    for each  poId in poIds
+			                    {
+			                        thisapp.Update_PO_Shipment_Summary(poId);
+			                    }
+			                    openUrl("#Page:Shipment_Dispatch_Wizard?Dispatch_ID=" + input.ID,"same window");
+			                }
+			            )
+			        }
+			    }
+			
+}

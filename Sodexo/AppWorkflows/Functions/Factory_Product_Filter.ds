@@ -1,0 +1,9 @@
+int Filters.Factory_Product_Filter()
+{
+
+			
+			                 	get_User = Create_User[Email == zoho.loginuserid && Status == "Active"];
+			                 	return get_User.Associated_Factory;
+			                 
+			
+}

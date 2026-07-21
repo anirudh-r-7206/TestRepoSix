@@ -1,0 +1,80 @@
+report Production_Status_Report
+{
+
+		    quickview
+		    (
+		        layout
+		        (
+		            type = -1
+		            datablock1
+		            (
+		                layout type = -1
+		                fields
+		                (
+		                    Shipment_Reference as "Shipment Reference"
+		                    Dispatch_Status as "Dispatch Status"
+		                    Buyer
+		                    Supplier
+		                    Production_Status as "Production Status"
+		                    Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		                    Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		                    Quality_Control_Result as "Quality Control Result"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		            )
+		            record
+		            (
+		                Edit
+		            )
+		        )
+		        action
+		        (
+		            on click
+		            (
+		                View Record
+		            )
+		            on right click
+		            (
+		                Edit
+		                View Record
+		            )
+		        )
+		    )
+		    detailview
+		    (
+		        layout
+		        (
+		            type = 1
+		            datablock1
+		            (
+		                layout type = -2
+		                fields
+		                (
+		                    Shipment_Reference as "Shipment Reference"
+		                    Dispatch_Status as "Dispatch Status"
+		                    Buyer
+		                    Supplier
+		                    Production_Status as "Production Status"
+		                    Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		                    Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		                    Quality_Control_Date as "Quality Control Date"
+		                    Quality_Control_Result as "Quality Control Result"
+		                )
+		            )
+		        )
+		        menu
+		        (
+		            header
+		            (
+		                Edit
+		            )
+		        )
+		    )
+		
+}

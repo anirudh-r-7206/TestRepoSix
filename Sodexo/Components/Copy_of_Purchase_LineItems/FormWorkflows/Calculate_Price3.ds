@@ -1,0 +1,33 @@
+Calculate_Price3 as "Calculate Price"
+{
+
+			
+							type =  form
+							form = Copy_of_Purchase_LineItems
+			
+							record event = on add or edit
+			
+							on user input of Quantity
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Quantity <= 0)
+													{
+														alert "Quantity must be greater than 0.";
+														input.Quantity = null;
+													}
+													else if(input.Product != null && input.Quantity > 0)
+													{
+														get_product_Price = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Copy_of_Purchase_Order.Buyer_Organisation && Style_ID == input.Product && Buyer_Product_Mapping.Factory_Allocated == input.Copy_of_Purchase_Order.Supplier];
+														input.Selling_Price_Sub_Total = if(get_product_Price.count(ID) > 0,get_product_Price.Sell_Price,0) * input.Quantity;
+														input.Purchase_Price_Sub_Total = if(get_product_Price.count(ID) > 0,get_product_Price.Buy_Price,0) * input.Quantity;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,33 @@
+Filter_Product2 as "Filter Product"
+{
+
+			
+							type =  form
+							form = Copy_of_Purchase_Order
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														// disable Order_Reference;
+													disable Supplier;
+													disable Order_Request;
+													disable Delivery_Date;
+													// Hide Unwanted Fields
+													hide Copy_Purchase_LineItems;
+													hide Selling_Terms;
+													hide Transport_Mode;
+													hide Delivery_Contact;
+													show Freight_Forwarder;
+													show Incoterms;
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,19 @@
+Create_Dispatch as "Create Dispatch"
+{
+
+			    type = functions
+			    form = Purchase_Order
+			    execution type = for each record
+			
+			    on start
+			    {
+			        actions
+			        {
+			            on click
+			            (
+			                openUrl("#Form:Shipment_Dispatch?zc_LoadIn=dialog&Buyer=" + input.Buyer_Organisation.ID + "&Supplier=" + input.Supplier.ID + "&Freight_Forwarder=" + input.Freight_Forwarder.ID + "&Estimated_ExFactory_Date=" + input.Delivery_Date,"same window");
+			            )
+			        }
+			    }
+			
+}

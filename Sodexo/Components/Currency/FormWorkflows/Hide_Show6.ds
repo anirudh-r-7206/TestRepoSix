@@ -1,0 +1,20 @@
+Hide_Show6 as "Hide & Show"
+{
+
+			
+							type =  form
+							form = Currency
+			
+							record event = on edit
+			
+							field rules
+							{
+								actions 
+								{
+									disable Currency_Name;
+								}
+							}
+			
+						
+			
+}

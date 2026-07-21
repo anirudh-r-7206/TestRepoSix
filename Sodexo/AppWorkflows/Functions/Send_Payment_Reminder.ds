@@ -1,0 +1,22 @@
+void Send_Payment_Reminder(int dispatchId, string offsetLabel)
+{
+
+			    dispatchRec = Shipment_Dispatch[ID == dispatchId];
+			    settingRec = Shipment_Settings[ID != 0];
+			    if(dispatchRec != null && dispatchRec.count() > 0 && settingRec != null && settingRec.count() > 0 && settingRec.Reminder_Recipients != null && settingRec.Reminder_Recipients.trim() != "")
+			    {
+			        sendmail
+			        [
+			            from : zoho.adminuserid
+			            to : settingRec.Reminder_Recipients
+			            subject : "Payment reminder - " + dispatchRec.Shipment_Reference
+			            message : "Payment status for shipment " + dispatchRec.Shipment_Reference + " is " + ifnull(dispatchRec.Payment_Status,"Not Paid") + ". Expected payment date: " + ifnull(dispatchRec.Expected_Payment_Date,"-") + ". Reminder offset: " + offsetLabel + " days."
+			        ]
+			        update Shipment_Dispatch[ID == dispatchId]
+			        [
+			            Last_Payment_Reminder_Date = zoho.currentdate
+			            Last_Payment_Reminder_Offset = offsetLabel.toLong()
+			        ];
+			    }
+			
+}

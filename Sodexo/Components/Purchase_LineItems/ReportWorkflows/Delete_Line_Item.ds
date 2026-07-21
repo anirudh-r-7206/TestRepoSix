@@ -1,0 +1,20 @@
+Delete_Line_Item as "Delete Line Item"
+{
+
+			
+							type =  functions
+							form = Purchase_LineItems
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									delete from Purchase_LineItems[ID == input.ID];
+								)
+								}
+							}
+						
+			
+}

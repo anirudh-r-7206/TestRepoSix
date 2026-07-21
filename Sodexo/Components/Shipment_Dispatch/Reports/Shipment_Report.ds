@@ -1,0 +1,82 @@
+default list Shipment_Report
+{
+
+		    displayName = "Shipment Report"
+		    show all rows from Shipment_Dispatch
+		    (
+		        Shipment_Reference as "Shipment Reference"
+		        Dispatch_Status as "Dispatch Status"
+		        Buyer
+		        Supplier
+		        Freight_Forwarder as "Freight Forwarder"
+		        Forwarder_Booking_ID as "Forwarder Booking ID"
+		        Transit_Mode as "Transit Mode"
+		        Shipment_Status as "Shipment Status"
+		        Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		        Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		        ETD_Date as "ETD"
+		        ATD_Date as "ATD"
+		        ETA_Date as "ETA"
+		        ATA_Date as "ATA"
+		        Estimated_Delivery_Date as "Estimated Delivery Date"
+		        Actual_Delivery_Date as "Actual Delivery Date"
+		        Expected_Payment_Date as "Expected Payment Date"
+		        Payment_Status as "Payment Status"
+		        custom action "Open Dispatch Wizard"
+		        (
+		            workflow = Open_Dispatch_Wizard
+		            show action for each record = true
+		            column header = "Dispatch"
+		            success message = "Opening dispatch wizard."
+		            condition = (Dispatch_Status == "Draft")
+		        )
+		        custom action "Confirm Dispatch"
+		        (
+		            workflow = Confirm_Dispatch
+		            show action in edit record menu = true
+		            success message = "Dispatch confirmation submitted."
+		            condition = (Dispatch_Status == "Draft")
+		            confirmation before execution
+		            (
+		                message for individual record = "Confirm this dispatch? Split rows will be locked."
+		                confirm button text = "Confirm"
+		                cancel button text = "Cancel"
+		            )
+		        )
+		        custom action "Cancel Shipment"
+		        (
+		            workflow = Cancel_Shipment
+		            show action in edit record menu = true
+		            success message = "Shipment cancellation submitted."
+		            condition = (Dispatch_Status == "Confirmed" && ATD_Date is null)
+		            confirmation before execution
+		            (
+		                message for individual record = "Cancel this shipment before departure?"
+		                confirm button text = "Cancel Shipment"
+		                cancel button text = "Go Back"
+		            )
+		        )
+		        custom action "Sync Forwarder Now"
+		        (
+		            workflow = Sync_Forwarder_Now
+		            show action in edit record menu = true
+		            success message = "Forwarder sync requested."
+		            condition = (Dispatch_Status == "Confirmed" && Shipment_Status != "Delivered")
+		        )
+		    )
+		    filters
+		    (
+		        Dispatch_Status
+		        Buyer
+		        Supplier
+		        Freight_Forwarder
+		        Transit_Mode
+		        Shipment_Status
+		        Payment_Status
+		    )
+		    sort by
+		    (
+		        Estimated_Delivery_Date descending
+		    )
+		
+}

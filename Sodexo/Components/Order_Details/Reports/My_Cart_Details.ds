@@ -1,0 +1,50 @@
+list My_Cart_Details
+{
+
+		
+					displayName = "My Cart Details"
+					show all rows from Order_Details    
+					(
+						Product
+						Product_Color as "Product Color"
+						Product_Size as "Product Size"
+						Quantity
+						Sub_Total as "Sub Total"
+						Description as "Description "
+						Order_Request as "Order Request"
+						Product.Style_Code as "Style Code"
+						Product_Size.Size_Order as "Size Order"
+					)
+					group by
+					(
+						Product.Style_Code ascending
+					)
+					sort by
+					(
+						Product_Color ascending
+						Product_Size.Size_Order ascending
+					)
+					custom actions
+					(
+						"Remove from Cart"
+						(
+			  			workflow = Remove_from_Cart
+						show action in edit record menu = true
+						)
+					)
+					customlayouts
+					(
+						template
+			 			(
+			 	  			displayname="Custom Layout 1"
+			 	  			content="<panel  \n >\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '17px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '100%'\n		hAlign = 'left'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<pr \n	>\n	<pc \n	\n>\n	<text \n\n	margin = '0px'\n	padding = '0px'\n	color = '#000000'\n	size = '20px'\n	bold = 'true' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '28'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Product'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '5px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '3'\n\n\n\n\n\n	  value = 'Description'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '30px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	paddingTop = '0px'\n	paddingLeft = '0px'\n	paddingRight = '15px'\n	paddingBottom = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#000000'\n    borderWidth = '0px'\n\n	  value = 'Product_Color'\n>\n</text>\n\n</pc><pc \n	\n>\n	<text \n\n	marginLeft = '20px'\n	marginRight = '20px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	paddingTop = '0px'\n	paddingLeft = '10px'\n	paddingRight = '10px'\n	paddingBottom = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#000000'\n    borderWidth = '0px'\n\n	  value = 'Product_Size'\n>\n</text>\n\n</pc><pc \n	\n>\n	<text \n\n	marginLeft = '20px'\n	marginRight = '20px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	paddingTop = '0px'\n	paddingLeft = '10px'\n	paddingRight = '10px'\n	paddingBottom = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#000000'\n    borderWidth = '0px'\n\n	  value = 'Quantity'\n>\n</text>\n\n</pc><pc \n	\n>\n	<text \n\n	marginLeft = '30px'\n	marginRight = '30px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	paddingTop = '0px'\n	paddingLeft = '15px'\n	paddingRight = '15px'\n	paddingBottom = '0px'\n	color = '#000000'\n	size = '16px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#000000'\n    borderWidth = '0px'\n\n	  value = 'Sub_Total'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>"
+			    		)
+						template
+			 			(
+			 	  			displayname="Custom Layout 2"
+			 	  			content="<panel  \n >\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '0px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '100%'\n		hAlign = 'center'\n		vAlign = 'middle'\n>\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		paddingTop = '10px'\n	paddingLeft = '17px'\n	paddingRight = '0px'\n	paddingBottom = '10px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n    borderColor = '#444444'\n    borderWidth = '0px'\n		width = '100%'\n		hAlign = 'left'\n		vAlign = 'middle'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<text \n\n	margin = '0px'\n	padding = '0px'\n	color = '#4E96F4'\n	size = '15px'\n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '21'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#4E96F4'\n    borderWidth = '0px'\n\n	  value = 'Product'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr><pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '0px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '24%'\n		hAlign = 'left'\n		vAlign = 'middle'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '17px'\n	marginRight = '0px' \n	marginBottom = '8px'\n	marginTop = '15px'\n	padding = '0px'\n	color = '#132437'\n	size = '16px'\n	bold = 'true' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Product_Color'\n>\n</text>\n\n</pc>\n</pr>\n</pc><pc \n		padding = '0px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n    borderColor = '#444444'\n    borderWidth = '0px'\n		width = '24%'\n		hAlign = 'center'\n		vAlign = 'middle'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '8px'\n	marginTop = '15px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	bold = 'true' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Product_Size'\n>\n</text>\n\n</pc>\n</pr>\n</pc><pc \n		padding = '0px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n    borderColor = '#444444'\n    borderWidth = '0px'\n		width = '27%'\n		hAlign = 'center'\n		vAlign = 'middle'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '8px'\n	marginTop = '15px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	bold = 'true' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#000000'\n    borderWidth = '0px'\n\n	  value = 'Quantity'\n>\n</text>\n\n</pc>\n</pr>\n</pc><pc \n		padding = '0px'\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n\n		width = '25%'\n		hAlign = 'right'\n		vAlign = 'middle'\n    	cornerRadius = '0px'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '17px' \n	marginBottom = '8px'\n	marginTop = '15px'\n	padding = '0px'\n	color = '#000000'\n	size = '16px'\n	bold = 'true' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Sub_Total'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>"
+			    		)
+					)
+				
+		
+}

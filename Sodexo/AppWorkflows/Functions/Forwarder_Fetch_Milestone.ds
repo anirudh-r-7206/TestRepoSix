@@ -1,0 +1,18 @@
+map Forwarder_Fetch_Milestone(int dispatchId)
+{
+
+			    responseMap = Map();
+			    dispatchRec = Shipment_Dispatch[ID == dispatchId];
+			    if(dispatchRec != null && dispatchRec.count() > 0)
+			    {
+			        responseMap.put("status","placeholder");
+			        responseMap.put("message","Forwarder API endpoint and connection details are not configured yet. Manual backup fields remain editable for SSA and Factory users.");
+			        update Shipment_Dispatch[ID == dispatchId]
+			        [
+			            Forwarder_Last_Sync_Time = zoho.currenttime
+			            Forwarder_Last_Response = responseMap.toString()
+			        ];
+			    }
+			    return responseMap;
+			
+}

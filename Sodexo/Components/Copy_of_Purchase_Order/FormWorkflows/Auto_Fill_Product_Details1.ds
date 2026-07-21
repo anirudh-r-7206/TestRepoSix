@@ -1,0 +1,59 @@
+Auto_Fill_Product_Details1 as "Auto Fill Product Details"
+{
+
+			
+							type =  form
+							form = Copy_of_Purchase_Order
+			
+							record event = on add or edit
+			
+							on user input of Copy_Purchase_LineItems.Product
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														get_product_Price = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation && Style_ID == row.Product && Buyer_Product_Mapping.Factory_Allocated == input.Supplier];
+													get_Fabric = Fabric_Form[ID == row.Product.Fabric_Code];
+													row.Product_Color=row.Product.Style_Colour;
+													row.Product_Size=row.Product.Size_Set;
+													row.Description=row.Product.Product_Description;
+													row.Purchase_Price=if(get_product_Price.count(ID) > 0,get_product_Price.Buy_Price,0);
+													row.Selling_Price=if(get_product_Price.count(ID) > 0,get_product_Price.Sell_Price,0);
+													row.Style_Code=row.Product.Style_Code.Style_Code;
+													row.HS_Code=if(get_product_Price.count(ID) > 0,get_product_Price.HS_Code,"");
+													row.Fabric_Composition=if(get_Fabric.count() > 0,get_Fabric.Fabric_Composition,"");
+													// 
+													if(row.Product != null && row.Quantity != null)
+													{
+														row.Selling_Price_Sub_Total=row.Selling_Price * row.Quantity;
+														row.Purchase_Price_Sub_Total=row.Purchase_Price * row.Quantity;
+													}
+													input.Total_Purchase_Price = input.Copy_Purchase_LineItems.sum(Purchase_Price_Sub_Total);
+													input.Total_Selling_Price = input.Copy_Purchase_LineItems.sum(Selling_Price_Sub_Total);
+													// Remove Repeated Products
+													if(input.Buyer_Organisation != null)
+													{
+														get_Buyer_Product = Buyer_Products[Buyer_Product_Mapping.Buyer == input.Buyer_Organisation && Buyer_Product_Mapping.Factory_Allocated == input.Supplier];
+														get_Product = get_Buyer_Product.Style_ID.getall();
+													}
+													else
+													{
+														get_Product = Add_Product[ID != 0 && Status == "Approved"].ID.getAll();
+													}
+													for each  purchase in input.Copy_Purchase_LineItems
+													{
+														get_Product.removeAll(input.Copy_Purchase_LineItems.Product.getall());
+														old_Product = purchase.Product;
+														add_sub_Product = get_Product;
+														add_sub_Product.add(old_Product);
+														purchase.Product:ui.add(add_sub_Product);
+														purchase.Product=old_Product;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

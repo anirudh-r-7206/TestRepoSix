@@ -1,0 +1,21 @@
+View_QO_in_Amendment as "View QO in Amendment"
+{
+
+			
+							type =  functions
+							form = History
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									input.QO_Viewed = true;
+													openUrl("#Page:QOTemplate?QO_ID=" + input.Purchase_Order_ID,"popup window");
+								)
+								}
+							}
+						
+			
+}

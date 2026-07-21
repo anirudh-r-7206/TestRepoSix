@@ -1,0 +1,15 @@
+string helpers.getWardrobesAndCategories(int supplier_id)
+{
+
+			
+			                 	wardrobeList = List();
+			                 	get_Buyer = Create_User[Email == zoho.loginuserid && Status == "Active" && User_Type == "Buyer"];
+			                 	get_Buyer_Org = Buyers_Master[ID == get_Buyer.Associated_Buyer && Status == "Active"];
+			                 	wardrobes_categories = Buyer_Products[Buyer_Product_Mapping.Buyer == get_Buyer_Org.ID && Buyer_Product_Mapping.Factory_Allocated == supplier_id];
+			                 	resultMap = Map();
+			                 	resultMap.put("wardrobes",wardrobes_categories.distinct(Wardrobe_Data));
+			                 	resultMap.put("Buyer_Currency",wardrobes_categories.Buyer_Product_Mapping.Sell_Currency.Symbol);
+			                 	return resultMap;
+			                 
+			
+}

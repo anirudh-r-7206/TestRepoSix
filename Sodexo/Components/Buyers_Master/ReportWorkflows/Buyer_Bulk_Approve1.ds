@@ -1,0 +1,22 @@
+Buyer_Bulk_Approve1 as "Buyer Bulk Approve"
+{
+
+			
+							type =  functions
+							form = Buyers_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// Change Status
+													input.Approval_Status = "Approved";
+													input.Status = "Active";
+								)
+								}
+							}
+						
+			
+}

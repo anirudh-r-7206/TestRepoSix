@@ -1,0 +1,128 @@
+report Buyers_Report
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Buyer_Code as "Buyer Code"
+										Buyer_Organisation as "Buyer Organisation"
+										Buyer_Type as "Buyer Type"
+										Region
+										Country
+										Status
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										"Delete Buyers"
+									)
+								record
+								(
+									"Activate"
+									"Deactivate"
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									"Activate"
+									"Deactivate"
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Buyer_Code as "Buyer Code"
+										Buyer_Organisation as "Buyer Organisation"
+										Buyer_Type as "Buyer Type"
+										Region
+										Primary_Name1 as "Name"
+										Primary_Email as "Email"
+										Primary_Phone as "Phone"
+										Office_Address as "Invoice Address"
+										Country
+										Product_Range as "Product Range"
+										Wardrobe
+										HS_Code_Allocation as "HS Code Allocation"
+										Payment_Terms as "Payment Terms"
+										Currency
+										Status
+										Approval_Status as "Approval Status"
+									)
+								)
+								datablock4
+								(
+				     				title = "Secondary Contact Details"
+									fields
+									(
+										Person_2_Name1 as "Name"
+										Person_2_Email as "Email"
+										Person_2_Phone as "Phone"
+									)
+								)
+								datablock3
+								(
+									layout type = -1
+				     				title = "Delivery Person Details"
+				     				related field = Delivery_Person_Details
+									fields
+									(
+										Company_Name as "Company Name"
+										Contact_Person1 as "Contact Person"
+										Email
+										Phone_Number as "Phone"
+										Address
+										Country
+									)
+								)
+								datablock2
+								(
+									layout type = -1
+				     				title = "Focal Details"
+				     				related field = Focal_Details_Subform
+									fields
+									(
+										Name
+										Email
+										Phone_Number as "Phone"
+										Role
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										"Activate"
+										"Deactivate"
+										Edit 
+									)
+								)
+						)
+					
+		
+}

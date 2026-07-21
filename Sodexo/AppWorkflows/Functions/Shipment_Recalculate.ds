@@ -1,0 +1,92 @@
+void Shipment_Recalculate(int dispatchId)
+{
+
+			    dispatchRec = Shipment_Dispatch[ID == dispatchId];
+			    if(dispatchRec != null && dispatchRec.count() > 0)
+			    {
+			        etdDate = dispatchRec.ETD_Date;
+			        etaDate = dispatchRec.ETA_Date;
+			        estimatedDeliveryDate = dispatchRec.Estimated_Delivery_Date;
+			        if(dispatchRec.Estimated_ExFactory_Date != null)
+			        {
+			            etdDate = dispatchRec.Estimated_ExFactory_Date.addDay(7);
+			        }
+			        if(dispatchRec.Buyer != null && dispatchRec.Supplier != null && dispatchRec.Transit_Mode != null && dispatchRec.Transit_Mode != "" && etdDate != null)
+			        {
+			            transitDays = thisapp.Shipment_Get_Transit_Days(dispatchRec.Buyer.ID,dispatchRec.Supplier.ID,dispatchRec.Transit_Mode);
+			            if(transitDays > 0)
+			            {
+			                etaDate = etdDate.addDay(transitDays);
+			                settingRec = Shipment_Settings[ID != 0];
+			                deliveryOffset = 10;
+			                if(settingRec != null && settingRec.count() > 0 && ifnull(settingRec.Estimated_Delivery_Offset_Days,0) > 0)
+			                {
+			                    deliveryOffset = settingRec.Estimated_Delivery_Offset_Days;
+			                }
+			                estimatedDeliveryDate = etaDate.addDay(deliveryOffset);
+			            }
+			        }
+			        expectedPaymentDate = dispatchRec.Expected_Payment_Date;
+			        if(dispatchRec.Actual_ExFactory_Date != null && ifnull(dispatchRec.Payment_Terms_Days,0) > 0)
+			        {
+			            expectedPaymentDate = dispatchRec.Actual_ExFactory_Date.addDay(dispatchRec.Payment_Terms_Days);
+			        }
+			        exFactoryVariance = thisapp.Shipment_Date_Variance(dispatchRec.Estimated_ExFactory_Date,dispatchRec.Actual_ExFactory_Date);
+			        etdVariance = thisapp.Shipment_Date_Variance(etdDate,dispatchRec.ATD_Date);
+			        etaVariance = thisapp.Shipment_Date_Variance(etaDate,dispatchRec.ATA_Date);
+			        deliveryVariance = thisapp.Shipment_Date_Variance(estimatedDeliveryDate,dispatchRec.Actual_Delivery_Date);
+			        leadTime = 0;
+			        if(dispatchRec.Actual_ExFactory_Date != null && dispatchRec.Actual_Delivery_Date != null)
+			        {
+			            leadTime = thisapp.Shipment_Date_Variance(dispatchRec.Actual_ExFactory_Date,dispatchRec.Actual_Delivery_Date);
+			        }
+			        kpiStatus = "On Track";
+			        settingRec = Shipment_Settings[ID != 0];
+			        amberThreshold = 7;
+			        redThreshold = 8;
+			        if(settingRec != null && settingRec.count() > 0)
+			        {
+			            amberThreshold = ifnull(settingRec.KPI_Amber_Threshold_Days,7);
+			            redThreshold = ifnull(settingRec.KPI_Red_Threshold_Days,8);
+			        }
+			        maxVariance = exFactoryVariance;
+			        if(etdVariance > maxVariance)
+			        {
+			            maxVariance = etdVariance;
+			        }
+			        if(etaVariance > maxVariance)
+			        {
+			            maxVariance = etaVariance;
+			        }
+			        if(deliveryVariance > maxVariance)
+			        {
+			            maxVariance = deliveryVariance;
+			        }
+			        if(dispatchRec.Shipment_Status == "Delivered" || dispatchRec.Actual_Delivery_Date != null)
+			        {
+			            kpiStatus = "Complete";
+			        }
+			        else if(maxVariance >= redThreshold)
+			        {
+			            kpiStatus = "Late";
+			        }
+			        else if(maxVariance >= amberThreshold)
+			        {
+			            kpiStatus = "Minor Slip";
+			        }
+			        update Shipment_Dispatch[ID == dispatchId]
+			        [
+			            ETD_Date = etdDate
+			            ETA_Date = etaDate
+			            Estimated_Delivery_Date = estimatedDeliveryDate
+			            Expected_Payment_Date = expectedPaymentDate
+			            ExFactory_Variance_Days = exFactoryVariance
+			            ETD_Variance_Days = etdVariance
+			            ETA_Variance_Days = etaVariance
+			            Delivery_Variance_Days = deliveryVariance
+			            Total_Lead_Time_Days = leadTime
+			            KPI_Status = kpiStatus
+			        ];
+			    }
+			
+}

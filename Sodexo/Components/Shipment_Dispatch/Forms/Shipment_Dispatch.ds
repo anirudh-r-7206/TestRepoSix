@@ -1,0 +1,431 @@
+form Shipment_Dispatch
+{
+
+		    displayname = "Shipment Dispatch"
+		    success message = "Shipment dispatch saved successfully."
+		    General
+		    (
+		        type = section
+		        row = 1
+		        column = 0
+		        width = medium
+		    )
+		    must have unique Shipment_Reference
+		    (
+		        type = text
+		        displayname = "Shipment Reference"
+		        maxchar = 100
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Dispatch_Status
+		    (
+		        type = picklist
+		        displayname = "Dispatch Status"
+		        values = {"Draft","Confirmed","Cancelled"}
+		        initial value = "Draft"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Buyer
+		    (
+		        type = picklist
+		        values = Buyers_Master.ID
+		        displayformat = [Buyer_Organisation]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Supplier
+		    (
+		        type = picklist
+		        values = Add_Suppliers.ID
+		        displayformat = [Supplier_Organisation]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Freight_Forwarder
+		    (
+		        type = picklist
+		        displayname = "Freight Forwarder"
+		        values = Freight_Partners_Form.ID
+		        displayformat = [Freight_Partners_Name]
+		        searchable = true
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Forwarder_Booking_ID
+		    (
+		        type = text
+		        displayname = "Forwarder Booking ID"
+		        maxchar = 100
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Forwarder_Transport_Mode
+		    (
+		        type = picklist
+		        displayname = "Forwarder Transport Mode"
+		        values = {"Sea","Air"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Transit_Mode
+		    (
+		        type = picklist
+		        displayname = "Transit Mode"
+		        values = {"FCL","LCL","AIR","CEP"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Shipment_Status
+		    (
+		        type = picklist
+		        displayname = "Shipment Status"
+		        values = {"Booked","In Progress","Picked","In Transit","Delivered"}
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Milestones
+		    (
+		        type = section
+		        row = 2
+		        column = 1
+		        width = medium
+		        visibility = true
+		    )
+		    Production_Status
+		    (
+		        type = picklist
+		        displayname = "Production Status"
+		        values = {"In Production","Completed"}
+		        initial value = "In Production"
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Estimated_ExFactory_Date
+		    (
+		        type = date
+		        displayname = "Estimated Ex-Factory Date"
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Actual_ExFactory_Date
+		    (
+		        type = date
+		        displayname = "Actual Ex-Factory Date"
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Quality_Control_Date
+		    (
+		        type = date
+		        displayname = "Quality Control Date"
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Quality_Control_Result
+		    (
+		        type = picklist
+		        displayname = "Quality Control Result"
+		        values = {"Pass","Fail"}
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Invoice_Upload
+		    (
+		        type = upload file
+		        displayname = "Invoice Upload"
+		        file count = 1
+		        browse = local_drive, google_docs, zoho_docs
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Packing_List_Upload
+		    (
+		        type = upload file
+		        displayname = "Packing List Upload"
+		        file count = 1
+		        browse = local_drive, google_docs, zoho_docs
+		        row = 2
+		        column = 1
+		        width = medium
+		    )
+		    Schedule
+		    (
+		        type = section
+		        row = 3
+		        column = 1
+		        width = medium
+		        visibility = true
+		    )
+		    ETD_Date
+		    (
+		        type = date
+		        displayname = "ETD"
+		        row = 3
+		        column = 1
+		        width = medium
+		    )
+		    ATD_Date
+		    (
+		        type = date
+		        displayname = "ATD"
+		        row = 3
+		        column = 1
+		        width = medium
+		    )
+		    ETA_Date
+		    (
+		        type = date
+		        displayname = "ETA"
+		        row = 3
+		        column = 1
+		        width = medium
+		    )
+		    ATA_Date
+		    (
+		        type = date
+		        displayname = "ATA"
+		        row = 3
+		        column = 1
+		        width = medium
+		    )
+		    Estimated_Delivery_Date
+		    (
+		        type = date
+		        displayname = "Estimated Delivery Date"
+		        row = 3
+		        column = 1
+		        width = medium
+		    )
+		    Actual_Delivery_Date
+		    (
+		        type = date
+		        displayname = "Actual Delivery Date"
+		        row = 3
+		        column = 1
+		        width = medium
+		    )
+		    Payment_API_KPI
+		    (
+		        type = section
+		        row = 4
+		        column = 1
+		        width = medium
+		        visibility = true
+		    )
+		    Payment_Terms_Days
+		    (
+		        type = number
+		        displayname = "Payment Terms Days"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Expected_Payment_Date
+		    (
+		        type = date
+		        displayname = "Expected Payment Date"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Payment_Status
+		    (
+		        type = picklist
+		        displayname = "Payment Status"
+		        values = {"Not Paid","Partially Paid","Fully Paid"}
+		        initial value = "Not Paid"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Last_Payment_Reminder_Date
+		    (
+		        type = date
+		        displayname = "Last Payment Reminder Date"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Last_Payment_Reminder_Offset
+		    (
+		        type = number
+		        displayname = "Last Payment Reminder Offset"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    ExFactory_Variance_Days
+		    (
+		        type = number
+		        displayname = "Ex-Factory Variance Days"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    ETD_Variance_Days
+		    (
+		        type = number
+		        displayname = "ETD Variance Days"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    ETA_Variance_Days
+		    (
+		        type = number
+		        displayname = "ETA Variance Days"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Delivery_Variance_Days
+		    (
+		        type = number
+		        displayname = "Delivery Variance Days"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Total_Lead_Time_Days
+		    (
+		        type = number
+		        displayname = "Total Lead Time Days"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    KPI_Status
+		    (
+		        type = picklist
+		        displayname = "KPI Status"
+		        values = {"On Track","Minor Slip","Late","Complete"}
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Forwarder_Last_Sync_Time
+		    (
+		        type = datetime
+		        displayname = "Forwarder Last Sync Time"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Forwarder_Last_Response
+		    (
+		        type = textarea
+		        displayname = "Forwarder Last Response"
+		        height = 100px
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    API_Source_Reference
+		    (
+		        type = text
+		        displayname = "API Source Reference"
+		        maxchar = 255
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Buyer_Update_Last_Sent_Date
+		    (
+		        type = date
+		        displayname = "Buyer Update Last Sent Date"
+		        row = 4
+		        column = 1
+		        width = medium
+		    )
+		    Cancellation
+		    (
+		        type = section
+		        row = 5
+		        column = 1
+		        width = medium
+		        visibility = true
+		    )
+		    Cancellation_Reason
+		    (
+		        type = textarea
+		        displayname = "Cancellation Reason"
+		        height = 100px
+		        row = 5
+		        column = 1
+		        width = medium
+		    )
+		    Cancelled_On
+		    (
+		        type = datetime
+		        displayname = "Cancelled On"
+		        row = 5
+		        column = 1
+		        width = medium
+		    )
+		    Cancelled_By
+		    (
+		        type = email
+		        displayname = "Cancelled By"
+		        row = 5
+		        column = 1
+		        width = medium
+		    )
+		    Comments
+		    (
+		        type = textarea
+		        height = 100px
+		        row = 5
+		        column = 1
+		        width = medium
+		    )
+		
+		    actions
+		    {
+		        on add
+		        {
+		            submit
+		            (
+		                type = submit
+		                displayname = "Submit"
+		            )
+		            reset
+		            (
+		                type = reset
+		                displayname = "Reset"
+		            )
+		        }
+		        on edit
+		        {
+		            update
+		            (
+		                type = submit
+		                displayname = "Update"
+		            )
+		            cancel
+		            (
+		                type = cancel
+		                displayname = "Cancel"
+		            )
+		        }
+		    }
+		
+}

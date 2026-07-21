@@ -1,0 +1,30 @@
+list Production_Status_Report
+{
+
+		    displayName = "Production Status Report"
+		    show all rows from Shipment_Dispatch
+		    (
+		        Shipment_Reference as "Shipment Reference"
+		        Dispatch_Status as "Dispatch Status"
+		        Buyer
+		        Supplier
+		        Production_Status as "Production Status"
+		        Estimated_ExFactory_Date as "Estimated Ex-Factory Date"
+		        Actual_ExFactory_Date as "Actual Ex-Factory Date"
+		        Quality_Control_Date as "Quality Control Date"
+		        Quality_Control_Result as "Quality Control Result"
+		    )
+		    filters
+		    (
+		        Dispatch_Status
+		        Production_Status
+		        Quality_Control_Result
+		        Supplier
+		        Buyer
+		    )
+		    sort by
+		    (
+		        Estimated_ExFactory_Date ascending
+		    )
+		
+}

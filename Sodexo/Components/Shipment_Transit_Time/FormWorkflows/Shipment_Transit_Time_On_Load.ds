@@ -1,0 +1,19 @@
+Shipment_Transit_Time_On_Load as "Hide Combination Key"
+{
+
+			    type = form
+			    form = Shipment_Transit_Time
+			    record event = on add or edit
+			
+			    on load
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                hide Combination_Key;
+			            )
+			        }
+			    }
+			
+}

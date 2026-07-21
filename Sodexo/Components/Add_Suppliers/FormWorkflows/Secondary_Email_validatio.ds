@@ -1,0 +1,75 @@
+Secondary_Email_validatio as "Secondary Email validation"
+{
+
+			
+							type =  form
+							form = Add_Suppliers
+			
+							record event = on add or edit
+			
+							on user input of Email1
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Email1 != null && input.Email1 != "")
+													{
+														duplicate_Email = false;
+														if(input.Email1.equalsIgnoreCase(input.Email))
+														{
+															duplicate_Email = true;
+														}
+														if(duplicate_Email == true)
+														{
+															alert "This email address has already been added. Duplicate email addresses are not allowed.";
+															input.Email1 = null;
+														}
+														if(duplicate_Email == false)
+														{
+															fetUser = Create_User[Email.equalsIgnoreCase(input.Email1)];
+															if(fetUser.count() > 0)
+															{
+																if(fetUser.User_Type != "Factory")
+																{
+																	alert "This email is already associated with buyer or internal user.";
+																	input.Email1 = null;
+																}
+																else if(fetUser.User_Type == "Factory" && fetUser.Associated_Factory != input.ID)
+																{
+																	alert "This email is already linked to another factory.";
+																	input.Email1 = null;
+																}
+															}
+															else
+															{
+																if(!thisapp.permissions.profileForUser(input.Email1).isEmpty())
+																{
+																	alert "This email is already mapped to a different user profile.";
+																	input.Email1 = null;
+																}
+																else if(thisapp.permissions.adminEmailIds().containsIgnoreCase(input.Email1))
+																{
+																	alert "User email IDs cannot be used as factory email IDs.";
+																	input.Email1 = null;
+																}
+															}
+														}
+													}
+													if(input.Email1 != null)
+													{
+														for each  factory in input.Factory_Details
+														{
+															if(input.Email1.equalsIgnoreCase(factory.Factory_Email))
+															{
+																factory.Need_App_Access=input.Need_App_Access1;
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

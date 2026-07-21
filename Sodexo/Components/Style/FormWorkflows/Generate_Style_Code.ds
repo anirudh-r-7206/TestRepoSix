@@ -1,0 +1,32 @@
+Generate_Style_Code as "Generate Style Code"
+{
+
+			
+							type =  form
+							form = Style
+			
+							record event = on add or edit
+			
+							on user input of Product_Code
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														input.Product_Colour = null;
+													clear Product_Colour;
+													if(input.Product_Code != null)
+													{
+														get_Colors = Add_Colors[Status == "Active"].ID.getAll();
+														get_Style_Color = Style[Product_Code == input.Product_Code];
+														get_Colors.removeAll(get_Style_Color.Product_Colour.getall());
+														input.Product_Colour:ui.add(get_Colors);
+													}
+													input.Style_Code = if(input.Product_Code != null,input.Product_Code.Product_Code,"") + "-" + if(input.Product_Colour != null,input.Product_Colour.Color_Code,"");
+									)
+								}
+							}
+			
+						
+			
+}

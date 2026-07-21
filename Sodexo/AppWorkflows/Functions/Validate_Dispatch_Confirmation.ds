@@ -1,0 +1,61 @@
+string Validate_Dispatch_Confirmation(int dispatchId)
+{
+
+			    message = "";
+			    dispatchRec = Shipment_Dispatch[ID == dispatchId];
+			    if(dispatchRec == null || dispatchRec.count() == 0)
+			    {
+			        return "Shipment dispatch was not found.";
+			    }
+			    if(dispatchRec.Buyer == null || dispatchRec.Supplier == null || dispatchRec.Transit_Mode == null || dispatchRec.Transit_Mode == "" || dispatchRec.Estimated_ExFactory_Date == null || dispatchRec.Freight_Forwarder == null || dispatchRec.Forwarder_Booking_ID == null || dispatchRec.Forwarder_Booking_ID.trim() == "")
+			    {
+			        return "Buyer, Supplier, Transit Mode, Estimated Ex-Factory Date, Freight Forwarder, and Forwarder Booking ID are required before confirmation.";
+			    }
+			    transitDays = thisapp.Shipment_Get_Transit_Days(dispatchRec.Buyer.ID,dispatchRec.Supplier.ID,dispatchRec.Transit_Mode);
+			    if(transitDays <= 0)
+			    {
+			        return "Transit time mapping is missing for the selected Buyer, Supplier, and Transit Mode.";
+			    }
+			    splitRows = Shipment_Dispatch_Split[Shipment_Dispatch == dispatchId && Split_Status != "Cancelled"];
+			    if(splitRows.count() == 0)
+			    {
+			        return "At least one dispatch split row is required before confirmation.";
+			    }
+			    poIds = List();
+			    for each  splitRow in splitRows
+			    {
+			        if(splitRow.Purchase_Order == null)
+			        {
+			            return "Every dispatch split row must have a PO / QO selected.";
+			        }
+			        if(splitRow.Purchase_Order.Buyer_Organisation.ID != dispatchRec.Buyer.ID || splitRow.Purchase_Order.Supplier.ID != dispatchRec.Supplier.ID)
+			        {
+			            return "All PO / QO split rows must match the dispatch Buyer and Supplier.";
+			        }
+			        if(!poIds.contains(splitRow.Purchase_Order.ID))
+			        {
+			            poIds.add(splitRow.Purchase_Order.ID);
+			        }
+			    }
+			    for each  poId in poIds
+			    {
+			        poRec = Purchase_Order[ID == poId];
+			        splitQty = Shipment_Dispatch_Split[Purchase_Order == poId && Split_Status != "Cancelled"].sum(Split_Quantity);
+			        splitQOValue = Shipment_Dispatch_Split[Purchase_Order == poId && Split_Status != "Cancelled"].sum(Split_QO_Value);
+			        splitPOValue = Shipment_Dispatch_Split[Purchase_Order == poId && Split_Status != "Cancelled"].sum(Split_PO_Value);
+			        if(splitQty > ifnull(poRec.Total_Quantity,0))
+			        {
+			            return "Split quantity exceeds the PO / QO total quantity for " + poRec.PO_Number + ".";
+			        }
+			        if(splitQOValue > ifnull(poRec.Base_Selling_Price_Total,0))
+			        {
+			            return "Split QO value exceeds the base selling value for " + poRec.PO_Number + ".";
+			        }
+			        if(splitPOValue > ifnull(poRec.Base_Purchase_Price_Total,0))
+			        {
+			            return "Split PO value exceeds the base purchase value for " + poRec.PO_Number + ".";
+			        }
+			    }
+			    return message;
+			
+}

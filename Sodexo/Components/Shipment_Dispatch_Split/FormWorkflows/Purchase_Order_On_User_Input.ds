@@ -1,0 +1,35 @@
+Purchase_Order_On_User_Input as "Copy PO QO Details"
+{
+
+			    type = form
+			    form = Shipment_Dispatch_Split
+			    record event = on add or edit
+			
+			    on user input of Purchase_Order
+			    {
+			        actions
+			        {
+			            custom deluge script
+			            (
+			                if(input.Purchase_Order != null)
+			                {
+			                    input.PO_Number_Display = input.Purchase_Order.PO_Number;
+			                    input.QO_Number_Display = input.Purchase_Order.QO_Number;
+			                    input.Transport_Mode = input.Purchase_Order.Transport_Mode;
+			                    if(input.Shipment_Dispatch != null)
+			                    {
+			                        if(input.Purchase_Order.Buyer_Organisation.ID != input.Shipment_Dispatch.Buyer.ID || input.Purchase_Order.Supplier.ID != input.Shipment_Dispatch.Supplier.ID)
+			                        {
+			                            alert "Selected PO / QO must match the dispatch Buyer and Supplier.";
+			                            input.Purchase_Order = null;
+			                            input.PO_Number_Display = "";
+			                            input.QO_Number_Display = "";
+			                            input.Transport_Mode = "";
+			                        }
+			                    }
+			                }
+			            )
+			        }
+			    }
+			
+}

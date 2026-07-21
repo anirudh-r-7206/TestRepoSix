@@ -1,0 +1,62 @@
+form Bulk_Update
+{
+
+		
+					displayname = "Bulk Update"
+					store data in zc = false
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Bulk_Edit_Tigger
+					(
+						type = picklist	
+						displayname = "Bulk Edit Tigger"
+						values  = Bulk_Edit_Tigger.ID
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Action_Type
+					(
+						type = checkboxes	
+						displayname = "Action Type"
+						values = {"PO Unit Pricing","QO Unit Pricing"}
+						layout = 2
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					PO_Unit_Pricing
+					(
+						type = decimal
+						displayname = "PO Unit Pricing"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					QO_Unit_Pricing
+					(
+						type = decimal
+						displayname = "QO Unit Pricing"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						Submit
+						(
+		   					type = submit
+		   					displayname = "Submit"
+						)
+					}
+				
+		
+}

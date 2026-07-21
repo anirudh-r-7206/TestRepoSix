@@ -1,0 +1,15 @@
+void Approve_Product_Catalog(Add_Product ids)
+{
+
+			
+			                 	for each  id in ids
+			                 	{
+			                 		get_Catalog = Add_Product[ID == id.ID];
+			                 		if(get_Catalog.count(ID) > 0)
+			                 		{
+			                 			get_Catalog.Status="Approved";
+			                 		}
+			                 	}
+			                 
+			
+}

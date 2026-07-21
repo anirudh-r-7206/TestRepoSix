@@ -1,0 +1,26 @@
+Disable_fields2 as "Disable fields"
+{
+
+			
+							type =  form
+							form = Buyer_Products
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														disable Style_ID;
+													disable Style_Name;
+													input.Style_Name:ui.add(input.Style_ID.toList());
+													input.Style_Name = input.Style_ID;
+									)
+								}
+							}
+			
+						
+			
+}

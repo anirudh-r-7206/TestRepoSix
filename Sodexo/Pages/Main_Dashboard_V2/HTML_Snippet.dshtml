@@ -1,0 +1,248 @@
+<%
+	user_Data = thisapp.Page.dashboard_data("adminData");
+	%>
+<html>
+
+<head>
+		<style>
+		<%=thisapp.Style.user_dashboard_style()%>
+	</style>
+</head>
+
+<body class="procure-dashboard">
+
+		<!-- ===== MAIN WRAPPER ===== -->
+		<div class="page-wrapper">
+
+				<!-- ===== MAIN CONTENT ===== -->
+				<main class="main-content">
+
+						<!-- ===== STAT CARDS ROW ===== -->
+						<section class="stat-cards">
+
+								<!-- User -->
+								<div class="stat-card">
+										<div class="stat-card__header">
+												<span class="stat-card__label">User</span>
+												<div class="stat-card__icon">
+							<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M18.75 17.75C21.1662 17.75 23.125 15.7912 23.125 13.375C23.125 10.9588 21.1662 9 18.75 9C16.3338 9 14.375 10.9588 14.375 13.375C14.375 15.7912 16.3338 17.75 18.75 17.75Z" fill="#EEDAFF"/>
+							<path d="M27.5 25.7702C27.5 25.9623 27.4993 26.1513 27.4978 26.3373C27.4756 29.173 25.75 30.8743 18.75 30.8743C10 30.8743 10 28.5888 10 25.7702C10 22.9515 13.9178 20.666 18.75 20.666C23.5822 20.666 27.5 22.9515 27.5 25.7702Z" fill="#EEDAFF"/>
+							<path d="M17.5 16.042C19.9162 16.042 21.875 14.0832 21.875 11.667C21.875 9.25075 19.9162 7.29199 17.5 7.29199C15.0838 7.29199 13.125 9.25075 13.125 11.667C13.125 14.0832 15.0838 16.042 17.5 16.042Z" stroke="#AD46FF" stroke-width="1.5"/>
+							<path d="M26.25 24.0622C26.25 24.2542 26.2493 24.4433 26.2478 24.6293C26.2256 27.465 24.5 29.1663 17.5 29.1663C8.75 29.1663 8.75 26.8808 8.75 24.0622C8.75 21.2435 12.6678 18.958 17.5 18.958C22.3322 18.958 26.25 21.2435 26.25 24.0622Z" stroke="#AD46FF" stroke-width="1.5" stroke-linecap="round"/>
+							</svg>
+												</div>
+										</div>
+										<div class="stat-card__body">
+												<div class="stat-item">
+						<div class="stat-num"><%=user_Data.get("Total_Users")%></div>
+														<div class="stat-sub">Total User</div>
+												</div>
+												<div class="stat-divider"></div>
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("Active_Users")%></div>
+														<div class="stat-sub">Active User</div>
+												</div>
+										</div>
+								</div>
+
+								<!-- Buyer -->
+								<div class="stat-card">
+										<div class="stat-card__header">
+												<span class="stat-card__label">Buyer</span>
+												<div class="stat-card__icon">
+							<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M17.375 15.75C19.7912 15.75 21.75 13.7912 21.75 11.375C21.75 8.95875 19.7912 7 17.375 7C14.9588 7 13 8.95875 13 11.375C13 13.7912 14.9588 15.75 17.375 15.75Z" fill="#FFEDD9"/>
+							<path d="M16.041 14.583C18.4573 14.583 20.416 12.6243 20.416 10.208C20.416 7.79176 18.4573 5.83301 16.041 5.83301C13.6248 5.83301 11.666 7.79176 11.666 10.208C11.666 12.6243 13.6248 14.583 16.041 14.583Z" stroke="#FF8904" stroke-width="1.5"/>
+							<path d="M10 25.5C10 28.5372 14.3449 31 19.7039 31C21.8163 31 23.7712 30.6173 25.3645 29.9676C25.3645 29.9676 27.5526 28.8004 26.867 27.5432C26.1813 26.2861 25.3645 24.4183 25.3645 22.6942C25.3645 20.9701 23.208 20.2265 22.1298 20.0701C21.3929 20.0237 20.5861 20 19.7039 20C10 20 10 22.4628 10 25.5Z" fill="#FFEDD9"/>
+							<path d="M21.1452 26.7499C19.7085 27.3529 17.9458 27.708 16.041 27.708C11.2088 27.708 7.29102 25.4225 7.29102 22.6038C7.29102 19.7852 7.29102 17.4997 16.041 17.4997C16.8366 17.4997 17.564 17.5217 18.2285 17.5648" stroke="#FF8904" stroke-width="1.5" stroke-linecap="round"/>
+							<path d="M21 17H22.104C22.5699 17 22.9717 17.3343 23.0657 17.8003L24.117 23.0099C24.2424 23.6312 24.7781 24.077 25.3992 24.077H29.3439C29.9486 24.077 30.4746 23.6541 30.6165 23.0539L31.1805 20.6684C31.3296 20.0376 30.8615 19.4306 30.226 19.4306H23.3803M25.2845 26.7222C25.2845 26.9907 25.0713 27.2083 24.8084 27.2083C24.5455 27.2083 24.3324 26.9907 24.3324 26.7222C24.3324 26.4537 24.5455 26.2361 24.8084 26.2361C25.0713 26.2361 25.2845 26.4537 25.2845 26.7222ZM30.521 26.7222C30.521 26.9907 30.3079 27.2083 30.045 27.2083C29.7821 27.2083 29.5689 26.9907 29.5689 26.7222C29.5689 26.4537 29.7821 26.2361 30.045 26.2361C30.3079 26.2361 30.521 26.4537 30.521 26.7222Z" stroke="#FF8904" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+												</div>
+										</div>
+										<div class="stat-card__body">
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("Total_Buyer")%></div>
+														<div class="stat-sub">Total Buyer</div>
+												</div>
+												<div class="stat-divider"></div>
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("Total_Buyer_Users")%></div>
+														<div class="stat-sub">Buyer User</div>
+												</div>
+										</div>
+								</div>
+
+								<!-- Supplier -->
+								<div class="stat-card">
+										<div class="stat-card__header">
+												<span class="stat-card__label">Supplier</span>
+												<div class="stat-card__icon icon-pink">
+							<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M17.75 15.7363C20.1662 15.7363 22.125 13.7776 22.125 11.3613C22.125 8.94508 20.1662 6.98633 17.75 6.98633C15.3338 6.98633 13.375 8.94508 13.375 11.3613C13.375 13.7776 15.3338 15.7363 17.75 15.7363Z" fill="#FFEAFA"/>
+							<path d="M26.5 23.7565C26.5 23.9486 26.4993 24.1376 26.4978 24.3236C26.4756 27.1593 24.75 28.8607 17.75 28.8607C9 28.8607 9 26.5751 9 23.7565C9 20.9379 12.9178 18.6523 17.75 18.6523C22.5822 18.6523 26.5 20.9379 26.5 23.7565Z" fill="#FFEAFA"/>
+							<path d="M16.041 14.583C18.4573 14.583 20.416 12.6243 20.416 10.208C20.416 7.79176 18.4573 5.83301 16.041 5.83301C13.6248 5.83301 11.666 7.79176 11.666 10.208C11.666 12.6243 13.6248 14.583 16.041 14.583Z" stroke="#FF04C0" stroke-width="1.5"/>
+							<path d="M21.1452 18.4581C19.7085 17.8551 17.9458 17.5 16.041 17.5C11.2088 17.5 7.29102 19.7855 7.29102 22.6042C7.29102 25.4228 7.29102 27.7083 16.041 27.7083C16.8366 27.7083 17.564 27.6864 18.2285 27.6432" stroke="#FF04C0" stroke-width="1.5" stroke-linecap="round"/>
+							<path d="M28.2489 24.8839L28.4211 20.0188L23.556 19.8465M28.4211 20.0188L21.3537 26.7027" stroke="#FF04C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+												</div>
+										</div>
+										<div class="stat-card__body">
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("Total_Factory")%></div>
+														<div class="stat-sub">Total Supplier</div>
+												</div>
+												<div class="stat-divider"></div>
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("Total_Factory_User")%></div>
+														<div class="stat-sub">Supplier User</div>
+												</div>
+										</div>
+								</div>
+
+								<!-- POs this month -->
+								<div class="stat-card">
+										<div class="stat-card__header">
+												<span class="stat-card__label">POs this month</span>
+												<div class="stat-card__icon icon-blue">
+							<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9 11V29.25C9 31.4591 10.7909 33.25 13 33.25H17.9523C18.4872 33.25 18.782 32.5397 18.4422 32.1266C16.81 30.1424 14.2372 25.7734 18 21C20.842 17.3947 26.596 18.3257 28.6592 18.8032C29.0382 18.8909 29.4167 18.606 29.4167 18.217V16.205C29.4167 16.053 29.3568 15.9071 29.25 15.7989L20.7353 7.17199C20.6266 7.06194 20.4785 7 20.3239 7H13C10.7909 7 9 8.79086 9 11Z" fill="#DDEDFF"/>
+							<path d="M27.7077 18.2292V13.58C27.7077 13.428 27.6478 13.2821 27.541 13.1739L19.0263 4.54699C18.9177 4.43694 18.7695 4.375 18.6149 4.375H11.291C9.08188 4.375 7.29102 6.16586 7.29102 8.375V26.625C7.29102 28.8341 9.08188 30.625 11.291 30.625H16.7702" stroke="#51A2FF" stroke-width="1.5" stroke-linecap="round"/>
+							<path d="M18.959 4.375L19.0158 12.551C19.018 12.8686 19.2761 13.125 19.5938 13.125H27.709" stroke="#51A2FF" stroke-width="1.5"/>
+							<path d="M10.9375 11.667H15.3125" stroke="#51A2FF" stroke-width="1.5" stroke-linecap="round"/>
+							<path d="M10.9375 16.2119L24.062 16.3247" stroke="#51A2FF" stroke-width="1.5" stroke-linecap="round"/>
+							<path d="M10.9375 21.46H18.2292" stroke="#51A2FF" stroke-width="1.5" stroke-linecap="round"/>
+							<path d="M10.9316 26.6436H15.3066" stroke="#51A2FF" stroke-width="1.5" stroke-linecap="round"/>
+							<circle cx="26" cy="27" r="7" fill="#DDEDFF"/>
+							<circle cx="24.7923" cy="26.2503" r="5.83333" stroke="#51A2FF" stroke-width="1.5"/>
+							<path d="M24.7923 23.333V23.8191M24.7923 29.1663V28.6802M26.2507 25.0344C26.2507 24.3636 25.5978 23.8191 24.7923 23.8191M24.7923 23.8191C23.9868 23.8191 23.334 24.3636 23.334 25.0344C23.334 25.7052 23.9868 26.2497 24.7923 26.2497C25.5978 26.2497 26.2507 26.7941 26.2507 27.465C26.2507 28.1358 25.5978 28.6802 24.7923 28.6802M24.7923 28.6802C23.9868 28.6802 23.334 28.1358 23.334 27.465" stroke="#51A2FF" stroke-width="1.5" stroke-linecap="round"/>
+							</svg>
+												</div>
+										</div>
+										<div class="stat-card__body">
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("PO_Sell_Amount")%></div>
+														<div class="stat-sub">Sell Amount</div>
+												</div>
+												<div class="stat-divider"></div>
+												<div class="stat-item">
+														<div class="stat-num"><%=user_Data.get("PO_Buy_Amount")%></div>
+														<div class="stat-sub">Buy Amount</div>
+												</div>
+										</div>
+								</div>
+
+						</section>
+
+						<!-- ===== MIDDLE ROW ===== -->
+						<section class="middle-row">
+
+								<!-- Requests Details (Donut) -->
+								<div class="card requests-details">
+										<h2 class="card-title">Requests Details</h2>
+										<div class="donut-wrapper">
+						<div elName='zc-component' style="width:100%;" pageLinkName='Request_Details' params='zc_Header=false'>Loading View...</div>
+										</div>
+								</div>
+
+								<!-- Purchase Orders (Bars) -->
+								<div class="card po-bars">
+										<h2 class="card-title">Purchase Orders</h2>
+										<div class="bar-list">
+
+												<div class="bar-row">
+														<span class="bar-label">Awaiting Buyer review</span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Buyer_Revew_Percentage')%>%;background:#6366f1"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Buyer_Revew")%></span>
+												</div>
+
+												<div class="bar-row">
+														<span class="bar-label">Awaiting Factory review</span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Factory_Revew_Percentage')%>%;background:#ef4444"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Factory_Revew")%></span>
+												</div>
+
+												<div class="bar-row">
+														<span class="bar-label">Amendment Request<br><span
+																		style="font-size:0.74rem;color:var(--clr-text-muted)">(Buyer)</span></span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Buyer_Amendment_Requested_Percentage')%>%;background:#38bdf8"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Buyer_Amendment_Requested")%></span>
+												</div>
+
+												<div class="bar-row">
+														<span class="bar-label">Amendment Request<br><span
+																		style="font-size:0.74rem;color:var(--clr-text-muted)">(Factory)</span></span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Factory_Amendment_Requested_Percentage')%>%;background:#a855f7"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Factory_Amendment_Requested")%></span>
+												</div>
+						
+						<div class="bar-row">
+														<span class="bar-label">Awaiting Production</span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Awaiting_Production_Percentage')%>%;background:#f97316"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Awaiting_Production")%></span>
+												</div>
+
+												<div class="bar-row">
+														<span class="bar-label">In production</span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('In_Production_Percentage')%>%;background:#06b6d4"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("In_Production")%></span>
+												</div>
+
+												<div class="bar-row">
+														<span class="bar-label">Cancelled</span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Cancelled_Percentage')%>%;background:#ca8a04"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Cancelled")%></span>
+												</div>
+						
+						<div class="bar-row">
+														<span class="bar-label">Completed</span>
+														<div class="bar-track">
+																<div class="bar-fill" style="width:<%=user_Data.get('Completed_Percentage')%>%;background:#22c55e"></div>
+														</div>
+														<span class="bar-val"><%=user_Data.get("Completed")%></span>
+												</div>
+
+										</div>
+								</div>
+
+								<!-- Quick Links -->
+								<div class="card quick-links">
+										<h2 class="card-title">Quick Links</h2>
+										<ul class="link-list">
+												<li><a href="#Report:All_Countries?zc_LoadIn=dialog">Countries</a></li>
+												<li><a href="#Report:All_Colors?zc_LoadIn=dialog">Colors</a></li>
+												<li><a href="#Report:All_Fabrics?zc_LoadIn=dialog">Fabrics</a></li>
+												<li><a href="#Report:All_Styles?zc_LoadIn=dialog">Styles</a></li>
+												<li><a href="#Report:All_Product_Categories?zc_LoadIn=dialog">Style Categories</a></li>
+												<li><a href="#Report:All_Sizes?zc_LoadIn=dialog">Sizes</a></li>
+												<li><a href="#Report:All_Wardrobes?zc_LoadIn=dialog">Wardrobes</a></li>
+										</ul>
+								</div>
+
+						</section>
+
+						<!-- ===== PURCHASE ORDERS TABLE ===== -->
+						<div class="card table-card">
+				<div elName='zc-component' viewLinkName='All_Purchase_Orders' params='zc_Header=true'>Loading View...</div>
+						</div>
+
+				</main>
+		</div>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+list regionDeleteFilter()
+{
+
+			
+			                 	fetCountry = Add_Country[ID != null].Region_Code_New.getAll();
+			                 	fetSizechart = Size_Chart_Mapping[ID != null].Region_New.getAll();
+			                 	fetRegion = Add_Region[ID != null].ID.getAll();
+			                 	fetRegion.removeAll(fetSizechart);
+			                 	fetRegion.removeAll(fetCountry);
+			                 	return List(fetRegion);
+			                 
+			
+}

@@ -1,0 +1,55 @@
+<style>
+	.buyer_OverAll_container{
+		height: 100%;
+	}
+	[pagelinkname="Buyer_Cart_Page"] .divEmbedContainer {
+		height: calc(100% - 83px) !important;
+	}
+	[pagelinkname="Buyer_Cart_Page"] .Layout.elemContainment{
+		height: 100% !important;
+		border: none;
+	}
+	[pagelinkname="Buyer_Cart_Page"] .zc-pb-page-content-wrapper{
+		 overflow: hidden;
+	 }
+	 
+	 .buyer_Header_container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 15px;
+		padding: 15px 0px 10px;
+		margin: 0px 20px;
+			border-bottom: 1px solid #E8E8E8;
+	}
+	.cart_header {
+		font-size: 20px;
+		font-weight: 600;
+	}
+	 
+	 /* Buyer Filter form style*/
+	form[name="Buyer_Filter"].label-inplace{
+		width: 100% !important;
+		overflow: unset !important;
+	}
+	 form[name="Buyer_Filter"] .formContainer {
+		padding: 0 !important;
+	}
+	[formlinkname="Buyer_Filter"] .form-outer-wrapper{
+	    box-shadow: none !important;
+	}
+	form[name="Buyer_Filter"] .form-group.clearfix.zc-Select_Supplier-group {
+		margin-bottom: 1px !important;
+	}
+
+	 [formlinkname="Buyer_Filter"] .zc-footer-wrapper{
+		 display: none;
+	 }
+</style>
+<div class="buyer_OverAll_container">
+	<div class="buyer_Header_container">
+		<div class="cart_header">Product catalogue</div>
+		<div elName='zc-component' formLinkName='Buyer_Filter' params='zc_Header=false&amp;zc_SuccMsg=Data Added Successfully!&amp;zc_SubmitVal=Submit&amp;zc_ResetVal=Reset'></div>
+	</div>
+	<div elName='zc-component' name="BuyerCart" pageLinkName='Buyer_Cart_Page' params='zc_Header=true'></div>
+</div>

@@ -1,0 +1,147 @@
+form Shipment_Settings
+{
+
+		    displayname = "Shipment Settings"
+		    success message = "Shipment settings saved successfully."
+		    Section
+		    (
+		        type = section
+		        row = 1
+		        column = 0
+		        width = medium
+		    )
+		    Setting_Name
+		    (
+		        type = text
+		        displayname = "Setting Name"
+		        initial value = "Default Shipment Settings"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Estimated_Delivery_Offset_Days
+		    (
+		        type = number
+		        displayname = "Estimated Delivery Offset Days"
+		        initial value = 10
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    KPI_Amber_Threshold_Days
+		    (
+		        type = number
+		        displayname = "KPI Amber Threshold Days"
+		        initial value = 7
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    KPI_Red_Threshold_Days
+		    (
+		        type = number
+		        displayname = "KPI Red Threshold Days"
+		        initial value = 8
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Buyer_Cost_Visibility
+		    (
+		        type = checkbox
+		        displayname = "Buyer Cost Visibility"
+		        initial value = false
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Buyer_Update_Channel
+		    (
+		        type = picklist
+		        displayname = "Buyer Update Channel"
+		        values = {"Dashboard Only","Email + Dashboard"}
+		        initial value = "Dashboard Only"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Payment_Reminder_Offsets
+		    (
+		        type = textarea
+		        displayname = "Payment Reminder Offsets"
+		        height = 100px
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Reminder_Recipients
+		    (
+		        type = textarea
+		        displayname = "Reminder Recipients"
+		        description
+		        [
+		            type = tooltip
+		            message = "Enter comma-separated email addresses for payment reminders."
+		        ]
+		        height = 100px
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Forwarder_API_Poll_Enabled
+		    (
+		        type = checkbox
+		        displayname = "Forwarder API Poll Enabled"
+		        initial value = false
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Forwarder_API_Base_URL
+		    (
+		        type = url
+		        displayname = "Forwarder API Base URL"
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		    Notes
+		    (
+		        type = textarea
+		        height = 100px
+		        row = 1
+		        column = 1
+		        width = medium
+		    )
+		
+		    actions
+		    {
+		        on add
+		        {
+		            submit
+		            (
+		                type = submit
+		                displayname = "Submit"
+		            )
+		            reset
+		            (
+		                type = reset
+		                displayname = "Reset"
+		            )
+		        }
+		        on edit
+		        {
+		            update
+		            (
+		                type = submit
+		                displayname = "Update"
+		            )
+		            cancel
+		            (
+		                type = cancel
+		                displayname = "Cancel"
+		            )
+		        }
+		    }
+		
+}

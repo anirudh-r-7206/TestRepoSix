@@ -1,0 +1,104 @@
+list Suppliers_Widget
+{
+
+		
+					displayName = "Suppliers Widget"
+					show all rows from Add_Suppliers  [Status == "Active" && ID == thisapp.helpers.returnSuppliers()]  
+					(
+						Supplier_Code as "Supplier Code"
+						Country
+						Contact_Person as "Contact Person1"
+						Email
+						Phone as "Phone "
+						(
+							displayformat = plainnumber 
+						)
+						Factory_Address  as "Invoice Address"
+			 			(
+			      			enable = Link_to_Map,Show_As_Text
+			 			)
+						ERP_System as "ERP System"
+						Status
+						Supplier_type as " Supplier type"
+						Supplier_Organisation as "Supplier Organisation"
+					)
+					sort by
+					(
+						Supplier_Organisation ascending
+					)
+					custom actions
+					(
+						"Reject"
+						(
+			  			workflow = Reject_Supplier
+						show action in edit record menu = true
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to reject this supplier?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Activate"
+						(
+			  			workflow = Active_Supplier
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Inactive" && Approval_Status == "Approved")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to activate this supplier?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Deactivate"
+						(
+			  			workflow = Deactivate_Supplier
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (Status == "Active" && Approval_Status == "Approved" && ID != thisapp.Deactivate_Records.Deactivate_Suppliers())
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to deactivate this supplier?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Delete Suppliers"
+						(
+			  			workflow = Delete_Selected_Suppliers
+						show action in view header = true
+						show action in edit record menu = true
+						condition = (ID != thisapp.Delete_Records.Delete_Suppliers())
+						)
+						"Approve"
+						(
+			  			workflow = Approve_Supplier
+						show action in edit record menu = true
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to approve this supplier?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+					conditional formatting
+					(
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#5dc35a;"
+						}
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+					)
+				
+		
+}

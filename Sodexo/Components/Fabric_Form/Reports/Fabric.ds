@@ -1,0 +1,110 @@
+list Fabric
+{
+
+		
+					displayName = "Fabric"
+					show all rows from Fabric_Form  [Fabric_Code.contains("TC")]  
+					(
+						Fabric_Code as "Fabric Colour Code"
+						Colour_Code as "Fabric Colour"
+						Fabric_Name as "Fabric Name"
+						Fabric_Composition as "Fabric Composition"
+						Fabric_Description as "Fabric Description"
+						Status
+						Country_of_Origin as "Country of Origin"
+					)
+					group by
+					(
+						properties
+		    			(
+		  	    			display record count = true
+		   				)
+						Status custom
+					)
+					custom actions
+					(
+						"Delete Fabrics"
+						(
+			  			workflow = Delete_Selected_Fabrics
+						show action in edit record menu = true
+						condition = (ID != thisapp.Delete_Records.Delete_Fabrics())
+						confirmation before execution
+						(
+							message for multiple records = "Are you sure you want to delete fabrics for the selected ${record_count} records?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Reject"
+						(
+			  			workflow = Reject_Fabrics
+						show action in edit record menu = true
+						condition = (Status == "Pending")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to reject this record?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Active"
+						(
+			  			workflow = Active_Fabrics
+						show action in edit record menu = true
+						condition = (Status == "Inactive")
+						)
+						"Deactivate"
+						(
+			  			workflow = Deactivate_Fabrics
+						show action in edit record menu = true
+						condition = (Status == "Active" && ID != thisapp.Deactivate_Records.Deactivate_Fabric())
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to deactivate this fabric?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"Approve"
+						(
+			  			workflow = Approve_Fabrics
+						show action in edit record menu = true
+						condition = (Status == "Pending")
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to approve this record?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+					)
+					conditional formatting
+					(
+						"Pending"
+						{
+						condition = (Status == "Pending")
+						fields = [Status]
+						format = "color:#398ef3;"
+						}
+						"Active"
+						{
+						condition = (Status == "Active")
+						fields = [Status]
+						format = "color:#5dc35a;"
+						}
+						"Inactive"
+						{
+						condition = (Status == "Inactive")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+						"Rejected"
+						{
+						condition = (Status == "Rejected")
+						fields = [Status]
+						format = "color:#ef1616;"
+						}
+					)
+				
+		
+}

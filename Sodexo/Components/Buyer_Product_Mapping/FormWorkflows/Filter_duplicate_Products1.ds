@@ -1,0 +1,56 @@
+Filter_duplicate_Products1 as "Filter duplicate Products"
+{
+
+			
+							type =  form
+							form = Buyer_Product_Mapping
+			
+							record event = on add or edit
+			
+							on user input of Style_Details.Style_ID
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														disable row.Style_ID;
+													row.Product_ID=row.Style_ID.Style_ID + "-" + input.Factory_Allocated.Supplier_Code + "-" + input.Buyer.Buyer_Code;
+													row.Colors=row.Style_ID.Style_Colour;
+													row.Size=row.Style_ID.Size_Set;
+													row.Style_Name:ui.add(row.Style_ID.toList());
+													row.Style_Name=row.Style_ID;
+													row.Style_Description=row.Style_ID.Style_Code.Style_Description;
+													row.HS_Name=input.Buyer.HS_Code_Region;
+													// 
+													// get_Factory_Product = Add_Product[Status == "Approved"].ID.getAll();
+													// get_sub_Product = input.Style_Details.Style_ID.getall();
+													// get_Factory_Product.removeAll(get_sub_Product);
+													// get_Factory_Product.removeElement(row.Style_ID);
+													// for each  purchase in input.Style_Details
+													// {
+													// 	old_Product = purchase.Style_ID;
+													// 	add_sub_Product = get_Factory_Product;
+													// 	add_sub_Product.add(old_Product);
+													// 	purchase.Style_ID:ui.add(add_sub_Product);
+													// 	purchase.Style_ID=old_Product;
+													// }
+													row.HS_Code=null;
+													if(row.HS_Name == "USA")
+													{
+														row.HS_Code=row.Style_ID.HS_Code_USA;
+													}
+													else if(row.HS_Name == "EU")
+													{
+														row.HS_Code=row.Style_ID.HS_Code_EU;
+													}
+													else if(row.HS_Name == "APAC")
+													{
+														row.HS_Code=row.Style_ID.HS_Code_APAC;
+													}
+									)
+								}
+							}
+			
+						
+			
+}
