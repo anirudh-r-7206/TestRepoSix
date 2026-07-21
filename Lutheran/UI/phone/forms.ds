@@ -1,0 +1,143 @@
+forms
+{
+
+	
+				form Accreditation
+				{
+					label placement = auto
+				}
+				form Accreditation_Courses
+				{
+					label placement = auto
+				}
+				form Accreditation_Details
+				{
+					label placement = auto
+				}
+				form Add_Remove_Representation_Team
+				{
+					label placement = auto
+				}
+				form Approval_Configuration
+				{
+					label placement = auto
+				}
+				form Award_Eligible_Staff
+				{
+					label placement = auto
+				}
+				form Campus
+				{
+					label placement = auto
+				}
+				form Compliance_Training
+				{
+					label placement = auto
+				}
+				form Email_Templates
+				{
+					label placement = auto
+				}
+				form Employee_Filter
+				{
+					label placement = auto
+				}
+				form Empty_State
+				{
+					label placement = auto
+				}
+				form History
+				{
+					label placement = auto
+				}
+				form Accredit
+				{
+					label placement = auto
+				}
+				form Organisation
+				{
+					label placement = auto
+				}
+				form Positions
+				{
+					label placement = auto
+				}
+				form Qualification_Type
+				{
+					label placement = auto
+				}
+				form Qualifications
+				{
+					label placement = auto
+				}
+				form Regions
+				{
+					label placement = auto
+				}
+				form Representation_Team
+				{
+					label placement = auto
+				}
+				form School
+				{
+					label placement = auto
+				}
+				form Search_Service_Awards
+				{
+					label placement = auto
+				}
+				form Send_Mail
+				{
+					label placement = auto
+				}
+				form Service_Awards
+				{
+					label placement = auto
+				}
+				form Speciality
+				{
+					label placement = auto
+				}
+				form Staff_Employment
+				{
+					label placement = auto
+				}
+				form Staff_Master
+				{
+					label placement = auto
+				}
+				form Staff_Onboarding1
+				{
+					label placement = auto
+				}
+				form Staff_Request
+				{
+					label placement = auto
+				}
+				form Staff_Service_Awards
+				{
+					label placement = auto
+				}
+				form Subject_form
+				{
+					label placement = auto
+				}
+				form Training_Completion_Request
+				{
+					label placement = auto
+				}
+				form Training_Completion_Request_Import
+				{
+					label placement = auto
+				}
+				form Training_Type
+				{
+					label placement = auto
+				}
+				form Year_Level
+				{
+					label placement = auto
+				}
+			
+	
+}

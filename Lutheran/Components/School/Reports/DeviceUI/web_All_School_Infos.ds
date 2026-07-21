@@ -1,0 +1,78 @@
+report All_School_Infos
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										school_name as "School Name"
+										school_type as "School Type"
+										school_image as "School Image"
+										school_address as "School Address"
+										School_Email as "School Email"
+										Region
+										Region_Name as "Region Name"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Region
+										school_name as "School Name"
+										school_type as "School Type"
+										school_image as "School Image"
+										school_address as "School Address"
+										School_Email as "School Email"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
+						)
+					
+		
+}

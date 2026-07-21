@@ -1,0 +1,58 @@
+string helpers.formatServicePeriod(map service_map)
+{
+
+			
+			                 	years = service_map.get("years");
+			                 	months = service_map.get("months");
+			                 	days = service_map.get("days");
+			                 	parts = List();
+			                 	if(years > 0)
+			                 	{
+			                 		if(years == 1)
+			                 		{
+			                 			parts.add("1 Year");
+			                 		}
+			                 		else
+			                 		{
+			                 			parts.add(years + " Years");
+			                 		}
+			                 	}
+			                 	if(months > 0)
+			                 	{
+			                 		if(months == 1)
+			                 		{
+			                 			parts.add("1 Month");
+			                 		}
+			                 		else
+			                 		{
+			                 			parts.add(months + " Months");
+			                 		}
+			                 	}
+			                 	if(days > 0)
+			                 	{
+			                 		if(days == 1)
+			                 		{
+			                 			parts.add("1 Day");
+			                 		}
+			                 		else
+			                 		{
+			                 			parts.add(days + " Days");
+			                 		}
+			                 	}
+			                 	if(parts.size() == 0)
+			                 	{
+			                 		return "0 Days";
+			                 	}
+			                 	result = "";
+			                 	for each  part in parts
+			                 	{
+			                 		if(result != "")
+			                 		{
+			                 			result = result + ", ";
+			                 		}
+			                 		result = result + part;
+			                 	}
+			                 	return result;
+			                 
+			
+}

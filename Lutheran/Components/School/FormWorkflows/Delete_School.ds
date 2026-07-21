@@ -1,0 +1,33 @@
+Delete_School as "Delete School"
+{
+
+			
+							type =  form
+							form = School
+			
+							record event = on delete
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														reps_or_teams = Representation_Team[School == input.ID];
+													staff_employments = Staff_Employment[School == input.ID];
+													staff_masters = Staff_Master[Current_Employment == input.ID];
+													staff_requests = Staff_Master[Current_Employment == input.ID];
+													campus_count = Campus[School == input.ID].count();
+													isImplemented = reps_or_teams.count() > 0 || staff_employments.count() > 0 || staff_masters.count() > 0 || staff_requests.count() > 0 || campus_count > 0;
+													if(isImplemented)
+													{
+														alert "School has been linked to few modules. Please unlink them to delete this School.";
+														cancel delete;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

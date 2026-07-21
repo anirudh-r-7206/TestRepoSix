@@ -1,0 +1,50 @@
+<style>
+	aside.zc-left-menu.zc-flex.zc-direction-column,
+	.zc-app-side-bar-wrapper,
+	.zc-topbar-combined,
+	.zc-app-top-bar {
+		display: none;
+}
+
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content {
+	height: 100% !important;
+}
+
+a.lea-back-btn {
+		display: none !important;
+}
+* {
+		padding: 0;
+		margin: 0;
+		border: none;
+}
+
+
+.zc-dem-container .inner .form-outer-wrapper>.row {
+		overflow: auto;
+}
+
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .form-outer-wrapper .formContainer {
+		height: auto !important;
+}
+
+div#zppagesLive,
+div#elementsContainer,
+.Layout.elemContainment,
+div#row_1,
+.zc-pb-formreport-placeholder {
+		height: 100% !important;
+}
+.Layout.elemContainment {
+		padding: unset !important;
+}
+.admin-entry-container {
+	height: 100%;
+		padding: 20px;
+		background: #efefef;
+		box-sizing: border-box;
+}
+	</style>
+	<div class='admin-entry-container'>
+		<div elName='zc-component' formLinkName='Staff_Master' params='zc_Header=false&Overall_Admin=true&zc_SubmitVal=Submit'></div>
+	</div>

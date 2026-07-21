@@ -1,0 +1,116 @@
+form Send_Mail
+{
+
+		
+					displayname = "Send Mail"
+					success message = "Mail Sent Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Send_By
+					(
+						type = picklist	
+						displayname = "Initiated By"
+						values  = Staff_Master.ID
+		    			displayformat = [Name.prefix + Name.first_name + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Type_field
+					(
+						type = radiobuttons
+						displayname = "Type"
+						maxchar = 100
+						values = {"Committee","Individual"}
+						layout = 3
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Committee
+					(
+						type = picklist	
+						displayname = "Committee "
+						values  = Representation_Team[ID == thisapp.helpers.returnEligibleCommittee()].ID
+		    			displayformat = [Representation_Team]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Staff_Master
+					(
+						type = list	
+						displayname = "Staff Master"
+						values  = Staff_Master[status == "Active" || status == "On Leave" && ID == thisapp.helpers.returnEligibleStaff()].ID
+		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Subject_field
+					(
+		    			type = text
+						displayname = "Subject"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Content
+					(
+		    			type = richtext
+						height = 200px
+						toolbar = enable
+						[
+							style, font-color, background-color, link, bullets-and-numbering, 
+							font-size : {1, 2, 3, 4, 5, 6, 7}
+						]
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Attachments
+					(
+		    			type = upload file
+						displayname = "Attachments "
+						browse = local_drive
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Send"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

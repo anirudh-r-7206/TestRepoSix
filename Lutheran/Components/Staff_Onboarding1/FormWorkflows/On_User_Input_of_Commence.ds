@@ -1,0 +1,32 @@
+On_User_Input_of_Commence as "On User Input of Commencement_Date :"
+{
+
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Commenced_Date
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Commenced_Date != null)
+													{
+														minDate = zoho.currentdate.addYear(-1);
+														maxDate = zoho.currentdate.addYear(1);
+														if(input.Commenced_Date < minDate || input.Commenced_Date > maxDate)
+														{
+															alert "Commencement Date must be within 1 year past or 1 year future from today.";
+															input.Commenced_Date = null;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

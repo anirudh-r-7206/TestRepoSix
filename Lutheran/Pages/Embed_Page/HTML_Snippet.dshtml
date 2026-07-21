@@ -1,0 +1,46 @@
+<%
+	// 	if(input.stageName.isEmpty())
+	// 	{
+	// 		input.stageName = "Personal Data";
+	// 	}
+	%>
+<style>
+
+* {
+		padding: 0;
+		margin: 0;
+		border: none;
+}
+
+div#zppagesLive,
+div#elementsContainer,
+.Layout.elemContainment,
+div#row_1,
+.zc-pb-formreport-placeholder {
+		height: 100% !important;
+}
+.main-div-onboard-container {
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+}
+.Layout.elemContainment {
+		padding: unset !important;
+}
+
+
+</style>
+ <div class = "main-div-onboard-container" name="onboard-div" >
+<%
+	param = "";
+	if(input.stageName.isEmpty())
+	{
+		param = "stageName=Personal Data";
+	}
+	else
+	{
+		param = "stageName=" + input.stageName + "&staffID=" + input.staffID;
+	}
+	%>
+<div elName='zc-component' name='onboard-div' pageLinkName='Staff_Onboarding_page' params='<%=param%>'></div>
+</div>

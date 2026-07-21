@@ -1,0 +1,38 @@
+Re_Trigger_Approval_Flow as "Re-Trigger Approval Flow"
+{
+
+			
+							type =  form
+							form = Training_Completion_Request
+			
+							record event = on edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														input.Status = "Pending";
+													insert into History
+													[
+														Added_User=zoho.loginuser
+														Action_By=input.Staff.ID
+														Action_field="Training Completion Re-Requested"
+														Comment="Compliance Training Completion Re-Requested"
+														Training_Completion_Request=input.ID
+													]
+													compliance_rec = Compliance_Training[ID == input.Compliance_Training];
+													if(compliance_rec.count() > 0)
+													{
+														compliance_rec.Training_Name=input.Training_Name;
+													}
+													input.Current_Approver = thisapp.helpers.returnComplianceCompletionRequestNextApprover("",input.Staff.ID);
+													openUrl("#Script:page.parent.refresh","same window");
+									)
+								}
+							}
+			
+						
+			
+}

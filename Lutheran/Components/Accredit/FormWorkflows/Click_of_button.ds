@@ -1,0 +1,34 @@
+Click_of_button as "Click of button"
+{
+
+			
+							type =  form
+							form = Accredit
+							button = Submit
+							on click
+							{
+								actions 
+								{
+								on click
+								(
+									if(input.Renewal_Action == "Extend" && input.Renewal_Date == null)
+													{
+														alert "Please, select renewal date";
+													}
+													else
+													{
+														accredition_details = Accreditation_Details[ID == input.Accreditation.ID];
+														accredition_details.Status_Accreditation="Accredited";
+														accredition_details.Completion_Date=zoho.currentdate;
+														if(input.Renewal_Action == "Extend")
+														{
+															accredition_details.Due_Date=input.Renewal_Date;
+														}
+														openUrl("#Script:page.parent.refresh","same window");
+													}
+								)
+								}
+							}
+						
+			
+}

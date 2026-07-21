@@ -1,0 +1,27 @@
+Load_of_the_form_On_Add_S4 as "Load of the form - On Add Scripts"
+{
+
+			
+							type =  form
+							form = School
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(School[ID != null].count() == 0)
+													{
+														hide Campus;
+														input.Region = Regions[ID != null].ID;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,267 @@
+form Staff_Employment
+{
+
+		
+					displayname = "Staff Employment"
+					success message = "Staff Employment Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Staff
+					(
+						type = picklist	
+						values  = Staff_Master.ID
+		    			bidirectional = Employment_Records
+		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					School
+					(
+						type = picklist	
+						values  = School.ID
+		    			displayformat = [school_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Campus
+					(
+						type = picklist	
+						values  = Campus.ID
+		    			displayformat = [campus_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Position
+					(
+						type = picklist	
+						values  = Positions.ID
+		    			displayformat = [position_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Admin_Type
+					(
+						type = picklist
+						displayname = "Admin Type"
+						maxchar = 100
+						values = {"Overall Admin","National","Region","School","Campus"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Commencement_Date
+					(
+		    			type = date
+						displayname = "Commencement Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					End_Date
+					(
+		    			type = date
+						displayname = "End Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have FTE
+					(
+						type = decimal
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Teaching_Staff
+					(
+						type = picklist
+						displayname = "Teaching Staff"
+						maxchar = 100
+						values = {"Yes","No"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Teacher_Type
+					(
+						type = picklist
+						displayname = "Teacher Type"
+						maxchar = 100
+						values = {"Across All Levels","Entry","Kindergarden","Primary","Secondary"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Year_Level
+					(
+						type = list	
+						displayname = "Year Level"
+						values  = Year_Level.ID
+		    			displayformat = [year_level_name]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Subject_field
+					(
+						type = list	
+						displayname = "Subject"
+						values  = Subject_form.ID
+		    			displayformat = [subject_field]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Speciality
+					(
+						type = list	
+						values  = Speciality.ID
+		    			displayformat = [Speciality]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Service_In_Years
+					(
+						type = number
+						displayname = "Service In Years"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Service_In_Months
+					(
+						type = number
+						displayname = "Service In Months"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Service_In_Days
+					(
+						type = number
+						displayname = "Service In Days"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Total_Service_Period
+					(
+		    			type = text
+						displayname = "Total Service Period"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Position1
+					(
+		    			type = formula
+						displayname = "Position"
+						value =  input.Position.position_name
+						visibility = false
+						display type = text
+						format = plaintext
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					School1
+					(
+		    			type = formula
+						displayname = "School"
+						value =  input.School.school_name
+						visibility = false
+						display type = text
+						format = plaintext
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Campus1
+					(
+		    			type = formula
+						displayname = "Campus"
+						value =  input.Campus.campus_name
+						visibility = false
+						display type = text
+						format = plaintext
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Is_primary
+					(
+		    			type = checkbox
+						displayname = "Is primary"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Is_On_Leave
+					(
+		    			type = checkbox
+						displayname = "Is On Leave "
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Leave_Untill
+					(
+		    			type = date
+						displayname = "Leave Untill"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

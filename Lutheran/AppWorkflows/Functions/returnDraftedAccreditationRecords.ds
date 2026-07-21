@@ -1,0 +1,8 @@
+list reportfilters.returnDraftedAccreditationRecords()
+{
+
+			
+			                 	return Accreditation_Details[Status_Accreditation == "Draft"].Staff.ID.getAll();
+			                 
+			
+}

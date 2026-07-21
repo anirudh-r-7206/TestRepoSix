@@ -1,0 +1,72 @@
+report Training_Completion_Request_Import_Report
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Training_Type as "Training Type"
+										Training_Name as "Training Name"
+										Completion_Date as "Completion Date"
+										Status
+										Reason
+										"Reinsert"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Delete 
+									)
+								record
+								(
+									"Edit "
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Training_Type as "Training Type"
+										Training_Name as "Training Name"
+										Completion_Date as "Completion Date"
+										Status
+										Reason
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		
+}

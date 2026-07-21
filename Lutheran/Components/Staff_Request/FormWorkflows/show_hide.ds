@@ -1,0 +1,131 @@
+show_hide as "show hide"
+{
+
+			
+							type =  form
+							form = Staff_Request
+			
+							record event = on add
+			
+							on user input of Current_Position
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Current_Position != null)
+													{
+														fetchCampus = Campus[ID != 0];
+														if(input.Current_Position.position_name == "Administrative Officer")
+														{
+															show Admin_Type;
+															hide Current_Employment;
+															show FTE;
+															hide Campus;
+															input.Admin_Type = null;
+															input.Current_Employment = null;
+															input.Campus = null;
+															input.FTE = null;
+															hide Teacher_Type;
+															hide Year_Level;
+															hide Subject_form;
+															hide Speciality;
+															input.Teacher_Type = null;
+															input.Year_Level = null;
+															input.Subject_form = null;
+															input.Speciality = null;
+														}
+														else
+														{
+															hide Admin_Type;
+															input.Admin_Type = null;
+															input.Organisation = null;
+															input.Regions = null;
+															input.Campus = null;
+															input.Current_Employment = null;
+															if(input.Request_Type == "Position Update")
+															{
+																getStaff = Staff_Master[ID == input.Staff];
+																show Current_Employment;
+																show FTE;
+																show Campus;
+																if(getStaff.count() > 0)
+																{
+																	if(getStaff.Current_Position.position_name == "Administrative Officer")
+																	{
+																		input.Campus:ui.add(Campus[ID != 0].ID.getAll());
+																		input.FTE = getStaff.FTE;
+																	}
+																	else
+																	{
+																		disable Current_Employment;
+																		disable Campus;
+																		if(getStaff.Campus == null)
+																		{
+																			enable Campus;
+																		}
+																		input.Current_Employment = getStaff.Current_Employment;
+																		input.Campus = getStaff.Campus;
+																		input.FTE = getStaff.FTE;
+																	}
+																}
+																if(input.Teaching_Staff == "Yes")
+																{
+																	show Teacher_Type;
+																	show Year_Level;
+																	show Subject_form;
+																	show Speciality;
+																}
+																else
+																{
+																	hide Teacher_Type;
+																	hide Year_Level;
+																	hide Subject_form;
+																	hide Speciality;
+																	input.Teacher_Type = null;
+																	input.Year_Level = null;
+																	input.Subject_form = null;
+																	input.Speciality = null;
+																}
+															}
+															else if(input.Request_Type == "Transfer" || input.Request_Type == "New Employment")
+															{
+																show Current_Employment;
+																show FTE;
+																show Campus;
+																enable Current_Employment;
+																enable Campus;
+																input.Campus:ui.add(Campus[ID != 0].ID.getAll());
+																if(input.Teaching_Staff == "Yes")
+																{
+																	show Teacher_Type;
+																	show Year_Level;
+																	show Subject_form;
+																	show Speciality;
+																}
+																else
+																{
+																	hide Teacher_Type;
+																	hide Year_Level;
+																	hide Subject_form;
+																	hide Speciality;
+																	input.Teacher_Type = null;
+																	input.Year_Level = null;
+																	input.Subject_form = null;
+																	input.Speciality = null;
+																}
+															}
+														}
+													}
+													else
+													{
+														hide Admin_Type;
+														input.Admin_Type = null;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

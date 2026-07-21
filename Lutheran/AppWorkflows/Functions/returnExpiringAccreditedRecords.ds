@@ -1,0 +1,8 @@
+list reportfilters.returnExpiringAccreditedRecords()
+{
+
+			
+			                 	return Accreditation_Details[Status_Accreditation == "Accredited" && Due_Date >= zoho.currentdate.subYear(1)].ID.getAll();
+			                 
+			
+}

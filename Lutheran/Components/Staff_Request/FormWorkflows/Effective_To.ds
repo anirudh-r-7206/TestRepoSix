@@ -1,0 +1,35 @@
+Effective_To as "Effective To"
+{
+
+			
+							type =  form
+							form = Staff_Request
+			
+							record event = on add or edit
+			
+							on user input of Effective_To
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Effective_To != null)
+													{
+														if(input.Effective_Date == null)
+														{
+															alert "Please select Effective Date first.";
+															input.Effective_To = null;
+														}
+														else if(input.Effective_To <= input.Effective_Date)
+														{
+															alert "Effective To date must be after Effective Date.";
+															input.Effective_To = null;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

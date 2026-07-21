@@ -1,0 +1,39 @@
+unser_input_of_cn as "unser input of cn"
+{
+
+			
+							type =  form
+							form = Employee_Filter
+			
+							record event = on add
+			
+							on user input of Search_Contact_Number
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Current_Page == "staffPage")
+													{
+														url = "#Report:All_Staff?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false&zc_AddRec=false&zc_Import=false";
+														if(!isNull(input.Search_School))
+														{
+															url = url + "&Current_Employment=" + input.Search_School.school_name;
+														}
+														if(!isNull(input.Search_Contact_Number))
+														{
+															url = url + "&Phone_Number=" + input.Search_Contact_Number;
+														}
+														if(!isNull(input.Select_Region))
+														{
+															url = url + "&Regions=" + input.Select_Region.region_name;
+														}
+														openUrl(url,"same window");
+													}
+									)
+								}
+							}
+			
+						
+			
+}

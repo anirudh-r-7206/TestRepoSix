@@ -1,0 +1,56 @@
+void mail.sendRequestApproved(int requestId)
+{
+
+			
+			                 	req = Staff_Request[ID == requestId];
+			                 	if(req.count() > 0)
+			                 	{
+			                 		toList = List();
+			                 		if(req.Staff != null && req.Staff.Staff_Email != null)
+			                 		{
+			                 			toList.add(req.Staff.Staff_Email);
+			                 		}
+			                 		if(req.Raised_by != null && req.Raised_by.Staff_Email != null)
+			                 		{
+			                 			toList.add(req.Raised_by.Staff_Email);
+			                 		}
+			                 		if(toList.size() > 0)
+			                 		{
+			                 			template = Email_Templates[Template_Name == "Request_Approved"];
+			                 			if(template.count() > 0)
+			                 			{
+			                 				staffName = "";
+			                 				if(req.Staff != null)
+			                 				{
+			                 					staffName = req.Staff.Name;
+			                 				}
+			                 				raisedBy = "";
+			                 				if(req.Raised_by != null)
+			                 				{
+			                 					raisedBy = req.Raised_by.Name;
+			                 				}
+			                 				effectiveDate = "";
+			                 				if(req.Effective_Date != null)
+			                 				{
+			                 					effectiveDate = req.Effective_Date.toString("dd-MMM-yyyy");
+			                 				}
+			                 				subjectText = template.Subject_field;
+			                 				subjectText = subjectText.replaceAll("${Request_Type}",req.Request_Type,true);
+			                 				messageContent = template.Email_Content;
+			                 				messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
+			                 				messageContent = messageContent.replaceAll("${Request_Type}",req.Request_Type,true);
+			                 				messageContent = messageContent.replaceAll("${Raised_By}",raisedBy,true);
+			                 				messageContent = messageContent.replaceAll("${Effective_Date}",effectiveDate,true);
+			                 				sendmail
+			                 				[
+			                 					from :zoho.adminuserid
+			                 					to :toList
+			                 					subject :subjectText
+			                 					message :messageContent
+			                 				]
+			                 			}
+			                 		}
+			                 	}
+			                 
+			
+}

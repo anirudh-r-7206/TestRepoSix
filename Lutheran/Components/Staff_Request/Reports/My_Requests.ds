@@ -1,0 +1,65 @@
+list My_Requests
+{
+
+		
+					displayName = "My Requests"
+					show all rows from Staff_Request  [Staff_Email == zoho.loginuserid]  
+					(
+						Request_Type as "Request Type"
+						Staff
+						Effective_Date as "Effective Date"
+						Supporting_Docs as "Supporting Docs"
+						Raised_by as "Raised by"
+						Status
+						Request_Details as "Request Details"
+						Current_Employment as "School"
+						Current_Position as "Position"
+						FTE
+						Teacher_Type as "Teacher Type"
+						Next_Approver as "Next Approver"
+						Added_Time as "Added Time"
+						Effective_To as "Effective To"
+					)
+					sort by
+					(
+						Added_Time descending
+					)
+					custom actions
+					(
+						"Reject "
+						(
+			  			workflow = Reject
+						show action in view header = true
+						show action in edit record menu = true
+						)
+						"Approve"
+						(
+			  			workflow = Approve
+						show action in view header = true
+						show action in edit record menu = true
+						)
+					)
+					conditional formatting
+					(
+						"New Formatting"
+						{
+						condition = (Status == "Rejected" || Status == "Cancelled")
+						fields = [Status]
+						format = "color:#e64d3b;"
+						}
+						"New Formatting"
+						{
+						condition = (Status == "Pending")
+						fields = [Status]
+						format = "color:#e77f06;"
+						}
+						"New Formatting"
+						{
+						condition = (Status == "Approved")
+						fields = [Status]
+						format = "color:#19bc9f;"
+						}
+					)
+				
+		
+}

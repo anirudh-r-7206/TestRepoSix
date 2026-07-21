@@ -1,0 +1,23 @@
+User_input_of_Training_Ty as "User input of Training Type"
+{
+
+			
+							type =  form
+							form = Accreditation
+			
+							record event = on add or edit
+			
+							on user input of Required_Courses.Training_Type
+							{
+								actions 
+								{
+									custom deluge script
+									(
+													allTrainingTypes = Training_Type[Type_field == "Accreditation"].ID.getAll();
+									)
+								}
+							}
+			
+						
+			
+}

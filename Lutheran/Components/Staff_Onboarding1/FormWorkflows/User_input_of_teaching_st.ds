@@ -1,0 +1,129 @@
+User_input_of_teaching_st as "User input of teaching staff"
+{
+
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Teaching_Staff
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetStaff = Staff_Master[ID == input.Staff];
+													if(input.Teaching_Staff == "Yes")
+													{
+														fetchedPositions = Positions[applicable_for == "Teaching"].ID.getAll();
+														input.Current_Position:ui.add(fetchedPositions);
+														show Current_Position;
+														show Teacher_Type;
+														show Speciality;
+														show Year_Level;
+														show Subject_form;
+														hide Admin_Type;
+														hide Organisation;
+														hide Region;
+														hide Current_Employment;
+														hide Campus;
+														if(input.Is_Loaded == true)
+														{
+															if(input.Admin_Type != null)
+															{
+																input.Admin_Type = null;
+															}
+															if(input.Organisation != null)
+															{
+																input.Organisation = null;
+															}
+															if(input.Region != null)
+															{
+																input.Region = null;
+															}
+															if(input.Current_Employment != null)
+															{
+																input.Current_Employment = null;
+															}
+															if(input.Campus != null)
+															{
+																input.Campus = null;
+															}
+														}
+														if(input.Is_Loaded == false)
+														{
+															if(fetStaff.Current_Position != null)
+															{
+																input.Current_Position = fetStaff.Current_Position;
+															}
+														}
+													}
+													else
+													{
+														fetchedPositions = Positions[applicable_for == "Non-Teaching"].ID.getAll();
+														input.Current_Position:ui.add(fetchedPositions);
+														show Current_Position;
+														hide Teacher_Type;
+														hide Speciality;
+														hide Year_Level;
+														hide Subject_form;
+														hide Admin_Type;
+														hide Organisation;
+														hide Region;
+														hide Current_Employment;
+														hide Campus;
+														if(input.Is_Loaded == true)
+														{
+															if(input.Teacher_Type != null)
+															{
+																input.Teacher_Type = null;
+															}
+															if(input.Speciality != null)
+															{
+																input.Speciality = null;
+															}
+															if(input.Year_Level != null)
+															{
+																input.Year_Level = null;
+															}
+															if(input.Subject_form != null)
+															{
+																input.Subject_form = null;
+															}
+															if(input.Admin_Type != null)
+															{
+																input.Admin_Type = null;
+															}
+															if(input.Organisation != null)
+															{
+																input.Organisation = null;
+															}
+															if(input.Region != null)
+															{
+																input.Region = null;
+															}
+															if(input.Current_Employment != null)
+															{
+																input.Current_Employment = null;
+															}
+															if(input.Campus != null)
+															{
+																input.Campus = null;
+															}
+														}
+														if(input.Is_Loaded == false)
+														{
+															if(fetStaff.Current_Position != null)
+															{
+																input.Current_Position = fetStaff.Current_Position;
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

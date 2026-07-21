@@ -1,0 +1,126 @@
+<%
+	selected_tab = ifnull(input.tab,"");
+	if(selected_tab == "" || selected_tab.isEmpty())
+	{
+		selected_tab = "pending";
+	}
+	pending_request_count = Compliance_Training[Staff.Staff_Email == zoho.loginuserid && Status == "Pending"].count();
+	completed_request_count = Compliance_Training[Staff.Staff_Email == zoho.loginuserid && Status == "Completed"].count();
+	all_request_count = Compliance_Training[Staff.Staff_Email == zoho.loginuserid].count();
+	tab_list = {"pending":pending_request_count,"completed":completed_request_count,"all":all_request_count};
+	if(selected_tab == "completed")
+	{
+		report_url = "My_Completed_Compliance_Trainings";
+	}
+	else if(selected_tab == "all")
+	{
+		report_url = "My_Compliance_Trainings";
+	}
+	else
+	{
+		selected_tab = "pending";
+		report_url = "My_Pending_Compliance_Trainings";
+	}
+	%>
+<style>
+	<%=thisapp.Styles.Base_Styles()%>
+	.zcs-horizontal-tabhead {
+				box-shadow: 0px -1px 0px 0px var(--zcs_tertiary_border_color) inset;
+				overflow-x: auto;
+				overflow-y: hidden;
+				-ms-overflow-style: none;
+				scrollbar-width: none;
+		}
+
+		.zcs-horizontal-tabhead::-webkit-scrollbar {
+				display: none;
+		}
+
+		.zcs-horizontal-tabitem {
+				list-style-type: none;
+				border-bottom: 1px solid transparent;
+				letter-spacing: 0.1px;
+		}
+
+		.zcs-horizontal-tabicon {
+				width: 16px;
+				height: 16px;
+		}
+
+		.zcs-horizontal-tabtext {
+				text-wrap: nowrap;
+		}
+
+		.zcs-horizontal-tabcount {
+				min-width: 20px;
+				background-color: var(--zcs-page-bg-color);
+		}
+
+		.zcs-horizontal-tabitem:hover .zcs-horizontal-tablink {
+				color: var(--zcs_brand_color);
+		}
+
+		.zcs-horizontal-tabitem:hover .zcs-horizontal-tabcount,
+		.zcs-horizontal-tabitem.zcs-horizontal-tabactive .zcs-horizontal-tabcount {
+				background-color: var(--zcs_component_hover_color);
+		}
+
+		.zcs-horizontal-tabitem.zcs-horizontal-tabactive {
+				border-bottom-color: var(--zcs_brand_color);
+		}
+
+		.zcs-horizontal-tabitem.zcs-horizontal-tabactive .zcs-horizontal-tablink {
+				color: var(--zcs_brand_color);
+		}
+
+		.zcs-horizontal-tabbody {
+				overflow: auto;
+		}
+	
+	.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper.zc-page-content-wrapper .elemContainment {
+		box-sizing: border-box;
+	}
+	
+	.zcs-horizontal-tabitem .zcs-horizontal-tablink {
+		padding-inline: 20px;
+	}
+	
+	.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .view-outer-wrapper .reportfullwidth {
+		border-radius: var(--content_card_radius);
+		box-shadow: none !important;
+		overflow: hidden;
+			margin-top: 0 !important;
+	}
+	
+	.zc-pb-tile-card {
+		background: unset !important;
+	}
+	
+	.zcs-horizontal-tabpanel {
+		border-radius: 20px;
+		background: white;
+	}
+</style>
+<div class='zcs-horizontal-tabpanel zcs-flex zcs-direction-column zcs-wh-full'>
+		<ul class='zcs-horizontal-tabhead zcs-flex zcs-gap-12 zcs-px-10 zcs-py-0 zcs-m-0 zcs-box-border'>
+<%
+	for each  tab_li in tab_list.keys()
+	{
+%>
+<li class='zcs-horizontal-tabitem <%=if(selected_tab == tab_li,"zcs-horizontal-tabactive","")%>'>
+						<a class='zcs-horizontal-tablink zcs-flex zcs-align-items-center zcs-justify-center zcs-gap-8 zcs-px-10 zcs-py-12 zcs-box-border zcs-font-medium zcs-lh-body zcs-color-tertiary'
+							href='#Page:My_Compliance_Trainings1?tab=<%=tab_li%>'>
+							<span class='zcs-horizontal-tabtext zcs-font-15 zcs-capitalize'> <%=tab_li%> </span>
+							<span
+								class='zcs-horizontal-tabcount zcs-rounded-sm zcs-px-6 zcs-py-2 zcs-box-border zcs-font-12 zcs-text-center'>
+								<%=tab_list.get(tab_li)%> </span>
+						</a>
+					</li>
+<%
+	}
+	%>
+</ul>
+		<div class='zcs-horizontal-tabbody zcs-col-common zcs-p-10' style='box-sizing: border-box;'>
+		<div elName='zc-component' viewLinkName='<%=report_url%>' params='zc_Header=false&zc_Footer=false&zc_AddRec=false' style='height: 100% !important'></div>
+		</div>
+</div>

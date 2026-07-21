@@ -1,0 +1,131 @@
+Filter as "Filter"
+{
+
+			
+							type =  form
+							form = Employee_Filter
+							button = Search
+							on click
+							{
+								actions 
+								{
+								on click
+								(
+									// if(input.Current_Page == "staffPage")
+													// {
+													// 	if(input.Search_Contact_Number == null && input.Search_School == null && input.Select_Region == null)
+													// 	{
+													// 		alert "Select any field to proceed the search";
+													// 	}
+													// 	url = "#Report:All_Staff?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false";
+													// 	if(!isNull(input.Search_School))
+													// 	{
+													// 		url = url + "&Current_Employment=" + input.Search_School.school_name;
+													// 	}
+													// 	if(!isNull(input.Search_Contact_Number))
+													// 	{
+													// 		url = url + "&Phone_Number=" + input.Search_Contact_Number;
+													// 	}
+													// 	if(!isNull(input.Select_Region))
+													// 	{
+													// 		url = url + "&Select_Region=" + input.Select_Region.region_name;
+													// 	}
+													// 	openUrl(url,"same window");
+													// }
+													// else if(input.Current_Page == "staffOnboard")
+													// {
+													// 	if(input.Search_Contact_Number == null && input.Search_School == null)
+													// 	{
+													// 		alert "Select any field to proceed the search";
+													// 	}
+													// 	url = "#Report:All_Staff?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false";
+													// 	if(!isNull(input.Search_School))
+													// 	{
+													// 		url = url + "&Current_Employment=" + input.Search_School.school_name;
+													// 	}
+													// 	else 
+													//     {
+													// 		if(!isNull(input.Search_Contact_Number))
+													// 	{
+													// 		url = url + "&Phone_Number=" + input.Search_Contact_Number;
+													// 	}
+													// 	fetstaffmaster = Staff_Master[Current_Employment == input.Search_School || Phone_Number == input.Search_Contact_Number];
+													// 	info fetstaffmaster.count();
+													// 	if(fetstaffmaster.count() > 0)
+													// 	{
+													// 		openUrl(url,"same window");
+													// 	}
+													// 	else
+													// 	{
+													// 		openUrl("#Page:Add_Staff_Button?zc_LoadIn=embed-sd-reportview","same window");
+													// 	}
+													//     }
+													// 	}
+													// if(input.Current_Page == "staffPage")
+													// {
+													// 	if(input.Search_Contact_Number.isEmpty() && input.Search_School == null && input.Select_Region == null)
+													// 	{
+													// 		alert "Select any field to proceed the search";
+													// 	}
+													// 	else
+													// 	{
+													// 		url = "#Report:All_Staff?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false";
+													// 		if(!isNull(input.Search_School))
+													// 		{
+													// 			url = url + "&Current_Employment=" + input.Search_School.school_name;
+													// 		}
+													// 		if(!isNull(input.Search_Contact_Number))
+													// 		{
+													// 			url = url + "&Phone_Number=" + input.Search_Contact_Number;
+													// 		}
+													// 		if(!isNull(input.Select_Region))
+													// 		{
+													// 			url = url + "&Regions=" + input.Select_Region.region_name;
+													// 		}
+													// 		openUrl(url,"same window");
+													// 	}
+													// }
+													// if(input.Current_Page == "staffOnboard")
+													// {
+													// 	if(input.Search_Staff.isEmpty() && input.Search_Contact == null && input.Search_DOB == null)
+													// 	{
+													// 		alert "Select any field to proceed the search";
+													// 	}
+													// 	else
+													// 	{
+													// 		url = "#Report:All_Staff_Grouped?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false";
+													// 		filteredIds = list();
+													// 		if(!input.Search_Staff.isEmpty())
+													// 		{
+													// 			url = url + "&Name=" + input.Search_Staff + "&Name_op=26";
+													// 			fetstaffmaster = Staff_Master[Name.contains(input.Search_Staff)];
+													// 			filteredIds = fetstaffmaster.ID.getall();
+													// 		}
+													// 		if(input.Search_Contact != null)
+													// 		{
+													// 			url = url + "&Phone_Number=" + input.Search_Contact + "&Phone_Number_op=26";
+													// 			fetstaffmaster = Staff_Master[ID in filteredIds && Phone_Number.contains(input.Search_Contact.toString())];
+													// 			filteredIds = fetstaffmaster.ID.getall();
+													// 		}
+													// 		if(input.Search_DOB != null)
+													// 		{
+													// 			url = url + "&date_of_birth=" + input.Search_DOB + "&date_of_birth_op=18";
+													// 			fetstaffmaster = Staff_Master[ID in filteredIds && date_of_birth == input.Search_DOB];
+													// 			filteredIds = fetstaffmaster.ID.getall();
+													// 		}
+													// 		if(filteredIds.size() > 0)
+													// 		{
+													// 			openUrl(url,"same window");
+													// 		}
+													// 		else
+													// 		{
+													// 			openUrl("#Page:Add_Staff_Button?zc_LoadIn=embed-sd-reportview","same window");
+													// 		}
+													// 	}
+													// }
+								)
+								}
+							}
+						
+			
+}

@@ -1,0 +1,14 @@
+default list Email_Templates1
+{
+
+		
+					displayName = "Email Templates"
+					show all rows from Email_Templates    
+					(
+						Template_Name as "Template Name"
+						Subject_field as "Subject"
+						Email_Content as "Email Content"
+					)
+				
+		
+}

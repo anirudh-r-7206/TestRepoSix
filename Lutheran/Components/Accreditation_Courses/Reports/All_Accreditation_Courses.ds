@@ -1,0 +1,14 @@
+default list All_Accreditation_Courses
+{
+
+		
+					displayName = "All Accreditation Courses"
+					show all rows from Accreditation_Courses    
+					(
+						SI_No as "SI No"
+						Training_Type as "Training Type"
+						Accreditation
+					)
+				
+		
+}

@@ -1,0 +1,33 @@
+Add_Service_Years
+{
+
+			
+			    			display name = "Add Service Years"
+			    			type = batchworkflow
+			    			form = Staff_Employment[End_Date is null]
+			    			event = "On Schedule"
+			    			start = "01/05/2026 22:00:00"
+			    			frequency = daily
+			    			batch size = 1000
+			    			status = active
+			    			on execute 
+			    			{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Staff != null && input.Commencement_Date != null)
+													{
+														service_years = thisapp.helpers.returnServiceYears(input.Commencement_Date,zoho.currentdate);
+														input.Service_In_Years = service_years.get("years");
+														input.Service_In_Months = service_years.get("months");
+														input.Service_In_Days = service_years.get("days");
+														input.Total_Service_Period = thisapp.helpers.formatServicePeriod(service_years);
+														thisapp.helpers.sumofServicePeriod(input.Staff.ID);
+													}
+									)
+								}
+			    			}
+						
+			
+}

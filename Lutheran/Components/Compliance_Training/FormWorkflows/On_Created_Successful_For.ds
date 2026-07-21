@@ -1,0 +1,39 @@
+On_Created_Successful_For as "On Created - Successful Form Submission"
+{
+
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on add
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetStaff = Staff_Master[Staff_Email == zoho.loginuserid];
+													if(fetStaff.Admin_Type in {"Overall Admin","National","Region","School","Campus"} && input.Status == "Completed")
+													{
+														fetAccreditation = Accreditation_Details[Staff == input.Staff] sort by Added_Time desc range from 0 to 1;
+														if(fetAccreditation.count() > 0)
+														{
+															input.Accreditation_Details = fetAccreditation.ID;
+															if(fetAccreditation.PD_Hours_Collected != null)
+															{
+																fetAccreditation.PD_Hours_Collected=fetAccreditation.PD_Hours_Collected + ifNull(input.Hours_Number_for_PD,0);
+															}
+															else
+															{
+																fetAccreditation.PD_Hours_Collected=input.Hours_Number_for_PD;
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

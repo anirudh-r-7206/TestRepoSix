@@ -1,0 +1,67 @@
+report All_Training_Types
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Training
+										Type_field as "Type"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Training
+										Type_field as "Type"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
+						)
+					
+		
+}

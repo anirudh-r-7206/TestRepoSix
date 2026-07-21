@@ -1,0 +1,72 @@
+report All_Compliance_Trainings
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Training_Name as "Training Name"
+										Training_Type as "Training Type"
+										Hours_Number_for_PD as "PD Hours"
+										Completion_Date as "Completion Date"
+										Completion_Request_Raised as "Completion Request Raised?"
+										Status
+										"Complete"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Staff
+										Training_Name as "Training Name"
+										Training_Type as "Training Type"
+										Hours_Number_for_PD as "PD Hours"
+										Completion_Date as "Completion Date"
+										Completion_Request_Raised as "Completion Request Raised?"
+										Status
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

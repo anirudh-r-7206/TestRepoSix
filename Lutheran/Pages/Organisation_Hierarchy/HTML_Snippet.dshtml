@@ -1,0 +1,307 @@
+<%
+	clr_list = {"#FF5073","#FFB350","#19BFAE","#AA68FA","#FA68BD","#4EBC13","#509FFF"};
+	clr_ind = 0;
+	loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
+	var = thisapp.permissions.loginUserProfile();
+	all_open = false;
+	if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+	{
+		all_open = true;
+	}
+	%>
+<style>
+	<%=thisapp.Styles.Base_Styles()%>
+	* { 
+	  margin: 0; 
+	 padding: 0; 
+	}
+
+	.org-container {
+		border-radius: 14px;
+		background: #fff;
+		padding-block: 25px;
+		overflow: hidden;
+	box-sizing: border-box;
+	}
+
+	.org-container .zcs-common-hdr {
+	margin-inline: 25px;
+	}
+
+	.zc-pb-tile-card { background: unset !important; }
+
+	.org-tree {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	flex: 1;
+	overflow: auto;
+	padding-inline: 25px;
+	}
+
+	.org-tree details,
+	.org-tree .org-campus-row {
+		border-bottom: 1px solid #f2f2f2;
+	}
+
+	.org-tree details:last-child,
+	.org-tree .org-campus-row:last-child {
+		border-bottom: none;
+	}
+
+	.org-tree summary {
+		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 14px 6px;
+		cursor: pointer;
+		user-select: none;
+		gap: 12px;
+	}
+
+	.org-tree summary::-webkit-details-marker { 
+	  display: none; 
+	}
+
+	.org-summary-left {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 1;
+	}
+
+	.org-chevron {
+		width: 18px;
+		height: 18px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		color: #1a73e8;
+		transition: transform 0.2s ease;
+	}
+
+	details[open] > summary .org-chevron {
+		transform: rotate(90deg);
+	}
+
+	details[open] > summary .org-chevron svg {
+		transform: rotate(0deg);
+	}
+
+	.org-label {
+		font-size: 14px;
+		font-weight: 600;
+		color: #1a1a2e;
+	}
+
+	.org-level-1 > summary .org-label {
+		font-size: 15px;
+	}
+
+	.org-meta {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 13px;
+		color: #aaa;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+
+	.org-meta-dot {
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background: #ccc;
+		display: inline-block;
+	}
+	
+	.org-meta .org-meta-item:not(:first-child)::before {
+		content: "";
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background: #ccc;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 5px;
+}
+
+	.org-meta-item {
+		color: #999;
+		font-size: 13px;
+	}
+
+	.org-children {
+		padding-left: 32px;
+		border-left: 2px solid #e8edf5;
+		margin-left: 16px;
+	}
+
+	.org-campus-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 13px 6px 13px 10px;
+		gap: 12px;
+	}
+
+	.org-campus-left {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 1;
+	}
+
+	.org-campus-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+
+	.org-campus-label {
+		font-size: 14px;
+		color: #333;
+		font-weight: 400;
+	}
+
+	.org-staff-count {
+		font-size: 13px;
+		color: #999;
+		white-space: nowrap;
+	}
+	
+	.popupbox {
+		width: 70%;
+		height: 90%;
+}
+
+div[pagelinkname="Organisation_Hierarchy"] .elemContainment {
+	padding: unset !important;
+}
+
+summary:hover,
+.org-campus-row:hover {
+	background: rgb(from var(--theme_brand_color) r g b / 0.1);
+		border-radius: 10px;
+}
+
+</style>
+
+<div class='zcs-flex zcs-wh-full zcs-direction-column org-container'>
+	<div class='zcs-common-hdr'>Organisation Hierarchy</div>
+
+	<ul class='org-tree'>
+<%
+	for each  organisation in Organisation[ID != null]
+	{
+		regions = Regions[Main_Organisation == organisation.ID];
+		regionIds = Regions[Main_Organisation == organisation.ID].ID.getAll();
+		school = School[Region in regionIds];
+		schoolIds = School[Region in regionIds].ID.getAll();
+		campus = Campus[School in schoolIds];
+		staff = Staff_Master[Organisation == organisation.ID];
+		%>
+<li>
+	<details open class="org-level-1">
+				<summary>
+					<div class="org-summary-left">
+						<span class="org-chevron">
+							<svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="var(--theme_brand_color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</span>
+						<span class="org-label"><%=organisation.organisation_name%></span>
+					</div>
+					<div class="org-meta">
+		    <%=if(regions.count() > 0,"<span class='org-meta-item'>" + regions.count() + " regions</span>","")%>
+		  	<%=if(school.count() > 0,"<span class='org-meta-item'>" + school.count() + " schools</span>","")%>
+			<%=if(campus.count() > 0,"<span class='org-meta-item'>" + campus.count() + " campuses</span>","")%>
+			<%=if(staff.count() > 0,"<span class='org-meta-item'>" + staff.count() + " staff</span>","")%>
+					</div>
+				</summary>
+<%
+		for each  region in regions
+		{
+			school = School[Region == region.ID];
+			schoolIds = School[Region == region.ID].ID.getAll();
+			campus = Campus[School in schoolIds];
+			staff = Staff_Master[Regions == region.ID];
+			%>
+<div class="org-children">
+				  <details <%=if(all_open == true || loginUser.Regions == region.ID,"open","")%>>
+					<summary>
+					  <div class="org-summary-left">
+						<span class="org-chevron">
+						  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="var(--theme_brand_color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						  </svg>
+						</span>
+						<span class="org-label"><%=region.region_name%></span>
+					  </div>
+					  <div class="org-meta">
+						<%=if(school.count() > 0,"<span class='org-meta-item'>" + school.count() + " schools</span>","")%>
+						<%=if(campus.count() > 0,"<span class='org-meta-item'>" + campus.count() + " campuses</span>","")%>
+						<%=if(staff.count() > 0,"<span class='org-meta-item'>" + staff.count() + " staff</span>","")%>
+					  </div>
+					</summary>
+<%
+			for each  school in School[Region == region.ID]
+			{
+				campus = Campus[School == school.ID];
+				staff = Staff_Master[Current_Employment == school.ID];
+				%>
+<div class="org-children">
+								  <details <%=if(all_open == true || loginUser.Current_Employment == school.ID,"open","")%>>
+									<summary>
+									  <div class="org-summary-left">
+										<span class="org-chevron">
+										  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="var(--theme_brand_color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										  </svg>
+										</span>
+										<span class="org-label"><%=school.school_name%></span>
+									  </div>
+									  <div class="org-meta">
+										<%=if(campus.count() > 0,"<span class='org-meta-item'>" + campus.count() + " campuses</span>","")%>
+										<%=if(staff.count() > 0,"<span class='org-meta-item'>" + staff.count() + " staff</span>","")%>
+									  </div>
+									</summary>
+<%
+				for each  campus in Campus[School == school.ID]
+				{
+					staff = Staff_Master[Campus == campus.ID];
+					%>
+<div class="org-children">
+											  <div class="org-campus-row">
+												<div class="org-campus-left">
+		    										<span class="org-campus-dot" style='background:<%=clr_list.get(clr_ind % clr_list.size())%>'></span>
+												  	<span class="org-campus-label"><%=campus.campus_name%></span>
+												</div>
+												<%=if(staff.count() > 0,"<span class='org-meta-item'>" + staff.count() + " staff</span>","")%>
+											  </div>
+											</div>
+<%
+					clr_ind = clr_ind + 1;
+				}
+				%>
+</details>
+								</div>
+<%
+			}
+			%>
+</details>
+				</div>
+<%
+		}
+		%>
+</details>
+		</li>
+<%
+	}
+	%>
+</ul>
+</div>

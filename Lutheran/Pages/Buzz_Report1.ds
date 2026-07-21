@@ -1,0 +1,11 @@
+<page linkname = "Buzz_Report1" displayname = "Buzz Book Report"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<file name:Report.ds/> </column>
+		</row>
+	</layout>
+</zml>
+</content>

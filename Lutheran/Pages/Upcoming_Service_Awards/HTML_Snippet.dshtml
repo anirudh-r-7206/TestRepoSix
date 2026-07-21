@@ -1,0 +1,165 @@
+<style>
+	
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .form-outer-wrapper {
+		box-shadow: unset !important;
+}
+
+		 * {
+						padding: 0;
+						margin: 0;
+						border: none;
+				}
+	
+				.main-container {
+			height: calc(100% - 30px);
+			width: calc(100% - 30px);
+			padding: 10px 20px;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			margin: 15px;
+			box-sizing: border-box;
+			border-radius: 10px;
+// 			box-shadow: 0 0 10px 0 #cccccc;
+			            box-sizing: border-box;
+
+		}
+		.Layout.elemContainment {
+		padding: unset !important;
+}
+		.popage {
+			border: 1px solid #cccccc;
+			border-radius: 10px;
+			overflow: auto;
+		}
+
+	  div#zppagesLive,
+		div#elementsContainer,
+		.Layout.elemContainment,
+		div#row_1,
+		.zc-pb-formreport-placeholder{
+			height: 100% !important;
+		}
+		.PO_search .zc-footer-wrapper {
+			display: none !important;
+		}
+		.PO_search .form-group {
+				margin-bottom: 0px !important; 
+				}
+		.PO_search .zc-form-fullheight .form-outer-wrapper .formContainer,
+		.PO_search  .form-outer-wrapper .formContainer
+		{
+			padding:0px !important;
+		}
+		.PO_search.divEmbedContainer {
+			height:60px !important;
+			padding-top:6px;
+			            box-sizing: border-box;
+
+				}
+		.popage.divEmbedContainer {
+			height:calc(100% - 90px) !important; 
+				}
+		.popage .zc-pb-page-content-wrapper [displaytype="plain"] .elemContainment
+		{
+			border:0px !important;
+		}
+		.search-text
+		{
+			font-size: 20px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color:#444aa5;
+		}
+		
+			.button-div {
+		width: 60px;
+		height: 41px;
+		background: #f8bb27;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+}
+.zpelement-wrapper.zcpage-elemContainer#row_1 {
+		border: none;
+}
+// .button-div {
+//     width: 60px;
+//     height: 40px;
+//     background: #f8bb27;
+//     display: none;
+//     align-items: center;
+//     justify-content: center;
+//     border-radius: 5px;
+//     position: absolute;
+//     right: 13px;
+//     top: 36px;
+//     color: black;
+// }
+.form-button-div {
+		display: flex;
+		align-items: center;
+		position: relative;
+}
+.top-timeline-div {
+		display: flex;
+		gap: 80px;
+		align-items: center;
+		justify-content: flex-end;
+}
+.top-logo-div {
+		 width: 252px;
+/*     height: 100px; */
+		border-radius: 14px;
+		display: flex;
+		align-items: center;
+//     border: 2px solid #090986;
+		justify-content: center;
+}
+
+.zc-dem-container .inner .form-outer-wrapper form.form-table{
+	border-radius: unset !important;
+}
+img.logo-img {
+		height: 65%;
+}
+.zc-pb-tile-card {
+		overflow: hidden !important;
+}
+.popage:empty:after {
+		content: "Please choose an Award to view the eligible Staff";
+		font-size: 16px;
+}
+
+.popage:empty {
+		position: relative;
+		height: 100% !important;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+}
+</style>
+<div class="main-container">
+<div class = "top-timeline-div">
+
+<div class ="top-logo-div">
+ <!-- <img src="" > -->
+ <!--  <div class ="hearder-div">
+	 Board Rsolutions
+	 </div> -->
+</div>
+
+<div class ="form-button-div">
+	<div elName='zc-component' class="PO_search" formLinkName='Search_Service_Awards' params='zc_Header=false&amp;zc_SuccMsg=Data Added Successfully!&amp;zc_SubmitVal=Submit&amp;zc_ResetVal=Reset'></div>
+</div>
+
+</div>
+
+	<div name="popage" elName='zc-component' viewLinkName='' params=''style="width:100%; height:100%;"  class="popage" ></div>
+	
+
+</div>

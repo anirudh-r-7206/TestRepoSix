@@ -1,0 +1,30 @@
+User_input_of_Required_PD as "User input of Required PD Hours"
+{
+
+			
+							type =  form
+							form = Accreditation
+			
+							record event = on add or edit
+			
+							on user input of Required_PD_Hours
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Required_PD_Hours != null)
+													{
+														if(input.Required_PD_Hours < 0)
+														{
+															alert "Required PD Hours must be greator than 0.";
+															input.Required_PD_Hours = null;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

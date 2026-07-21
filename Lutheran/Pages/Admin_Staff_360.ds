@@ -1,0 +1,20 @@
+<page linkname = "Admin_Staff_360" parameters = "int staffID" displayname = "Admin Staff 360"/>
+<content>
+<zml webDeviceConfig='{\"layout\":{\"displayType\":\"plain\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'>
+	<layout>
+		<row>
+			<column width='100%'>
+				<dsp id='admin_staff_360_html' elementName='Admin Staff 360' bgColor=\"#FFFFFF\">
+          <![CDATA[htmlpage admin_staff_360_html()
+content
+			<%{%>
+            <file name:Admin_Staff_360.dshtml/>
+			<%}%>
+      
+      ]]>
+        </dsp>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

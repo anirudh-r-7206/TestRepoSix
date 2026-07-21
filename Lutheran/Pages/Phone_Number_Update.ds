@@ -1,0 +1,17 @@
+<page linkname = "Phone_Number_Update" displayname = "Phone Number Update"/>
+<content>
+<zml>
+	<layout>
+		<row>
+			<column width='100%'>
+				<file name:Panel_1.ds/>
+			</column>
+		</row>
+		<row>
+			<column width='100%'>
+				<file name:Panel.ds/>
+			</column>
+		</row>
+	</layout>
+</zml>
+</content>

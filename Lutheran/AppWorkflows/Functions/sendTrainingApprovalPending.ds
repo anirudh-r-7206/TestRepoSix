@@ -1,0 +1,76 @@
+void mail.sendTrainingApprovalPending(int requestId)
+{
+
+			
+			                 	req = Training_Completion_Request[ID == requestId];
+			                 	if(req.count() > 0)
+			                 	{
+			                 		getStaff = Staff_Master[ID == req.Staff];
+			                 		approverList = List();
+			                 		/* GET APPROVER LIST BASED ON CURRENT APPROVER */
+			                 		if(req.Current_Approver == "School Admin")
+			                 		{
+			                 			approverList = Staff_Master[Organisation == getStaff.Organisation && Current_Employment == getStaff.Current_Employment && Admin_Type == "School"].Staff_Email.getAll();
+			                 		}
+			                 		else if(req.Current_Approver == "Region Admin")
+			                 		{
+			                 			approverList = Staff_Master[Organisation == getStaff.Organisation && Regions == getStaff.Regions && Admin_Type == "Region"].Staff_Email.getAll();
+			                 		}
+			                 		else if(req.Current_Approver == "National Admin")
+			                 		{
+			                 			approverList = Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].Staff_Email.getAll();
+			                 		}
+			                 		else if(req.Current_Approver == "Campus Admin")
+			                 		{
+			                 			approverList = Staff_Master[Organisation == getStaff.Organisation && Campus == getStaff.Campus && Admin_Type == "Campus"].Staff_Email.getAll();
+			                 		}
+			                 		if(approverList.size() > 0)
+			                 		{
+			                 			template = Email_Templates[Template_Name == "Training_Approval_Pending"];
+			                 			if(template.count() > 0)
+			                 			{
+			                 				/* VALUES */
+			                 				staffName = "";
+			                 				if(req.Staff != null)
+			                 				{
+			                 					staffName = req.Staff.Name;
+			                 				}
+			                 				trainingName = "";
+			                 				if(req.Training_Name != null)
+			                 				{
+			                 					trainingName = req.Training_Name;
+			                 				}
+			                 				trainingType = "";
+			                 				if(req.Training_Type != null)
+			                 				{
+			                 					trainingType = req.Training_Type.Training;
+			                 				}
+			                 				raisedBy = "";
+			                 				if(req.Added_User != null)
+			                 				{
+			                 					raisedBy = req.Added_User;
+			                 				}
+			                 				/* SUBJECT */
+			                 				subjectText = template.Subject_field;
+			                 				subjectText = subjectText.replaceAll("${Training_Name}",trainingName,true);
+			                 				/* CONTENT */
+			                 				messageContent = template.Email_Content;
+			                 				messageContent = messageContent.replaceAll("${Approver_Name}",req.Current_Approver,true);
+			                 				messageContent = messageContent.replaceAll("${Training_Name}",trainingName,true);
+			                 				messageContent = messageContent.replaceAll("${Training_Type}",trainingType,true);
+			                 				messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
+			                 				messageContent = messageContent.replaceAll("${Raised_By}",raisedBy,true);
+			                 				/* SEND MAIL */
+			                 				sendmail
+			                 				[
+			                 					from :zoho.adminuserid
+			                 					to :approverList
+			                 					subject :subjectText
+			                 					message :messageContent
+			                 				]
+			                 			}
+			                 		}
+			                 	}
+			                 
+			
+}

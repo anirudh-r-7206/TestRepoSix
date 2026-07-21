@@ -1,0 +1,23 @@
+Hide_Show3 as "Hide / Show"
+{
+
+			
+							type =  form
+							form = Regions
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide School;
+									)
+								}
+							}
+			
+						
+			
+}

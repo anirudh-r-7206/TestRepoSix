@@ -1,0 +1,45 @@
+void mail.sendSabbaticalReturn(int requestId)
+{
+
+			
+			                 	req = Staff_Request[ID == requestId];
+			                 	if(req.count() > 0)
+			                 	{
+			                 		toList = List();
+			                 		if(req.Staff != null && req.Staff.Staff_Email != null)
+			                 		{
+			                 			toList.add(req.Staff.Staff_Email);
+			                 		}
+			                 		if(req.Raised_by != null && req.Raised_by.Staff_Email != null)
+			                 		{
+			                 			toList.add(req.Raised_by.Staff_Email);
+			                 		}
+			                 		if(toList.size() > 0)
+			                 		{
+			                 			template = Email_Templates[Template_Name == "Sabbatical_Return"];
+			                 			if(template.count() > 0)
+			                 			{
+			                 				staffName = "";
+			                 				if(req.Staff != null)
+			                 				{
+			                 					staffName = req.Staff.Name;
+			                 				}
+			                 				processedDate = zoho.currentdate.toString("dd-MMM-yyyy");
+			                 				subjectText = template.Subject_field;
+			                 				subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
+			                 				messageContent = template.Email_Content;
+			                 				messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
+			                 				messageContent = messageContent.replaceAll("${Effective_To}",processedDate,true);
+			                 				sendmail
+			                 				[
+			                 					from :zoho.adminuserid
+			                 					to :toList
+			                 					subject :subjectText
+			                 					message :messageContent
+			                 				]
+			                 			}
+			                 		}
+			                 	}
+			                 
+			
+}

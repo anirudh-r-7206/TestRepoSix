@@ -1,0 +1,417 @@
+Show_hide_fields as "Show hide fields"
+{
+
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Admin_Type
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(!input.Admin_Type.isEmpty() && input.Admin_Type != null && input.Current_Position.position_name == "Administrative Officer")
+													{
+														fetStaff = Staff_Master[ID == input.Staff];
+														adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+														var = thisapp.permissions.loginUserProfile();
+														isSuperAdmin = false;
+														if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+														{
+															isSuperAdmin = true;
+														}
+														if(input.Is_Loaded == true)
+														{
+															input.Region = null;
+															input.Current_Employment = null;
+															input.Campus = null;
+														}
+														if(input.Admin_Type == "Overall Admin")
+														{
+															hide Organisation;
+															hide Region;
+															hide Current_Employment;
+															hide Campus;
+															if(input.Is_Loaded == true)
+															{
+																input.Organisation = null;
+																input.Region = null;
+																input.Current_Employment = null;
+																input.Campus = null;
+															}
+														}
+														else if(input.Admin_Type == "National")
+														{
+															show Organisation;
+															hide Region;
+															hide Current_Employment;
+															hide Campus;
+															if(isSuperAdmin)
+															{
+																fetOrg = Organisation[ID != 0].ID.getAll();
+																input.Organisation:ui.add(fetOrg);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetOrg.size() == 1)
+																	{
+																		input.Organisation = fetOrg.get(0);
+																	}
+																}
+															}
+															else
+															{
+																input.Organisation:ui.add(adminRec.Organisation);
+																if(input.Is_Loaded == true)
+																{
+																	input.Organisation = adminRec.Organisation;
+																}
+															}
+														}
+														else if(input.Admin_Type == "Region")
+														{
+															show Organisation;
+															show Region;
+															hide Current_Employment;
+															hide Campus;
+															if(isSuperAdmin)
+															{
+																fetOrg = Organisation[ID != 0].ID.getAll();
+																input.Organisation:ui.add(fetOrg);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetOrg.size() == 1)
+																	{
+																		input.Organisation = fetOrg.get(0);
+																	}
+																}
+																fetRegions = Regions[ID != 0].ID.getAll();
+																input.Region:ui.add(fetRegions);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetRegions.size() == 1)
+																	{
+																		input.Region = fetRegions.get(0);
+																	}
+																}
+															}
+															else
+															{
+																input.Organisation:ui.add(adminRec.Organisation);
+																if(input.Is_Loaded == true)
+																{
+																	input.Organisation = adminRec.Organisation;
+																}
+																if(adminRec.Admin_Type == "National")
+																{
+																	fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
+																	input.Region:ui.add(fetRegions);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetRegions.size() == 1)
+																		{
+																			input.Region = fetRegions.get(0);
+																		}
+																	}
+																}
+																else
+																{
+																	input.Region:ui.add(adminRec.Regions);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Region = adminRec.Regions;
+																	}
+																}
+															}
+														}
+														else if(input.Admin_Type == "School")
+														{
+															show Organisation;
+															show Region;
+															show Current_Employment;
+															hide Campus;
+															if(isSuperAdmin)
+															{
+																fetOrg = Organisation[ID != 0].ID.getAll();
+																input.Organisation:ui.add(fetOrg);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetOrg.size() == 1)
+																	{
+																		input.Organisation = fetOrg.get(0);
+																	}
+																}
+																fetRegions = Regions[ID != 0].ID.getAll();
+																input.Region:ui.add(fetRegions);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetRegions.size() == 1)
+																	{
+																		input.Region = fetRegions.get(0);
+																	}
+																}
+																fetSchools = School[ID != 0].ID.getAll();
+																input.Current_Employment:ui.add(fetSchools);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetSchools.size() == 1)
+																	{
+																		input.Current_Employment = fetSchools.get(0);
+																	}
+																}
+															}
+															else
+															{
+																input.Organisation:ui.add(adminRec.Organisation);
+																if(input.Is_Loaded == true)
+																{
+																	input.Organisation = adminRec.Organisation;
+																}
+																if(adminRec.Admin_Type == "National")
+																{
+																	fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
+																	input.Region:ui.add(fetRegions);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetRegions.size() == 1)
+																		{
+																			input.Region = fetRegions.get(0);
+																		}
+																	}
+																	fetSchools = School[Region in fetRegions].ID.getAll();
+																	input.Current_Employment:ui.add(fetSchools);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetSchools.size() == 1)
+																		{
+																			input.Current_Employment = fetSchools.get(0);
+																		}
+																	}
+																}
+																else if(adminRec.Admin_Type == "Region")
+																{
+																	input.Region:ui.add(adminRec.Regions);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Region = adminRec.Regions;
+																	}
+																	fetSchools = School[Region == adminRec.Regions].ID.getAll();
+																	input.Current_Employment:ui.add(fetSchools);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetSchools.size() == 1)
+																		{
+																			input.Current_Employment = fetSchools.get(0);
+																		}
+																	}
+																}
+																else if(adminRec.Admin_Type == "School")
+																{
+																	input.Region:ui.add(adminRec.Regions);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Region = adminRec.Regions;
+																	}
+																	input.Current_Employment:ui.add(adminRec.Current_Employment);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Current_Employment = adminRec.Current_Employment;
+																	}
+																}
+															}
+														}
+														else if(input.Admin_Type == "Campus")
+														{
+															show Organisation;
+															show Region;
+															show Current_Employment;
+															show Campus;
+															if(isSuperAdmin)
+															{
+																fetOrg = Organisation[ID != 0].ID.getAll();
+																input.Organisation:ui.add(fetOrg);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetOrg.size() == 1)
+																	{
+																		input.Organisation = fetOrg.get(0);
+																	}
+																}
+																fetRegions = Regions[ID != 0].ID.getAll();
+																input.Region:ui.add(fetRegions);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetRegions.size() == 1)
+																	{
+																		input.Region = fetRegions.get(0);
+																	}
+																}
+																fetSchools = School[ID != 0].ID.getAll();
+																input.Current_Employment:ui.add(fetSchools);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetSchools.size() == 1)
+																	{
+																		input.Current_Employment = fetSchools.get(0);
+																	}
+																}
+																fetCampus = Campus[ID != 0].ID.getAll();
+																input.Campus:ui.add(fetCampus);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetCampus.size() == 1)
+																	{
+																		input.Campus = fetCampus.get(0);
+																	}
+																}
+															}
+															else
+															{
+																input.Organisation:ui.add(adminRec.Organisation);
+																if(input.Is_Loaded == true)
+																{
+																	input.Organisation = adminRec.Organisation;
+																}
+																if(adminRec.Admin_Type == "National")
+																{
+																	fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
+																	input.Region:ui.add(fetRegions);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetRegions.size() == 1)
+																		{
+																			input.Region = fetRegions.get(0);
+																		}
+																	}
+																	fetSchools = School[Region in fetRegions].ID.getAll();
+																	input.Current_Employment:ui.add(fetSchools);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetSchools.size() == 1)
+																		{
+																			input.Current_Employment = fetSchools.get(0);
+																		}
+																	}
+																	fetCampus = Campus[School in fetSchools].ID.getAll();
+																	input.Campus:ui.add(fetCampus);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetCampus.size() == 1)
+																		{
+																			input.Campus = fetCampus.get(0);
+																		}
+																	}
+																}
+																else if(adminRec.Admin_Type == "Region")
+																{
+																	input.Region:ui.add(adminRec.Regions);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Region = adminRec.Regions;
+																	}
+																	fetSchools = School[Region == adminRec.Regions].ID.getAll();
+																	input.Current_Employment:ui.add(fetSchools);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetSchools.size() == 1)
+																		{
+																			input.Current_Employment = fetSchools.get(0);
+																		}
+																	}
+																	fetCampus = Campus[School in fetSchools].ID.getAll();
+																	input.Campus:ui.add(fetCampus);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetCampus.size() == 1)
+																		{
+																			input.Campus = fetCampus.get(0);
+																		}
+																	}
+																}
+																else if(adminRec.Admin_Type == "School")
+																{
+																	input.Region:ui.add(adminRec.Regions);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Region = adminRec.Regions;
+																	}
+																	input.Current_Employment:ui.add(adminRec.Current_Employment);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Current_Employment = adminRec.Current_Employment;
+																	}
+																	fetCampus = Campus[School == adminRec.Current_Employment].ID.getAll();
+																	input.Campus:ui.add(fetCampus);
+																	if(input.Is_Loaded == true)
+																	{
+																		if(fetCampus.size() == 1)
+																		{
+																			input.Campus = fetCampus.get(0);
+																		}
+																	}
+																}
+																else if(adminRec.Admin_Type == "Campus")
+																{
+																	input.Region:ui.add(adminRec.Regions);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Region = adminRec.Regions;
+																	}
+																	input.Current_Employment:ui.add(adminRec.Current_Employment);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Current_Employment = adminRec.Current_Employment;
+																	}
+																	input.Campus:ui.add(adminRec.Campus);
+																	if(input.Is_Loaded == true)
+																	{
+																		input.Campus = adminRec.Campus;
+																	}
+																}
+															}
+														}
+														if(input.Is_Loaded == false)
+														{
+															if(fetStaff.Organisation != null)
+															{
+																input.Organisation = fetStaff.Organisation;
+															}
+														}
+													}
+													else
+													{
+														if(input.Current_Position != null && input.Current_Position.position_name == "Administrative Officer")
+														{
+															hide Organisation;
+															hide Region;
+															hide Current_Employment;
+															hide Campus;
+															if(input.Is_Loaded == true)
+															{
+																input.Organisation = null;
+																input.Region = null;
+																input.Current_Employment = null;
+																input.Campus = null;
+															}
+														}
+														else
+														{
+															hide Organisation;
+															if(input.Is_Loaded == true)
+															{
+																input.Organisation = null;
+																input.Region = null;
+															}
+															show Current_Employment;
+															show Campus;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

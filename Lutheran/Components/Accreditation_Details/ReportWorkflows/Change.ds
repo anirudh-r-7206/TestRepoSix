@@ -1,0 +1,20 @@
+Change as "Change"
+{
+
+			
+							type =  functions
+							form = Accreditation_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:Accreditation_Details?Staff=" + input.Staff.ID,"popup window","height=auto,width=auto");
+								)
+								}
+							}
+						
+			
+}

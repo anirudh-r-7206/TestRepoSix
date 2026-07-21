@@ -1,0 +1,187 @@
+<%
+	awardRec = Service_Awards[ID == input.awardID];
+	staffList = Staff_Master[status == "Active" || status == "On Leave"];
+	%>
+<style>
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .form-outer-wrapper {
+		box-shadow: unset !important;
+}
+.award-page {
+		padding: 20px;
+		background: #f4f6fb;
+		min-height: 100%;
+		box-sizing: border-box;
+	    height: 100%;
+		overflow: auto;
+}
+.card-grid {
+	 	display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(317px, 1fr));
+		gap: 14px;
+	overflow: auto;
+}
+.staff-card {
+		padding: 15px;
+		width: 100%;
+		position: relative;
+		box-sizing: border-box;
+		border-radius: 20px;
+		border: 1px solid #EAEAEA;
+		background: #FFF;
+		box-shadow: 0 5px 10px 0 rgba(205, 205, 205, 0.25);
+}
+.medal-btn {
+		position: absolute;
+		top: -1px;
+		right: 23px;
+		width: 46px;
+		height: 60px;
+}
+.staff-photo {
+		width: 60px;
+		height: 60px;
+		border-radius: 10px;
+		overflow: hidden;
+		border: 2px solid #7798DB;
+		margin-bottom: 10px;
+}
+.staff-photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+}
+.staff-initials {
+		width: 100%;
+		height: 100%;
+		background: #eef2ff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 20px;
+		font-weight: 600;
+		color: #4466cc;
+}
+.staff-name {
+		margin-bottom: 8px;
+		color: #000;
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 140%;
+}
+.staff-role {
+		font-size: 12px;
+		color: #CB0C32;
+		font-weight: 400;
+		margin: 0 0 10px;
+}
+.staff-info {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-bottom: 14px;
+}
+.staff-info span {
+		color: #000;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 140%;
+	overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+}
+.eligible-label {
+		color: #838383;
+		font-family: Poppins;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 168%;
+		margin-bottom: 11px;
+}
+.eligible-value {
+		margin: 0;
+		color: #243C6C;
+		font-family: Poppins;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 168%;
+}
+.empty {
+		text-align: center;
+		padding: 40px;
+		color: #888;
+		width: 100%;
+		grid-column: 1 / -1;
+	    box-sizing: border-box;
+}
+</style>
+
+<div class="award-page">
+		<div class="card-grid">
+<%
+	for each  staff in staffList
+	{
+		staff_image = "";
+		if(staff.Photograph != null)
+		{
+			staff_image = staff.Photograph;
+			staff_image = staff_image.replaceAll("/sharedBy/appLinkName/",zoho.appuri);
+			staff_image = staff_image.replaceAll("viewLinkName","All_Staff");
+			staff_image = staff_image.replaceAll("fieldName","Profile");
+		}
+		initials = staff.Name.first_name.substring(0,1) + staff.Name.last_name.substring(0,1);
+		eligibleIn = thisapp.helpers.timeToAward(staff.Service_In_Days,awardRec.Years_of_Service_Required);
+		%>
+<div class="staff-card">
+						<div class="medal-btn">
+								<svg width="47" height="60" viewBox="0 0 47 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M45.6045 2.08691L35.6045 25.5869C35.5767 25.6523 35.5424 25.7132 35.5068 25.7725C39.6226 29.3477 42.2246 34.6202 42.2246 40.5C42.2246 51.2696 33.4942 60 22.7246 60C11.9551 60 3.22461 51.2696 3.22461 40.5C3.22461 34.4531 5.97655 29.0484 10.2969 25.4717L0.833984 2.0625L0 0H46.4932L45.6045 2.08691ZM22.7246 24C13.6119 24 6.22461 31.3873 6.22461 40.5C6.22461 49.6127 13.6119 57 22.7246 57C31.8373 57 39.2246 49.6127 39.2246 40.5C39.2246 31.3873 31.8373 24 22.7246 24ZM12.8174 23.7021C15.3839 22.1852 18.3276 21.2391 21.4746 21.04V13C21.4746 12.1716 22.1462 11.5 22.9746 11.5C23.803 11.5 24.4746 12.1716 24.4746 13V21.0781C27.601 21.3562 30.5144 22.3728 33.041 23.9512L41.957 3H4.44922L12.8174 23.7021Z" fill="#E7E7E7"/>
+					<path d="M23.5527 36.5283C23.8206 37.3522 24.5887 37.9102 25.4551 37.9102H28.916L26.1162 39.9443C25.4152 40.4536 25.1219 41.3566 25.3896 42.1807L26.459 45.4717L23.6592 43.4375C22.9582 42.9282 22.0086 42.9282 21.3076 43.4375L18.5078 45.4717L19.5771 42.1807C19.8449 41.3566 19.5516 40.4536 18.8506 39.9443L16.0508 37.9102H19.5117C20.3781 37.9102 21.1462 37.3522 21.4141 36.5283L22.4834 33.2363L23.5527 36.5283Z" stroke="#7798DB" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+						</div>
+						<div class="staff-photo">
+<%
+		if(staff_image != "")
+		{
+			%>
+<%=staff_image%>
+<%
+		}
+		else
+		{
+			%>
+<div class="staff-initials"><%=initials%></div>
+<%
+		}
+		%>
+</div>
+						<p class="staff-name"><%=staff.Name%></p>
+						<p class="staff-role"><%=staff.Current_Position.position_name%></p>
+						<div class="staff-info">
+								<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M8.61714 5H6.71429C6.25963 5 5.82359 5.18061 5.5021 5.5021C5.18061 5.82359 5 6.25963 5 6.71429V8.42857C5 13.1626 8.83743 17 13.5714 17H15.2857C15.7404 17 16.1764 16.8194 16.4979 16.4979C16.8194 16.1764 17 15.7404 17 15.2857V14.1011C16.9999 13.942 16.9555 13.786 16.8718 13.6507C16.7881 13.5154 16.6684 13.406 16.526 13.3349L14.4551 12.2994C14.3453 12.2445 14.225 12.2138 14.1022 12.2094C13.9795 12.205 13.8573 12.2271 13.7438 12.2741C13.6303 12.3211 13.5283 12.3919 13.4446 12.4817C13.3609 12.5716 13.2974 12.6784 13.2586 12.7949L13.004 13.5603C12.9241 13.8001 12.7594 14.0025 12.5407 14.1294C12.3221 14.2563 12.0647 14.299 11.8169 14.2494C10.8137 14.0483 9.89236 13.5549 9.16895 12.8314C8.44554 12.1078 7.95234 11.1864 7.75143 10.1831C7.70191 9.93528 7.74461 9.67785 7.87151 9.45925C7.99841 9.24065 8.20077 9.07591 8.44057 8.996L9.39029 8.67886C9.59494 8.61059 9.76633 8.46766 9.87024 8.27859C9.97414 8.08952 10.0029 7.86822 9.95086 7.65886L9.44857 5.64886C9.40214 5.4635 9.2951 5.29898 9.14446 5.18142C8.99383 5.06386 8.80822 5.00001 8.61714 5Z" stroke="#194BB2"/>
+				</svg>
+								<span><%=staff.Phone_Number%></span>
+						</div>
+						<div class="staff-info">
+								<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 6H16.6C17.37 6 18 6.6125 18 7.36111V15.5278C18 16.2764 17.37 16.8889 16.6 16.8889H5.4C4.63 16.8889 4 16.2764 4 15.5278V7.36111C4 6.6125 4.63 6 5.4 6Z" stroke="#194BB2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M18 7.55566L11 12.2223L4 7.55566" stroke="#194BB2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+
+								<span><%=staff.Staff_Email%></span>
+						</div>
+						<p class="eligible-label">Eligible in :</p>
+						<p class="eligible-value"><%=eligibleIn%></p>
+				</div>
+<%
+	}
+	if(staffList.count() == 0)
+	{
+		%>
+<div class="empty">No staff due within 1 year</div>
+<%
+	}
+	%>
+</div>
+</div>

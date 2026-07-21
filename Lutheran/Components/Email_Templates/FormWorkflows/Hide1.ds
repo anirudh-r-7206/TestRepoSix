@@ -1,0 +1,23 @@
+Hide1 as "Hide"
+{
+
+			
+							type =  form
+							form = Email_Templates
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide plain;
+									)
+								}
+							}
+			
+						
+			
+}

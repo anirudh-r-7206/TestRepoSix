@@ -1,0 +1,111 @@
+form Accreditation_Details
+{
+
+		
+					displayname = "Accreditation Details"
+					success message = "Accreditation Detail Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Staff
+					(
+						type = picklist	
+						values  = Staff_Master.ID
+		    			bidirectional = Accreditation_Details
+		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Status_Accreditation
+					(
+						type = picklist
+						displayname = "Status Accreditation"
+						maxchar = 100
+						values = {"Not Accredited","Accredited","Accreditation In Progress","Eligible For Accreditation","Draft"}
+						initial value = "Draft"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Required_Accreditation
+					(
+						type = picklist	
+						displayname = "Required Accreditation"
+						values  = Accreditation.ID
+		    			displayformat = [Accreditation_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					PD_Hours_Collected
+					(
+						type = number
+						displayname = "PD Hours Collected"
+						initial value = 0
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Due_Date
+					(
+		    			type = date
+						displayname = "Due Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Completion_Date
+					(
+		    			type = date
+						displayname = "Completion Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Training_Completed
+					(
+						type = grid
+						displayname = "Training Completed"
+						values  = Compliance_Training.ID
+		    			bidirectional = Accreditation_Details
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

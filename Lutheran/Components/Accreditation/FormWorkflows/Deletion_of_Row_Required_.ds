@@ -1,0 +1,28 @@
+Deletion_of_Row_Required_ as "Deletion of Row - Required Courses"
+{
+
+			
+							type =  form
+							form = Accreditation
+			
+							record event = on add or edit
+			
+							on delete row of Required_Courses
+							{
+								actions 
+								{
+									custom deluge script
+									(
+													s_no = 1;
+													for each  rec in input.Required_Courses
+													{
+														rec.SI_No=s_no;
+														s_no = s_no + 1;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

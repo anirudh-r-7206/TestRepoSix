@@ -1,0 +1,25 @@
+Load_of_the_form_On_Add_E as "Load of the form - On Add/Edit Scripts"
+{
+
+			
+							type =  form
+							form = Staff_Service_Awards
+			
+							record event = on add or edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														alert "You don't have access to add a record directly here.";
+													info "";
+													openUrl("#Script:page.parent.refresh","same window");
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,62 @@
+list reportfilters.getRequestIDs()
+{
+
+			
+			                 	login_user = Staff_Master[Staff_Email == zoho.loginuserid];
+			                 	if(login_user.Admin_Type == "School")
+			                 	{
+			                 		staff_request_list = Staff_Request[Status == "Pending" && Next_Approver == "School Admin"].ID.getAll();
+			                 		if(login_user.Current_Employment != null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions && Raised_by.Current_Employment == login_user.Current_Employment].ID.getAll();
+			                 		}
+			                 		else if(login_user.Campus != null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions && Raised_by.Current_Employment == login_user.Current_Employment && Raised_by.Campus == login_user.Campus].ID.getAll();
+			                 		}
+			                 	}
+			                 	else if(login_user.Admin_Type == "Region")
+			                 	{
+			                 		staff_request_list = Staff_Request[Status == "Pending" && Next_Approver == "Region Admin"].ID.getAll();
+			                 		info staff_request_list;
+			                 		if(login_user.Current_Employment == null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions].ID.getAll();
+			                 		}
+			                 		else if(login_user.Campus == null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions && Raised_by.Current_Employment == login_user.Current_Employment].ID.getAll();
+			                 		}
+			                 		else if(login_user.Campus != null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions && Raised_by.Current_Employment == login_user.Current_Employment && Raised_by.Campus == login_user.Campus].ID.getAll();
+			                 		}
+			                 	}
+			                 	else if(login_user.Admin_Type == "National")
+			                 	{
+			                 		staff_request_list = Staff_Request[Status == "Pending" && Next_Approver == "National Admin"].ID.getAll();
+			                 		if(login_user.Regions == null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation].ID.getAll();
+			                 		}
+			                 		else if(login_user.Current_Employment == null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions].ID.getAll();
+			                 		}
+			                 		else if(login_user.Campus == null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions && Raised_by.Current_Employment == login_user.Current_Employment].ID.getAll();
+			                 		}
+			                 		else if(login_user.Campus != null)
+			                 		{
+			                 			return Staff_Request[ID in staff_request_list && Raised_by.Organisation == login_user.Organisation && Raised_by.Regions == login_user.Regions && Raised_by.Current_Employment == login_user.Current_Employment && Raised_by.Campus == login_user.Campus].ID.getAll();
+			                 		}
+			                 	}
+			                 	else
+			                 	{
+			                 		return list();
+			                 	}
+			                 	return list();
+			                 
+			
+}

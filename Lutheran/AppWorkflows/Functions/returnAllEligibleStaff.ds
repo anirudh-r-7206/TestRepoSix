@@ -1,0 +1,31 @@
+list helpers.returnAllEligibleStaff()
+{
+
+			
+			                 	loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
+			                 	var = thisapp.permissions.loginUserProfile();
+			                 	eligibleIDs = list();
+			                 	if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+			                 	{
+			                 		eligibleIDs = Staff_Master[ID != loginUser.ID].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "National")
+			                 	{
+			                 		eligibleIDs = Staff_Master[Organisation == loginUser.Organisation && ID != loginUser.ID].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "Region")
+			                 	{
+			                 		eligibleIDs = Staff_Master[Organisation == loginUser.Organisation && Regions == loginUser.Regions && ID != loginUser.ID].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "School")
+			                 	{
+			                 		eligibleIDs = Staff_Master[Current_Employment == loginUser.Current_Employment && ID != loginUser.ID].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "Campus")
+			                 	{
+			                 		eligibleIDs = Staff_Master[Campus == loginUser.Campus && ID != loginUser.ID].ID.getAll();
+			                 	}
+			                 	return eligibleIDs;
+			                 
+			
+}

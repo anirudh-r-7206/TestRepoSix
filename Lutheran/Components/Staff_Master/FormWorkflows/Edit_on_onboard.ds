@@ -1,0 +1,27 @@
+Edit_on_onboard as "Edit on onboard"
+{
+
+			
+							type =  form
+							form = Staff_Master
+			
+							record event = on edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Onboarding == true)
+													{
+														openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.ID,"same window");
+														// 	input.Onboarding = false;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

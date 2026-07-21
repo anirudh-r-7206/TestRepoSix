@@ -1,0 +1,65 @@
+Change_Draft_Accreditatio as "Change Draft Accreditation"
+{
+
+			
+							type =  schedule
+							form = Accreditation_Details
+								status = inactive
+							start = Due_Date at "09:00:00"
+							time zone = "Asia/Kolkata"
+							on start
+							{
+								actions 
+								{
+								on load
+								(
+									drafted_accreditation = Accreditation_Details[Staff == input.Staff && Status_Accreditation == "Draft"];
+													if(drafted_accreditation.count() > 0)
+													{
+														input.Status_Accreditation = "Not Accredited";
+														fetAccCourse = Accreditation_Courses[Accreditation == drafted_accreditation.ID] sort by SI_No;
+														for each  acccor in fetAccCourse
+														{
+															insert into Compliance_Training
+															[
+																Training_Name=acccor.Training_Type.Training
+																Staff=input.Staff
+																Training_Type=acccor.Training_Type
+																Accreditation_Details=drafted_accreditation.ID
+																Status="Pending"
+																Added_User=zoho.loginuser
+															]
+														}
+														thisapp.mail.sendAccreditationRenewalEmail(drafted_accreditation.ID);
+													}
+													else
+													{
+														newAcc = insert into Accreditation_Details
+														[
+															Added_User=zoho.loginuser
+															Due_Date=zoho.currentdate.addYear(5)
+															Required_Accreditation=input.Required_Accreditation
+															Staff=input.Staff
+															Status_Accreditation="Not Accredited"
+														];
+														fetAccCourse = Accreditation_Courses[Accreditation == input.Required_Accreditation.ID] sort by SI_No;
+														for each  acccorNew in fetAccCourse
+														{
+															insert into Compliance_Training
+															[
+																Training_Name=acccorNew.Training_Type.Training
+																Staff=input.Staff
+																Training_Type=acccorNew.Training_Type
+																Accreditation_Details=newAcc
+																Status="Pending"
+																Added_User=zoho.loginuser
+															]
+														}
+														thisapp.mail.sendAccreditationRenewalEmail(newAcc);
+													}
+								)
+								}
+							}
+						
+			
+}

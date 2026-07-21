@@ -1,0 +1,26 @@
+Success_Scripts4 as "Success Scripts"
+{
+
+			
+							type =  form
+							form = School
+			
+							record event = on add
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(false)
+													{
+														openUrl("#Page:Initial_Setup","same window");
+													}
+									)
+								}
+							}
+			
+						
+			
+}

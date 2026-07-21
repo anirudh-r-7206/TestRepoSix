@@ -1,0 +1,20 @@
+Reject1 as "Reject"
+{
+
+			
+							type =  functions
+							form = Training_Completion_Request
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:History?Training_Completion_Request=" + input.ID + "&Action_field=Training Completion Requested Rejected&zc_Header=false","popup window");
+								)
+								}
+							}
+						
+			
+}

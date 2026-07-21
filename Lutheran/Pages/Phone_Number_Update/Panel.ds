@@ -1,0 +1,10 @@
+<panel elementName='Panel'>
+					<pr width='fill' height='fill'>
+						<pc padding='20px' bgColor='#FFFFFF' width='100%' vAlign='middle'>
+							<pr width='auto' height='auto'>
+								<pc vAlign='middle'>
+									<button margin='0px' paddingTop='12px' paddingLeft='15px' paddingRight='15px' paddingBottom='12px' action='ExecuteFunction' executeWorkflow='afterConfirmation' functionName='helpers.createOrgStructure' color='#FFFFFF' size='16px' borderColor='#FFFFFF' borderWidth='0px' text='Create National Structure' bgColor='theme' cornerRadius='60px' /> </pc>
+							</pr>
+						</pc>
+					</pr>
+</panel>

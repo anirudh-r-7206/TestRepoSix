@@ -1,0 +1,9 @@
+void removeFromCommittee(Staff_Master recID)
+{
+
+			
+			                 	reqID = recID.ID;
+			                 	openUrl("#Form:Add_Remove_Committee?Staff_Master=" + reqID + "&From_Field=Committee","popup window");
+			                 
+			
+}

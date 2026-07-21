@@ -1,0 +1,88 @@
+report My_Active_Employment
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Position
+										School
+										Campus
+										FTE
+										Teacher_Type as "Teacher Type"
+										Year_Level as "Year Level"
+										Subject_field as "Subject"
+										Commencement_Date as "Commencement Date"
+										End_Date as "End Date"
+										Is_primary as "Is primary"
+										"Mark as Primary"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Commencement_Date as "Commencement Date"
+										End_Date as "End Date"
+										Position
+										FTE
+										Teacher_Type as "Teacher Type"
+										Year_Level as "Year Level"
+										Subject_field as "Subject"
+										Speciality
+										Staff
+										School
+										Teaching_Staff as "Teaching Staff"
+										Service_In_Years as "Service In Years"
+										Service_In_Months as "Service In Months"
+										Service_In_Days as "Service In Days"
+										Total_Service_Period as "Total Service Period"
+										School1 as "School"
+										Position1 as "Position"
+										Campus
+										Campus1 as "Campus"
+										Admin_Type as "Admin Type"
+										Is_primary as "Is primary"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

@@ -1,0 +1,64 @@
+Approve1 as "Approve"
+{
+
+			
+							type =  functions
+							form = Training_Completion_Request
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									compliance_info = Compliance_Training[ID == input.Compliance_Training];
+													if(compliance_info.count() > 0 && compliance_info.Accreditation_Details != null)
+													{
+														login_user = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"];
+														insert into History
+														[
+															Added_User=zoho.loginuser
+															Action_By=login_user
+															Action_field="Training Completion Request Approved"
+															Comment="Compliance Training Completion Request Approved by " + input.Current_Approver
+															Training_Completion_Request=input.ID
+														]
+														input.Current_Approver = thisapp.helpers.returnComplianceCompletionRequestNextApprover(input.Current_Approver,input.Staff.ID);
+														if(input.Current_Approver != "")
+														{
+															thisapp.mail.sendTrainingApprovalPending(input.ID);
+														}
+														if(input.Current_Approver == "")
+														{
+															input.Status = "Approved";
+															thisapp.mail.sendTrainingApproved(input.ID);
+															compliance_info = Compliance_Training[ID == input.Compliance_Training];
+															if(compliance_info.count() > 0)
+															{
+																compliance_info.Status="Completed";
+															}
+															total_accreditation = Compliance_Training[Accreditation_Details == compliance_info.Accreditation_Details];
+															completed_total_accreditation = Compliance_Training[Accreditation_Details == compliance_info.Accreditation_Details && Status == "Completed"];
+															accreditation = Accreditation_Details[ID == compliance_info.Accreditation_Details];
+															if(total_accreditation.count() == completed_total_accreditation.count() && accreditation.PD_Hours_Collected >= accreditation.Required_Accreditation.Required_PD_Hours)
+															{
+																accreditation.Status_Accreditation="Eligible For Accreditation";
+															}
+															else if(accreditation.Status_Accreditation == "Not Accredited")
+															{
+																accreditation.Status_Accreditation="Accreditation In Progress";
+															}
+														}
+														openUrl("#Script:page.parent.refresh","same window");
+														openUrl("#Script:page.parent.refresh","same window");
+													}
+													else
+													{
+														openUrl("#Form:Compliance_Training?viewLinkName=All_Compliance_Trainings&recLinkID=" + input.Compliance_Training.ID + "&zc_NextUrl=#Script:page.parent.refresh","popup window");
+													}
+								)
+								}
+							}
+						
+			
+}

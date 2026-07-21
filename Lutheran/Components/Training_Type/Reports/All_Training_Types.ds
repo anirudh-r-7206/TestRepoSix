@@ -1,0 +1,13 @@
+default list All_Training_Types
+{
+
+		
+					displayName = "All Training Types"
+					show all rows from Training_Type    
+					(
+						Training
+						Type_field as "Type"
+					)
+				
+		
+}

@@ -1,0 +1,36 @@
+User_input_of_Service_Req as "User input of Service Required"
+{
+
+			
+							type =  form
+							form = Service_Awards
+			
+							record event = on add or edit
+			
+							on user input of Years_of_Service_Required
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Years_of_Service_Required <= 0)
+													{
+														alert "Years of service must be greater than 0.";
+														input.Years_of_Service_Required = null;
+													}
+													else if(input.Years_of_Service_Required != null)
+													{
+														fetRec = Service_Awards[Years_of_Service_Required == input.Years_of_Service_Required && ID != input.ID];
+														if(fetRec.count() > 0)
+														{
+															alert "This years of service already exists.";
+															input.Years_of_Service_Required = null;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,149 @@
+menu
+{
+
+	    unused
+	    {
+	        form Organisation { icon = "business-building" }
+	        form Regions { icon = "business-globe" }
+	        form Campus { icon = "business-building" }
+	        form School { icon = "business-building" }
+	        form Positions { icon = "business-briefcase-24" }
+	        form Qualifications { icon = "education-paper-diploma" }
+	        form Year_Level { icon = "text-list-numbers" }
+	        form Subject_form { icon = "business-books" }
+	        form Speciality { icon = "business-award-48" }
+	        form Staff_Employment { icon = "business-briefcase-24" }
+	        form Staff_Request { icon = "files-edit" }
+	        form History { icon = "files-time" }
+	        form Qualification_Type { icon = "education-paper-diploma" }
+	        form Accreditation { icon = "business-award-48" }
+	        form Accreditation_Details { icon = "business-award-49" }
+	        form Compliance_Training { icon = "files-check" }
+	        form Training_Completion_Request { icon = "files-edit" }
+	        form Employee_Filter { icon = "files-search" }
+	        form Staff_Onboarding1 { icon = "users-add-27" }
+	        form Staff_Master { icon = "users-single-01" }
+	        form Approval_Configuration { icon = "design-todo" }
+	        form Training_Type { icon = "files-single-content-03" }
+	        form Accreditation_Courses { icon = "education-paper-diploma" }
+	        form Accredit { icon = "business-award-48" }
+	        form Email_Templates { icon = "files-single-content-03" }
+	        form Service_Awards { icon = "business-award-48" }
+	        form Staff_Service_Awards { icon = "business-award-49" }
+	        form Add_Remove_Representation_Team { icon = "users-multiple-11" }
+	        form Representation_Team { icon = "users-multiple-19" }
+	        form Award_Eligible_Staff { icon = "business-award-74" }
+	        form Send_Mail { icon = "files-single-content-03" }
+	        form Search_Service_Awards { icon = "files-search" }
+	        form Training_Completion_Request_Import { icon = "files-upload" }
+	        form Empty_State { icon = "files-folder-14" }
+	
+	        report All_Qualifications { icon = "files-single-content-03" }
+	        report All_Position_Details { icon = "business-briefcase-24" }
+	        report Representation_Team_Staff { icon = "users-multiple-11" }
+	        report Buzz_Book_Report { icon = "files-book-07" }
+	        report All_Staff_Masters { icon = "users-single-01" }
+	        report All_Staff_Admin { icon = "users-badge-13" }
+	        report Email_Templates1 { icon = "files-single-content-03" }
+	        report All_Accreditation_Courses { icon = "education-paper-diploma" }
+	        report Mail_Sent { icon = "files-single-content-03" }
+	        report All_School_Infos { icon = "business-building" }
+	        report Training_Completion_Request_Import_Report { icon = "files-upload" }
+	        report All_Subjects { icon = "business-books" }
+	        report All_Campuses { icon = "business-building" }
+	        report All_Year_Levels { icon = "text-list-numbers" }
+	        report All_Approval_Configurations { icon = "design-todo" }
+	        report All_Qualification_Types { icon = "education-paper-diploma" }
+	        report All_Organisation_Infos { icon = "business-building" }
+	        report All_Region_Infos { icon = "business-globe" }
+	        report All_Training_Types { icon = "files-single-content-03" }
+	        report All_Representation_Team { icon = "users-multiple-19" }
+	        report Empty_State_Report { icon = "files-folder-14" }
+	        report All_Specialities { icon = "business-award-48" }
+	        report All_Accreditation_Details { icon = "business-award-49" }
+	        report Eligible_For_Accreditation { icon = "business-award-74" }
+	        report All_Accreditations1 { icon = "business-award-48" }
+	        report Expiring_Accreditation { icon = "files-time" }
+	        report My_Pending_Training_Requests { icon = "files-time" }
+	        report All_Training_Completion_Requests { icon = "files-single-content-03" }
+	        report All_Approved_Training_Requests { icon = "files-check" }
+	        report All_Training_Completion_Requests2 { icon = "files-single-content-03" }
+	        report My_Approved_Training_Requests { icon = "files-check" }
+	        report Pending_Training_Completion_Requests { icon = "files-time" }
+	        report All_Pending_Training_Requests { icon = "files-time" }
+	        report My_Training_Completion_Requests { icon = "files-single-content-03" }
+	        report Service_Awards1 { icon = "business-award-48" }
+	        report All_Requests { icon = "files-single-content-03" }
+	        report Raised_Requests { icon = "files-upload" }
+	        report My_Requests { icon = "files-single-content-03" }
+	        report Pending_Requests { icon = "files-time" }
+	        report Staff_On_Leave { icon = "users-delete-28" }
+	        report Staff_On_Leave1 { icon = "users-delete-28" }
+	        report All_Employment_Histories { icon = "files-time" }
+	        report My_Pending_Compliance_Trainings { icon = "files-time" }
+	        report All_Completed_Compliance_Trainings { icon = "files-check" }
+	        report All_Pending_Compliance_Trainings { icon = "files-time" }
+	        report All_Compliance_Trainings { icon = "files-check" }
+	        report My_Compliance_Trainings { icon = "files-check" }
+	        report My_Completed_Compliance_Trainings { icon = "files-check" }
+	        report All_Staff_Service_Awards { icon = "business-award-49" }
+	        report All_Staff { icon = "users-single-01" }
+	        report My_Staff { icon = "users-single-01" }
+	        report Staff_For_Request { icon = "users-single-01" }
+	        report My_Active_Employment { icon = "business-briefcase-24" }
+	        report All_Staff_Employment { icon = "business-briefcase-24" }
+	        report All_Accreditation { icon = "business-award-48" }
+	        report All_Staff_Grouped { icon = "users-multiple-11" }
+	
+	        page Raise_Request { icon = "files-edit" }
+	        page Admin_Staff_360 { icon = "users-badge-13" }
+	        page Staff_Service_Awards1 { icon = "business-award-49" }
+	        page Not_Registered { icon = "files-no-access" }
+	        page Embed_Page { icon = "files-single-content-03" }
+	        page Eligible_For_Accreditation1 { icon = "business-award-74" }
+	        page Dashboard { icon = "business-chart" }
+	        page Email_Templates2 { icon = "files-single-content-03" }
+	        page Phone_Number_Update { icon = "tech-mobile" }
+	        page Buzz_Report1 { icon = "files-book-07" }
+	        page Upcoming_Service_Awards { icon = "business-award-48" }
+	        page All_Compliance_Trainings1 { icon = "files-check" }
+	        page Staff_Admin_Entry { icon = "users-badge-13" }
+	        page My_Compliance_Trainings1 { icon = "files-check" }
+	        page Organisation_Hierarchy { icon = "business-hierarchy-53" }
+	        page Add_Staff_Button { icon = "users-add-27" }
+	        page Staff_Search { icon = "files-search" }
+	        page All_Training_Completion_Requests1 { icon = "files-single-content-03" }
+	        page Accreditation_Details1 { icon = "business-award-49" }
+	        page Onboarding_complete { icon = "files-check" }
+	        page Initial_Setup { icon = "design-todo" }
+	        page Staff_Details { icon = "users-single-01" }
+	        page My_Training_Completion_Requests1 { icon = "files-single-content-03" }
+	        page Admin_Dashboard { icon = "business-chart" }
+	        page Expiring_Accreditation1 { icon = "files-time" }
+	        page Service_Awards_Due_Soon { icon = "business-award-48" }
+	        page View_Committee_Staff { icon = "users-multiple-11" }
+	        page Staff_Onboarding_page { icon = "users-add-27" }
+	    }
+	
+	    space System_Space
+	    {
+	        displayname = "System"
+	        icon = "business-chart"
+	        section SharedAnalytics_Section
+	        {
+	            type = shared_user_report_section
+	            displayname = "Reports"
+	            icon = "business-chart-bar-33"
+	        }
+	    }
+	
+	    preference
+	    {
+	        icon
+	        {
+	            style = outline
+	            show = {space,section,component}
+	        }
+	    }
+	
+}

@@ -1,0 +1,87 @@
+form Approval_Configuration
+{
+
+		
+					displayname = "Approval Configuration"
+					success message = "Approval Configuration Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Request_Type
+					(
+						type = picklist
+						displayname = "Request Type "
+						maxchar = 100
+						values = {"New Staff","Position Update","Transfer","Resignation","Deceased","Sabbatical Leave","Training"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					National_Admin
+					(
+		    			type = checkbox
+						displayname = "National Admin"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Region_Admin
+					(
+		    			type = checkbox
+						displayname = "Region Admin "
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					School_Admin
+					(
+		    			type = checkbox
+						displayname = "School Admin"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Campus_Admin
+					(
+		    			type = checkbox
+						displayname = "Campus Admin"
+						initial value = false
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

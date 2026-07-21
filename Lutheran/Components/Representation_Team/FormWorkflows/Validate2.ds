@@ -1,0 +1,49 @@
+Validate2 as "Validate"
+{
+
+			
+							type =  form
+							form = Representation_Team
+			
+							record event = on add
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														isValid = true;
+													/* REQUIRED FIELD CHECK */
+													if(input.Type_field == "National" && input.Organisation == null)
+													{
+														alert(Organisation,"Please select National");
+														isValid = false;
+													}
+													else if(input.Type_field == "Region" && input.Regions == null)
+													{
+														alert(Regions,"Please select Region");
+														isValid = false;
+													}
+													else if(input.Type_field == "School" && input.School == null)
+													{
+														alert(School,"Please select School");
+														isValid = false;
+													}
+													else if(input.Type_field == "Campus" && input.Campus == null)
+													{
+														alert(Campus,"Please select Campus");
+														isValid = false;
+													}
+													/* FINAL */
+													if(isValid == false)
+													{
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,20 @@
+Field_Scripts5 as "Field Scripts"
+{
+
+			
+							type =  form
+							form = Award_Eligible_Staff
+			
+							record event = on add
+			
+							field rules
+							{
+								actions 
+								{
+									disable Service_Award;
+								}
+							}
+			
+						
+			
+}

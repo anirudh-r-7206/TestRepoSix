@@ -1,0 +1,15 @@
+default list All_Organisation_Infos
+{
+
+		
+					displayName = "National Info"
+					show all rows from Organisation    
+					(
+						organisation_name as "National Name"
+						logo as "National Logo"
+						main_office_address  as "Main Office Address"
+						contact_number as "Contact Number"
+					)
+				
+		
+}

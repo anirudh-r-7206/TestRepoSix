@@ -1,0 +1,75 @@
+report All_Staff
+{
+
+		
+						quickview
+						(
+							layout
+							(
+				 				type = Custom
+				 				selectedlayout = "Custom Layout 1"
+			     				recordsperrow = 4
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+									layout type = -6
+				     				title = "Overview"
+									fields
+									(
+										gender as "Gender"
+										Previous_Surname as "Previous  Surname "
+										religion as "Religion"
+										origin as "Origin"
+										Current_Position as "Current Position"
+										Admin_Type as "Admin Type"
+										Organisation as "National"
+										Regions
+										Current_Employment as "Current Employment"
+										Campus
+										FTE
+										Teaching_Staff as "Teaching Staff"
+										Teacher_Type as "Teacher Type"
+										Name
+										Photograph
+										Phone_Number as "Phone"
+										Staff_Email as "Staff Email"
+										date_of_birth as "Date Of Birth"
+										status as "Status"
+										Surname as "Middle name"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

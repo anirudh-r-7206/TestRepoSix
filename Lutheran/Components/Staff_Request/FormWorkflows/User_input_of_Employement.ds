@@ -1,0 +1,90 @@
+User_input_of_Employement as "User input of Employement"
+{
+
+			
+							type =  form
+							form = Staff_Request
+			
+							record event = on add
+			
+							on user input of Employment
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Employment != null)
+													{
+														getEmp = Staff_Employment[ID == input.Employment];
+														if(getEmp.count() > 0)
+														{
+															/* DERIVE REGION + ORGANISATION FROM SCHOOL */
+															orgName = "-";
+															regionName = "-";
+															if(getEmp.School != null)
+															{
+																getSchool = School[ID == getEmp.School];
+																if(getSchool.count() > 0)
+																{
+																	if(getSchool.Region != null)
+																	{
+																		regionName = getSchool.Region.region_name;
+																		getRegion = Regions[ID == getSchool.Region];
+																		if(getRegion.count() > 0 && getRegion.Main_Organisation != null)
+																		{
+																			orgName = getRegion.Main_Organisation.organisation_name;
+																		}
+																	}
+																}
+															}
+													if(input.Request_Type == "Position Update")
+													{
+														show Teaching_Staff;
+														show Current_Position;
+														show Current_Employment;
+														show Campus;
+														show FTE;
+														input.Teaching_Staff = getEmp.Teaching_Staff;
+														input.Current_Employment = getEmp.School;
+														input.Campus = getEmp.Campus;
+														input.FTE = getEmp.FTE;
+													}
+													if(input.Request_Type == "Transfer")
+													{
+														show Teaching_Staff;
+														show Current_Position;
+														show Current_Employment;
+														show Campus;
+														show FTE;
+														input.Teaching_Staff = getEmp.Teaching_Staff;
+														input.FTE = getEmp.FTE;
+													}
+														}
+													}
+													else
+													{
+														/* CLEAR WHEN EMPLOYMENT REMOVED */
+														// 	input.Teaching_Staff = null;
+														input.Current_Position = null;
+														input.Current_Employment = null;
+														input.Campus = null;
+														input.FTE = null;
+														input.org_info = null;
+														/* HIDE EMPLOYMENT BASED FIELDS */
+														if(input.Request_Type != "New Employment")
+														{
+															hide Teaching_Staff;
+															hide Current_Position;
+															hide Current_Employment;
+															hide Campus;
+															hide FTE;
+															hide org_info;
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

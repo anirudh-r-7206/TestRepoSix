@@ -1,0 +1,30 @@
+Delete_Accreditation as "Delete Accreditation"
+{
+
+			
+							type =  form
+							form = Accreditation
+			
+							record event = on delete
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														acc_courses = Accreditation_Courses[Accreditation == input.ID];
+													acc_details = Accreditation_Details[Required_Accreditation == input.ID];
+													isImplemented = acc_courses.count() > 0 || acc_details.count() > 0;
+													if(isImplemented)
+													{
+														alert "Accreditation has been linked to few modules. Please unlink them to delete this Accreditation.";
+														cancel delete;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

@@ -1,0 +1,678 @@
+<%
+	bgimg = "https://creatorapp.zohopublic.com/jumpstartteam/jaztest/report/All_Public_Images/4235496000029151002/Files/download-file/hspRKS5HmZJrBG9RnW7mzmZnxFGmsxBFHsNPzUM5yTgGt50pBTwnCQEUuQKVRnjjrgyd1aC08QApSSVvW5S43Qh1AkWyhpxq950R?filepath=/1775736609864125_Lutheran_BG.svg&digestValue=eyJsYW5ndWFnZSI6ImVuIn0=";
+	getStaff = Staff_Master[Staff_Email == zoho.loginuserid];
+	if(getStaff.count() == 0)
+	{
+		openUrl("#Page:Not_Registered","same window");
+	}
+	%>
+<style>
+* {
+		padding: 0;
+		margin: 0;
+		border: none;
+}
+
+div#zppagesLive,
+div#elementsContainer,
+.Layout.elemContainment,
+div#row_1,
+.zc-pb-formreport-placeholder {
+		height: 100% !important;
+}
+.Layout.elemContainment {
+		padding: unset !important;
+}
+.sd-fullContainer {
+		height: 100%;
+		width: 100%;
+		background: #F3F3F3;
+	padding: 12px;
+		box-sizing: border-box;
+}
+.sd-topdivContaner {
+		width: 100%;
+		height: 77px;
+		border: 1px solid #E8E8E8;
+		background: #FFF;
+		border-radius: 16px 16px 14px 14px;
+	padding: 0 28px;
+		box-sizing: border-box;
+	
+}
+
+.sd-formdivContaner {
+		width: 100%;
+		height: 68px;
+		border: 1px solid #E8E8E8;
+		background: #FFF;
+		border-radius: 20px;
+		margin-top: 9px;
+		padding: 12px 12px;
+		box-sizing: border-box;
+	display: none;
+	
+}
+
+.sd-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 20px;
+}
+
+.sd-card {
+		background: #ffffff;
+		padding: 18px;
+		border-radius: 20px;
+		border: 1px solid #EAEAEA;
+		box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 206px; /* instead of fixed height */
+}
+
+
+.sd-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+}
+
+.sd-top {
+		display: flex;
+		align-items: center;
+		margin-bottom: 17px;
+}
+
+.sd-avatar {
+		width: 52px;
+		height: 52px;
+		border-radius: 12px;
+		object-fit: cover;
+		margin-right: 12px;
+		border: 2px solid #e6ecff;
+}
+
+.sd-name {
+		font-weight: 600;
+		font-size: 16px;
+		color: #222;
+}
+
+.sd-role {
+		font-size: 12px;
+		color: #e63946;
+		margin-top: 2px;
+}
+
+.sd-info {
+		font-size: 13px;
+		color: #444;
+		margin-top: 10px;
+	    display: flex;
+		flex-direction: column;
+		height: calc(100% - 70px);
+		justify-content: space-between;
+}
+
+.sd-info-row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 6px;
+	font-size: 14.5px;
+
+}
+
+.sd-icon svg {
+
+		display: block;
+}
+.sd-bottomdivContaner {
+		margin-top: 10px;
+		height: calc(100% - 92px);
+		width: 100%;
+		border-radius: 20px 20px 32px 32px;
+	background:  url("<%=bgimg%>");
+	       background-color: white;
+		box-sizing: border-box;
+background-size: cover;
+background-repeat: no-repeat;
+		background-position: 0px bottom;
+
+}
+
+
+
+.Staff.Details {
+		color: #000;
+		font-family: Poppins;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 600;
+}
+.sd-topbar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	    height: 100%;
+}
+
+.sd-staffTitle {
+		color: #000;
+		font-family: Poppins, sans-serif;
+		font-size: 18px;
+		font-weight: 600;
+}
+
+.sd-addBtn {
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: 0.2s ease;
+}
+
+.sd-addBtn:hover {
+		transform: scale(1.05);
+}
+
+
+
+.form-view {
+		height: 55px !important;
+	}
+
+	.form-view .zc-footer-wrapper {
+		display: block;
+	}
+
+	.form-view .zc-form-fullheight {
+		display: unset;
+	}
+
+	.form-view .zc-form-fullheight,
+	.form-view .zc-form-fullheight .form-outer-wrapper {}
+
+	.form-view .form-group {
+		margin-bottom: unset !important;
+	}
+	
+	.form-table.label-inplace .zc-form-scroll-wrapper {
+		margin: 10px 0;
+	}
+
+	.form-view .zc-form-scroll-wrapper div[elname="formRow"] .second-column .form-group>label {
+		display: none;
+	}
+
+	.form-view .zc-form-scroll-wrapper div[elname="formRow"] {
+		display: flex;
+		gap: 10px;
+	}
+
+	.form-view .zc-form-scroll-wrapper div[elname="formRow"] .second-column {
+		min-width: unset !important;
+	}
+
+	.form-view .zc-form-scroll-wrapper div[elname="formRow"]>div:first-child,
+	.form-view .zc-form-scroll-wrapper div[elname="formRow"]>div:last-child {
+		display: none;
+	}
+
+
+
+	.form-view form {
+		width: unset !important;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	height: 42px;
+	}
+
+	.form-view .form-field .choice-table-row:first-child .choice-table-cell span {
+		width: max-content;
+	}
+
+	.form-view .form-field .tempContDiv .choice-table-cell:last-child {
+		padding: unset;
+	}
+
+	.form-view .form-field .choice-table-row:first-child .choice-table-cell span {
+		width: max-content;
+		height: 55px;
+		background: white;
+		border: 1px solid #EFF0F6;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: row-reverse;
+		gap: 10px;
+		align-items: center;
+		padding-top: unset !important;
+		padding-left: 10px;
+	}
+
+	.form-view .zc-Search_Box-group .form-field input {
+		width: 100%;
+		border: 1px solid #EFF0F6;
+		height: 55px;
+		border-radius: 10px;
+		padding-left: 15px;
+		padding-right: 45px;
+	}
+
+	.form-view .zc-Search_Box-group .form-field {
+		width: 100% !important;
+		position: relative;
+	}
+
+	.form-view .zc-Search_Box-group .form-field::after {
+		content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.66683 14C11.1646 14 14.0002 11.1644 14.0002 7.66665C14.0002 4.16884 11.1646 1.33331 7.66683 1.33331C4.16903 1.33331 1.3335 4.16884 1.3335 7.66665C1.3335 11.1644 4.16903 14 7.66683 14Z' stroke='%23292D32' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.6668 14.6666L13.3335 13.3333' stroke='%23292D32' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+		position: absolute;
+		right: 23px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.form-view .form-field .choice-table-row:first-child .choice-table-cell span label {
+		top: unset !important;
+	}
+
+	.form-view .zc-Search_Box-group>label {
+		font-size: 0.9rem !important;
+		top: 50% !important;
+		transform: translate(10px, -50%) !important;
+	}
+
+	.form-view .zc-Search_Box-group:is(.zc-focus, .zc-label-float)>label {
+		transform: translate(10px, -35px) !important;
+		background: unset !important;
+	}
+
+	div[elname="recordcontainerwrapper"]:has(.zc-cardcontainerwrapper),
+	.report-view .custom-report .zc-cardcontainerwrapper {
+		border-bottom: unset !important;
+	}
+
+	.form-view .form-field .choice-table-row:first-child .choice-table-cell span label:after {
+		top: 2px;
+		left: 2px;
+	}
+
+	.form-view .zc-Search_Box-group .form-field .cogLoader {
+		display: none;
+	}
+	.form-view .zc-form-scroll-wrapper div[elname="formRow"] .first-column {
+		width: 100%;
+		display: flex;
+		width: 100% !important;
+		justify-content: flex-end;
+		gap: 25px;
+}
+
+.form-view .formContainer {
+		padding: unset !important;
+}
+.form-action.formbutton {
+		padding: unset !important;
+}
+.zc-form-scroll-wrapper {
+		margin: unset !important;
+}
+.statelessFormWidth .zc-live-primary-btn {
+		margin-bottom: unset !important;
+}
+.divEmbedContainer {
+		height: 100% !important;
+}
+div#All_Staff_ZC_VWF2BG {
+		background: unset !important;
+}
+div#All_Staff_ZC_NQYTO7 {
+		background: unset !important;
+}
+.row.reportfullwidth.zc-report-no-header.custom-report.zc-card-report {
+		background: unset !important;
+}
+
+.zc-pb-reportlive-container .view-outer-wrapper.summary-type-report, .divEmbedContainer .view-outer-wrapper.summary-type-report {
+		background-color: unset !important;
+}
+.zc-pb-tile-card.zc-pb-tile-cnt-wrapper {
+		border: 1px solid #EAEAEA !important;
+	    border-radius: 20px !important;
+}
+span#text_3::before {
+		content: "";
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		vertical-align: middle;
+	background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.61714 5H6.71429C6.25963 5 5.82359 5.18061 5.5021 5.5021C5.18061 5.82359 5 6.25963 5 6.71429V8.42857C5 13.1626 8.83743 17 13.5714 17H15.2857C15.7404 17 16.1764 16.8194 16.4979 16.4979C16.8194 16.1764 17 15.7404 17 15.2857V14.1011C16.9999 13.942 16.9555 13.786 16.8718 13.6507C16.7881 13.5154 16.6684 13.406 16.526 13.3349L14.4551 12.2994C14.3453 12.2445 14.225 12.2138 14.1022 12.2094C13.9795 12.205 13.8573 12.2271 13.7438 12.2741C13.6303 12.3211 13.5283 12.3919 13.4446 12.4817C13.3609 12.5716 13.2974 12.6784 13.2586 12.7949L13.004 13.5603C12.9241 13.8001 12.7594 14.0025 12.5407 14.1294C12.3221 14.2563 12.0647 14.299 11.8169 14.2494C10.8137 14.0483 9.89236 13.5549 9.16895 12.8314C8.44554 12.1078 7.95234 11.1864 7.75143 10.1831C7.70191 9.93528 7.74461 9.67785 7.87151 9.45925C7.99841 9.24065 8.20077 9.07591 8.44057 8.996L9.39029 8.67886C9.59494 8.61059 9.76633 8.46766 9.87024 8.27859C9.97414 8.08952 10.0029 7.86822 9.95086 7.65886L9.44857 5.64886C9.40214 5.4635 9.2951 5.29898 9.14446 5.18142C8.99383 5.06386 8.80822 5.00001 8.61714 5Z' stroke='%23194BB2'/%3E%3C/svg%3E%0A");
+	}
+	
+	span#text_4::before{
+		 content: "";
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		vertical-align: middle;
+	background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.4 6H16.6C17.37 6 18 6.6125 18 7.36111V15.5278C18 16.2764 17.37 16.8889 16.6 16.8889H5.4C4.63 16.8889 4 16.2764 4 15.5278V7.36111C4 6.6125 4.63 6 5.4 6Z' stroke='%23194BB2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18 7.55566L11 12.2223L4 7.55566' stroke='%23194BB2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+	
+}
+
+span#text_5::before{
+		 content: "";
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		vertical-align: middle;
+	background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.86971 8.43972H3.66699V6.39426L10.5582 3.66699L17.417 6.39426V8.43972H16.0355M4.86971 8.43972V15.1767M4.86971 8.43972H7.73023M4.86971 15.1767H3.66699V17.417H17.417V15.1767H16.0355M4.86971 15.1767H7.73023M16.0355 8.43972V15.1767M16.0355 8.43972H13.24M16.0355 15.1767H13.24M7.73023 8.43972V15.1767M7.73023 8.43972H13.24M7.73023 15.1767H13.24M13.24 8.43972V15.1767' stroke='%23194BB2' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+
+	
+}
+
+.form-view .form-field input {
+		border: none !important;
+		width: 100% !important;
+}
+
+.formContainer {
+		width: 100%;
+}
+
+.form-view .zc-footer-wrapper label.form-label {
+		display: none;
+}
+.form-view .zc-footer-wrapper input.zc-live-primary-btn {
+		margin: 0;
+		margin-left: 30px;
+		display: flex;
+		width: 93px;
+		height: 40px;
+		padding: 8px 12px;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		border-radius: 6px !important;
+		font-size: 14px;
+		font-weight: 500;
+}
+
+.form-view .zc-dem-container .inner .form-outer-wrapper>.row {
+		border-radius: unset !important;
+}
+
+.form-view .zc-dem-container .inner .form-outer-wrapper form.form-table {
+		border-radius: unset !important;
+}
+
+.form-view .formColumn .form-group {
+		flex: 1;
+}
+
+.form-view .form-group .form-field {
+		width: 100% !important;
+}
+
+.form-view .zc-form-fullheight {
+		display: block !important;
+		height: 100%;
+		width: 100%;
+}
+
+.form-view .form-outer-wrapper {
+		height: 100% !important;
+		width: 100%;
+}
+
+.inner .zc-page-content-wrapper .zc-pb-page-content-wrapper .form-table .formContainer {
+		height: 100% !important;
+}
+
+.form-view .zc-form-scroll-wrapper {
+		height: 100%;
+}
+
+.form-view .form-view .zc-form-scroll-wrapper div[elname="formRow"] {
+		height: 100%;
+}
+
+.form-view .form-field input {
+		height: 100% !important;
+		min-height: 100% !important;
+}
+
+ .form-view .form-group .form-field {
+		height: 100% !important;
+}
+
+.form-view .form-group:is(.zc-focus, .zc-label-float) label{
+		display: none !important;
+}
+/*
+.form-group.clearfix.zc-Search_Contact_Number-group {
+		border-right: 1px solid #DADADA;
+}*/
+.form-view input#s2id_autogen6 {
+		width: 100% !important;
+}
+
+.form-view a.select2-choice.select2-default {
+		width: 100% !important;
+	    border: none !important;
+		border-radius: unset !important;
+	box-shadow: unset !important;
+}
+
+
+.form-view div#s2id_autogen3 {
+		width: 100% !important;
+	   
+}
+
+
+.form-view div#s2id_autogen5 {
+		width: 100% !important;
+}
+.form-view .select2-container 
+ {
+		width: 100% !important;
+}
+
+.form-view .form-field.clearfix.searchable-lookup.mediumSizeLive.zc-Default {
+		border-left: 1px solid #DADADA;
+	    padding-left: 13px;
+}
+.form-view a.select2-choice {
+		width: 100% !important;
+		border: none !important;
+}
+.form-view .select2-container .select2-choice:hover{
+		box-shadow: unset !important;
+	}
+	.form-view .zpelement-wrapper .zc-pb-tile-container a:focus-visible {
+		box-shadow: unset !important;
+}
+.form-view .select2-container .select2-choice:focus
+{
+	    box-shadow: unset !important;
+
+}
+.form-view form.form-table .formContainer .formColumn .form-group.zc-focus .form-field .form-control,
+.form-view form.form-table .formContainer .formColumn .form-group:hover .form-field .form-control,
+.form-view form.form-table .formContainer .formColumn .form-group .form-field .select2-container.select2-allowclear .select2-choice {
+		box-shadow :none
+}
+.form-view div#zc-country-input,
+.flag-container,
+.intl-tel-input.allow-dropdown.separate-dial-code {
+		height: 100% !important;
+}
+.form-view div#splash-screen {
+		display: none !important;
+}
+.form-view .form-group label.form-label
+{
+	    top: 50% !important;
+		left: 10px !important;
+		transform: translateY(-50%) !important;
+}
+.form-view .zc-footer-wrapper {
+		display: none !important;
+}
+div[viewlinkname="All_Staff"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:not(:first-child) .zcp-col > span > span:empty:after
+{
+	    content: "-";
+}
+
+div[viewlinkname="All_Staff"] {
+		padding-bottom: 17px;
+		box-sizing: border-box;
+}
+
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper.zc-page-content-wrapper .view-outer-wrapper .view-header .zc-new-report-header {
+		background: transparent !important;
+}
+
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .view-outer-wrapper .view-header {
+		background: transparent !important;
+}
+
+.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .view-outer-wrapper .reportfullwidth.custom-report {
+		background: transparent !important;
+		border-top: unset !important;
+		padding: unset !important;
+}
+
+.zpelement-wrapper .zc-pb-tile-container.zc-qv-custom-layout .zc-pb-tile-cnt-wrapper  {
+	width: 100% !important;
+}
+
+.zpelement-wrapper .zc-pb-tile-container.zc-qv-custom-layout .zc-pb-tile-cnt-wrapper:hover,
+.zpelement-wrapper .zc-pb-tile-container.zc-qv-custom-layout.zc-selected-card .zc-pb-tile-cnt-wrapper{
+		border-color: var(--primary_color) !important;
+	box-shadow: unset !important;
+}
+
+.zc-pb-tile-card.zc-pb-tile-cnt-wrapper {
+		margin: 0 !important;
+}
+
+
+div[viewlinkname="All_Staff"] .group-record-title {
+		background: rgb(from #0a2151     calc(r + (255 - r) * 0.6)     calc(g + (255 - g) * 0.6)     calc(b + (255 - b) * 0.6));
+		height: 45px !important;
+		padding: unset;
+		align-items: center;
+		padding-left: 20px;
+		margin-inline: unset !important;
+	display: flex;
+	position: sticky !important;
+		top: 0;
+		z-index: 9;
+}
+
+div[viewlinkname="All_Staff"] .group-record-title::after {
+		content: unset !important;
+}
+
+div[viewlinkname="All_Staff"] .record-container.record-container-fix {
+		padding: unset !important;
+}
+
+div[viewlinkname="All_Staff"] .custom-report.zc-card-report {
+		margin: unset !important;
+}
+
+div[viewlinkname="All_Staff"] .zc-pb-tile-container {
+		padding: unset !important;
+		margin: unset !important;
+}
+
+div[viewlinkname="All_Staff"] .zpelement-wrapper.zcpage-elemContainer {
+		display: grid !important;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		width: 100%;
+		gap: 14px;
+	padding-inline: 16px;
+}
+
+div[viewlinkname="All_Staff"].zpelement-wrapper.zcpage-elemContainer:after, .zpelement-wrapper.zcpage-elemContainer:before {
+		content: unset !important;
+}
+
+div[viewlinkname="All_Staff"] .zpelement-wrapper.zcpage-elemContainer .column-container {
+		width: 100% !important;
+}
+
+div[viewlinkname="All_Staff"] .zcp-col > span img {
+		border: 2px solid var(--theme_brand_color);
+		box-sizing: border-box;
+}
+
+div[viewlinkname="All_Staff"] span[id*=image] {
+		width: 100% !important;
+}
+
+div[viewlinkname="All_Staff"] .noRecImage {
+		border-color: var(--theme_brand_color);
+		border-width: 2px;
+		width: 100% !important;
+		max-width: 100%;
+		max-height: 100%;
+}
+
+div[viewlinkname="All_Staff"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(1) > .zcp-col > .zcp-row > .zcp-col,
+div[viewlinkname="All_Staff"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(1) > .zcp-col > .zcp-row {
+		width: 100% !important;
+}
+
+div[viewlinkname="All_Staff"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:not(:first-child) .zcp-col > span > span:empty:after {
+		content: "-";
+}
+</style>
+
+
+<div class = "sd-fullContainer" >
+
+<div class="sd-topdivContaner">
+
+		<div class="sd-topbar">
+				<div class="sd-staffTitle">Staff Details</div>
+
+		 <!--  <a href="#Form:Staff_Master?zc_LoadIn=dialog&zc_NextUrl=#Script:page.refresh" class="sd-addBtn">
+
+		<svg width="46" height="42" viewBox="0 0 46 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<rect x="0.5" y="0.5" width="45" height="41" rx="9.5" fill="white"/>
+				<rect x="0.5" y="0.5" width="45" height="41" rx="9.5" stroke="#E8E8E8"/>
+				<path d="M23 14L23 28M30 21L16 21" stroke="#243C6C" stroke-width="2" stroke-linecap="round"/>
+		</svg>
+
+</a> -->
+		</div>
+
+</div>
+
+
+
+
+<div class ="sd-formdivContaner">
+
+		<div elName='zc-component' class="form-view" formLinkName='Employee_Filter' params='zc_Header=false&zc_Focus=false&Current_Page=staffPage'></div>
+
+</div>
+
+
+
+<div class ="sd-bottomdivContaner">
+
+ <div elName='zc-component' name="sd-reportview" viewLinkName='All_Staff'  params='zc_Header=true&zc_ReportName=false&zc_MoreAction=false&zc_AddRec=false&zc_Footer=false&zc_Search=true'></div>
+
+</div>
+
+</div>

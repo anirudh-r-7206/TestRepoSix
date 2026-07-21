@@ -1,0 +1,43 @@
+void initial.seedPositions()
+{
+
+			
+			                 	positions = List();
+			                 	/* TEACHING */
+			                 	positions.add({"position_name":"Principal","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Vice Principal","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Head of Department (HOD)","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Head of Sub School","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Senior Teacher","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Classroom Teacher","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Relief Teacher","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Special Education Teacher","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Curriculum Coordinator","applicable_for":"Teaching"});
+			                 	positions.add({"position_name":"Academic Coordinator","applicable_for":"Teaching"});
+			                 	/* NON-TEACHING */
+			                 	positions.add({"position_name":"IT Support Officer","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Administrative Officer","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Finance Officer","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"HR Officer","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Receptionist","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Librarian","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Lab Technician","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Maintenance Officer","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"School Counsellor","applicable_for":"Non-Teaching"});
+			                 	positions.add({"position_name":"Operations Manager","applicable_for":"Non-Teaching"});
+			                 	for each  position in positions
+			                 	{
+			                 		existing = Positions[position_name == position.get("position_name")];
+			                 		if(existing.count() == 0)
+			                 		{
+			                 			insert into Positions
+			                 			[
+			                 				position_name=position.get("position_name")
+			                 				applicable_for=position.get("applicable_for")
+			                 				Added_User=zoho.loginuser
+			                 			]
+			                 		}
+			                 	}
+			                 
+			
+}

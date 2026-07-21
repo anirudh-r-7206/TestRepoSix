@@ -1,0 +1,34 @@
+default list All_Staff_Employment
+{
+
+		
+					displayName = "All Staff Employment"
+					show all rows from Staff_Employment    
+					(
+						Commencement_Date as "Commencement Date"
+						End_Date as "End Date"
+						Position
+						FTE
+						Teacher_Type as "Teacher Type"
+						Year_Level as "Year Level"
+						Subject_field as "Subject"
+						Speciality
+						Staff
+						School
+						Teaching_Staff as "Teaching Staff"
+						Service_In_Years as "Service In Years"
+						Service_In_Months as "Service In Months"
+						Service_In_Days as "Service In Days"
+						Total_Service_Period as "Total Service Period"
+						School1 as "School"
+						Position1 as "Position"
+						Campus
+						Campus1 as "Campus"
+						Admin_Type as "Admin Type"
+						Is_primary as "Is primary"
+						Is_On_Leave as "Is On Leave "
+						Leave_Untill as "Leave Untill"
+					)
+				
+		
+}

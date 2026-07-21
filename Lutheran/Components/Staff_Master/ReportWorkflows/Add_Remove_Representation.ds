@@ -1,0 +1,20 @@
+Add_Remove_Representation as "Add / Remove Representation/Team"
+{
+
+			
+							type =  functions
+							form = Staff_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:Add_Remove_Representation_Team?Staff_Master=" + input.ID + "&From_Field=Staff","popup window");
+								)
+								}
+							}
+						
+			
+}

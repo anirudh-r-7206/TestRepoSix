@@ -1,0 +1,51 @@
+User_input_of_Completion_ as "User input of Completion date field"
+{
+
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Completion_Date
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Completion_Date != null)
+													{
+														/* FUTURE DATE CHECK */
+														maxFutureDate = zoho.currentdate.addYear(3);
+														if(input.Completion_Date > maxFutureDate)
+														{
+															alert "Completion Date cannot be more than 5 years in the future.";
+															input.Completion_Date = null;
+														}
+														else if(input.Staff != null && input.Staff.date_of_birth != null)
+														{
+															/* BEFORE DOB CHECK */
+															if(input.Completion_Date < input.Staff.date_of_birth)
+															{
+																alert "Completion Date cannot be before Date of Birth.";
+																input.Completion_Date = null;
+															}
+															else
+															{
+																/* MIN AGE 16 CHECK */
+																minValidDate = input.Staff.date_of_birth.addYear(15);
+																if(input.Completion_Date < minValidDate)
+																{
+																	alert "Staff must be at least 15 years old at the time of completion.";
+																	input.Completion_Date = null;
+																}
+															}
+														}
+													}
+									)
+								}
+							}
+			
+						
+			
+}

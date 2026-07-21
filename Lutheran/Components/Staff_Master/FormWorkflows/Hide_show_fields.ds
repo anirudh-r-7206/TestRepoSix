@@ -1,0 +1,38 @@
+Hide_show_fields as "Hide show fields"
+{
+
+			
+							type =  form
+							form = Staff_Master
+			
+							record event = on add or edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(Onboarding == true)
+													{
+														hide status;
+														hide Qualifications;
+														hide Section;
+														hide Latest_Teaching_Details;
+														hide Employment_Records;
+														hide Employment_History;
+														hide Accreditation_Details;
+														hide Trainings;
+														hide Section1;
+													}
+													hide Section1;
+													hide Service_Period;
+													hide Staff_Service_Awards;
+													// hide maiden_name;
+									)
+								}
+							}
+			
+						
+			
+}

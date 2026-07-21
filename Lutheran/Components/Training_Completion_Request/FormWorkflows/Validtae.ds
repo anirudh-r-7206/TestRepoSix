@@ -1,0 +1,27 @@
+Validtae as "Validtae"
+{
+
+			
+							type =  form
+							form = Training_Completion_Request
+			
+							record event = on add or edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Evidence_File == null || input.Evidence_File.isEmpty())
+													{
+														alert(Evidence_File,"Please upload file.");
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
+			
+}

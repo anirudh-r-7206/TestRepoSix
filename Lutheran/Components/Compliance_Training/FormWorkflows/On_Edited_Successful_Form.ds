@@ -1,0 +1,96 @@
+On_Edited_Successful_Form as "On Edited - Successful Form Submission"
+{
+
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on edit
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														login_user = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"];
+													fetTrainingRequest = Training_Completion_Request[Compliance_Training == input.ID];
+													if(fetTrainingRequest.count() > 0)
+													{
+														fetTrainingRequest.Training_Name=input.Training_Name;
+														action = "Training Completion Request Accepted";
+														comment = "Compliance Training Completion Request Accepted by " + fetTrainingRequest.Current_Approver;
+														if(thisapp.permissions.loginUserProfile() != "Staff")
+														{
+															current_approver = "";
+															if(login_user.Admin_Type == "Campus")
+															{
+																current_approver = "Campus Admin";
+															}
+															else if(login_user.Admin_Type == "School")
+															{
+																current_approver = "School Admin";
+															}
+															else if(login_user.Admin_Type == "Region")
+															{
+																current_approver = "Region Admin";
+															}
+															else if(login_user.Admin_Type == "National")
+															{
+																current_approver = "National Admin";
+															}
+															fetTrainingRequest.Current_Approver=thisapp.helpers.returnComplianceCompletionRequestNextApprover(current_approver,input.Staff.ID);
+														}
+														else
+														{
+															fetTrainingRequest.Current_Approver=thisapp.helpers.returnComplianceCompletionRequestNextApprover(fetTrainingRequest.Current_Approver,input.Staff.ID);
+														}
+														if(fetTrainingRequest.Current_Approver == "")
+														{
+															fetTrainingRequest.Status="Approved";
+															input.Completion_Request_Raised = true;
+															input.Status = "Completed";
+															total_accreditation = Compliance_Training[Accreditation_Details == input.Accreditation_Details];
+															completed_total_accreditation = Compliance_Training[Accreditation_Details == input.Accreditation_Details && Status == "Completed"];
+															accreditation = Accreditation_Details[ID == input.Accreditation_Details];
+															if(total_accreditation.count() == completed_total_accreditation.count() && accreditation.PD_Hours_Collected >= accreditation.Required_Accreditation.Required_PD_Hours)
+															{
+																accreditation.Status_Accreditation="Eligible For Accreditation";
+															}
+															else if(accreditation.Status_Accreditation == "Not Accredited")
+															{
+																accreditation.Status_Accreditation="Accreditation In Progress";
+															}
+															fetAccreditation = Accreditation_Details[Staff == input.Staff] sort by Added_Time desc range from 0 to 1;
+															if(fetAccreditation.count() > 0)
+															{
+																input.Accreditation_Details = fetAccreditation.ID;
+																if(fetAccreditation.PD_Hours_Collected != null)
+																{
+																	fetAccreditation.PD_Hours_Collected=fetAccreditation.PD_Hours_Collected + ifNull(input.Hours_Number_for_PD,0);
+																}
+																else
+																{
+																	fetAccreditation.PD_Hours_Collected=input.Hours_Number_for_PD;
+																}
+															}
+															action = "Training Completion Request Approved";
+															comment = "Compliance Training Completion Request Completed";
+														}
+														insert into History
+														[
+															Added_User=zoho.loginuser
+															Action_By=login_user
+															Action_field=action
+															Comment=comment
+															Training_Completion_Request=fetTrainingRequest
+														]
+														openUrl("#Script:page.parent.refresh","same window");
+													}
+									)
+								}
+							}
+			
+						
+			
+}

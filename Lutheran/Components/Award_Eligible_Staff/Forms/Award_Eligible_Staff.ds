@@ -1,0 +1,55 @@
+form Award_Eligible_Staff
+{
+
+		
+					displayname = "Award Eligible Staff"
+					store data in zc = false
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Service_Award
+					(
+						type = picklist	
+						displayname = "Service Award"
+						values  = Service_Awards.ID
+		    			displayformat = [Award_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Staff
+					(
+						type = list	
+						values  = Staff_Master.ID
+		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					staff_info
+					(
+		    			type = plaintext
+						value = "<div> <br /></div>"
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+			
+					actions
+					{
+						Submit
+						(
+		   					type = submit
+		   					displayname = "Submit"
+						)
+					}
+				
+		
+}

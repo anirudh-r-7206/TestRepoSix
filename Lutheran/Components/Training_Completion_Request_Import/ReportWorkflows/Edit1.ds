@@ -1,0 +1,20 @@
+Edit1 as "Edit"
+{
+
+			
+							type =  functions
+							form = Training_Completion_Request_Import
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									openUrl("#Form:Training_Completion_Request_Import?recLinkID=" + input.ID + "&viewLinkName=Training_Completion_Request_Import_Report&zc_NextUrl=#Script:page.refresh","popup window");
+								)
+								}
+							}
+						
+			
+}

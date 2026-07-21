@@ -1,0 +1,99 @@
+string helpers.timeToAward(int serviced_days, int award_years)
+{
+
+			
+			                 	/* TODAY */
+			                 	today = zoho.currentdate;
+			                 	/* FIND ACTUAL JOIN DATE */
+			                 	joinDate = today.subDay(serviced_days);
+			                 	/* CALCULATE AWARD DATE */
+			                 	awardDate = joinDate.addYear(award_years);
+			                 	/* IF ALREADY ELIGIBLE */
+			                 	if(awardDate <= today)
+			                 	{
+			                 		return "Award Due";
+			                 	}
+			                 	/* CALCULATE DIFFERENCE */
+			                 	years = awardDate.getYear() - today.getYear();
+			                 	months = awardDate.getMonth() - today.getMonth();
+			                 	days = awardDate.getDay() - today.getDay();
+			                 	/* ADJUST DAYS */
+			                 	if(days < 0)
+			                 	{
+			                 		months = months - 1;
+			                 		prevMonth = awardDate.getMonth() - 1;
+			                 		prevYear = awardDate.getYear();
+			                 		if(prevMonth == 0)
+			                 		{
+			                 			prevMonth = 12;
+			                 			prevYear = prevYear - 1;
+			                 		}
+			                 		daysInMonth = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31};
+			                 		/* Leap year */
+			                 		if(prevMonth == 2)
+			                 		{
+			                 			if((prevYear % 4 == 0 && prevYear % 100 != 0) || prevYear % 400 == 0)
+			                 			{
+			                 				daysInMonth.put(2,29);
+			                 			}
+			                 		}
+			                 		days = days + daysInMonth.get(prevMonth);
+			                 	}
+			                 	/* ADJUST MONTHS */
+			                 	if(months < 0)
+			                 	{
+			                 		years = years - 1;
+			                 		months = months + 12;
+			                 	}
+			                 	/* BUILD STRING */
+			                 	parts = List();
+			                 	if(years > 0)
+			                 	{
+			                 		if(years == 1)
+			                 		{
+			                 			parts.add("1 Year");
+			                 		}
+			                 		else
+			                 		{
+			                 			parts.add(years + " Years");
+			                 		}
+			                 	}
+			                 	if(months > 0)
+			                 	{
+			                 		if(months == 1)
+			                 		{
+			                 			parts.add("1 Month");
+			                 		}
+			                 		else
+			                 		{
+			                 			parts.add(months + " Months");
+			                 		}
+			                 	}
+			                 	if(days > 0)
+			                 	{
+			                 		if(days == 1)
+			                 		{
+			                 			parts.add("1 Day");
+			                 		}
+			                 		else
+			                 		{
+			                 			parts.add(days + " Days");
+			                 		}
+			                 	}
+			                 	if(parts.size() == 0)
+			                 	{
+			                 		return "Award Due";
+			                 	}
+			                 	result = "";
+			                 	for each  part in parts
+			                 	{
+			                 		if(result != "")
+			                 		{
+			                 			result = result + ", ";
+			                 		}
+			                 		result = result + part;
+			                 	}
+			                 	return result + " remaining";
+			                 
+			
+}

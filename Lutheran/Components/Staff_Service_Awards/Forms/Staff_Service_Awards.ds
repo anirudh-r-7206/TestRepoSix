@@ -1,0 +1,71 @@
+form Staff_Service_Awards
+{
+
+		
+					displayname = "Staff Service Awards"
+					success message = "Staff Service Award Added Successfully"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					must have Staff
+					(
+						type = picklist	
+						values  = Staff_Master.ID
+		    			bidirectional = Staff_Service_Awards
+		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Award
+					(
+						type = picklist	
+						values  = Service_Awards.ID
+		    			displayformat = [Award_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have award_date
+					(
+		    			type = date
+						displayname = "Award Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		
+}

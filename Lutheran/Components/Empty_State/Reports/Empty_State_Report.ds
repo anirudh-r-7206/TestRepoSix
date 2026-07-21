@@ -1,0 +1,13 @@
+default list Empty_State_Report
+{
+
+		
+					displayName = "Empty State Report"
+					show all rows from Empty_State    
+					(
+						Image
+						Name
+					)
+				
+		
+}

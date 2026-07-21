@@ -1,0 +1,15 @@
+default list All_Qualifications
+{
+
+		
+					displayName = "All Qualifications"
+					show all rows from Qualifications    
+					(
+						completion_date as "Completion Date"
+						Institution
+						Staff
+						Qualification_Type as "Qualification Type"
+					)
+				
+		
+}

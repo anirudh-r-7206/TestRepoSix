@@ -1,0 +1,75 @@
+report Representation_Team_Staff
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Photograph
+										Name
+										Staff_Email as "Staff Email"
+										Phone_Number as "Phone"
+										date_of_birth as "Date Of Birth"
+										Current_Position as "Current Position"
+										Committees.ID as "ID"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Photograph
+										Name
+										Surname as "Middle name"
+										Phone_Number as "Phone"
+										date_of_birth as "Date Of Birth"
+										gender as "Gender"
+										religion as "Religion"
+										origin as "Origin"
+										status as "Status"
+										Teaching_Staff as "Teaching Staff"
+										Current_Position as "Current Position"
+										FTE
+										Teacher_Type as "Teacher Type"
+										Date_Commenced_in_Current_School as "Date Commenced in Current School"
+										Date_Commenced_in_Lutheran_School as "Date Commenced in Lutheran School"
+										Current_Employment as "Current Employment"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

@@ -1,0 +1,67 @@
+report All_Position_Details
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										position_name as "Position Name"
+										applicable_for as "Applicable For"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										position_name as "Position Name"
+										applicable_for as "Applicable For"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
+						)
+					
+		
+}

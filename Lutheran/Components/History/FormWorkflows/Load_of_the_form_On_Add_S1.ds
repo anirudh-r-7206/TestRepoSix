@@ -1,0 +1,29 @@
+Load_of_the_form_On_Add_S1 as "Load of the form - On Add Scripts"
+{
+
+			
+							type =  form
+							form = History
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														header_val = "";
+													if(input.Action_field.containsIgnoreCase("reject"))
+													{
+														header_val = "Reject";
+													}
+													input.Header = "<div style='margin: 0; font-size: 1.125rem;'>" + header_val + "</div>";
+													input.Action_By = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"].ID;
+									)
+								}
+							}
+			
+						
+			
+}

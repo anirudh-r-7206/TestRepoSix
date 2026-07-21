@@ -1,0 +1,72 @@
+report Pending_Training_Completion_Requests
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Compliance_Training as " Compliance Training"
+										Training_Type as "Training Type"
+										Training_Name as "Training Name"
+										Completion_Date as "Completion Date"
+										Evidence_File as "Evidence File "
+										"Approve"
+										"Reject "
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Staff
+										Compliance_Training as " Compliance Training"
+										Training_Type as "Training Type"
+										Training_Name as "Training Name"
+										Completion_Date as "Completion Date"
+										Evidence_File as "Evidence File "
+										Status
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+									)
+								)
+						)
+					
+		
+}

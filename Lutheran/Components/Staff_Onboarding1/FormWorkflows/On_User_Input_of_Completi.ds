@@ -1,0 +1,28 @@
+On_User_Input_of_Completi as "On User Input of Completion_Date"
+{
+
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+								status = inactive
+			
+							on user input of Completion_Date
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Completion_Date > zoho.currentdate)
+													{
+														input.Completion_Date = null;
+														alert "Completion Date must be a past date.";
+													}
+									)
+								}
+							}
+			
+						
+			
+}

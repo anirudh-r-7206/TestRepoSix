@@ -1,0 +1,84 @@
+report All_Campuses
+{
+
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										campus_name as "Campus Name"
+										campus_image as "Campus Image"
+										campus_address as "Campus Address"
+										Campus_Email as "Campus Email"
+										School
+										Organisation_Name as "National  Name"
+										Region_Name as "Region Name"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										campus_name as "Campus Name"
+										campus_image as "Campus Image"
+										campus_address as "Campus Address"
+										Campus_Email as "Campus Email"
+										School
+										Organisation_Name as "National  Name"
+										Region_Name as "Region Name"
+										School_Name as "School Name"
+										Web_Address as "Web Address"
+										Head_of_Campus as "Head of Campus"
+										Telephone
+										Enrollment
+										Postal_Address as "Postal Address"
+										Staff_Generic_Email as "Staff Generic Email"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
+						)
+					
+		
+}
