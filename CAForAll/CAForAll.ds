@@ -1,0 +1,935 @@
+/*
+ * Author       : anirudh.r_zohocorp
+ * Generated on : 21-Jul-2026 09:06:07
+ * Version      : 1.0
+ */
+application "CAForAll"
+{
+	date format = "dd-MMM-yyyy"
+	time zone = "Asia/Kolkata"
+	time format = "24-hr"
+
+
+
+	forms
+	{
+		form Staff_Details
+		{
+		
+					displayname = "Staff Details"
+					success message = "Data Added Successfully!"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Name
+					(
+		    			type = text
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Age
+					(
+						type = number
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Dept
+					(
+						type = radiobuttons
+						maxchar = 100
+						values = {"Dept 1","Dept 2","Dept 3"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		}
+	}
+
+	reports
+	{
+		default list Staff_Details_Report
+		{
+		
+					displayName = "Staff Details Report"
+					show all rows from Staff_Details    
+					(
+						Name
+						Age
+						Dept
+						custom action "ReportField"
+						(
+			  			workflow = ReportField
+						show action in edit record menu = true
+						column header = "ReportField"
+						)
+					)
+					custom actions
+					(
+						"OnClickofaRecord"
+						(
+			  			workflow = OnClickofaRecord
+						show action in edit record menu = true
+						condition = (ID > 100)
+						confirmation before execution
+						(
+							message for individual record = "Execute the OnClickofaRecord action for this record? ${Name}"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"ForSingleRecord"
+						(
+			  			workflow = ForSingleRecord
+						show action in edit record menu = true
+						condition = (ID > 9999)
+						confirmation before execution
+						(
+							message for individual record = "Execute the ForSingleRecord action for this record?"
+							confirm button text = "Yeah"		
+							cancel button text = "Nah"
+						)
+						)
+						"ForRightClickofaRecord"
+						(
+			  			workflow = ForRightClickofaRecord
+						condition = (ID > 10000)
+						confirmation before execution
+						(
+							message for individual record = "Execute the ForRightClickofaRecord action for this record?"
+							confirm button text = "Panlama"		
+							cancel button text = "Venama"
+						)
+						)
+						"ForMultipleRecords"
+						(
+			  			workflow = ForMultipleRecords
+						show action in view header = true
+						show action in edit record menu = true
+						)
+						"ForMultipleRecordsColle"
+						(
+			  			workflow = ForMultipleRecordsColle
+						show action in view header = true
+						show action in edit record menu = true
+						execute action for collection of records
+						condition = (ID > 100)
+						confirmation before execution
+						(
+							message for multiple records = "Execute the ForMultipleRecordsColle action for the selected ${record_count} records?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						"ForSelectedRecordDV"
+						(
+			  			workflow = ForSelectedRecordDV
+						show action in view header = true
+						)
+						"OnTapofaRecordMob"
+						(
+			  			workflow = OnTapofaRecordMob
+						)
+						"ForSingleRecordMob"
+						(
+			  			workflow = ForSingleRecordMob
+						show action in edit record menu = true
+						)
+						"ForLongPressofaRecordMob"
+						(
+			  			workflow = ForLongPressofaRecordMob
+						)
+						"ForSwipeLeftofaRecordMob"
+						(
+			  			workflow = ForSwipeLeftofaRecordMob
+						)
+						"ForSwipeRightofaRecordMob"
+						(
+			  			workflow = ForSwipeRightofaRecordMob
+						)
+						"ForMultipleRecordsMob"
+						(
+			  			workflow = ForMultipleRecordsMob
+						show action in view header = true
+						)
+						"ForMultipleRecordsMobColle"
+						(
+			  			workflow = ForMultipleRecordsMobColl
+						show action in view header = true
+						execute action for collection of records
+						)
+						"ForSelectedRecordDVMob"
+						(
+			  			workflow = ForSelectedRecordDVMob
+						show action in view header = true
+						)
+						"RecheckForMultipleRecords"
+						(
+			  			workflow = RecheckForMultipleRecords
+						show action in view header = true
+						)
+					)
+				
+		}
+	}
+
+	workflow
+	{
+		functions
+		{
+			ForLongPressofaRecordMob as "ForLongPressofaRecordMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForLongPressofaRecordMob";
+								)
+								}
+							}
+						
+			}
+
+			ForMultipleRecords as "ForMultipleRecords"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								insert into Staff_Details
+								[
+									Age = "9999"
+								]
+								}
+							}
+						
+			}
+
+			ForMultipleRecordsColle as "ForMultipleRecordsColle"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = collection of records	
+							on start
+							{
+								actions 
+								{
+									thisapp.ForMultipleRecordsColle(Staff_Details);
+								}
+							}
+						
+			}
+
+			ForMultipleRecordsMob as "ForMultipleRecordsMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForMultipleRecordsMob";
+								)
+								}
+							}
+						
+			}
+
+			ForMultipleRecordsMobColl as "ForMultipleRecordsMobColle"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = collection of records	
+							on start
+							{
+								actions 
+								{
+									thisapp.ForMultipleRecordsColle(Staff_Details);
+								}
+							}
+						
+			}
+
+			ForRightClickofaRecord as "ForRightClickofaRecord"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+									success message "Panniten da";
+								}
+							}
+						
+			}
+
+			ForSelectedRecordDV as "ForSelectedRecordDV"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForSelectedRecordDV";
+								)
+								}
+							}
+						
+			}
+
+			ForSelectedRecordDVMob as "ForSelectedRecordDVMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForSelectedRecordDVMob";
+								)
+								}
+							}
+						
+			}
+
+			ForSingleRecord as "ForSingleRecord"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForSingleRecord";
+								)
+								}
+							}
+						
+			}
+
+			ForSingleRecordMob as "ForSingleRecordMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForSingleRecordMob";
+								)
+								}
+							}
+						
+			}
+
+			ForSwipeLeftofaRecordMob as "ForSwipeLeftofaRecordMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForSwipeLeftofaRecordMob";
+								)
+								}
+								actions 
+								{
+								on click
+								(
+									info "ForSwipeLeftofaRecordMob";
+								)
+								}
+							}
+						
+			}
+
+			ForSwipeRightofaRecordMob as "ForSwipeRightofaRecordMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ForSwipeRightofaRecordMob";
+								)
+								}
+							}
+						
+			}
+
+			OnClickofaRecord as "OnClickofaRecord"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "OnClickofaRecord";
+								)
+								}
+							}
+						
+			}
+
+			OnTapofaRecordMob as "OnTapofaRecordMob"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "OnTapofaRecordMob";
+								)
+								}
+							}
+						
+			}
+
+			RecheckForMultipleRecords as "RecheckForMultipleRecords"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "RecheckForMultipleRecords";
+								)
+								}
+							}
+						
+			}
+
+			ReportField as "ReportField"
+			{
+			
+							type =  functions
+							form = Staff_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									info "ReportField";
+								)
+								}
+							}
+						
+			}
+		}
+	}
+
+	functions
+	{
+		Deluge
+		{
+			void ForMultipleRecordsColle(Staff_Details staffDetails)
+			{
+			
+			                 	info staffDetails.Name;
+			                 
+			}
+		}
+	}
+
+	share_settings
+	{
+	"Read"
+	{
+	
+					name = "Read"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have read permission for all components\n"
+				
+	}
+	"Write"
+	{
+	
+					name = "Write"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have write permission for all components\n"
+				
+	}
+	"Administrator"
+	{
+	
+					name = "Administrator"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have all the permissions.\n"
+				
+	}
+	"Customer"
+	{
+	
+					name = "Customer"
+					type = Customer_Portal
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This is the default profile having only add and view permission.\n"
+				
+	}
+	"Developer"
+	{
+	
+					name = "Developer"
+					type = Developer
+					permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "Developer Profile\n"
+				
+	}
+	roles
+	{
+	
+					"CEO"
+					{
+						description = "User belonging to this role can access data of all other users."
+					}
+				
+	}
+	}
+
+	web
+	{
+	forms
+	{
+	
+				form Staff_Details
+				{
+					label placement = left
+				}
+			
+	}
+	reports
+	{
+		report Staff_Details_Report
+		{
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Name
+										Age
+										Dept
+										"ReportField"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+										"ForMultipleRecords"
+										"ForMultipleRecordsColle"
+										"RecheckForMultipleRecords"
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+									"ForSingleRecord"
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+									"ForRightClickofaRecord"
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Name
+										Age
+										Dept
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+										"ForSelectedRecordDV"
+									)
+								)
+						)
+					
+		}
+	}
+	menu
+	{
+	
+				space Space
+				{
+					displayname = "Space"
+					icon = "objects-spaceship"
+	
+					section Staff_Details
+					{
+						displayname = "Staff Details"
+						icon = "holidays-sickle"
+						form  Staff_Details
+						{
+							icon = "holidays-sickle"
+						}
+						report Staff_Details_Report
+						{
+							icon = "tech-desktop"
+						}
+					}
+					section App_Preferences
+					{
+						displayname = "App Preferences"
+						icon = "design-app"
+						systemcomponent
+						{
+							type = localization
+							displayname = "Language Selection"
+							icon = "education-language"
+						}
+						systemcomponent
+						{
+							type = connection
+							displayname = "Integrations"
+							icon = "tech-2-connection"
+						}
+					}
+					section Approvals
+					{
+						displayname = "Approvals"
+						icon = "ui-2-hourglass"
+						systemcomponent
+						{
+							type = approval
+							approval status = pending
+							displayname = "Pending Tasks"
+							icon = "ui-2-hourglass"
+						}
+						systemcomponent
+						{
+							type = approval
+							approval status = completed
+							displayname = "Completed Tasks"
+							icon = "design-todo"
+						}
+					}
+					section SharedAnalytics_Section
+					{
+						type = shared_user_report_section
+						displayname = "Reports"
+						icon = "business-chart-bar-33"
+					}
+				}
+				preference
+				{
+					icon
+					{
+						style = outline
+					}
+				}
+			
+	}
+	customize
+	{
+	
+				font = "lato"
+				color options
+				{
+					color = "11"
+				}
+				logo
+				{
+					preference = "app_icon"
+					placement = "left"
+				}
+			
+	}
+	}
+
+	phone
+	{
+	forms
+	{
+	
+				form Staff_Details
+				{
+					label placement = auto
+				}
+			
+	}
+	reports
+	{
+		report Staff_Details_Report
+		{
+		
+						quickview
+						(
+							layout
+							(
+				 				type = 9
+								datablock1
+								(
+					 				display type = auto
+									layout type = 31
+									fields
+									(
+										Name
+										Age
+										Dept
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+										"ForMultipleRecords"
+										"ForMultipleRecordsColle"
+										"ForMultipleRecordsMob"
+										"ForMultipleRecordsMobColle"
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+									"ForSingleRecord"
+									"ForSingleRecordMob"
+									"ReportField"
+		    					)
+								)
+		    				action
+		    				(
+								on tap
+								(
+									"OnClickofaRecord"
+									"OnTapofaRecordMob"
+		    					)
+								on long press
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+									"ForRightClickofaRecord"
+									"ForLongPressofaRecordMob"
+		    					)
+								on left swipe
+								(
+									"ForSwipeLeftofaRecordMob"
+		    					)
+								on right swipe
+								(
+									"ForSwipeRightofaRecordMob"
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Name
+										Age
+										Dept
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+										"ForSelectedRecordDV"
+										"ForSelectedRecordDVMob"
+									)
+								)
+						)
+					
+		}
+	}
+	customize
+	{
+	
+				layout = twocolumn
+				font = "default"
+				style = "3"
+				color options
+				{
+					color = chryslerpurple
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	}
+	}
+
+	tablet
+	{
+	forms
+	{
+	
+				form Staff_Details
+				{
+					label placement = auto
+				}
+			
+	}
+	customize
+	{
+	
+				layout = slidingpane
+				font = "default"
+				style = "3"
+				color options
+				{
+					color = yellow
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	}
+	}
+
+	translation
+	{
+	
+	{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+	
+	}
+}
