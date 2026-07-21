@@ -1,0 +1,418 @@
+/*
+ * Author       : anirudh.r_zohocorp
+ * Generated on : 21-Jul-2026 09:15:10
+ * Version      : 1.0
+ */
+application "CondFormat"
+{
+	date format = "dd-MMM-yyyy"
+	time zone = "Asia/Kolkata"
+	time format = "24-hr"
+
+
+
+	forms
+	{
+		form Add_Order
+		{
+		
+					displayname = "Add Order"
+					success message = "Data Added Successfully!"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Single_Line
+					(
+		    			type = text
+						displayname = "Single Line"
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Age
+					(
+						type = number
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Name
+					(
+						type = radiobuttons
+						displayname = "Dept"
+						maxchar = 100
+						values = {"Dept 1","Dept 2","Dept 3"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		}
+	}
+
+	reports
+	{
+		default custom Add_Order_Report
+		{
+		
+					displayName = "Add Order Report"
+					show all rows from Add_Order    
+					(
+						Single_Line as "Single Line"
+						Age
+						Name as "Dept"
+						Added_User as "Added User"
+						Added_Time as "Added Time"
+						Modified_User as "Modified User"
+						Modified_Time as "Modified Time"
+						ID
+					)
+					customlayouts
+					(
+						template
+			 			(
+			 	  			displayname="QVByMe"
+			 	  			content="<panel  \n >\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '20px'\n	bgColor = '#FFFFFF'\n\n		width = '100%'\n		hAlign = 'left'\n		vAlign = 'middle'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n		padding = '0px'\n\n		hAlign = 'left'\n>\n	<pr \n	>\n	<pc \n	\n>\n	<text \n\n	margin = '0px'\n	padding = '0px'\n	color = '#0BA0AC'\n	size = '15px'\n	underline = 'true' \n	bold = 'true' \n	italic = 'true' \n	fontFamily = 'heuristica, tinos, times, serif' \n	type = 'field'\n\n	bgColor = 'transparent'\n        bgColorType = 'noFill'\n	cornerRadius = '0px'\n\n    lineHeight = '21'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#295BF9'\n    borderWidth = '0px'\n\n	  value = 'Single_Line'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '8px'\n	marginTop = '12px'\n	color = '#132437'\n	size = '20px'\n	bold = 'true' \n	type = 'field'\n\n\n    lineHeight = '29'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Age'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	margin = '0px'\n	color = '#111111'\n	size = '15px'\n	type = 'field'\n\n\n    lineHeight = '21'\n    numOfLines = '1'\n\n\n\n\n\n	  value = 'Name'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>"
+			    		)
+					)
+				
+		}
+	}
+
+	share_settings
+	{
+	"Read"
+	{
+	
+					name = "Read"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have read permission for all components\n"
+				
+	}
+	"Write"
+	{
+	
+					name = "Write"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have write permission for all components\n"
+				
+	}
+	"Administrator"
+	{
+	
+					name = "Administrator"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have all the permissions.\n"
+				
+	}
+	"Customer"
+	{
+	
+					name = "Customer"
+					type = Customer_Portal
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This is the default profile having only add and view permission.\n"
+				
+	}
+	"Developer"
+	{
+	
+					name = "Developer"
+					type = Developer
+					permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "Developer Profile\n"
+				
+	}
+	roles
+	{
+	
+					"CEO"
+					{
+						description = "User belonging to this role can access data of all other users."
+					}
+				
+	}
+	}
+
+	web
+	{
+	forms
+	{
+	
+				form Add_Order
+				{
+					label placement = left
+				}
+			
+	}
+	reports
+	{
+		report Add_Order_Report
+		{
+		
+						quickview
+						(
+							layout
+							(
+				 				type = Custom
+				 				selectedlayout = "QVByMe"
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+			 					type = 1
+								datablock1
+								(
+									layout type = -6
+				     				title = "Overview"
+									fields
+									(
+										Single_Line as "Single Line"
+										Name as "Dept"
+										Added_User as "Added User"
+										Added_Time as "Added Time"
+										Modified_User as "Modified User"
+										Modified_Time as "Modified Time"
+										ID
+										Single_Line as "Single Line"
+										Single_Line as "Single Line"
+										Single_Line as "Single Line"
+										Single_Line as "Single Line"
+										Age
+										Age
+										Name as "Dept"
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		}
+	}
+	menu
+	{
+	
+				space Space
+				{
+					displayname = "Space"
+					icon = "objects-spaceship"
+	
+					section Add_Order
+					{
+						displayname = "Add Order"
+						icon = "tech-2-p-add"
+						form  Add_Order
+						{
+							icon = "tech-2-p-add"
+						}
+						report Add_Order_Report
+						{
+							icon = "tech-desktop"
+						}
+					}
+					section App_Preferences
+					{
+						displayname = "App Preferences"
+						icon = "design-app"
+						systemcomponent
+						{
+							type = localization
+							displayname = "Language Selection"
+							icon = "education-language"
+						}
+						systemcomponent
+						{
+							type = connection
+							displayname = "Integrations"
+							icon = "tech-2-connection"
+						}
+					}
+					section Approvals
+					{
+						displayname = "Approvals"
+						icon = "ui-2-hourglass"
+						systemcomponent
+						{
+							type = approval
+							approval status = pending
+							displayname = "Pending Tasks"
+							icon = "ui-2-hourglass"
+						}
+						systemcomponent
+						{
+							type = approval
+							approval status = completed
+							displayname = "Completed Tasks"
+							icon = "design-todo"
+						}
+					}
+					section SharedAnalytics_Section
+					{
+						type = shared_user_report_section
+						displayname = "Reports"
+						icon = "business-chart-bar-33"
+					}
+				}
+				preference
+				{
+					icon
+					{
+						style = outline
+					}
+				}
+			
+	}
+	customize
+	{
+	
+				font = "lato"
+				color options
+				{
+					color = "11"
+				}
+				logo
+				{
+					preference = "app_icon"
+					placement = "left"
+				}
+			
+	}
+	}
+
+	phone
+	{
+	forms
+	{
+	
+				form Add_Order
+				{
+					label placement = auto
+				}
+			
+	}
+	customize
+	{
+	
+				layout = twocolumn
+				font = "default"
+				style = "3"
+				color options
+				{
+					color = chryslerpurple
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	}
+	}
+
+	tablet
+	{
+	forms
+	{
+	
+				form Add_Order
+				{
+					label placement = auto
+				}
+			
+	}
+	customize
+	{
+	
+				layout = slidingpane
+				font = "default"
+				style = "3"
+				color options
+				{
+					color = lightred
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	}
+	}
+
+	translation
+	{
+	
+	{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+	
+	}
+}
