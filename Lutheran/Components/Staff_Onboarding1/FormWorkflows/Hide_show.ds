@@ -1,157 +1,155 @@
 Hide_show as "Hide show"
 {
 
-			
-							type =  form
-							form = Staff_Onboarding1
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide Is_Loaded;
-													input.Is_Loaded = false;
-													input.Stage = input.Stage;
-													input.Staff = input.Staff;
-													hide Personal_Data;
-													hide Qualifications;
-													hide Latest_Teaching_Details;
-													hide Accreditation_Details;
-													hide status;
-													hide Section;
-													hide Qualification_ID;
-													hide Admin_Type;
-													hide Status_Accreditation;
-													hide Onboard_Completion;
-													// hide Original_Current_Employment;
-													if(input.Stage == "Personal Data")
+				type =  form
+				form = Staff_Onboarding1
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Is_Loaded;
+										input.Is_Loaded = false;
+										input.Stage = input.Stage;
+										input.Staff = input.Staff;
+										hide Personal_Data;
+										hide Qualifications;
+										hide Latest_Teaching_Details;
+										hide Accreditation_Details;
+										hide status;
+										hide Section;
+										hide Qualification_ID;
+										hide Admin_Type;
+										hide Status_Accreditation;
+										hide Onboard_Completion;
+										// hide Original_Current_Employment;
+										if(input.Stage == "Personal Data")
+										{
+											input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
+											show Personal_Data;
+											if(input.Staff != null)
+											{
+												fetstaffMaster = Staff_Master[ID == input.Staff];
+												if(fetstaffMaster != null)
+												{
+													input.Photograph = fetstaffMaster.Photograph;
+													input.Name.prefix = fetstaffMaster.Name.prefix;
+													input.Name.first_name = fetstaffMaster.Name.first_name;
+													input.Name.last_name = fetstaffMaster.Name.last_name;
+													input.Surname = fetstaffMaster.Surname;
+													// 			input.maiden_name = fetstaffMaster.maiden_name;
+													input.date_of_birth = fetstaffMaster.date_of_birth;
+													input.gender = fetstaffMaster.gender;
+													input.Phone_Number = fetstaffMaster.Phone_Number;
+													input.religion = fetstaffMaster.religion;
+													input.origin = fetstaffMaster.origin;
+												}
+											}
+										}
+										else if(input.Stage == "Qualifications")
+										{
+											input.plain = "<style> label#zc-Remove-arialabel { display: none !important; } label.choice-label-text {padding: 0px 5px; border-bottom: 1px solid #243C6C; color :#243C6C !important;} .choice-table-cell span{ width: 100%; } .choice-table-cell span label:nth-child(2) { display: none !important; } .choice-table-cell span label:last-child { width: 100%; box-sizing: border-box; }   .form-field .tempContDiv .choice-table-cell { padding: 0 8px 0 0 !important; } form.form-table .formContainer .formColumn .form-group { margin-bottom: 20px !important; }label#zc-New_Qualification-arialabel { display: none !important; }.form-field .tempContDiv { display: flex !important; }</style>";
+											// 	.customRadio:checked~label.choice-label-text{ background: #5051f9 !important; color: white !important; }
+											// 	.choice-table-cell span label:last-child:hover { background: #F8F8FB; border:1px solid #ccccdd !important; }
+											show Qualifications;
+											if(input.Staff != null)
+											{
+												qualList = Qualifications[Staff == input.Staff];
+												optionsList = List();
+												optionListID = List();
+												for each  qual in qualList
+												{
+													optionListID.add(qual.Qualification_Type);
+													optionsList.add(qual.Qualification_Type.qualification_type);
+												}
+												qualType = Qualification_Type[ID != 0].ID.getAll();
+												input.Qualification_Type:ui.add(qualType);
+												optionsList.add("Add New");
+												input.New_Qualification:ui.add(optionsList);
+											}
+										}
+										else if(input.Stage == "Teaching Details")
+										{
+											input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
+											hide Year_Level;
+											hide Subject_form;
+											hide Teacher_Type;
+											hide Speciality;
+											hide Organisation;
+											hide Admin_Type;
+											hide Region;
+											hide Current_Employment;
+											hide Campus;
+											show Latest_Teaching_Details;
+											hide Current_Position;
+											if(input.Staff != null)
+											{
+												fetStaff = Staff_Master[ID == input.Staff];
+												if(fetStaff != null)
+												{
+													if(fetStaff.origin == "Non Teacher")
 													{
-														input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
-														show Personal_Data;
-														if(input.Staff != null)
-														{
-															fetstaffMaster = Staff_Master[ID == input.Staff];
-															if(fetstaffMaster != null)
-															{
-																input.Photograph = fetstaffMaster.Photograph;
-																input.Name.prefix = fetstaffMaster.Name.prefix;
-																input.Name.first_name = fetstaffMaster.Name.first_name;
-																input.Name.last_name = fetstaffMaster.Name.last_name;
-																input.Surname = fetstaffMaster.Surname;
-																// 			input.maiden_name = fetstaffMaster.maiden_name;
-																input.date_of_birth = fetstaffMaster.date_of_birth;
-																input.gender = fetstaffMaster.gender;
-																input.Phone_Number = fetstaffMaster.Phone_Number;
-																input.religion = fetstaffMaster.religion;
-																input.origin = fetstaffMaster.origin;
-															}
-														}
+														input.Teaching_Staff = "No";
+														disable Teaching_Staff;
 													}
-													else if(input.Stage == "Qualifications")
+													// -------------------------
+													// Simple fields
+													// -------------------------
+													if(!fetStaff.Teaching_Staff.isEmpty())
 													{
-														input.plain = "<style> label#zc-Remove-arialabel { display: none !important; } label.choice-label-text {padding: 0px 5px; border-bottom: 1px solid #243C6C; color :#243C6C !important;} .choice-table-cell span{ width: 100%; } .choice-table-cell span label:nth-child(2) { display: none !important; } .choice-table-cell span label:last-child { width: 100%; box-sizing: border-box; }   .form-field .tempContDiv .choice-table-cell { padding: 0 8px 0 0 !important; } form.form-table .formContainer .formColumn .form-group { margin-bottom: 20px !important; }label#zc-New_Qualification-arialabel { display: none !important; }.form-field .tempContDiv { display: flex !important; }</style>";
-														// 	.customRadio:checked~label.choice-label-text{ background: #5051f9 !important; color: white !important; }
-														// 	.choice-table-cell span label:last-child:hover { background: #F8F8FB; border:1px solid #ccccdd !important; }
-														show Qualifications;
-														if(input.Staff != null)
-														{
-															qualList = Qualifications[Staff == input.Staff];
-															optionsList = List();
-															optionListID = List();
-															for each  qual in qualList
-															{
-																optionListID.add(qual.Qualification_Type);
-																optionsList.add(qual.Qualification_Type.qualification_type);
-															}
-															qualType = Qualification_Type[ID != 0].ID.getAll();
-															input.Qualification_Type:ui.add(qualType);
-															optionsList.add("Add New");
-															input.New_Qualification:ui.add(optionsList);
-														}
+														input.Teaching_Staff = fetStaff.Teaching_Staff;
 													}
-													else if(input.Stage == "Teaching Details")
+													if(fetStaff.Current_Position != null)
 													{
-														input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
-														hide Year_Level;
-														hide Subject_form;
-														hide Teacher_Type;
-														hide Speciality;
-														hide Organisation;
-														hide Admin_Type;
-														hide Region;
-														hide Current_Employment;
-														hide Campus;
-														show Latest_Teaching_Details;
-														hide Current_Position;
-														if(input.Staff != null)
-														{
-															fetStaff = Staff_Master[ID == input.Staff];
-															if(fetStaff != null)
-															{
-																if(fetStaff.origin == "Non Teacher")
-																{
-																	input.Teaching_Staff = "No";
-																	disable Teaching_Staff;
-																}
-																// -------------------------
-																// Simple fields
-																// -------------------------
-																if(!fetStaff.Teaching_Staff.isEmpty())
-																{
-																	input.Teaching_Staff = fetStaff.Teaching_Staff;
-																}
-																if(fetStaff.Current_Position != null)
-																{
-																	input.Current_Position = fetStaff.Current_Position;
-																}
-																if(fetStaff.FTE != null)
-																{
-																	input.FTE = fetStaff.FTE;
-																}
-																if(!fetStaff.Teacher_Type.isEmpty())
-																{
-																	input.Teacher_Type = fetStaff.Teacher_Type;
-																}
-																if(fetStaff.Year_Level != null)
-																{
-																	input.Year_Level = fetStaff.Year_Level;
-																}
-																if(!fetStaff.Subject_form.isEmpty())
-																{
-																	input.Subject_form = fetStaff.Subject_form;
-																}
-																if(!fetStaff.Speciality.isEmpty())
-																{
-																	input.Speciality = fetStaff.Speciality;
-																}
-																if(fetStaff.Date_Commenced_in_Current_School != null)
-																{
-																	input.Commenced_Date = fetStaff.Date_Commenced_in_Current_School;
-																}
-															}
-														}
+														input.Current_Position = fetStaff.Current_Position;
 													}
-													else if(input.Stage == "Accreditation Details")
+													if(fetStaff.FTE != null)
 													{
-														input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
-														fetStaff = Staff_Master[ID == input.Staff];
-														input.Due_Date = fetStaff.Date_Commenced_in_Current_School.addYear(5);
-														show Accreditation_Details;
+														input.FTE = fetStaff.FTE;
 													}
-													else if(input.Stage == "Onboard Completed")
+													if(!fetStaff.Teacher_Type.isEmpty())
 													{
-														input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
-														show Onboard_Completion;
-														input.plain1 = "<style>.formColumn.first-column { display: flex; justify-content: center; } input.zc-live-primary-btn { display: none; }.completion-wrapper{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;font-family:Arial,sans-serif;}.completion-icon{width:80px;height:80px;background:#e8f5e9;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:40px;}.completion-title{font-size:24px;font-weight:700;color:#243C6C;margin-bottom:10px;}.completion-subtitle{font-size:14px;color:#6b7280;margin-bottom:30px;text-align:center;}.completion-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#4866A1;color:#ffffff !important;text-decoration:none;border-radius:8px;font-size:14px;font-weight:600;}.completion-btn:hover{background:#243C6C;}</style><div class='completion-wrapper'><div class='completion-icon'>✅</div><div class='completion-title'> Onboarding Completed</div><div class='completion-subtitle'>Your onboarding process has been successfully completed.<br/>You can now view your submitted request below.</div><a class='completion-btn' href='#Report:Raised_Requests'>Click here to view your Request</a></div>";
+														input.Teacher_Type = fetStaff.Teacher_Type;
 													}
-									)
-								}
-							}
-			
-						
+													if(fetStaff.Year_Level != null)
+													{
+														input.Year_Level = fetStaff.Year_Level;
+													}
+													if(!fetStaff.Subject_form.isEmpty())
+													{
+														input.Subject_form = fetStaff.Subject_form;
+													}
+													if(!fetStaff.Speciality.isEmpty())
+													{
+														input.Speciality = fetStaff.Speciality;
+													}
+													if(fetStaff.Date_Commenced_in_Current_School != null)
+													{
+														input.Commenced_Date = fetStaff.Date_Commenced_in_Current_School;
+													}
+												}
+											}
+										}
+										else if(input.Stage == "Accreditation Details")
+										{
+											input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
+											fetStaff = Staff_Master[ID == input.Staff];
+											input.Due_Date = fetStaff.Date_Commenced_in_Current_School.addYear(5);
+											show Accreditation_Details;
+										}
+										else if(input.Stage == "Onboard Completed")
+										{
+											input.plain = "<style> .form-action.formbutton input[value=\"Skip\"] { display: none; }</style>";
+											show Onboard_Completion;
+											input.plain1 = "<style>.formColumn.first-column { display: flex; justify-content: center; } input.zc-live-primary-btn { display: none; }.completion-wrapper{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;font-family:Arial,sans-serif;}.completion-icon{width:80px;height:80px;background:#e8f5e9;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:40px;}.completion-title{font-size:24px;font-weight:700;color:#243C6C;margin-bottom:10px;}.completion-subtitle{font-size:14px;color:#6b7280;margin-bottom:30px;text-align:center;}.completion-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#4866A1;color:#ffffff !important;text-decoration:none;border-radius:8px;font-size:14px;font-weight:600;}.completion-btn:hover{background:#243C6C;}</style><div class='completion-wrapper'><div class='completion-icon'>✅</div><div class='completion-title'> Onboarding Completed</div><div class='completion-subtitle'>Your onboarding process has been successfully completed.<br/>You can now view your submitted request below.</div><a class='completion-btn' href='#Report:Raised_Requests'>Click here to view your Request</a></div>";
+										}
+						)
+					}
+				}
+
 			
 }

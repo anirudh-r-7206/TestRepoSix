@@ -1,20 +1,18 @@
 Edit as "Edit"
 {
 
-			
-							type =  functions
-							form = Training_Completion_Request
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									openUrl("#Form:Training_Completion_Request?viewLinkName=My_Training_Completion_Requests&recLinkID=" + input.ID,"popup window");
-								)
-								}
-							}
-						
+				type =  functions
+				form = Training_Completion_Request
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						openUrl("#Form:Training_Completion_Request?viewLinkName=My_Training_Completion_Requests&recLinkID=" + input.ID,"popup window");
+					)
+					}
+				}
 			
 }

@@ -1,23 +1,21 @@
 Load_of_the_form as "Load of the form"
 {
 
-			
-							type =  form
-							form = Accreditation
-			
-							record event = on add or edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-													allTrainingTypes = Training_Type[Type_field == "Accreditation"].ID.getAll();
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Accreditation
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+										allTrainingTypes = Training_Type[Type_field == "Accreditation"].ID.getAll();
+						)
+					}
+				}
+
 			
 }

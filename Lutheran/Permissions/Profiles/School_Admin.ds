@@ -1,308 +1,306 @@
 "School Admin"
 {
 
-	
-					name = "School Admin"
-					type = Users_Permissions
-					permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
-					description = "School Admin\n"
-					ModulePermissions
+				name = "School Admin"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "School Admin\n"
+				ModulePermissions
+				{
+					Employee_Filter
 					{
-						Employee_Filter
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Compliance_Training
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
 						{
-							enabled= Create,Tab 
-							allFieldsVisible= true 
-						}
-						Compliance_Training
-						{
-							enabled= Create,Viewall,Modifyall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								My_Completed_Compliance_Trainings={"View"}
-								My_Pending_Compliance_Trainings={"View"}
-								All_Pending_Compliance_Trainings={"View"}
-								My_Compliance_Trainings={"View"}
-								All_Compliance_Trainings={"View","Edit"}
-								All_Completed_Compliance_Trainings={"View"}
-							}
-						}
-						Training_Type
-						{
-							allFieldsVisible= true 
-						}
-						Staff_Master
-						{
-							enabled= Create,Viewall,Modifyall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								Buzz_Book_Report={"View"}
-								Representation_Team_Staff={"View"}
-								Staff_For_Request={"View"}
-								All_Staff={"View","Edit"}
-								All_Staff_Grouped={"View","Edit"}
-								All_Staff_Admin={"View","Edit"}
-								My_Staff={"View"}
-							}
-						}
-						History
-						{
-							enabled= Create,Tab 
-							allFieldsVisible= true 
-						}
-						Staff_Service_Awards
-						{
-							enabled= Viewall 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								All_Staff_Service_Awards={"View"}
-							}
-						}
-						Representation_Team
-						{
-							enabled= Create,Viewall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								All_Representation_Team={"View"}
-							}
-						}
-						School
-						{
-							allFieldsVisible= true 
-						}
-						Subject_form
-						{
-							allFieldsVisible= true 
-						}
-						Year_Level
-						{
-							allFieldsVisible= true 
-						}
-						Accreditation
-						{
-							allFieldsVisible= true 
-						}
-						Staff_Employment
-						{
-							enabled= Viewall 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								My_Active_Employment={"View"}
-							}
-						}
-						Campus
-						{
-							allFieldsVisible= true 
-						}
-						Accredit
-						{
-							enabled= Create,Tab 
-							allFieldsVisible= true 
-						}
-						Service_Awards
-						{
-							enabled= Viewall 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								Service_Awards1={"View"}
-							}
-						}
-						Speciality
-						{
-							allFieldsVisible= true 
-						}
-						Organisation
-						{
-							allFieldsVisible= true 
-						}
-						Accreditation_Courses
-						{
-							allFieldsVisible= true 
-						}
-						Approval_Configuration
-						{
-							allFieldsVisible= true 
-						}
-						Regions
-						{
-							allFieldsVisible= true 
-						}
-						Accreditation_Details
-						{
-							enabled= Create,Viewall,Modifyall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								All_Accreditation_Details={"View","Edit"}
-								Expiring_Accreditation={"View","Edit"}
-								Eligible_For_Accreditation={"View"}
-							}
-						}
-						Staff_Onboarding1
-						{
-							enabled= Create,Tab 
-							allFieldsVisible= true 
-						}
-						Award_Eligible_Staff
-						{
-							enabled= Create,Tab 
-							allFieldsVisible= true 
-						}
-						Search_Service_Awards
-						{
-							allFieldsVisible= true 
-						}
-						Staff_Request
-						{
-							enabled= Create,Viewall,Modifyall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								My_Requests={"View"}
-								Pending_Requests={"View","Edit"}
-								Staff_On_Leave={"View"}
-								Raised_Requests={"View"}
-							}
-						}
-						Training_Completion_Request
-						{
-							enabled= Create,Viewall,Modifyall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								All_Pending_Training_Requests={"View"}
-								My_Training_Completion_Requests={"View","Edit"}
-								Pending_Training_Completion_Requests={"View"}
-								My_Approved_Training_Requests={"View"}
-								My_Pending_Training_Requests={"View"}
-								All_Approved_Training_Requests={"View"}
-								All_Training_Completion_Requests={"View"}
-							}
-						}
-						Qualification_Type
-						{
-							allFieldsVisible= true 
-						}
-						Email_Templates
-						{
-							allFieldsVisible= true 
-						}
-						Positions
-						{
-							allFieldsVisible= true 
-						}
-						Send_Mail
-						{
-							enabled= Create,Viewall,Tab 
-							allFieldsVisible= true 
-							ReportPermissions
-							{
-								Mail_Sent={"View"}
-							}
-						}
-						Training_Completion_Request_Import
-						{
-							allFieldsVisible= true 
-						}
-						Add_Remove_Representation_Team
-						{
-							enabled= Create,Tab 
-							allFieldsVisible= true 
-						}
-						Qualifications
-						{
-							allFieldsVisible= true 
-						}
-						Staff_Details
-						{
-							enabled = tab
-						}
-						Add_Staff_Button
-						{
-							enabled = tab
-						}
-						Embed_Page
-						{
-							enabled = tab
-						}
-						Staff_Onboarding_page
-						{
-							enabled = tab
-						}
-						Staff_Search
-						{
-							enabled = tab
-						}
-						Raise_Request
-						{
-							enabled = tab
-						}
-						Initial_Setup
-						{
-							enabled = tab
-						}
-						Not_Registered
-						{
-							enabled = tab
-						}
-						My_Training_Completion_Requests1
-						{
-							enabled = tab
-						}
-						My_Compliance_Trainings1
-						{
-							enabled = tab
-						}
-						All_Training_Completion_Requests1
-						{
-							enabled = tab
-						}
-						All_Compliance_Trainings1
-						{
-							enabled = tab
-						}
-						Admin_Dashboard
-						{
-							enabled = tab
-						}
-						Organisation_Hierarchy
-						{
-							enabled = tab
-						}
-						Dashboard
-						{
-							enabled = tab
-						}
-						View_Committee_Staff
-						{
-							enabled = tab
-						}
-						Buzz_Report1
-						{
-							enabled = tab
-						}
-						Accreditation_Details1
-						{
-							enabled = tab
-						}
-						Expiring_Accreditation1
-						{
-							enabled = tab
-						}
-						Eligible_For_Accreditation1
-						{
-							enabled = tab
-						}
-						Staff_Service_Awards1
-						{
-							enabled = tab
+							My_Completed_Compliance_Trainings={"View"}
+							My_Pending_Compliance_Trainings={"View"}
+							All_Pending_Compliance_Trainings={"View"}
+							My_Compliance_Trainings={"View"}
+							All_Compliance_Trainings={"View","Edit"}
+							All_Completed_Compliance_Trainings={"View"}
 						}
 					}
-				
-	
+					Training_Type
+					{
+						allFieldsVisible= true 
+					}
+					Staff_Master
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Buzz_Book_Report={"View"}
+							Representation_Team_Staff={"View"}
+							Staff_For_Request={"View"}
+							All_Staff={"View","Edit"}
+							All_Staff_Grouped={"View","Edit"}
+							All_Staff_Admin={"View","Edit"}
+							My_Staff={"View"}
+						}
+					}
+					History
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Staff_Service_Awards
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Staff_Service_Awards={"View"}
+						}
+					}
+					Representation_Team
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Representation_Team={"View"}
+						}
+					}
+					School
+					{
+						allFieldsVisible= true 
+					}
+					Subject_form
+					{
+						allFieldsVisible= true 
+					}
+					Year_Level
+					{
+						allFieldsVisible= true 
+					}
+					Accreditation
+					{
+						allFieldsVisible= true 
+					}
+					Staff_Employment
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							My_Active_Employment={"View"}
+						}
+					}
+					Campus
+					{
+						allFieldsVisible= true 
+					}
+					Accredit
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Service_Awards
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Service_Awards1={"View"}
+						}
+					}
+					Speciality
+					{
+						allFieldsVisible= true 
+					}
+					Organisation
+					{
+						allFieldsVisible= true 
+					}
+					Accreditation_Courses
+					{
+						allFieldsVisible= true 
+					}
+					Approval_Configuration
+					{
+						allFieldsVisible= true 
+					}
+					Regions
+					{
+						allFieldsVisible= true 
+					}
+					Accreditation_Details
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Accreditation_Details={"View","Edit"}
+							Expiring_Accreditation={"View","Edit"}
+							Eligible_For_Accreditation={"View"}
+						}
+					}
+					Staff_Onboarding1
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Award_Eligible_Staff
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Search_Service_Awards
+					{
+						allFieldsVisible= true 
+					}
+					Staff_Request
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							My_Requests={"View"}
+							Pending_Requests={"View","Edit"}
+							Staff_On_Leave={"View"}
+							Raised_Requests={"View"}
+						}
+					}
+					Training_Completion_Request
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Pending_Training_Requests={"View"}
+							My_Training_Completion_Requests={"View","Edit"}
+							Pending_Training_Completion_Requests={"View"}
+							My_Approved_Training_Requests={"View"}
+							My_Pending_Training_Requests={"View"}
+							All_Approved_Training_Requests={"View"}
+							All_Training_Completion_Requests={"View"}
+						}
+					}
+					Qualification_Type
+					{
+						allFieldsVisible= true 
+					}
+					Email_Templates
+					{
+						allFieldsVisible= true 
+					}
+					Positions
+					{
+						allFieldsVisible= true 
+					}
+					Send_Mail
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Mail_Sent={"View"}
+						}
+					}
+					Training_Completion_Request_Import
+					{
+						allFieldsVisible= true 
+					}
+					Add_Remove_Representation_Team
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Qualifications
+					{
+						allFieldsVisible= true 
+					}
+					Staff_Details
+					{
+						enabled = tab
+					}
+					Add_Staff_Button
+					{
+						enabled = tab
+					}
+					Embed_Page
+					{
+						enabled = tab
+					}
+					Staff_Onboarding_page
+					{
+						enabled = tab
+					}
+					Staff_Search
+					{
+						enabled = tab
+					}
+					Raise_Request
+					{
+						enabled = tab
+					}
+					Initial_Setup
+					{
+						enabled = tab
+					}
+					Not_Registered
+					{
+						enabled = tab
+					}
+					My_Training_Completion_Requests1
+					{
+						enabled = tab
+					}
+					My_Compliance_Trainings1
+					{
+						enabled = tab
+					}
+					All_Training_Completion_Requests1
+					{
+						enabled = tab
+					}
+					All_Compliance_Trainings1
+					{
+						enabled = tab
+					}
+					Admin_Dashboard
+					{
+						enabled = tab
+					}
+					Organisation_Hierarchy
+					{
+						enabled = tab
+					}
+					Dashboard
+					{
+						enabled = tab
+					}
+					View_Committee_Staff
+					{
+						enabled = tab
+					}
+					Buzz_Report1
+					{
+						enabled = tab
+					}
+					Accreditation_Details1
+					{
+						enabled = tab
+					}
+					Expiring_Accreditation1
+					{
+						enabled = tab
+					}
+					Eligible_For_Accreditation1
+					{
+						enabled = tab
+					}
+					Staff_Service_Awards1
+					{
+						enabled = tab
+					}
+				}
+			
 }

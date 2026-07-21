@@ -1,26 +1,24 @@
 Load_of_the_form_On_Add_S5 as "Load of the form - On Add Scripts"
 {
 
-			
-							type =  form
-							form = Campus
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(Campus[ID != null].count() == 0)
-													{
-														input.School = School[ID != null].ID;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Campus
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Campus[ID != null].count() == 0)
+										{
+											input.School = School[ID != null].ID;
+										}
+						)
+					}
+				}
+
 			
 }

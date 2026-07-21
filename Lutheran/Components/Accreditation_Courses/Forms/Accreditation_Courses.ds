@@ -1,71 +1,69 @@
 form Accreditation_Courses
 {
 
-		
-					displayname = "Accreditation Courses"
-					success message = "Accreditation Course Added Successfully"
-					Section
+			displayname = "Accreditation Courses"
+			success message = "Accreditation Course Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Accreditation
+			(
+				type = picklist	
+				values  = Accreditation.ID
+    			bidirectional = Required_Courses
+    			displayformat = [Accreditation_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have SI_No
+			(
+				type = number
+				displayname = "SI No"
+	 			row = 1
+	 			column = 1   
+				width = 50px
+			)
+			must have Training_Type
+			(
+				type = picklist	
+				displayname = "Training Type"
+				values  = Training_Type[Type_field == "Accreditation"].ID
+    			displayformat = [Training]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = 200px
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					Accreditation
+				}
+				on edit
+				{
+					update
 					(
-						type = picklist	
-						values  = Accreditation.ID
-		    			bidirectional = Required_Courses
-		    			displayformat = [Accreditation_Name]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have SI_No
+					cancel
 					(
-						type = number
-						displayname = "SI No"
-			 			row = 1
-			 			column = 1   
-						width = 50px
+   						type = cancel
+   						displayname = "Cancel"
 					)
-					must have Training_Type
-					(
-						type = picklist	
-						displayname = "Training Type"
-						values  = Training_Type[Type_field == "Accreditation"].ID
-		    			displayformat = [Training]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = 200px
-					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

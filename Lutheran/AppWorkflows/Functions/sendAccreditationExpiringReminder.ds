@@ -1,73 +1,71 @@
 void mail.sendAccreditationExpiringReminder(int accreditationId)
 {
 
-			
-			                 	accRec = Accreditation_Details[ID == accreditationId];
-			                 	if(accRec.count() > 0)
-			                 	{
-			                 		staffRec = Staff_Master[ID == accRec.Staff];
-			                 		if(staffRec.count() > 0)
-			                 		{
-			                 			accreditationLink = "<a href='https://creator.zoho.com" + zoho.appuri + "#Report:Expiring_Accreditation" + "'>Click here to view pending trainings</a>";
-			                 			staffName = staffRec.Name.prefix + " " + staffRec.Name.first_name + " " + staffRec.Name.last_name;
-			                 			accreditationName = accRec.Required_Accreditation.Accreditation_Name;
-			                 			dueDate = accRec.Due_Date.toString("dd-MMM-yyyy");
-			                 			// Send to Staff
-			                 			if(!isEmpty(staffRec.Staff_Email))
-			                 			{
-			                 				templateStaff = Email_Templates[Template_Name == "Accreditation_Expiring_Reminder_Staff"];
-			                 				if(templateStaff.count() > 0)
-			                 				{
-			                 					subjectText = templateStaff.Subject_field;
-			                 					subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
-			                 					messageContent = templateStaff.Email_Content;
-			                 					messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
-			                 					messageContent = messageContent.replaceAll("${Accreditation_Name}",accreditationName,true);
-			                 					messageContent = messageContent.replaceAll("${Due_Date}",dueDate,true);
-			                 					sendmail
-			                 					[
-			                 						from :zoho.adminuserid
-			                 						to :staffRec.Staff_Email
-			                 						subject :subjectText
-			                 						message :messageContent
-			                 					]
-			                 				}
-			                 			}
-			                 			// Send to Admin
-			                 			adminList = List();
-			                 			if(staffRec.Campus != null)
-			                 			{
-			                 				adminList = Staff_Master[Organisation == staffRec.Organisation && Current_Employment == staffRec.Current_Employment && Admin_Type == "School"].Staff_Email.getAll();
-			                 			}
-			                 			else
-			                 			{
-			                 				adminList = Staff_Master[Organisation == staffRec.Organisation && Regions == staffRec.Regions && Admin_Type == "Region"].Staff_Email.getAll();
-			                 			}
-			                 			if(adminList.size() > 0)
-			                 			{
-			                 				templateAdmin = Email_Templates[Template_Name == "Accreditation_Expiring_Reminder_Admin"];
-			                 				if(templateAdmin.count() > 0)
-			                 				{
-			                 					info templateAdmin.count();
-			                 					info adminList;
-			                 					subjectText = templateAdmin.Subject_field;
-			                 					subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
-			                 					messageContent = templateAdmin.Email_Content;
-			                 					messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
-			                 					messageContent = messageContent.replaceAll("${Accreditation_Name}",accreditationName,true);
-			                 					messageContent = messageContent.replaceAll("${Due_Date}",dueDate,true);
-			                 					messageContent = messageContent.replaceAll("${Accreditation_Link}",accreditationLink,true);
-			                 					sendmail
-			                 					[
-			                 						from :zoho.adminuserid
-			                 						to :adminList
-			                 						subject :subjectText
-			                 						message :messageContent
-			                 					]
-			                 				}
-			                 			}
-			                 		}
-			                 	}
-			                 
-			
+                 	accRec = Accreditation_Details[ID == accreditationId];
+                 	if(accRec.count() > 0)
+                 	{
+                 		staffRec = Staff_Master[ID == accRec.Staff];
+                 		if(staffRec.count() > 0)
+                 		{
+                 			accreditationLink = "<a href='https://creator.zoho.com" + zoho.appuri + "#Report:Expiring_Accreditation" + "'>Click here to view pending trainings</a>";
+                 			staffName = staffRec.Name.prefix + " " + staffRec.Name.first_name + " " + staffRec.Name.last_name;
+                 			accreditationName = accRec.Required_Accreditation.Accreditation_Name;
+                 			dueDate = accRec.Due_Date.toString("dd-MMM-yyyy");
+                 			// Send to Staff
+                 			if(!isEmpty(staffRec.Staff_Email))
+                 			{
+                 				templateStaff = Email_Templates[Template_Name == "Accreditation_Expiring_Reminder_Staff"];
+                 				if(templateStaff.count() > 0)
+                 				{
+                 					subjectText = templateStaff.Subject_field;
+                 					subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
+                 					messageContent = templateStaff.Email_Content;
+                 					messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
+                 					messageContent = messageContent.replaceAll("${Accreditation_Name}",accreditationName,true);
+                 					messageContent = messageContent.replaceAll("${Due_Date}",dueDate,true);
+                 					sendmail
+                 					[
+                 						from :zoho.adminuserid
+                 						to :staffRec.Staff_Email
+                 						subject :subjectText
+                 						message :messageContent
+                 					]
+                 				}
+                 			}
+                 			// Send to Admin
+                 			adminList = List();
+                 			if(staffRec.Campus != null)
+                 			{
+                 				adminList = Staff_Master[Organisation == staffRec.Organisation && Current_Employment == staffRec.Current_Employment && Admin_Type == "School"].Staff_Email.getAll();
+                 			}
+                 			else
+                 			{
+                 				adminList = Staff_Master[Organisation == staffRec.Organisation && Regions == staffRec.Regions && Admin_Type == "Region"].Staff_Email.getAll();
+                 			}
+                 			if(adminList.size() > 0)
+                 			{
+                 				templateAdmin = Email_Templates[Template_Name == "Accreditation_Expiring_Reminder_Admin"];
+                 				if(templateAdmin.count() > 0)
+                 				{
+                 					info templateAdmin.count();
+                 					info adminList;
+                 					subjectText = templateAdmin.Subject_field;
+                 					subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
+                 					messageContent = templateAdmin.Email_Content;
+                 					messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
+                 					messageContent = messageContent.replaceAll("${Accreditation_Name}",accreditationName,true);
+                 					messageContent = messageContent.replaceAll("${Due_Date}",dueDate,true);
+                 					messageContent = messageContent.replaceAll("${Accreditation_Link}",accreditationLink,true);
+                 					sendmail
+                 					[
+                 						from :zoho.adminuserid
+                 						to :adminList
+                 						subject :subjectText
+                 						message :messageContent
+                 					]
+                 				}
+                 			}
+                 		}
+                 	}
+                 
 }

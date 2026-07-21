@@ -1,0 +1,6 @@
+"Staff","Training_Type","Training_Name","Completion_Date","Status","Reason"
+"STF001","Teacher Accreditation Program","Teacher Accreditation Portfolio Review","15-Jul-2026","Success","Imported and matched to the active compliance training record."
+"STF002","First Aid Certification","First Aid Practical Assessment","14-Jul-2026","Failed","Duplicate completion request already exists for the same staff member and training type."
+"STF003","School Leadership Accreditation","Leadership Standards Workshop","17-Jul-2026","Success","Imported successfully and queued for accreditation credit review."
+"STF004","Inclusive Education Workshop","Inclusive Classroom Strategies","18-Jul-2026","Failed","Training name required manual verification before it can be credited."
+"STF005","Child Protection Training","Child Protection Refresher","21-Jul-2026","Success","Imported and linked to the completed child protection compliance record."

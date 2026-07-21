@@ -1,32 +1,30 @@
 Delete_staff_in_all_place as "Delete staff in all place"
 {
 
-			
-							type =  form
-							form = Staff_Master
-			
-							record event = on delete
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														delete from Staff_Request[Staff == input.ID || Raised_by == input.ID];
-													delete from History[Staff == input.ID || Action_By == input.ID];
-													delete from Compliance_Training[Staff == input.ID];
-													delete from Staff_Service_Awards[Staff == input.ID];
-													delete from Staff_Employment[Staff == input.ID];
-													delete from Training_Completion_Request[Staff == input.ID];
-													delete from Training_Completion_Request_Import[Staff == input.ID];
-													delete from Accreditation_Details[Staff == input.ID];
-													delete from Qualifications[Staff == input.ID];
-													delete from Send_Mail[Send_By == input.ID || Staff_Master == input.ID];
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Master
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											delete from Staff_Request[Staff == input.ID || Raised_by == input.ID];
+										delete from History[Staff == input.ID || Action_By == input.ID];
+										delete from Compliance_Training[Staff == input.ID];
+										delete from Staff_Service_Awards[Staff == input.ID];
+										delete from Staff_Employment[Staff == input.ID];
+										delete from Training_Completion_Request[Staff == input.ID];
+										delete from Training_Completion_Request_Import[Staff == input.ID];
+										delete from Accreditation_Details[Staff == input.ID];
+										delete from Qualifications[Staff == input.ID];
+										delete from Send_Mail[Send_By == input.ID || Staff_Master == input.ID];
+						)
+					}
+				}
+
 			
 }

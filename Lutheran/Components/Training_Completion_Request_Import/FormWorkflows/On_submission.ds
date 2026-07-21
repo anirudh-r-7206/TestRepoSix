@@ -1,237 +1,235 @@
 On_submission as "On submission"
 {
 
-			
-							type =  form
-							form = Training_Completion_Request_Import
-			
-							record event = on edit
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														reasonList = List();
-													/* =====================================================
-																							 				 														   1. BASIC VALIDATION
-																							 				 														===================================================== */
-													/* CHECK STAFF */
-													staffRec = Staff_Master[ID == input.Staff];
-													if(staffRec.count() == 0)
+				type =  form
+				form = Training_Completion_Request_Import
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											reasonList = List();
+										/* =====================================================
+																				 				 														   1. BASIC VALIDATION
+																				 				 														===================================================== */
+										/* CHECK STAFF */
+										staffRec = Staff_Master[ID == input.Staff];
+										if(staffRec.count() == 0)
+										{
+											reasonList.add("Staff not found");
+										}
+										else if(staffRec.status != "Active")
+										{
+											reasonList.add("Staff is not Active");
+										}
+										/* CHECK TRAINING TYPE */
+										trainTypeRec = Training_Type[ID == input.Training_Type];
+										if(trainTypeRec.count() == 0)
+										{
+											reasonList.add("Training Type not found");
+										}
+										/* CHECK TRAINING NAME */
+										if(input.Training_Name == null || input.Training_Name.trim() == "" || input.Training_Name.trim() == "null")
+										{
+											reasonList.add("Training Name is required");
+										}
+										/* CHECK COMPLETION DATE */
+										if(input.Completion_Date != null)
+										{
+											if(input.Completion_Date > zoho.currentdate)
+											{
+												reasonList.add("Completion Date cannot be in future");
+											}
+										}
+										else
+										{
+											reasonList.add("Completion Date is required");
+										}
+										/* =====================================================
+																				 				 														   2. MAIN LOGIC
+																				 				 														===================================================== */
+										complianceToLink = null;
+										isAccreditation = false;
+										if(reasonList.isEmpty() && trainTypeRec.count() > 0)
+										{
+											if(trainTypeRec.Type_field == "Accreditation")
+											{
+												isAccreditation = true;
+												/* ============================================
+																				 				 																   ACCREDITATION FLOW
+																				 				 																============================================ */
+												/* STEP 1: GET LATEST ACCREDITATION (NOT ACCREDITED) */
+												accRec = Accreditation_Details[Staff == input.Staff && Status_Accreditation == "Not Accredited"] sort by Added_Time desc;
+												if(accRec.count() == 0)
+												{
+													reasonList.add("No active Accreditation found for this staff");
+												}
+												else
+												{
+													/* STEP 2: DIRECT FETCH FROM SUBFORM TABLE */
+													courseRec = Accreditation_Courses[Accreditation == accRec.Required_Accreditation.ID && Training_Type == input.Training_Type];
+													if(courseRec.count() == 0)
 													{
-														reasonList.add("Staff not found");
-													}
-													else if(staffRec.status != "Active")
-													{
-														reasonList.add("Staff is not Active");
-													}
-													/* CHECK TRAINING TYPE */
-													trainTypeRec = Training_Type[ID == input.Training_Type];
-													if(trainTypeRec.count() == 0)
-													{
-														reasonList.add("Training Type not found");
-													}
-													/* CHECK TRAINING NAME */
-													if(input.Training_Name == null || input.Training_Name.trim() == "" || input.Training_Name.trim() == "null")
-													{
-														reasonList.add("Training Name is required");
-													}
-													/* CHECK COMPLETION DATE */
-													if(input.Completion_Date != null)
-													{
-														if(input.Completion_Date > zoho.currentdate)
-														{
-															reasonList.add("Completion Date cannot be in future");
-														}
+														reasonList.add("Training is not part of the staff Accreditation");
 													}
 													else
 													{
-														reasonList.add("Completion Date is required");
-													}
-													/* =====================================================
-																							 				 														   2. MAIN LOGIC
-																							 				 														===================================================== */
-													complianceToLink = null;
-													isAccreditation = false;
-													if(reasonList.isEmpty() && trainTypeRec.count() > 0)
-													{
-														if(trainTypeRec.Type_field == "Accreditation")
+														/* STEP 3: FIND EXISTING COMPLIANCE */
+														compRec = Compliance_Training[Staff == input.Staff && Training_Type == input.Training_Type && Accreditation_Details == accRec.ID];
+														if(compRec.count() == 0)
 														{
-															isAccreditation = true;
-															/* ============================================
-																							 				 																   ACCREDITATION FLOW
-																							 				 																============================================ */
-															/* STEP 1: GET LATEST ACCREDITATION (NOT ACCREDITED) */
-															accRec = Accreditation_Details[Staff == input.Staff && Status_Accreditation == "Not Accredited"] sort by Added_Time desc;
-															if(accRec.count() == 0)
+															reasonList.add("Compliance record not found for this Accreditation course");
+														}
+														else
+														{
+															/* STEP 4: CHECK EXISTING REQUEST */
+															existingReq = Training_Completion_Request[Compliance_Training == compRec.ID];
+															if(existingReq.count() > 0)
 															{
-																reasonList.add("No active Accreditation found for this staff");
+																reasonList.add("Request already exists for this Accreditation course");
 															}
 															else
 															{
-																/* STEP 2: DIRECT FETCH FROM SUBFORM TABLE */
-																courseRec = Accreditation_Courses[Accreditation == accRec.Required_Accreditation.ID && Training_Type == input.Training_Type];
-																if(courseRec.count() == 0)
-																{
-																	reasonList.add("Training is not part of the staff Accreditation");
-																}
-																else
-																{
-																	/* STEP 3: FIND EXISTING COMPLIANCE */
-																	compRec = Compliance_Training[Staff == input.Staff && Training_Type == input.Training_Type && Accreditation_Details == accRec.ID];
-																	if(compRec.count() == 0)
-																	{
-																		reasonList.add("Compliance record not found for this Accreditation course");
-																	}
-																	else
-																	{
-																		/* STEP 4: CHECK EXISTING REQUEST */
-																		existingReq = Training_Completion_Request[Compliance_Training == compRec.ID];
-																		if(existingReq.count() > 0)
-																		{
-																			reasonList.add("Request already exists for this Accreditation course");
-																		}
-																		else
-																		{
-																			complianceToLink = compRec.ID;
-																		}
-																	}
-																}
-															}
-														}
-														else
-														{
-															/* ============================================
-																							 				 																   OTHER COURSE FLOW
-																							 				 																============================================ */
-															existingReq = Training_Completion_Request[Staff == input.Staff && Training_Type == input.Training_Type && Training_Name == input.Training_Name && Completion_Date == input.Completion_Date];
-															if(existingReq.count() > 0)
-															{
-																reasonList.add("Duplicate request already exists");
+																complianceToLink = compRec.ID;
 															}
 														}
 													}
-													/* =====================================================
-																							 				 														   3. FINAL RESULT
-																							 				 														===================================================== */
-													if(reasonList.size() > 0)
-													{
-														input.Status = "Failed";
-														success message "Your reinsert has been failed";
-														reasonText = "";
-														for each  r in reasonList
-														{
-															reasonText = reasonText + r + "\n";
-														}
-														input.Reason = reasonText.trim();
-													}
-													else
-													{
-														input.Reason = "";
-														input.Status = "Success";
-														success message "Your training request has been reinserted has been submitted successfully";
-														/* CREATE REQUEST */
-														reqID = insert into Training_Completion_Request
-														[
-															Staff=input.Staff
-															Training_Type=input.Training_Type
-															Training_Name=input.Training_Name.trim()
-															Completion_Date=input.Completion_Date
-															Added_User=zoho.loginuser
-															Compliance_Training=complianceToLink
-														];
-														req = Training_Completion_Request[ID == reqID];
-														/* ============================================
-																							 				 															   HANDLE COMPLIANCE
-																							 				 															============================================ */
-														if(isAccreditation == false)
-														{
-															/* CREATE NEW COMPLIANCE */
-															compID = insert into Compliance_Training
-															[
-																Added_User=zoho.loginuser
-																Staff=req.Staff
-																Status="Pending"
-																Completion_Date=req.Completion_Date
-																Training_Name=req.Training_Name
-																Training_Type=req.Training_Type
-															];
-															req.Compliance_Training=compID;
-														}
-														else
-														{
-															/* UPDATE EXISTING COMPLIANCE */
-															compRec = Compliance_Training[ID == complianceToLink];
-															if(compRec.count() > 0)
-															{
-																compRec.Status="Pending";
-																compRec.Completion_Request_Raised=true;
-															}
-														}
-														/* ============================================
-																							 				 															   APPROVAL FLOW
-																							 				 															============================================ */
-														login_user_info = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"];
-														current_approver = "";
-														if(login_user_info.Admin_Type == "Campus")
-														{
-															current_approver = "Campus Admin";
-														}
-														else if(login_user_info.Admin_Type == "School")
-														{
-															current_approver = "School Admin";
-														}
-														else if(login_user_info.Admin_Type == "Region")
-														{
-															current_approver = "Region Admin";
-														}
-														else if(login_user_info.Admin_Type == "National")
-														{
-															current_approver = "National Admin";
-														}
-														req.Current_Approver=thisapp.helpers.returnComplianceCompletionRequestNextApprover(current_approver,req.Staff.ID);
-														/* HISTORY */
-														if(req.Current_Approver == "")
-														{
-															action_value = "Training Completion Request Approved";
-															comments = "Auto Approved";
-														}
-														else
-														{
-															action_value = "Training Completion Requested";
-															comments = "Sent for Approval";
-														}
-														insert into History
-														[
-															Added_User=zoho.loginuser
-															Action_By=login_user_info.ID
-															Action_field=action_value
-															Comment=comments
-															Training_Completion_Request=req.ID
-														]
-														/* MAIL + STATUS */
-														if(req.Current_Approver != "")
-														{
-															thisapp.mail.sendTrainingApprovalPending(req.ID);
-														}
-														else
-														{
-															req.Status="Approved";
-															thisapp.mail.sendTrainingApproved(req.ID);
-															compRec = Compliance_Training[ID == req.Compliance_Training];
-															if(compRec.count() > 0)
-															{
-																compRec.Status="Completed";
-																compRec.Completion_Request_Raised=false;
-															}
-														}
-													}
-									)
-								}
-							}
-			
-						
+												}
+											}
+											else
+											{
+												/* ============================================
+																				 				 																   OTHER COURSE FLOW
+																				 				 																============================================ */
+												existingReq = Training_Completion_Request[Staff == input.Staff && Training_Type == input.Training_Type && Training_Name == input.Training_Name && Completion_Date == input.Completion_Date];
+												if(existingReq.count() > 0)
+												{
+													reasonList.add("Duplicate request already exists");
+												}
+											}
+										}
+										/* =====================================================
+																				 				 														   3. FINAL RESULT
+																				 				 														===================================================== */
+										if(reasonList.size() > 0)
+										{
+											input.Status = "Failed";
+											success message "Your reinsert has been failed";
+											reasonText = "";
+											for each  r in reasonList
+											{
+												reasonText = reasonText + r + "\n";
+											}
+											input.Reason = reasonText.trim();
+										}
+										else
+										{
+											input.Reason = "";
+											input.Status = "Success";
+											success message "Your training request has been reinserted has been submitted successfully";
+											/* CREATE REQUEST */
+											reqID = insert into Training_Completion_Request
+											[
+												Staff=input.Staff
+												Training_Type=input.Training_Type
+												Training_Name=input.Training_Name.trim()
+												Completion_Date=input.Completion_Date
+												Added_User=zoho.loginuser
+												Compliance_Training=complianceToLink
+											];
+											req = Training_Completion_Request[ID == reqID];
+											/* ============================================
+																				 				 															   HANDLE COMPLIANCE
+																				 				 															============================================ */
+											if(isAccreditation == false)
+											{
+												/* CREATE NEW COMPLIANCE */
+												compID = insert into Compliance_Training
+												[
+													Added_User=zoho.loginuser
+													Staff=req.Staff
+													Status="Pending"
+													Completion_Date=req.Completion_Date
+													Training_Name=req.Training_Name
+													Training_Type=req.Training_Type
+												];
+												req.Compliance_Training=compID;
+											}
+											else
+											{
+												/* UPDATE EXISTING COMPLIANCE */
+												compRec = Compliance_Training[ID == complianceToLink];
+												if(compRec.count() > 0)
+												{
+													compRec.Status="Pending";
+													compRec.Completion_Request_Raised=true;
+												}
+											}
+											/* ============================================
+																				 				 															   APPROVAL FLOW
+																				 				 															============================================ */
+											login_user_info = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"];
+											current_approver = "";
+											if(login_user_info.Admin_Type == "Campus")
+											{
+												current_approver = "Campus Admin";
+											}
+											else if(login_user_info.Admin_Type == "School")
+											{
+												current_approver = "School Admin";
+											}
+											else if(login_user_info.Admin_Type == "Region")
+											{
+												current_approver = "Region Admin";
+											}
+											else if(login_user_info.Admin_Type == "National")
+											{
+												current_approver = "National Admin";
+											}
+											req.Current_Approver=thisapp.helpers.returnComplianceCompletionRequestNextApprover(current_approver,req.Staff.ID);
+											/* HISTORY */
+											if(req.Current_Approver == "")
+											{
+												action_value = "Training Completion Request Approved";
+												comments = "Auto Approved";
+											}
+											else
+											{
+												action_value = "Training Completion Requested";
+												comments = "Sent for Approval";
+											}
+											insert into History
+											[
+												Added_User=zoho.loginuser
+												Action_By=login_user_info.ID
+												Action_field=action_value
+												Comment=comments
+												Training_Completion_Request=req.ID
+											]
+											/* MAIL + STATUS */
+											if(req.Current_Approver != "")
+											{
+												thisapp.mail.sendTrainingApprovalPending(req.ID);
+											}
+											else
+											{
+												req.Status="Approved";
+												thisapp.mail.sendTrainingApproved(req.ID);
+												compRec = Compliance_Training[ID == req.Compliance_Training];
+												if(compRec.count() > 0)
+												{
+													compRec.Status="Completed";
+													compRec.Completion_Request_Raised=false;
+												}
+											}
+										}
+						)
+					}
+				}
+
 			
 }

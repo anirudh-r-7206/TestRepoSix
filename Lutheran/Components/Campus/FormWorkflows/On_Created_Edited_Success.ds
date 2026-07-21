@@ -1,26 +1,24 @@
 On_Created_Edited_Success as "On Created & Edited - Successful form submission"
 {
 
-			
-							type =  form
-							form = Campus
-			
-							record event = on add or edit
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.campus_image == "" || input.campus_image.isEmpty())
-													{
-														input.campus_image = thisapp.helpers.getEmptyState("DEFAULT_IMAGE");
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Campus
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.campus_image == "" || input.campus_image.isEmpty())
+										{
+											input.campus_image = thisapp.helpers.getEmptyState("DEFAULT_IMAGE");
+										}
+						)
+					}
+				}
+
 			
 }

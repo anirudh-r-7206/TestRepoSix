@@ -1,48 +1,46 @@
 on_submit as "on submit"
 {
 
-			
-							type =  form
-							form = Send_Mail
-			
-							record event = on add or edit
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Type_field == "Committee")
-													{
-														fetComInfo = Representation_Team[ID == input.Committee];
-														staffEmails = Staff_Master[ID in fetComInfo.Staff_Master].Staff_Email.getAll();
-														sendmail
-														[
-															from :zoho.adminuserid
-															to :staffEmails
-															subject :input.Subject_field
-															message :input.Content
-															Attachments :file:input.Attachments
-														]
-													}
-													else if(input.Type_field == "Individual")
-													{
-														staffEmails = Staff_Master[ID in input.Staff_Master].Staff_Email.getAll();
-														sendmail
-														[
-															from :zoho.adminuserid
-															to :staffEmails
-															subject :input.Subject_field
-															message :input.Content
-															Attachments :file:input.Attachments
-														]
-													}
-													openUrl("#Script:page.parent.reload","same window");
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Send_Mail
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Type_field == "Committee")
+										{
+											fetComInfo = Representation_Team[ID == input.Committee];
+											staffEmails = Staff_Master[ID in fetComInfo.Staff_Master].Staff_Email.getAll();
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :staffEmails
+												subject :input.Subject_field
+												message :input.Content
+												Attachments :file:input.Attachments
+											]
+										}
+										else if(input.Type_field == "Individual")
+										{
+											staffEmails = Staff_Master[ID in input.Staff_Master].Staff_Email.getAll();
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :staffEmails
+												subject :input.Subject_field
+												message :input.Content
+												Attachments :file:input.Attachments
+											]
+										}
+										openUrl("#Script:page.parent.reload","same window");
+						)
+					}
+				}
+
 			
 }

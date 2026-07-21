@@ -1,5 +1,5 @@
 <div style="padding:24px;background:#fff;border-radius:12px;font-family:Arial,sans-serif;">
-	<h2 style="margin:0 0 8px;color:#194BB2;">Staff Onboarding</h2>
-	<p style="margin:0;color:#555;">Onboarding content is temporarily simplified while compile issues are resolved.</p>
-	<div elName='zc-component' formLinkName='Staff_Master' params='zc_Header=false&Onboarding=true' style='height:420px;margin-top:16px;'></div>
+  <h2 style="margin:0 0 8px;color:#194BB2;">Staff Onboarding</h2>
+  <p style="margin:0;color:#555;">Onboarding content is temporarily simplified while compile issues are resolved.</p>
+  <div elName='zc-component' formLinkName='Staff_Master' params='zc_Header=false&Onboarding=true' style='height:420px;margin-top:16px;'></div>
 </div>

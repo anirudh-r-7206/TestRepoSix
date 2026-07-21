@@ -1,65 +1,63 @@
 report All_Qualification_Types
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										qualification_type as "Qualification Type"
-									)
-								)
+								qualification_type as "Qualification Type"
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								record
-								(
-									Edit   	   
-									Delete   	   
-		    					)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									Edit   	   
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-								datablock1
-								(
-									fields
-									(
-										qualification_type as "Qualification Type"
-									)
-								)
+								Edit 
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								)
+						record
+						(
+							Edit   	   
+							Delete   	   
+    					)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								qualification_type as "Qualification Type"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						)
+				)
+			
 }

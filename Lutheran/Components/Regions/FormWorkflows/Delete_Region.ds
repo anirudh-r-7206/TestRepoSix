@@ -1,32 +1,30 @@
 Delete_Region as "Delete Region"
 {
 
-			
-							type =  form
-							form = Regions
-			
-							record event = on delete
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														reps_or_teams = Representation_Team[Regions == input.ID];
-													staff_masters = Staff_Master[Regions == input.ID];
-													staff_requests = Staff_Request[Regions == input.ID];
-													schools = School[Region == input.ID];
-													isImplemented = reps_or_teams.count() > 0 || staff_masters.count() > 0 || staff_requests.count() > 0 || schools.count() > 0;
-													if(isImplemented)
-													{
-														alert "Region has been linked to few modules. Please unlink them to delete this Region.";
-														cancel delete;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Regions
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											reps_or_teams = Representation_Team[Regions == input.ID];
+										staff_masters = Staff_Master[Regions == input.ID];
+										staff_requests = Staff_Request[Regions == input.ID];
+										schools = School[Region == input.ID];
+										isImplemented = reps_or_teams.count() > 0 || staff_masters.count() > 0 || staff_requests.count() > 0 || schools.count() > 0;
+										if(isImplemented)
+										{
+											alert "Region has been linked to few modules. Please unlink them to delete this Region.";
+											cancel delete;
+										}
+						)
+					}
+				}
+
 			
 }

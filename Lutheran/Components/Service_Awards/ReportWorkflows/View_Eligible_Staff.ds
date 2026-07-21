@@ -1,20 +1,18 @@
 View_Eligible_Staff as "View Eligible Staff"
 {
 
-			
-							type =  functions
-							form = Service_Awards
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									openUrl("#Form:Award_Eligible_Staff?Service_Award=" + input.ID,"popup window","height=auto, width=80%");
-								)
-								}
-							}
-						
+				type =  functions
+				form = Service_Awards
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						openUrl("#Form:Award_Eligible_Staff?Service_Award=" + input.ID,"popup window","height=auto, width=80%");
+					)
+					}
+				}
 			
 }

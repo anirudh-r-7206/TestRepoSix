@@ -1,23 +1,21 @@
 default list All_Representation_Team
 {
 
-		
-					displayName = "All Representation/Team"
-					show all rows from Representation_Team  [ID == thisapp.helpers.returnEligibleCommittee()]  
-					(
-						Type_field as "Type "
-						custom action "View Staff"
-						(
-			  			workflow = Add_Remove_Representation1
-						show action in edit record menu = true
-						column header = "View Staff"
-						)
-						Representation_Team as "Representation/Team"
-						Organisation as "National"
-						Regions
-						School
-						Campus
-					)
-				
+			displayName = "All Representation/Team"
+			show all rows from Representation_Team  [ID == thisapp.helpers.returnEligibleCommittee()]  
+			(
+				Type_field as "Type "
+				custom action "View Staff"
+				(
+	  			workflow = Add_Remove_Representation1
+				show action in edit record menu = true
+				column header = "View Staff"
+				)
+				Representation_Team as "Representation/Team"
+				Organisation as "National"
+				Regions
+				School
+				Campus
+			)
 		
 }

@@ -1,76 +1,74 @@
 report All_Region_Infos
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										region_name as "Region Name"
-										regional_logo as "Regional Logo"
-										Regional_Office_Address as "Regional Office Address"
-										Main_Organisation as "Main National "
-										Regional_Office_Email as "Regional Office Email"
-										Organisation_Name as "National Name"
-									)
-								)
+								region_name as "Region Name"
+								regional_logo as "Regional Logo"
+								Regional_Office_Address as "Regional Office Address"
+								Main_Organisation as "Main National "
+								Regional_Office_Email as "Regional Office Email"
+								Organisation_Name as "National Name"
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								record
-								(
-									Edit   	   
-									Delete   	   
-		    					)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									Edit   	   
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-				 				type = 2
-								datablock1
-								(
-				     				title = "Overview"
-									fields
-									(
-										region_name as "Region Name"
-										regional_logo as "Regional Logo"
-										Regional_Office_Address as "Regional Office Address"
-										Main_Organisation as "Main National "
-										Regional_Office_Email as "Regional Office Email"
-									)
-								)
+								Edit 
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								)
+						record
+						(
+							Edit   	   
+							Delete   	   
+    					)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								region_name as "Region Name"
+								regional_logo as "Regional Logo"
+								Regional_Office_Address as "Regional Office Address"
+								Main_Organisation as "Main National "
+								Regional_Office_Email as "Regional Office Email"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						)
+				)
+			
 }

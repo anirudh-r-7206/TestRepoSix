@@ -1,61 +1,59 @@
 form Empty_State
 {
 
-		
-					displayname = "Empty State"
-					success message = "Data Added Successfully!"
-					Section
+			displayname = "Empty State"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Name
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Image
+			(
+    			type = image
+				source  = file
+				enable = title
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					must have unique Name
+				}
+				on edit
+				{
+					update
 					(
-		    			type = text
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have Image
+					cancel
 					(
-		    			type = image
-						source  = file
-						enable = title
-						aspect ratio = original
-						camera = primary
-						show gallery = true
-						switch camera = true
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

@@ -1,27 +1,25 @@
 on_validte as "on validte"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-													if(input.Request_Type == null || input.Request_Type.isEmpty())
-													{
-														alert "Please select Request Type";
-														cancel submit;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+										if(input.Request_Type == null || input.Request_Type.isEmpty())
+										{
+											alert "Please select Request Type";
+											cancel submit;
+										}
+						)
+					}
+				}
+
 			
 }

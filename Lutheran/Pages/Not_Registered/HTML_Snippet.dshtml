@@ -1,89 +1,89 @@
 <title>Access Restricted</title>
-		<style>
-				* { margin: 0; padding: 0; box-sizing: border-box; }
-				
-				.container {
-						text-align: center;
-						max-width: 400px;
-						padding: 2rem;
-				}
-				.icon-wrapper {
-						width: 80px;
-						height: 80px;
-						border-radius: 50%;
-						background-color: #EEF3FC;
-						border: 1.5px solid #C5D5F5;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						margin: 0 auto 1.5rem;
-				}
-				.title {
-						font-size: 20px;
-						font-weight: 600;
-						color: #111827;
-						margin-bottom: 0.6rem;
-				}
-				.message {
-						font-size: 14px;
-						color: #6B7280;
-						line-height: 1.75;
-						margin-bottom: 1.5rem;
-				}
-				.message strong {
-						color: #374151;
-						font-weight: 500;
-				}
-				.info-box {
-						background: #EEF3FC;
-						border: 1px solid #C5D5F5;
-						border-radius: 8px;
-						padding: 12px 20px;
-				}
-				.info-box p {
-						font-size: 13px;
-						color: #194BB2;
-						margin: 0;
-						line-height: 1.6;
-				}
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .container {
+            text-align: center;
+            max-width: 400px;
+            padding: 2rem;
+        }
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #EEF3FC;
+            border: 1.5px solid #C5D5F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.6rem;
+        }
+        .message {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+        .message strong {
+            color: #374151;
+            font-weight: 500;
+        }
+        .info-box {
+            background: #EEF3FC;
+            border: 1px solid #C5D5F5;
+            border-radius: 8px;
+            padding: 12px 20px;
+        }
+        .info-box p {
+            font-size: 13px;
+            color: #194BB2;
+            margin: 0;
+            line-height: 1.6;
+        }
 		div#zppagesLive,
 div#elementsContainer,
 .Layout.elemContainment,
 div#row_1,
 .zc-pb-formreport-placeholder {
-		height: 100% !important;
+    height: 100% !important;
 }
 .Layout.elemContainment {
-		padding: unset !important;
+    padding: unset !important;
 }
 aside.zc-left-menu.zc-flex.zc-direction-column,
 .zc-app-side-bar-wrapper,
 .zc-topbar-combined,
 .zc-app-top-bar {
-		display: none;
+    display: none;
 }
 .zc-container-wrapper .zc-main-content-wrapper .zc-main-content {
-		height: 100%;
+    height: 100%;
 }
 .zc-container-wrapper.zc-row.zc-row-nowrap {
-		height: 100vh;
+    height: 100vh;
 }
 
 .zc-pb-embedlive-container .zc-pb-embed-placeholder-content {
-		display: flex !important;
-		align-items: center;
-		justify-content: center;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
-		</style>
-		<div class="container">
-				<div class="icon-wrapper">
-						<svg width="36" height="36" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M4.86971 8.43972H3.66699V6.39426L10.5582 3.66699L17.417 6.39426V8.43972H16.0355M4.86971 8.43972V15.1767M4.86971 8.43972H7.73023M4.86971 15.1767H3.66699V17.417H17.417V15.1767H16.0355M4.86971 15.1767H7.73023M16.0355 8.43972V15.1767M16.0355 8.43972H13.24M16.0355 15.1767H13.24M7.73023 8.43972V15.1767M7.73023 8.43972H13.24M7.73023 15.1767H13.24M13.24 8.43972V15.1767" stroke="#194BB2" stroke-width="1.2" stroke-linejoin="round"/>
-						</svg>
-				</div>
-				<h2 class="title">Access Restricted</h2>
-				<p class="message">You are not registered in <strong>Staff Master</strong>. Please contact your administrator to get onboarded before accessing this system.</p>
-				<div class="info-box">
-						<p>Please contact your Admin to onboard you into the system.</p>
-				</div>
-		</div>
+    </style>
+    <div class="container">
+        <div class="icon-wrapper">
+            <svg width="36" height="36" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.86971 8.43972H3.66699V6.39426L10.5582 3.66699L17.417 6.39426V8.43972H16.0355M4.86971 8.43972V15.1767M4.86971 8.43972H7.73023M4.86971 15.1767H3.66699V17.417H17.417V15.1767H16.0355M4.86971 15.1767H7.73023M16.0355 8.43972V15.1767M16.0355 8.43972H13.24M16.0355 15.1767H13.24M7.73023 8.43972V15.1767M7.73023 8.43972H13.24M7.73023 15.1767H13.24M13.24 8.43972V15.1767" stroke="#194BB2" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <h2 class="title">Access Restricted</h2>
+        <p class="message">You are not registered in <strong>Staff Master</strong>. Please contact your administrator to get onboarded before accessing this system.</p>
+        <div class="info-box">
+            <p>Please contact your Admin to onboard you into the system.</p>
+        </div>
+    </div>

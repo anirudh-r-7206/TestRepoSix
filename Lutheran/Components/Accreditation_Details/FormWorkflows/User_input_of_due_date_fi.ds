@@ -1,28 +1,26 @@
 User_input_of_due_date_fi as "User input of due date field"
 {
 
-			
-							type =  form
-							form = Accreditation_Details
-			
-							record event = on add or edit
-			
-							on user input of Due_Date
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														last_accreditation = Accreditation_Details[Staff == input.Staff && Status_Accreditation != "Draft"] sort by Added_Time desc range from 1 to 1;
-													if(input.Due_Date < last_accreditation.Due_Date.addYear(5))
-													{
-														input.Due_Date = last_accreditation.Due_Date.addYear(5);
-														alert "The due date must be five years after the last accreditation due date.";
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Accreditation_Details
+
+				record event = on add or edit
+
+				on user input of Due_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											last_accreditation = Accreditation_Details[Staff == input.Staff && Status_Accreditation != "Draft"] sort by Added_Time desc range from 1 to 1;
+										if(input.Due_Date < last_accreditation.Due_Date.addYear(5))
+										{
+											input.Due_Date = last_accreditation.Due_Date.addYear(5);
+											alert "The due date must be five years after the last accreditation due date.";
+										}
+						)
+					}
+				}
+
 			
 }

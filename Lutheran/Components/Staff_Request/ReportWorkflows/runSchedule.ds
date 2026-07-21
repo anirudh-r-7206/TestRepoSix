@@ -1,20 +1,18 @@
 runSchedule as "runSchedule"
 {
 
-			
-							type =  functions
-							form = Staff_Request
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									thisapp.helpers.processStaffRequest(input.ID);
-								)
-								}
-							}
-						
+				type =  functions
+				form = Staff_Request
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						thisapp.helpers.processStaffRequest(input.ID);
+					)
+					}
+				}
 			
 }

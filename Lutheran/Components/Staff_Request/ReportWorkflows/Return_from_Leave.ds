@@ -1,55 +1,53 @@
 Return_from_Leave as "Return from Leave"
 {
 
-			
-							type =  functions
-							form = Staff_Request
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									req = Staff_Request[ID == input.ID];
-													staffRec = Staff_Master[ID == req.Staff];
-													// Close previous employment
-													oldEmp = Staff_Employment[Staff == req.Staff && End_Date == null];
-													if(oldEmp.count() > 0)
-													{
-														oldEmp.End_Date=zoho.currentdate;
-													}
-													// Insert new Staff_Employment
-													insert into Staff_Employment
-													[
-														Staff=req.Staff
-														School=staffRec.Current_Employment
-														Position=staffRec.Current_Position
-														Commencement_Date=zoho.currentdate
-														FTE=staffRec.FTE
-														Teaching_Staff=staffRec.Teaching_Staff
-														Teacher_Type=staffRec.Teacher_Type
-														Year_Level=staffRec.Year_Level
-														Subject_field=staffRec.Subject_form
-														Speciality=staffRec.Speciality
-														Added_User=zoho.loginuser
-													]
-													// Update Staff_Master
-													staffRec.status="Active";
-													staffRec.Date_Commenced_in_Current_School=zoho.currentdate;
-													// Update Staff_Request
-													// Insert Staff_History
-													insert into History
-													[
-														Staff=req.Staff
-														Action_field="Sabbatical Leave"
-														Comment="Returned from Leave"
-														Added_User=zoho.loginuser
-													]
-													input.Returned = true;
-								)
-								}
-							}
-						
+				type =  functions
+				form = Staff_Request
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						req = Staff_Request[ID == input.ID];
+										staffRec = Staff_Master[ID == req.Staff];
+										// Close previous employment
+										oldEmp = Staff_Employment[Staff == req.Staff && End_Date == null];
+										if(oldEmp.count() > 0)
+										{
+											oldEmp.End_Date=zoho.currentdate;
+										}
+										// Insert new Staff_Employment
+										insert into Staff_Employment
+										[
+											Staff=req.Staff
+											School=staffRec.Current_Employment
+											Position=staffRec.Current_Position
+											Commencement_Date=zoho.currentdate
+											FTE=staffRec.FTE
+											Teaching_Staff=staffRec.Teaching_Staff
+											Teacher_Type=staffRec.Teacher_Type
+											Year_Level=staffRec.Year_Level
+											Subject_field=staffRec.Subject_form
+											Speciality=staffRec.Speciality
+											Added_User=zoho.loginuser
+										]
+										// Update Staff_Master
+										staffRec.status="Active";
+										staffRec.Date_Commenced_in_Current_School=zoho.currentdate;
+										// Update Staff_Request
+										// Insert Staff_History
+										insert into History
+										[
+											Staff=req.Staff
+											Action_field="Sabbatical Leave"
+											Comment="Returned from Leave"
+											Added_User=zoho.loginuser
+										]
+										input.Returned = true;
+					)
+					}
+				}
 			
 }

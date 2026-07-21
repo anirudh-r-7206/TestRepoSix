@@ -1,162 +1,160 @@
 Update_next_approver_or_S as "Update next approver or Status Change"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														// Cancel existing approved for Resignation/Deceased
-													if(input.Request_Type == "Resignation" || input.Request_Type == "Deceased")
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Cancel existing approved for Resignation/Deceased
+										if(input.Request_Type == "Resignation" || input.Request_Type == "Deceased")
+										{
+											allApprovedRequest = Staff_Request[Staff == input.Staff && Status == "Approved" && Effective_Date > zoho.currentdate];
+											for each  approvedRequest in allApprovedRequest
+											{
+												approvedRequest.Status="Cancelled";
+											}
+										}
+										thisapp.mail.sendRequestSubmitted(input.ID);
+										getStaff = Staff_Master[ID == input.Raised_by];
+										if(getStaff.count() > 0)
+										{
+											var = thisapp.permissions.loginUserProfile();
+											if(getStaff.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+											{
+												input.Status = "Approved";
+												thisapp.mail.sendRequestApproved(input.ID);
+												if(input.Request_Type == "Personal Details")
+												{
+													thisapp.helpers.processStaffRequest(input.ID);
+												}
+												else if(input.Effective_Date <= zoho.currentdate)
+												{
+													thisapp.helpers.processStaffRequest(input.ID);
+												}
+											}
+											else
+											{
+												getConfig = Approval_Configuration[Request_Type == input.Request_Type];
+												schoolAdminFlag = true;
+												regionAdminFlag = true;
+												orgAdminFlag = true;
+												if(getConfig.count() > 0)
+												{
+													schoolAdminFlag = getConfig.School_Admin;
+													regionAdminFlag = getConfig.Region_Admin;
+													orgAdminFlag = getConfig.National_Admin;
+												}
+												if(getStaff.Admin_Type == "Campus")
+												{
+													if(schoolAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Current_Employment == getStaff.Current_Employment && Admin_Type == "School"].count() > 0)
 													{
-														allApprovedRequest = Staff_Request[Staff == input.Staff && Status == "Approved" && Effective_Date > zoho.currentdate];
-														for each  approvedRequest in allApprovedRequest
+														input.Next_Approver = "School Admin";
+														thisapp.mail.sendRequestRaised(input.ID);
+													}
+													else if(regionAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Regions == getStaff.Regions && Admin_Type == "Region"].count() > 0)
+													{
+														input.Next_Approver = "Region Admin";
+														thisapp.mail.sendRequestRaised(input.ID);
+													}
+													else if(orgAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].count() > 0)
+													{
+														input.Next_Approver = "National Admin";
+														thisapp.mail.sendRequestRaised(input.ID);
+													}
+													else
+													{
+														input.Status = "Approved";
+														thisapp.mail.sendRequestApproved(input.ID);
+														if(input.Request_Type == "Personal Details")
 														{
-															approvedRequest.Status="Cancelled";
+															thisapp.helpers.processStaffRequest(input.ID);
+														}
+														else if(input.Effective_Date <= zoho.currentdate)
+														{
+															thisapp.helpers.processStaffRequest(input.ID);
 														}
 													}
-													thisapp.mail.sendRequestSubmitted(input.ID);
-													getStaff = Staff_Master[ID == input.Raised_by];
-													if(getStaff.count() > 0)
+												}
+												else if(getStaff.Admin_Type == "School")
+												{
+													if(regionAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Regions == getStaff.Regions && Admin_Type == "Region"].count() > 0)
 													{
-														var = thisapp.permissions.loginUserProfile();
-														if(getStaff.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+														input.Next_Approver = "Region Admin";
+														thisapp.mail.sendRequestRaised(input.ID);
+													}
+													else if(orgAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].count() > 0)
+													{
+														input.Next_Approver = "National Admin";
+														thisapp.mail.sendRequestRaised(input.ID);
+													}
+													else
+													{
+														input.Status = "Approved";
+														thisapp.mail.sendRequestApproved(input.ID);
+														if(input.Request_Type == "Personal Details")
 														{
-															input.Status = "Approved";
-															thisapp.mail.sendRequestApproved(input.ID);
-															if(input.Request_Type == "Personal Details")
-															{
-																thisapp.helpers.processStaffRequest(input.ID);
-															}
-															else if(input.Effective_Date <= zoho.currentdate)
-															{
-																thisapp.helpers.processStaffRequest(input.ID);
-															}
+															thisapp.helpers.processStaffRequest(input.ID);
 														}
-														else
+														else if(input.Effective_Date <= zoho.currentdate)
 														{
-															getConfig = Approval_Configuration[Request_Type == input.Request_Type];
-															schoolAdminFlag = true;
-															regionAdminFlag = true;
-															orgAdminFlag = true;
-															if(getConfig.count() > 0)
-															{
-																schoolAdminFlag = getConfig.School_Admin;
-																regionAdminFlag = getConfig.Region_Admin;
-																orgAdminFlag = getConfig.National_Admin;
-															}
-															if(getStaff.Admin_Type == "Campus")
-															{
-																if(schoolAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Current_Employment == getStaff.Current_Employment && Admin_Type == "School"].count() > 0)
-																{
-																	input.Next_Approver = "School Admin";
-																	thisapp.mail.sendRequestRaised(input.ID);
-																}
-																else if(regionAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Regions == getStaff.Regions && Admin_Type == "Region"].count() > 0)
-																{
-																	input.Next_Approver = "Region Admin";
-																	thisapp.mail.sendRequestRaised(input.ID);
-																}
-																else if(orgAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].count() > 0)
-																{
-																	input.Next_Approver = "National Admin";
-																	thisapp.mail.sendRequestRaised(input.ID);
-																}
-																else
-																{
-																	input.Status = "Approved";
-																	thisapp.mail.sendRequestApproved(input.ID);
-																	if(input.Request_Type == "Personal Details")
-																	{
-																		thisapp.helpers.processStaffRequest(input.ID);
-																	}
-																	else if(input.Effective_Date <= zoho.currentdate)
-																	{
-																		thisapp.helpers.processStaffRequest(input.ID);
-																	}
-																}
-															}
-															else if(getStaff.Admin_Type == "School")
-															{
-																if(regionAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Regions == getStaff.Regions && Admin_Type == "Region"].count() > 0)
-																{
-																	input.Next_Approver = "Region Admin";
-																	thisapp.mail.sendRequestRaised(input.ID);
-																}
-																else if(orgAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].count() > 0)
-																{
-																	input.Next_Approver = "National Admin";
-																	thisapp.mail.sendRequestRaised(input.ID);
-																}
-																else
-																{
-																	input.Status = "Approved";
-																	thisapp.mail.sendRequestApproved(input.ID);
-																	if(input.Request_Type == "Personal Details")
-																	{
-																		thisapp.helpers.processStaffRequest(input.ID);
-																	}
-																	else if(input.Effective_Date <= zoho.currentdate)
-																	{
-																		thisapp.helpers.processStaffRequest(input.ID);
-																	}
-																}
-															}
-															else if(getStaff.Admin_Type == "Region")
-															{
-																if(orgAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].count() > 0)
-																{
-																	input.Next_Approver = "National Admin";
-																	thisapp.mail.sendRequestRaised(input.ID);
-																}
-																else
-																{
-																	input.Status = "Approved";
-																	thisapp.mail.sendRequestApproved(input.ID);
-																	if(input.Request_Type == "Personal Details")
-																	{
-																		thisapp.helpers.processStaffRequest(input.ID);
-																	}
-																	else if(input.Effective_Date <= zoho.currentdate)
-																	{
-																		thisapp.helpers.processStaffRequest(input.ID);
-																	}
-																}
-															}
-															else if(getStaff.Admin_Type == "National")
-															{
-																input.Status = "Approved";
-																thisapp.mail.sendRequestApproved(input.ID);
-																if(input.Request_Type == "Personal Details")
-																{
-																	thisapp.helpers.processStaffRequest(input.ID);
-																}
-																else if(input.Effective_Date <= zoho.currentdate)
-																{
-																	thisapp.helpers.processStaffRequest(input.ID);
-																}
-															}
+															thisapp.helpers.processStaffRequest(input.ID);
 														}
 													}
-													insert into History
-													[
-														Added_User=zoho.loginuser
-														Action_By=Staff_Master[Staff_Email == zoho.loginuserid].ID
-														Action_field="Staff request raised"
-														Comment="Staff request raised for " + input.Request_Type
-														Staff_Request=input.ID
-													]
-									)
-								}
-							}
-			
-						
+												}
+												else if(getStaff.Admin_Type == "Region")
+												{
+													if(orgAdminFlag == true && Staff_Master[Organisation == getStaff.Organisation && Admin_Type == "National"].count() > 0)
+													{
+														input.Next_Approver = "National Admin";
+														thisapp.mail.sendRequestRaised(input.ID);
+													}
+													else
+													{
+														input.Status = "Approved";
+														thisapp.mail.sendRequestApproved(input.ID);
+														if(input.Request_Type == "Personal Details")
+														{
+															thisapp.helpers.processStaffRequest(input.ID);
+														}
+														else if(input.Effective_Date <= zoho.currentdate)
+														{
+															thisapp.helpers.processStaffRequest(input.ID);
+														}
+													}
+												}
+												else if(getStaff.Admin_Type == "National")
+												{
+													input.Status = "Approved";
+													thisapp.mail.sendRequestApproved(input.ID);
+													if(input.Request_Type == "Personal Details")
+													{
+														thisapp.helpers.processStaffRequest(input.ID);
+													}
+													else if(input.Effective_Date <= zoho.currentdate)
+													{
+														thisapp.helpers.processStaffRequest(input.ID);
+													}
+												}
+											}
+										}
+										insert into History
+										[
+											Added_User=zoho.loginuser
+											Action_By=Staff_Master[Staff_Email == zoho.loginuserid].ID
+											Action_field="Staff request raised"
+											Comment="Staff request raised for " + input.Request_Type
+											Staff_Request=input.ID
+										]
+						)
+					}
+				}
+
 			
 }

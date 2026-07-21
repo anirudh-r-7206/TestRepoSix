@@ -1,26 +1,24 @@
 On_click_of_skip as "On click of skip"
 {
 
-			
-							type =  form
-							form = Staff_Onboarding1
-							button = Skip
-							on click
-							{
-								actions 
-								{
-								on click
-								(
-									if(input.Stage == "Qualifications")
-													{
-														delete from Qualifications[Staff == input.Staff];
-														fetStaff = Staff_Master[ID == input.Staff];
-														fetStaff.Max_Stage_Reached=1;
-														openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Teaching Details&staffID=" + input.Staff,"same window");
-													}
-								)
-								}
-							}
-						
+				type =  form
+				form = Staff_Onboarding1
+				button = Skip
+				on click
+				{
+					actions 
+					{
+					on click
+					(
+						if(input.Stage == "Qualifications")
+										{
+											delete from Qualifications[Staff == input.Staff];
+											fetStaff = Staff_Master[ID == input.Staff];
+											fetStaff.Max_Stage_Reached=1;
+											openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Teaching Details&staffID=" + input.Staff,"same window");
+										}
+					)
+					}
+				}
 			
 }

@@ -10,173 +10,173 @@
 	}
 	%>
 <style>
-	<%=thisapp.Styles.Base_Styles()%>
-	* { 
+  <%=thisapp.Styles.Base_Styles()%>
+  * { 
 	  margin: 0; 
 	 padding: 0; 
 	}
 
-	.org-container {
-		border-radius: 14px;
-		background: #fff;
-		padding-block: 25px;
-		overflow: hidden;
+  .org-container {
+    border-radius: 14px;
+    background: #fff;
+    padding-block: 25px;
+    overflow: hidden;
 	box-sizing: border-box;
-	}
+  }
 
-	.org-container .zcs-common-hdr {
+  .org-container .zcs-common-hdr {
 	margin-inline: 25px;
-	}
+  }
 
-	.zc-pb-tile-card { background: unset !important; }
+  .zc-pb-tile-card { background: unset !important; }
 
-	.org-tree {
-		list-style: none;
-		padding: 0;
-		margin: 0;
+  .org-tree {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 	flex: 1;
 	overflow: auto;
 	padding-inline: 25px;
-	}
+  }
 
-	.org-tree details,
-	.org-tree .org-campus-row {
-		border-bottom: 1px solid #f2f2f2;
-	}
+  .org-tree details,
+  .org-tree .org-campus-row {
+    border-bottom: 1px solid #f2f2f2;
+  }
 
-	.org-tree details:last-child,
-	.org-tree .org-campus-row:last-child {
-		border-bottom: none;
-	}
+  .org-tree details:last-child,
+  .org-tree .org-campus-row:last-child {
+    border-bottom: none;
+  }
 
-	.org-tree summary {
-		list-style: none;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 14px 6px;
-		cursor: pointer;
-		user-select: none;
-		gap: 12px;
-	}
+  .org-tree summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 6px;
+    cursor: pointer;
+    user-select: none;
+    gap: 12px;
+  }
 
-	.org-tree summary::-webkit-details-marker { 
+  .org-tree summary::-webkit-details-marker { 
 	  display: none; 
 	}
 
-	.org-summary-left {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		flex: 1;
-	}
+  .org-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
 
-	.org-chevron {
-		width: 18px;
-		height: 18px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-		color: #1a73e8;
-		transition: transform 0.2s ease;
-	}
+  .org-chevron {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #1a73e8;
+    transition: transform 0.2s ease;
+  }
 
-	details[open] > summary .org-chevron {
-		transform: rotate(90deg);
-	}
+  details[open] > summary .org-chevron {
+    transform: rotate(90deg);
+  }
 
-	details[open] > summary .org-chevron svg {
-		transform: rotate(0deg);
-	}
+  details[open] > summary .org-chevron svg {
+    transform: rotate(0deg);
+  }
 
-	.org-label {
-		font-size: 14px;
-		font-weight: 600;
-		color: #1a1a2e;
-	}
+  .org-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
 
-	.org-level-1 > summary .org-label {
-		font-size: 15px;
-	}
+  .org-level-1 > summary .org-label {
+    font-size: 15px;
+  }
 
-	.org-meta {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		font-size: 13px;
-		color: #aaa;
-		white-space: nowrap;
-		flex-shrink: 0;
-	}
+  .org-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #aaa;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 
-	.org-meta-dot {
-		width: 4px;
-		height: 4px;
-		border-radius: 50%;
-		background: #ccc;
-		display: inline-block;
-	}
-	
-	.org-meta .org-meta-item:not(:first-child)::before {
-		content: "";
-		width: 4px;
-		height: 4px;
-		border-radius: 50%;
-		background: #ccc;
-		display: inline-block;
-		vertical-align: middle;
-		margin-right: 5px;
+  .org-meta-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ccc;
+    display: inline-block;
+  }
+  
+  .org-meta .org-meta-item:not(:first-child)::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ccc;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
-	.org-meta-item {
-		color: #999;
-		font-size: 13px;
-	}
+  .org-meta-item {
+    color: #999;
+    font-size: 13px;
+  }
 
-	.org-children {
-		padding-left: 32px;
-		border-left: 2px solid #e8edf5;
-		margin-left: 16px;
-	}
+  .org-children {
+    padding-left: 32px;
+    border-left: 2px solid #e8edf5;
+    margin-left: 16px;
+  }
 
-	.org-campus-row {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 13px 6px 13px 10px;
-		gap: 12px;
-	}
+  .org-campus-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 6px 13px 10px;
+    gap: 12px;
+  }
 
-	.org-campus-left {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		flex: 1;
-	}
+  .org-campus-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
 
-	.org-campus-dot {
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		flex-shrink: 0;
-	}
+  .org-campus-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
 
-	.org-campus-label {
-		font-size: 14px;
-		color: #333;
-		font-weight: 400;
-	}
+  .org-campus-label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 400;
+  }
 
-	.org-staff-count {
-		font-size: 13px;
-		color: #999;
-		white-space: nowrap;
-	}
-	
-	.popupbox {
-		width: 70%;
-		height: 90%;
+  .org-staff-count {
+    font-size: 13px;
+    color: #999;
+    white-space: nowrap;
+  }
+  
+  .popupbox {
+    width: 70%;
+    height: 90%;
 }
 
 div[pagelinkname="Organisation_Hierarchy"] .elemContainment {
@@ -186,15 +186,15 @@ div[pagelinkname="Organisation_Hierarchy"] .elemContainment {
 summary:hover,
 .org-campus-row:hover {
 	background: rgb(from var(--theme_brand_color) r g b / 0.1);
-		border-radius: 10px;
+    border-radius: 10px;
 }
 
 </style>
 
 <div class='zcs-flex zcs-wh-full zcs-direction-column org-container'>
-	<div class='zcs-common-hdr'>Organisation Hierarchy</div>
+  <div class='zcs-common-hdr'>Organisation Hierarchy</div>
 
-	<ul class='org-tree'>
+  <ul class='org-tree'>
 <%
 	for each  organisation in Organisation[ID != null]
 	{
@@ -207,22 +207,22 @@ summary:hover,
 		%>
 <li>
 	<details open class="org-level-1">
-				<summary>
-					<div class="org-summary-left">
-						<span class="org-chevron">
-							<svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="var(--theme_brand_color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</span>
-						<span class="org-label"><%=organisation.organisation_name%></span>
-					</div>
-					<div class="org-meta">
+        <summary>
+          <div class="org-summary-left">
+            <span class="org-chevron">
+              <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="var(--theme_brand_color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="org-label"><%=organisation.organisation_name%></span>
+          </div>
+          <div class="org-meta">
 		    <%=if(regions.count() > 0,"<span class='org-meta-item'>" + regions.count() + " regions</span>","")%>
 		  	<%=if(school.count() > 0,"<span class='org-meta-item'>" + school.count() + " schools</span>","")%>
 			<%=if(campus.count() > 0,"<span class='org-meta-item'>" + campus.count() + " campuses</span>","")%>
 			<%=if(staff.count() > 0,"<span class='org-meta-item'>" + staff.count() + " staff</span>","")%>
-					</div>
-				</summary>
+          </div>
+        </summary>
 <%
 		for each  region in regions
 		{
@@ -299,7 +299,7 @@ summary:hover,
 		}
 		%>
 </details>
-		</li>
+    </li>
 <%
 	}
 	%>

@@ -1,143 +1,141 @@
 forms
 {
 
-	
-				form Accreditation
-				{
-					label placement = left
-				}
-				form Accreditation_Courses
-				{
-					label placement = left
-				}
-				form Accreditation_Details
-				{
-					label placement = left
-				}
-				form Add_Remove_Representation_Team
-				{
-					label placement = left
-				}
-				form Approval_Configuration
-				{
-					label placement = left
-				}
-				form Award_Eligible_Staff
-				{
-					label placement = left
-				}
-				form Campus
-				{
-					label placement = left
-				}
-				form Compliance_Training
-				{
-					label placement = left
-				}
-				form Email_Templates
-				{
-					label placement = left
-				}
-				form Employee_Filter
-				{
-					label placement = labelinplace
-				}
-				form Empty_State
-				{
-					label placement = left
-				}
-				form History
-				{
-					label placement = left
-				}
-				form Accredit
-				{
-					label placement = left
-				}
-				form Organisation
-				{
-					label placement = left
-				}
-				form Positions
-				{
-					label placement = left
-				}
-				form Qualification_Type
-				{
-					label placement = left
-				}
-				form Qualifications
-				{
-					label placement = left
-				}
-				form Regions
-				{
-					label placement = left
-				}
-				form Representation_Team
-				{
-					label placement = left
-				}
-				form School
-				{
-					label placement = left
-				}
-				form Search_Service_Awards
-				{
-					label placement = left
-				}
-				form Send_Mail
-				{
-					label placement = left
-				}
-				form Service_Awards
-				{
-					label placement = left
-				}
-				form Speciality
-				{
-					label placement = left
-				}
-				form Staff_Employment
-				{
-					label placement = left
-				}
-				form Staff_Master
-				{
-					label placement = left
-				}
-				form Staff_Onboarding1
-				{
-					label placement = left
-				}
-				form Staff_Request
-				{
-					label placement = left
-				}
-				form Staff_Service_Awards
-				{
-					label placement = left
-				}
-				form Subject_form
-				{
-					label placement = left
-				}
-				form Training_Completion_Request
-				{
-					label placement = left
-				}
-				form Training_Completion_Request_Import
-				{
-					label placement = left
-				}
-				form Training_Type
-				{
-					label placement = left
-				}
-				form Year_Level
-				{
-					label placement = left
-				}
-			
-	
+			form Accreditation
+			{
+				label placement = left
+			}
+			form Accreditation_Courses
+			{
+				label placement = left
+			}
+			form Accreditation_Details
+			{
+				label placement = left
+			}
+			form Add_Remove_Representation_Team
+			{
+				label placement = left
+			}
+			form Approval_Configuration
+			{
+				label placement = left
+			}
+			form Award_Eligible_Staff
+			{
+				label placement = left
+			}
+			form Campus
+			{
+				label placement = left
+			}
+			form Compliance_Training
+			{
+				label placement = left
+			}
+			form Email_Templates
+			{
+				label placement = left
+			}
+			form Employee_Filter
+			{
+				label placement = labelinplace
+			}
+			form Empty_State
+			{
+				label placement = left
+			}
+			form History
+			{
+				label placement = left
+			}
+			form Accredit
+			{
+				label placement = left
+			}
+			form Organisation
+			{
+				label placement = left
+			}
+			form Positions
+			{
+				label placement = left
+			}
+			form Qualification_Type
+			{
+				label placement = left
+			}
+			form Qualifications
+			{
+				label placement = left
+			}
+			form Regions
+			{
+				label placement = left
+			}
+			form Representation_Team
+			{
+				label placement = left
+			}
+			form School
+			{
+				label placement = left
+			}
+			form Search_Service_Awards
+			{
+				label placement = left
+			}
+			form Send_Mail
+			{
+				label placement = left
+			}
+			form Service_Awards
+			{
+				label placement = left
+			}
+			form Speciality
+			{
+				label placement = left
+			}
+			form Staff_Employment
+			{
+				label placement = left
+			}
+			form Staff_Master
+			{
+				label placement = left
+			}
+			form Staff_Onboarding1
+			{
+				label placement = left
+			}
+			form Staff_Request
+			{
+				label placement = left
+			}
+			form Staff_Service_Awards
+			{
+				label placement = left
+			}
+			form Subject_form
+			{
+				label placement = left
+			}
+			form Training_Completion_Request
+			{
+				label placement = left
+			}
+			form Training_Completion_Request_Import
+			{
+				label placement = left
+			}
+			form Training_Type
+			{
+				label placement = left
+			}
+			form Year_Level
+			{
+				label placement = left
+			}
+		
 }

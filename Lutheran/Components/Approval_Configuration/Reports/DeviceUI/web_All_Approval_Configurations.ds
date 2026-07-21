@@ -1,72 +1,70 @@
 report All_Approval_Configurations
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Request_Type as "Request Type "
-										National_Admin as "National Admin"
-										Region_Admin as "Region Admin "
-										School_Admin as "School Admin"
-										Campus_Admin as "Campus Admin"
-									)
-								)
+								Request_Type as "Request Type "
+								National_Admin as "National Admin"
+								Region_Admin as "Region Admin "
+								School_Admin as "School Admin"
+								Campus_Admin as "Campus Admin"
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								record
-								(
-									Edit   	   
-		    					)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									Edit   	   
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-								datablock1
-								(
-									fields
-									(
-										Request_Type as "Request Type "
-										National_Admin as "National Admin"
-										Region_Admin as "Region Admin "
-										School_Admin as "School Admin"
-										Campus_Admin as "Campus Admin"
-									)
-								)
+								Edit 
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								)
+						record
+						(
+							Edit   	   
+    					)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Request_Type as "Request Type "
+								National_Admin as "National Admin"
+								Region_Admin as "Region Admin "
+								School_Admin as "School Admin"
+								Campus_Admin as "Campus Admin"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						)
+				)
+			
 }

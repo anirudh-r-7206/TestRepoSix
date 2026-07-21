@@ -1,13 +1,11 @@
 default list All_Position_Details
 {
 
-		
-					displayName = "Position Details"
-					show all rows from Positions    
-					(
-						position_name as "Position Name"
-						applicable_for as "Applicable For"
-					)
-				
+			displayName = "Position Details"
+			show all rows from Positions    
+			(
+				position_name as "Position Name"
+				applicable_for as "Applicable For"
+			)
 		
 }

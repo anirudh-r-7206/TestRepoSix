@@ -1,31 +1,29 @@
 Insert_records as "Insert records"
 {
 
-			
-							type =  form
-							form = Award_Eligible_Staff
-							button = Submit
-							on click
-							{
-								actions 
-								{
-								on click
-								(
-									for each  staff in input.Staff
-													{
-														insert into Staff_Service_Awards
-														[
-															Added_User=zoho.loginuser
-															Award=input.Service_Award
-															Staff=staff
-															award_date=zoho.currentdate
-														]
-													}
-													// success message "staff has been ";
-													openUrl("#Script:dialog.close","same window");
-								)
-								}
-							}
-						
+				type =  form
+				form = Award_Eligible_Staff
+				button = Submit
+				on click
+				{
+					actions 
+					{
+					on click
+					(
+						for each  staff in input.Staff
+										{
+											insert into Staff_Service_Awards
+											[
+												Added_User=zoho.loginuser
+												Award=input.Service_Award
+												Staff=staff
+												award_date=zoho.currentdate
+											]
+										}
+										// success message "staff has been ";
+										openUrl("#Script:dialog.close","same window");
+					)
+					}
+				}
 			
 }

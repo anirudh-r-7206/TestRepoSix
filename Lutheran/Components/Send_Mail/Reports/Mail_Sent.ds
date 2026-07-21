@@ -1,18 +1,16 @@
 default list Mail_Sent
 {
 
-		
-					displayName = "Mail Sent"
-					show all rows from Send_Mail  [Send_By.ID == thisapp.helpers.returnEligibleStaff() || Send_By.Staff_Email == zoho.loginuserid]  
-					(
-						Subject_field as "Subject"
-						Content
-						Send_By as "Initiated By"
-						Type_field as "Type"
-						Staff_Master as "Staff Master"
-						Committee as "Committee "
-						Attachments as "Attachments "
-					)
-				
+			displayName = "Mail Sent"
+			show all rows from Send_Mail  [Send_By.ID == thisapp.helpers.returnEligibleStaff() || Send_By.Staff_Email == zoho.loginuserid]  
+			(
+				Subject_field as "Subject"
+				Content
+				Send_By as "Initiated By"
+				Type_field as "Type"
+				Staff_Master as "Staff Master"
+				Committee as "Committee "
+				Attachments as "Attachments "
+			)
 		
 }

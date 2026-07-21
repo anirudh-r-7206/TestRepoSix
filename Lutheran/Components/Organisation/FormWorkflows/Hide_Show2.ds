@@ -1,23 +1,21 @@
 Hide_Show2 as "Hide Show"
 {
 
-			
-							type =  form
-							form = Organisation
-			
-							record event = on add or edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide Regions;
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Organisation
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Regions;
+						)
+					}
+				}
+
 			
 }

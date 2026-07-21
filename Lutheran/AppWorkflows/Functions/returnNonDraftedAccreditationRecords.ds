@@ -1,8 +1,6 @@
 list reportfilters.returnNonDraftedAccreditationRecords()
 {
 
-			
-			                 	return Staff_Master[ID != 0].ID.getAll();
-			                 
-			
+                 	return Staff_Master[ID != 0].ID.getAll();
+                 
 }

@@ -1,0 +1,10 @@
+default list All_Year_Levels
+{
+
+			displayName = "Year Levels"
+			show all rows from Year_Level    
+			(
+				year_level_name as "Year Level"
+			)
+		
+}

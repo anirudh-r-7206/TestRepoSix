@@ -1,8 +1,8 @@
 <style>
 * {
-		padding: 0;
-		margin: 0;
-		border: none;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 div#zppagesLive,
@@ -10,55 +10,55 @@ div#elementsContainer,
 .Layout.elemContainment,
 div#row_1,
 .zc-pb-formreport-placeholder {
-		height: 100% !important;
+    height: 100% !important;
 }
 .Layout.elemContainment {
-		padding: unset !important;
+    padding: unset !important;
 }
 
 .page-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .zc-design-switch [displaytype=plain] .column-container .zc-pb-tile-container .zc-pb-tile-card {
 	box-shadow: unset !important;
-		background: unset !important;	 
+    background: unset !important;	 
 }
 
 .page-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 .add-btn {
 	background: var(--theme_brand_color);
-			color: white;
-		/* padding: 15px 35px; */
-		font-size: 16px;
-		border-radius: 14px;
-		text-decoration: none;
-		width: 175px;
-		height: 55px;
-		box-sizing: border-box;
-		text-align: center;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+      color: white;
+    /* padding: 15px 35px; */
+    font-size: 16px;
+    border-radius: 14px;
+    text-decoration: none;
+    width: 175px;
+    height: 55px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
 .add-btn:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.25);
 }
 .msg-content {
-		color: black;
-		font-size: 16px;
+    color: black;
+    font-size: 16px;
 }
 </style>
 
@@ -66,16 +66,16 @@ div#row_1,
 	<div class='page-content'>
 			 <div class ="msg-content">No staff found. Click \u201CAdd New Staff\u201D to create a new record.</div>
 <a href="#Page:Embed_Page" class="add-btn">
-		<span class="icon">
-				<svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path d="M15.1053 19C15.1053 17.0847 12.8434 15.5333 10.0526 15.5333C7.26189 15.5333 5 17.0847 5 19M18.4737 16.4V13.8M18.4737 13.8V11.2M18.4737 13.8H15.9474M18.4737 13.8H21M10.0526 12.9333C9.15927 12.9333 8.3025 12.5681 7.6708 11.918C7.0391 11.2678 6.68421 10.3861 6.68421 9.46667C6.68421 8.54725 7.0391 7.66549 7.6708 7.01536C8.3025 6.36524 9.15927 6 10.0526 6C10.946 6 11.8028 6.36524 12.4345 7.01536C13.0662 7.66549 13.4211 8.54725 13.4211 9.46667C13.4211 10.3861 13.0662 11.2678 12.4345 11.918C11.8028 12.5681 10.946 12.9333 10.0526 12.9333Z"
-								stroke="white" stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"/>
-				</svg>
-		</span>
+    <span class="icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.1053 19C15.1053 17.0847 12.8434 15.5333 10.0526 15.5333C7.26189 15.5333 5 17.0847 5 19M18.4737 16.4V13.8M18.4737 13.8V11.2M18.4737 13.8H15.9474M18.4737 13.8H21M10.0526 12.9333C9.15927 12.9333 8.3025 12.5681 7.6708 11.918C7.0391 11.2678 6.68421 10.3861 6.68421 9.46667C6.68421 8.54725 7.0391 7.66549 7.6708 7.01536C8.3025 6.36524 9.15927 6 10.0526 6C10.946 6 11.8028 6.36524 12.4345 7.01536C13.0662 7.66549 13.4211 8.54725 13.4211 9.46667C13.4211 10.3861 13.0662 11.2678 12.4345 11.918C11.8028 12.5681 10.946 12.9333 10.0526 12.9333Z"
+                stroke="white" stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+    </span>
 
-		<span>Add Staff</span>
+    <span>Add Staff</span>
 </a>	</div>
 </div>

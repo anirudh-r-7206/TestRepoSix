@@ -1,8 +1,6 @@
 string helpers.getEmptyState(String name)
 {
 
-			
-			                 	return ifNull(Empty_State[Name == name].Image,"");
-			                 
-			
+                 	return ifNull(Empty_State[Name == name].Image,"");
+                 
 }

@@ -1,31 +1,29 @@
 Load_of_the_form_Scripts1 as "Load of the form - Scripts"
 {
 
-			
-							type =  form
-							form = Award_Eligible_Staff
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														awarded_employees = Staff_Service_Awards[Award == input.Service_Award || Award.Years_of_Service_Required >= input.Service_Award.Years_of_Service_Required].Staff.ID.getAll();
-													eligible_employees = Staff_Master[status == "Active" || status == "On Leave" && Service_In_Years >= input.Service_Award.Years_of_Service_Required].ID.getAll();
-													eligible_employees.removeAll(awarded_employees);
-													if(eligible_employees.size() == 0)
-													{
-														alert "No staff are eligible";
-														openUrl("#Script:dialog.close","same window");
-													}
-													input.Staff:ui.add(eligible_employees);
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Award_Eligible_Staff
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											awarded_employees = Staff_Service_Awards[Award == input.Service_Award || Award.Years_of_Service_Required >= input.Service_Award.Years_of_Service_Required].Staff.ID.getAll();
+										eligible_employees = Staff_Master[status == "Active" || status == "On Leave" && Service_In_Years >= input.Service_Award.Years_of_Service_Required].ID.getAll();
+										eligible_employees.removeAll(awarded_employees);
+										if(eligible_employees.size() == 0)
+										{
+											alert "No staff are eligible";
+											openUrl("#Script:dialog.close","same window");
+										}
+										input.Staff:ui.add(eligible_employees);
+						)
+					}
+				}
+
 			
 }

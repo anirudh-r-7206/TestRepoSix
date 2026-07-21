@@ -1,33 +1,31 @@
 Hide_disable as "Hide / disable"
 {
 
-			
-							type =  form
-							form = Training_Completion_Request_Import
-			
-							record event = on edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide Reason;
-													hide Status;
-													disable Staff;
-													if(input.Completion_Date != null)
-													{
-														if(input.Completion_Date > zoho.currentdate)
-														{
-															alert "Completion Date cannot be a future date.";
-															input.Completion_Date = null;
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Training_Completion_Request_Import
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Reason;
+										hide Status;
+										disable Staff;
+										if(input.Completion_Date != null)
+										{
+											if(input.Completion_Date > zoho.currentdate)
+											{
+												alert "Completion Date cannot be a future date.";
+												input.Completion_Date = null;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

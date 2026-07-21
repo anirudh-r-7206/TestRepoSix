@@ -1,38 +1,36 @@
 list helpers.returnEligibleStaff()
 {
-
-				loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
-				var = thisapp.permissions.loginUserProfile();
-				eligibleIDs = List();
-				staffIds = List();
-				schoolIds = List();
-				if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-				{
-					eligibleIDs = Staff_Master[ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
-				}
-				if(loginUser.Admin_Type == "National")
-				{
-					regionIds = Regions[Main_Organisation == loginUser.Organisation].ID.getAll();
-					schoolIds = School[Region in regionIds].ID.getAll();
-					staffIds = Staff_Employment[School in schoolIds && End_Date == null].Staff.getAll();
-					eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
-				}
-				if(loginUser.Admin_Type == "Region")
-				{
-					schoolIds = School[Region == loginUser.Regions].ID.getAll();
-					staffIds = Staff_Employment[School in schoolIds && End_Date == null].Staff.getAll();
-					eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
-				}
-				if(loginUser.Admin_Type == "School")
-				{
-					staffIds = Staff_Employment[School == loginUser.Current_Employment && End_Date == null].Staff.getAll();
-					eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
-				}
-				if(loginUser.Admin_Type == "Campus")
-				{
-					staffIds = Staff_Employment[Campus == loginUser.Campus && End_Date == null].Staff.getAll();
-					eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
-				}
-				return eligibleIDs;
-			
+	loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
+	var = thisapp.permissions.loginUserProfile();
+	eligibleIDs = List();
+	staffIds = List();
+	schoolIds = List();
+	if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+	{
+		eligibleIDs = Staff_Master[ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
+	}
+	if(loginUser.Admin_Type == "National")
+	{
+		regionIds = Regions[Main_Organisation == loginUser.Organisation].ID.getAll();
+		schoolIds = School[Region in regionIds].ID.getAll();
+		staffIds = Staff_Employment[School in schoolIds && End_Date == null].Staff.getAll();
+		eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
+	}
+	if(loginUser.Admin_Type == "Region")
+	{
+		schoolIds = School[Region == loginUser.Regions].ID.getAll();
+		staffIds = Staff_Employment[School in schoolIds && End_Date == null].Staff.getAll();
+		eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
+	}
+	if(loginUser.Admin_Type == "School")
+	{
+		staffIds = Staff_Employment[School == loginUser.Current_Employment && End_Date == null].Staff.getAll();
+		eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
+	}
+	if(loginUser.Admin_Type == "Campus")
+	{
+		staffIds = Staff_Employment[Campus == loginUser.Campus && End_Date == null].Staff.getAll();
+		eligibleIDs = Staff_Master[ID in staffIds && ID != loginUser.ID && (status == "Active" || status == "On Leave")].ID.getAll();
+	}
+	return eligibleIDs;
 }

@@ -1,34 +1,32 @@
 On_Created_Load_of_the_fo as "On Created - Load of the form"
 {
 
-			
-							type =  form
-							form = Compliance_Training
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Accreditation_Details != null)
-													{
-														input.Staff = input.Accreditation_Details.Staff;
-													}
-													else
-													{
-														hide Accreditation_Details;
-														input.Status = "Completed";
-														disable Status;
-														fetStaffIds = Staff_Master[status == "Active" && ID == thisapp.helpers.returnEligibleStaff()].ID.getAll();
-														input.Staff:ui.add(fetStaffIds);
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Compliance_Training
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Accreditation_Details != null)
+										{
+											input.Staff = input.Accreditation_Details.Staff;
+										}
+										else
+										{
+											hide Accreditation_Details;
+											input.Status = "Completed";
+											disable Status;
+											fetStaffIds = Staff_Master[status == "Active" && ID == thisapp.helpers.returnEligibleStaff()].ID.getAll();
+											input.Staff:ui.add(fetStaffIds);
+										}
+						)
+					}
+				}
+
 			
 }

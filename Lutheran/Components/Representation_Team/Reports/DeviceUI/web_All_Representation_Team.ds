@@ -1,65 +1,63 @@
 report All_Representation_Team
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Type_field as "Type "
-										Representation_Team as "Representation/Team"
-										Organisation as "National"
-										Regions
-										School
-										Campus
-										"View Staff"
-									)
-								)
+								Type_field as "Type "
+								Representation_Team as "Representation/Team"
+								Organisation as "National"
+								Regions
+								School
+								Campus
+								"View Staff"
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-				 				type = 2
-								datablock1
-								(
-				     				title = "Overview"
-									fields
-									(
-										Type_field as "Type "
-										Representation_Team as "Representation/Team"
-										Organisation as "National"
-										Regions
-										School
-									)
-								)
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Type_field as "Type "
+								Representation_Team as "Representation/Team"
+								Organisation as "National"
+								Regions
+								School
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			
 }

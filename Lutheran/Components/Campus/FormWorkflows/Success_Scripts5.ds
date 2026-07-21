@@ -1,30 +1,28 @@
 Success_Scripts5 as "Success Scripts"
 {
 
-			
-							type =  form
-							form = Campus
-			
-							record event = on add
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(zoho.loginuserid == zoho.adminuserid)
-													{
-														openUrl("#Page:Staff_Admin_Entry","same window");
-													}
-													else
-													{
-														openUrl("#Page:Embed_Page","same window");
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Campus
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(zoho.loginuserid == zoho.adminuserid)
+										{
+											openUrl("#Page:Staff_Admin_Entry","same window");
+										}
+										else
+										{
+											openUrl("#Page:Embed_Page","same window");
+										}
+						)
+					}
+				}
+
 			
 }

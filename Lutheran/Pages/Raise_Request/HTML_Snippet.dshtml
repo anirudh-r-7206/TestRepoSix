@@ -1,8 +1,8 @@
 <style>
 * {
-		padding: 0;
-		margin: 0;
-		border: none;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 
@@ -12,14 +12,14 @@ div#elementsContainer,
 .Layout.elemContainment,
 div#row_1,
 .zc-pb-formreport-placeholder {
-		height: 100% !important;
+    height: 100% !important;
 		box-sizing:border-box
 
 }
 
 
 .divEmbedContainer {
-		height: 100% !important;
+    height: 100% !important;
 }
 	</style>
 

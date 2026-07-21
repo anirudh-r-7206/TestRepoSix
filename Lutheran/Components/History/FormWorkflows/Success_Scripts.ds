@@ -1,50 +1,48 @@
 Success_Scripts as "Success Scripts"
 {
 
-			
-							type =  form
-							form = History
-			
-							record event = on add
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Staff_Request != null)
-													{
-														if(input.Action_field == "Request Rejected" && input.Staff_Request != null)
-														{
-															staff_request = Staff_Request[ID == input.Staff_Request];
-															staff_request.Status="Rejected";
-															if(staff_request.Request_Type = "New Staff")
-															{
-																fetStaff = Staff_Master[ID == staff_request.Staff];
-																fetStaff.status="Rejected";
-															}
-															thisapp.mail.sendRequestRejected(input.Staff_Request,input.Comment);
-														}
-													}
-													else if(input.Training_Completion_Request != null)
-													{
-														training_request = Training_Completion_Request[ID == input.Training_Completion_Request];
-														training_request.Status="Rejected";
-														thisapp.mail.sendTrainingRejected(training_request.ID,input.Comment,training_request.Current_Approver);
-														training_request.Current_Approver="";
-														compliance_info = Compliance_Training[ID == input.Training_Completion_Request.Compliance_Training];
-														compliance_info.Status="Rejected";
-														if(compliance_info.Accreditation_Details != null)
-														{
-															compliance_info.Completion_Request_Raised=false;
-														}
-													}
-													openUrl("#Script:page.parent.refresh","same window");
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = History
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Staff_Request != null)
+										{
+											if(input.Action_field == "Request Rejected" && input.Staff_Request != null)
+											{
+												staff_request = Staff_Request[ID == input.Staff_Request];
+												staff_request.Status="Rejected";
+												if(staff_request.Request_Type = "New Staff")
+												{
+													fetStaff = Staff_Master[ID == staff_request.Staff];
+													fetStaff.status="Rejected";
+												}
+												thisapp.mail.sendRequestRejected(input.Staff_Request,input.Comment);
+											}
+										}
+										else if(input.Training_Completion_Request != null)
+										{
+											training_request = Training_Completion_Request[ID == input.Training_Completion_Request];
+											training_request.Status="Rejected";
+											thisapp.mail.sendTrainingRejected(training_request.ID,input.Comment,training_request.Current_Approver);
+											training_request.Current_Approver="";
+											compliance_info = Compliance_Training[ID == input.Training_Completion_Request.Compliance_Training];
+											compliance_info.Status="Rejected";
+											if(compliance_info.Accreditation_Details != null)
+											{
+												compliance_info.Completion_Request_Raised=false;
+											}
+										}
+										openUrl("#Script:page.parent.refresh","same window");
+						)
+					}
+				}
+
 			
 }

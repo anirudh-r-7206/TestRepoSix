@@ -1,39 +1,37 @@
 Mark_as_Primary as "Mark as Primary"
 {
 
-			
-							type =  functions
-							form = Staff_Employment
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									/* REMOVE OLD PRIMARY */
-													oldPrimary = Staff_Employment[Staff == input.Staff && Is_primary == true && End_Date == null];
-													for each  emp in oldPrimary
-													{
-														emp.Is_primary=false;
-													}
-													/* SET SELECTED AS PRIMARY */
-													input.Is_primary = true;
-													/* UPDATE STAFF MASTER */
-													staffRec = Staff_Master[ID == input.Staff];
-													staffRec.Current_Position=input.Position;
-													staffRec.Current_Employment=input.School;
-													staffRec.Campus=input.Campus;
-													staffRec.FTE=input.FTE;
-													staffRec.Teaching_Staff=input.Teaching_Staff;
-													staffRec.Teacher_Type=input.Teacher_Type;
-													staffRec.Year_Level=input.Year_Level;
-													staffRec.Subject_form=input.Subject_field;
-													staffRec.Speciality=input.Speciality;
-													/* PRIMARY EMPLOYMENT UPDATED */
-								)
-								}
-							}
-						
+				type =  functions
+				form = Staff_Employment
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						/* REMOVE OLD PRIMARY */
+										oldPrimary = Staff_Employment[Staff == input.Staff && Is_primary == true && End_Date == null];
+										for each  emp in oldPrimary
+										{
+											emp.Is_primary=false;
+										}
+										/* SET SELECTED AS PRIMARY */
+										input.Is_primary = true;
+										/* UPDATE STAFF MASTER */
+										staffRec = Staff_Master[ID == input.Staff];
+										staffRec.Current_Position=input.Position;
+										staffRec.Current_Employment=input.School;
+										staffRec.Campus=input.Campus;
+										staffRec.FTE=input.FTE;
+										staffRec.Teaching_Staff=input.Teaching_Staff;
+										staffRec.Teacher_Type=input.Teacher_Type;
+										staffRec.Year_Level=input.Year_Level;
+										staffRec.Subject_form=input.Subject_field;
+										staffRec.Speciality=input.Speciality;
+										/* PRIMARY EMPLOYMENT UPDATED */
+					)
+					}
+				}
 			
 }

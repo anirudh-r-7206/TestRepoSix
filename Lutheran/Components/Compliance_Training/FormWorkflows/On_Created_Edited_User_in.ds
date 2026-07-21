@@ -1,27 +1,25 @@
 On_Created_Edited_User_in as "On Created & Edited - User input Completion Date"
 {
 
-			
-							type =  form
-							form = Compliance_Training
-			
-							record event = on add or edit
-			
-							on user input of Completion_Date
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Completion_Date > zoho.currentdate)
-													{
-														alert "Future Dates are not allowed.";
-														input.Completion_Date = null;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Compliance_Training
+
+				record event = on add or edit
+
+				on user input of Completion_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Completion_Date > zoho.currentdate)
+										{
+											alert "Future Dates are not allowed.";
+											input.Completion_Date = null;
+										}
+						)
+					}
+				}
+
 			
 }

@@ -1,69 +1,67 @@
 report Mail_Sent
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Send_By as "Initiated By"
-										Type_field as "Type"
-										Subject_field as "Subject"
-										Content
-										Committee as "Committee "
-										Staff_Master as "Staff Master"
-										Attachments as "Attachments "
-									)
-								)
+								Send_By as "Initiated By"
+								Type_field as "Type"
+								Subject_field as "Subject"
+								Content
+								Committee as "Committee "
+								Staff_Master as "Staff Master"
+								Attachments as "Attachments "
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-								datablock1
-								(
-									fields
-									(
-										Subject_field as "Subject"
-										Content
-										Send_By as "Initiated By"
-										Type_field as "Type"
-										Staff_Master as "Staff Master"
-										Committee as "Committee "
-										Attachments as "Attachments "
-									)
-								)
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Subject_field as "Subject"
+								Content
+								Send_By as "Initiated By"
+								Type_field as "Type"
+								Staff_Master as "Staff Master"
+								Committee as "Committee "
+								Attachments as "Attachments "
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			
 }

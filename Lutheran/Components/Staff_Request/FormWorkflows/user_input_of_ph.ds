@@ -1,120 +1,118 @@
 user_input_of_ph as "user input of ph"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on user input of Phone_Number
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														getStaff = Staff_Master[ID == input.Staff];
-													if(input.Phone_Number.isEmpty() != true)
-													{
-														exists = Staff_Master[Phone_Number == input.Phone_Number && ID != getStaff.ID].count();
-														if(exists > 0)
-														{
-															alert "This phone number already exists.";
-															input.Phone_Number = null;
-														}
-													}
-													tableHTML = "<style> .table-container { background: linear-gradient(145deg, #ffffff, #f8f9fd); border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); overflow: hidden; width: 100%; } .table-header { background: linear-gradient(179deg, #194BB2 -73.08%, #4866A1 69.32%, #2E5585 175.3%); color: white; padding: 10px; font-size: 16px; font-weight: 600; border-top-left-radius: 10px; border-top-right-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; } table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; text-align: left; font-size: 14px; color: #2d3748; } th { background: #EEF2FF; color: #2d3748; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; } td { border-bottom: 1px solid #eee; } tr:last-child td { border-bottom: none; } tr:nth-child(even) { background: rgba(255, 255, 255, 0.8); } tr.changed { background: #FFF8E1 !important; } tr.changed td { color: #b45309; font-weight: 600; } @media (max-width: 600px) { th, td { padding: 8px; font-size: 12px; } .table-container { max-width: 100%; } .table-header { font-size: 14px; padding: 8px; } } </style> <div class='table-container'> <div class='table-header'>Personal Details</div> <table> <thead> <tr> <th>Field</th> <th>Old Value</th> <th>New Value</th> </tr> </thead> <tbody>";
-													rows = "";
-													// First Name
-													oldVal = getStaff.Name.first_name;
-													newVal = input.Name.first_name;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>First Name</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Last Name
-													oldVal = getStaff.Name.last_name;
-													newVal = input.Name.last_name;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Last Name</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Prefix
-													oldVal = getStaff.Name.prefix;
-													newVal = input.Name.prefix;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Prefix</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Surname
-													oldVal = getStaff.Surname;
-													newVal = input.Surname;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Surname</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Maiden Name
-													// oldVal = getStaff.maiden_name;
-													// newVal = input.Maiden_Name;
-													// oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													// newDisplay = if(newVal == null || newVal == "","-",newVal);
-													// rowClass = if(oldVal != newVal,"changed","");
-													// rows = rows + "<tr class='" + rowClass + "'><td>Maiden Name</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Previous Surname
-													oldVal = getStaff.Previous_Surname;
-													newVal = input.Previous_Surname;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Previous Surname</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Date of Birth
-													oldVal = getStaff.date_of_birth.toString("dd-MMM-yyyy");
-													newVal = input.date_of_birth1.toString("dd-MMM-yyyy");
-													oldDisplay = if(oldVal == null || oldVal == "" || oldVal == "null","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "" || newVal == "null","-",newVal);
-													rowClass = if(getStaff.date_of_birth != input.date_of_birth1,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Date of Birth</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Gender
-													oldVal = getStaff.gender;
-													newVal = input.gender1;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Gender</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Religion
-													oldVal = getStaff.religion;
-													newVal = input.religion;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Religion</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Origin
-													oldVal = getStaff.origin;
-													newVal = input.origin1;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Origin</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Phone Number
-													oldVal = getStaff.Phone_Number;
-													newVal = input.Phone_Number;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Phone Number</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													// Staff Email
-													oldVal = getStaff.Staff_Email;
-													newVal = input.Staff_Email;
-													oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
-													newDisplay = if(newVal == null || newVal == "","-",newVal);
-													rowClass = if(oldVal != newVal,"changed","");
-													rows = rows + "<tr class='" + rowClass + "'><td>Staff Email</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
-													tableHTML = tableHTML + rows + "</tbody></table></div>";
-													input.plain = tableHTML;
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on user input of Phone_Number
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											getStaff = Staff_Master[ID == input.Staff];
+										if(input.Phone_Number.isEmpty() != true)
+										{
+											exists = Staff_Master[Phone_Number == input.Phone_Number && ID != getStaff.ID].count();
+											if(exists > 0)
+											{
+												alert "This phone number already exists.";
+												input.Phone_Number = null;
+											}
+										}
+										tableHTML = "<style> .table-container { background: linear-gradient(145deg, #ffffff, #f8f9fd); border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); overflow: hidden; width: 100%; } .table-header { background: linear-gradient(179deg, #194BB2 -73.08%, #4866A1 69.32%, #2E5585 175.3%); color: white; padding: 10px; font-size: 16px; font-weight: 600; border-top-left-radius: 10px; border-top-right-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; } table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; text-align: left; font-size: 14px; color: #2d3748; } th { background: #EEF2FF; color: #2d3748; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; } td { border-bottom: 1px solid #eee; } tr:last-child td { border-bottom: none; } tr:nth-child(even) { background: rgba(255, 255, 255, 0.8); } tr.changed { background: #FFF8E1 !important; } tr.changed td { color: #b45309; font-weight: 600; } @media (max-width: 600px) { th, td { padding: 8px; font-size: 12px; } .table-container { max-width: 100%; } .table-header { font-size: 14px; padding: 8px; } } </style> <div class='table-container'> <div class='table-header'>Personal Details</div> <table> <thead> <tr> <th>Field</th> <th>Old Value</th> <th>New Value</th> </tr> </thead> <tbody>";
+										rows = "";
+										// First Name
+										oldVal = getStaff.Name.first_name;
+										newVal = input.Name.first_name;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>First Name</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Last Name
+										oldVal = getStaff.Name.last_name;
+										newVal = input.Name.last_name;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Last Name</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Prefix
+										oldVal = getStaff.Name.prefix;
+										newVal = input.Name.prefix;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Prefix</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Surname
+										oldVal = getStaff.Surname;
+										newVal = input.Surname;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Surname</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Maiden Name
+										// oldVal = getStaff.maiden_name;
+										// newVal = input.Maiden_Name;
+										// oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										// newDisplay = if(newVal == null || newVal == "","-",newVal);
+										// rowClass = if(oldVal != newVal,"changed","");
+										// rows = rows + "<tr class='" + rowClass + "'><td>Maiden Name</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Previous Surname
+										oldVal = getStaff.Previous_Surname;
+										newVal = input.Previous_Surname;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Previous Surname</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Date of Birth
+										oldVal = getStaff.date_of_birth.toString("dd-MMM-yyyy");
+										newVal = input.date_of_birth1.toString("dd-MMM-yyyy");
+										oldDisplay = if(oldVal == null || oldVal == "" || oldVal == "null","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "" || newVal == "null","-",newVal);
+										rowClass = if(getStaff.date_of_birth != input.date_of_birth1,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Date of Birth</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Gender
+										oldVal = getStaff.gender;
+										newVal = input.gender1;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Gender</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Religion
+										oldVal = getStaff.religion;
+										newVal = input.religion;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Religion</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Origin
+										oldVal = getStaff.origin;
+										newVal = input.origin1;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Origin</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Phone Number
+										oldVal = getStaff.Phone_Number;
+										newVal = input.Phone_Number;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Phone Number</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										// Staff Email
+										oldVal = getStaff.Staff_Email;
+										newVal = input.Staff_Email;
+										oldDisplay = if(oldVal == null || oldVal == "","-",oldVal);
+										newDisplay = if(newVal == null || newVal == "","-",newVal);
+										rowClass = if(oldVal != newVal,"changed","");
+										rows = rows + "<tr class='" + rowClass + "'><td>Staff Email</td><td>" + oldDisplay + "</td><td>" + newDisplay + "</td></tr>";
+										tableHTML = tableHTML + rows + "</tbody></table></div>";
+										input.plain = tableHTML;
+						)
+					}
+				}
+
 			
 }

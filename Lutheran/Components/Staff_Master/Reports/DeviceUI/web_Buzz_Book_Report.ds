@@ -1,93 +1,91 @@
 report Buzz_Book_Report
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Regions
-										Current_Employment.school_name as "School Name"
-										LEA_Staff_Rec_Num as "LEA staff record number"
-										Name
-										Staff_Email as "Staff Email"
-										Phone_Number as "Phone"
-										Speciality
-									)
-								)
+								Regions
+								Current_Employment.school_name as "School Name"
+								LEA_Staff_Rec_Num as "LEA staff record number"
+								Name
+								Staff_Email as "Staff Email"
+								Phone_Number as "Phone"
+								Speciality
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-				 				type = 2
-								datablock1
-								(
-				     				title = "Overview"
-									fields
-									(
-										Photograph
-										LEA_Staff_Rec_Num as "LEA staff record number"
-										Name
-										Surname as "Middle name"
-										Previous_Surname as "Previous  Surname "
-										Phone_Number as "Phone"
-										date_of_birth as "Date Of Birth"
-										gender as "Gender"
-										Staff_Email as "Staff Email"
-										religion as "Religion"
-										origin as "Origin"
-										Organisation as "National"
-										Regions
-										Current_Employment as "Current Employment"
-										Campus
-										Date_Commenced_in_Current_School as "Date Commenced in Current School"
-										Date_Commenced_in_Lutheran_School as "Date Commenced in Lutheran School"
-										Date_commenced_in_current_position as "Date commenced in current position"
-										Teaching_Staff as "Teaching Staff"
-										Acting as "Acting?"
-										Current_Position as "Current Position"
-										FTE
-										Teacher_Type as "Teacher Type"
-										Year_Level as "Year Level"
-										Subject_form as "Subject"
-										Speciality
-										Total_Service_Period as "Total Service Period"
-										Admin_Type as "Admin Type"
-										status as "Status"
-									)
-								)
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Photograph
+								LEA_Staff_Rec_Num as "LEA staff record number"
+								Name
+								Surname as "Middle name"
+								Previous_Surname as "Previous  Surname "
+								Phone_Number as "Phone"
+								date_of_birth as "Date Of Birth"
+								gender as "Gender"
+								Staff_Email as "Staff Email"
+								religion as "Religion"
+								origin as "Origin"
+								Organisation as "National"
+								Regions
+								Current_Employment as "Current Employment"
+								Campus
+								Date_Commenced_in_Current_School as "Date Commenced in Current School"
+								Date_Commenced_in_Lutheran_School as "Date Commenced in Lutheran School"
+								Date_commenced_in_current_position as "Date commenced in current position"
+								Teaching_Staff as "Teaching Staff"
+								Acting as "Acting?"
+								Current_Position as "Current Position"
+								FTE
+								Teacher_Type as "Teacher Type"
+								Year_Level as "Year Level"
+								Subject_form as "Subject"
+								Speciality
+								Total_Service_Period as "Total Service Period"
+								Admin_Type as "Admin Type"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			
 }

@@ -1,56 +1,54 @@
 list Staff_On_Leave1
 {
 
-		
-					displayName = "Staff On Leave"
-					show all rows from Staff_Employment  [Is_On_Leave == true]  
-					(
-						Commencement_Date as "Commencement Date"
-						End_Date as "End Date"
-						Position
-						FTE
-						Teacher_Type as "Teacher Type"
-						Year_Level as "Year Level"
-						Subject_field as "Subject"
-						Speciality
-						Staff
-						School
-						Teaching_Staff as "Teaching Staff"
-						Service_In_Years as "Service In Years"
-						Service_In_Months as "Service In Months"
-						Service_In_Days as "Service In Days"
-						Total_Service_Period as "Total Service Period"
-						School1 as "School"
-						Position1 as "Position"
-						Campus
-						Campus1 as "Campus"
-						Admin_Type as "Admin Type"
-						Is_primary as "Is primary"
-						(
-								displaytrue = "Primary"
-								displayfalse = "Secondary"
-						)
-						custom action "Mark as Primary"
-						(
-			  			workflow = Mark_as_Primary
-						show action in edit record menu = true
-						column header = "Mark as Primary"
-						condition = (Is_primary == false)
-						)
-						custom action "Return from Leave"
-						(
-			  			workflow = Return_from_Leave1
-						show action in edit record menu = true
-						column header = "Return from Leave"
-						confirmation before execution
-						(
-							message for individual record = "Are you sure you want to mark this staff as Returned from Leave?"
-							confirm button text = "Yes"		
-							cancel button text = "No"
-						)
-						)
-						Leave_Untill as "Leave Untill"
-					)
-				
+			displayName = "Staff On Leave"
+			show all rows from Staff_Employment  [Is_On_Leave == true]  
+			(
+				Commencement_Date as "Commencement Date"
+				End_Date as "End Date"
+				Position
+				FTE
+				Teacher_Type as "Teacher Type"
+				Year_Level as "Year Level"
+				Subject_field as "Subject"
+				Speciality
+				Staff
+				School
+				Teaching_Staff as "Teaching Staff"
+				Service_In_Years as "Service In Years"
+				Service_In_Months as "Service In Months"
+				Service_In_Days as "Service In Days"
+				Total_Service_Period as "Total Service Period"
+				School1 as "School"
+				Position1 as "Position"
+				Campus
+				Campus1 as "Campus"
+				Admin_Type as "Admin Type"
+				Is_primary as "Is primary"
+				(
+						displaytrue = "Primary"
+						displayfalse = "Secondary"
+				)
+				custom action "Mark as Primary"
+				(
+	  			workflow = Mark_as_Primary
+				show action in edit record menu = true
+				column header = "Mark as Primary"
+				condition = (Is_primary == false)
+				)
+				custom action "Return from Leave"
+				(
+	  			workflow = Return_from_Leave1
+				show action in edit record menu = true
+				column header = "Return from Leave"
+				confirmation before execution
+				(
+					message for individual record = "Are you sure you want to mark this staff as Returned from Leave?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				Leave_Untill as "Leave Untill"
+			)
 		
 }

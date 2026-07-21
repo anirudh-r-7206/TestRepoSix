@@ -1,67 +1,65 @@
 form Accreditation
 {
 
-		
-					success message = "Accreditation Added Successfully"
-					Section
+			success message = "Accreditation Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Accreditation_Name
+			(
+    			type = text
+				displayname = "Accreditation Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Required_PD_Hours
+			(
+				type = number
+				displayname = "Required PD Hours"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Required_Courses
+			(
+				type = grid
+				displayname = "Required Courses"
+				values  = Accreditation_Courses.ID
+    			bidirectional = Accreditation
+				auto width = false
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					must have unique Accreditation_Name
+				}
+				on edit
+				{
+					update
 					(
-		    			type = text
-						displayname = "Accreditation Name"
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have Required_PD_Hours
+					cancel
 					(
-						type = number
-						displayname = "Required PD Hours"
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-					must have Required_Courses
-					(
-						type = grid
-						displayname = "Required Courses"
-						values  = Accreditation_Courses.ID
-		    			bidirectional = Accreditation
-						auto width = false
-			 			row = 2
-			 			column = 1   
-						width = medium
-					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

@@ -1,34 +1,32 @@
 hide as "hide"
 {
 
-			
-							type =  form
-							form = Employee_Filter
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Current_Page = "staffPage")
-													{
-														show Select_Region;
-														show Search_Contact_Number;
-														show Search_School;
-													}
-													else if(input.Current_Page = "staffOnboard")
-													{
-														show Search_Contact;
-														show Search_Staff;
-														show Search_DOB;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Employee_Filter
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Current_Page = "staffPage")
+										{
+											show Select_Region;
+											show Search_Contact_Number;
+											show Search_School;
+										}
+										else if(input.Current_Page = "staffOnboard")
+										{
+											show Search_Contact;
+											show Search_Staff;
+											show Search_DOB;
+										}
+						)
+					}
+				}
+
 			
 }

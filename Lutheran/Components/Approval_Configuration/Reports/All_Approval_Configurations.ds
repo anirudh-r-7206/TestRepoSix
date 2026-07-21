@@ -1,20 +1,18 @@
 default list All_Approval_Configurations
 {
 
-		
-					displayName = "Approval Configurations"
-					show all rows from Approval_Configuration    
-					(
-						Request_Type as "Request Type "
-						School_Admin as "School Admin"
-						Region_Admin as "Region Admin "
-						National_Admin as "National Admin"
-						(
-								displaytrue = "true"
-								displayfalse = "false"
-						)
-						Campus_Admin as "Campus Admin"
-					)
-				
+			displayName = "Approval Configurations"
+			show all rows from Approval_Configuration    
+			(
+				Request_Type as "Request Type "
+				School_Admin as "School Admin"
+				Region_Admin as "Region Admin "
+				National_Admin as "National Admin"
+				(
+						displaytrue = "true"
+						displayfalse = "false"
+				)
+				Campus_Admin as "Campus Admin"
+			)
 		
 }

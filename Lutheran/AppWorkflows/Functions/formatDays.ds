@@ -1,23 +1,21 @@
 string helpers.formatDays(int total_days)
 {
 
-			
-			                 	/* TOTAL DAYS ONLY */
-			                 	//  staff_info.Service_In_Days = total_days;
-			                 	if(total_days == null)
-			                 	{
-			                 		total_days = 0;
-			                 	}
-			                 	/* CONVERT DAYS → YEARS, MONTHS, DAYS */
-			                 	years = (total_days / 365).toLong();
-			                 	remainingDaysAfterYears = total_days - years * 365;
-			                 	months = (remainingDaysAfterYears / 30).toLong();
-			                 	days = remainingDaysAfterYears - months * 30;
-			                 	resultMap = Map();
-			                 	resultMap.put("years",years);
-			                 	resultMap.put("months",months);
-			                 	resultMap.put("days",days);
-			                 	return thisapp.helpers.formatServicePeriod(resultMap);
-			                 
-			
+                 	/* TOTAL DAYS ONLY */
+                 	//  staff_info.Service_In_Days = total_days;
+                 	if(total_days == null)
+                 	{
+                 		total_days = 0;
+                 	}
+                 	/* CONVERT DAYS → YEARS, MONTHS, DAYS */
+                 	years = (total_days / 365).toLong();
+                 	remainingDaysAfterYears = total_days - years * 365;
+                 	months = (remainingDaysAfterYears / 30).toLong();
+                 	days = remainingDaysAfterYears - months * 30;
+                 	resultMap = Map();
+                 	resultMap.put("years",years);
+                 	resultMap.put("months",months);
+                 	resultMap.put("days",days);
+                 	return thisapp.helpers.formatServicePeriod(resultMap);
+                 
 }

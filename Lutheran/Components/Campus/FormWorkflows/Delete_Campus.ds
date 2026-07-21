@@ -1,32 +1,30 @@
 Delete_Campus as "Delete Campus"
 {
 
-			
-							type =  form
-							form = Campus
-			
-							record event = on delete
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														reps_or_teams = Representation_Team[Campus == input.ID];
-													staff_employments = Staff_Employment[Campus == input.ID];
-													staff_masters = Staff_Master[Campus == input.ID];
-													staff_requests = Staff_Request[Campus == input.ID];
-													isImplemented = reps_or_teams.count() > 0 || staff_employments.count() > 0 || staff_masters.count() > 0 || staff_requests.count() > 0;
-													if(isImplemented)
-													{
-														alert "Campus has been linked to few modules. Please unlink them to delete this Campus.";
-														cancel delete;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Campus
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											reps_or_teams = Representation_Team[Campus == input.ID];
+										staff_employments = Staff_Employment[Campus == input.ID];
+										staff_masters = Staff_Master[Campus == input.ID];
+										staff_requests = Staff_Request[Campus == input.ID];
+										isImplemented = reps_or_teams.count() > 0 || staff_employments.count() > 0 || staff_masters.count() > 0 || staff_requests.count() > 0;
+										if(isImplemented)
+										{
+											alert "Campus has been linked to few modules. Please unlink them to delete this Campus.";
+											cancel delete;
+										}
+						)
+					}
+				}
+
 			
 }

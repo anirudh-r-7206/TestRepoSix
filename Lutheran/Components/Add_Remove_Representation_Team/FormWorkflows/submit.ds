@@ -1,60 +1,58 @@
 submit as "submit"
 {
 
-			
-							type =  form
-							form = Add_Remove_Representation_Team
-							button = Submit
-							on click
-							{
-								actions 
-								{
-								on click
-								(
-									for each  com in input.Representation_Team
-													{
-														fetComInfo = Representation_Team[ID == com];
-														existingStaff = List();
-														if(fetComInfo.Staff_Master != null)
-														{
-															existingStaff = fetComInfo.Staff_Master.getAll();
-														}
-														if(input.Action_field == "Add")
-														{
-															existingStaff.addAll(input.Staff_Master);
-															fetComInfo.Staff_Master=existingStaff;
-															for each  staff in input.Staff_Master
-															{
-																insert into History
-																[
-																	Staff=staff
-																	Action_field="Representation/Team Added"
-																	Comment="Added to " + fetComInfo.Representation_Team + " " + fetComInfo.Type_field
-																	Added_User=zoho.loginuser
-																]
-															}
-														}
-														else if(input.Action_field == "Remove")
-														{
-															existingStaff.removeAll(input.Staff_Master);
-															fetComInfo.Staff_Master=existingStaff;
-															for each  staff in input.Staff_Master
-															{
-																insert into History
-																[
-																	Staff=staff
-																	Action_field="Representation/Team Removed"
-																	Comment="Removed from " + fetComInfo.Representation_Team + " " + fetComInfo.Type_field
-																	Added_User=zoho.loginuser
-																]
-															}
-														}
-													}
-													openUrl("#Script:dialog.close","same window");
-													openUrl("#Script:page.parent.reload","same window");
-								)
-								}
-							}
-						
+				type =  form
+				form = Add_Remove_Representation_Team
+				button = Submit
+				on click
+				{
+					actions 
+					{
+					on click
+					(
+						for each  com in input.Representation_Team
+										{
+											fetComInfo = Representation_Team[ID == com];
+											existingStaff = List();
+											if(fetComInfo.Staff_Master != null)
+											{
+												existingStaff = fetComInfo.Staff_Master.getAll();
+											}
+											if(input.Action_field == "Add")
+											{
+												existingStaff.addAll(input.Staff_Master);
+												fetComInfo.Staff_Master=existingStaff;
+												for each  staff in input.Staff_Master
+												{
+													insert into History
+													[
+														Staff=staff
+														Action_field="Representation/Team Added"
+														Comment="Added to " + fetComInfo.Representation_Team + " " + fetComInfo.Type_field
+														Added_User=zoho.loginuser
+													]
+												}
+											}
+											else if(input.Action_field == "Remove")
+											{
+												existingStaff.removeAll(input.Staff_Master);
+												fetComInfo.Staff_Master=existingStaff;
+												for each  staff in input.Staff_Master
+												{
+													insert into History
+													[
+														Staff=staff
+														Action_field="Representation/Team Removed"
+														Comment="Removed from " + fetComInfo.Representation_Team + " " + fetComInfo.Type_field
+														Added_User=zoho.loginuser
+													]
+												}
+											}
+										}
+										openUrl("#Script:dialog.close","same window");
+										openUrl("#Script:page.parent.reload","same window");
+					)
+					}
+				}
 			
 }

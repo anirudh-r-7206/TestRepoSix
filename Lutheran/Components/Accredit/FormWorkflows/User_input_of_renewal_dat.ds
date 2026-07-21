@@ -1,27 +1,25 @@
 User_input_of_renewal_dat as "User input of renewal date"
 {
 
-			
-							type =  form
-							form = Accredit
-			
-							record event = on add
-			
-							on user input of Renewal_Date
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Renewal_Date != null && input.Accreditation.Due_Date > input.Renewal_Date)
-													{
-														alert "Renewal date cannot be lessor than the previous one";
-														input.Renewal_Date = input.Accreditation.Due_Date;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Accredit
+
+				record event = on add
+
+				on user input of Renewal_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Renewal_Date != null && input.Accreditation.Due_Date > input.Renewal_Date)
+										{
+											alert "Renewal date cannot be lessor than the previous one";
+											input.Renewal_Date = input.Accreditation.Due_Date;
+										}
+						)
+					}
+				}
+
 			
 }

@@ -1,76 +1,74 @@
 report Raised_Requests
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Request_Type as "Request Type"
-										Raised_by as "Raised by"
-										Staff
-										Next_Approver as "Next Approver"
-										Request_Details as "Request Details"
-										Effective_Date as "Effective Date"
-										Status
-									)
-								)
+								Request_Type as "Request Type"
+								Raised_by as "Raised by"
+								Staff
+								Next_Approver as "Next Approver"
+								Request_Details as "Request Details"
+								Effective_Date as "Effective Date"
+								Status
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-				 				type = 2
-								datablock1
-								(
-				     				title = "Overview"
-									fields
-									(
-										Request_Type as "Request Type"
-										Raised_by as "Raised by"
-										Staff
-										Supporting_Docs as "Supporting Docs"
-										Request_Details as "Request Details"
-										Current_Employment as "School"
-										Current_Position as "Position"
-										FTE
-										Teacher_Type as "Teacher Type"
-										Effective_Date as "Effective Date"
-										Effective_To as "Effective To"
-										Status
-									)
-								)
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Request_Type as "Request Type"
+								Raised_by as "Raised by"
+								Staff
+								Supporting_Docs as "Supporting Docs"
+								Request_Details as "Request Details"
+								Current_Employment as "School"
+								Current_Position as "Position"
+								FTE
+								Teacher_Type as "Teacher Type"
+								Effective_Date as "Effective Date"
+								Effective_To as "Effective To"
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			
 }

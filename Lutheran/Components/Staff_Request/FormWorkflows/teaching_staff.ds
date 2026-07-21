@@ -1,131 +1,129 @@
 teaching_staff as "teaching staff"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on user input of Teaching_Staff
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														/* CHECK IF STAFF HAS ANY ADMIN EMPLOYMENT */
-													isAdminExists = false;
-													fetEmp = Staff_Employment[Staff == input.Staff && End_Date == null];
-													empCount = fetEmp.count();
-													for each  emp in fetEmp
-													{
-														if(emp.Position != null && emp.Position.position_name == "Administrative Officer")
-														{
-															isAdminExists = true;
-															break;
-														}
-													}
-													/* POSITION FETCH */
-													if(input.Teaching_Staff == "Yes")
-													{
-														if(input.Request_Type == "Position Update" && input.Employment != null)
-														{
-															getEmp = Staff_Employment[ID == input.Employment];
-															/* BLOCK ADMIN IF MULTIPLE EMPLOYMENTS */
-															if(empCount > 1)
-															{
-																fetchedPositions = Positions[applicable_for == "Teaching" && ID != getEmp.Position && position_name != "Administrative Officer"].ID.getAll();
-															}
-															else
-															{
-																fetchedPositions = Positions[applicable_for == "Teaching" && ID != getEmp.Position].ID.getAll();
-															}
-														}
-														else if(input.Request_Type == "Transfer" && input.Employment != null)
-														{
-															getEmp = Staff_Employment[ID == input.Employment];
-															if(empCount > 1)
-															{
-																fetchedPositions = Positions[applicable_for == "Teaching" && position_name != "Administrative Officer"].ID.getAll();
-															}
-															else
-															{
-																fetchedPositions = Positions[applicable_for == "Teaching"].ID.getAll();
-															}
-														}
-														else if(input.Request_Type == "New Employment" && isAdminExists == false)
-														{
-															fetchedPositions = Positions[applicable_for == "Teaching" && position_name != "Administrative Officer"].ID.getAll();
-														}
-														else
-														{
-															fetchedPositions = Positions[applicable_for == "Teaching"].ID.getAll();
-														}
-													}
-													else
-													{
-														if(input.Request_Type == "Position Update" && input.Employment != null)
-														{
-															getEmp = Staff_Employment[ID == input.Employment];
-															if(empCount > 1)
-															{
-																fetchedPositions = Positions[applicable_for == "Non-Teaching" && ID != getEmp.Position && position_name != "Administrative Officer"].ID.getAll();
-															}
-															else
-															{
-																fetchedPositions = Positions[applicable_for == "Non-Teaching" && ID != getEmp.Position].ID.getAll();
-															}
-														}
-														else if(input.Request_Type == "Transfer" && input.Employment != null)
-														{
-															getEmp = Staff_Employment[ID == input.Employment];
-															if(empCount > 1)
-															{
-																fetchedPositions = Positions[applicable_for == "Non-Teaching" && position_name != "Administrative Officer"].ID.getAll();
-															}
-															else
-															{
-																fetchedPositions = Positions[applicable_for == "Non-Teaching"].ID.getAll();
-															}
-														}
-														else if(input.Request_Type == "New Employment" && isAdminExists == false)
-														{
-															fetchedPositions = Positions[applicable_for == "Non-Teaching" && position_name != "Administrative Officer"].ID.getAll();
-														}
-														else
-														{
-															fetchedPositions = Positions[applicable_for == "Non-Teaching"].ID.getAll();
-														}
-													}
-													input.Current_Position:ui.add(fetchedPositions);
-													/* TEACHING UI */
-													if(input.Teaching_Staff == "Yes")
-													{
-														show Teacher_Type;
-														show Speciality;
-														show Year_Level;
-														show Subject_form;
-														if(input.Admin_Type != null)
-														{
-															input.Admin_Type = null;
-															hide Admin_Type;
-														}
-													}
-													else
-													{
-														hide Teacher_Type;
-														hide Speciality;
-														hide Year_Level;
-														hide Subject_form;
-														input.Teacher_Type = null;
-														input.Speciality = null;
-														input.Year_Level = null;
-														input.Subject_form = null;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on user input of Teaching_Staff
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											/* CHECK IF STAFF HAS ANY ADMIN EMPLOYMENT */
+										isAdminExists = false;
+										fetEmp = Staff_Employment[Staff == input.Staff && End_Date == null];
+										empCount = fetEmp.count();
+										for each  emp in fetEmp
+										{
+											if(emp.Position != null && emp.Position.position_name == "Administrative Officer")
+											{
+												isAdminExists = true;
+												break;
+											}
+										}
+										/* POSITION FETCH */
+										if(input.Teaching_Staff == "Yes")
+										{
+											if(input.Request_Type == "Position Update" && input.Employment != null)
+											{
+												getEmp = Staff_Employment[ID == input.Employment];
+												/* BLOCK ADMIN IF MULTIPLE EMPLOYMENTS */
+												if(empCount > 1)
+												{
+													fetchedPositions = Positions[applicable_for == "Teaching" && ID != getEmp.Position && position_name != "Administrative Officer"].ID.getAll();
+												}
+												else
+												{
+													fetchedPositions = Positions[applicable_for == "Teaching" && ID != getEmp.Position].ID.getAll();
+												}
+											}
+											else if(input.Request_Type == "Transfer" && input.Employment != null)
+											{
+												getEmp = Staff_Employment[ID == input.Employment];
+												if(empCount > 1)
+												{
+													fetchedPositions = Positions[applicable_for == "Teaching" && position_name != "Administrative Officer"].ID.getAll();
+												}
+												else
+												{
+													fetchedPositions = Positions[applicable_for == "Teaching"].ID.getAll();
+												}
+											}
+											else if(input.Request_Type == "New Employment" && isAdminExists == false)
+											{
+												fetchedPositions = Positions[applicable_for == "Teaching" && position_name != "Administrative Officer"].ID.getAll();
+											}
+											else
+											{
+												fetchedPositions = Positions[applicable_for == "Teaching"].ID.getAll();
+											}
+										}
+										else
+										{
+											if(input.Request_Type == "Position Update" && input.Employment != null)
+											{
+												getEmp = Staff_Employment[ID == input.Employment];
+												if(empCount > 1)
+												{
+													fetchedPositions = Positions[applicable_for == "Non-Teaching" && ID != getEmp.Position && position_name != "Administrative Officer"].ID.getAll();
+												}
+												else
+												{
+													fetchedPositions = Positions[applicable_for == "Non-Teaching" && ID != getEmp.Position].ID.getAll();
+												}
+											}
+											else if(input.Request_Type == "Transfer" && input.Employment != null)
+											{
+												getEmp = Staff_Employment[ID == input.Employment];
+												if(empCount > 1)
+												{
+													fetchedPositions = Positions[applicable_for == "Non-Teaching" && position_name != "Administrative Officer"].ID.getAll();
+												}
+												else
+												{
+													fetchedPositions = Positions[applicable_for == "Non-Teaching"].ID.getAll();
+												}
+											}
+											else if(input.Request_Type == "New Employment" && isAdminExists == false)
+											{
+												fetchedPositions = Positions[applicable_for == "Non-Teaching" && position_name != "Administrative Officer"].ID.getAll();
+											}
+											else
+											{
+												fetchedPositions = Positions[applicable_for == "Non-Teaching"].ID.getAll();
+											}
+										}
+										input.Current_Position:ui.add(fetchedPositions);
+										/* TEACHING UI */
+										if(input.Teaching_Staff == "Yes")
+										{
+											show Teacher_Type;
+											show Speciality;
+											show Year_Level;
+											show Subject_form;
+											if(input.Admin_Type != null)
+											{
+												input.Admin_Type = null;
+												hide Admin_Type;
+											}
+										}
+										else
+										{
+											hide Teacher_Type;
+											hide Speciality;
+											hide Year_Level;
+											hide Subject_form;
+											input.Teacher_Type = null;
+											input.Speciality = null;
+											input.Year_Level = null;
+											input.Subject_form = null;
+										}
+						)
+					}
+				}
+
 			
 }

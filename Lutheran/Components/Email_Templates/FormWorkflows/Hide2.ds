@@ -1,24 +1,22 @@
 Hide2 as "Hide"
 {
 
-			
-							type =  form
-							form = Email_Templates
-			
-							record event = on edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														input.plain = "<style>  .box { background: #f5f7fa; border: 1px solid #dcdfe6; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #333; line-height: 1.9; } .warning { color: #d9534f; font-weight: bold; } </style> <div class=\"box\"> <span class=\"warning\">System Placeholders — Do not edit or remove.</span> These are automatically replaced by the system.<br> <b>${Staff_Name}</b>, <b>${Request_Type}</b>, <b>${Effective_Date}</b>, <b>${Effective_To}</b>, <b>${Raised_By}</b>, <b>${Approver_Name}</b>, <b>${Rejected_By}</b>, <b>${Rejection_Reason}</b> </div>";
-													disable Template_Name;
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Email_Templates
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.plain = "<style>  .box { background: #f5f7fa; border: 1px solid #dcdfe6; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #333; line-height: 1.9; } .warning { color: #d9534f; font-weight: bold; } </style> <div class=\"box\"> <span class=\"warning\">System Placeholders — Do not edit or remove.</span> These are automatically replaced by the system.<br> <b>${Staff_Name}</b>, <b>${Request_Type}</b>, <b>${Effective_Date}</b>, <b>${Effective_To}</b>, <b>${Raised_By}</b>, <b>${Approver_Name}</b>, <b>${Rejected_By}</b>, <b>${Rejection_Reason}</b> </div>";
+										disable Template_Name;
+						)
+					}
+				}
+
 			
 }

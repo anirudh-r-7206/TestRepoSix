@@ -1,43 +1,41 @@
 string helpers.returnStaffRequestNextApprover(string current_approver, int request_by_id, int requestID)
 {
 
-			
-			                 	request_by = Staff_Master[ID == request_by_id];
-			                 	getRequest = Staff_Request[ID == requestID];
-			                 	getConfig = Approval_Configuration[Request_Type == getRequest.Request_Type];
-			                 	schoolAdminFlag = true;
-			                 	regionAdminFlag = true;
-			                 	orgAdminFlag = true;
-			                 	if(getConfig.count() > 0)
-			                 	{
-			                 		schoolAdminFlag = getConfig.School_Admin;
-			                 		regionAdminFlag = getConfig.Region_Admin;
-			                 		orgAdminFlag = getConfig.National_Admin;
-			                 	}
-			                 	next_approver = "";
-			                 	if(current_approver == "School Admin")
-			                 	{
-			                 		if(regionAdminFlag == true && Staff_Master[Organisation == request_by.Organisation && Regions == request_by.Regions && Admin_Type == "Region"].count() > 0)
-			                 		{
-			                 			next_approver = "Region Admin";
-			                 		}
-			                 		else if(orgAdminFlag == true && Staff_Master[Organisation == request_by.Organisation && Admin_Type == "National"].count() > 0)
-			                 		{
-			                 			next_approver = "National Admin";
-			                 		}
-			                 	}
-			                 	else if(current_approver == "Region Admin")
-			                 	{
-			                 		if(orgAdminFlag == true && Staff_Master[Organisation == request_by.Organisation && Admin_Type == "National"].count() > 0)
-			                 		{
-			                 			next_approver = "National Admin";
-			                 		}
-			                 	}
-			                 	else if(current_approver == "National Admin")
-			                 	{
-			                 		next_approver = "";
-			                 	}
-			                 	return next_approver;
-			                 
-			
+                 	request_by = Staff_Master[ID == request_by_id];
+                 	getRequest = Staff_Request[ID == requestID];
+                 	getConfig = Approval_Configuration[Request_Type == getRequest.Request_Type];
+                 	schoolAdminFlag = true;
+                 	regionAdminFlag = true;
+                 	orgAdminFlag = true;
+                 	if(getConfig.count() > 0)
+                 	{
+                 		schoolAdminFlag = getConfig.School_Admin;
+                 		regionAdminFlag = getConfig.Region_Admin;
+                 		orgAdminFlag = getConfig.National_Admin;
+                 	}
+                 	next_approver = "";
+                 	if(current_approver == "School Admin")
+                 	{
+                 		if(regionAdminFlag == true && Staff_Master[Organisation == request_by.Organisation && Regions == request_by.Regions && Admin_Type == "Region"].count() > 0)
+                 		{
+                 			next_approver = "Region Admin";
+                 		}
+                 		else if(orgAdminFlag == true && Staff_Master[Organisation == request_by.Organisation && Admin_Type == "National"].count() > 0)
+                 		{
+                 			next_approver = "National Admin";
+                 		}
+                 	}
+                 	else if(current_approver == "Region Admin")
+                 	{
+                 		if(orgAdminFlag == true && Staff_Master[Organisation == request_by.Organisation && Admin_Type == "National"].count() > 0)
+                 		{
+                 			next_approver = "National Admin";
+                 		}
+                 	}
+                 	else if(current_approver == "National Admin")
+                 	{
+                 		next_approver = "";
+                 	}
+                 	return next_approver;
+                 
 }

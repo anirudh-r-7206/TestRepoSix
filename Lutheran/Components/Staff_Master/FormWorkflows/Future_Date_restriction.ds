@@ -1,36 +1,34 @@
 Future_Date_restriction as "Future Date restriction"
 {
 
-			
-							type =  form
-							form = Staff_Master
-			
-							record event = on add or edit
-			
-							on user input of date_of_birth
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.date_of_birth > zoho.currentdate)
-													{
-														input.date_of_birth = null;
-														alert "Date of Birth cannot be a future date.";
-													}
-													else
-													{
-														minDate = zoho.currentdate.subYear(18);
-														if(input.date_of_birth > minDate)
-														{
-															input.date_of_birth = null;
-															alert "Staff must be at least 18 years old.";
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Master
+
+				record event = on add or edit
+
+				on user input of date_of_birth
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.date_of_birth > zoho.currentdate)
+										{
+											input.date_of_birth = null;
+											alert "Date of Birth cannot be a future date.";
+										}
+										else
+										{
+											minDate = zoho.currentdate.subYear(18);
+											if(input.date_of_birth > minDate)
+											{
+												input.date_of_birth = null;
+												alert "Staff must be at least 18 years old.";
+											}
+										}
+						)
+					}
+				}
+
 			
 }

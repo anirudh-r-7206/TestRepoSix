@@ -1,21 +1,19 @@
 Field_Scripts6 as "Field Scripts"
 {
 
-			
-							type =  form
-							form = Accreditation_Details
-			
-							record event = on add or edit
-			
-							field rules
-							{
-								actions 
-								{
-									hide PD_Hours_Collected,Status_Accreditation,Training_Completed,Completion_Date;
-									disable Staff;
-								}
-							}
-			
-						
+				type =  form
+				form = Accreditation_Details
+
+				record event = on add or edit
+
+				field rules
+				{
+					actions 
+					{
+						hide PD_Hours_Collected,Status_Accreditation,Training_Completed,Completion_Date;
+						disable Staff;
+					}
+				}
+
 			
 }

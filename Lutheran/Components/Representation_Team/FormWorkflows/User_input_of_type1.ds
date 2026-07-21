@@ -1,46 +1,44 @@
 User_input_of_type1 as "User input of type"
 {
 
-			
-							type =  form
-							form = Representation_Team
-			
-							record event = on add
-			
-							on user input of Type_field
-							{
-								actions 
-								{
-									custom deluge script
-									(
-													input.Organisation = null;
-													input.Regions = null;
-													input.School = null;
-													input.Campus = null;
-													hide Organisation;
-													hide Regions;
-													hide School;
-													hide Campus;
-													if(input.Type_field == "National")
-													{
-														show Organisation;
-													}
-													if(input.Type_field == "Region")
-													{
-														show Regions;
-													}
-													if(input.Type_field == "School")
-													{
-														show School;
-													}
-													if(input.Type_field == "Campus")
-													{
-														show Campus;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Representation_Team
+
+				record event = on add
+
+				on user input of Type_field
+				{
+					actions 
+					{
+						custom deluge script
+						(
+										input.Organisation = null;
+										input.Regions = null;
+										input.School = null;
+										input.Campus = null;
+										hide Organisation;
+										hide Regions;
+										hide School;
+										hide Campus;
+										if(input.Type_field == "National")
+										{
+											show Organisation;
+										}
+										if(input.Type_field == "Region")
+										{
+											show Regions;
+										}
+										if(input.Type_field == "School")
+										{
+											show School;
+										}
+										if(input.Type_field == "Campus")
+										{
+											show Campus;
+										}
+						)
+					}
+				}
+
 			
 }

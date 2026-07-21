@@ -1,24 +1,22 @@
 hide_show1 as "hide show"
 {
 
-			
-							type =  form
-							form = Staff_Master
-			
-							record event = on edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide Employment_History;
-													hide LEA_Staff_Rec_Num;
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Master
+
+				record event = on edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Employment_History;
+										hide LEA_Staff_Rec_Num;
+						)
+					}
+				}
+
 			
 }

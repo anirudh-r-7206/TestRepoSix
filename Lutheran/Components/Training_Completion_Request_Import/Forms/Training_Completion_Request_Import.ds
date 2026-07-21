@@ -1,97 +1,95 @@
 form Training_Completion_Request_Import
 {
 
-		
-					displayname = "Training Completion Request Import"
-					success message = "Training Completion Request Added Successfully"
-					Section
+			displayname = "Training Completion Request Import"
+			success message = "Training Completion Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Staff
+			(
+				type = picklist	
+				values  = Staff_Master.ID
+    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Training_Type
+			(
+				type = picklist	
+				displayname = "Training Type"
+				values  = Training_Type.ID
+    			displayformat = [Training]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Training_Name
+			(
+    			type = text
+				displayname = "Training Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Completion_Date
+			(
+    			type = date
+				displayname = "Completion Date"
+				initial value = "${zoho.currentdate}"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Success","Failed"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Reason
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					must have Staff
+				}
+				on edit
+				{
+					update
 					(
-						type = picklist	
-						values  = Staff_Master.ID
-		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have Training_Type
+					cancel
 					(
-						type = picklist	
-						displayname = "Training Type"
-						values  = Training_Type.ID
-		    			displayformat = [Training]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-					must have Training_Name
-					(
-		    			type = text
-						displayname = "Training Name"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Completion_Date
-					(
-		    			type = date
-						displayname = "Completion Date"
-						initial value = "${zoho.currentdate}"
-						alloweddays = 0,1,2,3,4,5,6
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Status
-					(
-						type = picklist
-						maxchar = 100
-						values = {"Success","Failed"}
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Reason
-					(
-		    			type = textarea
-						height = 100px
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

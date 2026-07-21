@@ -1,96 +1,94 @@
 Load_Fields as "Load Fields"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide Next_Approver;
-													hide Status;
-													hide Admin_Type;
-													hide Organisation;
-													hide Regions;
-													hide Campus;
-													hide Current_Employment;
-													hide Teaching_Staff;
-													hide Teacher_Type;
-													hide Year_Level;
-													hide Subject_form;
-													hide Speciality;
-													hide Current_Position;
-													hide FTE;
-													hide Teaching_Details;
-													hide Position_Update;
-													hide Effective_To;
-													hide Returned;
-													hide Personal_Details;
-													hide plain;
-													hide Acting;
-													hide Employment;
-													hide Is_primary;
-													getRaisedBy = Staff_Master[Staff_Email == zoho.loginuserid];
-													if(getRaisedBy.count() > 0)
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Next_Approver;
+										hide Status;
+										hide Admin_Type;
+										hide Organisation;
+										hide Regions;
+										hide Campus;
+										hide Current_Employment;
+										hide Teaching_Staff;
+										hide Teacher_Type;
+										hide Year_Level;
+										hide Subject_form;
+										hide Speciality;
+										hide Current_Position;
+										hide FTE;
+										hide Teaching_Details;
+										hide Position_Update;
+										hide Effective_To;
+										hide Returned;
+										hide Personal_Details;
+										hide plain;
+										hide Acting;
+										hide Employment;
+										hide Is_primary;
+										getRaisedBy = Staff_Master[Staff_Email == zoho.loginuserid];
+										if(getRaisedBy.count() > 0)
+										{
+											input.Raised_by = getRaisedBy.ID;
+											disable Raised_by;
+										}
+										if(input.Staff != null)
+										{
+											disable Staff;
+											getStaff = Staff_Master[ID == input.Staff];
+											pendingRequest = Staff_Request[Staff == input.Staff && Status == "Pending"];
+											approvedNotEffective = Staff_Request[Staff == input.Staff && Status == "Approved" && Effective_Date > zoho.currentdate];
+											if(pendingRequest.count() > 0)
+											{
+												alert "This staff already has a pending request. Please resolve it before raising a new one.";
+												openUrl("#Script:dialog.close","same window");
+											}
+											else if(getStaff.status == "Deceased")
+											{
+												alert "No requests can be raised for a deceased staff member.";
+												openUrl("#Script:dialog.close","same window");
+											}
+											else
+											{
+												if(getStaff.status == "On Leave")
+												{
+													input.Request_Type:ui.add({"Personal Details","Resignation","Deceased"});
+												}
+												else if(getStaff.status == "Resigned")
+												{
+													input.Request_Type:ui.add({"New Employment","Deceased"});
+												}
+												else
+												{
+													if(getStaff.Admin_Type != null && getStaff.Admin_Type != "")
 													{
-														input.Raised_by = getRaisedBy.ID;
-														disable Raised_by;
-													}
-													if(input.Staff != null)
-													{
-														disable Staff;
-														getStaff = Staff_Master[ID == input.Staff];
-														pendingRequest = Staff_Request[Staff == input.Staff && Status == "Pending"];
-														approvedNotEffective = Staff_Request[Staff == input.Staff && Status == "Approved" && Effective_Date > zoho.currentdate];
-														if(pendingRequest.count() > 0)
-														{
-															alert "This staff already has a pending request. Please resolve it before raising a new one.";
-															openUrl("#Script:dialog.close","same window");
-														}
-														else if(getStaff.status == "Deceased")
-														{
-															alert "No requests can be raised for a deceased staff member.";
-															openUrl("#Script:dialog.close","same window");
-														}
-														else
-														{
-															if(getStaff.status == "On Leave")
-															{
-																input.Request_Type:ui.add({"Personal Details","Resignation","Deceased"});
-															}
-															else if(getStaff.status == "Resigned")
-															{
-																input.Request_Type:ui.add({"New Employment","Deceased"});
-															}
-															else
-															{
-																if(getStaff.Admin_Type != null && getStaff.Admin_Type != "")
-																{
-																	/* ADMIN → NO NEW EMPLOYMENT */
-																	input.Request_Type:ui.add({"Personal Details","Position Update","Transfer","Sabbatical Leave","Resignation","Deceased"});
-																}
-																else
-																{
-																	input.Request_Type:ui.add({"Personal Details","New Employment","Position Update","Transfer","Sabbatical Leave","Resignation","Deceased"});
-																}
-															}
-														}
+														/* ADMIN → NO NEW EMPLOYMENT */
+														input.Request_Type:ui.add({"Personal Details","Position Update","Transfer","Sabbatical Leave","Resignation","Deceased"});
 													}
 													else
 													{
-														alert "You cannot add the staff request here.";
-														openUrl("#Script:dialog.close","same window");
+														input.Request_Type:ui.add({"Personal Details","New Employment","Position Update","Transfer","Sabbatical Leave","Resignation","Deceased"});
 													}
-									)
-								}
-							}
-			
-						
+												}
+											}
+										}
+										else
+										{
+											alert "You cannot add the staff request here.";
+											openUrl("#Script:dialog.close","same window");
+										}
+						)
+					}
+				}
+
 			
 }

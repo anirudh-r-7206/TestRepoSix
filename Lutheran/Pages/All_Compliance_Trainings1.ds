@@ -4,7 +4,7 @@
 	<layout>
 		<row>
 			<column width='100%'>
-				<dsp id='html_snippet711' elementName='HTML Snippet' bgColor=\"#FFFFFF\">
+				<dsp id='html_snippet711' elementName='HTML Snippet' bgColor="#FFFFFF">
           <![CDATA[htmlpage html_snippet711()
 content
 			<%{%>

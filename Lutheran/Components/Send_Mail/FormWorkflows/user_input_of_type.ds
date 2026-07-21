@@ -1,34 +1,32 @@
 user_input_of_type as "user input of type"
 {
 
-			
-							type =  form
-							form = Send_Mail
-			
-							record event = on add or edit
-			
-							on user input of Type_field
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Type_field == "Committee")
-													{
-														show Committee;
-														hide Staff_Master;
-														input.Staff_Master = null;
-													}
-													else if(input.Type_field == "Individual")
-													{
-														show Staff_Master;
-														hide Committee;
-														input.Committee = null;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Send_Mail
+
+				record event = on add or edit
+
+				on user input of Type_field
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Type_field == "Committee")
+										{
+											show Committee;
+											hide Staff_Master;
+											input.Staff_Master = null;
+										}
+										else if(input.Type_field == "Individual")
+										{
+											show Staff_Master;
+											hide Committee;
+											input.Committee = null;
+										}
+						)
+					}
+				}
+
 			
 }

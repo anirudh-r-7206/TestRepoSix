@@ -1,18 +1,16 @@
 Embed as "Embed"
 {
-
-				type = form
-				form = Staff_Onboarding1
-				button = Next
-				on click
-				{
-					actions
-					{
-					on click
-					(
-						openUrl("#Page:Staff_Onboarding_page","same window");
-					)
-					}
-				}
-			
+	type = form
+	form = Staff_Onboarding1
+	button = Next
+	on click
+	{
+		actions
+		{
+		on click
+		(
+			openUrl("#Page:Staff_Onboarding_page","same window");
+		)
+		}
+	}
 }

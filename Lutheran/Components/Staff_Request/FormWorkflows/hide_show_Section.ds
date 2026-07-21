@@ -1,54 +1,52 @@
 hide_show_Section as "hide show Section"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on user input of Request_Type
-							{
-								actions 
-								{
-									custom deluge script
-									(
-													hide Employment;
-													hide Current_Employment;
-													hide Campus;
-													hide FTE;
-													hide Teacher_Type;
-													hide Year_Level;
-													hide Subject_form;
-													hide Speciality;
-													hide Effective_To;
-													hide Current_Position;
-													hide Teaching_Staff;
-													hide Personal_Details;
-													if(input.Request_Type == "Personal Details")
-													{
-														show Personal_Details;
-													}
-													if(input.Request_Type == "Position Update" || input.Request_Type == "Transfer" || input.Request_Type == "Resignation" || input.Request_Type == "Sabbatical Leave")
-													{
-														show Employment;
-													}
-													if(input.Request_Type == "New Employment")
-													{
-														show Current_Position;
-														show Current_Employment;
-														show Campus;
-														show FTE;
-														show Teaching_Staff;
-													}
-													if(input.Request_Type == "Sabbatical Leave")
-													{
-														show Effective_To;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on user input of Request_Type
+				{
+					actions 
+					{
+						custom deluge script
+						(
+										hide Employment;
+										hide Current_Employment;
+										hide Campus;
+										hide FTE;
+										hide Teacher_Type;
+										hide Year_Level;
+										hide Subject_form;
+										hide Speciality;
+										hide Effective_To;
+										hide Current_Position;
+										hide Teaching_Staff;
+										hide Personal_Details;
+										if(input.Request_Type == "Personal Details")
+										{
+											show Personal_Details;
+										}
+										if(input.Request_Type == "Position Update" || input.Request_Type == "Transfer" || input.Request_Type == "Resignation" || input.Request_Type == "Sabbatical Leave")
+										{
+											show Employment;
+										}
+										if(input.Request_Type == "New Employment")
+										{
+											show Current_Position;
+											show Current_Employment;
+											show Campus;
+											show FTE;
+											show Teaching_Staff;
+										}
+										if(input.Request_Type == "Sabbatical Leave")
+										{
+											show Effective_To;
+										}
+						)
+					}
+				}
+
 			
 }

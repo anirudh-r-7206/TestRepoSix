@@ -1,76 +1,74 @@
 report All_Accreditation_Courses
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										SI_No as "SI No"
-										Training_Type as "Training Type"
-										Accreditation
-									)
-								)
+								SI_No as "SI No"
+								Training_Type as "Training Type"
+								Accreditation
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-										Duplicate 
-										Delete 
-									)
-								record
-								(
-									Edit   	   
-									Duplicate   	   
-									Delete   	   
-		    					)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									Edit   	   
-									Delete   	   
-									Duplicate   	   
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-								datablock1
-								(
-									fields
-									(
-										SI_No as "SI No"
-										Training_Type as "Training Type"
-										Accreditation
-									)
-								)
+								Edit 
+								Duplicate 
+								Delete 
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-										Duplicate 
-										Delete 
-									)
-								)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								SI_No as "SI No"
+								Training_Type as "Training Type"
+								Accreditation
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			
 }

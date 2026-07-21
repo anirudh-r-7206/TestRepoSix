@@ -1,27 +1,25 @@
 User_input_of_Completion_1 as "User input of Completion date field"
 {
 
-			
-							type =  form
-							form = Training_Completion_Request
-			
-							record event = on add
-			
-							on user input of Completion_Date
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Completion_Date > zoho.currentdate)
-													{
-														alert "Future dates are not allowed.";
-														input.Completion_Date = null;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Training_Completion_Request
+
+				record event = on add
+
+				on user input of Completion_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Completion_Date > zoho.currentdate)
+										{
+											alert "Future dates are not allowed.";
+											input.Completion_Date = null;
+										}
+						)
+					}
+				}
+
 			
 }

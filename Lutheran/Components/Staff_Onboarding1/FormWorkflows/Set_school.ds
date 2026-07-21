@@ -1,73 +1,71 @@
 Set_school as "Set school"
 {
 
-			
-							type =  form
-							form = Staff_Onboarding1
-			
-							record event = on add
-			
-							on user input of Region
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Region != null)
+				type =  form
+				form = Staff_Onboarding1
+
+				record event = on add
+
+				on user input of Region
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Region != null)
+										{
+											fetStaff = Staff_Master[ID == input.Staff];
+											adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+											var = thisapp.permissions.loginUserProfile();
+											isSuperAdmin = false;
+											if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+											{
+												isSuperAdmin = true;
+											}
+											if(input.Is_Loaded == true)
+											{
+												input.Current_Employment = null;
+												input.Campus = null;
+											}
+											if(adminRec.Admin_Type == "School" || adminRec.Admin_Type == "Campus")
+											{
+												input.Current_Employment:ui.add(adminRec.Current_Employment);
+												if(input.Is_Loaded == true)
+												{
+													input.Current_Employment = adminRec.Current_Employment;
+												}
+											}
+											else
+											{
+												fetSchools = School[Region == input.Region].ID.getAll();
+												input.Current_Employment:ui.add(fetSchools);
+												if(input.Is_Loaded == true)
+												{
+													if(fetSchools.size() == 1)
 													{
-														fetStaff = Staff_Master[ID == input.Staff];
-														adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-														var = thisapp.permissions.loginUserProfile();
-														isSuperAdmin = false;
-														if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-														{
-															isSuperAdmin = true;
-														}
-														if(input.Is_Loaded == true)
-														{
-															input.Current_Employment = null;
-															input.Campus = null;
-														}
-														if(adminRec.Admin_Type == "School" || adminRec.Admin_Type == "Campus")
-														{
-															input.Current_Employment:ui.add(adminRec.Current_Employment);
-															if(input.Is_Loaded == true)
-															{
-																input.Current_Employment = adminRec.Current_Employment;
-															}
-														}
-														else
-														{
-															fetSchools = School[Region == input.Region].ID.getAll();
-															input.Current_Employment:ui.add(fetSchools);
-															if(input.Is_Loaded == true)
-															{
-																if(fetSchools.size() == 1)
-																{
-																	input.Current_Employment = fetSchools.get(0);
-																}
-															}
-														}
-														if(input.Is_Loaded == false)
-														{
-															if(fetStaff.Current_Employment != null && input.Admin_Type in {"School","Campus"})
-															{
-																input.Current_Employment = fetStaff.Current_Employment;
-															}
-														}
+														input.Current_Employment = fetSchools.get(0);
 													}
-													else if(input.Current_Position.position_name == "Administrative Officer")
-													{
-														if(input.Is_Loaded == true)
-														{
-															input.Current_Employment = null;
-															input.Campus = null;
-														}
-													}
-									)
-								}
-							}
-			
-						
+												}
+											}
+											if(input.Is_Loaded == false)
+											{
+												if(fetStaff.Current_Employment != null && input.Admin_Type in {"School","Campus"})
+												{
+													input.Current_Employment = fetStaff.Current_Employment;
+												}
+											}
+										}
+										else if(input.Current_Position.position_name == "Administrative Officer")
+										{
+											if(input.Is_Loaded == true)
+											{
+												input.Current_Employment = null;
+												input.Campus = null;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

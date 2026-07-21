@@ -1,65 +1,63 @@
 Load_of_the_form_On_Add_S2 as "Load of the form - On Add Scripts"
 {
 
-			
-							type =  form
-							form = Training_Completion_Request
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														fetStaff = Staff_Master[Staff_Email == zoho.loginuserid];
-													if(fetStaff.count() == 0)
-													{
-														openUrl("#Page:Not_Registered","same window");
-													}
-													else
-													{
-														isAdmin = fetStaff.Admin_Type in {"Overall Admin","National","Region","School","Campus"};
-														hasCompliance = input.Compliance_Training != null;
-														fetTrainingType = Training_Type[Type_field == "Others"];
-														if(hasCompliance)
-														{
-															input.Staff = input.Compliance_Training.Staff;
-															input.Training_Type = input.Compliance_Training.Training_Type;
-															input.Completion_Date = input.Compliance_Training.Completion_Date;
-															input.Training_Name = input.Compliance_Training.Training_Name;
-															disable Staff;
-															disable Compliance_Training;
-															disable Training_Type;
-														}
-														else
-														{
-															hide Compliance_Training;
-															input.Training_Type:ui.add(Training_Type[Type_field == "Others"].ID.getAll());
-															if(isAdmin)
-															{
-																current_login = Staff_Master[Staff_Email == zoho.loginuserid];
-																staff_list = thisapp.helpers.returnEligibleStaff();
-																staff_list.add(current_login.ID);
-																fetStaffList = Staff_Master[status == "Active" && ID == staff_list].ID.getAll();
-																input.Staff:ui.add(fetStaffList);
-																input.Staff = current_login.ID;
-															}
-															else
-															{
-																input.Staff = fetStaff.ID;
-															}
-														}
-														if(!isAdmin)
-														{
-															disable Staff;
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Training_Completion_Request
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											fetStaff = Staff_Master[Staff_Email == zoho.loginuserid];
+										if(fetStaff.count() == 0)
+										{
+											openUrl("#Page:Not_Registered","same window");
+										}
+										else
+										{
+											isAdmin = fetStaff.Admin_Type in {"Overall Admin","National","Region","School","Campus"};
+											hasCompliance = input.Compliance_Training != null;
+											fetTrainingType = Training_Type[Type_field == "Others"];
+											if(hasCompliance)
+											{
+												input.Staff = input.Compliance_Training.Staff;
+												input.Training_Type = input.Compliance_Training.Training_Type;
+												input.Completion_Date = input.Compliance_Training.Completion_Date;
+												input.Training_Name = input.Compliance_Training.Training_Name;
+												disable Staff;
+												disable Compliance_Training;
+												disable Training_Type;
+											}
+											else
+											{
+												hide Compliance_Training;
+												input.Training_Type:ui.add(Training_Type[Type_field == "Others"].ID.getAll());
+												if(isAdmin)
+												{
+													current_login = Staff_Master[Staff_Email == zoho.loginuserid];
+													staff_list = thisapp.helpers.returnEligibleStaff();
+													staff_list.add(current_login.ID);
+													fetStaffList = Staff_Master[status == "Active" && ID == staff_list].ID.getAll();
+													input.Staff:ui.add(fetStaffList);
+													input.Staff = current_login.ID;
+												}
+												else
+												{
+													input.Staff = fetStaff.ID;
+												}
+											}
+											if(!isAdmin)
+											{
+												disable Staff;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

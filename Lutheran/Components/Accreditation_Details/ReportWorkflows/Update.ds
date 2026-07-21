@@ -1,21 +1,19 @@
 Update as "Update"
 {
 
-			
-							type =  functions
-							form = Accreditation_Details
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									draft_accreditation = Accreditation_Details[Staff == input.Staff && Status_Accreditation == "Draft"];
-													openUrl("#Form:Accreditation_Details?recLinkID=" + draft_accreditation.ID + "&viewLinkName=All_Accreditation_Details","popup window","height=auto,width=auto");
-								)
-								}
-							}
-						
+				type =  functions
+				form = Accreditation_Details
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						draft_accreditation = Accreditation_Details[Staff == input.Staff && Status_Accreditation == "Draft"];
+										openUrl("#Form:Accreditation_Details?recLinkID=" + draft_accreditation.ID + "&viewLinkName=All_Accreditation_Details","popup window","height=auto,width=auto");
+					)
+					}
+				}
 			
 }

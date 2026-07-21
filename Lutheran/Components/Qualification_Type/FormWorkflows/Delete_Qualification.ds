@@ -1,29 +1,27 @@
 Delete_Qualification as "Delete Qualification"
 {
 
-			
-							type =  form
-							form = Qualification_Type
-			
-							record event = on delete
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														qualifications = Qualifications[Qualification_Type == input.ID];
-													isImplemented = qualifications.count() > 0;
-													if(isImplemented)
-													{
-														alert "Qualification has been linked to few modules. Please unlink them to delete this Qualification.";
-														cancel delete;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Qualification_Type
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											qualifications = Qualifications[Qualification_Type == input.ID];
+										isImplemented = qualifications.count() > 0;
+										if(isImplemented)
+										{
+											alert "Qualification has been linked to few modules. Please unlink them to delete this Qualification.";
+											cancel delete;
+										}
+						)
+					}
+				}
+
 			
 }

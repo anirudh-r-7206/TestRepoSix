@@ -1,98 +1,96 @@
 Admin_type as "Admin type"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on user input of Admin_Type
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Request_Type == "Transfer" || input.Request_Type == "New Employment")
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on user input of Admin_Type
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Request_Type == "Transfer" || input.Request_Type == "New Employment")
+										{
+											if(!input.Admin_Type.isEmpty())
+											{
+												if(input.Admin_Type == "National")
+												{
+													if(Organisation[ID != null].count() == 0)
 													{
-														if(!input.Admin_Type.isEmpty())
-														{
-															if(input.Admin_Type == "National")
-															{
-																if(Organisation[ID != null].count() == 0)
-																{
-																	alert "No National available";
-																	openUrl("#Script:dialog.close","same window");
-																}
-																show Organisation;
-																hide Regions;
-																hide Current_Employment;
-																hide Campus;
-																input.Regions = null;
-																input.Current_Employment = null;
-																input.Campus = null;
-															}
-															else if(input.Admin_Type == "Region")
-															{
-																if(Regions[ID != null].count() == 0)
-																{
-																	alert "No regions available";
-																	openUrl("#Script:dialog.close","same window");
-																}
-																show Regions;
-																hide Organisation;
-																hide Current_Employment;
-																hide Campus;
-																input.Organisation = null;
-																input.Current_Employment = null;
-																input.Campus = null;
-															}
-															else if(input.Admin_Type == "School")
-															{
-																if(School[ID != null].count() == 0)
-																{
-																	alert "No schools available";
-																	openUrl("#Script:dialog.close","same window");
-																}
-																show Current_Employment;
-																hide Organisation;
-																hide Regions;
-																hide Campus;
-																input.Organisation = null;
-																input.Regions = null;
-																input.Campus = null;
-															}
-															else if(input.Admin_Type == "Campus")
-															{
-																if(Campus[ID != null].count() == 0)
-																{
-																	alert "No campus available";
-																	openUrl("#Script:dialog.close","same window");
-																}
-																show Campus;
-																hide Organisation;
-																hide Regions;
-																hide Current_Employment;
-																input.Organisation = null;
-																input.Regions = null;
-																input.Current_Employment = null;
-															}
-														}
-														else
-														{
-															if(input.Current_Position.position_name == "Administrative Officer")
-															{
-																hide Current_Employment;
-																hide Campus;
-															}
-															hide Organisation;
-															hide Regions;
-														}
+														alert "No National available";
+														openUrl("#Script:dialog.close","same window");
 													}
-									)
-								}
-							}
-			
-						
+													show Organisation;
+													hide Regions;
+													hide Current_Employment;
+													hide Campus;
+													input.Regions = null;
+													input.Current_Employment = null;
+													input.Campus = null;
+												}
+												else if(input.Admin_Type == "Region")
+												{
+													if(Regions[ID != null].count() == 0)
+													{
+														alert "No regions available";
+														openUrl("#Script:dialog.close","same window");
+													}
+													show Regions;
+													hide Organisation;
+													hide Current_Employment;
+													hide Campus;
+													input.Organisation = null;
+													input.Current_Employment = null;
+													input.Campus = null;
+												}
+												else if(input.Admin_Type == "School")
+												{
+													if(School[ID != null].count() == 0)
+													{
+														alert "No schools available";
+														openUrl("#Script:dialog.close","same window");
+													}
+													show Current_Employment;
+													hide Organisation;
+													hide Regions;
+													hide Campus;
+													input.Organisation = null;
+													input.Regions = null;
+													input.Campus = null;
+												}
+												else if(input.Admin_Type == "Campus")
+												{
+													if(Campus[ID != null].count() == 0)
+													{
+														alert "No campus available";
+														openUrl("#Script:dialog.close","same window");
+													}
+													show Campus;
+													hide Organisation;
+													hide Regions;
+													hide Current_Employment;
+													input.Organisation = null;
+													input.Regions = null;
+													input.Current_Employment = null;
+												}
+											}
+											else
+											{
+												if(input.Current_Position.position_name == "Administrative Officer")
+												{
+													hide Current_Employment;
+													hide Campus;
+												}
+												hide Organisation;
+												hide Regions;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

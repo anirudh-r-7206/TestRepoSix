@@ -1,35 +1,33 @@
 FTE_field_On_User_Input as "FTE field → On User Input"
 {
 
-			
-							type =  form
-							form = Staff_Onboarding1
-			
-							record event = on add
-			
-							on user input of FTE
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.FTE != null)
-													{
-														if(input.FTE > 1.0)
-														{
-															alert "FTE cannot be greater than 1.0";
-															input.FTE = null;
-														}
-														else if(input.FTE <= 0)
-														{
-															alert "FTE cannot be less than 0";
-															input.FTE = null;
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Onboarding1
+
+				record event = on add
+
+				on user input of FTE
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.FTE != null)
+										{
+											if(input.FTE > 1.0)
+											{
+												alert "FTE cannot be greater than 1.0";
+												input.FTE = null;
+											}
+											else if(input.FTE <= 0)
+											{
+												alert "FTE cannot be less than 0";
+												input.FTE = null;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

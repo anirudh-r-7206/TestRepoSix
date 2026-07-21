@@ -1,23 +1,21 @@
 list Eligible_For_Accreditation
 {
 
-		
-					displayName = "Eligible For Accreditation"
-					show all rows from Accreditation_Details  [Staff.ID == thisapp.helpers.returnEligibleStaff() && Status_Accreditation == "Eligible For Accreditation"]  
-					(
-						Status_Accreditation as "Status Accreditation"
-						Staff
-						Required_Accreditation as "Required Accreditation"
-						Due_Date as "Due Date"
-						PD_Hours_Collected as "PD Hours Collected"
-						Staff.Photograph
-						custom action "Mark as Accredited"
-						(
-			  			workflow = Accredit
-						show action in edit record menu = true
-						column header = "Mark as Accredited"
-						)
-					)
-				
+			displayName = "Eligible For Accreditation"
+			show all rows from Accreditation_Details  [Staff.ID == thisapp.helpers.returnEligibleStaff() && Status_Accreditation == "Eligible For Accreditation"]  
+			(
+				Status_Accreditation as "Status Accreditation"
+				Staff
+				Required_Accreditation as "Required Accreditation"
+				Due_Date as "Due Date"
+				PD_Hours_Collected as "PD Hours Collected"
+				Staff.Photograph
+				custom action "Mark as Accredited"
+				(
+	  			workflow = Accredit
+				show action in edit record menu = true
+				column header = "Mark as Accredited"
+				)
+			)
 		
 }

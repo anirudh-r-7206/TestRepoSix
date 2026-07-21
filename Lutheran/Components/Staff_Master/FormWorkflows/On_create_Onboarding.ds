@@ -1,53 +1,51 @@
 On_create_Onboarding as "On create Onboarding"
 {
 
-			
-							type =  form
-							form = Staff_Master
-			
-							record event = on add
-			
-							on success
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(Onboarding == true)
-													{
-														if(input.Max_Stage_Reached == null)
-														{
-															input.Max_Stage_Reached = 0;
-														}
-														if(input.status.isEmpty())
-														{
-															input.status = "Draft";
-														}
-														// 	input.Onboarding = false;
-														openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.ID,"same window");
-													}
-													else if(input.Overall_Admin == true)
-													{
-														thisapp.initial.seedPositions();
-														input.Admin_Type = "Overall Admin";
-														fetCurrentpos = Positions[position_name == "Administrative Officer"];
-														input.Current_Position = fetCurrentpos.ID;
-														input.status = "Active";
-														insercStaffEMP = insert into Staff_Employment
-														[
-															Staff=input.ID
-															FTE=input.FTE
-															Position=input.Current_Position
-															Admin_Type=input.Admin_Type
-															Added_User=zoho.loginuser
-														];
-														input.Overall_Admin = false;
-														openUrl("#Page:Staff_Search","same window");
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Master
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Onboarding == true)
+										{
+											if(input.Max_Stage_Reached == null)
+											{
+												input.Max_Stage_Reached = 0;
+											}
+											if(input.status.isEmpty())
+											{
+												input.status = "Draft";
+											}
+											// 	input.Onboarding = false;
+											openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.ID,"same window");
+										}
+										else if(input.Overall_Admin == true)
+										{
+											thisapp.initial.seedPositions();
+											input.Admin_Type = "Overall Admin";
+											fetCurrentpos = Positions[position_name == "Administrative Officer"];
+											input.Current_Position = fetCurrentpos.ID;
+											input.status = "Active";
+											insercStaffEMP = insert into Staff_Employment
+											[
+												Staff=input.ID
+												FTE=input.FTE
+												Position=input.Current_Position
+												Admin_Type=input.Admin_Type
+												Added_User=zoho.loginuser
+											];
+											input.Overall_Admin = false;
+											openUrl("#Page:Staff_Search","same window");
+										}
+						)
+					}
+				}
+
 			
 }

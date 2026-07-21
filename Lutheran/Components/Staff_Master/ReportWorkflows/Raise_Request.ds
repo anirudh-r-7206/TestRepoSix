@@ -1,20 +1,18 @@
 Raise_Request as "Raise Request"
 {
 
-			
-							type =  functions
-							form = Staff_Master
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									openUrl("#Form:Staff_Request?Staff=" + input.ID + "&zc_NextUrl=#Script:page.refresh","popup window");
-								)
-								}
-							}
-						
+				type =  functions
+				form = Staff_Master
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						openUrl("#Form:Staff_Request?Staff=" + input.ID + "&zc_NextUrl=#Script:page.refresh","popup window");
+					)
+					}
+				}
 			
 }

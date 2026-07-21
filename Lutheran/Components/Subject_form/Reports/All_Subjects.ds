@@ -1,12 +1,10 @@
 default list All_Subjects
 {
 
-		
-					displayName = "Subjects"
-					show all rows from Subject_form    
-					(
-						subject_field as "Subject"
-					)
-				
+			displayName = "Subjects"
+			show all rows from Subject_form    
+			(
+				subject_field as "Subject"
+			)
 		
 }

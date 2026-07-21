@@ -1,63 +1,61 @@
 report My_Approved_Training_Requests
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Compliance_Training as " Compliance Training"
-										Training_Type as "Training Type"
-										Completion_Date as "Completion Date"
-										Evidence_File as "Evidence File "
-									)
-								)
+								Compliance_Training as " Compliance Training"
+								Training_Type as "Training Type"
+								Completion_Date as "Completion Date"
+								Evidence_File as "Evidence File "
 							)
-								menu
-								(
-									header
-									(
-									)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-				 				type = 2
-								datablock1
-								(
-				     				title = "Overview"
-									fields
-									(
-										Compliance_Training as " Compliance Training"
-										Training_Type as "Training Type"
-										Completion_Date as "Completion Date"
-										Evidence_File as "Evidence File "
-										Status
-									)
-								)
 							)
-								menu
-								(
-									header
-									(
-										Delete 
-									)
-								)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								Compliance_Training as " Compliance Training"
+								Training_Type as "Training Type"
+								Completion_Date as "Completion Date"
+								Evidence_File as "Evidence File "
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Delete 
+							)
+						)
+				)
+			
 }

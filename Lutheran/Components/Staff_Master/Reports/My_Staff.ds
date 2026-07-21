@@ -1,34 +1,32 @@
 custom My_Staff
 {
 
-		
-					displayName = "My Staff"
-					show all rows from Staff_Master  [ID == thisapp.helpers.returnEligibleStaff()]  
-					(
-						date_of_birth as "Date Of Birth"
-						origin as "Origin"
-						status as "Status"
-						Name 
-						Current_Position as "Current Position"
-						FTE
-						Teacher_Type as "Teacher Type"
-						Photograph
-						Staff_Email as "Staff Email"
-						Phone_Number as "Phone"
-						(
-							displayformat = plainnumber 
-							linktodial = disable
-						)
-						Current_Employment as "Current Employment"
-						Campus
-						Regions
-						gender as "Gender"
-						Previous_Surname as "Previous  Surname "
-						religion as "Religion"
-						Admin_Type as "Admin Type"
-						Organisation as "National"
-						Teaching_Staff as "Teaching Staff"
-						Surname as "Middle name"
-					)
-		
+			displayName = "My Staff"
+			show all rows from Staff_Master  [ID == thisapp.helpers.returnEligibleStaff()]  
+			(
+				date_of_birth as "Date Of Birth"
+				origin as "Origin"
+				status as "Status"
+				Name 
+				Current_Position as "Current Position"
+				FTE
+				Teacher_Type as "Teacher Type"
+				Photograph
+				Staff_Email as "Staff Email"
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = disable
+				)
+				Current_Employment as "Current Employment"
+				Campus
+				Regions
+				gender as "Gender"
+				Previous_Surname as "Previous  Surname "
+				religion as "Religion"
+				Admin_Type as "Admin Type"
+				Organisation as "National"
+				Teaching_Staff as "Teaching Staff"
+				Surname as "Middle name"
+			)
 }

@@ -1,33 +1,31 @@
 default list Training_Completion_Request_Import_Report
 {
 
-		
-					displayName = "Training Completion Request Import Report"
-					show all rows from Training_Completion_Request_Import    
-					(
-						Staff
-						Training_Type as "Training Type"
-						Training_Name as "Training Name"
-						Completion_Date as "Completion Date"
-						Status
-						Reason
-						custom action "Reinsert"
-						(
-			  			workflow = Reinsert
-						show action in edit record menu = true
-						column header = "Reinsert"
-						condition = (Status == "Failed")
-						)
-					)
-					custom actions
-					(
-						"Edit "
-						(
-			  			workflow = Edit1
-						show action in edit record menu = true
-						condition = (Status == "Failed")
-						)
-					)
-				
+			displayName = "Training Completion Request Import Report"
+			show all rows from Training_Completion_Request_Import    
+			(
+				Staff
+				Training_Type as "Training Type"
+				Training_Name as "Training Name"
+				Completion_Date as "Completion Date"
+				Status
+				Reason
+				custom action "Reinsert"
+				(
+	  			workflow = Reinsert
+				show action in edit record menu = true
+				column header = "Reinsert"
+				condition = (Status == "Failed")
+				)
+			)
+			custom actions
+			(
+				"Edit "
+				(
+	  			workflow = Edit1
+				show action in edit record menu = true
+				condition = (Status == "Failed")
+				)
+			)
 		
 }

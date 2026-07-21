@@ -1,316 +1,314 @@
 form School
 {
 
-		
-					success message = "School Info Added Successfully"
-					Section
+			success message = "School Info Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Region
+			(
+				type = picklist	
+				values  = Regions.ID
+    			bidirectional = School
+    			displayformat = [region_name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have school_type
+			(
+				type = picklist
+				displayname = "School Type"
+				maxchar = 100
+				values = {"LCA","ALWS","School","ECSs"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			unique Commonwealth_Govt_School_ID
+			(
+    			type = text
+				displayname = "Commonwealth Govt School ID"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have school_name
+			(
+    			type = text
+				displayname = "School Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have unique School_Email
+			(
+    			type = email
+				displayname = "School Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			ABN
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			school_image
+			(
+    			type = image
+				displayname = "School Image"
+				source  = file
+				aspect ratio = original
+				camera = primary
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			school_address
+			(
+    			type = address
+				displayname = "School Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Web_Address
+			(
+    			type = url
+				displayname = "Web Address"
+				enable  linkname
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Principal_Director
+			(
+				type = picklist	
+				displayname = "Principal/Director"
+				values  = Staff_Master.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Telephone
+			(
+    			type = phonenumber
+    			defaultcountry="au"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Enrollment
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Postal_Address
+			(
+    			type = address
+				displayname = "Postal Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Staff_Generic_Email
+			(
+    			type = email
+				displayname = "Staff Generic Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Council_Chairperson
+			(
+				type = picklist	
+				displayname = "Council Chairperson"
+				values  = Staff_Master.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " - " + Staff_Email]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			School_Hours
+			(
+				type = decimal
+				displayname = "School Hours"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Year_Of_Opening
+			(
+				type = number
+				displayname = "Year of Opening"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Region_Name
+			(
+    			type = formula
+				displayname = "Region Name"
+				value =  ""
+				visibility = false
+				display type = text
+				format = plaintext
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Organisation_Name
+			(
+    			type = formula
+				displayname = "National Name"
+				value =  ""
+				visibility = false
+				display type = text
+				format = plaintext
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Campus
+			(
+				type = grid
+				values  = Campus.ID
+    			bidirectional = School
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					must have Region
+				}
+				on edit
+				{
+					update
 					(
-						type = picklist	
-						values  = Regions.ID
-		    			bidirectional = School
-		    			displayformat = [region_name]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have school_type
+					cancel
 					(
-						type = picklist
-						displayname = "School Type"
-						maxchar = 100
-						values = {"LCA","ALWS","School","ECSs"}
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-					unique Commonwealth_Govt_School_ID
-					(
-		    			type = text
-						displayname = "Commonwealth Govt School ID"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have school_name
-					(
-		    			type = text
-						displayname = "School Name"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have unique School_Email
-					(
-		    			type = email
-						displayname = "School Email"
-						maxchar = 80
-			 			row = 1
-			 			column = 1   
-						width = medium
-						personal data = true
-					)
-					ABN
-					(
-		    			type = text
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					school_image
-					(
-		    			type = image
-						displayname = "School Image"
-						source  = file
-						aspect ratio = original
-						camera = primary
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					school_address
-					(
-		    			type = address
-						displayname = "School Address"
-		     			capture_coordinates = true
-		     			adjust_using_map = false
-		     			address_line_1
-		     			(
-			     			  type = address_line_1
-			     			  displayname = "Address Line 1"
-		     			) 
-		     			address_line_2
-		     			(
-			     			  type = address_line_2
-			     			  displayname = "Address Line 2"
-		     			) 
-		     			district_city
-		     			(
-			     			  type = district_city
-			     			  displayname = "City / District"
-		     			) 
-		     			state_province
-		     			(
-			     			  type = state_province
-			     			  displayname = "State / Province"
-		     			) 
-		     			postal_Code
-		     			(
-			     			  type = postal_Code
-			     			  displayname = "Postal Code"
-		     			) 
-		     			country
-		     			(
-			     			  type = country
-			     			  displayname = "Country"
-		     			) 
-		     			latitude
-		     			(
-			     			  type = latitude
-			     			  displayname = "latitude"
-			     			 visibility = false
-		     			) 
-		     			longitude
-		     			(
-			     			  type = longitude
-			     			  displayname = "longitude"
-			     			 visibility = false
-		     			) 
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have Web_Address
-					(
-		    			type = url
-						displayname = "Web Address"
-						enable  linkname
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have Principal_Director
-					(
-						type = picklist	
-						displayname = "Principal/Director"
-						values  = Staff_Master.ID
-		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have Telephone
-					(
-		    			type = phonenumber
-		    			defaultcountry="au"
-			 			row = 1
-			 			column = 1   
-						width = medium
-						personal data = true
-					)
-					must have Enrollment
-					(
-		    			type = text
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have Postal_Address
-					(
-		    			type = address
-						displayname = "Postal Address"
-		     			capture_coordinates = true
-		     			adjust_using_map = false
-		     			address_line_1
-		     			(
-			     			  type = address_line_1
-			     			  displayname = "Address Line 1"
-		     			) 
-		     			address_line_2
-		     			(
-			     			  type = address_line_2
-			     			  displayname = "Address Line 2"
-		     			) 
-		     			district_city
-		     			(
-			     			  type = district_city
-			     			  displayname = "City / District"
-		     			) 
-		     			state_province
-		     			(
-			     			  type = state_province
-			     			  displayname = "State / Province"
-		     			) 
-		     			postal_Code
-		     			(
-			     			  type = postal_Code
-			     			  displayname = "Postal Code"
-		     			) 
-		     			country
-		     			(
-			     			  type = country
-			     			  displayname = "Country"
-		     			) 
-		     			latitude
-		     			(
-			     			  type = latitude
-			     			  displayname = "latitude"
-			     			 visibility = false
-		     			) 
-		     			longitude
-		     			(
-			     			  type = longitude
-			     			  displayname = "longitude"
-			     			 visibility = false
-		     			) 
-			 			row = 1
-			 			column = 1   
-						width = medium
-						personal data = true
-					)
-					must have Staff_Generic_Email
-					(
-		    			type = email
-						displayname = "Staff Generic Email"
-						maxchar = 80
-			 			row = 1
-			 			column = 1   
-						width = medium
-						personal data = true
-					)
-					Council_Chairperson
-					(
-						type = picklist	
-						displayname = "Council Chairperson"
-						values  = Staff_Master.ID
-		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " - " + Staff_Email]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					School_Hours
-					(
-						type = decimal
-						displayname = "School Hours"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Year_Of_Opening
-					(
-						type = number
-						displayname = "Year of Opening"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Region_Name
-					(
-		    			type = formula
-						displayname = "Region Name"
-						value =  ""
-						visibility = false
-						display type = text
-						format = plaintext
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Organisation_Name
-					(
-		    			type = formula
-						displayname = "National Name"
-						value =  ""
-						visibility = false
-						display type = text
-						format = plaintext
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Campus
-					(
-						type = grid
-						values  = Campus.ID
-		    			bidirectional = School
-			 			row = 2
-			 			column = 1   
-						width = medium
-					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

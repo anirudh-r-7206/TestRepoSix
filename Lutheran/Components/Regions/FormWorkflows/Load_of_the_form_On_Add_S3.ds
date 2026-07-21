@@ -1,27 +1,25 @@
 Load_of_the_form_On_Add_S3 as "Load of the form - On Add Scripts"
 {
 
-			
-							type =  form
-							form = Regions
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														region = Regions[ID != null];
-													if(region.count() == 0)
-													{
-														input.Main_Organisation = Organisation[ID != null].ID;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Regions
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											region = Regions[ID != null];
+										if(region.count() == 0)
+										{
+											input.Main_Organisation = Organisation[ID != null].ID;
+										}
+						)
+					}
+				}
+
 			
 }

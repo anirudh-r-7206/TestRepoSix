@@ -1,75 +1,73 @@
 On_load as "On load"
 {
 
-			
-							type =  form
-							form = Add_Remove_Representation_Team
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide From_Field;
-													if(input.Staff_Master != null && !input.Staff_Master.isEmpty() && input.Staff_Master.size() > 0)
-													{
-														disable Staff_Master;
-													}
-													if(input.Representation_Team != null && !input.Representation_Team.isEmpty() && input.Representation_Team.size() > 0)
-													{
-														disable Representation_Team;
-													}
-													/* =========================
-																							 				 														   FROM = COMMITTEE (STRICT LOGIC)
-																							 				 														========================= */
-													if(input.From_Field == "Representation/Team")
-													{
-														fetComInfo = Representation_Team[ID == input.Representation_Team];
-														existingStaff = List();
-														if(fetComInfo.Staff_Master != null)
-														{
-															existingStaff = fetComInfo.Staff_Master.getAll();
-														}
-														/* =========================
-																							 				 															   COMMITTEE SCOPE (STRICT)
-																							 				 															========================= */
-														comScope = List();
-														if(fetComInfo.Type_field == "National")
-														{
-															comScope = Staff_Master[Organisation == fetComInfo.Organisation && status == "Active"].ID.getAll();
-														}
-														else if(fetComInfo.Type_field == "Region")
-														{
-															comScope = Staff_Master[Regions == fetComInfo.Regions && status == "Active"].ID.getAll();
-														}
-														else if(fetComInfo.Type_field == "School")
-														{
-															comScope = Staff_Master[Current_Employment == fetComInfo.School && status == "Active"].ID.getAll();
-														}
-														else if(fetComInfo.Type_field == "Campus")
-														{
-															comScope = Staff_Master[Campus == fetComInfo.Campus && status == "Active"].ID.getAll();
-														}
-														/* =========================
-																							 				 															   ADD
-																							 				 															========================= */
-														if(input.Action_field == "Add")
-														{
-															comScope.removeAll(existingStaff);
-															input.Staff_Master:ui.add(comScope);
-														}
-														if(input.Action_field == "Remove")
-														{
-															input.Staff_Master:ui.add(existingStaff);
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Add_Remove_Representation_Team
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide From_Field;
+										if(input.Staff_Master != null && !input.Staff_Master.isEmpty() && input.Staff_Master.size() > 0)
+										{
+											disable Staff_Master;
+										}
+										if(input.Representation_Team != null && !input.Representation_Team.isEmpty() && input.Representation_Team.size() > 0)
+										{
+											disable Representation_Team;
+										}
+										/* =========================
+																				 				 														   FROM = COMMITTEE (STRICT LOGIC)
+																				 				 														========================= */
+										if(input.From_Field == "Representation/Team")
+										{
+											fetComInfo = Representation_Team[ID == input.Representation_Team];
+											existingStaff = List();
+											if(fetComInfo.Staff_Master != null)
+											{
+												existingStaff = fetComInfo.Staff_Master.getAll();
+											}
+											/* =========================
+																				 				 															   COMMITTEE SCOPE (STRICT)
+																				 				 															========================= */
+											comScope = List();
+											if(fetComInfo.Type_field == "National")
+											{
+												comScope = Staff_Master[Organisation == fetComInfo.Organisation && status == "Active"].ID.getAll();
+											}
+											else if(fetComInfo.Type_field == "Region")
+											{
+												comScope = Staff_Master[Regions == fetComInfo.Regions && status == "Active"].ID.getAll();
+											}
+											else if(fetComInfo.Type_field == "School")
+											{
+												comScope = Staff_Master[Current_Employment == fetComInfo.School && status == "Active"].ID.getAll();
+											}
+											else if(fetComInfo.Type_field == "Campus")
+											{
+												comScope = Staff_Master[Campus == fetComInfo.Campus && status == "Active"].ID.getAll();
+											}
+											/* =========================
+																				 				 															   ADD
+																				 				 															========================= */
+											if(input.Action_field == "Add")
+											{
+												comScope.removeAll(existingStaff);
+												input.Staff_Master:ui.add(comScope);
+											}
+											if(input.Action_field == "Remove")
+											{
+												input.Staff_Master:ui.add(existingStaff);
+											}
+										}
+						)
+					}
+				}
+
 			
 }

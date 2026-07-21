@@ -1,35 +1,33 @@
 void mail.sendAccreditationRenewalEmail(int accreditationId)
 {
 
-			
-			                 	accRec = Accreditation_Details[ID == accreditationId];
-			                 	if(accRec.count() > 0)
-			                 	{
-			                 		staffRec = Staff_Master[ID == accRec.Staff];
-			                 		if(staffRec.count() > 0 && !isEmpty(staffRec.Staff_Email))
-			                 		{
-			                 			accreditationLink = "<a href='https://creator.zoho.com" + zoho.appuri + "#Report:My_Pending_Compliance_Trainings" + "'>Click here to view pending trainings</a>";
-			                 			staffName = staffRec.Name.prefix + " " + staffRec.Name.first_name + " " + staffRec.Name.last_name;
-			                 			accreditationName = accRec.Required_Accreditation.Accreditation_Name;
-			                 			template = Email_Templates[Template_Name == "Accreditation_Renewal_Email"];
-			                 			if(template.count() > 0)
-			                 			{
-			                 				subjectText = template.Subject_field;
-			                 				subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
-			                 				messageContent = template.Email_Content;
-			                 				messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
-			                 				messageContent = messageContent.replaceAll("${Accreditation_Name}",accreditationName,true);
-			                 				messageContent = messageContent.replaceAll("${Accreditation_Link}",accreditationLink,true);
-			                 				sendmail
-			                 				[
-			                 					from :zoho.adminuserid
-			                 					to :staffRec.Staff_Email
-			                 					subject :subjectText
-			                 					message :messageContent
-			                 				]
-			                 			}
-			                 		}
-			                 	}
-			                 
-			
+                 	accRec = Accreditation_Details[ID == accreditationId];
+                 	if(accRec.count() > 0)
+                 	{
+                 		staffRec = Staff_Master[ID == accRec.Staff];
+                 		if(staffRec.count() > 0 && !isEmpty(staffRec.Staff_Email))
+                 		{
+                 			accreditationLink = "<a href='https://creator.zoho.com" + zoho.appuri + "#Report:My_Pending_Compliance_Trainings" + "'>Click here to view pending trainings</a>";
+                 			staffName = staffRec.Name.prefix + " " + staffRec.Name.first_name + " " + staffRec.Name.last_name;
+                 			accreditationName = accRec.Required_Accreditation.Accreditation_Name;
+                 			template = Email_Templates[Template_Name == "Accreditation_Renewal_Email"];
+                 			if(template.count() > 0)
+                 			{
+                 				subjectText = template.Subject_field;
+                 				subjectText = subjectText.replaceAll("${Staff_Name}",staffName,true);
+                 				messageContent = template.Email_Content;
+                 				messageContent = messageContent.replaceAll("${Staff_Name}",staffName,true);
+                 				messageContent = messageContent.replaceAll("${Accreditation_Name}",accreditationName,true);
+                 				messageContent = messageContent.replaceAll("${Accreditation_Link}",accreditationLink,true);
+                 				sendmail
+                 				[
+                 					from :zoho.adminuserid
+                 					to :staffRec.Staff_Email
+                 					subject :subjectText
+                 					message :messageContent
+                 				]
+                 			}
+                 		}
+                 	}
+                 
 }

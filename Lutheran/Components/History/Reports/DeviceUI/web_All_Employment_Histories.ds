@@ -1,80 +1,78 @@
 report All_Employment_Histories
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										Comment
-										Staff
-										Staff_Request as "Staff Request"
-										Action_field as "Action"
-										Action_By as "Action By"
-										Training_Completion_Request as "Training Completion Request"
-									)
-								)
+								Comment
+								Staff
+								Staff_Request as "Staff Request"
+								Action_field as "Action"
+								Action_By as "Action By"
+								Training_Completion_Request as "Training Completion Request"
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-										Duplicate 
-										Delete 
-									)
-								record
-								(
-									Duplicate   	   
-									Delete   	   
-		    					)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									Delete   	   
-									Duplicate   	   
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-								datablock1
-								(
-									fields
-									(
-										Comment
-										Staff
-										Staff_Request as "Staff Request"
-										Action_field as "Action"
-										Action_By as "Action By"
-										Training_Completion_Request as "Training Completion Request"
-									)
-								)
+								Edit 
+								Duplicate 
+								Delete 
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-										Duplicate 
-										Delete 
-									)
-								)
+						record
+						(
+							Duplicate   	   
+							Delete   	   
+    					)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Comment
+								Staff
+								Staff_Request as "Staff Request"
+								Action_field as "Action"
+								Action_By as "Action By"
+								Training_Completion_Request as "Training Completion Request"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			
 }

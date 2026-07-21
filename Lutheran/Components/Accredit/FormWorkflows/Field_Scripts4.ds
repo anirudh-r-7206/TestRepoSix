@@ -1,21 +1,19 @@
 Field_Scripts4 as "Field Scripts"
 {
 
-			
-							type =  form
-							form = Accredit
-			
-							record event = on add
-			
-							field rules
-							{
-								actions 
-								{
-									hide Accreditation;
-									disable Renewal_Date;
-								}
-							}
-			
-						
+				type =  form
+				form = Accredit
+
+				record event = on add
+
+				field rules
+				{
+					actions 
+					{
+						hide Accreditation;
+						disable Renewal_Date;
+					}
+				}
+
 			
 }

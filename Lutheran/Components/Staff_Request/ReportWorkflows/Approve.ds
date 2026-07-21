@@ -1,79 +1,77 @@
 Approve as "Approve"
 {
 
-			
-							type =  functions
-							form = Staff_Request
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									approved_by = "";
-													login_user = Staff_Master[Staff_Email == zoho.loginuser && status == "Active"];
-													next_approver = thisapp.helpers.returnStaffRequestNextApprover(input.Next_Approver,input.Raised_by,input.ID);
-													if(input.Next_Approver == "School Admin")
-													{
-														approved_by = input.Next_Approver;
-														if(next_approver == "")
-														{
-															input.Next_Approver = null;
-															input.Status = "Approved";
-															if(input.Effective_Date <= zoho.currentdate)
-															{
-																thisapp.helpers.processStaffRequest(input.ID);
-															}
-														}
-														else
-														{
-															input.Next_Approver = next_approver;
-															thisapp.mail.sendApprovalPending(input.ID);
-														}
-													}
-													else if(input.Next_Approver == "Region Admin")
-													{
-														approved_by = input.Next_Approver;
-														if(next_approver == "")
-														{
-															input.Next_Approver = null;
-															input.Status = "Approved";
-															thisapp.mail.sendRequestApproved(input.ID);
-															if(input.Effective_Date <= zoho.currentdate)
-															{
-																thisapp.helpers.processStaffRequest(input.ID);
-															}
-														}
-														else
-														{
-															input.Next_Approver = next_approver;
-															thisapp.mail.sendApprovalPending(input.ID);
-														}
-													}
-													else if(input.Next_Approver == "National Admin")
-													{
-														approved_by = input.Next_Approver;
-														input.Next_Approver = null;
-														input.Status = "Approved";
-														thisapp.mail.sendRequestApproved(input.ID);
-														if(input.Effective_Date <= zoho.currentdate)
-														{
-															thisapp.helpers.processStaffRequest(input.ID);
-														}
-													}
-													insert into History
-													[
-														Staff_Request=input.ID
-														Comment="The request has been approved by " + approved_by
-														Action_By=Staff_Master[Staff_Email == zoho.loginuserid].ID
-														Action_field="Request Approved"
-														Added_User=zoho.loginuser
-													]
-													openUrl("#Script:page.parent.refresh","same window");
-								)
-								}
-							}
-						
+				type =  functions
+				form = Staff_Request
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						approved_by = "";
+										login_user = Staff_Master[Staff_Email == zoho.loginuser && status == "Active"];
+										next_approver = thisapp.helpers.returnStaffRequestNextApprover(input.Next_Approver,input.Raised_by,input.ID);
+										if(input.Next_Approver == "School Admin")
+										{
+											approved_by = input.Next_Approver;
+											if(next_approver == "")
+											{
+												input.Next_Approver = null;
+												input.Status = "Approved";
+												if(input.Effective_Date <= zoho.currentdate)
+												{
+													thisapp.helpers.processStaffRequest(input.ID);
+												}
+											}
+											else
+											{
+												input.Next_Approver = next_approver;
+												thisapp.mail.sendApprovalPending(input.ID);
+											}
+										}
+										else if(input.Next_Approver == "Region Admin")
+										{
+											approved_by = input.Next_Approver;
+											if(next_approver == "")
+											{
+												input.Next_Approver = null;
+												input.Status = "Approved";
+												thisapp.mail.sendRequestApproved(input.ID);
+												if(input.Effective_Date <= zoho.currentdate)
+												{
+													thisapp.helpers.processStaffRequest(input.ID);
+												}
+											}
+											else
+											{
+												input.Next_Approver = next_approver;
+												thisapp.mail.sendApprovalPending(input.ID);
+											}
+										}
+										else if(input.Next_Approver == "National Admin")
+										{
+											approved_by = input.Next_Approver;
+											input.Next_Approver = null;
+											input.Status = "Approved";
+											thisapp.mail.sendRequestApproved(input.ID);
+											if(input.Effective_Date <= zoho.currentdate)
+											{
+												thisapp.helpers.processStaffRequest(input.ID);
+											}
+										}
+										insert into History
+										[
+											Staff_Request=input.ID
+											Comment="The request has been approved by " + approved_by
+											Action_By=Staff_Master[Staff_Email == zoho.loginuserid].ID
+											Action_field="Request Approved"
+											Added_User=zoho.loginuser
+										]
+										openUrl("#Script:page.parent.refresh","same window");
+					)
+					}
+				}
 			
 }

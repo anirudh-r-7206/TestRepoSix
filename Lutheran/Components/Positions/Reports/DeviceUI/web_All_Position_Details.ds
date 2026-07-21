@@ -1,67 +1,65 @@
 report All_Position_Details
 {
 
-		
-						quickview
+				quickview
+				(
+					layout
+					(
+						datablock1
 						(
-							layout
+							fields
 							(
-								datablock1
-								(
-									fields
-									(
-										position_name as "Position Name"
-										applicable_for as "Applicable For"
-									)
-								)
+								position_name as "Position Name"
+								applicable_for as "Applicable For"
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								record
-								(
-									Edit   	   
-									Delete   	   
-		    					)
-								)
-		    				action
-		    				(
-								on click
-								(
-									View Record   	   
-		    					)
-								on right click
-								(
-									Edit   	   
-									View Record   	   
-		    					)
-		     				)
 						)
-		
-						detailview
+					)
+						menu
 						(
-							layout
+							header
 							(
-								datablock1
-								(
-									fields
-									(
-										position_name as "Position Name"
-										applicable_for as "Applicable For"
-									)
-								)
+								Edit 
 							)
-								menu
-								(
-									header
-									(
-										Edit 
-									)
-								)
+						record
+						(
+							Edit   	   
+							Delete   	   
+    					)
 						)
-					
-		
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								position_name as "Position Name"
+								applicable_for as "Applicable For"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						)
+				)
+			
 }

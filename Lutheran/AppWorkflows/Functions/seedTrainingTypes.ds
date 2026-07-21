@@ -1,33 +1,31 @@
 void initial.seedTrainingTypes()
 {
 
-			
-			                 	trainingTypes = List();
-			                 	trainingTypes.add({"Training":"Induction","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"Early years leaders","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"Ministry","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"Leadership Course","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"Connect","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"Equip 2","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"Equip 1","Type_field":"Accreditation"});
-			                 	trainingTypes.add({"Training":"PD Hours","Type_field":"Others"});
-			                 	trainingTypes.add({"Training":"First_Aid","Type_field":"Others"});
-			                 	trainingTypes.add({"Training":"Teacher_Registration","Type_field":"Others"});
-			                 	trainingTypes.add({"Training":"VSC_Module2_FaceToFace","Type_field":"Others"});
-			                 	trainingTypes.add({"Training":"VSC_Module1","Type_field":"Others"});
-			                 	for each  tt in trainingTypes
-			                 	{
-			                 		existing = Training_Type[Training == tt.get("Training")];
-			                 		if(existing.count() == 0)
-			                 		{
-			                 			insert into Training_Type
-			                 			[
-			                 				Training=tt.get("Training")
-			                 				Type_field=tt.get("Type_field")
-			                 				Added_User=zoho.loginuser
-			                 			]
-			                 		}
-			                 	}
-			                 
-			
+                 	trainingTypes = List();
+                 	trainingTypes.add({"Training":"Induction","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"Early years leaders","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"Ministry","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"Leadership Course","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"Connect","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"Equip 2","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"Equip 1","Type_field":"Accreditation"});
+                 	trainingTypes.add({"Training":"PD Hours","Type_field":"Others"});
+                 	trainingTypes.add({"Training":"First_Aid","Type_field":"Others"});
+                 	trainingTypes.add({"Training":"Teacher_Registration","Type_field":"Others"});
+                 	trainingTypes.add({"Training":"VSC_Module2_FaceToFace","Type_field":"Others"});
+                 	trainingTypes.add({"Training":"VSC_Module1","Type_field":"Others"});
+                 	for each  tt in trainingTypes
+                 	{
+                 		existing = Training_Type[Training == tt.get("Training")];
+                 		if(existing.count() == 0)
+                 		{
+                 			insert into Training_Type
+                 			[
+                 				Training=tt.get("Training")
+                 				Type_field=tt.get("Type_field")
+                 				Added_User=zoho.loginuser
+                 			]
+                 		}
+                 	}
+                 
 }

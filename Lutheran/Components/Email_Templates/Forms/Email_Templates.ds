@@ -1,79 +1,77 @@
 form Email_Templates
 {
 
-		
-					displayname = "Email Templates"
-					success message = "Email Template Added Successfully"
-					Section
+			displayname = "Email Templates"
+			success message = "Email Template Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "Add your Note here ..."
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Template_Name
+			(
+    			type = text
+				displayname = "Template Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Subject_field
+			(
+    			type = text
+				displayname = "Subject"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Email_Content
+			(
+    			type = richtext
+				displayname = "Email Content"
+				height = 200px
+				toolbar = enable
+				[
+					style, font-color, background-color, link, bullets-and-numbering, 
+					font-size : {1, 2, 3, 4, 5, 6, 7}
+				]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					plain
+				}
+				on edit
+				{
+					update
 					(
-		    			type = plaintext
-						value = "Add your Note here ..."
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					Template_Name
+					cancel
 					(
-		    			type = text
-						displayname = "Template Name"
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-					Subject_field
-					(
-		    			type = text
-						displayname = "Subject"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Email_Content
-					(
-		    			type = richtext
-						displayname = "Email Content"
-						height = 200px
-						toolbar = enable
-						[
-							style, font-color, background-color, link, bullets-and-numbering, 
-							font-size : {1, 2, 3, 4, 5, 6, 7}
-						]
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

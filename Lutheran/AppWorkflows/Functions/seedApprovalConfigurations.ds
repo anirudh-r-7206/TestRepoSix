@@ -1,31 +1,29 @@
 void initial.seedApprovalConfigurations()
 {
 
-			
-			                 	configs = List();
-			                 	configs.add({"Request_Type":"Training","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":true});
-			                 	configs.add({"Request_Type":"Sabbatical Leave","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
-			                 	configs.add({"Request_Type":"Deceased","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
-			                 	configs.add({"Request_Type":"Resignation","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
-			                 	configs.add({"Request_Type":"Transfer","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
-			                 	configs.add({"Request_Type":"Position Update","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
-			                 	configs.add({"Request_Type":"New Staff","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
-			                 	for each  config in configs
-			                 	{
-			                 		existing = Approval_Configuration[Request_Type == config.get("Request_Type")];
-			                 		if(existing.count() == 0)
-			                 		{
-			                 			insert into Approval_Configuration
-			                 			[
-			                 				Request_Type=config.get("Request_Type")
-			                 				National_Admin=config.get("National_Admin")
-			                 				Region_Admin=config.get("Region_Admin")
-			                 				School_Admin=config.get("School_Admin")
-			                 				Campus_Admin=config.get("Campus_Admin")
-			                 				Added_User=zoho.loginuser
-			                 			]
-			                 		}
-			                 	}
-			                 
-			
+                 	configs = List();
+                 	configs.add({"Request_Type":"Training","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":true});
+                 	configs.add({"Request_Type":"Sabbatical Leave","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
+                 	configs.add({"Request_Type":"Deceased","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
+                 	configs.add({"Request_Type":"Resignation","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
+                 	configs.add({"Request_Type":"Transfer","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
+                 	configs.add({"Request_Type":"Position Update","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
+                 	configs.add({"Request_Type":"New Staff","National_Admin":true,"Region_Admin":true,"School_Admin":true,"Campus_Admin":false});
+                 	for each  config in configs
+                 	{
+                 		existing = Approval_Configuration[Request_Type == config.get("Request_Type")];
+                 		if(existing.count() == 0)
+                 		{
+                 			insert into Approval_Configuration
+                 			[
+                 				Request_Type=config.get("Request_Type")
+                 				National_Admin=config.get("National_Admin")
+                 				Region_Admin=config.get("Region_Admin")
+                 				School_Admin=config.get("School_Admin")
+                 				Campus_Admin=config.get("Campus_Admin")
+                 				Added_User=zoho.loginuser
+                 			]
+                 		}
+                 	}
+                 
 }

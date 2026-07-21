@@ -1,90 +1,88 @@
 form Employee_Filter
 {
 
-		
-					store data in zc = false
-					success message = "Data Added Successfully!"
-					Section
-					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
-					)
-					Current_Page
-					(
-		    			type = text
-						displayname = "Current Page"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Search_Staff
-					(
-		    			type = text
-						displayname = "Search by first or last name"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Search_Contact
-					(
-						type = number
-						displayname = "Search Contact"
-						maxchar = 19
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Search_School
-					(
-						type = picklist	
-						displayname = "Search School"
-						values  = School.ID
-		    			displayformat = [school_name]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Select_Region
-					(
-						type = picklist	
-						displayname = "Select Region "
-						values  = Regions.ID
-		    			displayformat = [region_name]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Search_Contact_Number
-					(
-		    			type = phonenumber
-						displayname = "Search Contact Number"
-		    			defaultcountry="au"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Search_DOB
-					(
-		    			type = date
-						displayname = "Search DOB"
-						alloweddays = 0,1,2,3,4,5,6
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-			
-					actions
-					{
-						Search
-						(
-		   					type = button
-		   					displayname = "Search"
-						)
-					}
-				
+			store data in zc = false
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Current_Page
+			(
+    			type = text
+				displayname = "Current Page"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Search_Staff
+			(
+    			type = text
+				displayname = "Search by first or last name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Search_Contact
+			(
+				type = number
+				displayname = "Search Contact"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Search_School
+			(
+				type = picklist	
+				displayname = "Search School"
+				values  = School.ID
+    			displayformat = [school_name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Select_Region
+			(
+				type = picklist	
+				displayname = "Select Region "
+				values  = Regions.ID
+    			displayformat = [region_name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Search_Contact_Number
+			(
+    			type = phonenumber
+				displayname = "Search Contact Number"
+    			defaultcountry="au"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Search_DOB
+			(
+    			type = date
+				displayname = "Search DOB"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				Search
+				(
+   					type = button
+   					displayname = "Search"
+				)
+			}
 		
 }

@@ -1,58 +1,56 @@
 form Training_Type
 {
 
-		
-					displayname = "Training Type"
-					success message = "Training Type Added Successfully"
-					Section
+			displayname = "Training Type"
+			success message = "Training Type Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Training
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Type_field
+			(
+				type = picklist
+				displayname = "Type"
+				maxchar = 100
+				values = {"Accreditation","Others"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					must have unique Training
+				}
+				on edit
+				{
+					update
 					(
-		    			type = text
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have Type_field
+					cancel
 					(
-						type = picklist
-						displayname = "Type"
-						maxchar = 100
-						values = {"Accreditation","Others"}
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

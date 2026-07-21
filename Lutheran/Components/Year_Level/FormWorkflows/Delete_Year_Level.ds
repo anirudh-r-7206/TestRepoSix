@@ -1,31 +1,29 @@
 Delete_Year_Level as "Delete Year Level"
 {
 
-			
-							type =  form
-							form = Year_Level
-			
-							record event = on delete
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														staff_masters = Staff_Master[Year_Level == input.ID];
-													staff_employments = Staff_Employment[Year_Level == input.ID];
-													staff_requests = Staff_Request[Year_Level == input.ID];
-													isImplemented = staff_masters.count() > 0 || staff_employments.count() > 0 || staff_requests.count() > 0;
-													if(isImplemented)
-													{
-														alert "Year Level has been linked to few modules. Please unlink them to delete this Year Level.";
-														cancel delete;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Year_Level
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											staff_masters = Staff_Master[Year_Level == input.ID];
+										staff_employments = Staff_Employment[Year_Level == input.ID];
+										staff_requests = Staff_Request[Year_Level == input.ID];
+										isImplemented = staff_masters.count() > 0 || staff_employments.count() > 0 || staff_requests.count() > 0;
+										if(isImplemented)
+										{
+											alert "Year Level has been linked to few modules. Please unlink them to delete this Year Level.";
+											cancel delete;
+										}
+						)
+					}
+				}
+
 			
 }

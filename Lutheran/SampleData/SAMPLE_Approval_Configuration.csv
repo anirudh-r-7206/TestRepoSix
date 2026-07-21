@@ -1,0 +1,6 @@
+"Request_Type","National_Admin","Region_Admin","School_Admin","Campus_Admin"
+"New Staff","true","true","true","false"
+"Position Update","true","true","false","false"
+"Transfer","true","true","true","true"
+"Resignation","true","false","true","false"
+"Training","false","true","true","true"

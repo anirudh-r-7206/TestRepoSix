@@ -1,29 +1,27 @@
 roles
 {
-
-	    "CEO"
-	    {
-	        description = "User belonging to this role can access data of all other users."
-	        "National Admin"
-	        {
-	            description = "National administration role"
-	            "Region Admin"
-	            {
-	                description = "Regional administration role"
-	                "School Admin"
-	                {
-	                    description = "School administration role"
-	                    "Campus Admin"
-	                    {
-	                        description = "Campus administration role"
-	                        "Staff"
-	                        {
-	                            description = "Staff role"
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    }
-	
+    "CEO"
+    {
+        description = "User belonging to this role can access data of all other users."
+        "National Admin"
+        {
+            description = "National administration role"
+            "Region Admin"
+            {
+                description = "Regional administration role"
+                "School Admin"
+                {
+                    description = "School administration role"
+                    "Campus Admin"
+                    {
+                        description = "Campus administration role"
+                        "Staff"
+                        {
+                            description = "Staff role"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

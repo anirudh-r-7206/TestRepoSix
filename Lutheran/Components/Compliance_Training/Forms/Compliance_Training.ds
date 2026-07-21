@@ -1,123 +1,121 @@
 form Compliance_Training
 {
 
-		
-					title 
-		    		{
-						displayname = "Compliance Training"
-		    			on add = "Compliance Training"
-		   	 			on edit = "Approve"
-					}
-					success message = "Compliance Training Added Successfully"
-					Section
+			title 
+    		{
+				displayname = "Compliance Training"
+    			on add = "Compliance Training"
+   	 			on edit = "Approve"
+			}
+			success message = "Compliance Training Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Accreditation_Details
+			(
+				type = picklist	
+				displayname = "Accreditation Details"
+				values  = Accreditation_Details.ID
+    			bidirectional = Training_Completed
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Staff
+			(
+				type = picklist	
+				values  = Staff_Master.ID
+    			bidirectional = Trainings
+    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Training_Type
+			(
+				type = picklist	
+				displayname = "Training Type"
+				values  = Training_Type[Type_field == "Others"].ID
+    			displayformat = [Training]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Training_Name
+			(
+    			type = text
+				displayname = "Training Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Completion_Date
+			(
+    			type = date
+				displayname = "Completion Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Hours_Number_for_PD
+			(
+				type = number
+				displayname = "PD Hours"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Pending","Completed"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Completion_Request_Raised
+			(
+    			type = checkbox
+				displayname = "Completion Request Raised?"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
 					(
-						type = section
-			 			row = 1
-			 			column = 0   
-						width = medium
+   						type = submit
+   						displayname = "Submit"
 					)
-					Accreditation_Details
+				}
+				on edit
+				{
+					update
 					(
-						type = picklist	
-						displayname = "Accreditation Details"
-						values  = Accreditation_Details.ID
-		    			bidirectional = Training_Completed
-		    			displayformat = [ID]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = submit
+   						displayname = "Update"
 					)
-					must have Staff
+					cancel
 					(
-						type = picklist	
-						values  = Staff_Master.ID
-		    			bidirectional = Trainings
-		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
+   						type = cancel
+   						displayname = "Cancel"
 					)
-					must have Training_Type
-					(
-						type = picklist	
-						displayname = "Training Type"
-						values  = Training_Type[Type_field == "Others"].ID
-		    			displayformat = [Training]
-						sortorder = ascending
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					must have Training_Name
-					(
-		    			type = text
-						displayname = "Training Name"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Completion_Date
-					(
-		    			type = date
-						displayname = "Completion Date"
-						alloweddays = 0,1,2,3,4,5,6
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Hours_Number_for_PD
-					(
-						type = number
-						displayname = "PD Hours"
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Status
-					(
-						type = picklist
-						maxchar = 100
-						values = {"Pending","Completed"}
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-					Completion_Request_Raised
-					(
-		    			type = checkbox
-						displayname = "Completion Request Raised?"
-						initial value = false
-			 			row = 1
-			 			column = 1   
-						width = medium
-					)
-			
-					actions
-					{
-						on add
-						{
-							submit
-							(
-		   						type = submit
-		   						displayname = "Submit"
-							)
-						}
-						on edit
-						{
-							update
-							(
-		   						type = submit
-		   						displayname = "Update"
-							)
-							cancel
-							(
-		   						type = cancel
-		   						displayname = "Cancel"
-							)
-						}
-					}
-				
+				}
+			}
 		
 }

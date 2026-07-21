@@ -1,23 +1,21 @@
 Hide_show4 as "Hide / show"
 {
 
-			
-							type =  form
-							form = Regions
-			
-							record event = on add or edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide School;
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Regions
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide School;
+						)
+					}
+				}
+
 			
 }

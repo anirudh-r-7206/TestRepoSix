@@ -1,8 +1,6 @@
 int helpers.returnDaysBetween(string start, string end)
 {
 
-			
-			                 	return start.toDate().daysBetween(end.toDate());
-			                 
-			
+                 	return start.toDate().daysBetween(end.toDate());
+                 
 }

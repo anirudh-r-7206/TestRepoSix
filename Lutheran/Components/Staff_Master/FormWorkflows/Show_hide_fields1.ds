@@ -1,45 +1,43 @@
 Show_hide_fields1 as "Show hide fields"
 {
 
-			
-							type =  form
-							form = Staff_Master
-			
-							record event = on add
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(Overall_Admin == true)
-													{
-														hide status;
-														hide Qualifications;
-														hide Section;
-														hide Latest_Teaching_Details;
-														hide Employment_Records;
-														hide Employment_History;
-														hide Accreditation_Details;
-														hide Trainings;
-														hide Section1;
-														disable Staff_Email;
-													}
-													getStaff = Staff_Master[Staff_Email == zoho.loginuserid];
-													if(getStaff.count() == 0)
-													{
-														var = thisapp.permissions.loginUserProfile();
-														if(var == "Administrator" || var == "Developer")
-														{
-															input.Staff_Email = zoho.loginuserid;
-															disable Staff_Email;
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Master
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Overall_Admin == true)
+										{
+											hide status;
+											hide Qualifications;
+											hide Section;
+											hide Latest_Teaching_Details;
+											hide Employment_Records;
+											hide Employment_History;
+											hide Accreditation_Details;
+											hide Trainings;
+											hide Section1;
+											disable Staff_Email;
+										}
+										getStaff = Staff_Master[Staff_Email == zoho.loginuserid];
+										if(getStaff.count() == 0)
+										{
+											var = thisapp.permissions.loginUserProfile();
+											if(var == "Administrator" || var == "Developer")
+											{
+												input.Staff_Email = zoho.loginuserid;
+												disable Staff_Email;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

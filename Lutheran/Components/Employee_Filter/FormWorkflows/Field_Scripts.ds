@@ -1,20 +1,18 @@
 Field_Scripts as "Field Scripts"
 {
 
-			
-							type =  form
-							form = Employee_Filter
-			
-							record event = on add
-			
-							field rules
-							{
-								actions 
-								{
-									hide Current_Page,Search_Contact,Search_Contact_Number,Search_DOB,Search_School,Search_Staff,Select_Region;
-								}
-							}
-			
-						
+				type =  form
+				form = Employee_Filter
+
+				record event = on add
+
+				field rules
+				{
+					actions 
+					{
+						hide Current_Page,Search_Contact,Search_Contact_Number,Search_DOB,Search_School,Search_Staff,Select_Region;
+					}
+				}
+
 			
 }

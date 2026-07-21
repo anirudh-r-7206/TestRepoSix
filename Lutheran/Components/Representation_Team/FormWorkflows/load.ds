@@ -1,67 +1,65 @@
 load as "load"
 {
 
-			
-							type =  form
-							form = Representation_Team
-			
-							record event = on add or edit
-			
-							on load
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														hide Staff_Master;
-													adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-													var = thisapp.permissions.loginUserProfile();
-													isSuperAdmin = false;
-													if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-													{
-														isSuperAdmin = true;
-													}
-													/* TYPE FILTER BASED ON ADMIN */
-													typeList = List();
-													if(isSuperAdmin)
-													{
-														typeList.add("National");
-														typeList.add("Region");
-														typeList.add("School");
-														typeList.add("Campus");
-													}
-													else if(adminRec.Admin_Type == "National")
-													{
-														typeList.add("National");
-														typeList.add("Region");
-														typeList.add("School");
-														typeList.add("Campus");
-													}
-													else if(adminRec.Admin_Type == "Region")
-													{
-														typeList.add("Region");
-														typeList.add("School");
-														typeList.add("Campus");
-													}
-													else if(adminRec.Admin_Type == "School")
-													{
-														typeList.add("School");
-														typeList.add("Campus");
-													}
-													else if(adminRec.Admin_Type == "Campus")
-													{
-														typeList.add("Campus");
-													}
-													input.Type_field:ui.add(typeList);
-													/* HIDE ALL SCOPE FIELDS INITIALLY */
-													hide Organisation;
-													hide Regions;
-													hide School;
-													hide Campus;
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Representation_Team
+
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Staff_Master;
+										adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+										var = thisapp.permissions.loginUserProfile();
+										isSuperAdmin = false;
+										if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+										{
+											isSuperAdmin = true;
+										}
+										/* TYPE FILTER BASED ON ADMIN */
+										typeList = List();
+										if(isSuperAdmin)
+										{
+											typeList.add("National");
+											typeList.add("Region");
+											typeList.add("School");
+											typeList.add("Campus");
+										}
+										else if(adminRec.Admin_Type == "National")
+										{
+											typeList.add("National");
+											typeList.add("Region");
+											typeList.add("School");
+											typeList.add("Campus");
+										}
+										else if(adminRec.Admin_Type == "Region")
+										{
+											typeList.add("Region");
+											typeList.add("School");
+											typeList.add("Campus");
+										}
+										else if(adminRec.Admin_Type == "School")
+										{
+											typeList.add("School");
+											typeList.add("Campus");
+										}
+										else if(adminRec.Admin_Type == "Campus")
+										{
+											typeList.add("Campus");
+										}
+										input.Type_field:ui.add(typeList);
+										/* HIDE ALL SCOPE FIELDS INITIALLY */
+										hide Organisation;
+										hide Regions;
+										hide School;
+										hide Campus;
+						)
+					}
+				}
+
 			
 }

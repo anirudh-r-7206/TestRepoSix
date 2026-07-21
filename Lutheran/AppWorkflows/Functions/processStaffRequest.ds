@@ -1,10 +1,8 @@
 void helpers.processStaffRequest(int requestID)
 {
-
-				req = Staff_Request[ID == requestID];
-				if(req.count() > 0)
-				{
-					req.Status="Completed";
-				}
-			
+	req = Staff_Request[ID == requestID];
+	if(req.count() > 0)
+	{
+		req.Status="Completed";
+	}
 }

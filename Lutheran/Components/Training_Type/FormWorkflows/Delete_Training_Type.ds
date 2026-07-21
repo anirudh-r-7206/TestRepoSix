@@ -1,31 +1,29 @@
 Delete_Training_Type as "Delete Training Type"
 {
 
-			
-							type =  form
-							form = Training_Type
-			
-							record event = on delete
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														acc_courses = Accreditation_Courses[Training_Type == input.ID];
-													com_trainings = Compliance_Training[Training_Type == input.ID];
-													training_requests = Training_Completion_Request[Training_Type == input.ID];
-													isImplemented = acc_courses.count() > 0 || com_trainings.count() > 0 || training_requests.count() > 0;
-													if(isImplemented)
-													{
-														alert "Training Type has been linked to few modules. Please unlink them to delete this Training Type.";
-														cancel delete;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Training_Type
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											acc_courses = Accreditation_Courses[Training_Type == input.ID];
+										com_trainings = Compliance_Training[Training_Type == input.ID];
+										training_requests = Training_Completion_Request[Training_Type == input.ID];
+										isImplemented = acc_courses.count() > 0 || com_trainings.count() > 0 || training_requests.count() > 0;
+										if(isImplemented)
+										{
+											alert "Training Type has been linked to few modules. Please unlink them to delete this Training Type.";
+											cancel delete;
+										}
+						)
+					}
+				}
+
 			
 }

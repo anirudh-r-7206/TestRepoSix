@@ -1,32 +1,30 @@
 Name_Duplicate as "Name Duplicate"
 {
 
-			
-							type =  form
-							form = Service_Awards
-			
-							record event = on add or edit
-			
-							on user input of Award_Name
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Award_Name != null && !input.Award_Name.isEmpty())
-													{
-														cleanName = input.Award_Name.trim();
-														fetSerAw = Service_Awards[Award_Name == cleanName];
-														if(fetSerAw.count() > 0)
-														{
-															alert "Award name already exists. Please enter a different name.";
-															input.Award_Name = null;
-														}
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Service_Awards
+
+				record event = on add or edit
+
+				on user input of Award_Name
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Award_Name != null && !input.Award_Name.isEmpty())
+										{
+											cleanName = input.Award_Name.trim();
+											fetSerAw = Service_Awards[Award_Name == cleanName];
+											if(fetSerAw.count() > 0)
+											{
+												alert "Award name already exists. Please enter a different name.";
+												input.Award_Name = null;
+											}
+										}
+						)
+					}
+				}
+
 			
 }

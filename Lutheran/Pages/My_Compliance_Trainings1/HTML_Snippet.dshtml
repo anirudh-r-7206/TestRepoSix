@@ -25,57 +25,57 @@
 <style>
 	<%=thisapp.Styles.Base_Styles()%>
 	.zcs-horizontal-tabhead {
-				box-shadow: 0px -1px 0px 0px var(--zcs_tertiary_border_color) inset;
-				overflow-x: auto;
-				overflow-y: hidden;
-				-ms-overflow-style: none;
-				scrollbar-width: none;
-		}
+        box-shadow: 0px -1px 0px 0px var(--zcs_tertiary_border_color) inset;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 
-		.zcs-horizontal-tabhead::-webkit-scrollbar {
-				display: none;
-		}
+    .zcs-horizontal-tabhead::-webkit-scrollbar {
+        display: none;
+    }
 
-		.zcs-horizontal-tabitem {
-				list-style-type: none;
-				border-bottom: 1px solid transparent;
-				letter-spacing: 0.1px;
-		}
+    .zcs-horizontal-tabitem {
+        list-style-type: none;
+        border-bottom: 1px solid transparent;
+        letter-spacing: 0.1px;
+    }
 
-		.zcs-horizontal-tabicon {
-				width: 16px;
-				height: 16px;
-		}
+    .zcs-horizontal-tabicon {
+        width: 16px;
+        height: 16px;
+    }
 
-		.zcs-horizontal-tabtext {
-				text-wrap: nowrap;
-		}
+    .zcs-horizontal-tabtext {
+        text-wrap: nowrap;
+    }
 
-		.zcs-horizontal-tabcount {
-				min-width: 20px;
-				background-color: var(--zcs-page-bg-color);
-		}
+    .zcs-horizontal-tabcount {
+        min-width: 20px;
+        background-color: var(--zcs-page-bg-color);
+    }
 
-		.zcs-horizontal-tabitem:hover .zcs-horizontal-tablink {
-				color: var(--zcs_brand_color);
-		}
+    .zcs-horizontal-tabitem:hover .zcs-horizontal-tablink {
+        color: var(--zcs_brand_color);
+    }
 
-		.zcs-horizontal-tabitem:hover .zcs-horizontal-tabcount,
-		.zcs-horizontal-tabitem.zcs-horizontal-tabactive .zcs-horizontal-tabcount {
-				background-color: var(--zcs_component_hover_color);
-		}
+    .zcs-horizontal-tabitem:hover .zcs-horizontal-tabcount,
+    .zcs-horizontal-tabitem.zcs-horizontal-tabactive .zcs-horizontal-tabcount {
+        background-color: var(--zcs_component_hover_color);
+    }
 
-		.zcs-horizontal-tabitem.zcs-horizontal-tabactive {
-				border-bottom-color: var(--zcs_brand_color);
-		}
+    .zcs-horizontal-tabitem.zcs-horizontal-tabactive {
+        border-bottom-color: var(--zcs_brand_color);
+    }
 
-		.zcs-horizontal-tabitem.zcs-horizontal-tabactive .zcs-horizontal-tablink {
-				color: var(--zcs_brand_color);
-		}
+    .zcs-horizontal-tabitem.zcs-horizontal-tabactive .zcs-horizontal-tablink {
+        color: var(--zcs_brand_color);
+    }
 
-		.zcs-horizontal-tabbody {
-				overflow: auto;
-		}
+    .zcs-horizontal-tabbody {
+        overflow: auto;
+    }
 	
 	.zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper.zc-page-content-wrapper .elemContainment {
 		box-sizing: border-box;
@@ -89,7 +89,7 @@
 		border-radius: var(--content_card_radius);
 		box-shadow: none !important;
 		overflow: hidden;
-			margin-top: 0 !important;
+    	margin-top: 0 !important;
 	}
 	
 	.zc-pb-tile-card {
@@ -102,7 +102,7 @@
 	}
 </style>
 <div class='zcs-horizontal-tabpanel zcs-flex zcs-direction-column zcs-wh-full'>
-		<ul class='zcs-horizontal-tabhead zcs-flex zcs-gap-12 zcs-px-10 zcs-py-0 zcs-m-0 zcs-box-border'>
+    <ul class='zcs-horizontal-tabhead zcs-flex zcs-gap-12 zcs-px-10 zcs-py-0 zcs-m-0 zcs-box-border'>
 <%
 	for each  tab_li in tab_list.keys()
 	{
@@ -120,7 +120,7 @@
 	}
 	%>
 </ul>
-		<div class='zcs-horizontal-tabbody zcs-col-common zcs-p-10' style='box-sizing: border-box;'>
+    <div class='zcs-horizontal-tabbody zcs-col-common zcs-p-10' style='box-sizing: border-box;'>
 		<div elName='zc-component' viewLinkName='<%=report_url%>' params='zc_Header=false&zc_Footer=false&zc_AddRec=false' style='height: 100% !important'></div>
-		</div>
+    </div>
 </div>

@@ -1,32 +1,30 @@
 FTE as "FTE"
 {
 
-			
-							type =  form
-							form = Staff_Request
-			
-							record event = on add
-			
-							on user input of FTE
-							{
-								actions 
-								{
-									custom deluge script
-									(
-													if(input.FTE != null && input.FTE > 1.0)
-													{
-														alert "FTE cannot be greater than 1.0.";
-														input.FTE = null;
-													}
-													if(input.FTE != null && input.FTE <= 0)
-													{
-														alert "FTE cannot be less than or equal to 0.";
-														input.FTE = null;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Staff_Request
+
+				record event = on add
+
+				on user input of FTE
+				{
+					actions 
+					{
+						custom deluge script
+						(
+										if(input.FTE != null && input.FTE > 1.0)
+										{
+											alert "FTE cannot be greater than 1.0.";
+											input.FTE = null;
+										}
+										if(input.FTE != null && input.FTE <= 0)
+										{
+											alert "FTE cannot be less than or equal to 0.";
+											input.FTE = null;
+										}
+						)
+					}
+				}
+
 			
 }

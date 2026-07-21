@@ -1,71 +1,69 @@
 Set_Campus_Value as "Set Campus Value"
 {
 
-			
-							type =  form
-							form = Staff_Onboarding1
-			
-							record event = on add
-			
-							on user input of Current_Employment
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														input.Campus = null;
-													if(input.Current_Employment != null)
+				type =  form
+				form = Staff_Onboarding1
+
+				record event = on add
+
+				on user input of Current_Employment
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Campus = null;
+										if(input.Current_Employment != null)
+										{
+											fetStaff = Staff_Master[ID == input.Staff];
+											adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+											var = thisapp.permissions.loginUserProfile();
+											isSuperAdmin = false;
+											if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+											{
+												isSuperAdmin = true;
+											}
+											if(adminRec.Admin_Type == "Campus")
+											{
+												input.Campus:ui.add(adminRec.Campus);
+												if(input.Is_Loaded == true)
+												{
+													input.Campus = adminRec.Campus;
+												}
+											}
+											else
+											{
+												fetCamp = Campus[School == input.Current_Employment].ID.getAll();
+												input.Campus:ui.add(fetCamp);
+												if(input.Is_Loaded == true)
+												{
+													if(fetCamp.size() == 1)
 													{
-														fetStaff = Staff_Master[ID == input.Staff];
-														adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-														var = thisapp.permissions.loginUserProfile();
-														isSuperAdmin = false;
-														if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-														{
-															isSuperAdmin = true;
-														}
-														if(adminRec.Admin_Type == "Campus")
-														{
-															input.Campus:ui.add(adminRec.Campus);
-															if(input.Is_Loaded == true)
-															{
-																input.Campus = adminRec.Campus;
-															}
-														}
-														else
-														{
-															fetCamp = Campus[School == input.Current_Employment].ID.getAll();
-															input.Campus:ui.add(fetCamp);
-															if(input.Is_Loaded == true)
-															{
-																if(fetCamp.size() == 1)
-																{
-																	input.Campus = fetCamp.get(0);
-																}
-															}
-														}
-														if(input.Is_Loaded == false)
-														{
-															if(input.Current_Position != null && input.Current_Position.position_name == "Administrative Officer")
-															{
-																if(fetStaff.Campus != null && input.Admin_Type in {"Campus"})
-																{
-																	input.Campus = fetStaff.Campus;
-																}
-															}
-															else
-															{
-																if(fetStaff.Campus != null)
-																{
-																	input.Campus = fetStaff.Campus;
-																}
-															}
-														}
+														input.Campus = fetCamp.get(0);
 													}
-									)
-								}
-							}
-			
-						
+												}
+											}
+											if(input.Is_Loaded == false)
+											{
+												if(input.Current_Position != null && input.Current_Position.position_name == "Administrative Officer")
+												{
+													if(fetStaff.Campus != null && input.Admin_Type in {"Campus"})
+													{
+														input.Campus = fetStaff.Campus;
+													}
+												}
+												else
+												{
+													if(fetStaff.Campus != null)
+													{
+														input.Campus = fetStaff.Campus;
+													}
+												}
+											}
+										}
+						)
+					}
+				}
+
 			
 }

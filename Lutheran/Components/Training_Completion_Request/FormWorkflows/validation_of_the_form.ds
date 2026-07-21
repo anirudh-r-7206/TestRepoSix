@@ -1,27 +1,25 @@
 validation_of_the_form as "validation of the form"
 {
 
-			
-							type =  form
-							form = Training_Completion_Request
-			
-							record event = on add
-			
-							on validate
-							{
-								actions 
-								{
-									custom deluge script
-									(
-														if(input.Completion_Date == null)
-													{
-														alert(Completion_Date,"Please, Enter completion date.");
-														cancel submit;
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Training_Completion_Request
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Completion_Date == null)
+										{
+											alert(Completion_Date,"Please, Enter completion date.");
+											cancel submit;
+										}
+						)
+					}
+				}
+
 			
 }

@@ -1,80 +1,78 @@
 map helpers.returnServiceYears(date from_date, date to_date)
 {
 
-			
-			                 	fromDay = from_date.getDay();
-			                 	fromMonth = from_date.getMonth();
-			                 	fromYear = from_date.getYear();
-			                 	toDay = to_date.getDay();
-			                 	toMonth = to_date.getMonth();
-			                 	toYear = to_date.getYear();
-			                 	// Days in each month
-			                 	daysInMonthMap = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31};
-			                 	// Leap year check for to_date year
-			                 	if((toYear % 4 == 0 && toYear % 100 != 0) || toYear % 400 == 0)
-			                 	{
-			                 		daysInMonthMap.put(2,29);
-			                 	}
-			                 	// If to_date is the last day of its month, treat it as 1st of next month (full month covered)
-			                 	if(toDay == daysInMonthMap.get(toMonth))
-			                 	{
-			                 		toDay = 1;
-			                 		toMonth = toMonth + 1;
-			                 		if(toMonth > 12)
-			                 		{
-			                 			toMonth = 1;
-			                 			toYear = toYear + 1;
-			                 		}
-			                 		years = toYear - fromYear;
-			                 		months = toMonth - fromMonth;
-			                 		days = toDay - fromDay;
-			                 	}
-			                 	else
-			                 	{
-			                 		// Normal inclusive calculation
-			                 		years = toYear - fromYear;
-			                 		months = toMonth - fromMonth;
-			                 		days = toDay - fromDay + 1;
-			                 	}
-			                 	// Adjust days if negative
-			                 	if(days < 0)
-			                 	{
-			                 		months = months - 1;
-			                 		prevMonth = toMonth - 1;
-			                 		prevYear = toYear;
-			                 		if(prevMonth == 0)
-			                 		{
-			                 			prevMonth = 12;
-			                 			prevYear = prevYear - 1;
-			                 		}
-			                 		daysInPrevMonth = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31};
-			                 		if(prevMonth == 2)
-			                 		{
-			                 			if((prevYear % 4 == 0 && prevYear % 100 != 0) || prevYear % 400 == 0)
-			                 			{
-			                 				daysInPrevMonth.put(2,29);
-			                 			}
-			                 		}
-			                 		days = days + daysInPrevMonth.get(prevMonth);
-			                 	}
-			                 	// Adjust months if negative
-			                 	if(months < 0)
-			                 	{
-			                 		years = years - 1;
-			                 		months = months + 12;
-			                 	}
-			                 	// Rollover months to year if needed
-			                 	if(months >= 12)
-			                 	{
-			                 		years = years + 1;
-			                 		months = months - 12;
-			                 	}
-			                 	// Return as map
-			                 	resultMap = Map();
-			                 	resultMap.put("years",years);
-			                 	resultMap.put("months",months);
-			                 	resultMap.put("days",days);
-			                 	return resultMap;
-			                 
-			
+                 	fromDay = from_date.getDay();
+                 	fromMonth = from_date.getMonth();
+                 	fromYear = from_date.getYear();
+                 	toDay = to_date.getDay();
+                 	toMonth = to_date.getMonth();
+                 	toYear = to_date.getYear();
+                 	// Days in each month
+                 	daysInMonthMap = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31};
+                 	// Leap year check for to_date year
+                 	if((toYear % 4 == 0 && toYear % 100 != 0) || toYear % 400 == 0)
+                 	{
+                 		daysInMonthMap.put(2,29);
+                 	}
+                 	// If to_date is the last day of its month, treat it as 1st of next month (full month covered)
+                 	if(toDay == daysInMonthMap.get(toMonth))
+                 	{
+                 		toDay = 1;
+                 		toMonth = toMonth + 1;
+                 		if(toMonth > 12)
+                 		{
+                 			toMonth = 1;
+                 			toYear = toYear + 1;
+                 		}
+                 		years = toYear - fromYear;
+                 		months = toMonth - fromMonth;
+                 		days = toDay - fromDay;
+                 	}
+                 	else
+                 	{
+                 		// Normal inclusive calculation
+                 		years = toYear - fromYear;
+                 		months = toMonth - fromMonth;
+                 		days = toDay - fromDay + 1;
+                 	}
+                 	// Adjust days if negative
+                 	if(days < 0)
+                 	{
+                 		months = months - 1;
+                 		prevMonth = toMonth - 1;
+                 		prevYear = toYear;
+                 		if(prevMonth == 0)
+                 		{
+                 			prevMonth = 12;
+                 			prevYear = prevYear - 1;
+                 		}
+                 		daysInPrevMonth = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31};
+                 		if(prevMonth == 2)
+                 		{
+                 			if((prevYear % 4 == 0 && prevYear % 100 != 0) || prevYear % 400 == 0)
+                 			{
+                 				daysInPrevMonth.put(2,29);
+                 			}
+                 		}
+                 		days = days + daysInPrevMonth.get(prevMonth);
+                 	}
+                 	// Adjust months if negative
+                 	if(months < 0)
+                 	{
+                 		years = years - 1;
+                 		months = months + 12;
+                 	}
+                 	// Rollover months to year if needed
+                 	if(months >= 12)
+                 	{
+                 		years = years + 1;
+                 		months = months - 12;
+                 	}
+                 	// Return as map
+                 	resultMap = Map();
+                 	resultMap.put("years",years);
+                 	resultMap.put("months",months);
+                 	resultMap.put("days",days);
+                 	return resultMap;
+                 
 }

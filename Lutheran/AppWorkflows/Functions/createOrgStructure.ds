@@ -1,67 +1,65 @@
 void helpers.createOrgStructure()
 {
 
-			
-			                 	/* ---------------- NATIONAL ---------------- */
-			                 	orgID = insert into Organisation
-			                 	[
-			                 		logo="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946002_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwMiUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjc5NDkyOTk3Nl9yZXB1YmxpYy1kYXktMjAyNS5hdmlmJTIyJTJDJTIyYXBwbGlua25hbWUlMjIlM0ElMjJpc3QtdGVzdCUyMiUyQyUyMmxvZ2luWnVpZCUyMiUzQSUyMi0xMDAlMjIlMkMlMjJ2aWV3bGlua25hbWUlMjIlM0ElMjJpbWFnZXdfUmVwb3J0JTIyJTJDJTIyc2NvcGVuYW1lJTIyJTNBJTIyamhhc2ZhcmpqdW1wc3RhcnR0ZWFtaW50ZXN0JTIyJTJDJTIyaXNQdWJsaWMlMjIlM0F0cnVlJTdE"
-			                 		organisation_name="India"
-			                 		contact_number="+61 412 345 678"
-			                 		Added_User=zoho.loginuser
-			                 	];
-			                 	getOrg = Organisation[ID == orgID];
-			                 	/* ---------------- REGION ---------------- */
-			                 	regionID = insert into Regions
-			                 	[
-			                 		Main_Organisation=getOrg.ID
-			                 		region_name="South"
-			                 		Regional_Office_Email="south@lutheran.org"
-			                 		regional_logo="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946004_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwNCUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjg0NDAzMzc4NV83MTAlMjIlMkMlMjJhcHBsaW5rbmFtZSUyMiUzQSUyMmlzdC10ZXN0JTIyJTJDJTIybG9naW5adWlkJTIyJTNBJTIyLTEwMCUyMiUyQyUyMnZpZXdsaW5rbmFtZSUyMiUzQSUyMmltYWdld19SZXBvcnQlMjIlMkMlMjJzY29wZW5hbWUlMjIlM0ElMjJqaGFzZmFyamp1bXBzdGFydHRlYW1pbnRlc3QlMjIlMkMlMjJpc1B1YmxpYyUyMiUzQXRydWUlN0Q%3D"
-			                 		Regional_Office_Address.address_line_1="South Office"
-			                 		Regional_Office_Address.address_line_2="Central Block"
-			                 		Regional_Office_Address.district_city="Chennai"
-			                 		Regional_Office_Address.state_province="Tamil Nadu"
-			                 		Regional_Office_Address.postal_Code="600001"
-			                 		Regional_Office_Address.country="India"
-			                 		Added_User=zoho.loginuser
-			                 	];
-			                 	getRegion = Regions[ID == regionID];
-			                 	/* ---------------- SCHOOL ---------------- */
-			                 	schoolID = insert into School
-			                 	[
-			                 		Region=getRegion.ID
-			                 		school_name="Chennai School"
-			                 		school_type="Private"
-			                 		Commonwealth_Govt_School_ID="SCH1001"
-			                 		School_Email="chennai@school.com"
-			                 		ABN="ABN123456"
-			                 		school_image="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946006_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwNiUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjg2NDcwNzY3MF83MTAlMjIlMkMlMjJhcHBsaW5rbmFtZSUyMiUzQSUyMmlzdC10ZXN0JTIyJTJDJTIybG9naW5adWlkJTIyJTNBJTIyLTEwMCUyMiUyQyUyMnZpZXdsaW5rbmFtZSUyMiUzQSUyMmltYWdld19SZXBvcnQlMjIlMkMlMjJzY29wZW5hbWUlMjIlM0ElMjJqaGFzZmFyamp1bXBzdGFydHRlYW1pbnRlc3QlMjIlMkMlMjJpc1B1YmxpYyUyMiUzQXRydWUlN0Q%3D"
-			                 		school_address.address_line_1="Anna Salai"
-			                 		school_address.address_line_2="Near Signal"
-			                 		school_address.district_city="Chennai"
-			                 		school_address.state_province="Tamil Nadu"
-			                 		school_address.postal_Code="600002"
-			                 		school_address.country="India"
-			                 		Added_User=zoho.loginuser
-			                 	];
-			                 	getSchool = School[ID == schoolID];
-			                 	/* ---------------- CAMPUS ---------------- */
-			                 	campusID = insert into Campus
-			                 	[
-			                 		School=getSchool.ID
-			                 		campus_name="Anna Nagar Campus"
-			                 		Campus_Email="annanagar@school.com"
-			                 		campus_image="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946008_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwOCUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjg5NTI2NTk5MF90bm1faW1wb3J0X3NpdGVzX2RlZmF1bHRfZmlsZXNfQW5uYU5hZ2FyVG93ZXJQYXJrXzEyMDBfVHdpdHRlci5hdmlmJTIyJTJDJTIyYXBwbGlua25hbWUlMjIlM0ElMjJpc3QtdGVzdCUyMiUyQyUyMmxvZ2luWnVpZCUyMiUzQSUyMi0xMDAlMjIlMkMlMjJ2aWV3bGlua25hbWUlMjIlM0ElMjJpbWFnZXdfUmVwb3J0JTIyJTJDJTIyc2NvcGVuYW1lJTIyJTNBJTIyamhhc2ZhcmpqdW1wc3RhcnR0ZWFtaW50ZXN0JTIyJTJDJTIyaXNQdWJsaWMlMjIlM0F0cnVlJTdE"
-			                 		campus_address.address_line_1="Anna Nagar Main Road"
-			                 		campus_address.address_line_2="Block A"
-			                 		campus_address.district_city="Chennai"
-			                 		campus_address.state_province="Tamil Nadu"
-			                 		campus_address.postal_Code="600040"
-			                 		campus_address.country="India"
-			                 		Added_User=zoho.loginuser
-			                 	];
-			                 	info "Organisation structure created successfully";
-			                 
-			
+                 	/* ---------------- NATIONAL ---------------- */
+                 	orgID = insert into Organisation
+                 	[
+                 		logo="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946002_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwMiUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjc5NDkyOTk3Nl9yZXB1YmxpYy1kYXktMjAyNS5hdmlmJTIyJTJDJTIyYXBwbGlua25hbWUlMjIlM0ElMjJpc3QtdGVzdCUyMiUyQyUyMmxvZ2luWnVpZCUyMiUzQSUyMi0xMDAlMjIlMkMlMjJ2aWV3bGlua25hbWUlMjIlM0ElMjJpbWFnZXdfUmVwb3J0JTIyJTJDJTIyc2NvcGVuYW1lJTIyJTNBJTIyamhhc2ZhcmpqdW1wc3RhcnR0ZWFtaW50ZXN0JTIyJTJDJTIyaXNQdWJsaWMlMjIlM0F0cnVlJTdE"
+                 		organisation_name="India"
+                 		contact_number="+61 412 345 678"
+                 		Added_User=zoho.loginuser
+                 	];
+                 	getOrg = Organisation[ID == orgID];
+                 	/* ---------------- REGION ---------------- */
+                 	regionID = insert into Regions
+                 	[
+                 		Main_Organisation=getOrg.ID
+                 		region_name="South"
+                 		Regional_Office_Email="south@lutheran.org"
+                 		regional_logo="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946004_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwNCUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjg0NDAzMzc4NV83MTAlMjIlMkMlMjJhcHBsaW5rbmFtZSUyMiUzQSUyMmlzdC10ZXN0JTIyJTJDJTIybG9naW5adWlkJTIyJTNBJTIyLTEwMCUyMiUyQyUyMnZpZXdsaW5rbmFtZSUyMiUzQSUyMmltYWdld19SZXBvcnQlMjIlMkMlMjJzY29wZW5hbWUlMjIlM0ElMjJqaGFzZmFyamp1bXBzdGFydHRlYW1pbnRlc3QlMjIlMkMlMjJpc1B1YmxpYyUyMiUzQXRydWUlN0Q%3D"
+                 		Regional_Office_Address.address_line_1="South Office"
+                 		Regional_Office_Address.address_line_2="Central Block"
+                 		Regional_Office_Address.district_city="Chennai"
+                 		Regional_Office_Address.state_province="Tamil Nadu"
+                 		Regional_Office_Address.postal_Code="600001"
+                 		Regional_Office_Address.country="India"
+                 		Added_User=zoho.loginuser
+                 	];
+                 	getRegion = Regions[ID == regionID];
+                 	/* ---------------- SCHOOL ---------------- */
+                 	schoolID = insert into School
+                 	[
+                 		Region=getRegion.ID
+                 		school_name="Chennai School"
+                 		school_type="Private"
+                 		Commonwealth_Govt_School_ID="SCH1001"
+                 		School_Email="chennai@school.com"
+                 		ABN="ABN123456"
+                 		school_image="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946006_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwNiUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjg2NDcwNzY3MF83MTAlMjIlMkMlMjJhcHBsaW5rbmFtZSUyMiUzQSUyMmlzdC10ZXN0JTIyJTJDJTIybG9naW5adWlkJTIyJTNBJTIyLTEwMCUyMiUyQyUyMnZpZXdsaW5rbmFtZSUyMiUzQSUyMmltYWdld19SZXBvcnQlMjIlMkMlMjJzY29wZW5hbWUlMjIlM0ElMjJqaGFzZmFyamp1bXBzdGFydHRlYW1pbnRlc3QlMjIlMkMlMjJpc1B1YmxpYyUyMiUzQXRydWUlN0Q%3D"
+                 		school_address.address_line_1="Anna Salai"
+                 		school_address.address_line_2="Near Signal"
+                 		school_address.district_city="Chennai"
+                 		school_address.state_province="Tamil Nadu"
+                 		school_address.postal_Code="600002"
+                 		school_address.country="India"
+                 		Added_User=zoho.loginuser
+                 	];
+                 	getSchool = School[ID == schoolID];
+                 	/* ---------------- CAMPUS ---------------- */
+                 	campusID = insert into Campus
+                 	[
+                 		School=getSchool.ID
+                 		campus_name="Anna Nagar Campus"
+                 		Campus_Email="annanagar@school.com"
+                 		campus_image="https://files.zohopublic.in/public?x-service=ZohoCreator&event-id=251690000002946008_Image&x-cli-msg=JTdCJTIyZmllbGRsaW5rbmFtZSUyMiUzQSUyMkltYWdlJTIyJTJDJTIybW9kdWxlJTIyJTNBJTIycmVwb3J0cyUyMiUyQyUyMmRvd25sb2FkdHlwZSUyMiUzQSUyMmltYWdlJTIyJTJDJTIyaXNBdHRhY2htZW50JTIyJTNBZmFsc2UlMkMlMjJyZWNvcmRpZCUyMiUzQSUyMjI1MTY5MDAwMDAwMjk0NjAwOCUyMiUyQyUyMnByaXZhdGVrZXklMjIlM0ElMjJLTnZaR1JmR1V5NXQ4RERTVnNlRGFIS3dDRFBEeFRrOFpSMUFGcXcyT3lRQUt6Mm5RMFJOOHdndTFWdTducEU4Z1hoUVR5eFVLTVhGeFV6RFpKWTBVaHpnZnBQZkRBZ2FFejNPJTIyJTJDJTIyZGlnZXN0VmFsdWUlMjIlM0ElMjJleUpzWVc1bmRXRm5aU0k2SW1WdUluMCUzRCUyMiUyQyUyMmZpbGVwYXRoJTIyJTNBJTIyMTc3OTExMjg5NTI2NTk5MF90bm1faW1wb3J0X3NpdGVzX2RlZmF1bHRfZmlsZXNfQW5uYU5hZ2FyVG93ZXJQYXJrXzEyMDBfVHdpdHRlci5hdmlmJTIyJTJDJTIyYXBwbGlua25hbWUlMjIlM0ElMjJpc3QtdGVzdCUyMiUyQyUyMmxvZ2luWnVpZCUyMiUzQSUyMi0xMDAlMjIlMkMlMjJ2aWV3bGlua25hbWUlMjIlM0ElMjJpbWFnZXdfUmVwb3J0JTIyJTJDJTIyc2NvcGVuYW1lJTIyJTNBJTIyamhhc2ZhcmpqdW1wc3RhcnR0ZWFtaW50ZXN0JTIyJTJDJTIyaXNQdWJsaWMlMjIlM0F0cnVlJTdE"
+                 		campus_address.address_line_1="Anna Nagar Main Road"
+                 		campus_address.address_line_2="Block A"
+                 		campus_address.district_city="Chennai"
+                 		campus_address.state_province="Tamil Nadu"
+                 		campus_address.postal_Code="600040"
+                 		campus_address.country="India"
+                 		Added_User=zoho.loginuser
+                 	];
+                 	info "Organisation structure created successfully";
+                 
 }

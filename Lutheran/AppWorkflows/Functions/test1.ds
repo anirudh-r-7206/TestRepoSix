@@ -1,11 +1,9 @@
 void test.test1()
 {
 
-			
-			                 	// 	g = Staff_Master [ Staff_Email == "demouser_1@zohocreator.com" ];
-			                 	// 	info g.Profile.title;
-			                 	h = Empty_State[Name == "PHOTOGRAPH_EMPTY_MALE"];
-			                 	info h.Image.title;
-			                 
-			
+                 	// 	g = Staff_Master [ Staff_Email == "demouser_1@zohocreator.com" ];
+                 	// 	info g.Profile.title;
+                 	h = Empty_State[Name == "PHOTOGRAPH_EMPTY_MALE"];
+                 	info h.Image.title;
+                 
 }

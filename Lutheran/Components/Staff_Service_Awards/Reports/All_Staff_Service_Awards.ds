@@ -1,14 +1,12 @@
 default list All_Staff_Service_Awards
 {
 
-		
-					displayName = "Staff Service Awards"
-					show all rows from Staff_Service_Awards  [Staff.ID == thisapp.helpers.returnEligibleStaff()]  
-					(
-						Award
-						award_date as "Award Date"
-						Staff
-					)
-				
+			displayName = "Staff Service Awards"
+			show all rows from Staff_Service_Awards  [Staff.ID == thisapp.helpers.returnEligibleStaff()]  
+			(
+				Award
+				award_date as "Award Date"
+				Staff
+			)
 		
 }

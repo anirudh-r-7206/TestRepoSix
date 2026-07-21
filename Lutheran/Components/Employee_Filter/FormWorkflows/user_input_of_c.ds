@@ -1,26 +1,24 @@
 user_input_of_c as "user input of c"
 {
 
-			
-							type =  form
-							form = Employee_Filter
-			
-							record event = on add
-			
-							on user input of Search_Contact
-							{
-								actions 
-								{
-									custom deluge script
-									(
-													if(input.Current_Page == "staffOnboard")
-													{
-														openUrl("#Report:All_Staff_Grouped?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false","same window");
-													}
-									)
-								}
-							}
-			
-						
+				type =  form
+				form = Employee_Filter
+
+				record event = on add
+
+				on user input of Search_Contact
+				{
+					actions 
+					{
+						custom deluge script
+						(
+										if(input.Current_Page == "staffOnboard")
+										{
+											openUrl("#Report:All_Staff_Grouped?zc_LoadIn=embed-sd-reportview&zc_Header=false&zc_Footer=false","same window");
+										}
+						)
+					}
+				}
+
 			
 }

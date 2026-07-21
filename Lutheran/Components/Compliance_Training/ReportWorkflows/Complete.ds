@@ -1,50 +1,48 @@
 Complete as "Complete"
 {
 
-			
-							type =  functions
-							form = Compliance_Training
-							execution type = for each record	
-							on start
-							{
-								actions 
-								{
-								on click
-								(
-									if(input.Accreditation_Details != null)
-													{
-														currentSI = Accreditation_Courses[Accreditation == input.Accreditation_Details.Required_Accreditation && Training_Type == input.Training_Type].SI_No;
-														if(currentSI != null && currentSI > 1)
-														{
-															lowerCourses = Accreditation_Courses[Accreditation == input.Accreditation_Details.Required_Accreditation && SI_No < currentSI];
-															trainingTypes = Accreditation_Courses[Accreditation == input.Accreditation_Details.Required_Accreditation && SI_No < currentSI].Training_Type.getAll();
-															completedRec = Compliance_Training[Staff == input.Staff && Training_Type in trainingTypes && Status == "Completed"];
-															if(completedRec.count() < lowerCourses.count())
-															{
-																openUrl("#Script:dialog.close","same window");
-																return;
-															}
-														}
-													}
-													training_request_rec = Training_Completion_Request[Compliance_Training == input.ID && Status == "Approved"];
-													if(training_request_rec.count() > 0)
-													{
-														if(training_request_rec.Staff.Staff_Email != zoho.loginuserid)
-														{
-															openUrl("#Form:Compliance_Training?viewLinkName=All_Compliance_Trainings&recLinkID=" + input.ID + "&zc_NextUrl=#Script:page.parent.refresh","popup window");
-														}
-																else
-																{
-																	openUrl("#Script:dialog.close","same window");
-																}
-													}
+				type =  functions
+				form = Compliance_Training
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						if(input.Accreditation_Details != null)
+										{
+											currentSI = Accreditation_Courses[Accreditation == input.Accreditation_Details.Required_Accreditation && Training_Type == input.Training_Type].SI_No;
+											if(currentSI != null && currentSI > 1)
+											{
+												lowerCourses = Accreditation_Courses[Accreditation == input.Accreditation_Details.Required_Accreditation && SI_No < currentSI];
+												trainingTypes = Accreditation_Courses[Accreditation == input.Accreditation_Details.Required_Accreditation && SI_No < currentSI].Training_Type.getAll();
+												completedRec = Compliance_Training[Staff == input.Staff && Training_Type in trainingTypes && Status == "Completed"];
+												if(completedRec.count() < lowerCourses.count())
+												{
+													openUrl("#Script:dialog.close","same window");
+													return;
+												}
+											}
+										}
+										training_request_rec = Training_Completion_Request[Compliance_Training == input.ID && Status == "Approved"];
+										if(training_request_rec.count() > 0)
+										{
+											if(training_request_rec.Staff.Staff_Email != zoho.loginuserid)
+											{
+												openUrl("#Form:Compliance_Training?viewLinkName=All_Compliance_Trainings&recLinkID=" + input.ID + "&zc_NextUrl=#Script:page.parent.refresh","popup window");
+											}
 													else
 													{
-														openUrl("#Form:Training_Completion_Request?Compliance_Training=" + input.ID,"popup window");
+														openUrl("#Script:dialog.close","same window");
 													}
-								)
-								}
-							}
-						
+										}
+										else
+										{
+											openUrl("#Form:Training_Completion_Request?Compliance_Training=" + input.ID,"popup window");
+										}
+					)
+					}
+				}
 			
 }

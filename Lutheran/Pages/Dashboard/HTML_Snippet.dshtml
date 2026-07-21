@@ -1,5 +1,5 @@
 <div style="padding:24px;background:#fff;border-radius:12px;font-family:Arial,sans-serif;">
-	<h2 style="margin:0 0 8px;color:#194BB2;">My Profile</h2>
-	<p style="margin:0;color:#555;">Profile dashboard content is temporarily simplified while compile issues are resolved.</p>
-	<div elName='zc-component' viewLinkName='My_Training_Completion_Requests' params='zc_Header=true&zc_Footer=false&zc_AddRec=false' style='height:420px;margin-top:16px;'></div>
+  <h2 style="margin:0 0 8px;color:#194BB2;">My Profile</h2>
+  <p style="margin:0;color:#555;">Profile dashboard content is temporarily simplified while compile issues are resolved.</p>
+  <div elName='zc-component' viewLinkName='My_Training_Completion_Requests' params='zc_Header=true&zc_Footer=false&zc_AddRec=false' style='height:420px;margin-top:16px;'></div>
 </div>
