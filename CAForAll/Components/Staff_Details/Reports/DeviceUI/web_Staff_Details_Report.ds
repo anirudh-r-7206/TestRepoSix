@@ -1,0 +1,81 @@
+report Staff_Details_Report
+{
+
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Name
+								Age
+								Dept
+								"ReportField"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								"ForMultipleRecords"
+								"ForMultipleRecordsColle"
+								"RecheckForMultipleRecords"
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							"ForSingleRecord"
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+							"ForRightClickofaRecord"
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Name
+								Age
+								Dept
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								"ForSelectedRecordDV"
+							)
+						)
+				)
+			
+}

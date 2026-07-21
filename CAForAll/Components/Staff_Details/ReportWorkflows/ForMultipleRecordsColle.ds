@@ -1,0 +1,15 @@
+ForMultipleRecordsColle as "ForMultipleRecordsColle"
+{
+
+				type =  functions
+				form = Staff_Details
+				execution type = collection of records	
+				on start
+				{
+					actions 
+					{
+						thisapp.ForMultipleRecordsColle(Staff_Details);
+					}
+				}
+			
+}

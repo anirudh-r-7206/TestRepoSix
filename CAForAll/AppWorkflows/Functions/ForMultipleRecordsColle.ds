@@ -1,0 +1,6 @@
+void ForMultipleRecordsColle(Staff_Details staffDetails)
+{
+
+                 	info staffDetails.Name;
+                 
+}

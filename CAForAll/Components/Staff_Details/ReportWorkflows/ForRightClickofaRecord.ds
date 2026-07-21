@@ -1,0 +1,15 @@
+ForRightClickofaRecord as "ForRightClickofaRecord"
+{
+
+				type =  functions
+				form = Staff_Details
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+						success message "Panniten da";
+					}
+				}
+			
+}

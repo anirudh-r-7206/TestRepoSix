@@ -1,0 +1,123 @@
+default list Staff_Details_Report
+{
+
+			displayName = "Staff Details Report"
+			show all rows from Staff_Details    
+			(
+				Name
+				Age
+				Dept
+				custom action "ReportField"
+				(
+	  			workflow = ReportField
+				show action in edit record menu = true
+				column header = "ReportField"
+				)
+			)
+			custom actions
+			(
+				"OnClickofaRecord"
+				(
+	  			workflow = OnClickofaRecord
+				show action in edit record menu = true
+				condition = (ID > 100)
+				confirmation before execution
+				(
+					message for individual record = "Execute the OnClickofaRecord action for this record? ${Name}"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				"ForSingleRecord"
+				(
+	  			workflow = ForSingleRecord
+				show action in edit record menu = true
+				condition = (ID > 9999)
+				confirmation before execution
+				(
+					message for individual record = "Execute the ForSingleRecord action for this record?"
+					confirm button text = "Yeah"		
+					cancel button text = "Nah"
+				)
+				)
+				"ForRightClickofaRecord"
+				(
+	  			workflow = ForRightClickofaRecord
+				condition = (ID > 10000)
+				confirmation before execution
+				(
+					message for individual record = "Execute the ForRightClickofaRecord action for this record?"
+					confirm button text = "Panlama"		
+					cancel button text = "Venama"
+				)
+				)
+				"ForMultipleRecords"
+				(
+	  			workflow = ForMultipleRecords
+				show action in view header = true
+				show action in edit record menu = true
+				)
+				"ForMultipleRecordsColle"
+				(
+	  			workflow = ForMultipleRecordsColle
+				show action in view header = true
+				show action in edit record menu = true
+				execute action for collection of records
+				condition = (ID > 100)
+				confirmation before execution
+				(
+					message for multiple records = "Execute the ForMultipleRecordsColle action for the selected ${record_count} records?"
+					confirm button text = "Yes"		
+					cancel button text = "No"
+				)
+				)
+				"ForSelectedRecordDV"
+				(
+	  			workflow = ForSelectedRecordDV
+				show action in view header = true
+				)
+				"OnTapofaRecordMob"
+				(
+	  			workflow = OnTapofaRecordMob
+				)
+				"ForSingleRecordMob"
+				(
+	  			workflow = ForSingleRecordMob
+				show action in edit record menu = true
+				)
+				"ForLongPressofaRecordMob"
+				(
+	  			workflow = ForLongPressofaRecordMob
+				)
+				"ForSwipeLeftofaRecordMob"
+				(
+	  			workflow = ForSwipeLeftofaRecordMob
+				)
+				"ForSwipeRightofaRecordMob"
+				(
+	  			workflow = ForSwipeRightofaRecordMob
+				)
+				"ForMultipleRecordsMob"
+				(
+	  			workflow = ForMultipleRecordsMob
+				show action in view header = true
+				)
+				"ForMultipleRecordsMobColle"
+				(
+	  			workflow = ForMultipleRecordsMobColl
+				show action in view header = true
+				execute action for collection of records
+				)
+				"ForSelectedRecordDVMob"
+				(
+	  			workflow = ForSelectedRecordDVMob
+				show action in view header = true
+				)
+				"RecheckForMultipleRecords"
+				(
+	  			workflow = RecheckForMultipleRecords
+				show action in view header = true
+				)
+			)
+		
+}

@@ -1,0 +1,18 @@
+ForSingleRecordMob as "ForSingleRecordMob"
+{
+
+				type =  functions
+				form = Staff_Details
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						info "ForSingleRecordMob";
+					)
+					}
+				}
+			
+}

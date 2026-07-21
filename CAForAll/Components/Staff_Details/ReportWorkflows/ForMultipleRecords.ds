@@ -1,0 +1,18 @@
+ForMultipleRecords as "ForMultipleRecords"
+{
+
+				type =  functions
+				form = Staff_Details
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					insert into Staff_Details
+					[
+						Age = "9999"
+					]
+					}
+				}
+			
+}

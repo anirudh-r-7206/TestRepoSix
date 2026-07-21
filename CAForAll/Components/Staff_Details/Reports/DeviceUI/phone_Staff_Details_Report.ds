@@ -1,0 +1,97 @@
+report Staff_Details_Report
+{
+
+				quickview
+				(
+					layout
+					(
+		 				type = 9
+						datablock1
+						(
+			 				display type = auto
+							layout type = 31
+							fields
+							(
+								Name
+								Age
+								Dept
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								"ForMultipleRecords"
+								"ForMultipleRecordsColle"
+								"ForMultipleRecordsMob"
+								"ForMultipleRecordsMobColle"
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							"ForSingleRecord"
+							"ForSingleRecordMob"
+							"ReportField"
+    					)
+						)
+    				action
+    				(
+						on tap
+						(
+							"OnClickofaRecord"
+							"OnTapofaRecordMob"
+    					)
+						on long press
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+							"ForRightClickofaRecord"
+							"ForLongPressofaRecordMob"
+    					)
+						on left swipe
+						(
+							"ForSwipeLeftofaRecordMob"
+    					)
+						on right swipe
+						(
+							"ForSwipeRightofaRecordMob"
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Name
+								Age
+								Dept
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								"ForSelectedRecordDV"
+								"ForSelectedRecordDVMob"
+							)
+						)
+				)
+			
+}
