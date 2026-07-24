@@ -2,6 +2,7 @@ schedule_monthly_leave_credit as "Monthly Leave Credit"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 06:00:00"
 				frequency = monthly
 				time zone = "Asia/Kolkata"

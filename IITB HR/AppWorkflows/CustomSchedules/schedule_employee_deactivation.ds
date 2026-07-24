@@ -2,6 +2,7 @@ schedule_employee_deactivation as "Employee Deactivation"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 23:00:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"

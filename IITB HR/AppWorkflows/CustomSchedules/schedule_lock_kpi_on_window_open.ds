@@ -2,6 +2,7 @@ schedule_lock_kpi_on_window_open as "Lock KPI On Window Open"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 00:01:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"

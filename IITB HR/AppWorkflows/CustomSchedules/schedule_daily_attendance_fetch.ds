@@ -2,6 +2,7 @@ schedule_daily_attendance_fetch as "Daily Attendance Fetch"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 23:59:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"

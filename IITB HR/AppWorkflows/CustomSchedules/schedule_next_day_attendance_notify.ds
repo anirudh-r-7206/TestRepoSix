@@ -2,6 +2,7 @@ schedule_next_day_attendance_notify as "Next Day Attendance Notify"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 08:00:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"

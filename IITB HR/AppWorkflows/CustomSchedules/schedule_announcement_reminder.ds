@@ -2,6 +2,7 @@ schedule_announcement_reminder as "Announcement Reminder"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 09:00:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"

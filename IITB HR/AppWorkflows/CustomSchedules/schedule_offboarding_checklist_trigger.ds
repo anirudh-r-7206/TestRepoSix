@@ -2,6 +2,7 @@ schedule_offboarding_checklist_trigger as "Offboarding Checklist Trigger"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 07:00:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"

@@ -2,6 +2,7 @@ schedule_daily_attendance_prefill as "Daily Attendance Prefill"
 {
 
 				type =  schedule
+					status = inactive
 				start = "2025-01-01 06:00:00"
 				frequency = daily
 				time zone = "Asia/Kolkata"
