@@ -1,0 +1,13 @@
+connectors
+{
+	vendor_api_connector
+	(
+		displayname = "Vendor API Connector"
+		description = "Custom bearer-token connector for Vendor API."
+		auth type = "bearer_token"
+		configurations
+		(
+			parameters = [{"key":"Authorization","displayname":"Authorization Token","location":"header","token_prefix":"Bearer"}]
+		)
+	)
+}
