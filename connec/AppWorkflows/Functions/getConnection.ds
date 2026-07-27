@@ -1,6 +1,8 @@
 void getConnection()
 {
 
-                 	workspaces = zoho.bookings.getWorkspaces("zoho_bookings_connection");
+                 	workspaces = zoho.bookings.getWorkspaces("zoho_bookings_connection1");
+                 	recs = zoho.projects.getPortals("bigin_by_zoho_crm_connection");
+                 	cliqz = zoho.cliq.postToBot("Hello","zoho_cliq_connection");
                  
 }
