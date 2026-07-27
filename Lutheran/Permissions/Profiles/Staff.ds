@@ -1,188 +1,190 @@
 "Staff"
 {
 
-				name = "Staff"
-				type = Users_Permissions
-				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
-				description = "Staff\n"
-				ModulePermissions
-				{
-					Employee_Filter
+	
+					name = "Staff"
+					type = Users_Permissions
+					permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "Staff\n"
+					ModulePermissions
 					{
-						enabled= Create,Tab 
-						allFieldsVisible= true 
-					}
-					Compliance_Training
-					{
-						allFieldsVisible= true 
-						ReportPermissions
+						Employee_Filter
 						{
-							My_Completed_Compliance_Trainings={"View"}
-							My_Pending_Compliance_Trainings={"View"}
-							My_Compliance_Trainings={"View"}
+							enabled= Create,Tab 
+							allFieldsVisible= true 
+						}
+						Compliance_Training
+						{
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								My_Completed_Compliance_Trainings={"View"}
+								My_Pending_Compliance_Trainings={"View"}
+								My_Compliance_Trainings={"View"}
+							}
+						}
+						Training_Type
+						{
+							allFieldsVisible= true 
+						}
+						Staff_Master
+						{
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								All_Staff={"View"}
+							}
+						}
+						History
+						{
+							allFieldsVisible= true 
+						}
+						Staff_Service_Awards
+						{
+							allFieldsVisible= true 
+						}
+						Representation_Team
+						{
+							allFieldsVisible= true 
+						}
+						School
+						{
+							allFieldsVisible= true 
+						}
+						Subject_form
+						{
+							allFieldsVisible= true 
+						}
+						Year_Level
+						{
+							allFieldsVisible= true 
+						}
+						Accreditation
+						{
+							allFieldsVisible= true 
+						}
+						Staff_Employment
+						{
+							enabled= Viewall 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								My_Active_Employment={"View"}
+							}
+						}
+						Campus
+						{
+							allFieldsVisible= true 
+						}
+						Accredit
+						{
+							allFieldsVisible= true 
+						}
+						Service_Awards
+						{
+							allFieldsVisible= true 
+						}
+						Speciality
+						{
+							allFieldsVisible= true 
+						}
+						Organisation
+						{
+							allFieldsVisible= true 
+						}
+						Accreditation_Courses
+						{
+							allFieldsVisible= true 
+						}
+						Approval_Configuration
+						{
+							allFieldsVisible= true 
+						}
+						Regions
+						{
+							allFieldsVisible= true 
+						}
+						Accreditation_Details
+						{
+							allFieldsVisible= true 
+						}
+						Staff_Onboarding1
+						{
+							allFieldsVisible= true 
+						}
+						Award_Eligible_Staff
+						{
+							allFieldsVisible= true 
+						}
+						Search_Service_Awards
+						{
+							allFieldsVisible= true 
+						}
+						Staff_Request
+						{
+							enabled= Viewall 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								My_Requests={"View"}
+							}
+						}
+						Training_Completion_Request
+						{
+							enabled= Create,Viewall,Modifyall,Tab 
+							allFieldsVisible= true 
+							ReportPermissions
+							{
+								My_Approved_Training_Requests={"View"}
+								My_Pending_Training_Requests={"View"}
+								My_Training_Completion_Requests={"View","Edit"}
+							}
+						}
+						Qualification_Type
+						{
+							allFieldsVisible= true 
+						}
+						Email_Templates
+						{
+							allFieldsVisible= true 
+						}
+						Positions
+						{
+							allFieldsVisible= true 
+						}
+						Send_Mail
+						{
+							allFieldsVisible= true 
+						}
+						Training_Completion_Request_Import
+						{
+							allFieldsVisible= true 
+						}
+						Add_Remove_Representation_Team
+						{
+							allFieldsVisible= true 
+						}
+						Qualifications
+						{
+							allFieldsVisible= true 
+						}
+						Not_Registered
+						{
+							enabled = tab
+						}
+						My_Training_Completion_Requests1
+						{
+							enabled = tab
+						}
+						My_Compliance_Trainings1
+						{
+							enabled = tab
+						}
+						Dashboard
+						{
+							enabled = tab
 						}
 					}
-					Training_Type
-					{
-						allFieldsVisible= true 
-					}
-					Staff_Master
-					{
-						allFieldsVisible= true 
-						ReportPermissions
-						{
-							All_Staff={"View"}
-						}
-					}
-					History
-					{
-						allFieldsVisible= true 
-					}
-					Staff_Service_Awards
-					{
-						allFieldsVisible= true 
-					}
-					Representation_Team
-					{
-						allFieldsVisible= true 
-					}
-					School
-					{
-						allFieldsVisible= true 
-					}
-					Subject_form
-					{
-						allFieldsVisible= true 
-					}
-					Year_Level
-					{
-						allFieldsVisible= true 
-					}
-					Accreditation
-					{
-						allFieldsVisible= true 
-					}
-					Staff_Employment
-					{
-						enabled= Viewall 
-						allFieldsVisible= true 
-						ReportPermissions
-						{
-							My_Active_Employment={"View"}
-						}
-					}
-					Campus
-					{
-						allFieldsVisible= true 
-					}
-					Accredit
-					{
-						allFieldsVisible= true 
-					}
-					Service_Awards
-					{
-						allFieldsVisible= true 
-					}
-					Speciality
-					{
-						allFieldsVisible= true 
-					}
-					Organisation
-					{
-						allFieldsVisible= true 
-					}
-					Accreditation_Courses
-					{
-						allFieldsVisible= true 
-					}
-					Approval_Configuration
-					{
-						allFieldsVisible= true 
-					}
-					Regions
-					{
-						allFieldsVisible= true 
-					}
-					Accreditation_Details
-					{
-						allFieldsVisible= true 
-					}
-					Staff_Onboarding1
-					{
-						allFieldsVisible= true 
-					}
-					Award_Eligible_Staff
-					{
-						allFieldsVisible= true 
-					}
-					Search_Service_Awards
-					{
-						allFieldsVisible= true 
-					}
-					Staff_Request
-					{
-						enabled= Viewall 
-						allFieldsVisible= true 
-						ReportPermissions
-						{
-							My_Requests={"View"}
-						}
-					}
-					Training_Completion_Request
-					{
-						enabled= Create,Viewall,Modifyall,Tab 
-						allFieldsVisible= true 
-						ReportPermissions
-						{
-							My_Approved_Training_Requests={"View"}
-							My_Pending_Training_Requests={"View"}
-							My_Training_Completion_Requests={"View","Edit"}
-						}
-					}
-					Qualification_Type
-					{
-						allFieldsVisible= true 
-					}
-					Email_Templates
-					{
-						allFieldsVisible= true 
-					}
-					Positions
-					{
-						allFieldsVisible= true 
-					}
-					Send_Mail
-					{
-						allFieldsVisible= true 
-					}
-					Training_Completion_Request_Import
-					{
-						allFieldsVisible= true 
-					}
-					Add_Remove_Representation_Team
-					{
-						allFieldsVisible= true 
-					}
-					Qualifications
-					{
-						allFieldsVisible= true 
-					}
-					Not_Registered
-					{
-						enabled = tab
-					}
-					My_Training_Completion_Requests1
-					{
-						enabled = tab
-					}
-					My_Compliance_Trainings1
-					{
-						enabled = tab
-					}
-					Dashboard
-					{
-						enabled = tab
-					}
-				}
-			
+				
+	
 }

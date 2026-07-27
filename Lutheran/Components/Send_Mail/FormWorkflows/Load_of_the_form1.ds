@@ -1,22 +1,24 @@
 Load_of_the_form1 as "Load of the form"
 {
 
-				type =  form
-				form = Send_Mail
-
-				record event = on add or edit
-
-				on load
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											hide Staff_Master;
-										hide Committee;
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Send_Mail
+			
+							record event = on add or edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														hide Staff_Master;
+													hide Committee;
+									)
+								}
+							}
+			
+						
 			
 }

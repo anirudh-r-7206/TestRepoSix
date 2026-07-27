@@ -1,20 +1,22 @@
 void UpdateCampusTest()
 {
 
-                 	allStaff = Staff_Master[ID != 0];
-                 	for each  staffRec in allStaff
-                 	{
-                 		fetEmp = Staff_Employment[Staff == staffRec.ID && End_Date == null];
-                 		if(fetEmp.count() > 1)
-                 		{
-                 			for each  emp in fetEmp
-                 			{
-                 				if(staffRec.Current_Position == emp.Position)
-                 				{
-                 					emp.Is_primary=true;
-                 				}
-                 			}
-                 		}
-                 	}
-                 
+			
+			                 	allStaff = Staff_Master[ID != 0];
+			                 	for each  staffRec in allStaff
+			                 	{
+			                 		fetEmp = Staff_Employment[Staff == staffRec.ID && End_Date == null];
+			                 		if(fetEmp.count() > 1)
+			                 		{
+			                 			for each  emp in fetEmp
+			                 			{
+			                 				if(staffRec.Current_Position == emp.Position)
+			                 				{
+			                 					emp.Is_primary=true;
+			                 				}
+			                 			}
+			                 		}
+			                 	}
+			                 
+			
 }

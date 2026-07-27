@@ -1,55 +1,57 @@
 custom Staff_For_Request
 {
 
-			displayName = "Staff For Request"
-			show all rows from Staff_Master    
-			(
-				date_of_birth as "Date Of Birth"
-				gender as "Gender"
-				religion as "Religion"
-				origin as "Origin"
-				status as "Status"
-				Name 
-				Surname as "Middle name"
-				Current_Position as "Current Position"
-				FTE
-				Photograph
-				Phone_Number as "Phone"
-				(
-					displayformat = plainnumber 
-				)
-				Staff_Email as "Staff Email"
-				Added_Time as "Added Time"
-				Previous_Surname as "Previous  Surname "
-				Admin_Type as "Admin Type"
-				Organisation as "National"
-				Regions
-				Current_Employment as "Current Employment"
-				Campus
-				Teaching_Staff as "Teaching Staff"
-				Teacher_Type as "Teacher Type"
-			)
-			group by
-			(
-				status ascending
-			)
-			sort by
-			(
-				Added_Time descending
-			)
-			custom actions
-			(
-				"Raise Request"
-				(
-	  			workflow = Raise_Request1
-				show action in edit record menu = true
-				condition = (status == "Resigned")
-				)
-				"Continue Onboarding"
-				(
-	  			workflow = Continue_Onboarding
-				show action in edit record menu = true
-				condition = (status == "Draft")
-				)
-			)
+		
+					displayName = "Staff For Request"
+					show all rows from Staff_Master    
+					(
+						date_of_birth as "Date Of Birth"
+						gender as "Gender"
+						religion as "Religion"
+						origin as "Origin"
+						status as "Status"
+						Name 
+						Surname as "Middle name"
+						Current_Position as "Current Position"
+						FTE
+						Photograph
+						Phone_Number as "Phone"
+						(
+							displayformat = plainnumber 
+						)
+						Staff_Email as "Staff Email"
+						Added_Time as "Added Time"
+						Previous_Surname as "Previous  Surname "
+						Admin_Type as "Admin Type"
+						Organisation as "National"
+						Regions
+						Current_Employment as "Current Employment"
+						Campus
+						Teaching_Staff as "Teaching Staff"
+						Teacher_Type as "Teacher Type"
+					)
+					group by
+					(
+						status ascending
+					)
+					sort by
+					(
+						Added_Time descending
+					)
+					custom actions
+					(
+						"Raise Request"
+						(
+			  			workflow = Raise_Request1
+						show action in edit record menu = true
+						condition = (status == "Resigned")
+						)
+						"Continue Onboarding"
+						(
+			  			workflow = Continue_Onboarding
+						show action in edit record menu = true
+						condition = (status == "Draft")
+						)
+					)
+		
 }

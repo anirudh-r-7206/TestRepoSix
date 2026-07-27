@@ -1,29 +1,31 @@
 Delete_Subject as "Delete Subject"
 {
 
-				type =  form
-				form = Subject_form
-
-				record event = on delete
-
-				on validate
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											staff_masters = Staff_Master[Subject_form == input.ID];
-										staff_employments = Staff_Employment[Subject_field == input.ID];
-										staff_requests = Staff_Request[Subject_form == input.ID];
-										isImplemented = staff_masters.count() > 0 || staff_employments.count() > 0 || staff_requests.count() > 0;
-										if(isImplemented)
-										{
-											alert "Subject has been linked to few modules. Please unlink them to delete this Subject.";
-											cancel delete;
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Subject_form
+			
+							record event = on delete
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														staff_masters = Staff_Master[Subject_form == input.ID];
+													staff_employments = Staff_Employment[Subject_field == input.ID];
+													staff_requests = Staff_Request[Subject_form == input.ID];
+													isImplemented = staff_masters.count() > 0 || staff_employments.count() > 0 || staff_requests.count() > 0;
+													if(isImplemented)
+													{
+														alert "Subject has been linked to few modules. Please unlink them to delete this Subject.";
+														cancel delete;
+													}
+									)
+								}
+							}
+			
+						
 			
 }

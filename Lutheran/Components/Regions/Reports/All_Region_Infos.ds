@@ -1,19 +1,21 @@
 default list All_Region_Infos
 {
 
-			displayName = "All Regions"
-			show all rows from Regions    
-			(
-				region_name as "Region Name"
-				regional_logo as "Regional Logo"
-				Regional_Office_Address  as "Regional Office Address"
-				Main_Organisation as "Main National "
-				Regional_Office_Email as "Regional Office Email"
-				Organisation_Name as "National Name"
-			)
-			group by
-			(
-				Main_Organisation descending
-			)
+		
+					displayName = "All Regions"
+					show all rows from Regions    
+					(
+						region_name as "Region Name"
+						regional_logo as "Regional Logo"
+						Regional_Office_Address  as "Regional Office Address"
+						Main_Organisation as "Main National "
+						Regional_Office_Email as "Regional Office Email"
+						Organisation_Name as "National Name"
+					)
+					group by
+					(
+						Main_Organisation descending
+					)
+				
 		
 }

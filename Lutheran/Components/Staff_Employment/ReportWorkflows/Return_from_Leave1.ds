@@ -1,66 +1,68 @@
 Return_from_Leave1 as "Return from Leave"
 {
 
-				type =  functions
-				form = Staff_Employment
-				execution type = for each record	
-				on start
-				{
-					actions 
-					{
-					on click
-					(
-						/* GET STAFF */
-										staffRec = Staff_Master[ID == input.Staff];
-										/* REMOVE OLD FLAGS */
-										input.Is_On_Leave = false;
-										input.Is_primary = false;
-										/* INSERT NEW EMPLOYMENT */
-										newEmpId = insert into Staff_Employment
-										[
-											Staff=input.Staff
-											School=input.School
-											Campus=input.Campus
-											Position=input.Position
-											Commencement_Date=zoho.currentdate
-											FTE=input.FTE
-											Teaching_Staff=input.Teaching_Staff
-											Teacher_Type=input.Teacher_Type
-											Year_Level=input.Year_Level
-											Subject_field=input.Subject_field
-											Speciality=input.Speciality
-											Added_User=zoho.loginuser
-										];
-										/* FETCH NEW */
-										newEmp = Staff_Employment[ID == newEmpId];
-										/* SET PRIMARY */
-										/* CHECK EXISTING PRIMARY */
-										existingPrimary = Staff_Employment[Staff == input.Staff && Is_primary == true && End_Date == null];
-										/* SET PRIMARY ONLY IF NONE EXISTS */
-										if(existingPrimary.count() == 0)
-										{
-											newEmp.Is_primary=true;
-											/* UPDATE STAFF MASTER */
-											staffRec.Current_Position=newEmp.Position;
-											staffRec.Current_Employment=newEmp.School;
-											staffRec.Campus=newEmp.Campus;
-											staffRec.FTE=newEmp.FTE;
-										}
-										/* UPDATE STAFF */
-										if(staffRec.status == "On Leave")
-										{
-											staffRec.status="Active";
-										}
-										/* HISTORY */
-										insert into History
-										[
-											Staff=input.Staff
-											Action_field="Returned from Leave"
-											Comment="Returned from Leave via Employment"
-											Added_User=zoho.loginuser
-										]
-					)
-					}
-				}
+			
+							type =  functions
+							form = Staff_Employment
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									/* GET STAFF */
+													staffRec = Staff_Master[ID == input.Staff];
+													/* REMOVE OLD FLAGS */
+													input.Is_On_Leave = false;
+													input.Is_primary = false;
+													/* INSERT NEW EMPLOYMENT */
+													newEmpId = insert into Staff_Employment
+													[
+														Staff=input.Staff
+														School=input.School
+														Campus=input.Campus
+														Position=input.Position
+														Commencement_Date=zoho.currentdate
+														FTE=input.FTE
+														Teaching_Staff=input.Teaching_Staff
+														Teacher_Type=input.Teacher_Type
+														Year_Level=input.Year_Level
+														Subject_field=input.Subject_field
+														Speciality=input.Speciality
+														Added_User=zoho.loginuser
+													];
+													/* FETCH NEW */
+													newEmp = Staff_Employment[ID == newEmpId];
+													/* SET PRIMARY */
+													/* CHECK EXISTING PRIMARY */
+													existingPrimary = Staff_Employment[Staff == input.Staff && Is_primary == true && End_Date == null];
+													/* SET PRIMARY ONLY IF NONE EXISTS */
+													if(existingPrimary.count() == 0)
+													{
+														newEmp.Is_primary=true;
+														/* UPDATE STAFF MASTER */
+														staffRec.Current_Position=newEmp.Position;
+														staffRec.Current_Employment=newEmp.School;
+														staffRec.Campus=newEmp.Campus;
+														staffRec.FTE=newEmp.FTE;
+													}
+													/* UPDATE STAFF */
+													if(staffRec.status == "On Leave")
+													{
+														staffRec.status="Active";
+													}
+													/* HISTORY */
+													insert into History
+													[
+														Staff=input.Staff
+														Action_field="Returned from Leave"
+														Comment="Returned from Leave via Employment"
+														Added_User=zoho.loginuser
+													]
+								)
+								}
+							}
+						
 			
 }

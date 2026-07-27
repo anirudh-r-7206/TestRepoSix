@@ -1,56 +1,58 @@
 Effective_Date as "Effective Date"
 {
 
-				type =  form
-				form = Staff_Request
-
-				record event = on add or edit
-
-				on user input of Effective_Date
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Effective_Date != null)
-										{
-											minDate = zoho.currentdate.addYear(-1);
-											maxDate = zoho.currentdate.addYear(1);
-											if(input.Effective_Date < minDate || input.Effective_Date > maxDate)
-											{
-												alert "Effective Date must be within 1 year past or 1 year future from today.";
-												Commenced_Date = null;
-											}
-											else
-											{
-												approvedRequest = Staff_Request[Staff == input.Staff && Status == "Approved" && Effective_Date > zoho.currentdate] sort by Added_Time desc;
-												if(approvedRequest.count() > 0)
-												{
-													if(approvedRequest.Request_Type == "Position Update")
+			
+							type =  form
+							form = Staff_Request
+			
+							record event = on add or edit
+			
+							on user input of Effective_Date
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Effective_Date != null)
 													{
-														if(input.Request_Type == "Position Update" || input.Request_Type == "Transfer")
+														minDate = zoho.currentdate.addYear(-1);
+														maxDate = zoho.currentdate.addYear(1);
+														if(input.Effective_Date < minDate || input.Effective_Date > maxDate)
 														{
-															if(input.Effective_Date <= approvedRequest.Effective_Date)
+															alert "Effective Date must be within 1 year past or 1 year future from today.";
+															Commenced_Date = null;
+														}
+														else
+														{
+															approvedRequest = Staff_Request[Staff == input.Staff && Status == "Approved" && Effective_Date > zoho.currentdate] sort by Added_Time desc;
+															if(approvedRequest.count() > 0)
 															{
-																alert "An approved Position Update exists. Your Effective Date must be after " + approvedRequest.Effective_Date + ".";
-																input.Effective_Date = null;
+																if(approvedRequest.Request_Type == "Position Update")
+																{
+																	if(input.Request_Type == "Position Update" || input.Request_Type == "Transfer")
+																	{
+																		if(input.Effective_Date <= approvedRequest.Effective_Date)
+																		{
+																			alert "An approved Position Update exists. Your Effective Date must be after " + approvedRequest.Effective_Date + ".";
+																			input.Effective_Date = null;
+																		}
+																	}
+																}
+															}
+														}
+														if(input.Effective_To != null)
+														{
+															if(input.Effective_To <= input.Effective_Date)
+															{
+																alert "Effective To date must be after Effective Date.";
+																input.Effective_To = null;
 															}
 														}
 													}
-												}
-											}
-											if(input.Effective_To != null)
-											{
-												if(input.Effective_To <= input.Effective_Date)
-												{
-													alert "Effective To date must be after Effective Date.";
-													input.Effective_To = null;
-												}
-											}
-										}
-						)
-					}
-				}
-
+									)
+								}
+							}
+			
+						
 			
 }

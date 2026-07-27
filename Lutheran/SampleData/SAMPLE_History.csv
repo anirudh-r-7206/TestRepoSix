@@ -1,6 +1,0 @@
-"Header","Training_Completion_Request","Staff_Request","Staff","Action_By","Action_field","Comment"
-"Training Completion Audit","TCR001","SR001","STF001","STF002","Submitted","<p>Training completion evidence was submitted and queued for regional review.</p>"
-"Staff Request Review","TCR002","SR002","STF002","STF001","Reviewed","<p>Staff request details were checked against employment records before approval routing.</p>"
-"Approval Update","TCR003","SR003","STF003","STF004","Approved","<p>Request was approved after all required documentation and staff details were confirmed.</p>"
-"Clarification Note","TCR004","SR004","STF004","STF003","Returned for Information","<p>Additional information was requested from the initiating school administrator.</p>"
-"Completion Log","TCR005","SR005","STF005","STF001","Completed","<p>Workflow action was completed and the related staff profile was updated successfully.</p>"

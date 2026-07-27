@@ -1,485 +1,487 @@
 form Staff_Request
 {
 
-			displayname = "Staff Request"
-			success message = "Staff Request Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have Staff
-			(
-				type = picklist	
-				values  = Staff_Master.ID
-    			displayformat = [" " + Name.first_name + " " + Name.last_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			must have Raised_by
-			(
-				type = picklist	
-				displayname = "Raised by"
-				values  = Staff_Master.ID
-    			displayformat = [" " + Name.first_name + " " + Name.last_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			must have Request_Type
-			(
-				type = radiobuttons
-				displayname = "Request Type"
-				maxchar = 100
-				values = {"New Staff","New Employment","Personal Details","Position Update","Transfer","Resignation","Deceased","Sabbatical Leave"}
-				layout = 3
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Employment
-			(
-				type = picklist	
-				values  = Staff_Employment[Staff.ID == input.Staff && End_Date is null].ID
-    			displayformat = [Position1 + " - " + School1 + " - " + Campus1]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			org_info
-			(
-    			type = plaintext
-				value = "<div> <br /></div>"
-	 			row = 1
-	 			column = 2   
-				width = medium
-			)
-			Personal_Details
-			(
-				type = section
-				displayname = "Personal Details "
-				visibility = true
-	 			row = 2
-	 			column = 0   
-				width = medium
-			)
-			Photograph
-			(
-    			type = image
-				source  = file
-				enable = title
-				aspect ratio = original
-				camera = primary
-				show gallery = true
-				switch camera = true
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			Name
-			(
-    			type = name
-     			prefix
-     			(
-	     			 type = prefix
-	     			 displayname ="Prefix"
-	     			 value = {"Mr.","Mrs.","Ms.","Rev.","Ps.","Fr.","Sis.","Dr."}
-     			) 
-     			first_name
-     			(
-	     			 type = first_name
-	     			 displayname ="First Name"
-     			) 
-     			last_name
-     			(
-	     			 type = last_name
-	     			 displayname ="Last Name"
-     			) 
-     			suffix
-     			(
-	     			 type = suffix
-	     			 displayname ="Suffix"
-	     			 visibility = false
-     			) 
-	 			row = 2
-	 			column = 1   
-				width = medium
-				personal data = true
-			)
-			Surname
-			(
-    			type = text
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			Previous_Surname
-			(
-    			type = text
-				displayname = "Previous  Surname "
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			Maiden_Name
-			(
-    			type = text
-				displayname = "Maiden Name"
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			date_of_birth1
-			(
-    			type = date
-				displayname = "Date Of Birth"
-				alloweddays = 0,1,2,3,4,5,6
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			gender1
-			(
-				type = radiobuttons
-				displayname = "Gender"
-				maxchar = 100
-				values = {"Male","Female","Prefer not to say"}
-				layout = 3
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			religion
-			(
-				type = picklist
-				displayname = "Religion"
-				maxchar = 100
-				values = {"Lutheran","Other Christian","Other","None"}
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			origin1
-			(
-				type = picklist
-				displayname = "Origin"
-				maxchar = 100
-				values = {"ALC Graduate","Non ALC Graduate","Government","Non government","Return to Service","Non Teacher"}
-	 			row = 2
-	 			column = 1   
-				width = medium
-			)
-			Phone_Number
-			(
-    			type = phonenumber
-				displayname = "Phone"
-    			defaultcountry="au"
-	 			row = 2
-	 			column = 1   
-				width = medium
-				personal data = true
-			)
-			Staff_Email
-			(
-    			type = email
-				displayname = "Staff Email"
-				maxchar = 80
-	 			row = 2
-	 			column = 1   
-				width = medium
-				personal data = true
-			)
-			plain
-			(
-    			type = plaintext
-				value = "<div> <br /></div>"
-	 			row = 2
-	 			column = 2   
-				width = medium
-			)
-			Section3
-			(
-				type = section
-				displayname = "Section"
-	 			row = 3
-	 			column = 0   
-				width = medium
-			)
-			Teaching_Staff
-			(
-				type = radiobuttons
-				displayname = "Teaching Staff "
-				maxchar = 100
-				values = {"Yes","No"}
-				layout = 3
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Current_Position
-			(
-				type = picklist	
-				displayname = "Position"
-				values  = Positions.ID
-    			displayformat = [position_name]
-				sortorder = ascending
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Admin_Type
-			(
-				type = picklist
-				displayname = "Admin Type"
-				maxchar = 100
-				values = {"National","Region","School","Campus"}
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Organisation
-			(
-				type = picklist	
-				displayname = "National"
-				values  = Organisation.ID
-    			displayformat = [organisation_name]
-				sortorder = ascending
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Regions
-			(
-				type = picklist	
-				values  = Regions.ID
-    			displayformat = [region_name]
-				sortorder = ascending
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Current_Employment
-			(
-				type = picklist	
-				displayname = "School"
-				values  = School.ID
-    			displayformat = [Organisation_Name + " - " + Region_Name + " - " + school_name]
-				advanced field search = true
-				sortorder = ascending
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Campus
-			(
-				type = picklist	
-				values  = Campus.ID
-    			displayformat = [Organisation_Name + " - " + Region_Name + " - " + School_Name + " - " + campus_name]
-				advanced field search = true
-				sortorder = ascending
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			FTE
-			(
-				type = decimal
-	 			row = 3
-	 			column = 1   
-				width = medium
-			)
-			Acting
-			(
-				type = radiobuttons
-				displayname = "Acting?"
-				maxchar = 100
-				values = {"Yes","No"}
-				initial value = "No"
-				layout = 3
-	 			row = 3
-	 			column = 2   
-				width = medium
-			)
-			Teacher_Type
-			(
-				type = picklist
-				displayname = "Teacher Type"
-				maxchar = 100
-				values = {"Across All Levels","Early Childhood","Primary","Secondary"}
-	 			row = 3
-	 			column = 2   
-				width = medium
-			)
-			Year_Level
-			(
-				type = list	
-				displayname = "Year Level"
-				values  = Year_Level.ID
-    			displayformat = [year_level_name]
-				sortorder = ascending
-				height = 60px
-	 			row = 3
-	 			column = 2   
-				width = medium
-			)
-			Subject_form
-			(
-				type = list	
-				displayname = "Subject"
-				values  = Subject_form.ID
-    			displayformat = [subject_field]
-				sortorder = ascending
-				height = 60px
-	 			row = 3
-	 			column = 2   
-				width = medium
-			)
-			Speciality
-			(
-				type = list	
-				values  = Speciality.ID
-    			displayformat = [Speciality]
-				sortorder = ascending
-				height = 60px
-	 			row = 3
-	 			column = 2   
-				width = medium
-			)
-			Is_primary
-			(
-    			type = checkbox
-				displayname = "Is primary"
-				initial value = false
-	 			row = 3
-	 			column = 2   
-				width = medium
-			)
-			Position_Update
-			(
-				type = section
-				displayname = "Position Update"
-	 			row = 4
-	 			column = 0   
-				width = medium
-			)
-			Section2
-			(
-				type = section
-				displayname = "Section"
-	 			row = 5
-	 			column = 0   
-				width = medium
-			)
-			Teaching_Details
-			(
-				type = section
-				displayname = "Teaching Details"
-	 			row = 6
-	 			column = 0   
-				width = medium
-			)
-			Section1
-			(
-				type = section
-				displayname = "Section"
-	 			row = 7
-	 			column = 0   
-				width = medium
-			)
-			Request_Details
-			(
-    			type = text
-				displayname = "Request Details"
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-			must have Effective_Date
-			(
-    			type = date
-				displayname = "Effective Date"
-				alloweddays = 0,1,2,3,4,5,6
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-			Effective_To
-			(
-    			type = date
-				displayname = "Effective To"
-				alloweddays = 0,1,2,3,4,5,6
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-			Supporting_Docs
-			(
-    			type = upload file
-				displayname = "Supporting Docs"
-    			file count = 10
-				browse = local_drive
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-			Status
-			(
-				type = picklist
-				maxchar = 100
-				values = {"Pending","Approved","Rejected","Cancelled","Completed"}
-				initial value = "Pending"
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-			Next_Approver
-			(
-				type = picklist
-				displayname = "Next Approver"
-				maxchar = 100
-				values = {"School Admin","Region Admin","National Admin"}
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-			Returned
-			(
-    			type = checkbox
-				initial value = false
-	 			row = 7
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					displayname = "Staff Request"
+					success message = "Staff Request Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have Staff
 					(
-   						type = submit
-   						displayname = "Update"
+						type = picklist	
+						values  = Staff_Master.ID
+		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
+					must have Raised_by
 					(
-   						type = cancel
-   						displayname = "Cancel"
+						type = picklist	
+						displayname = "Raised by"
+						values  = Staff_Master.ID
+		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-				}
-			}
+					must have Request_Type
+					(
+						type = radiobuttons
+						displayname = "Request Type"
+						maxchar = 100
+						values = {"New Staff","New Employment","Personal Details","Position Update","Transfer","Resignation","Deceased","Sabbatical Leave"}
+						layout = 3
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Employment
+					(
+						type = picklist	
+						values  = Staff_Employment[Staff.ID == input.Staff && End_Date is null].ID
+		    			displayformat = [Position1 + " - " + School1 + " - " + Campus1]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					org_info
+					(
+		    			type = plaintext
+						value = "<div> <br /></div>"
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					Personal_Details
+					(
+						type = section
+						displayname = "Personal Details "
+						visibility = true
+			 			row = 2
+			 			column = 0   
+						width = medium
+					)
+					Photograph
+					(
+		    			type = image
+						source  = file
+						enable = title
+						aspect ratio = original
+						camera = primary
+						show gallery = true
+						switch camera = true
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Name
+					(
+		    			type = name
+		     			prefix
+		     			(
+			     			 type = prefix
+			     			 displayname ="Prefix"
+			     			 value = {"Mr.","Mrs.","Ms.","Rev.","Ps.","Fr.","Sis.","Dr."}
+		     			) 
+		     			first_name
+		     			(
+			     			 type = first_name
+			     			 displayname ="First Name"
+		     			) 
+		     			last_name
+		     			(
+			     			 type = last_name
+			     			 displayname ="Last Name"
+		     			) 
+		     			suffix
+		     			(
+			     			 type = suffix
+			     			 displayname ="Suffix"
+			     			 visibility = false
+		     			) 
+			 			row = 2
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					Surname
+					(
+		    			type = text
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Previous_Surname
+					(
+		    			type = text
+						displayname = "Previous  Surname "
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Maiden_Name
+					(
+		    			type = text
+						displayname = "Maiden Name"
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					date_of_birth1
+					(
+		    			type = date
+						displayname = "Date Of Birth"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					gender1
+					(
+						type = radiobuttons
+						displayname = "Gender"
+						maxchar = 100
+						values = {"Male","Female","Prefer not to say"}
+						layout = 3
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					religion
+					(
+						type = picklist
+						displayname = "Religion"
+						maxchar = 100
+						values = {"Lutheran","Other Christian","Other","None"}
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					origin1
+					(
+						type = picklist
+						displayname = "Origin"
+						maxchar = 100
+						values = {"ALC Graduate","Non ALC Graduate","Government","Non government","Return to Service","Non Teacher"}
+			 			row = 2
+			 			column = 1   
+						width = medium
+					)
+					Phone_Number
+					(
+		    			type = phonenumber
+						displayname = "Phone"
+		    			defaultcountry="au"
+			 			row = 2
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					Staff_Email
+					(
+		    			type = email
+						displayname = "Staff Email"
+						maxchar = 80
+			 			row = 2
+			 			column = 1   
+						width = medium
+						personal data = true
+					)
+					plain
+					(
+		    			type = plaintext
+						value = "<div> <br /></div>"
+			 			row = 2
+			 			column = 2   
+						width = medium
+					)
+					Section3
+					(
+						type = section
+						displayname = "Section"
+			 			row = 3
+			 			column = 0   
+						width = medium
+					)
+					Teaching_Staff
+					(
+						type = radiobuttons
+						displayname = "Teaching Staff "
+						maxchar = 100
+						values = {"Yes","No"}
+						layout = 3
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Current_Position
+					(
+						type = picklist	
+						displayname = "Position"
+						values  = Positions.ID
+		    			displayformat = [position_name]
+						sortorder = ascending
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Admin_Type
+					(
+						type = picklist
+						displayname = "Admin Type"
+						maxchar = 100
+						values = {"National","Region","School","Campus"}
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Organisation
+					(
+						type = picklist	
+						displayname = "National"
+						values  = Organisation.ID
+		    			displayformat = [organisation_name]
+						sortorder = ascending
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Regions
+					(
+						type = picklist	
+						values  = Regions.ID
+		    			displayformat = [region_name]
+						sortorder = ascending
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Current_Employment
+					(
+						type = picklist	
+						displayname = "School"
+						values  = School.ID
+		    			displayformat = [Organisation_Name + " - " + Region_Name + " - " + school_name]
+						advanced field search = true
+						sortorder = ascending
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Campus
+					(
+						type = picklist	
+						values  = Campus.ID
+		    			displayformat = [Organisation_Name + " - " + Region_Name + " - " + School_Name + " - " + campus_name]
+						advanced field search = true
+						sortorder = ascending
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					FTE
+					(
+						type = decimal
+			 			row = 3
+			 			column = 1   
+						width = medium
+					)
+					Acting
+					(
+						type = radiobuttons
+						displayname = "Acting?"
+						maxchar = 100
+						values = {"Yes","No"}
+						initial value = "No"
+						layout = 3
+			 			row = 3
+			 			column = 2   
+						width = medium
+					)
+					Teacher_Type
+					(
+						type = picklist
+						displayname = "Teacher Type"
+						maxchar = 100
+						values = {"Across All Levels","Early Childhood","Primary","Secondary"}
+			 			row = 3
+			 			column = 2   
+						width = medium
+					)
+					Year_Level
+					(
+						type = list	
+						displayname = "Year Level"
+						values  = Year_Level.ID
+		    			displayformat = [year_level_name]
+						sortorder = ascending
+						height = 60px
+			 			row = 3
+			 			column = 2   
+						width = medium
+					)
+					Subject_form
+					(
+						type = list	
+						displayname = "Subject"
+						values  = Subject_form.ID
+		    			displayformat = [subject_field]
+						sortorder = ascending
+						height = 60px
+			 			row = 3
+			 			column = 2   
+						width = medium
+					)
+					Speciality
+					(
+						type = list	
+						values  = Speciality.ID
+		    			displayformat = [Speciality]
+						sortorder = ascending
+						height = 60px
+			 			row = 3
+			 			column = 2   
+						width = medium
+					)
+					Is_primary
+					(
+		    			type = checkbox
+						displayname = "Is primary"
+						initial value = false
+			 			row = 3
+			 			column = 2   
+						width = medium
+					)
+					Position_Update
+					(
+						type = section
+						displayname = "Position Update"
+			 			row = 4
+			 			column = 0   
+						width = medium
+					)
+					Section2
+					(
+						type = section
+						displayname = "Section"
+			 			row = 5
+			 			column = 0   
+						width = medium
+					)
+					Teaching_Details
+					(
+						type = section
+						displayname = "Teaching Details"
+			 			row = 6
+			 			column = 0   
+						width = medium
+					)
+					Section1
+					(
+						type = section
+						displayname = "Section"
+			 			row = 7
+			 			column = 0   
+						width = medium
+					)
+					Request_Details
+					(
+		    			type = text
+						displayname = "Request Details"
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+					must have Effective_Date
+					(
+		    			type = date
+						displayname = "Effective Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+					Effective_To
+					(
+		    			type = date
+						displayname = "Effective To"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+					Supporting_Docs
+					(
+		    			type = upload file
+						displayname = "Supporting Docs"
+		    			file count = 10
+						browse = local_drive
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+					Status
+					(
+						type = picklist
+						maxchar = 100
+						values = {"Pending","Approved","Rejected","Cancelled","Completed"}
+						initial value = "Pending"
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+					Next_Approver
+					(
+						type = picklist
+						displayname = "Next Approver"
+						maxchar = 100
+						values = {"School Admin","Region Admin","National Admin"}
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+					Returned
+					(
+		    			type = checkbox
+						initial value = false
+			 			row = 7
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

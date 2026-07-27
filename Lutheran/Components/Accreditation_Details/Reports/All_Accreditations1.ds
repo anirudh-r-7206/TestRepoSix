@@ -1,15 +1,17 @@
 list All_Accreditations1
 {
 
-			displayName = "All Accreditations"
-			show all rows from Accreditation_Details    
-			(
-				Status_Accreditation as "Status Accreditation"
-				Staff
-				Required_Accreditation as "Required Accreditation"
-				Due_Date as "Due Date"
-				PD_Hours_Collected as "PD Hours Collected"
-				Staff.Photograph
-			)
+		
+					displayName = "All Accreditations"
+					show all rows from Accreditation_Details    
+					(
+						Status_Accreditation as "Status Accreditation"
+						Staff
+						Required_Accreditation as "Required Accreditation"
+						Due_Date as "Due Date"
+						PD_Hours_Collected as "PD Hours Collected"
+						Staff.Photograph
+					)
+				
 		
 }

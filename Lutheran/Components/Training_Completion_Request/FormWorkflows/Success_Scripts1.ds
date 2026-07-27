@@ -1,102 +1,104 @@
 Success_Scripts1 as "Success Scripts"
 {
 
-				type =  form
-				form = Training_Completion_Request
-
-				record event = on add
-
-				on success
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											login_user_info = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"];
-										current_approver = "";
-										compliance_id = 0;
-										if(input.Compliance_Training != null)
-										{
-											compliance_rec = Compliance_Training[ID == input.Compliance_Training];
-											compliance_rec.Completion_Request_Raised=true;
-											compliance_rec.Training_Name=input.Training_Name;
-											compliance_rec.Status="Pending";
-										}
-										else
-										{
-											compliance_id = insert into Compliance_Training
-											[
-												Added_User=zoho.loginuser
-												Staff=input.Staff
-												Status="Pending"
-												Completion_Date=input.Completion_Date
-												Training_Name=input.Training_Name
-												Training_Type=input.Training_Type
-											];
-											input.Compliance_Training = compliance_id;
-										}
-										if(login_user_info.Admin_Type == "Campus")
-										{
-											current_approver = "Campus Admin";
-										}
-										else if(login_user_info.Admin_Type == "School")
-										{
-											current_approver = "School Admin";
-										}
-										else if(login_user_info.Admin_Type == "Region")
-										{
-											current_approver = "Region Admin";
-										}
-										else if(login_user_info.Admin_Type == "National")
-										{
-											current_approver = "National Admin";
-										}
-										input.Current_Approver = thisapp.helpers.returnComplianceCompletionRequestNextApprover(current_approver,input.Staff.ID);
-										if(input.Current_Approver == "")
-										{
-											action_value = "Training Completion Request Approved";
-											comments = "Compliance Training Completion Request Approved Automatically";
-										}
-										else
-										{
-											action_value = "Training Completion Requested";
-											comments = "Compliance Training Completion Requested";
-										}
-										insert into History
-										[
-											Added_User=zoho.loginuser
-											Action_By=login_user_info.ID
-											Action_field=action_value
-											Comment=comments
-											Training_Completion_Request=input.ID
-										]
-										if(input.Current_Approver != "")
-										{
-											thisapp.mail.sendTrainingApprovalPending(input.ID);
-										}
-										if(input.Current_Approver == "")
-										{
-											input.Status = "Approved";
-											thisapp.mail.sendTrainingApproved(input.ID);
-											if(thisapp.permissions.isUserInProfile("Staff") == false)
-											{
-												compliance_rec = Compliance_Training[ID == input.Compliance_Training];
-												compliance_rec.Completion_Request_Raised=false;
-												openUrl("#Form:Compliance_Training?viewLinkName=All_Compliance_Trainings&recLinkID=" + compliance_rec.ID + "&zc_NextUrl=#Script:page.parent.refresh","popup window");
-											}
-										}
-										else
-										{
-											fetCompliance = Compliance_Training[ID == input.Compliance_Training];
-											if(fetCompliance.count() > 0)
-											{
-												fetCompliance.Completion_Request_Raised=true;
-											}
-											openUrl("#Script:page.parent.refresh","same window");
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Training_Completion_Request
+			
+							record event = on add
+			
+							on success
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														login_user_info = Staff_Master[Staff_Email == zoho.loginuserid && status == "Active"];
+													current_approver = "";
+													compliance_id = 0;
+													if(input.Compliance_Training != null)
+													{
+														compliance_rec = Compliance_Training[ID == input.Compliance_Training];
+														compliance_rec.Completion_Request_Raised=true;
+														compliance_rec.Training_Name=input.Training_Name;
+														compliance_rec.Status="Pending";
+													}
+													else
+													{
+														compliance_id = insert into Compliance_Training
+														[
+															Added_User=zoho.loginuser
+															Staff=input.Staff
+															Status="Pending"
+															Completion_Date=input.Completion_Date
+															Training_Name=input.Training_Name
+															Training_Type=input.Training_Type
+														];
+														input.Compliance_Training = compliance_id;
+													}
+													if(login_user_info.Admin_Type == "Campus")
+													{
+														current_approver = "Campus Admin";
+													}
+													else if(login_user_info.Admin_Type == "School")
+													{
+														current_approver = "School Admin";
+													}
+													else if(login_user_info.Admin_Type == "Region")
+													{
+														current_approver = "Region Admin";
+													}
+													else if(login_user_info.Admin_Type == "National")
+													{
+														current_approver = "National Admin";
+													}
+													input.Current_Approver = thisapp.helpers.returnComplianceCompletionRequestNextApprover(current_approver,input.Staff.ID);
+													if(input.Current_Approver == "")
+													{
+														action_value = "Training Completion Request Approved";
+														comments = "Compliance Training Completion Request Approved Automatically";
+													}
+													else
+													{
+														action_value = "Training Completion Requested";
+														comments = "Compliance Training Completion Requested";
+													}
+													insert into History
+													[
+														Added_User=zoho.loginuser
+														Action_By=login_user_info.ID
+														Action_field=action_value
+														Comment=comments
+														Training_Completion_Request=input.ID
+													]
+													if(input.Current_Approver != "")
+													{
+														thisapp.mail.sendTrainingApprovalPending(input.ID);
+													}
+													if(input.Current_Approver == "")
+													{
+														input.Status = "Approved";
+														thisapp.mail.sendTrainingApproved(input.ID);
+														if(thisapp.permissions.isUserInProfile("Staff") == false)
+														{
+															compliance_rec = Compliance_Training[ID == input.Compliance_Training];
+															compliance_rec.Completion_Request_Raised=false;
+															openUrl("#Form:Compliance_Training?viewLinkName=All_Compliance_Trainings&recLinkID=" + compliance_rec.ID + "&zc_NextUrl=#Script:page.parent.refresh","popup window");
+														}
+													}
+													else
+													{
+														fetCompliance = Compliance_Training[ID == input.Compliance_Training];
+														if(fetCompliance.count() > 0)
+														{
+															fetCompliance.Completion_Request_Raised=true;
+														}
+														openUrl("#Script:page.parent.refresh","same window");
+													}
+									)
+								}
+							}
+			
+						
 			
 }

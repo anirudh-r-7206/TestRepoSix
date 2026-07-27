@@ -1,19 +1,21 @@
 Add_Remove_Representation1 as "Add / Remove Representation/Team"
 {
 
-				type =  functions
-				form = Representation_Team
-				execution type = for each record	
-				on start
-				{
-					actions 
-					{
-					on click
-					(
-						// openUrl("#Form:Add_Remove_Committee?Committee=" + input.ID + "&From_Field=Committee","popup window");
-										openUrl("#Page:View_Committee_Staff?CommitteeID=" + input.ID + "&From_Field=Representation/Team","popup window");
-					)
-					}
-				}
+			
+							type =  functions
+							form = Representation_Team
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									// openUrl("#Form:Add_Remove_Committee?Committee=" + input.ID + "&From_Field=Committee","popup window");
+													openUrl("#Page:View_Committee_Staff?CommitteeID=" + input.ID + "&From_Field=Representation/Team","popup window");
+								)
+								}
+							}
+						
 			
 }

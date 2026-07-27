@@ -1,75 +1,77 @@
 string helpers.returnComplianceCompletionRequestNextApprover(string current_approver, int request_for_id)
 {
 
-                 	request_for = Staff_Master[ID == request_for_id];
-                 	getConfig = Approval_Configuration[Request_Type == "Training"];
-                 	campusAdminFlag = true;
-                 	schoolAdminFlag = true;
-                 	regionAdminFlag = true;
-                 	orgAdminFlag = true;
-                 	if(getConfig.count() > 0)
-                 	{
-                 		schoolAdminFlag = getConfig.School_Admin;
-                 		regionAdminFlag = getConfig.Region_Admin;
-                 		orgAdminFlag = getConfig.National_Admin;
-                 		campusAdminFlag = getConfig.Campus_Admin;
-                 	}
-                 	if(current_approver == "")
-                 	{
-                 		if(campusAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Current_Employment == request_for.Current_Employment && Campus == request_for.Campus && Admin_Type == "Campus"].count() > 0)
-                 		{
-                 			next_approver = "Campus Admin";
-                 		}
-                 		else if(schoolAdminFlag == true && request_for.Current_Employment != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Current_Employment == request_for.Current_Employment && Admin_Type == "School"].count() > 0)
-                 		{
-                 			next_approver = "School Admin";
-                 		}
-                 		else if(regionAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Admin_Type == "Region"].count() > 0)
-                 		{
-                 			next_approver = "Region Admin";
-                 		}
-                 		else if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
-                 		{
-                 			next_approver = "National Admin";
-                 		}
-                 	}
-                 	else if(current_approver == "Campus Admin")
-                 	{
-                 		if(schoolAdminFlag == true && request_for.Current_Employment != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Current_Employment == request_for.Current_Employment && Admin_Type == "School"].count() > 0)
-                 		{
-                 			next_approver = "School Admin";
-                 		}
-                 		else if(regionAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Admin_Type == "Region"].count() > 0)
-                 		{
-                 			next_approver = "Region Admin";
-                 		}
-                 		else if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
-                 		{
-                 			next_approver = "National Admin";
-                 		}
-                 	}
-                 	else if(current_approver == "School Admin")
-                 	{
-                 		if(regionAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Admin_Type == "Region"].count() > 0)
-                 		{
-                 			next_approver = "Region Admin";
-                 		}
-                 		else if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
-                 		{
-                 			next_approver = "National Admin";
-                 		}
-                 	}
-                 	else if(current_approver == "Region Admin")
-                 	{
-                 		if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
-                 		{
-                 			next_approver = "National Admin";
-                 		}
-                 	}
-                 	else if(current_approver == "National Admin")
-                 	{
-                 		next_approver = "";
-                 	}
-                 	return next_approver;
-                 
+			
+			                 	request_for = Staff_Master[ID == request_for_id];
+			                 	getConfig = Approval_Configuration[Request_Type == "Training"];
+			                 	campusAdminFlag = true;
+			                 	schoolAdminFlag = true;
+			                 	regionAdminFlag = true;
+			                 	orgAdminFlag = true;
+			                 	if(getConfig.count() > 0)
+			                 	{
+			                 		schoolAdminFlag = getConfig.School_Admin;
+			                 		regionAdminFlag = getConfig.Region_Admin;
+			                 		orgAdminFlag = getConfig.National_Admin;
+			                 		campusAdminFlag = getConfig.Campus_Admin;
+			                 	}
+			                 	if(current_approver == "")
+			                 	{
+			                 		if(campusAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Current_Employment == request_for.Current_Employment && Campus == request_for.Campus && Admin_Type == "Campus"].count() > 0)
+			                 		{
+			                 			next_approver = "Campus Admin";
+			                 		}
+			                 		else if(schoolAdminFlag == true && request_for.Current_Employment != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Current_Employment == request_for.Current_Employment && Admin_Type == "School"].count() > 0)
+			                 		{
+			                 			next_approver = "School Admin";
+			                 		}
+			                 		else if(regionAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Admin_Type == "Region"].count() > 0)
+			                 		{
+			                 			next_approver = "Region Admin";
+			                 		}
+			                 		else if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
+			                 		{
+			                 			next_approver = "National Admin";
+			                 		}
+			                 	}
+			                 	else if(current_approver == "Campus Admin")
+			                 	{
+			                 		if(schoolAdminFlag == true && request_for.Current_Employment != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Current_Employment == request_for.Current_Employment && Admin_Type == "School"].count() > 0)
+			                 		{
+			                 			next_approver = "School Admin";
+			                 		}
+			                 		else if(regionAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Admin_Type == "Region"].count() > 0)
+			                 		{
+			                 			next_approver = "Region Admin";
+			                 		}
+			                 		else if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
+			                 		{
+			                 			next_approver = "National Admin";
+			                 		}
+			                 	}
+			                 	else if(current_approver == "School Admin")
+			                 	{
+			                 		if(regionAdminFlag == true && request_for.Campus != null && Staff_Master[Organisation == request_for.Organisation && Regions == request_for.Regions && Admin_Type == "Region"].count() > 0)
+			                 		{
+			                 			next_approver = "Region Admin";
+			                 		}
+			                 		else if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
+			                 		{
+			                 			next_approver = "National Admin";
+			                 		}
+			                 	}
+			                 	else if(current_approver == "Region Admin")
+			                 	{
+			                 		if(orgAdminFlag == true && request_for.Organisation != null && Staff_Master[Organisation == request_for.Organisation && Admin_Type == "National"].count() > 0)
+			                 		{
+			                 			next_approver = "National Admin";
+			                 		}
+			                 	}
+			                 	else if(current_approver == "National Admin")
+			                 	{
+			                 		next_approver = "";
+			                 	}
+			                 	return next_approver;
+			                 
+			
 }

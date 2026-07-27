@@ -1,62 +1,64 @@
 User_Input as "User Input"
 {
 
-				type =  form
-				form = Staff_Onboarding1
-
-				record event = on add
-
-				on user input of New_Qualification
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.New_Qualification == "Add New")
-										{
-											if(input.Qualification_Type == null || input.Completion_Date == null || input.Institution.trim() == "")
-											{
-												alert "Fill all fields to proceed";
-												input.New_Qualification = null;
-											}
-											else
-											{
-												if(input.Qualification_ID == null)
-												{
-													rec = insert into Qualifications
-													[
-														Staff=input.Staff
-														Qualification_Type=input.Qualification_Type
-														completion_date=input.Completion_Date
-														Institution=input.Institution
-														Added_User=zoho.loginuser
-													];
-												}
-												else
-												{
-													fetQual = Qualifications[ID == input.Qualification_ID];
-													fetQual.Qualification_Type=input.Qualification_Type;
-													fetQual.completion_date=input.Completion_Date;
-													fetQual.Institution=input.Institution;
-												}
-												openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.Staff,"same window");
-											}
-										}
-										else
-										{
-											fetQual = Qualifications[Qualification_Type.qualification_type == input.New_Qualification && Staff == input.Staff];
-											if(fetQual.count() > 0)
-											{
-												input.Qualification_ID = fetQual.ID;
-												input.Qualification_Type = fetQual.Qualification_Type;
-												input.Completion_Date = fetQual.completion_date;
-												input.Institution = fetQual.Institution;
-												input.Remove:ui.add("Remove");
-											}
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of New_Qualification
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.New_Qualification == "Add New")
+													{
+														if(input.Qualification_Type == null || input.Completion_Date == null || input.Institution.trim() == "")
+														{
+															alert "Fill all fields to proceed";
+															input.New_Qualification = null;
+														}
+														else
+														{
+															if(input.Qualification_ID == null)
+															{
+																rec = insert into Qualifications
+																[
+																	Staff=input.Staff
+																	Qualification_Type=input.Qualification_Type
+																	completion_date=input.Completion_Date
+																	Institution=input.Institution
+																	Added_User=zoho.loginuser
+																];
+															}
+															else
+															{
+																fetQual = Qualifications[ID == input.Qualification_ID];
+																fetQual.Qualification_Type=input.Qualification_Type;
+																fetQual.completion_date=input.Completion_Date;
+																fetQual.Institution=input.Institution;
+															}
+															openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.Staff,"same window");
+														}
+													}
+													else
+													{
+														fetQual = Qualifications[Qualification_Type.qualification_type == input.New_Qualification && Staff == input.Staff];
+														if(fetQual.count() > 0)
+														{
+															input.Qualification_ID = fetQual.ID;
+															input.Qualification_Type = fetQual.Qualification_Type;
+															input.Completion_Date = fetQual.completion_date;
+															input.Institution = fetQual.Institution;
+															input.Remove:ui.add("Remove");
+														}
+													}
+									)
+								}
+							}
+			
+						
 			
 }

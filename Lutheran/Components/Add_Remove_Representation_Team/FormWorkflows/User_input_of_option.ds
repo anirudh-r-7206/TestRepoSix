@@ -1,90 +1,92 @@
 User_input_of_option as "User input of option"
 {
 
-				type =  form
-				form = Add_Remove_Representation_Team
-
-				record event = on add
-
-				on user input of Action_field
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											/* FETCH ADMIN */
-										adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-										var = thisapp.permissions.loginUserProfile();
-										isSuperAdmin = false;
-										if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-										{
-											isSuperAdmin = true;
-										}
-										/* =========================
-																				 				 														   FROM = STAFF
-																				 				 														========================= */
-										if(input.From_Field == "Staff")
-										{
-											scopeCom = List();
-											/* GET COMMITTEES BASED ON ADMIN SCOPE */
-											if(isSuperAdmin)
-											{
-												scopeCom = Representation_Team[ID != 0].ID.getAll();
-											}
-											else if(adminRec.Admin_Type == "National")
-											{
-												fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
-												fetSchools = School[Region in fetRegions].ID.getAll();
-												fetCampus = Campus[School in fetSchools].ID.getAll();
-												scopeCom = Representation_Team[Organisation == adminRec.Organisation || Regions in fetRegions || School in fetSchools || Campus in fetCampus].ID.getAll();
-											}
-											else if(adminRec.Admin_Type == "Region")
-											{
-												fetSchools = School[Region == adminRec.Regions].ID.getAll();
-												fetCampus = Campus[School in fetSchools].ID.getAll();
-												scopeCom = Representation_Team[Regions == adminRec.Regions || School in fetSchools || Campus in fetCampus].ID.getAll();
-											}
-											else if(adminRec.Admin_Type == "School")
-											{
-												fetCampus = Campus[School == adminRec.Current_Employment].ID.getAll();
-												scopeCom = Representation_Team[School == adminRec.Current_Employment || Campus in fetCampus].ID.getAll();
-											}
-											else if(adminRec.Admin_Type == "Campus")
-											{
-												scopeCom = Representation_Team[Campus == adminRec.Campus].ID.getAll();
-											}
-											/* EXISTING COMMITTEES */
-											fetcom = Representation_Team[Staff_Master.ID in input.Staff_Master.ID].ID.getAll();
-											/* ADD */
-											if(input.Action_field == "Add")
-											{
-												scopeCom.removeAll(fetcom);
-												input.Representation_Team:ui.add(scopeCom);
-											}
-											if(input.Action_field == "Remove")
-											{
-												input.Representation_Team:ui.add(fetcom);
-											}
-										}
-										/* =========================
-																				 				 														   FROM = COMMITTEE
-																				 				 														========================= */
-										if(input.From_Field == "Representation/Team")
-										{
-											fetComInfo = Representation_Team[ID == input.Representation_Team];
-											existingStaff = List();
-											if(fetComInfo.Staff_Master != null)
-											{
-												existingStaff = fetComInfo.Staff_Master.getAll();
-											}
-											if(input.Action_field == "Remove")
-											{
-												input.Staff_Master:ui.add(existingStaff);
-											}
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Add_Remove_Representation_Team
+			
+							record event = on add
+			
+							on user input of Action_field
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														/* FETCH ADMIN */
+													adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+													var = thisapp.permissions.loginUserProfile();
+													isSuperAdmin = false;
+													if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+													{
+														isSuperAdmin = true;
+													}
+													/* =========================
+																							 				 														   FROM = STAFF
+																							 				 														========================= */
+													if(input.From_Field == "Staff")
+													{
+														scopeCom = List();
+														/* GET COMMITTEES BASED ON ADMIN SCOPE */
+														if(isSuperAdmin)
+														{
+															scopeCom = Representation_Team[ID != 0].ID.getAll();
+														}
+														else if(adminRec.Admin_Type == "National")
+														{
+															fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
+															fetSchools = School[Region in fetRegions].ID.getAll();
+															fetCampus = Campus[School in fetSchools].ID.getAll();
+															scopeCom = Representation_Team[Organisation == adminRec.Organisation || Regions in fetRegions || School in fetSchools || Campus in fetCampus].ID.getAll();
+														}
+														else if(adminRec.Admin_Type == "Region")
+														{
+															fetSchools = School[Region == adminRec.Regions].ID.getAll();
+															fetCampus = Campus[School in fetSchools].ID.getAll();
+															scopeCom = Representation_Team[Regions == adminRec.Regions || School in fetSchools || Campus in fetCampus].ID.getAll();
+														}
+														else if(adminRec.Admin_Type == "School")
+														{
+															fetCampus = Campus[School == adminRec.Current_Employment].ID.getAll();
+															scopeCom = Representation_Team[School == adminRec.Current_Employment || Campus in fetCampus].ID.getAll();
+														}
+														else if(adminRec.Admin_Type == "Campus")
+														{
+															scopeCom = Representation_Team[Campus == adminRec.Campus].ID.getAll();
+														}
+														/* EXISTING COMMITTEES */
+														fetcom = Representation_Team[Staff_Master.ID in input.Staff_Master.ID].ID.getAll();
+														/* ADD */
+														if(input.Action_field == "Add")
+														{
+															scopeCom.removeAll(fetcom);
+															input.Representation_Team:ui.add(scopeCom);
+														}
+														if(input.Action_field == "Remove")
+														{
+															input.Representation_Team:ui.add(fetcom);
+														}
+													}
+													/* =========================
+																							 				 														   FROM = COMMITTEE
+																							 				 														========================= */
+													if(input.From_Field == "Representation/Team")
+													{
+														fetComInfo = Representation_Team[ID == input.Representation_Team];
+														existingStaff = List();
+														if(fetComInfo.Staff_Master != null)
+														{
+															existingStaff = fetComInfo.Staff_Master.getAll();
+														}
+														if(input.Action_field == "Remove")
+														{
+															input.Staff_Master:ui.add(existingStaff);
+														}
+													}
+									)
+								}
+							}
+			
+						
 			
 }

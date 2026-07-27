@@ -1,63 +1,65 @@
 report All_Subjects
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								subject_field as "Subject"
+								datablock1
+								(
+									fields
+									(
+										subject_field as "Subject"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
+								datablock1
+								(
+									fields
+									(
+										subject_field as "Subject"
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-							Delete   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Edit   	   
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								subject_field as "Subject"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-							)
-						)
-				)
-			
+					
+		
 }

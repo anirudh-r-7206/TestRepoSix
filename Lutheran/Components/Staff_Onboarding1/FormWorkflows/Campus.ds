@@ -1,32 +1,34 @@
 Campus as "Campus"
 {
 
-				type =  form
-				form = Staff_Onboarding1
-
-				record event = on add
-
-				on user input of Campus
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Campus != null)
-										{
-											if(input.Is_Loaded == false)
-											{
-												fetStaff = Staff_Master[ID == input.Staff];
-												if(fetStaff.Campus != null)
-												{
-													input.Campus = fetStaff.Campus;
-												}
-											}
-										}
-										input.Is_Loaded = true;
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Campus
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Campus != null)
+													{
+														if(input.Is_Loaded == false)
+														{
+															fetStaff = Staff_Master[ID == input.Staff];
+															if(fetStaff.Campus != null)
+															{
+																input.Campus = fetStaff.Campus;
+															}
+														}
+													}
+													input.Is_Loaded = true;
+									)
+								}
+							}
+			
+						
 			
 }

@@ -1,21 +1,23 @@
 Hide_Disable1 as "Hide/Disable"
 {
 
-				type =  form
-				form = Approval_Configuration
-
-				record event = on edit
-
-				on load
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											disable Request_Type;
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Approval_Configuration
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														disable Request_Type;
+									)
+								}
+							}
+			
+						
 			
 }

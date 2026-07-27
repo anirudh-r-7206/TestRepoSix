@@ -1,76 +1,78 @@
 report All_Qualifications
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								completion_date as "Completion Date"
-								Institution
-								Staff
-								Qualification_Type as "Qualification Type"
+								datablock1
+								(
+									fields
+									(
+										completion_date as "Completion Date"
+										Institution
+										Staff
+										Qualification_Type as "Qualification Type"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
-								Duplicate 
-								Delete 
+								datablock1
+								(
+									fields
+									(
+										completion_date as "Completion Date"
+										Institution
+										Staff
+										Qualification_Type as "Qualification Type"
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-							Duplicate   	   
-							Delete   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Edit   	   
-							Delete   	   
-							Duplicate   	   
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								completion_date as "Completion Date"
-								Institution
-								Staff
-								Qualification_Type as "Qualification Type"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-								Duplicate 
-								Delete 
-							)
-						)
-				)
-			
+					
+		
 }

@@ -1,66 +1,68 @@
 report Service_Awards1
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Award_Name as "Award Name"
-								Years_of_Service_Required as "Years of Service Required"
-								Description
+								datablock1
+								(
+									fields
+									(
+										Award_Name as "Award Name"
+										Years_of_Service_Required as "Years of Service Required"
+										Description
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								record
+								(
+									"Award Eligible Staff"
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Award_Name as "Award Name"
+										Years_of_Service_Required as "Years of Service Required"
+										Description
+									)
+								)
 							)
-						record
-						(
-							"Award Eligible Staff"
-							Delete   	   
-    					)
+								menu
+								(
+									header
+									(
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-		 				type = 2
-						datablock1
-						(
-		     				title = "Overview"
-							fields
-							(
-								Award_Name as "Award Name"
-								Years_of_Service_Required as "Years of Service Required"
-								Description
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-							)
-						)
-				)
-			
+					
+		
 }

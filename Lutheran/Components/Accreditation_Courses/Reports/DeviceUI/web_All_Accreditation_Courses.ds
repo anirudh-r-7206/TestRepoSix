@@ -1,74 +1,76 @@
 report All_Accreditation_Courses
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								SI_No as "SI No"
-								Training_Type as "Training Type"
-								Accreditation
+								datablock1
+								(
+									fields
+									(
+										SI_No as "SI No"
+										Training_Type as "Training Type"
+										Accreditation
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
-								Duplicate 
-								Delete 
+								datablock1
+								(
+									fields
+									(
+										SI_No as "SI No"
+										Training_Type as "Training Type"
+										Accreditation
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-							Duplicate   	   
-							Delete   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Edit   	   
-							Delete   	   
-							Duplicate   	   
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								SI_No as "SI No"
-								Training_Type as "Training Type"
-								Accreditation
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-								Duplicate 
-								Delete 
-							)
-						)
-				)
-			
+					
+		
 }

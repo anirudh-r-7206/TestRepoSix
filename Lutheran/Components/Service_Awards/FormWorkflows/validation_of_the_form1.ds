@@ -1,25 +1,27 @@
 validation_of_the_form1 as "validation of the form"
 {
 
-				type =  form
-				form = Service_Awards
-
-				record event = on add or edit
-
-				on validate
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(Service_Awards[ID != input.ID && Award_Name == input.Award_Name && Years_of_Service_Required == input.Years_of_Service_Required].count() > 0)
-										{
-											alert "Duplicate entry not allowed. This award is already defined for the same years of service.";
-											cancel submit;
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Service_Awards
+			
+							record event = on add or edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(Service_Awards[ID != input.ID && Award_Name == input.Award_Name && Years_of_Service_Required == input.Years_of_Service_Required].count() > 0)
+													{
+														alert "Duplicate entry not allowed. This award is already defined for the same years of service.";
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
 			
 }

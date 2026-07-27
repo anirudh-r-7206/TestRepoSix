@@ -1,22 +1,24 @@
 Field_Scripts1 as "Field Scripts"
 {
 
-				type =  form
-				form = History
-
-				record event = on add or edit
-
-				field rules
-				{
-					actions 
-					{
-						hide Staff,Staff_Request,Action_By,Training_Completion_Request;
-					}
-					actions 
-					{
-						disable Action_field;
-					}
-				}
-
+			
+							type =  form
+							form = History
+			
+							record event = on add or edit
+			
+							field rules
+							{
+								actions 
+								{
+									hide Staff,Staff_Request,Action_By,Training_Completion_Request;
+								}
+								actions 
+								{
+									disable Action_field;
+								}
+							}
+			
+						
 			
 }

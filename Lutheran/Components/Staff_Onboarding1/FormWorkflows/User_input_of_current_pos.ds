@@ -1,212 +1,214 @@
 User_input_of_current_pos as "User input of current position"
 {
 
-				type =  form
-				form = Staff_Onboarding1
-
-				record event = on add
-
-				on user input of Current_Position
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											fetStaff = Staff_Master[ID == input.Staff];
-										var = thisapp.permissions.loginUserProfile();
-										if(input.Current_Position != null)
-										{
-											if(input.Current_Position.position_name == "Administrative Officer")
-											{
-												adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-												isSuperAdmin = false;
-												if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-												{
-													isSuperAdmin = true;
-												}
-												hide Current_Employment;
-												hide Campus;
-												show Admin_Type;
-												if(input.Is_Loaded == true)
-												{
-													if(input.Admin_Type != null && !input.Admin_Type.isEmpty())
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Current_Position
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetStaff = Staff_Master[ID == input.Staff];
+													var = thisapp.permissions.loginUserProfile();
+													if(input.Current_Position != null)
 													{
-														input.Admin_Type = null;
-													}
-												}
-												if(isSuperAdmin)
-												{
-													input.Admin_Type:ui.add({"Overall Admin","National","Region","School","Campus"});
-												}
-												else if(adminRec.Admin_Type == "National")
-												{
-													input.Admin_Type:ui.add({"National","Region","School","Campus"});
-												}
-												else if(adminRec.Admin_Type == "Region")
-												{
-													input.Admin_Type:ui.add({"Region","School","Campus"});
-												}
-												else if(adminRec.Admin_Type == "School")
-												{
-													input.Admin_Type:ui.add({"School","Campus"});
-												}
-												else if(adminRec.Admin_Type == "Campus")
-												{
-													input.Admin_Type:ui.add({"Campus"});
-													if(input.Is_Loaded == true)
-													{
-														input.Admin_Type = "Campus";
-													}
-												}
-												if(input.Is_Loaded == false)
-												{
-													if(!fetStaff.Admin_Type.isEmpty())
-													{
-														input.Admin_Type = fetStaff.Admin_Type;
-													}
-												}
-											}
-											else
-											{
-												adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-												isSuperAdmin = false;
-												if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-												{
-													isSuperAdmin = true;
-												}
-												hide Admin_Type;
-												hide Organisation;
-												hide Region;
-												if(input.Is_Loaded == true)
-												{
-													if(input.Admin_Type != null && !input.Admin_Type.isEmpty())
-													{
-														input.Admin_Type = null;
-													}
-												}
-												show Current_Employment;
-												show Campus;
-												if(isSuperAdmin)
-												{
-													fetSchools = School[ID != 0].ID.getAll();
-													input.Current_Employment:ui.add(fetSchools);
-													fetCampus = Campus[ID != 0].ID.getAll();
-													input.Campus:ui.add(fetCampus);
-												}
-												else if(adminRec.Admin_Type == "National")
-												{
-													fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
-													fetSchools = School[Region in fetRegions].ID.getAll();
-													input.Current_Employment:ui.add(fetSchools);
-													if(input.Is_Loaded == true)
-													{
-														if(fetSchools.size() == 1)
+														if(input.Current_Position.position_name == "Administrative Officer")
 														{
-															input.Current_Employment = fetSchools.get(0);
+															adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+															isSuperAdmin = false;
+															if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+															{
+																isSuperAdmin = true;
+															}
+															hide Current_Employment;
+															hide Campus;
+															show Admin_Type;
+															if(input.Is_Loaded == true)
+															{
+																if(input.Admin_Type != null && !input.Admin_Type.isEmpty())
+																{
+																	input.Admin_Type = null;
+																}
+															}
+															if(isSuperAdmin)
+															{
+																input.Admin_Type:ui.add({"Overall Admin","National","Region","School","Campus"});
+															}
+															else if(adminRec.Admin_Type == "National")
+															{
+																input.Admin_Type:ui.add({"National","Region","School","Campus"});
+															}
+															else if(adminRec.Admin_Type == "Region")
+															{
+																input.Admin_Type:ui.add({"Region","School","Campus"});
+															}
+															else if(adminRec.Admin_Type == "School")
+															{
+																input.Admin_Type:ui.add({"School","Campus"});
+															}
+															else if(adminRec.Admin_Type == "Campus")
+															{
+																input.Admin_Type:ui.add({"Campus"});
+																if(input.Is_Loaded == true)
+																{
+																	input.Admin_Type = "Campus";
+																}
+															}
+															if(input.Is_Loaded == false)
+															{
+																if(!fetStaff.Admin_Type.isEmpty())
+																{
+																	input.Admin_Type = fetStaff.Admin_Type;
+																}
+															}
+														}
+														else
+														{
+															adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+															isSuperAdmin = false;
+															if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+															{
+																isSuperAdmin = true;
+															}
+															hide Admin_Type;
+															hide Organisation;
+															hide Region;
+															if(input.Is_Loaded == true)
+															{
+																if(input.Admin_Type != null && !input.Admin_Type.isEmpty())
+																{
+																	input.Admin_Type = null;
+																}
+															}
+															show Current_Employment;
+															show Campus;
+															if(isSuperAdmin)
+															{
+																fetSchools = School[ID != 0].ID.getAll();
+																input.Current_Employment:ui.add(fetSchools);
+																fetCampus = Campus[ID != 0].ID.getAll();
+																input.Campus:ui.add(fetCampus);
+															}
+															else if(adminRec.Admin_Type == "National")
+															{
+																fetRegions = Regions[Main_Organisation == adminRec.Organisation].ID.getAll();
+																fetSchools = School[Region in fetRegions].ID.getAll();
+																input.Current_Employment:ui.add(fetSchools);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetSchools.size() == 1)
+																	{
+																		input.Current_Employment = fetSchools.get(0);
+																	}
+																}
+																fetCampus = Campus[School in fetSchools].ID.getAll();
+																input.Campus:ui.add(fetCampus);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetCampus.size() == 1)
+																	{
+																		input.Campus = fetCampus.get(0);
+																	}
+																}
+															}
+															else if(adminRec.Admin_Type == "Region")
+															{
+																fetSchools = School[Region == adminRec.Regions].ID.getAll();
+																input.Current_Employment:ui.add(fetSchools);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetSchools.size() == 1)
+																	{
+																		input.Current_Employment = fetSchools.get(0);
+																	}
+																}
+																fetCampus = Campus[School in fetSchools].ID.getAll();
+																input.Campus:ui.add(fetCampus);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetCampus.size() == 1)
+																	{
+																		input.Campus = fetCampus.get(0);
+																	}
+																}
+															}
+															else if(adminRec.Admin_Type == "School")
+															{
+																input.Current_Employment:ui.add(adminRec.Current_Employment);
+																if(input.Is_Loaded == true)
+																{
+																	input.Current_Employment = adminRec.Current_Employment;
+																}
+																fetCampus = Campus[School == adminRec.Current_Employment].ID.getAll();
+																input.Campus:ui.add(fetCampus);
+																if(input.Is_Loaded == true)
+																{
+																	if(fetCampus.size() == 1)
+																	{
+																		input.Campus = fetCampus.get(0);
+																	}
+																}
+															}
+															else if(adminRec.Admin_Type == "Campus")
+															{
+																input.Current_Employment:ui.add(adminRec.Current_Employment);
+																if(input.Is_Loaded == true)
+																{
+																	input.Current_Employment = adminRec.Current_Employment;
+																}
+																input.Campus:ui.add(adminRec.Campus);
+																if(input.Is_Loaded == true)
+																{
+																	input.Campus = adminRec.Campus;
+																}
+															}
+															if(input.Is_Loaded == false)
+															{
+																if(!fetStaff.Current_Employment.isEmpty())
+																{
+																	input.Current_Employment = fetStaff.Current_Employment;
+																}
+															}
 														}
 													}
-													fetCampus = Campus[School in fetSchools].ID.getAll();
-													input.Campus:ui.add(fetCampus);
-													if(input.Is_Loaded == true)
+													else
 													{
-														if(fetCampus.size() == 1)
+														hide Admin_Type;
+														hide Organisation;
+														hide Region;
+														if(input.Is_Loaded == true)
 														{
-															input.Campus = fetCampus.get(0);
+															if(input.Admin_Type != null)
+															{
+																input.Admin_Type = null;
+															}
+															if(input.Organisation != null)
+															{
+																input.Organisation = null;
+															}
+															if(input.Region != null)
+															{
+																input.Region = null;
+															}
+															if(input.Current_Employment != null)
+															{
+																input.Current_Employment = null;
+															}
+															if(input.Campus != null)
+															{
+																input.Campus = null;
+															}
 														}
 													}
-												}
-												else if(adminRec.Admin_Type == "Region")
-												{
-													fetSchools = School[Region == adminRec.Regions].ID.getAll();
-													input.Current_Employment:ui.add(fetSchools);
-													if(input.Is_Loaded == true)
-													{
-														if(fetSchools.size() == 1)
-														{
-															input.Current_Employment = fetSchools.get(0);
-														}
-													}
-													fetCampus = Campus[School in fetSchools].ID.getAll();
-													input.Campus:ui.add(fetCampus);
-													if(input.Is_Loaded == true)
-													{
-														if(fetCampus.size() == 1)
-														{
-															input.Campus = fetCampus.get(0);
-														}
-													}
-												}
-												else if(adminRec.Admin_Type == "School")
-												{
-													input.Current_Employment:ui.add(adminRec.Current_Employment);
-													if(input.Is_Loaded == true)
-													{
-														input.Current_Employment = adminRec.Current_Employment;
-													}
-													fetCampus = Campus[School == adminRec.Current_Employment].ID.getAll();
-													input.Campus:ui.add(fetCampus);
-													if(input.Is_Loaded == true)
-													{
-														if(fetCampus.size() == 1)
-														{
-															input.Campus = fetCampus.get(0);
-														}
-													}
-												}
-												else if(adminRec.Admin_Type == "Campus")
-												{
-													input.Current_Employment:ui.add(adminRec.Current_Employment);
-													if(input.Is_Loaded == true)
-													{
-														input.Current_Employment = adminRec.Current_Employment;
-													}
-													input.Campus:ui.add(adminRec.Campus);
-													if(input.Is_Loaded == true)
-													{
-														input.Campus = adminRec.Campus;
-													}
-												}
-												if(input.Is_Loaded == false)
-												{
-													if(!fetStaff.Current_Employment.isEmpty())
-													{
-														input.Current_Employment = fetStaff.Current_Employment;
-													}
-												}
-											}
-										}
-										else
-										{
-											hide Admin_Type;
-											hide Organisation;
-											hide Region;
-											if(input.Is_Loaded == true)
-											{
-												if(input.Admin_Type != null)
-												{
-													input.Admin_Type = null;
-												}
-												if(input.Organisation != null)
-												{
-													input.Organisation = null;
-												}
-												if(input.Region != null)
-												{
-													input.Region = null;
-												}
-												if(input.Current_Employment != null)
-												{
-													input.Current_Employment = null;
-												}
-												if(input.Campus != null)
-												{
-													input.Campus = null;
-												}
-											}
-										}
-						)
-					}
-				}
-
+									)
+								}
+							}
+			
+						
 			
 }

@@ -1,19 +1,21 @@
 Accredit as "Accredit"
 {
 
-				type =  functions
-				form = Accreditation_Details
-				execution type = for each record	
-				on start
-				{
-					actions 
-					{
-					on click
-					(
-						/* input.Status_Accreditation = "Accredited"; */
-										openUrl("#Form:Accredit?Accreditation=" + input.ID,"popup window");
-					)
-					}
-				}
+			
+							type =  functions
+							form = Accreditation_Details
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									/* input.Status_Accreditation = "Accredited"; */
+													openUrl("#Form:Accredit?Accreditation=" + input.ID,"popup window");
+								)
+								}
+							}
+						
 			
 }

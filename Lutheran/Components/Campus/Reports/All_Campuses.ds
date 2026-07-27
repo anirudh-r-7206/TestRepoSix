@@ -1,33 +1,35 @@
 default list All_Campuses
 {
 
-			displayName = "All Campuses"
-			show all rows from Campus    
-			(
-				campus_name as "Campus Name"
-				campus_image as "Campus Image"
-				campus_address  as "Campus Address"
-				Campus_Email as "Campus Email"
-				School
-				Organisation_Name as "National  Name"
-				Region_Name as "Region Name"
-				School_Name as "School Name"
-				Web_Address as "Web Address"
-				Head_of_Campus as "Head of Campus"
-				Telephone
-				(
-					displayformat = plainnumber 
-				)
-				Enrollment
-				Postal_Address  as "Postal Address"
-	 			(
-	      			enable = Link_to_Map,Show_As_Text
-	 			)
-				Staff_Generic_Email as "Staff Generic Email"
-			)
-			group by
-			(
-				School descending
-			)
+		
+					displayName = "All Campuses"
+					show all rows from Campus    
+					(
+						campus_name as "Campus Name"
+						campus_image as "Campus Image"
+						campus_address  as "Campus Address"
+						Campus_Email as "Campus Email"
+						School
+						Organisation_Name as "National  Name"
+						Region_Name as "Region Name"
+						School_Name as "School Name"
+						Web_Address as "Web Address"
+						Head_of_Campus as "Head of Campus"
+						Telephone
+						(
+							displayformat = plainnumber 
+						)
+						Enrollment
+						Postal_Address  as "Postal Address"
+			 			(
+			      			enable = Link_to_Map,Show_As_Text
+			 			)
+						Staff_Generic_Email as "Staff Generic Email"
+					)
+					group by
+					(
+						School descending
+					)
+				
 		
 }

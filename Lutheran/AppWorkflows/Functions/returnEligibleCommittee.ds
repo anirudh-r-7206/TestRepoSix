@@ -1,35 +1,37 @@
 list helpers.returnEligibleCommittee()
 {
 
-                 	loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
-                 	var = thisapp.permissions.loginUserProfile();
-                 	eligibleIDs = List();
-                 	if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-                 	{
-                 		eligibleIDs = Representation_Team[ID != 0].ID.getAll();
-                 	}
-                 	else if(loginUser.Admin_Type == "National")
-                 	{
-                 		fetRegions = Regions[Main_Organisation == loginUser.Organisation].ID.getAll();
-                 		fetSchools = School[Region in fetRegions].ID.getAll();
-                 		fetCampus = Campus[School in fetSchools].ID.getAll();
-                 		eligibleIDs = Representation_Team[Organisation == loginUser.Organisation || Regions in fetRegions || School in fetSchools || Campus in fetCampus].ID.getAll();
-                 	}
-                 	else if(loginUser.Admin_Type == "Region")
-                 	{
-                 		fetSchools = School[Region == loginUser.Regions].ID.getAll();
-                 		fetCampus = Campus[School in fetSchools].ID.getAll();
-                 		eligibleIDs = Representation_Team[Regions == loginUser.Regions || School in fetSchools || Campus in fetCampus].ID.getAll();
-                 	}
-                 	else if(loginUser.Admin_Type == "School")
-                 	{
-                 		fetCampus = Campus[School == loginUser.Current_Employment].ID.getAll();
-                 		eligibleIDs = Representation_Team[School == loginUser.Current_Employment || Campus in fetCampus].ID.getAll();
-                 	}
-                 	else if(loginUser.Admin_Type == "Campus")
-                 	{
-                 		eligibleIDs = Representation_Team[Campus == loginUser.Campus].ID.getAll();
-                 	}
-                 	return eligibleIDs;
-                 
+			
+			                 	loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
+			                 	var = thisapp.permissions.loginUserProfile();
+			                 	eligibleIDs = List();
+			                 	if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+			                 	{
+			                 		eligibleIDs = Representation_Team[ID != 0].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "National")
+			                 	{
+			                 		fetRegions = Regions[Main_Organisation == loginUser.Organisation].ID.getAll();
+			                 		fetSchools = School[Region in fetRegions].ID.getAll();
+			                 		fetCampus = Campus[School in fetSchools].ID.getAll();
+			                 		eligibleIDs = Representation_Team[Organisation == loginUser.Organisation || Regions in fetRegions || School in fetSchools || Campus in fetCampus].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "Region")
+			                 	{
+			                 		fetSchools = School[Region == loginUser.Regions].ID.getAll();
+			                 		fetCampus = Campus[School in fetSchools].ID.getAll();
+			                 		eligibleIDs = Representation_Team[Regions == loginUser.Regions || School in fetSchools || Campus in fetCampus].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "School")
+			                 	{
+			                 		fetCampus = Campus[School == loginUser.Current_Employment].ID.getAll();
+			                 		eligibleIDs = Representation_Team[School == loginUser.Current_Employment || Campus in fetCampus].ID.getAll();
+			                 	}
+			                 	else if(loginUser.Admin_Type == "Campus")
+			                 	{
+			                 		eligibleIDs = Representation_Team[Campus == loginUser.Campus].ID.getAll();
+			                 	}
+			                 	return eligibleIDs;
+			                 
+			
 }

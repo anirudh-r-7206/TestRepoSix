@@ -1,41 +1,43 @@
 list My_Compliance_Trainings
 {
 
-			displayName = "All Compliance Trainings"
-			show all rows from Compliance_Training  [Staff.Staff_Email == zoho.loginuserid]  
-			(
-				Training_Name as "Training Name"
-				Completion_Date as "Completion Date"
-				Hours_Number_for_PD as "PD Hours"
-				Status
-				custom action "Complete"
-				(
-	  			workflow = Complete
-				show action in edit record menu = true
-				column header = "Complete"
-				condition = (Completion_Request_Raised == false && Status != "Completed")
-				)
-				Training_Type as "Training Type"
-				Completion_Request_Raised as "Completion Request Raised?"
-				(
-						displaytrue = "Yes"
-						displayfalse = "No"
-				)
-			)
-			conditional formatting
-			(
-				"Completed"
-				{
-				condition = (Status == "Completed")
-				fields = [Status]
-				format = "color:#00ab30;"
-				}
-				"Pending"
-				{
-				condition = (Status == "Pending")
-				fields = [Status]
-				format = "color:#e77f06;"
-				}
-			)
+		
+					displayName = "All Compliance Trainings"
+					show all rows from Compliance_Training  [Staff.Staff_Email == zoho.loginuserid]  
+					(
+						Training_Name as "Training Name"
+						Completion_Date as "Completion Date"
+						Hours_Number_for_PD as "PD Hours"
+						Status
+						custom action "Complete"
+						(
+			  			workflow = Complete
+						show action in edit record menu = true
+						column header = "Complete"
+						condition = (Completion_Request_Raised == false && Status != "Completed")
+						)
+						Training_Type as "Training Type"
+						Completion_Request_Raised as "Completion Request Raised?"
+						(
+								displaytrue = "Yes"
+								displayfalse = "No"
+						)
+					)
+					conditional formatting
+					(
+						"Completed"
+						{
+						condition = (Status == "Completed")
+						fields = [Status]
+						format = "color:#00ab30;"
+						}
+						"Pending"
+						{
+						condition = (Status == "Pending")
+						fields = [Status]
+						format = "color:#e77f06;"
+						}
+					)
+				
 		
 }

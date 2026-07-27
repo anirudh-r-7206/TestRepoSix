@@ -1,63 +1,65 @@
 form Service_Awards
 {
 
-			displayname = "Service Awards"
-			success message = "Service Award Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have unique Award_Name
-			(
-    			type = text
-				displayname = "Award Name"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			must have unique Years_of_Service_Required
-			(
-				type = number
-				displayname = "Years of Service Required"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			must have Description
-			(
-    			type = textarea
-				height = 100px
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					displayname = "Service Awards"
+					success message = "Service Award Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have unique Award_Name
 					(
-   						type = submit
-   						displayname = "Update"
+		    			type = text
+						displayname = "Award Name"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
+					must have unique Years_of_Service_Required
 					(
-   						type = cancel
-   						displayname = "Cancel"
+						type = number
+						displayname = "Years of Service Required"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-				}
-			}
+					must have Description
+					(
+		    			type = textarea
+						height = 100px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

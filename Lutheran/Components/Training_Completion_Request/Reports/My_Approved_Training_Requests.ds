@@ -1,50 +1,52 @@
 list My_Approved_Training_Requests
 {
 
-			displayName = "My Approved Training Requests"
-			show all rows from Training_Completion_Request  [Staff.Staff_Email == zoho.loginuserid && Status == "Approved"]  
-			(
-				Completion_Date as "Completion Date"
-				Evidence_File as "Evidence File "
-				Status
-				Compliance_Training as " Compliance Training"
-				Training_Type as "Training Type"
-			)
-			custom actions
-			(
-				"Edit "
-				(
-	  			workflow = Edit
-				show action in edit record menu = true
-				condition = (Status == "Rejected")
-				)
-			)
-			conditional formatting
-			(
-				"Completed"
-				{
-				condition = (Status == "Approved")
-				fields = [Status]
-				format = "color:#00a321;"
-				}
-				"Rejected"
-				{
-				condition = (Status == "Rejected")
-				fields = [Status]
-				format = "color:#e64d3b;"
-				}
-				"Pending"
-				{
-				condition = (Status == "Pending")
-				fields = [Status]
-				format = "color:#e77f06;"
-				}
-				"Credited"
-				{
-				condition = (Status == "Credited")
-				fields = [Status]
-				format = "color:#007cba;"
-				}
-			)
+		
+					displayName = "My Approved Training Requests"
+					show all rows from Training_Completion_Request  [Staff.Staff_Email == zoho.loginuserid && Status == "Approved"]  
+					(
+						Completion_Date as "Completion Date"
+						Evidence_File as "Evidence File "
+						Status
+						Compliance_Training as " Compliance Training"
+						Training_Type as "Training Type"
+					)
+					custom actions
+					(
+						"Edit "
+						(
+			  			workflow = Edit
+						show action in edit record menu = true
+						condition = (Status == "Rejected")
+						)
+					)
+					conditional formatting
+					(
+						"Completed"
+						{
+						condition = (Status == "Approved")
+						fields = [Status]
+						format = "color:#00a321;"
+						}
+						"Rejected"
+						{
+						condition = (Status == "Rejected")
+						fields = [Status]
+						format = "color:#e64d3b;"
+						}
+						"Pending"
+						{
+						condition = (Status == "Pending")
+						fields = [Status]
+						format = "color:#e77f06;"
+						}
+						"Credited"
+						{
+						condition = (Status == "Credited")
+						fields = [Status]
+						format = "color:#007cba;"
+						}
+					)
+				
 		
 }

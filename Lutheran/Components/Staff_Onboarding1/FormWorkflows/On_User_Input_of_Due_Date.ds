@@ -1,26 +1,28 @@
 On_User_Input_of_Due_Date as "On User Input of Due_Date :"
 {
 
-				type =  form
-				form = Staff_Onboarding1
-
-				record event = on add
-
-				on user input of Due_Date
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											fetstaffMaster = Staff_Master[ID == input.Staff];
-										if(input.Due_Date < fetstaffMaster.Date_Commenced_in_Current_School.addYear(5))
-										{
-											input.Due_Date = fetstaffMaster.Date_Commenced_in_Current_School.addYear(5);
-											alert "The due date must be five years after the commencement date.";
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Due_Date
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetstaffMaster = Staff_Master[ID == input.Staff];
+													if(input.Due_Date < fetstaffMaster.Date_Commenced_in_Current_School.addYear(5))
+													{
+														input.Due_Date = fetstaffMaster.Date_Commenced_in_Current_School.addYear(5);
+														alert "The due date must be five years after the commencement date.";
+													}
+									)
+								}
+							}
+			
+						
 			
 }

@@ -1,69 +1,71 @@
 report All_Training_Completion_Requests
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Staff
-								Compliance_Training as " Compliance Training"
-								Training_Type as "Training Type"
-								Completion_Date as "Completion Date"
-								Evidence_File as "Evidence File "
-								Current_Approver as "Current Approver"
-								Status
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Compliance_Training as " Compliance Training"
+										Training_Type as "Training Type"
+										Completion_Date as "Completion Date"
+										Evidence_File as "Evidence File "
+										Current_Approver as "Current Approver"
+										Status
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Delete 
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Delete 
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Staff
+										Compliance_Training as " Compliance Training"
+										Training_Type as "Training Type"
+										Completion_Date as "Completion Date"
+										Evidence_File as "Evidence File "
+										Status
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-		 				type = 2
-						datablock1
-						(
-		     				title = "Overview"
-							fields
-							(
-								Staff
-								Compliance_Training as " Compliance Training"
-								Training_Type as "Training Type"
-								Completion_Date as "Completion Date"
-								Evidence_File as "Evidence File "
-								Status
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-							)
-						)
-				)
-			
+					
+		
 }

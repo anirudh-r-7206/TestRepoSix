@@ -1,65 +1,67 @@
 report Email_Templates1
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Template_Name as "Template Name"
-								Subject_field as "Subject"
-								Email_Content as "Email Content"
+								datablock1
+								(
+									fields
+									(
+										Template_Name as "Template Name"
+										Subject_field as "Subject"
+										Email_Content as "Email Content"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
-								Delete 
+								datablock1
+								(
+									fields
+									(
+										Template_Name as "Template Name"
+										Subject_field as "Subject"
+										Email_Content as "Email Content"
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-    					)
+								menu
+								(
+									header
+									(
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								Template_Name as "Template Name"
-								Subject_field as "Subject"
-								Email_Content as "Email Content"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-							)
-						)
-				)
-			
+					
+		
 }

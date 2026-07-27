@@ -1,22 +1,24 @@
 Load_of_the_form_On_Add_S6 as "Load of the form - On Add Scripts"
 {
 
-				type =  form
-				form = Send_Mail
-
-				record event = on add
-
-				on load
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											disable Send_By;
-										input.Send_By = Staff_Master[Staff_Email == zoho.loginuserid].ID;
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Send_Mail
+			
+							record event = on add
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														disable Send_By;
+													input.Send_By = Staff_Master[Staff_Email == zoho.loginuserid].ID;
+									)
+								}
+							}
+			
+						
 			
 }

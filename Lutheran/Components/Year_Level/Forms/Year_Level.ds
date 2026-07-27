@@ -1,47 +1,49 @@
 form Year_Level
 {
 
-			displayname = "Year Level"
-			success message = "Year Level Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have unique year_level_name
-			(
-    			type = text
-				displayname = "Year Level"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					displayname = "Year Level"
+					success message = "Year Level Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have unique year_level_name
 					(
-   						type = submit
-   						displayname = "Update"
+		    			type = text
+						displayname = "Year Level"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
-					(
-   						type = cancel
-   						displayname = "Cancel"
-					)
-				}
-			}
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

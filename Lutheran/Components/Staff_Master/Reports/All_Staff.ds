@@ -1,32 +1,34 @@
 custom All_Staff
 {
 
-			displayName = "All Staff"
-			show all rows from Staff_Master    
-			(
-				date_of_birth as "Date Of Birth"
-				origin as "Origin"
-				status as "Status"
-				Name 
-				Current_Position as "Current Position"
-				Photograph
-				Staff_Email as "Staff Email"
-				Phone_Number as "Phone"
-				(
-					displayformat = plainnumber 
-					linktodial = disable
-				)
-				Current_Employment as "Current Employment"
-				gender as "Gender"
-				religion as "Religion"
-				Surname as "Middle name"
-				Teaching_Staff as "Teaching Staff"
-				Previous_Surname as "Previous  Surname "
-				Admin_Type as "Admin Type"
-				Organisation as "National"
-				Regions
-				Campus
-				FTE
-				Teacher_Type as "Teacher Type"
-			)
+		
+					displayName = "All Staff"
+					show all rows from Staff_Master    
+					(
+						date_of_birth as "Date Of Birth"
+						origin as "Origin"
+						status as "Status"
+						Name 
+						Current_Position as "Current Position"
+						Photograph
+						Staff_Email as "Staff Email"
+						Phone_Number as "Phone"
+						(
+							displayformat = plainnumber 
+							linktodial = disable
+						)
+						Current_Employment as "Current Employment"
+						gender as "Gender"
+						religion as "Religion"
+						Surname as "Middle name"
+						Teaching_Staff as "Teaching Staff"
+						Previous_Surname as "Previous  Surname "
+						Admin_Type as "Admin Type"
+						Organisation as "National"
+						Regions
+						Campus
+						FTE
+						Teacher_Type as "Teacher Type"
+					)
+		
 }

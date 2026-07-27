@@ -1,45 +1,47 @@
 form Speciality
 {
 
-			success message = "Speciality Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have unique Speciality
-			(
-    			type = text
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					success message = "Speciality Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have unique Speciality
 					(
-   						type = submit
-   						displayname = "Update"
+		    			type = text
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
-					(
-   						type = cancel
-   						displayname = "Cancel"
-					)
-				}
-			}
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

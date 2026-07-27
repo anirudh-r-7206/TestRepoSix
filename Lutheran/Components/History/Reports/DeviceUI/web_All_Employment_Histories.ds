@@ -1,78 +1,80 @@
 report All_Employment_Histories
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Comment
-								Staff
-								Staff_Request as "Staff Request"
-								Action_field as "Action"
-								Action_By as "Action By"
-								Training_Completion_Request as "Training Completion Request"
+								datablock1
+								(
+									fields
+									(
+										Comment
+										Staff
+										Staff_Request as "Staff Request"
+										Action_field as "Action"
+										Action_By as "Action By"
+										Training_Completion_Request as "Training Completion Request"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
-								Duplicate 
-								Delete 
+								datablock1
+								(
+									fields
+									(
+										Comment
+										Staff
+										Staff_Request as "Staff Request"
+										Action_field as "Action"
+										Action_By as "Action By"
+										Training_Completion_Request as "Training Completion Request"
+									)
+								)
 							)
-						record
-						(
-							Duplicate   	   
-							Delete   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Delete   	   
-							Duplicate   	   
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								Comment
-								Staff
-								Staff_Request as "Staff Request"
-								Action_field as "Action"
-								Action_By as "Action By"
-								Training_Completion_Request as "Training Completion Request"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-								Duplicate 
-								Delete 
-							)
-						)
-				)
-			
+					
+		
 }

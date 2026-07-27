@@ -1,26 +1,28 @@
 Validate as "Validate"
 {
 
-				type =  form
-				form = Approval_Configuration
-
-				record event = on add
-
-				on validate
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											existingConfig = Approval_Configuration[Request_Type == input.Request_Type];
-										if(existingConfig.count() > 0)
-										{
-											alert "Request Type already exists.";
-											cancel submit;
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Approval_Configuration
+			
+							record event = on add
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														existingConfig = Approval_Configuration[Request_Type == input.Request_Type];
+													if(existingConfig.count() > 0)
+													{
+														alert "Request Type already exists.";
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
 			
 }

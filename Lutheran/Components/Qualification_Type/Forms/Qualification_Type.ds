@@ -1,47 +1,49 @@
 form Qualification_Type
 {
 
-			displayname = "Qualification Type"
-			success message = "Qualification Type Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have unique qualification_type
-			(
-    			type = text
-				displayname = "Qualification Type"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					displayname = "Qualification Type"
+					success message = "Qualification Type Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have unique qualification_type
 					(
-   						type = submit
-   						displayname = "Update"
+		    			type = text
+						displayname = "Qualification Type"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
-					(
-   						type = cancel
-   						displayname = "Cancel"
-					)
-				}
-			}
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

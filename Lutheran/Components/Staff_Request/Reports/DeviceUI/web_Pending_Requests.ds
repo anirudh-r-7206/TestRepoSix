@@ -1,76 +1,78 @@
 report Pending_Requests
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Request_Type as "Request Type"
-								Raised_by as "Raised by"
-								Staff
-								Request_Details as "Request Details"
-								Status
-								"Approve"
-								"Reject "
+								datablock1
+								(
+									fields
+									(
+										Request_Type as "Request Type"
+										Raised_by as "Raised by"
+										Staff
+										Request_Details as "Request Details"
+										Status
+										"Approve"
+										"Reject "
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										Request_Type as "Request Type"
+										Raised_by as "Raised by"
+										Staff
+										Supporting_Docs as "Supporting Docs"
+										Request_Details as "Request Details"
+										Current_Employment as "School"
+										Current_Position as "Position"
+										FTE
+										Teacher_Type as "Teacher Type"
+										Effective_Date as "Effective Date"
+										Effective_To as "Effective To"
+										Status
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										"Approve"
+										"Reject "
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-		 				type = 2
-						datablock1
-						(
-		     				title = "Overview"
-							fields
-							(
-								Request_Type as "Request Type"
-								Raised_by as "Raised by"
-								Staff
-								Supporting_Docs as "Supporting Docs"
-								Request_Details as "Request Details"
-								Current_Employment as "School"
-								Current_Position as "Position"
-								FTE
-								Teacher_Type as "Teacher Type"
-								Effective_Date as "Effective Date"
-								Effective_To as "Effective To"
-								Status
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								"Approve"
-								"Reject "
-							)
-						)
-				)
-			
+					
+		
 }

@@ -1,20 +1,22 @@
 default list Service_Awards1
 {
 
-			displayName = "Service Awards"
-			show all rows from Service_Awards    
-			(
-				Award_Name as "Award Name"
-				Description
-				Years_of_Service_Required as "Years of Service Required"
-			)
-			custom actions
-			(
-				"Award Eligible Staff"
-				(
-	  			workflow = View_Eligible_Staff
-				show action in edit record menu = true
-				)
-			)
+		
+					displayName = "Service Awards"
+					show all rows from Service_Awards    
+					(
+						Award_Name as "Award Name"
+						Description
+						Years_of_Service_Required as "Years of Service Required"
+					)
+					custom actions
+					(
+						"Award Eligible Staff"
+						(
+			  			workflow = View_Eligible_Staff
+						show action in edit record menu = true
+						)
+					)
+				
 		
 }

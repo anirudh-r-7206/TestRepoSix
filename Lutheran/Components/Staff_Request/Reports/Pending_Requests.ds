@@ -1,62 +1,64 @@
 default list Pending_Requests
 {
 
-			displayName = "Pending Requests"
-			show all rows from Staff_Request  [ID == thisapp.reportfilters.getRequestIDs()]  
-			(
-				Request_Type as "Request Type"
-				Staff
-				Effective_Date as "Effective Date"
-				Supporting_Docs as "Supporting Docs"
-				Raised_by as "Raised by"
-				Status
-				Request_Details as "Request Details"
-				Current_Employment as "School"
-				Current_Position as "Position"
-				FTE
-				Teacher_Type as "Teacher Type"
-				custom action "Approve"
-				(
-	  			workflow = Approve
-				show action in view header = true
-				show action in edit record menu = true
-				column header = "Approve"
-				confirmation before execution
-				(
-					message for individual record = "Are you sure you want to approve this request?"
-					confirm button text = "Yes"		
-					cancel button text = "No"
-				)
-				)
-				custom action "Reject "
-				(
-	  			workflow = Reject
-				show action in view header = true
-				show action in edit record menu = true
-				column header = "Reject "
-				)
-				Effective_To as "Effective To"
-			)
-			conditional formatting
-			(
-				"New Formatting"
-				{
-				condition = (Status == "Rejected")
-				fields = [Status]
-				format = "color:#e64d3b;"
-				}
-				"New Formatting"
-				{
-				condition = (Status == "Approved")
-				fields = [Status]
-				format = "color:#19bc9f;"
-				}
-				"New Formatting"
-				{
-				condition = (Status == "Pending")
-				fields = [Status]
-				format = "color:#e77f06;"
-				}
-			)
+		
+					displayName = "Pending Requests"
+					show all rows from Staff_Request  [ID == thisapp.reportfilters.getRequestIDs()]  
+					(
+						Request_Type as "Request Type"
+						Staff
+						Effective_Date as "Effective Date"
+						Supporting_Docs as "Supporting Docs"
+						Raised_by as "Raised by"
+						Status
+						Request_Details as "Request Details"
+						Current_Employment as "School"
+						Current_Position as "Position"
+						FTE
+						Teacher_Type as "Teacher Type"
+						custom action "Approve"
+						(
+			  			workflow = Approve
+						show action in view header = true
+						show action in edit record menu = true
+						column header = "Approve"
+						confirmation before execution
+						(
+							message for individual record = "Are you sure you want to approve this request?"
+							confirm button text = "Yes"		
+							cancel button text = "No"
+						)
+						)
+						custom action "Reject "
+						(
+			  			workflow = Reject
+						show action in view header = true
+						show action in edit record menu = true
+						column header = "Reject "
+						)
+						Effective_To as "Effective To"
+					)
+					conditional formatting
+					(
+						"New Formatting"
+						{
+						condition = (Status == "Rejected")
+						fields = [Status]
+						format = "color:#e64d3b;"
+						}
+						"New Formatting"
+						{
+						condition = (Status == "Approved")
+						fields = [Status]
+						format = "color:#19bc9f;"
+						}
+						"New Formatting"
+						{
+						condition = (Status == "Pending")
+						fields = [Status]
+						format = "color:#e77f06;"
+						}
+					)
+				
 		
 }

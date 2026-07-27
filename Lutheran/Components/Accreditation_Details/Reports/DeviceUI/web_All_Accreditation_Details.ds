@@ -1,66 +1,68 @@
 report All_Accreditation_Details
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Staff.Photograph as "Photograph"
-								Staff
-								Required_Accreditation as "Required Accreditation"
-								PD_Hours_Collected as "PD Hours Collected"
-								Due_Date as "Due Date"
-								Status_Accreditation as "Status Accreditation"
-								Completion_Date as "Completion Date"
+								datablock1
+								(
+									fields
+									(
+										Staff.Photograph as "Photograph"
+										Staff
+										Required_Accreditation as "Required Accreditation"
+										PD_Hours_Collected as "PD Hours Collected"
+										Due_Date as "Due Date"
+										Status_Accreditation as "Status Accreditation"
+										Completion_Date as "Completion Date"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
+								datablock1
+								(
+									fields
+									(
+										Status_Accreditation as "Status Accreditation"
+										Staff
+										Required_Accreditation as "Required Accreditation"
+										Due_Date as "Due Date"
+										PD_Hours_Collected as "PD Hours Collected"
+										Completion_Date as "Completion Date"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								Status_Accreditation as "Status Accreditation"
-								Staff
-								Required_Accreditation as "Required Accreditation"
-								Due_Date as "Due Date"
-								PD_Hours_Collected as "PD Hours Collected"
-								Completion_Date as "Completion Date"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-							)
-						)
-				)
-			
+					
+		
 }

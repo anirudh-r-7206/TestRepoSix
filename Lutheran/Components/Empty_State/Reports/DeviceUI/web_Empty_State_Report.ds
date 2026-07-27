@@ -1,63 +1,65 @@
 report Empty_State_Report
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Image
-								Name
+								datablock1
+								(
+									fields
+									(
+										Image
+										Name
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
+								datablock1
+								(
+									fields
+									(
+										Image
+										Name
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Edit   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								Image
-								Name
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-							)
-						)
-				)
-			
+					
+		
 }

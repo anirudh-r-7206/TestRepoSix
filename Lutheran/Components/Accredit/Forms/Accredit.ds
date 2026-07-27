@@ -1,55 +1,57 @@
 form Accredit
 {
 
-			displayname = "Mark as Accredited"
-			store data in zc = false
-			success message = "Data Added Successfully!"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			Accreditation
-			(
-				type = picklist	
-				values  = Accreditation_Details.ID
-    			displayformat = [ID]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			must have Renewal_Action
-			(
-				type = radiobuttons
-				displayname = "Do you want to change the renewal date?"
-				maxchar = 100
-				values = {"Retain","Extend"}
-				initial value = "Retain"
-				layout = 2
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Renewal_Date
-			(
-    			type = date
-				displayname = "Renewal Date"
-				alloweddays = 0,1,2,3,4,5,6
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				Submit
-				(
-   					type = submit
-   					displayname = "Submit"
-				)
-			}
+		
+					displayname = "Mark as Accredited"
+					store data in zc = false
+					success message = "Data Added Successfully!"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Accreditation
+					(
+						type = picklist	
+						values  = Accreditation_Details.ID
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					must have Renewal_Action
+					(
+						type = radiobuttons
+						displayname = "Do you want to change the renewal date?"
+						maxchar = 100
+						values = {"Retain","Extend"}
+						initial value = "Retain"
+						layout = 2
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Renewal_Date
+					(
+		    			type = date
+						displayname = "Renewal Date"
+						alloweddays = 0,1,2,3,4,5,6
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						Submit
+						(
+		   					type = submit
+		   					displayname = "Submit"
+						)
+					}
+				
 		
 }

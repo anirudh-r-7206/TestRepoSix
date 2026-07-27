@@ -1,16 +1,16 @@
 <style>
 	
 .zc-container-wrapper .zc-main-content-wrapper .zc-main-content .inner .page_content_wrapper .form-outer-wrapper {
-    box-shadow: unset !important;
+		box-shadow: unset !important;
 }
 
-     * {
-            padding: 0;
-            margin: 0;
-            border: none;
-        }
+		 * {
+						padding: 0;
+						margin: 0;
+						border: none;
+				}
 	
-        .main-container {
+				.main-container {
 			height: calc(100% - 30px);
 			width: calc(100% - 30px);
 			padding: 10px 20px;
@@ -26,7 +26,7 @@
 
 		}
 		.Layout.elemContainment {
-    padding: unset !important;
+		padding: unset !important;
 }
 		.popage {
 			border: 1px solid #cccccc;
@@ -45,8 +45,8 @@
 			display: none !important;
 		}
 		.PO_search .form-group {
-        margin-bottom: 0px !important; 
-        }
+				margin-bottom: 0px !important; 
+				}
 		.PO_search .zc-form-fullheight .form-outer-wrapper .formContainer,
 		.PO_search  .form-outer-wrapper .formContainer
 		{
@@ -57,10 +57,10 @@
 			padding-top:6px;
 			            box-sizing: border-box;
 
-        }
+				}
 		.popage.divEmbedContainer {
 			height:calc(100% - 90px) !important; 
-        }
+				}
 		.popage .zc-pb-page-content-wrapper [displaytype="plain"] .elemContainment
 		{
 			border:0px !important;
@@ -76,16 +76,16 @@
 		}
 		
 			.button-div {
-    width: 60px;
-    height: 41px;
-    background: #f8bb27;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
+		width: 60px;
+		height: 41px;
+		background: #f8bb27;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
 }
 .zpelement-wrapper.zcpage-elemContainer#row_1 {
-    border: none;
+		border: none;
 }
 // .button-div {
 //     width: 60px;
@@ -101,46 +101,46 @@
 //     color: black;
 // }
 .form-button-div {
-    display: flex;
-    align-items: center;
-    position: relative;
+		display: flex;
+		align-items: center;
+		position: relative;
 }
 .top-timeline-div {
-    display: flex;
-    gap: 80px;
-    align-items: center;
-    justify-content: flex-end;
+		display: flex;
+		gap: 80px;
+		align-items: center;
+		justify-content: flex-end;
 }
 .top-logo-div {
-     width: 252px;
+		 width: 252px;
 /*     height: 100px; */
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
+		border-radius: 14px;
+		display: flex;
+		align-items: center;
 //     border: 2px solid #090986;
-    justify-content: center;
+		justify-content: center;
 }
 
 .zc-dem-container .inner .form-outer-wrapper form.form-table{
 	border-radius: unset !important;
 }
 img.logo-img {
-    height: 65%;
+		height: 65%;
 }
 .zc-pb-tile-card {
-    overflow: hidden !important;
+		overflow: hidden !important;
 }
 .popage:empty:after {
-    content: "Please choose an Award to view the eligible Staff";
-    font-size: 16px;
+		content: "Please choose an Award to view the eligible Staff";
+		font-size: 16px;
 }
 
 .popage:empty {
-    position: relative;
-    height: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+		position: relative;
+		height: 100% !important;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 }
 </style>
 <div class="main-container">
@@ -149,8 +149,8 @@ img.logo-img {
 <div class ="top-logo-div">
  <!-- <img src="" > -->
  <!--  <div class ="hearder-div">
-   Board Rsolutions
-   </div> -->
+	 Board Rsolutions
+	 </div> -->
 </div>
 
 <div class ="form-button-div">

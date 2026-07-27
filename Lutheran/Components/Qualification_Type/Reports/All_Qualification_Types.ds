@@ -1,10 +1,12 @@
 default list All_Qualification_Types
 {
 
-			displayName = "Qualification Types"
-			show all rows from Qualification_Type    
-			(
-				qualification_type as "Qualification Type"
-			)
+		
+					displayName = "Qualification Types"
+					show all rows from Qualification_Type    
+					(
+						qualification_type as "Qualification Type"
+					)
+				
 		
 }

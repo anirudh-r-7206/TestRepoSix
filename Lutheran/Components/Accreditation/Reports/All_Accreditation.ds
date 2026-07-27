@@ -1,15 +1,17 @@
 default list All_Accreditation
 {
 
-			displayName = "All Accreditation"
-			show all rows from Accreditation    
-			(
-				Accreditation_Name as "Accreditation Name"
-				Required_PD_Hours as "Required PD Hours"
-				Required_Courses as "Required Courses"
-				(
-					field = Required_Courses.SI_No + " - " + Required_Courses.Training_Type
-				)
-			)
+		
+					displayName = "All Accreditation"
+					show all rows from Accreditation    
+					(
+						Accreditation_Name as "Accreditation Name"
+						Required_PD_Hours as "Required PD Hours"
+						Required_Courses as "Required Courses"
+						(
+							field = Required_Courses.SI_No + " - " + Required_Courses.Training_Type
+						)
+					)
+				
 		
 }

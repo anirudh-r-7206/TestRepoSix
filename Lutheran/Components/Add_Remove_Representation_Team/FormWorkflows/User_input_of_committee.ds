@@ -1,56 +1,58 @@
 User_input_of_committee as "User input of committee"
 {
 
-				type =  form
-				form = Add_Remove_Representation_Team
-
-				record event = on add
-
-				on user input of Representation_Team
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Representation_Team != null && input.Representation_Team.size() > 0)
-										{
-											if(input.From_Field == "Staff" && input.Action_field == "Remove")
-											{
-												validCommittee = List();
-												removedCommittee = List();
-												for each  com in input.Representation_Team
-												{
-													fetCom = Representation_Team[ID == com];
-													if(fetCom.count() > 0 && fetCom.Staff_Master != null)
+			
+							type =  form
+							form = Add_Remove_Representation_Team
+			
+							record event = on add
+			
+							on user input of Representation_Team
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Representation_Team != null && input.Representation_Team.size() > 0)
 													{
-														comStaff = fetCom.Staff_Master.getAll();
-														/* CHECK SELECTED STAFF EXISTS IN COMMITTEE */
-														matchStaff = comStaff.intersect(input.Staff_Master);
-														if(matchStaff.size() > 0)
+														if(input.From_Field == "Staff" && input.Action_field == "Remove")
 														{
-															validCommittee.add(com);
-														}
-														else
-														{
-															removedCommittee.add(fetCom.Representation_Team);
+															validCommittee = List();
+															removedCommittee = List();
+															for each  com in input.Representation_Team
+															{
+																fetCom = Representation_Team[ID == com];
+																if(fetCom.count() > 0 && fetCom.Staff_Master != null)
+																{
+																	comStaff = fetCom.Staff_Master.getAll();
+																	/* CHECK SELECTED STAFF EXISTS IN COMMITTEE */
+																	matchStaff = comStaff.intersect(input.Staff_Master);
+																	if(matchStaff.size() > 0)
+																	{
+																		validCommittee.add(com);
+																	}
+																	else
+																	{
+																		removedCommittee.add(fetCom.Representation_Team);
+																	}
+																}
+																else
+																{
+																	removedCommittee.add(fetCom.Representation_Team);
+																}
+															}
+															/* ONLY UPDATE IF INVALID COMMITTEES FOUND */
+															if(removedCommittee.size() > 0)
+															{
+																input.Representation_Team = validCommittee;
+																alert "Removed invalid committee selection: " + removedCommittee.toString(", ");
+															}
 														}
 													}
-													else
-													{
-														removedCommittee.add(fetCom.Representation_Team);
-													}
-												}
-												/* ONLY UPDATE IF INVALID COMMITTEES FOUND */
-												if(removedCommittee.size() > 0)
-												{
-													input.Representation_Team = validCommittee;
-													alert "Removed invalid committee selection: " + removedCommittee.toString(", ");
-												}
-											}
-										}
-						)
-					}
-				}
-
+									)
+								}
+							}
+			
+						
 			
 }

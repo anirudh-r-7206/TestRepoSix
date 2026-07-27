@@ -1,15 +1,17 @@
 default list All_Employment_Histories
 {
 
-			displayName = "All Employment Histories"
-			show all rows from History    
-			(
-				Comment
-				Staff
-				Staff_Request as "Staff Request"
-				Action_field as "Action"
-				Action_By as "Action By"
-				Training_Completion_Request as "Training Completion Request"
-			)
+		
+					displayName = "All Employment Histories"
+					show all rows from History    
+					(
+						Comment
+						Staff
+						Staff_Request as "Staff Request"
+						Action_field as "Action"
+						Action_By as "Action By"
+						Training_Completion_Request as "Training Completion Request"
+					)
+				
 		
 }

@@ -1,43 +1,43 @@
 <style>
 * {
-    padding: 0;
-    margin: 0;
-    border: none;
+		padding: 0;
+		margin: 0;
+		border: none;
 }
 div#zppagesLive,
 div#elementsContainer,
 .Layout.elemContainment,
 div#row_1,
 .zc-pb-formreport-placeholder {
-    height: 100% !important;
+		height: 100% !important;
 }
 .Layout.elemContainment {
-    padding: unset !important;
+		padding: unset !important;
 }
 .add-button-container {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 20px 0px 20px;
+		display: flex;
+		justify-content: flex-end;
+		padding: 10px 20px 0px 20px;
 }
 .add-button-container {
-    position: relative;
-    height: 0;
+		position: relative;
+		height: 0;
 }
 .add-staff-btn {
-    position: absolute;
-    top: 20px;
-    right: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    border: 1px solid #cbcbdc;
-    transition: all 0.2s ease;
-    z-index: 1;
+		position: absolute;
+		top: 20px;
+		right: 10px;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 8px 14px;
+		border-radius: 6px;
+		font-size: 13px;
+		font-weight: 500;
+		text-decoration: none;
+		border: 1px solid #cbcbdc;
+		transition: all 0.2s ease;
+		z-index: 1;
 }
 a.add-staff-btn { 
 color : #72718b;
@@ -45,21 +45,21 @@ color : #72718b;
 
 /* ? Hover effect */
 .add-staff-btn:hover {
-        background: var(--component_hover_color);
-    border: 1px solid var(--primary_color);
-    color: var(--primary_color);
+				background: var(--component_hover_color);
+		border: 1px solid var(--primary_color);
+		color: var(--primary_color);
 
 }
 
 /* ? Click effect */
 .add-staff-btn:active {
-    transform: scale(0.96);
+		transform: scale(0.96);
 }
 
 /* Icon */
 .add-staff-btn svg {
-    width: 14px;
-    height: 14px;
+		width: 14px;
+		height: 14px;
 }
 </style>
 <div class="add-button-container">

@@ -1,23 +1,25 @@
 On_Edited_Field_Rules as "On Edited - Field Rules"
 {
 
-				type =  form
-				form = Compliance_Training
-
-				record event = on edit
-
-				field rules
-				{
-					actions  (Accreditation_Details is null)
-					{
-						hide Accreditation_Details;
-					}
-					actions 
-					{
-						hide Status;
-						disable Accreditation_Details,Staff,Training_Type;
-					}
-				}
-
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on edit
+			
+							field rules
+							{
+								actions  (Accreditation_Details is null)
+								{
+									hide Accreditation_Details;
+								}
+								actions 
+								{
+									hide Status;
+									disable Accreditation_Details,Staff,Training_Type;
+								}
+							}
+			
+						
 			
 }

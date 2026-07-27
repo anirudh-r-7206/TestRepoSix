@@ -1,5 +1,5 @@
 <div style="padding:24px;background:#fff;border-radius:12px;font-family:Arial,sans-serif;">
-  <h2 style="margin:0 0 8px;color:#194BB2;">Initial Setup</h2>
-  <p style="margin:0;color:#555;">Use the setup forms to add National, Region, School, and Campus records.</p>
-  <div elName='zc-component' formLinkName='Organisation' params='zc_Header=false&zc_SubmitVal=Next' style='height:420px;margin-top:16px;'></div>
+	<h2 style="margin:0 0 8px;color:#194BB2;">Initial Setup</h2>
+	<p style="margin:0;color:#555;">Use the setup forms to add National, Region, School, and Campus records.</p>
+	<div elName='zc-component' formLinkName='Organisation' params='zc_Header=false&zc_SubmitVal=Next' style='height:420px;margin-top:16px;'></div>
 </div>

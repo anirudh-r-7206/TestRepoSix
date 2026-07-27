@@ -1,107 +1,109 @@
 form History
 {
 
-			success message = "Employment History Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			Header
-			(
-    			type = plaintext
-				value = "<div> <br /></div>"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Training_Completion_Request
-			(
-				type = picklist	
-				displayname = "Training Completion Request"
-				values  = Training_Completion_Request.ID
-    			displayformat = [ID]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Staff_Request
-			(
-				type = picklist	
-				displayname = "Staff Request"
-				values  = Staff_Request.ID
-    			displayformat = [ID]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Staff
-			(
-				type = picklist	
-				values  = Staff_Master.ID
-    			bidirectional = Employment_History
-    			displayformat = [" " + Name.first_name + " " + Name.last_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Action_By
-			(
-				type = picklist	
-				displayname = "Action By"
-				values  = Staff_Master.ID
-    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Action_field
-			(
-    			type = text
-				displayname = "Action"
-	 			row = 1
-	 			column = 1   
-				width = 300px
-			)
-			must have Comment
-			(
-    			type = richtext
-				height = 100px
-				toolbar = disable
-	 			row = 1
-	 			column = 1   
-				width = 300px
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					success message = "Employment History Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					Header
 					(
-   						type = submit
-   						displayname = "Update"
+		    			type = plaintext
+						value = "<div> <br /></div>"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
+					Training_Completion_Request
 					(
-   						type = cancel
-   						displayname = "Cancel"
+						type = picklist	
+						displayname = "Training Completion Request"
+						values  = Training_Completion_Request.ID
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-				}
-			}
+					Staff_Request
+					(
+						type = picklist	
+						displayname = "Staff Request"
+						values  = Staff_Request.ID
+		    			displayformat = [ID]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Staff
+					(
+						type = picklist	
+						values  = Staff_Master.ID
+		    			bidirectional = Employment_History
+		    			displayformat = [" " + Name.first_name + " " + Name.last_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Action_By
+					(
+						type = picklist	
+						displayname = "Action By"
+						values  = Staff_Master.ID
+		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Action_field
+					(
+		    			type = text
+						displayname = "Action"
+			 			row = 1
+			 			column = 1   
+						width = 300px
+					)
+					must have Comment
+					(
+		    			type = richtext
+						height = 100px
+						toolbar = disable
+			 			row = 1
+			 			column = 1   
+						width = 300px
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

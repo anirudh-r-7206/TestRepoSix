@@ -1,63 +1,65 @@
 report All_Year_Levels
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								year_level_name as "Year Level"
+								datablock1
+								(
+									fields
+									(
+										year_level_name as "Year Level"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
+								datablock1
+								(
+									fields
+									(
+										year_level_name as "Year Level"
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-							Delete   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Edit   	   
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								year_level_name as "Year Level"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-							)
-						)
-				)
-			
+					
+		
 }

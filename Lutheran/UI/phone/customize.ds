@@ -1,14 +1,21 @@
 customize
 {
-    layout = slidingpane
-    font = "lato"
-    style = "3"
-    color options
-    {
-        color = "11"
-    }
-    logo
-    {
-        preference = "none"
-    }
+
+	
+				layout = slidingpane
+				font = "default"
+				style = "3"
+				color options
+				{
+					name = "custom_color"
+					brand color = "#215bcf"
+					navigation background color = "#103275"
+					type = "custom"
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	
 }

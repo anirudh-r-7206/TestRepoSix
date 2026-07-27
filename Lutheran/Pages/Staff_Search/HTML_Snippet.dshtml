@@ -27,180 +27,180 @@
 	%>
 <style>
 * {
-    padding: 0;
-    margin: 0;
-    border: none;
+		padding: 0;
+		margin: 0;
+		border: none;
 }
 div#zppagesLive,
 div#elementsContainer,
 .Layout.elemContainment,
 div#row_1,
 .zc-pb-formreport-placeholder {
-    height: 100% !important;
+		height: 100% !important;
 }
 .Layout.elemContainment {
-    padding: unset !important;
+		padding: unset !important;
 }
 .sd-fullContainer {
-    height: 100%;
-    width: 100%;
-    background: #F3F3F3;
+		height: 100%;
+		width: 100%;
+		background: #F3F3F3;
 	padding: 12px;
-    box-sizing: border-box;
+		box-sizing: border-box;
 }
 .sd-topdivContaner {
-    width: 100%;
-    height: 77px;
-    border: 1px solid #E8E8E8;
-    background: #FFF;
-    border-radius: 16px 16px 14px 14px;
+		width: 100%;
+		height: 77px;
+		border: 1px solid #E8E8E8;
+		background: #FFF;
+		border-radius: 16px 16px 14px 14px;
 	padding-inline: 32px 18px;
-    box-sizing: border-box;
+		box-sizing: border-box;
 	
 }
 
 .zpelement-wrapper .zc-pb-tile-container.zc-qv-custom-layout .zc-pb-tile-cnt-wrapper:hover,
 .zpelement-wrapper .zc-pb-tile-container.zc-qv-custom-layout.zc-selected-card .zc-pb-tile-cnt-wrapper{
-    border-color: var(--primary_color) !important;
+		border-color: var(--primary_color) !important;
 	box-shadow: unset !important;
 }
 
 
 .sd-formdivContaner {
-       width: 100%;
-    height: 69px;
-    border: 1px solid #E8E8E8;
-    background: #FFF;
-    border-radius: 20px;
-    margin-top: 9px;
-    box-sizing: border-box;
+			 width: 100%;
+		height: 69px;
+		border: 1px solid #E8E8E8;
+		background: #FFF;
+		border-radius: 20px;
+		margin-top: 9px;
+		box-sizing: border-box;
 	overflow: hidden;
 }
 
 .sd-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 20px;
 }
 
 .sd-card {
-    background: #ffffff;
-    padding: 18px;
-    border-radius: 20px;
-    border: 1px solid #EAEAEA;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 206px; /* instead of fixed height */
+		background: #ffffff;
+		padding: 18px;
+		border-radius: 20px;
+		border: 1px solid #EAEAEA;
+		box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 206px; /* instead of fixed height */
 }
 
 
 .sd-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+		transform: translateY(-4px);
+		box-shadow: 0 10px 24px rgba(0,0,0,0.1);
 }
 
 .sd-top {
-    display: flex;
-    align-items: center;
-    margin-bottom: 17px;
+		display: flex;
+		align-items: center;
+		margin-bottom: 17px;
 }
 
 .sd-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    object-fit: cover;
-    margin-right: 12px;
-    border: 2px solid #e6ecff;
+		width: 52px;
+		height: 52px;
+		border-radius: 12px;
+		object-fit: cover;
+		margin-right: 12px;
+		border: 2px solid #e6ecff;
 }
 
 .sd-name {
-    font-weight: 600;
-    font-size: 16px;
-    color: #222;
+		font-weight: 600;
+		font-size: 16px;
+		color: #222;
 }
 
 .sd-role {
-    font-size: 12px;
-    color: #e63946;
-    margin-top: 2px;
+		font-size: 12px;
+		color: #e63946;
+		margin-top: 2px;
 }
 
 .sd-info {
-    font-size: 13px;
-    color: #444;
-    margin-top: 10px;
+		font-size: 13px;
+		color: #444;
+		margin-top: 10px;
 	    display: flex;
-    flex-direction: column;
-    height: calc(100% - 70px);
-    justify-content: space-between;
+		flex-direction: column;
+		height: calc(100% - 70px);
+		justify-content: space-between;
 }
 
 .sd-info-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 6px;
 	font-size: 14.5px;
 
 }
 
 .sd-icon svg {
 
-    display: block;
+		display: block;
 }
 .sd-bottomdivContaner {
-    margin-top: 10px;
-    height: calc(100% - 170px);
-    width: 100%;
-    border-radius: 20px 20px 32px 32px;
-   background: url("<%=bgimg%>");
+		margin-top: 10px;
+		height: calc(100% - 170px);
+		width: 100%;
+		border-radius: 20px 20px 32px 32px;
+	 background: url("<%=bgimg%>");
 	       background-color: white;
-    box-sizing: border-box;
+		box-sizing: border-box;
 background-size: cover;
 background-repeat: no-repeat;
-    background-position: 0px bottom;
+		background-position: 0px bottom;
 
 }
 
 
 .Staff.Details {
-    color: #000;
-    font-family: Poppins;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
+		color: #000;
+		font-family: Poppins;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 600;
 }
 .sd-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	    height: 100%;
 }
 
 .sd-staffTitle {
-    color: #000;
-    font-family: Poppins, sans-serif;
-    font-size: 18px;
-    font-weight: 600;
+		color: #000;
+		font-family: Poppins, sans-serif;
+		font-size: 18px;
+		font-weight: 600;
 }
 
 .sd-addBtn {
-    width: 46px;
-    height: 42px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.2s ease;
+		width: 46px;
+		height: 42px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: 0.2s ease;
 }
 
 .sd-addBtn:hover {
-    transform: scale(1.05);
+		transform: scale(1.05);
 }
 
 
@@ -255,7 +255,7 @@ background-repeat: no-repeat;
 		width: unset !important;
 		display: flex;
 		align-items: center;
-    justify-content: space-between;
+		justify-content: space-between;
 	height: 42px;
 	}
 
@@ -332,60 +332,60 @@ background-repeat: no-repeat;
 		display: none;
 	}
 	.form-view .zc-form-scroll-wrapper div[elname="formRow"] .first-column {
-    width: 100%;
-    display: flex;
-    width: 100% !important;
-    justify-content: flex-end;
-    gap: 25px;
+		width: 100%;
+		display: flex;
+		width: 100% !important;
+		justify-content: flex-end;
+		gap: 25px;
 }
 
 .form-view .formContainer {
-    padding: unset !important;
+		padding: unset !important;
 }
 .form-action.formbutton {
-    padding: unset !important;
+		padding: unset !important;
 }
 .zc-form-scroll-wrapper {
-    margin: unset !important;
+		margin: unset !important;
 }
 .statelessFormWidth .zc-live-primary-btn {
-    margin-bottom: unset !important;
+		margin-bottom: unset !important;
 }
 .divEmbedContainer {
-    height: 100% !important;
+		height: 100% !important;
 }
 div#All_Staff_ZC_VWF2BG {
-    background: unset !important;
+		background: unset !important;
 }
 div#All_Staff_ZC_NQYTO7 {
-    background: unset !important;
+		background: unset !important;
 }
 .row.reportfullwidth.zc-report-no-header.custom-report.zc-card-report {
-    background: unset !important;
+		background: unset !important;
 	padding: unset !important;
 }
 
 .zc-pb-reportlive-container .view-outer-wrapper.summary-type-report, .divEmbedContainer .view-outer-wrapper.summary-type-report {
-    background-color: unset !important;
+		background-color: unset !important;
 }
 .zc-pb-tile-card.zc-pb-tile-cnt-wrapper {
-    border: 1px solid #EAEAEA !important;
+		border: 1px solid #EAEAEA !important;
 	    border-radius: 20px !important;
 }
 .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(2) .zcp-col > span:before ,
 .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(3) .zcp-col > span:before ,
 .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(4) .zcp-col > span:before {
-    display: inline;
-    width: 22px;
-    height: 22px;
-    vertical-align: middle;
+		display: inline;
+		width: 22px;
+		height: 22px;
+		vertical-align: middle;
 }
 .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(2) .zcp-col > span:before {
 	content: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.61714 5H6.71429C6.25963 5 5.82359 5.18061 5.5021 5.5021C5.18061 5.82359 5 6.25963 5 6.71429V8.42857C5 13.1626 8.83743 17 13.5714 17H15.2857C15.7404 17 16.1764 16.8194 16.4979 16.4979C16.8194 16.1764 17 15.7404 17 15.2857V14.1011C16.9999 13.942 16.9555 13.786 16.8718 13.6507C16.7881 13.5154 16.6684 13.406 16.526 13.3349L14.4551 12.2994C14.3453 12.2445 14.225 12.2138 14.1022 12.2094C13.9795 12.205 13.8573 12.2271 13.7438 12.2741C13.6303 12.3211 13.5283 12.3919 13.4446 12.4817C13.3609 12.5716 13.2974 12.6784 13.2586 12.7949L13.004 13.5603C12.9241 13.8001 12.7594 14.0025 12.5407 14.1294C12.3221 14.2563 12.0647 14.299 11.8169 14.2494C10.8137 14.0483 9.89236 13.5549 9.16895 12.8314C8.44554 12.1078 7.95234 11.1864 7.75143 10.1831C7.70191 9.93528 7.74461 9.67785 7.87151 9.45925C7.99841 9.24065 8.20077 9.07591 8.44057 8.996L9.39029 8.67886C9.59494 8.61059 9.76633 8.46766 9.87024 8.27859C9.97414 8.08952 10.0029 7.86822 9.95086 7.65886L9.44857 5.64886C9.40214 5.4635 9.2951 5.29898 9.14446 5.18142C8.99383 5.06386 8.80822 5.00001 8.61714 5Z' stroke='%23194BB2'/%3E%3C%2Fsvg%3E");
 	}
 	
 	.zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(3) .zcp-col > span::before{
-       content: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.4 6H16.6C17.37 6 18 6.6125 18 7.36111V15.5278C18 16.2764 17.37 16.8889 16.6 16.8889H5.4C4.63 16.8889 4 16.2764 4 15.5278V7.36111C4 6.6125 4.63 6 5.4 6Z' stroke='%23194BB2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18 7.55566L11 12.2223L4 7.55566' stroke='%23194BB2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C%2Fsvg%3E");
+			 content: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.4 6H16.6C17.37 6 18 6.6125 18 7.36111V15.5278C18 16.2764 17.37 16.8889 16.6 16.8889H5.4C4.63 16.8889 4 16.2764 4 15.5278V7.36111C4 6.6125 4.63 6 5.4 6Z' stroke='%23194BB2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18 7.55566L11 12.2223L4 7.55566' stroke='%23194BB2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C%2Fsvg%3E");
 }
 
 .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(4) .zcp-col > span::before{
@@ -393,126 +393,126 @@ content: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 2
 }
 
 .form-view .form-field input {
-    border: none !important;
-    width: 100% !important;
+		border: none !important;
+		width: 100% !important;
 }
 
 .formContainer {
-    width: 100%;
+		width: 100%;
 }
 
 .form-view .zc-footer-wrapper label.form-label {
-    display: none;
+		display: none;
 }
 .form-view .zc-footer-wrapper input.zc-live-primary-btn {
-    margin: 0;
-    margin-left: 30px;
-    display: flex;
-    width: 93px;
-    height: 40px;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px !important;
-    font-size: 14px;
-    font-weight: 500;
+		margin: 0;
+		margin-left: 30px;
+		display: flex;
+		width: 93px;
+		height: 40px;
+		padding: 8px 12px;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		border-radius: 8px !important;
+		font-size: 14px;
+		font-weight: 500;
 }
 
 .form-view .zc-dem-container .inner .form-outer-wrapper>.row {
-    border-radius: unset !important;
+		border-radius: unset !important;
 }
 
 .form-view .zc-dem-container .inner .form-outer-wrapper form.form-table {
-    border-radius: unset !important;
+		border-radius: unset !important;
 }
 
 .form-view .formColumn .form-group {
-    flex: 1;
+		flex: 1;
 }
 
 .form-view .form-group .form-field {
-    width: 100% !important;
+		width: 100% !important;
 }
 
 .form-view .zc-form-fullheight {
-    display: block !important;
-    height: 100%;
-    width: 100%;
+		display: block !important;
+		height: 100%;
+		width: 100%;
 }
 
 .form-view .form-outer-wrapper {
-    height: 100% !important;
-    width: 100%;
+		height: 100% !important;
+		width: 100%;
 }
 
 .inner .zc-page-content-wrapper .zc-pb-page-content-wrapper .form-table .formContainer {
-    height: 100% !important;
+		height: 100% !important;
 }
 
 .form-view .zc-form-scroll-wrapper {
-    height: 100%;
+		height: 100%;
 }
 
 .form-view .form-view .zc-form-scroll-wrapper div[elname="formRow"] {
-    height: 100%;
+		height: 100%;
 }
 
 .form-view .form-field input {
-    height: 100% !important;
-    min-height: 100% !important;
+		height: 100% !important;
+		min-height: 100% !important;
 }
 
  .form-view .form-group .form-field {
-    height: 100% !important;
+		height: 100% !important;
 }
 
 .form-view .form-group:is(.zc-focus, .zc-label-float) label{
-    display: none !important;
+		display: none !important;
 }
 /*
 .form-group.clearfix.zc-Search_Contact_Number-group {
-    border-right: 1px solid #DADADA;
+		border-right: 1px solid #DADADA;
 }*/
 
 .form-view input#s2id_autogen6 {
-    width: 100% !important;
+		width: 100% !important;
 }
 
 .form-view a.select2-choice.select2-default {
-    width: 100% !important;
+		width: 100% !important;
 	    border: none !important;
-    border-radius: unset !important;
+		border-radius: unset !important;
 	box-shadow: unset !important;
 }
 
 
 .form-view div#s2id_autogen3 {
-    width: 100% !important;
+		width: 100% !important;
 	   
 }
 
 .form-view div#s2id_autogen5 {
-    width: 100% !important;
+		width: 100% !important;
 }
 .form-view .select2-container 
  {
-    width: 100% !important;
+		width: 100% !important;
 }
 
 .form-view .form-field.clearfix.searchable-lookup.mediumSizeLive.zc-Default {
-    border-left: 1px solid #DADADA;
+		border-left: 1px solid #DADADA;
 	    padding-left: 13px;
 }
 .form-view a.select2-choice {
-    width: 100% !important;
-    border: none !important;
+		width: 100% !important;
+		border: none !important;
 }
 .form-view .select2-container .select2-choice:hover{
-    box-shadow: unset !important;
+		box-shadow: unset !important;
 	}
 	.form-view .zpelement-wrapper .zc-pb-tile-container a:focus-visible {
-    box-shadow: unset !important;
+		box-shadow: unset !important;
 }
 .form-view .select2-container .select2-choice:focus
 {
@@ -522,113 +522,113 @@ content: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 2
 .form-view form.form-table .formContainer .formColumn .form-group.zc-focus .form-field .form-control,
 .form-view form.form-table .formContainer .formColumn .form-group:hover .form-field .form-control,
 .form-view form.form-table .formContainer .formColumn .form-group .form-field .select2-container.select2-allowclear .select2-choice {
-    box-shadow :none
+		box-shadow :none
 }
 .form-view div#zc-country-input,
 .flag-container,
 .intl-tel-input.allow-dropdown.separate-dial-code {
-    height: 100% !important;
+		height: 100% !important;
 }
 .form-view div#splash-screen {
-    display: none !important;
+		display: none !important;
 }
 .form-view .form-group label.form-label
 {
 	top: 50% !important;
-    left: 35px !important;
-    transform: translateY(-50%) !important;
-    max-width: calc(100% - 35px) !important;
-    width: 100% !important;
+		left: 35px !important;
+		transform: translateY(-50%) !important;
+		max-width: calc(100% - 35px) !important;
+		width: 100% !important;
 }
 
 .form-view .form-group label.form-label span {
-    max-width: 100% !important;
+		max-width: 100% !important;
 }
 
 div[formLinkName='Employee_Filter'] .zc-Search_Staff-group {
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20L16.1396 16.1396M16.1396 16.1396C16.7999 15.4793 17.3237 14.6953 17.6811 13.8326C18.0385 12.9698 18.2224 12.0451 18.2224 11.1112C18.2224 10.1774 18.0385 9.25264 17.6811 8.38987C17.3237 7.5271 16.7999 6.74316 16.1396 6.08283C15.4793 5.42249 14.6953 4.89868 13.8326 4.54131C12.9698 4.18394 12.0451 4 11.1112 4C10.1774 4 9.25264 4.18394 8.38987 4.54131C7.5271 4.89868 6.74316 5.42249 6.08283 6.08283C4.74921 7.41644 4 9.2252 4 11.1112C4 12.9972 4.74921 14.806 6.08283 16.1396C7.41644 17.4732 9.2252 18.2224 11.1112 18.2224C12.9972 18.2224 14.806 17.4732 16.1396 16.1396Z' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+		background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20L16.1396 16.1396M16.1396 16.1396C16.7999 15.4793 17.3237 14.6953 17.6811 13.8326C18.0385 12.9698 18.2224 12.0451 18.2224 11.1112C18.2224 10.1774 18.0385 9.25264 17.6811 8.38987C17.3237 7.5271 16.7999 6.74316 16.1396 6.08283C15.4793 5.42249 14.6953 4.89868 13.8326 4.54131C12.9698 4.18394 12.0451 4 11.1112 4C10.1774 4 9.25264 4.18394 8.38987 4.54131C7.5271 4.89868 6.74316 5.42249 6.08283 6.08283C4.74921 7.41644 4 9.2252 4 11.1112C4 12.9972 4.74921 14.806 6.08283 16.1396C7.41644 17.4732 9.2252 18.2224 11.1112 18.2224C12.9972 18.2224 14.806 17.4732 16.1396 16.1396Z' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
 }
 
 div[formLinkName='Employee_Filter'] .label-inplace .zc-label-float .form-control {
-    padding-top: 0px !important;
+		padding-top: 0px !important;
 }
 
 div[formLinkName='Employee_Filter'] .form-group {
-    background-repeat: no-repeat;
-    background-position: 5px center;
-    padding-left: 34px;
+		background-repeat: no-repeat;
+		background-position: 5px center;
+		padding-left: 34px;
 }
 
 div[formLinkName='Employee_Filter'] .zc-Search_Contact-group {
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.82286 4H6.28571C5.67951 4 5.09812 4.24082 4.66947 4.66947C4.24082 5.09812 4 5.67951 4 6.28571V8.57143C4 14.8834 9.11657 20 15.4286 20H17.7143C18.3205 20 18.9019 19.7592 19.3305 19.3305C19.7592 18.9019 20 18.3205 20 17.7143V16.1349C19.9999 15.9227 19.9407 15.7147 19.8291 15.5343C19.7175 15.3538 19.5578 15.208 19.368 15.1131L16.6069 13.7326C16.4604 13.6593 16.2999 13.6184 16.1363 13.6126C15.9727 13.6067 15.8097 13.6361 15.6584 13.6988C15.5071 13.7614 15.371 13.8558 15.2594 13.9756C15.1478 14.0954 15.0632 14.2378 15.0114 14.3931L14.672 15.4137C14.5654 15.7335 14.3458 16.0033 14.0543 16.1725C13.7629 16.3417 13.4196 16.3986 13.0891 16.3326C11.7515 16.0644 10.5231 15.4066 9.5586 14.4418C8.59405 13.477 7.93645 12.2485 7.66857 10.9109C7.60254 10.5804 7.65948 10.2371 7.82868 9.94567C7.99788 9.6542 8.26769 9.43455 8.58743 9.328L9.85371 8.90514C10.1266 8.81412 10.3551 8.62354 10.4936 8.37145C10.6322 8.11936 10.6706 7.82429 10.6011 7.54514L9.93143 4.86514C9.86952 4.618 9.7268 4.39864 9.52595 4.24189C9.3251 4.08515 9.07763 4.00001 8.82286 4Z' stroke='black'/%3E%3C/svg%3E%0A");
+		background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.82286 4H6.28571C5.67951 4 5.09812 4.24082 4.66947 4.66947C4.24082 5.09812 4 5.67951 4 6.28571V8.57143C4 14.8834 9.11657 20 15.4286 20H17.7143C18.3205 20 18.9019 19.7592 19.3305 19.3305C19.7592 18.9019 20 18.3205 20 17.7143V16.1349C19.9999 15.9227 19.9407 15.7147 19.8291 15.5343C19.7175 15.3538 19.5578 15.208 19.368 15.1131L16.6069 13.7326C16.4604 13.6593 16.2999 13.6184 16.1363 13.6126C15.9727 13.6067 15.8097 13.6361 15.6584 13.6988C15.5071 13.7614 15.371 13.8558 15.2594 13.9756C15.1478 14.0954 15.0632 14.2378 15.0114 14.3931L14.672 15.4137C14.5654 15.7335 14.3458 16.0033 14.0543 16.1725C13.7629 16.3417 13.4196 16.3986 13.0891 16.3326C11.7515 16.0644 10.5231 15.4066 9.5586 14.4418C8.59405 13.477 7.93645 12.2485 7.66857 10.9109C7.60254 10.5804 7.65948 10.2371 7.82868 9.94567C7.99788 9.6542 8.26769 9.43455 8.58743 9.328L9.85371 8.90514C10.1266 8.81412 10.3551 8.62354 10.4936 8.37145C10.6322 8.11936 10.6706 7.82429 10.6011 7.54514L9.93143 4.86514C9.86952 4.618 9.7268 4.39864 9.52595 4.24189C9.3251 4.08515 9.07763 4.00001 8.82286 4Z' stroke='black'/%3E%3C/svg%3E%0A");
 }
 
 div[formLinkName='Employee_Filter'] .zc-Search_DOB-group {
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 10.5882V12.3529V17.1123C4 18.7487 5.05 20 6.42308 20H16.5769C17.95 20 19 18.7487 19 17.1123V11.7647V10' stroke='%23243C6C' stroke-width='1.5'/%3E%3Cpath d='M19 10.375V8C19 6.89543 18.1046 6 17 6H6.00002C4.89544 6 4.00001 6.89544 4.00002 8.00002L4.00004 11' stroke='%23243C6C' stroke-width='1.5'/%3E%3Cpath d='M8 4V7' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M15 4V7' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M6 10H17' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+		background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 10.5882V12.3529V17.1123C4 18.7487 5.05 20 6.42308 20H16.5769C17.95 20 19 18.7487 19 17.1123V11.7647V10' stroke='%23243C6C' stroke-width='1.5'/%3E%3Cpath d='M19 10.375V8C19 6.89543 18.1046 6 17 6H6.00002C4.89544 6 4.00001 6.89544 4.00002 8.00002L4.00004 11' stroke='%23243C6C' stroke-width='1.5'/%3E%3Cpath d='M8 4V7' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M15 4V7' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M6 10H17' stroke='%23243C6C' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E%0A");
 }
 
 div[formLinkName='Employee_Filter'] .zc-Search_Staff-group:after,
 div[formLinkName='Employee_Filter'] .zc-Search_Contact-group:after {
-    content: "";
-    position: absolute;
-    background: #DADADA;
-    height: 100%;
-    width: 1px;
-    left: 100%;
+		content: "";
+		position: absolute;
+		background: #DADADA;
+		height: 100%;
+		width: 1px;
+		left: 100%;
 	border-radius: 5px;
 }
 
 div[viewlinkname="All_Staff_Grouped"] {
-    padding: 18px 17px;
-    box-sizing: border-box;
+		padding: 18px 17px;
+		box-sizing: border-box;
 }
 
 div[viewlinkname="All_Staff_Grouped"] {
-    padding: 18px 17px;
-    box-sizing: border-box;
+		padding: 18px 17px;
+		box-sizing: border-box;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .group-record-title {
-    background: rgb(from #0a2151     calc(r + (255 - r) * 0.6)     calc(g + (255 - g) * 0.6)     calc(b + (255 - b) * 0.6));
-    height: 45px !important;
-    padding: unset;
-    align-items: center;
-    padding-left: 20px;
-    margin-inline: unset !important;
+		background: rgb(from #0a2151     calc(r + (255 - r) * 0.6)     calc(g + (255 - g) * 0.6)     calc(b + (255 - b) * 0.6));
+		height: 45px !important;
+		padding: unset;
+		align-items: center;
+		padding-left: 20px;
+		margin-inline: unset !important;
 	display: flex;
 	position: sticky !important;
-    top: 0;
-    z-index: 99;
+		top: 0;
+		z-index: 99;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-card.zc-pb-tile-cnt-wrapper {
-    margin: unset !important;
+		margin: unset !important;
 	width: 100% !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .group-record-title::after {
-    content: unset !important;
+		content: unset !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .record-container.record-container-fix {
-    padding: unset !important;
+		padding: unset !important;
 	border-radius: 12px;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .custom-report.zc-card-report .group-record-container {
-    margin: unset !important;
+		margin: unset !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-container {
-    padding: unset !important;
-    margin: unset !important;
+		padding: unset !important;
+		margin: unset !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .group-record-container .zpelement-wrapper.zcpage-elemContainer {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    width: 100%;
-    gap: 14px;
+		display: grid !important;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		width: 100%;
+		gap: 14px;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .zc-card-selected {
@@ -636,37 +636,37 @@ div[viewlinkname="All_Staff_Grouped"] .zc-card-selected {
 }
 
 div[viewlinkname="All_Staff_Grouped"] .group-record-container .zpelement-wrapper.zcpage-elemContainer:after,.group-record-container .zpelement-wrapper.zcpage-elemContainer:before {
-    content: unset !important;
+		content: unset !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .group-record-container .zpelement-wrapper.zcpage-elemContainer .column-container {
-    width: 100% !important;
+		width: 100% !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .zcp-col > span img {
-    border: 2px solid var(--theme_brand_color);
-    box-sizing: border-box;
+		border: 2px solid var(--theme_brand_color);
+		box-sizing: border-box;
 }
 
 div[viewlinkname="All_Staff_Grouped"] span[id*=image] {
-    width: 100% !important;
+		width: 100% !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .noRecImage {
-    border-color: var(--theme_brand_color);
-    border-width: 2px;
-    width: 100% !important;
-    max-width: 100%;
-    max-height: 100%;
+		border-color: var(--theme_brand_color);
+		border-width: 2px;
+		width: 100% !important;
+		max-width: 100%;
+		max-height: 100%;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(1) > .zcp-col > .zcp-row > .zcp-col,
 div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:nth-child(1) > .zcp-col > .zcp-row {
-    width: 100% !important;
+		width: 100% !important;
 }
 
 div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-column-container.zcp-panel-wrapper > .zcp-row > .zcp-col > .zcp-row:not(:first-child) .zcp-col > span > span:empty:after {
-    content: "-";
+		content: "-";
 }
 
 .form-view input#Search_DOB {
@@ -674,7 +674,7 @@ div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-column-container.zcp-panel-wra
 }
 
 .form-view input#zc-Search_Contact+div {
-    display: none;
+		display: none;
 }
 
 .form-view form.form-table .formContainer .formColumn .form-group .form-field.validationError .form-control,
@@ -689,26 +689,26 @@ div[viewlinkname="All_Staff_Grouped"] .zc-pb-tile-column-container.zcp-panel-wra
 }
 
 [displaytype=plain] .zc-pb-page-content-wrapper {
-    background: unset !important;
+		background: unset !important;
 }
 
 .sd-bottomdivContaner .zc-pb-tile-card {
-    background: #ffffff63 !important;
+		background: #ffffff63 !important;
 }
 
 .form-view .zc-footer-wrapper {
-    display: none !important;
+		display: none !important;
 }
 
 i.fa.fa-phone {
-    display: none !important;
+		display: none !important;
 }
 
 .zc-dem-container .inner .form-view .form-outer-wrapper > .row {
 	height: 100%;
 }
 div[viewlinkname="All_Staff_Grouped"] .custom-report.zc-card-report .group-record-container:not(:first-child) {
-    margin-top: 14px !important;
+		margin-top: 14px !important;
 }
 </style>
 
@@ -717,19 +717,19 @@ div[viewlinkname="All_Staff_Grouped"] .custom-report.zc-card-report .group-recor
 
 <div class="sd-topdivContaner">
 
-    <div class="sd-topbar">
-        <div class="sd-staffTitle">Staff Details</div>
+		<div class="sd-topbar">
+				<div class="sd-staffTitle">Staff Details</div>
 
-       <a href="#Page:Embed_Page"  class="sd-addBtn">
+			 <a href="#Page:Embed_Page"  class="sd-addBtn">
 
-    <svg width="46" height="42" viewBox="0 0 46 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0.5" y="0.5" width="45" height="41" rx="9.5" fill="white"/>
-        <rect x="0.5" y="0.5" width="45" height="41" rx="9.5" stroke="#E8E8E8"/>
-        <path d="M23 14L23 28M30 21L16 21" stroke="#243C6C" stroke-width="2" stroke-linecap="round"/>
-    </svg>
+		<svg width="46" height="42" viewBox="0 0 46 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<rect x="0.5" y="0.5" width="45" height="41" rx="9.5" fill="white"/>
+				<rect x="0.5" y="0.5" width="45" height="41" rx="9.5" stroke="#E8E8E8"/>
+				<path d="M23 14L23 28M30 21L16 21" stroke="#243C6C" stroke-width="2" stroke-linecap="round"/>
+		</svg>
 
 </a> 
-    </div>
+		</div>
 
 </div>
 

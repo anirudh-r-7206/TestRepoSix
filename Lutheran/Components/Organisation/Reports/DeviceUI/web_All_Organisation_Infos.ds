@@ -1,70 +1,72 @@
 report All_Organisation_Infos
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								organisation_name as "National Name"
-								logo as "National Logo"
-								main_office_address as "Main Office Address"
-								contact_number as "Contact Number"
+								datablock1
+								(
+									fields
+									(
+										organisation_name as "National Name"
+										logo as "National Logo"
+										main_office_address as "Main Office Address"
+										contact_number as "Contact Number"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								record
+								(
+									Edit   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
+				 				type = 2
+								datablock1
+								(
+				     				title = "Overview"
+									fields
+									(
+										organisation_name as "National Name"
+										logo as "National Logo"
+										main_office_address as "Main Office Address"
+										contact_number as "Contact Number"
+									)
+								)
 							)
-						record
-						(
-							Edit   	   
-    					)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							Edit   	   
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-		 				type = 2
-						datablock1
-						(
-		     				title = "Overview"
-							fields
-							(
-								organisation_name as "National Name"
-								logo as "National Logo"
-								main_office_address as "Main Office Address"
-								contact_number as "Contact Number"
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-								Edit 
-							)
-						)
-				)
-			
+					
+		
 }

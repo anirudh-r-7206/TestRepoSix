@@ -1,18 +1,20 @@
 On_Created_Edited_Field_R as "On Created & Edited - Field Rules"
 {
 
-				type =  form
-				form = Compliance_Training
-
-				record event = on add or edit
-
-				field rules
-				{
-					actions 
-					{
-						hide Completion_Request_Raised;
-					}
-				}
-
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on add or edit
+			
+							field rules
+							{
+								actions 
+								{
+									hide Completion_Request_Raised;
+								}
+							}
+			
+						
 			
 }

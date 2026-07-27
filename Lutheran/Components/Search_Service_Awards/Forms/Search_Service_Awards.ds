@@ -1,34 +1,36 @@
 form Search_Service_Awards
 {
 
-			displayname = "Search Service Awards"
-			store data in zc = false
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			Service_Awards
-			(
-				type = picklist	
-				displayname = "Service Awards"
-				values  = Service_Awards.ID
-    			displayformat = [Award_Name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				Submit
-				(
-   					type = submit
-   					displayname = "Submit"
-				)
-			}
+		
+					displayname = "Search Service Awards"
+					store data in zc = false
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Service_Awards
+					(
+						type = picklist	
+						displayname = "Service Awards"
+						values  = Service_Awards.ID
+		    			displayformat = [Award_Name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						Submit
+						(
+		   					type = submit
+		   					displayname = "Submit"
+						)
+					}
+				
 		
 }

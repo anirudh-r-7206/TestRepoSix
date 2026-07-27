@@ -1,30 +1,32 @@
 list helpers.returnEligibleEmployments(int staffId)
 {
-	loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
-	var = thisapp.permissions.loginUserProfile();
-	empIds = List();
-	if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-	{
-		empIds = Staff_Employment[Staff == staffId && End_Date == null].ID.getAll();
-	}
-	if(loginUser.Admin_Type == "National")
-	{
-		regionIds = Regions[Main_Organisation == loginUser.Organisation].ID.getAll();
-		schoolIds = School[Region in regionIds].ID.getAll();
-		empIds = Staff_Employment[Staff == staffId && School in schoolIds && End_Date == null].ID.getAll();
-	}
-	if(loginUser.Admin_Type == "Region")
-	{
-		schoolIds = School[Region == loginUser.Regions].ID.getAll();
-		empIds = Staff_Employment[Staff == staffId && School in schoolIds && End_Date == null].ID.getAll();
-	}
-	if(loginUser.Admin_Type == "School")
-	{
-		empIds = Staff_Employment[Staff == staffId && School == loginUser.Current_Employment && End_Date == null].ID.getAll();
-	}
-	if(loginUser.Admin_Type == "Campus")
-	{
-		empIds = Staff_Employment[Staff == staffId && Campus == loginUser.Campus && End_Date == null].ID.getAll();
-	}
-	return empIds;
+
+				loginUser = Staff_Master[Staff_Email == zoho.loginuserid];
+				var = thisapp.permissions.loginUserProfile();
+				empIds = List();
+				if(loginUser.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+				{
+					empIds = Staff_Employment[Staff == staffId && End_Date == null].ID.getAll();
+				}
+				if(loginUser.Admin_Type == "National")
+				{
+					regionIds = Regions[Main_Organisation == loginUser.Organisation].ID.getAll();
+					schoolIds = School[Region in regionIds].ID.getAll();
+					empIds = Staff_Employment[Staff == staffId && School in schoolIds && End_Date == null].ID.getAll();
+				}
+				if(loginUser.Admin_Type == "Region")
+				{
+					schoolIds = School[Region == loginUser.Regions].ID.getAll();
+					empIds = Staff_Employment[Staff == staffId && School in schoolIds && End_Date == null].ID.getAll();
+				}
+				if(loginUser.Admin_Type == "School")
+				{
+					empIds = Staff_Employment[Staff == staffId && School == loginUser.Current_Employment && End_Date == null].ID.getAll();
+				}
+				if(loginUser.Admin_Type == "Campus")
+				{
+					empIds = Staff_Employment[Staff == staffId && Campus == loginUser.Campus && End_Date == null].ID.getAll();
+				}
+				return empIds;
+			
 }

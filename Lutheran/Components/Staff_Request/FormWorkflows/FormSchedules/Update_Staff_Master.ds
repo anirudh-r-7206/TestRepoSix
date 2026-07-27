@@ -1,20 +1,22 @@
 Update_Staff_Master as "Update Staff Master"
 {
 
-				type =  schedule
-				form = Staff_Request[Status == "Approved"]
-					status = inactive
-				start = Effective_Date at "00:00:00"
-				time zone = "Asia/Kolkata"
-				on start
-				{
-					actions 
-					{
-					on load
-					(
-						thisapp.helpers.processStaffRequest(input.ID);
-					)
-					}
-				}
+			
+							type =  schedule
+							form = Staff_Request[Status == "Approved"]
+								status = inactive
+							start = Effective_Date at "00:00:00"
+							time zone = "Asia/Kolkata"
+							on start
+							{
+								actions 
+								{
+								on load
+								(
+									thisapp.helpers.processStaffRequest(input.ID);
+								)
+								}
+							}
+						
 			
 }

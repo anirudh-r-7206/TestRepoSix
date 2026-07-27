@@ -1,95 +1,97 @@
 report All_Staff_Masters
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Photograph
-								Name
-								Surname as "Middle name"
-								Staff_Email as "Staff Email"
-								date_of_birth as "Date Of Birth"
-								gender as "Gender"
-								religion as "Religion"
-								origin as "Origin"
-								status as "Status"
-								Current_Employment as "Current Employment"
+								datablock1
+								(
+									fields
+									(
+										Photograph
+										Name
+										Surname as "Middle name"
+										Staff_Email as "Staff Email"
+										date_of_birth as "Date Of Birth"
+										gender as "Gender"
+										religion as "Religion"
+										origin as "Origin"
+										status as "Status"
+										Current_Employment as "Current Employment"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+										Edit 
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
-								Edit 
+								datablock1
+								(
+									fields
+									(
+										date_of_birth as "Date Of Birth"
+										gender as "Gender"
+										religion as "Religion"
+										origin as "Origin"
+										status as "Status"
+										Name
+										Surname as "Middle name"
+										Teaching_Staff as "Teaching Staff"
+										Current_Position as "Current Position"
+										FTE
+										Teacher_Type as "Teacher Type"
+										Date_Commenced_in_Current_School as "Date Commenced in Current School"
+										Date_Commenced_in_Lutheran_School as "Date Commenced in Lutheran School"
+										Current_Employment as "Current Employment"
+										Photograph
+										Phone_Number as "Phone"
+										Max_Stage_Reached as "Max Stage Reached "
+										Onboarding
+										Campus
+										Admin_Type as "Admin Type"
+										Staff_Email as "Staff Email"
+										Organisation as "National"
+										Regions
+										Previous_Surname as "Previous  Surname "
+										Overall_Admin as "Overall Admin"
+										Year_Level as "Year Level"
+										Speciality
+										Subject_form as "Subject"
+										Date_commenced_in_current_position as "Date commenced in current position"
+										Acting as "Acting?"
+										Service_In_Years as "Service In Years"
+										Service_In_Days as "Service In Days"
+										Total_Service_Period as "Total Service Period"
+										LEA_Staff_Rec_Num as "LEA staff record number"
+										Committees
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								date_of_birth as "Date Of Birth"
-								gender as "Gender"
-								religion as "Religion"
-								origin as "Origin"
-								status as "Status"
-								Name
-								Surname as "Middle name"
-								Teaching_Staff as "Teaching Staff"
-								Current_Position as "Current Position"
-								FTE
-								Teacher_Type as "Teacher Type"
-								Date_Commenced_in_Current_School as "Date Commenced in Current School"
-								Date_Commenced_in_Lutheran_School as "Date Commenced in Lutheran School"
-								Current_Employment as "Current Employment"
-								Photograph
-								Phone_Number as "Phone"
-								Max_Stage_Reached as "Max Stage Reached "
-								Onboarding
-								Campus
-								Admin_Type as "Admin Type"
-								Staff_Email as "Staff Email"
-								Organisation as "National"
-								Regions
-								Previous_Surname as "Previous  Surname "
-								Overall_Admin as "Overall Admin"
-								Year_Level as "Year Level"
-								Speciality
-								Subject_form as "Subject"
-								Date_commenced_in_current_position as "Date commenced in current position"
-								Acting as "Acting?"
-								Service_In_Years as "Service In Years"
-								Service_In_Days as "Service In Days"
-								Total_Service_Period as "Total Service Period"
-								LEA_Staff_Rec_Num as "LEA staff record number"
-								Committees
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-							)
-						)
-				)
-			
+					
+		
 }

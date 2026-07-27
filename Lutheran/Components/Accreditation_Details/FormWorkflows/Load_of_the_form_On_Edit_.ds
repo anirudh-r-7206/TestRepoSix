@@ -1,24 +1,26 @@
 Load_of_the_form_On_Edit_ as "Load of the form - On Edit Scripts"
 {
 
-				type =  form
-				form = Accreditation_Details
-
-				record event = on edit
-
-				on load
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											current_accreditation = input.Required_Accreditation;
-										all_accreditations = Accreditation[ID != 0].ID.getAll();
-										input.Required_Accreditation:ui.add(all_accreditations);
-										input.Required_Accreditation = current_accreditation;
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Accreditation_Details
+			
+							record event = on edit
+			
+							on load
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														current_accreditation = input.Required_Accreditation;
+													all_accreditations = Accreditation[ID != 0].ID.getAll();
+													input.Required_Accreditation:ui.add(all_accreditations);
+													input.Required_Accreditation = current_accreditation;
+									)
+								}
+							}
+			
+						
 			
 }

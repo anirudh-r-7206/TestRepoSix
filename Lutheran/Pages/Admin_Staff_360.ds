@@ -4,11 +4,11 @@
 	<layout>
 		<row>
 			<column width='100%'>
-				<dsp id='admin_staff_360_html' elementName='Admin Staff 360' bgColor="#FFFFFF">
+				<dsp id='admin_staff_360_html' elementName='Admin Staff 360' bgColor=\"#FFFFFF\">
           <![CDATA[htmlpage admin_staff_360_html()
 content
 			<%{%>
-            <file name:HTML_Snippet.dshtml/>
+            <file name:Admin_Staff_360.dshtml/>
 			<%}%>
       
       ]]>

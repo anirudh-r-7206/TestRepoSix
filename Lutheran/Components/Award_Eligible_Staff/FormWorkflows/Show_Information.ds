@@ -1,34 +1,36 @@
 Show_Information as "Show Information"
 {
 
-				type =  form
-				form = Award_Eligible_Staff
-
-				record event = on add
-
-				on user input of Staff
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Staff.size() > 0)
-										{
-											input.staff_info = "<style> .zcform_Award_Eligible_Staff .label-left .formColumn.second-column { width: 40%; } .form-group.clearfix.zc-staff_info-group.zc-addnote-fld.zc-addnote-fld { width: 100%; margin: 0 !important; }.zcform_Award_Eligible_Staff .second-column .notes-field.notes-field { width: 100%; } .main-div > div:not(:last-child){ border: 0.5px solid rgb(224, 224, 224); }</style><div class='main-div' style='background: rgb(255, 255, 255); border: 0.5px solid rgb(224, 224, 224); border-radius: 12px; overflow: hidden;'> <div style='padding: 0.3rem 1rem; border-bottom: 0.5px solid rgb(224, 224, 224); background: linear-gradient(179deg, rgb(25, 75, 178) -73.08%, rgb(72, 102, 161) 69.32%, rgb(46, 85, 133) 175.3%); color: white;'> <p style='font-size: 15px; font-weight: 500; margin: 0;'>Staff Service Years</p> </div> <div style='display: flex; border-bottom: 0.5px solid rgb(224, 224, 224); background: rgb(247, 247, 247);'> <span style='font-size: 12px;color: rgb(107, 107, 107);font-weight: 500;padding: 10px;width: 50%;flex-shrink: 0;box-sizing: border-box;'>Employee</span> <span style='font-size: 12px;color: rgb(107, 107, 107);font-weight: 500;padding: 10px;width: 50%;flex-shrink: 0;box-sizing: border-box;'>Service Period</span> </div>";
-											for each  staff in input.Staff
-											{
-												circle_letters = staff.Name.first_name.substring(0,1) + staff.Name.last_name.substring(0,1);
-												input.staff_info = input.staff_info + "<div style='display: flex; align-items: center; padding: 10px; box-sizing: border-box;'> <div style='display: flex;align-items: center;flex-shrink: 0;width: 50%;'> <div style='width: 32px; height: 32px; border-radius: 50%; background: #e6f1fb; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #185FA5; flex-shrink: 0; margin-right: 8px;'>" + circle_letters + "</div> <div> <p style='font-size: 13px; font-weight: 500; margin: 0;'>" + staff.Name + "</p> <p style='font-size: 11px; color: rgb(107, 107, 107); margin: 0; '>" + staff.Current_Position.position_name + "</p> </div> </div> <span style='font-size: 13px;font-weight: 500;padding: 10px;min-width: 50%;flex-shrink: 0;box-sizing: border-box;'>" + staff.Total_Service_Period + "</span> </div>";
-											}
-											input.staff_info = input.staff_info + "</div>";
-										}
-										else
-										{
-											input.staff_info = "";
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Award_Eligible_Staff
+			
+							record event = on add
+			
+							on user input of Staff
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Staff.size() > 0)
+													{
+														input.staff_info = "<style> .zcform_Award_Eligible_Staff .label-left .formColumn.second-column { width: 40%; } .form-group.clearfix.zc-staff_info-group.zc-addnote-fld.zc-addnote-fld { width: 100%; margin: 0 !important; }.zcform_Award_Eligible_Staff .second-column .notes-field.notes-field { width: 100%; } .main-div > div:not(:last-child){ border: 0.5px solid rgb(224, 224, 224); }</style><div class='main-div' style='background: rgb(255, 255, 255); border: 0.5px solid rgb(224, 224, 224); border-radius: 12px; overflow: hidden;'> <div style='padding: 0.3rem 1rem; border-bottom: 0.5px solid rgb(224, 224, 224); background: linear-gradient(179deg, rgb(25, 75, 178) -73.08%, rgb(72, 102, 161) 69.32%, rgb(46, 85, 133) 175.3%); color: white;'> <p style='font-size: 15px; font-weight: 500; margin: 0;'>Staff Service Years</p> </div> <div style='display: flex; border-bottom: 0.5px solid rgb(224, 224, 224); background: rgb(247, 247, 247);'> <span style='font-size: 12px;color: rgb(107, 107, 107);font-weight: 500;padding: 10px;width: 50%;flex-shrink: 0;box-sizing: border-box;'>Employee</span> <span style='font-size: 12px;color: rgb(107, 107, 107);font-weight: 500;padding: 10px;width: 50%;flex-shrink: 0;box-sizing: border-box;'>Service Period</span> </div>";
+														for each  staff in input.Staff
+														{
+															circle_letters = staff.Name.first_name.substring(0,1) + staff.Name.last_name.substring(0,1);
+															input.staff_info = input.staff_info + "<div style='display: flex; align-items: center; padding: 10px; box-sizing: border-box;'> <div style='display: flex;align-items: center;flex-shrink: 0;width: 50%;'> <div style='width: 32px; height: 32px; border-radius: 50%; background: #e6f1fb; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #185FA5; flex-shrink: 0; margin-right: 8px;'>" + circle_letters + "</div> <div> <p style='font-size: 13px; font-weight: 500; margin: 0;'>" + staff.Name + "</p> <p style='font-size: 11px; color: rgb(107, 107, 107); margin: 0; '>" + staff.Current_Position.position_name + "</p> </div> </div> <span style='font-size: 13px;font-weight: 500;padding: 10px;min-width: 50%;flex-shrink: 0;box-sizing: border-box;'>" + staff.Total_Service_Period + "</span> </div>";
+														}
+														input.staff_info = input.staff_info + "</div>";
+													}
+													else
+													{
+														input.staff_info = "";
+													}
+									)
+								}
+							}
+			
+						
 			
 }

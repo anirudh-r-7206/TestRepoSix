@@ -1,111 +1,113 @@
 form Representation_Team
 {
 
-			displayname = "Representation/Team"
-			success message = "Data Added Successfully!"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have Type_field
-			(
-				type = picklist
-				displayname = "Type "
-				maxchar = 100
-				values = {"National","Region","School","Campus"}
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			must have unique Representation_Team
-			(
-    			type = text
-				displayname = "Representation/Team"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Staff_Master
-			(
-				type = list	
-				displayname = "Staff"
-				values  = Staff_Master.ID
-    			bidirectional = Committees
-    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
-				sortorder = ascending
-				height = 60px
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			Organisation
-			(
-				type = picklist	
-				displayname = "National"
-				values  = Organisation.ID
-    			displayformat = [organisation_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 2   
-				width = medium
-			)
-			Regions
-			(
-				type = picklist	
-				values  = Regions.ID
-    			displayformat = [region_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 2   
-				width = medium
-			)
-			School
-			(
-				type = picklist	
-				values  = School.ID
-    			displayformat = [school_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 2   
-				width = medium
-			)
-			Campus
-			(
-				type = picklist	
-				values  = Campus.ID
-    			displayformat = [campus_name]
-				sortorder = ascending
-	 			row = 1
-	 			column = 2   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					displayname = "Representation/Team"
+					success message = "Data Added Successfully!"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have Type_field
 					(
-   						type = submit
-   						displayname = "Update"
+						type = picklist
+						displayname = "Type "
+						maxchar = 100
+						values = {"National","Region","School","Campus"}
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
+					must have unique Representation_Team
 					(
-   						type = cancel
-   						displayname = "Cancel"
+		    			type = text
+						displayname = "Representation/Team"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-				}
-			}
+					Staff_Master
+					(
+						type = list	
+						displayname = "Staff"
+						values  = Staff_Master.ID
+		    			bidirectional = Committees
+		    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+						sortorder = ascending
+						height = 60px
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Organisation
+					(
+						type = picklist	
+						displayname = "National"
+						values  = Organisation.ID
+		    			displayformat = [organisation_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					Regions
+					(
+						type = picklist	
+						values  = Regions.ID
+		    			displayformat = [region_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					School
+					(
+						type = picklist	
+						values  = School.ID
+		    			displayformat = [school_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+					Campus
+					(
+						type = picklist	
+						values  = Campus.ID
+		    			displayformat = [campus_name]
+						sortorder = ascending
+			 			row = 1
+			 			column = 2   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

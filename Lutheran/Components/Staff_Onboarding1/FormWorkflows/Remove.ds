@@ -1,26 +1,28 @@
 Remove as "Remove"
 {
 
-				type =  form
-				form = Staff_Onboarding1
-
-				record event = on add
-
-				on user input of Remove
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Remove == "Remove")
-										{
-											delete from Qualifications[Qualification_Type.qualification_type == input.New_Qualification && Staff == input.Staff];
-											clear Remove;
-											openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.Staff,"same window");
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Remove
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Remove == "Remove")
+													{
+														delete from Qualifications[Qualification_Type.qualification_type == input.New_Qualification && Staff == input.Staff];
+														clear Remove;
+														openUrl("#Page:Staff_Onboarding_page?zc_LoadIn=embed-onboard-div&stageName=Qualifications&staffID=" + input.Staff,"same window");
+													}
+									)
+								}
+							}
+			
+						
 			
 }

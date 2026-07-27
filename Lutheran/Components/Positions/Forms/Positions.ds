@@ -1,57 +1,59 @@
 form Positions
 {
 
-			success message = "Position Detail Added Successfully"
-			Section
-			(
-				type = section
-	 			row = 1
-	 			column = 0   
-				width = medium
-			)
-			must have position_name
-			(
-    			type = text
-				displayname = "Position Name"
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-			applicable_for
-			(
-				type = radiobuttons
-				displayname = "Applicable For"
-				maxchar = 100
-				values = {"Teaching","Non-Teaching"}
-				layout = 2
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
-	
-			actions
-			{
-				on add
-				{
-					submit
+		
+					success message = "Position Detail Added Successfully"
+					Section
 					(
-   						type = submit
-   						displayname = "Submit"
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
 					)
-				}
-				on edit
-				{
-					update
+					must have position_name
 					(
-   						type = submit
-   						displayname = "Update"
+		    			type = text
+						displayname = "Position Name"
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-					cancel
+					applicable_for
 					(
-   						type = cancel
-   						displayname = "Cancel"
+						type = radiobuttons
+						displayname = "Applicable For"
+						maxchar = 100
+						values = {"Teaching","Non-Teaching"}
+						layout = 2
+			 			row = 1
+			 			column = 1   
+						width = medium
 					)
-				}
-			}
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
 		
 }

@@ -1,30 +1,32 @@
 On_Created_User_Input_of_ as "On Created - User Input of Training Type"
 {
 
-				type =  form
-				form = Compliance_Training
-
-				record event = on add
-
-				on user input of Training_Type
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											fetExisting = Compliance_Training[Staff == input.Staff && Training_Type == input.Training_Type && Completion_Date == input.Completion_Date && Status == "Pending"];
-										if(fetExisting.count() > 0)
-										{
-											alert "There is a Pending Compliance Training for this Training Type.";
-											input.Training_Type = null;
-										}
-										else
-										{
-											input.Training_Name = input.Training_Type.Training;
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on add
+			
+							on user input of Training_Type
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														fetExisting = Compliance_Training[Staff == input.Staff && Training_Type == input.Training_Type && Completion_Date == input.Completion_Date && Status == "Pending"];
+													if(fetExisting.count() > 0)
+													{
+														alert "There is a Pending Compliance Training for this Training Type.";
+														input.Training_Type = null;
+													}
+													else
+													{
+														input.Training_Name = input.Training_Type.Training;
+													}
+									)
+								}
+							}
+			
+						
 			
 }

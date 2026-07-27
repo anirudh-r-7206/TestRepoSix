@@ -1,28 +1,30 @@
 user_input1 as "user input"
 {
 
-				type =  form
-				form = Search_Service_Awards
-
-				record event = on add
-
-				on user input of Service_Awards
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Service_Awards != null)
-										{
-											openUrl("#Page:Service_Awards_Due_Soon?zc_LoadIn=embed-popage&awardID=" + input.Service_Awards,"same window");
-										}
-										else
-										{
-											openUrl("#Page:Upcoming_Service_Awards","same window");
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Search_Service_Awards
+			
+							record event = on add
+			
+							on user input of Service_Awards
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Service_Awards != null)
+													{
+														openUrl("#Page:Service_Awards_Due_Soon?zc_LoadIn=embed-popage&awardID=" + input.Service_Awards,"same window");
+													}
+													else
+													{
+														openUrl("#Page:Upcoming_Service_Awards","same window");
+													}
+									)
+								}
+							}
+			
+						
 			
 }

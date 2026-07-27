@@ -1,10 +1,12 @@
 default list All_Specialities
 {
 
-			displayName = "Specialities"
-			show all rows from Speciality    
-			(
-				Speciality
-			)
+		
+					displayName = "Specialities"
+					show all rows from Speciality    
+					(
+						Speciality
+					)
+				
 		
 }

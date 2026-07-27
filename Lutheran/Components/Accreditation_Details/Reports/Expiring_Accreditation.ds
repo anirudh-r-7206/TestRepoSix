@@ -1,29 +1,31 @@
 list Expiring_Accreditation
 {
 
-			displayName = "Expiring Accreditation"
-			show all rows from Accreditation_Details  [ID == thisapp.reportfilters.returnExpiringAccreditedRecords() && Staff.ID == thisapp.helpers.returnEligibleStaff()]  
-			(
-				Status_Accreditation as "Status Accreditation"
-				Staff
-				Required_Accreditation as "Required Accreditation"
-				Due_Date as "Due Date"
-				PD_Hours_Collected as "PD Hours Collected"
-				Staff.Photograph
-				custom action "Add"
-				(
-	  			workflow = Change
-				show action in edit record menu = true
-				column header = "Add"
-				condition = (Staff.ID == thisapp.reportfilters.returnNonDraftedAccreditationRecords())
-				)
-				custom action "Update"
-				(
-	  			workflow = Update
-				show action in edit record menu = true
-				column header = "Update"
-				condition = (Staff.ID == thisapp.reportfilters.returnDraftedAccreditationRecords())
-				)
-			)
+		
+					displayName = "Expiring Accreditation"
+					show all rows from Accreditation_Details  [ID == thisapp.reportfilters.returnExpiringAccreditedRecords() && Staff.ID == thisapp.helpers.returnEligibleStaff()]  
+					(
+						Status_Accreditation as "Status Accreditation"
+						Staff
+						Required_Accreditation as "Required Accreditation"
+						Due_Date as "Due Date"
+						PD_Hours_Collected as "PD Hours Collected"
+						Staff.Photograph
+						custom action "Add"
+						(
+			  			workflow = Change
+						show action in edit record menu = true
+						column header = "Add"
+						condition = (Staff.ID == thisapp.reportfilters.returnNonDraftedAccreditationRecords())
+						)
+						custom action "Update"
+						(
+			  			workflow = Update
+						show action in edit record menu = true
+						column header = "Update"
+						condition = (Staff.ID == thisapp.reportfilters.returnDraftedAccreditationRecords())
+						)
+					)
+				
 		
 }

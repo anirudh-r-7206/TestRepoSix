@@ -1,29 +1,31 @@
 On_Created_Edited_User_in1 as "On Created & Edited - User input of Hours"
 {
 
-				type =  form
-				form = Compliance_Training
-
-				record event = on add or edit
-					status = inactive
-
-				on user input of Hours_Number_for_PD
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Hours_Number_for_PD != null)
-										{
-											if(input.Hours_Number_for_PD <= 0)
-											{
-												alert "PD Hours must be greater than 0.";
-												input.Hours_Number_for_PD = null;
-											}
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on add or edit
+								status = inactive
+			
+							on user input of Hours_Number_for_PD
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Hours_Number_for_PD != null)
+													{
+														if(input.Hours_Number_for_PD <= 0)
+														{
+															alert "PD Hours must be greater than 0.";
+															input.Hours_Number_for_PD = null;
+														}
+													}
+									)
+								}
+							}
+			
+						
 			
 }

@@ -1,47 +1,49 @@
 default list All_Training_Completion_Requests
 {
 
-			displayName = "All Training Completion Requests"
-			show all rows from Training_Completion_Request  [Staff.ID == thisapp.helpers.returnEligibleStaff()]  
-			(
-				Completion_Date as "Completion Date"
-				Evidence_File as "Evidence File "
-				Status
-				Staff
-				Compliance_Training as " Compliance Training"
-				Training_Type as "Training Type"
-				Current_Approver as "Current Approver"
-			)
-			group by
-			(
-				Staff ascending
-			)
-			conditional formatting
-			(
-				"Completed"
-				{
-				condition = (Status == "Approved")
-				fields = [Status]
-				format = "color:#00a321;"
-				}
-				"Rejected"
-				{
-				condition = (Status == "Rejected")
-				fields = [Status]
-				format = "color:#e64d3b;"
-				}
-				"Pending"
-				{
-				condition = (Status == "Pending")
-				fields = [Status]
-				format = "color:#e77f06;"
-				}
-				"Credited"
-				{
-				condition = (Status == "Credited")
-				fields = [Status]
-				format = "color:#007cba;"
-				}
-			)
+		
+					displayName = "All Training Completion Requests"
+					show all rows from Training_Completion_Request  [Staff.ID == thisapp.helpers.returnEligibleStaff()]  
+					(
+						Completion_Date as "Completion Date"
+						Evidence_File as "Evidence File "
+						Status
+						Staff
+						Compliance_Training as " Compliance Training"
+						Training_Type as "Training Type"
+						Current_Approver as "Current Approver"
+					)
+					group by
+					(
+						Staff ascending
+					)
+					conditional formatting
+					(
+						"Completed"
+						{
+						condition = (Status == "Approved")
+						fields = [Status]
+						format = "color:#00a321;"
+						}
+						"Rejected"
+						{
+						condition = (Status == "Rejected")
+						fields = [Status]
+						format = "color:#e64d3b;"
+						}
+						"Pending"
+						{
+						condition = (Status == "Pending")
+						fields = [Status]
+						format = "color:#e77f06;"
+						}
+						"Credited"
+						{
+						condition = (Status == "Credited")
+						fields = [Status]
+						format = "color:#007cba;"
+						}
+					)
+				
 		
 }

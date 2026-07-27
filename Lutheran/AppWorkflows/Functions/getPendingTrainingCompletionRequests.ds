@@ -1,23 +1,25 @@
 list reportfilters.getPendingTrainingCompletionRequests()
 {
 
-                 	login_user = Staff_Master[Staff_Email == zoho.loginuserid];
-                 	if(login_user.Admin_Type == "Campus")
-                 	{
-                 		return Training_Completion_Request[Current_Approver == "Campus Admin" && Staff.Campus == login_user.Campus && Status == "Pending"].ID.getAll();
-                 	}
-                 	else if(login_user.Admin_Type == "School")
-                 	{
-                 		return Training_Completion_Request[Current_Approver == "School Admin" && Staff.Current_Employment == login_user.Current_Employment && Status == "Pending"].ID.getAll();
-                 	}
-                 	else if(login_user.Admin_Type == "Region")
-                 	{
-                 		return Training_Completion_Request[Current_Approver == "Region Admin" && Staff.Regions == login_user.Regions && Status == "Pending"].ID.getAll();
-                 	}
-                 	else if(login_user.Admin_Type == "National")
-                 	{
-                 		return Training_Completion_Request[Current_Approver == "National Admin" && Staff.Organisation == login_user.Organisation && Status == "Pending"].ID.getAll();
-                 	}
-                 	return List();
-                 
+			
+			                 	login_user = Staff_Master[Staff_Email == zoho.loginuserid];
+			                 	if(login_user.Admin_Type == "Campus")
+			                 	{
+			                 		return Training_Completion_Request[Current_Approver == "Campus Admin" && Staff.Campus == login_user.Campus && Status == "Pending"].ID.getAll();
+			                 	}
+			                 	else if(login_user.Admin_Type == "School")
+			                 	{
+			                 		return Training_Completion_Request[Current_Approver == "School Admin" && Staff.Current_Employment == login_user.Current_Employment && Status == "Pending"].ID.getAll();
+			                 	}
+			                 	else if(login_user.Admin_Type == "Region")
+			                 	{
+			                 		return Training_Completion_Request[Current_Approver == "Region Admin" && Staff.Regions == login_user.Regions && Status == "Pending"].ID.getAll();
+			                 	}
+			                 	else if(login_user.Admin_Type == "National")
+			                 	{
+			                 		return Training_Completion_Request[Current_Approver == "National Admin" && Staff.Organisation == login_user.Organisation && Status == "Pending"].ID.getAll();
+			                 	}
+			                 	return List();
+			                 
+			
 }

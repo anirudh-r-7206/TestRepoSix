@@ -1,42 +1,44 @@
 Current_Employement as "Current Employement"
 {
 
-				type =  form
-				form = Staff_Request
-
-				record event = on add
-
-				on user input of Current_Employment
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Current_Employment != null)
-										{
-											fetCamp = Campus[School == input.Current_Employment].ID.getAll();
-											input.Campus:ui.add(fetCamp);
-											if(input.Request_Type == "Position Update")
-											{
-												if(input.Employment != null)
-												{
-													getEmp = Staff_Employment[ID == input.Employment];
-													if(getEmp.count() > 0 && getEmp.Campus != null)
+			
+							type =  form
+							form = Staff_Request
+			
+							record event = on add
+			
+							on user input of Current_Employment
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Current_Employment != null)
 													{
-														input.Campus = getEmp.Campus;
+														fetCamp = Campus[School == input.Current_Employment].ID.getAll();
+														input.Campus:ui.add(fetCamp);
+														if(input.Request_Type == "Position Update")
+														{
+															if(input.Employment != null)
+															{
+																getEmp = Staff_Employment[ID == input.Employment];
+																if(getEmp.count() > 0 && getEmp.Campus != null)
+																{
+																	input.Campus = getEmp.Campus;
+																}
+															}
+														}
 													}
-												}
-											}
-										}
-										else
-										{
-											fetchCampusIds = Campus[ID != 0].ID.getAll();
-											input.Campus = null;
-											input.Campus:ui.add(fetchCampusIds);
-										}
-						)
-					}
-				}
-
+													else
+													{
+														fetchCampusIds = Campus[ID != 0].ID.getAll();
+														input.Campus = null;
+														input.Campus:ui.add(fetchCampusIds);
+													}
+									)
+								}
+							}
+			
+						
 			
 }

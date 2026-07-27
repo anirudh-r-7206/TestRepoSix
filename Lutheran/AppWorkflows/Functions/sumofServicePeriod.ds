@@ -1,24 +1,26 @@
 void helpers.sumofServicePeriod(int rec_id)
 {
 
-                 	staff_info = Staff_Master[ID == rec_id];
-                 	/* TOTAL DAYS ONLY */
-                 	staff_info.Service_In_Days=ifnull(staff_info.Service_In_Days,0) + 1;
-                 	staff_info.Service_In_Years=(staff_info.Service_In_Days / 365).toNumber();
-                 	total_days = staff_info.Service_In_Days;
-                 	if(total_days == null)
-                 	{
-                 		total_days = 0;
-                 	}
-                 	/* CONVERT DAYS → YEARS, MONTHS, DAYS */
-                 	years = (total_days / 365).toLong();
-                 	remainingDaysAfterYears = total_days - years * 365;
-                 	months = (remainingDaysAfterYears / 30).toLong();
-                 	days = remainingDaysAfterYears - months * 30;
-                 	resultMap = Map();
-                 	resultMap.put("years",years);
-                 	resultMap.put("months",months);
-                 	resultMap.put("days",days);
-                 	staff_info.Total_Service_Period=thisapp.helpers.formatServicePeriod(resultMap);
-                 
+			
+			                 	staff_info = Staff_Master[ID == rec_id];
+			                 	/* TOTAL DAYS ONLY */
+			                 	staff_info.Service_In_Days=ifnull(staff_info.Service_In_Days,0) + 1;
+			                 	staff_info.Service_In_Years=(staff_info.Service_In_Days / 365).toNumber();
+			                 	total_days = staff_info.Service_In_Days;
+			                 	if(total_days == null)
+			                 	{
+			                 		total_days = 0;
+			                 	}
+			                 	/* CONVERT DAYS → YEARS, MONTHS, DAYS */
+			                 	years = (total_days / 365).toLong();
+			                 	remainingDaysAfterYears = total_days - years * 365;
+			                 	months = (remainingDaysAfterYears / 30).toLong();
+			                 	days = remainingDaysAfterYears - months * 30;
+			                 	resultMap = Map();
+			                 	resultMap.put("years",years);
+			                 	resultMap.put("months",months);
+			                 	resultMap.put("days",days);
+			                 	staff_info.Total_Service_Period=thisapp.helpers.formatServicePeriod(resultMap);
+			                 
+			
 }

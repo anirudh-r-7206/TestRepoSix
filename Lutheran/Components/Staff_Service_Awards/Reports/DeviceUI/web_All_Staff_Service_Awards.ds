@@ -1,59 +1,61 @@
 report All_Staff_Service_Awards
 {
 
-				quickview
-				(
-					layout
-					(
-						datablock1
+		
+						quickview
 						(
-							fields
+							layout
 							(
-								Staff
-								Award
-								award_date as "Award Date"
+								datablock1
+								(
+									fields
+									(
+										Staff
+										Award
+										award_date as "Award Date"
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									View Record   	   
+		    					)
+		     				)
 						)
-					)
-						menu
+		
+						detailview
 						(
-							header
+							layout
 							(
+								datablock1
+								(
+									fields
+									(
+										Award
+										award_date as "Award Date"
+										Staff
+									)
+								)
 							)
+								menu
+								(
+									header
+									(
+									)
+								)
 						)
-    				action
-    				(
-						on click
-						(
-							View Record   	   
-    					)
-						on right click
-						(
-							View Record   	   
-    					)
-     				)
-				)
-
-				detailview
-				(
-					layout
-					(
-						datablock1
-						(
-							fields
-							(
-								Award
-								award_date as "Award Date"
-								Staff
-							)
-						)
-					)
-						menu
-						(
-							header
-							(
-							)
-						)
-				)
-			
+					
+		
 }

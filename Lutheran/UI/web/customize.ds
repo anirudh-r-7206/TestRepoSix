@@ -1,17 +1,24 @@
 customize
 {
-    layout
-    {
-        theme = "theme_8"
-    }
-    font = "lato"
-    color options
-    {
-        color = "11"
-    }
-    logo
-    {
-        preference = "app_icon"
-        placement = "left"
-    }
+
+	
+				layout
+				{
+					theme = "theme_8"
+				}
+				font = "lato"
+				color options
+				{
+					name = "custom_color"
+					brand color = "#215bcf"
+					navigation background color = "#103275"
+					type = "custom"
+				}
+				logo
+				{
+					preference = "app_icon"
+					placement = "left"
+				}
+			
+	
 }

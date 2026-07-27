@@ -1,27 +1,29 @@
 Delete_Service_Awards as "Delete Service Awards"
 {
 
-				type =  form
-				form = Service_Awards
-
-				record event = on delete
-
-				on validate
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											staff_service_awards = Staff_Service_Awards[Award == input.ID];
-										isImplemented = staff_service_awards.count() > 0;
-										if(isImplemented)
-										{
-											alert "Service Award has been linked to few modules. Please unlink them to delete this Service Award.";
-											cancel delete;
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Service_Awards
+			
+							record event = on delete
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														staff_service_awards = Staff_Service_Awards[Award == input.ID];
+													isImplemented = staff_service_awards.count() > 0;
+													if(isImplemented)
+													{
+														alert "Service Award has been linked to few modules. Please unlink them to delete this Service Award.";
+														cancel delete;
+													}
+									)
+								}
+							}
+			
+						
 			
 }

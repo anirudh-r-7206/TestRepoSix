@@ -1,20 +1,22 @@
 Send_mail_for_Not_Accredi as "Send mail for Not Accreditation "
 {
 
-				type =  schedule
-				form = Accreditation_Details[Status_Accreditation == "Not Accredited" && Completion_Date is null]
-					status = inactive
-				start = before 365 days from Due_Date at "08:00:00"
-				time zone = "Asia/Kolkata"
-				on start
-				{
-					actions 
-					{
-					on load
-					(
-						thisapp.mail.sendAccreditationNotCompletedReminder(input.ID);
-					)
-					}
-				}
+			
+							type =  schedule
+							form = Accreditation_Details[Status_Accreditation == "Not Accredited" && Completion_Date is null]
+								status = inactive
+							start = before 365 days from Due_Date at "08:00:00"
+							time zone = "Asia/Kolkata"
+							on start
+							{
+								actions 
+								{
+								on load
+								(
+									thisapp.mail.sendAccreditationNotCompletedReminder(input.ID);
+								)
+								}
+							}
+						
 			
 }

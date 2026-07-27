@@ -1,34 +1,36 @@
 Validate1 as "Validate"
 {
 
-				type =  form
-				form = Send_Mail
-
-				record event = on add or edit
-
-				on validate
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Type_field == "Committee" && input.Committee == null || input.Committee.isEmpty())
-										{
-											alert(Committee,"Please select a Committee");
-											isValid = false;
-										}
-										else if(input.Type_field == "Individual" && input.Staff_Master == null)
-										{
-											alert(Staff_Master,"Please select a Staff");
-											isValid = false;
-										}
-										if(isValid == false)
-										{
-											cancel submit;
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Send_Mail
+			
+							record event = on add or edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Type_field == "Committee" && input.Committee == null || input.Committee.isEmpty())
+													{
+														alert(Committee,"Please select a Committee");
+														isValid = false;
+													}
+													else if(input.Type_field == "Individual" && input.Staff_Master == null)
+													{
+														alert(Staff_Master,"Please select a Staff");
+														isValid = false;
+													}
+													if(isValid == false)
+													{
+														cancel submit;
+													}
+									)
+								}
+							}
+			
+						
 			
 }

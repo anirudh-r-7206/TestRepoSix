@@ -1,34 +1,36 @@
 User_input_of_Name_field as "User input of Name field"
 {
 
-				type =  form
-				form = Staff_Master
-
-				record event = on add or edit
-
-				on user input of Name
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											male_sur_names = {"Mr.","Fr."};
-										female_sur_names = {"Mrs.","Ms.","Sis."};
-										if(male_sur_names.contains(input.Name.prefix))
-										{
-											input.gender = "Male";
-										}
-										else if(female_sur_names.contains(input.Name.prefix))
-										{
-											input.gender = "Female";
-										}
-										else
-										{
-											input.gender = "";
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Staff_Master
+			
+							record event = on add or edit
+			
+							on user input of Name
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														male_sur_names = {"Mr.","Fr."};
+													female_sur_names = {"Mrs.","Ms.","Sis."};
+													if(male_sur_names.contains(input.Name.prefix))
+													{
+														input.gender = "Male";
+													}
+													else if(female_sur_names.contains(input.Name.prefix))
+													{
+														input.gender = "Female";
+													}
+													else
+													{
+														input.gender = "";
+													}
+									)
+								}
+							}
+			
+						
 			
 }

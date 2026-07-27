@@ -1,73 +1,75 @@
 Create_Options_for_region as "Create Options for region"
 {
 
-				type =  form
-				form = Staff_Onboarding1
-
-				record event = on add
-
-				on user input of Organisation
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Organisation != null)
-										{
-											fetStaff = Staff_Master[ID == input.Staff];
-											adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
-											var = thisapp.permissions.loginUserProfile();
-											isSuperAdmin = false;
-											if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
-											{
-												isSuperAdmin = true;
-											}
-											if(input.Is_Loaded == true)
-											{
-												input.Region = null;
-												input.Current_Employment = null;
-												input.Campus = null;
-											}
-											if(isSuperAdmin || adminRec.Admin_Type == "National")
-											{
-												fetRegions = Regions[Main_Organisation == input.Organisation].ID.getAll();
-												input.Region:ui.add(fetRegions);
-												if(input.Is_Loaded == true)
-												{
-													if(fetRegions.size() == 1)
+			
+							type =  form
+							form = Staff_Onboarding1
+			
+							record event = on add
+			
+							on user input of Organisation
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Organisation != null)
 													{
-														input.Region = fetRegions.get(0);
+														fetStaff = Staff_Master[ID == input.Staff];
+														adminRec = Staff_Master[Staff_Email == zoho.loginuserid];
+														var = thisapp.permissions.loginUserProfile();
+														isSuperAdmin = false;
+														if(adminRec.Admin_Type == "Overall Admin" || var == "Administrator" || var == "Developer")
+														{
+															isSuperAdmin = true;
+														}
+														if(input.Is_Loaded == true)
+														{
+															input.Region = null;
+															input.Current_Employment = null;
+															input.Campus = null;
+														}
+														if(isSuperAdmin || adminRec.Admin_Type == "National")
+														{
+															fetRegions = Regions[Main_Organisation == input.Organisation].ID.getAll();
+															input.Region:ui.add(fetRegions);
+															if(input.Is_Loaded == true)
+															{
+																if(fetRegions.size() == 1)
+																{
+																	input.Region = fetRegions.get(0);
+																}
+															}
+														}
+														else
+														{
+															input.Region:ui.add(adminRec.Regions);
+															if(input.Is_Loaded == true)
+															{
+																input.Region = adminRec.Regions;
+															}
+														}
+														if(input.Is_Loaded == false)
+														{
+															if(fetStaff.Regions != null && input.Admin_Type in {"Region","School","Campus"} && input.Current_Position.position_name == "Administrative Officer")
+															{
+																input.Region = fetStaff.Regions;
+															}
+														}
 													}
-												}
-											}
-											else
-											{
-												input.Region:ui.add(adminRec.Regions);
-												if(input.Is_Loaded == true)
-												{
-													input.Region = adminRec.Regions;
-												}
-											}
-											if(input.Is_Loaded == false)
-											{
-												if(fetStaff.Regions != null && input.Admin_Type in {"Region","School","Campus"} && input.Current_Position.position_name == "Administrative Officer")
-												{
-													input.Region = fetStaff.Regions;
-												}
-											}
-										}
-										else
-										{
-											if(input.Is_Loaded == true)
-											{
-												input.Region = null;
-												input.Current_Employment = null;
-												input.Campus = null;
-											}
-										}
-						)
-					}
-				}
-
+													else
+													{
+														if(input.Is_Loaded == true)
+														{
+															input.Region = null;
+															input.Current_Employment = null;
+															input.Campus = null;
+														}
+													}
+									)
+								}
+							}
+			
+						
 			
 }

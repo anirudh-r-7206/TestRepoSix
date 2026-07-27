@@ -1,58 +1,60 @@
 void test.test()
 {
 
-                 	for each  se in Staff_Employment[Commencement_Date != null]
-                 	{
-                 		service_years = thisapp.helpers.returnServiceYears(se.Commencement_Date,ifnull(se.End_Date,zoho.currentdate.subDay(1)));
-                 		se.Service_In_Years=service_years.get("years");
-                 		se.Service_In_Months=service_years.get("months");
-                 		se.Service_In_Days=service_years.get("days");
-                 		se.Total_Service_Period=thisapp.helpers.formatServicePeriod(service_years);
-                 		staff_employement_records = Staff_Employment[ID == se.Staff] sort by Commencement_Date desc;
-                 		totalDays = 0;
-                 		window_start = null;
-                 		window_end = null;
-                 		staff_employement_records = Staff_Employment[Staff == se.Staff] sort by Commencement_Date desc;
-                 		staff_info = Staff_Master[ID == se.Staff];
-                 		for each  emp in staff_employement_records
-                 		{
-                 			emp_start = emp.Commencement_Date;
-                 			emp_end = ifnull(emp.End_Date,zoho.currentdate.subDay(1));
-                 			if(emp_end < emp_start)
-                 			{
-                 				continue;
-                 			}
-                 			if(window_start == null)
-                 			{
-                 				window_start = emp_start;
-                 				window_end = emp_end;
-                 			}
-                 			else if(emp_end >= window_start)
-                 			{
-                 				// Overlap — merge into current window
-                 				if(emp_start < window_start)
-                 				{
-                 					window_start = emp_start;
-                 				}
-                 				if(emp_end > window_end)
-                 				{
-                 					window_end = emp_end;
-                 				}
-                 			}
-                 			else
-                 			{
-                 				totalDays = totalDays + thisapp.helpers.returnDaysBetween(window_start,window_end);
-                 				window_start = emp_start;
-                 				window_end = emp_end;
-                 			}
-                 		}
-                 		if(window_start != null)
-                 		{
-                 			totalDays = totalDays + thisapp.helpers.returnDaysBetween(window_start,window_end);
-                 		}
-                 		staff_info.Service_In_Days=totalDays;
-                 		staff_info.Service_In_Years=(totalDays / 365).toNumber();
-                 		staff_info.Total_Service_Period=thisapp.helpers.formatDays(totalDays);
-                 	}
-                 
+			
+			                 	for each  se in Staff_Employment[Commencement_Date != null]
+			                 	{
+			                 		service_years = thisapp.helpers.returnServiceYears(se.Commencement_Date,ifnull(se.End_Date,zoho.currentdate.subDay(1)));
+			                 		se.Service_In_Years=service_years.get("years");
+			                 		se.Service_In_Months=service_years.get("months");
+			                 		se.Service_In_Days=service_years.get("days");
+			                 		se.Total_Service_Period=thisapp.helpers.formatServicePeriod(service_years);
+			                 		staff_employement_records = Staff_Employment[ID == se.Staff] sort by Commencement_Date desc;
+			                 		totalDays = 0;
+			                 		window_start = null;
+			                 		window_end = null;
+			                 		staff_employement_records = Staff_Employment[Staff == se.Staff] sort by Commencement_Date desc;
+			                 		staff_info = Staff_Master[ID == se.Staff];
+			                 		for each  emp in staff_employement_records
+			                 		{
+			                 			emp_start = emp.Commencement_Date;
+			                 			emp_end = ifnull(emp.End_Date,zoho.currentdate.subDay(1));
+			                 			if(emp_end < emp_start)
+			                 			{
+			                 				continue;
+			                 			}
+			                 			if(window_start == null)
+			                 			{
+			                 				window_start = emp_start;
+			                 				window_end = emp_end;
+			                 			}
+			                 			else if(emp_end >= window_start)
+			                 			{
+			                 				// Overlap — merge into current window
+			                 				if(emp_start < window_start)
+			                 				{
+			                 					window_start = emp_start;
+			                 				}
+			                 				if(emp_end > window_end)
+			                 				{
+			                 					window_end = emp_end;
+			                 				}
+			                 			}
+			                 			else
+			                 			{
+			                 				totalDays = totalDays + thisapp.helpers.returnDaysBetween(window_start,window_end);
+			                 				window_start = emp_start;
+			                 				window_end = emp_end;
+			                 			}
+			                 		}
+			                 		if(window_start != null)
+			                 		{
+			                 			totalDays = totalDays + thisapp.helpers.returnDaysBetween(window_start,window_end);
+			                 		}
+			                 		staff_info.Service_In_Days=totalDays;
+			                 		staff_info.Service_In_Years=(totalDays / 365).toNumber();
+			                 		staff_info.Total_Service_Period=thisapp.helpers.formatDays(totalDays);
+			                 	}
+			                 
+			
 }

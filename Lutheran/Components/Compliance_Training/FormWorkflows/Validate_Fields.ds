@@ -1,28 +1,30 @@
 Validate_Fields as "Validate Fields"
 {
 
-				type =  form
-				form = Compliance_Training
-
-				record event = on add or edit
-
-				on validate
-				{
-					actions 
-					{
-						custom deluge script
-						(
-											if(input.Hours_Number_for_PD != null)
-										{
-											if(input.Hours_Number_for_PD <= 0)
-											{
-												alert(Hours_Number_for_PD,"PD Hours must be greater than 0.");
-												cancel submit;
-											}
-										}
-						)
-					}
-				}
-
+			
+							type =  form
+							form = Compliance_Training
+			
+							record event = on add or edit
+			
+							on validate
+							{
+								actions 
+								{
+									custom deluge script
+									(
+														if(input.Hours_Number_for_PD != null)
+													{
+														if(input.Hours_Number_for_PD <= 0)
+														{
+															alert(Hours_Number_for_PD,"PD Hours must be greater than 0.");
+															cancel submit;
+														}
+													}
+									)
+								}
+							}
+			
+						
 			
 }

@@ -1,22 +1,24 @@
 Send_Email_Form_Propertie as "Send Email - Form Properties"
 {
 
-				type =  presuccess
-				form = Staff_Master
-					status = inactive
-				on start
-				{
-					actions 
-					{
-						sendmail
-						(
-							from : "zoho.adminuserid"
-							to : "zoho.adminuserid"
-							subject : "LEA : New entry added"
-							message : "Hello,<br/><br/>A new entry added in 'Staff Master' form of 'LEA' application.<br/><br><br><br><br>"
-							attachments : template : _default as inline
-						)
-					}
-				}
+			
+							type =  presuccess
+							form = Staff_Master
+								status = inactive
+							on start
+							{
+								actions 
+								{
+									sendmail
+									(
+										from : "zoho.adminuserid"
+										to : "zoho.adminuserid"
+										subject : "LEA : New entry added"
+										message : "Hello,<br/><br/>A new entry added in 'Staff Master' form of 'LEA' application.<br/><br><br><br><br>"
+										attachments : template : _default as inline
+									)
+								}
+							}
+						
 			
 }

@@ -1,36 +1,38 @@
 Continue_Onboarding as "Continue Onboarding"
 {
 
-				type =  functions
-				form = Staff_Master
-				execution type = for each record	
-				on start
-				{
-					actions 
-					{
-					on click
-					(
-						stageIndex = ifnull(input.Max_Stage_Reached,0) + 1;
-										stageName = "";
-										if(stageIndex == 0)
-										{
-											stageName = "Personal Data";
-										}
-										else if(stageIndex == 1)
-										{
-											stageName = "Qualifications";
-										}
-										else if(stageIndex == 2)
-										{
-											stageName = "Teaching Details";
-										}
-										else if(stageIndex == 3)
-										{
-											stageName = "Accreditation Details";
-										}
-										openUrl("#Page:Embed_Page?staffID=" + input.ID + "&stageName=" + stageName,"same window");
-					)
-					}
-				}
+			
+							type =  functions
+							form = Staff_Master
+							execution type = for each record	
+							on start
+							{
+								actions 
+								{
+								on click
+								(
+									stageIndex = ifnull(input.Max_Stage_Reached,0) + 1;
+													stageName = "";
+													if(stageIndex == 0)
+													{
+														stageName = "Personal Data";
+													}
+													else if(stageIndex == 1)
+													{
+														stageName = "Qualifications";
+													}
+													else if(stageIndex == 2)
+													{
+														stageName = "Teaching Details";
+													}
+													else if(stageIndex == 3)
+													{
+														stageName = "Accreditation Details";
+													}
+													openUrl("#Page:Embed_Page?staffID=" + input.ID + "&stageName=" + stageName,"same window");
+								)
+								}
+							}
+						
 			
 }
