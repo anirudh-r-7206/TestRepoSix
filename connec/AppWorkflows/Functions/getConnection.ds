@@ -1,0 +1,6 @@
+void getConnection()
+{
+
+                 	workspaces = zoho.bookings.getWorkspaces("zoho_bookings_connection");
+                 
+}

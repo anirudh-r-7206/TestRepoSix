@@ -1,0 +1,11 @@
+connections
+{
+
+		zoho_bookings_connection
+		(
+			displayname = "Zoho Bookings Connection"
+			connector = zoho_bookings
+			permissions = {"create_staff","update_workspace","update_appointment","reschedule_appointment","get_workspace","get_staff","get_service","get_resource","get_availability","get_all_workspaces","get_all_staff","get_all_services","get_all_resources","get_all_appointments","create_workspace","create_appointment","get_appointment"}
+		)
+	
+}
