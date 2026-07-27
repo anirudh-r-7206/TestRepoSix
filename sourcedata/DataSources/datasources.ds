@@ -1,0 +1,31 @@
+datasources
+{
+
+		zoho_sheet_records
+		{
+			displayname = "Zoho Sheet Records"
+			module = records
+			system connection = zohosheet
+			age
+			(
+				type = text
+				displayname = "Age"
+				source field name = "Age"
+			)
+			id
+			(
+				type = text
+				displayname = "Record Id"
+				source field name = "id"
+				primary = true
+				report only = true
+			)
+			names
+			(
+				type = text
+				displayname = "Names"
+				source field name = "Names"
+			)
+		}
+	
+}
