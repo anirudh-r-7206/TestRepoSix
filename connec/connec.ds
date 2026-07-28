@@ -1,0 +1,446 @@
+/*
+ * Author       : anirudh.rdcmbug1
+ * Generated on : 29-Jul-2026 00:31:24
+ * Version      : 1.0
+ */
+application "Connec"
+{
+	date format = "dd-MMM-yyyy"
+	time zone = "Asia/Kolkata"
+	time format = "24-hr"
+
+
+
+	forms
+	{
+		form Staff_Details
+		{
+		
+					displayname = "Staff Details"
+					success message = "Data Added Successfully!"
+					Section
+					(
+						type = section
+			 			row = 1
+			 			column = 0   
+						width = medium
+					)
+					Name
+					(
+		    			type = text
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Age
+					(
+						type = number
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Dept
+					(
+						type = radiobuttons
+						maxchar = 100
+						values = {"Dept 1","Dept 2","Dept 3"}
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+					Notes
+					(
+						type = text
+			 			row = 1
+			 			column = 1   
+						width = medium
+					)
+			
+					actions
+					{
+						on add
+						{
+							submit
+							(
+		   						type = submit
+		   						displayname = "Submit"
+							)
+						}
+						on edit
+						{
+							update
+							(
+		   						type = submit
+		   						displayname = "Update"
+							)
+							cancel
+							(
+		   						type = cancel
+		   						displayname = "Cancel"
+							)
+						}
+					}
+				
+		}
+	}
+
+	reports
+	{
+		default list Staff_Details_Report
+		{
+		
+					displayName = "Staff Details Report"
+					show all rows from Staff_Details    
+					(
+						Name
+						Age
+						Dept
+					)
+				
+		}
+	}
+
+	functions
+	{
+		Deluge
+		{
+			void getConnection()
+			{
+			
+			                 	crmWorkspaces = zoho.bookings.getWorkspaces("zoho_crm_connection");
+			                 	workspaces = zoho.bookings.getWorkspaces("zoho_bookings_connection1");
+			                 	recs = zoho.projects.getPortals("bigin_by_zoho_crm_connection");
+			                 	cliqz = zoho.cliq.postToBot("Hello","zoho_cliq_connection");
+			                 
+			}
+		}
+	}
+
+	share_settings
+	{
+	"Read"
+	{
+	
+					name = "Read"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have read permission for all components\n"
+				
+	}
+	"Write"
+	{
+	
+					name = "Write"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have write permission for all components\n"
+				
+	}
+	"Administrator"
+	{
+	
+					name = "Administrator"
+					type = Users_Permissions
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This profile will have all the permissions.\n"
+				
+	}
+	"Customer"
+	{
+	
+					name = "Customer"
+					type = Customer_Portal
+					permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "This is the default profile having only add and view permission.\n"
+				
+	}
+	"Developer"
+	{
+	
+					name = "Developer"
+					type = Developer
+					permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+					description = "Developer Profile\n"
+				
+	}
+	roles
+	{
+	
+					"CEO"
+					{
+						description = "User belonging to this role can access data of all other users."
+					}
+				
+	}
+	}
+
+	web
+	{
+	forms
+	{
+	
+				form Staff_Details
+				{
+					label placement = left
+				}
+			
+	}
+	reports
+	{
+		report Staff_Details_Report
+		{
+		
+						quickview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Name
+										Age
+										Dept
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								record
+								(
+									Edit   	   
+									Duplicate   	   
+									Delete   	   
+		    					)
+								)
+		    				action
+		    				(
+								on click
+								(
+									View Record   	   
+		    					)
+								on right click
+								(
+									Edit   	   
+									Delete   	   
+									Duplicate   	   
+									View Record   	   
+		    					)
+		     				)
+						)
+		
+						detailview
+						(
+							layout
+							(
+								datablock1
+								(
+									fields
+									(
+										Name
+										Age
+										Dept
+									)
+								)
+							)
+								menu
+								(
+									header
+									(
+										Edit 
+										Duplicate 
+										Delete 
+									)
+								)
+						)
+					
+		}
+	}
+	menu
+	{
+	
+				space Space
+				{
+					displayname = "Space"
+					icon = "objects-spaceship"
+	
+					section Staff_Details
+					{
+						displayname = "Staff Details"
+						icon = "holidays-sickle"
+						form  Staff_Details
+						{
+							icon = "holidays-sickle"
+						}
+						report Staff_Details_Report
+						{
+							icon = "tech-desktop"
+						}
+					}
+					section App_Preferences
+					{
+						displayname = "App Preferences"
+						icon = "design-app"
+						systemcomponent
+						{
+							type = localization
+							displayname = "Language Selection"
+							icon = "education-language"
+						}
+						systemcomponent
+						{
+							type = connection
+							displayname = "Integrations"
+							icon = "tech-2-connection"
+						}
+					}
+					section Approvals
+					{
+						displayname = "Approvals"
+						icon = "ui-2-hourglass"
+						systemcomponent
+						{
+							type = approval
+							approval status = pending
+							displayname = "Pending Tasks"
+							icon = "ui-2-hourglass"
+						}
+						systemcomponent
+						{
+							type = approval
+							approval status = completed
+							displayname = "Completed Tasks"
+							icon = "design-todo"
+						}
+					}
+					section SharedAnalytics_Section
+					{
+						type = shared_user_report_section
+						displayname = "Reports"
+						icon = "business-chart-bar-33"
+					}
+				}
+				preference
+				{
+					icon
+					{
+						style = outline
+					}
+				}
+			
+	}
+	customize
+	{
+	
+				font = "lato"
+				color options
+				{
+					color = "11"
+				}
+				logo
+				{
+					preference = "app_icon"
+					placement = "left"
+				}
+			
+	}
+	}
+
+	phone
+	{
+	forms
+	{
+	
+				form Staff_Details
+				{
+					label placement = auto
+				}
+			
+	}
+	customize
+	{
+	
+				layout = twocolumn
+				font = "default"
+				style = "3"
+				color options
+				{
+					color = chryslerpurple
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	}
+	}
+
+	tablet
+	{
+	forms
+	{
+	
+				form Staff_Details
+				{
+					label placement = auto
+				}
+			
+	}
+	customize
+	{
+	
+				layout = slidingpane
+				font = "default"
+				style = "3"
+				color options
+				{
+					color = lightred
+				}
+				logo
+				{
+					preference = "none"
+				}
+			
+	}
+	}
+
+	translation
+	{
+	
+	{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+	
+	}
+
+	connections
+	{
+	
+			zoho_bookings_connection1
+			(
+				displayname = "Zoho Bookings Connection1"
+				user access = true
+				auth per env = true
+				connector = zoho_bookings
+				permissions = {"get_all_appointments"}
+			)
+			bigin_by_zoho_crm_connection
+			(
+				displayname = "Bigin by Zoho CRM Connection"
+				connector = zoho_bigin
+				connection mode = byoc
+				permissions = {"create_call","create_company","create_contact","create_event","create_pipeline","create_product","create_task","create_user","get_all_calls","get_all_companies","get_all_contacts","get_all_events","get_all_pipelines","get_all_products","get_all_tasks","get_all_users","get_call","get_company","get_contact","get_event","get_pipeline","get_product","get_task","get_user","search_calls","search_companies","search_contacts","search_events","search_pipelines","search_products","search_tasks","sync_calls","sync_companies","sync_contacts","sync_events","sync_pipelines","sync_products","sync_tasks","update_call","update_company","update_contact","update_event","update_pipeline","update_product","update_task","update_user"}
+			)
+			zoho_crm_connection
+			(
+				displayname = "Zoho CRM Connection"
+				connector = zohocrm2
+				permissions = {"all_attachment_operations","delete_attachment","get_all_attachments","upload_attachment","get_file","upload_files_to_zfs","all_global_picklist_operations","get_all_layouts","mass_change_owner","mass_change_owner_status","mass_convert_lead","mass_convert_lead_status","mass_delete_records","mass_delete_status","mass_update_records","mass_update_status","all_module_operations","get_all_modules","create_record","delete_record","get_all_records","get_record","search_records","sync_records","update_record","create_user","get_all_users","get_user","update_user"}
+			)
+		
+	}
+}
