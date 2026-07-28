@@ -1,18 +1,20 @@
 connections
 {
-	zoho_bookings_connection1
-	(
-		displayname = "Zoho Bookings Connection1"
-		user access = true
-		auth per env = true
-		connector = zoho_bookings
-		permissions = {"get_all_appointments"}
-	)
-	bigin_by_zoho_crm_connection
-	(
-		displayname = "Bigin by Zoho CRM Connection"
-		connector = zoho_bigin
-		connection mode = byoc
-		permissions = {"create_call","create_company","create_contact","create_event","create_pipeline","create_product","create_task","create_user","get_all_calls","get_all_companies","get_all_contacts","get_all_events","get_all_pipelines","get_all_products","get_all_tasks","get_all_users","get_call","get_company","get_contact","get_event","get_pipeline","get_product","get_task","get_user","search_calls","search_companies","search_contacts","search_events","search_pipelines","search_products","search_tasks","sync_calls","sync_companies","sync_contacts","sync_events","sync_pipelines","sync_products","sync_tasks","update_call","update_company","update_contact","update_event","update_pipeline","update_product","update_task","update_user"}
-	)
+
+		zoho_bookings_connection1
+		(
+			displayname = "Zoho Bookings Connection1"
+			user access = true
+			auth per env = true
+			connector = zoho_bookings
+			permissions = {"get_all_appointments"}
+		)
+		bigin_by_zoho_crm_connection
+		(
+			displayname = "Bigin by Zoho CRM Connection"
+			connector = zoho_bigin
+			connection mode = byoc
+			permissions = {"create_call","create_company","create_contact","create_event","create_pipeline","create_product","create_task","create_user","get_all_calls","get_all_companies","get_all_contacts","get_all_events","get_all_pipelines","get_all_products","get_all_tasks","get_all_users","get_call","get_company","get_contact","get_event","get_pipeline","get_product","get_task","get_user","search_calls","search_companies","search_contacts","search_events","search_pipelines","search_products","search_tasks","sync_calls","sync_companies","sync_contacts","sync_events","sync_pipelines","sync_products","sync_tasks","update_call","update_company","update_contact","update_event","update_pipeline","update_product","update_task","update_user"}
+		)
+	
 }
