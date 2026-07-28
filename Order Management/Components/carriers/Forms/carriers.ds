@@ -67,6 +67,15 @@ form carriers
 				width = medium
 			)
 	
+			address
+			(
+     			type = text
+				displayname = "Address"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
 			actions
 			{
 				on add
