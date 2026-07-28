@@ -1,0 +1,89 @@
+report Pending_PO_Approvals
+{
+    quickview
+    (
+        layout
+        (
+            type = -1
+            datablock1
+            (
+                layout type = -1
+                fields
+                (
+                    PO_Number
+                    Vendor
+                    PO_Date
+                    Expected_Delivery_Date
+                    PO_Status
+                    Requested_By
+                    Approved_By
+                    Total_Amount
+                    Linked_Production
+                    Linked_Service
+                )
+            )
+        )
+        menu
+        (
+            header
+            (
+                Edit
+                Duplicate
+                Delete
+            )
+            record
+            (
+                Edit
+                Duplicate
+                Delete
+            )
+        )
+        action
+        (
+            on click
+            (
+                View Record
+            )
+            on right click
+            (
+                Edit
+                Delete
+                Duplicate
+                View Record
+            )
+        )
+    )
+    detailview
+    (
+        layout
+        (
+            type = 1
+            datablock1
+            (
+                layout type = -2
+                fields
+                (
+                    PO_Number
+                    Vendor
+                    PO_Date
+                    Expected_Delivery_Date
+                    PO_Status
+                    Requested_By
+                    Approved_By
+                    Total_Amount
+                    Linked_Production
+                    Linked_Service
+                )
+            )
+        )
+        menu
+        (
+            header
+            (
+                Edit
+                Duplicate
+                Delete
+            )
+        )
+    )
+}

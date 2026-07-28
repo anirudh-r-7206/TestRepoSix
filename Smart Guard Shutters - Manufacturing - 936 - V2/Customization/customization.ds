@@ -1,0 +1,22 @@
+customize
+{
+    new theme = 202
+    new theme color = 5
+    font = "poppins"
+
+    color options
+    {
+        color = "5"
+    }
+
+    logo
+    {
+        preference = "none"
+        placement = "left"
+    }
+
+    custom css
+    {
+        content = ":root { --sgs-primary: #2563eb; --sgs-accent: #14b8a6; --sgs-surface: #f8fafc; --sgs-text: #0f172a; } body, .zc-component { font-family: 'Poppins', sans-serif; }"
+    }
+}
