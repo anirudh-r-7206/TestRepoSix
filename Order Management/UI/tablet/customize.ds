@@ -6,10 +6,7 @@ customize
 			style = "3"
 			color options
 			{
-				name = "custom_color"
-				brand color = "#2b3797"
-				navigation background color = "#09103d"
-				type = "custom"
+				color = green
 			}
 			logo
 			{

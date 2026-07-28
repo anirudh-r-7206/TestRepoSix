@@ -1,21 +1,15 @@
 customize
 {
 
-			layout
-			{
-				theme = "theme_6"
-			}
-			font = "lato"
+			new theme = 11
+			font = "poppins"
 			color options
 			{
-				name = "custom_color"
-				brand color = "#2b3797"
-				navigation background color = "#09103d"
-				type = "custom"
+				color = "5"
 			}
 			logo
 			{
-				preference = "company_logo"
+				preference = "none"
 				placement = "left"
 			}
 		

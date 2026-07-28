@@ -1,7 +1,0 @@
-string Dev.get_User_Email()
-{
-
-                 	// 	return "demouser_4@zohocreator.com";
-                 	return zoho.loginuserid;
-                 
-}

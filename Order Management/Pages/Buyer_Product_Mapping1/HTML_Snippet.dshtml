@@ -1,9 +1,0 @@
-<style>
-	[viewlinkname="Buyer_Product_Mapping_Report"], [pagelinkname="Buyer_Product_Mapping1"]#zppagesLive, [pagelinkname="Buyer_Product_Mapping1"] div#elementsContainer, [pagelinkname="Buyer_Product_Mapping1"] div#row_1 {
-		height: 100% !important;
-	}
-	[pagelinkname="Buyer_Product_Mapping1"] .Layout.elemContainment{
-		height: calc(100% - 16px);
-	}
-	</style>
-<div elName='zc-component' name="BuyerProducts" viewLinkName='Buyer_Product_Mapping_Report' params='zc_Header=true'>Loading View...</div>

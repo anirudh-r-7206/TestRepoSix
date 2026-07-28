@@ -1,7 +1,0 @@
-<%
-	get_Product = Add_Product[ID == input.Product_ID];
-	image_link = get_Product.Primary_Image;
-	fileName = image_link.getSuffix("image/").getPrefix("\\" lowqual");
-	pubImageUrl = "https://creatorapp.zoho.com/file" + zoho.appuri + "Buyer_Products1/" + get_Product.ID + "/Primary_Image/image-download?filepath=/" + fileName;
-	%>
-<img src=<%=pubImageUrl%> alt="Product" />
