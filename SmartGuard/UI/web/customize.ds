@@ -1,0 +1,25 @@
+customize
+{
+    layout
+    {
+        theme = "theme_2"
+        variant = "variant_2"
+    }
+    font = "poppins"
+
+    color options
+    {
+        color = "5"
+    }
+
+    logo
+    {
+        preference = "app_icon"
+        placement = "left"
+    }
+
+    custom css
+    {
+        content = ":root { --sgs-primary: #2563eb; --sgs-accent: #14b8a6; --sgs-surface: #f8fafc; --sgs-text: #0f172a; } .zc-app-header, .zc-header { font-family: 'Poppins', sans-serif; } .zc-component, .zc-pb-page-content-wrapper { font-family: 'Poppins', sans-serif; }"
+    }
+}

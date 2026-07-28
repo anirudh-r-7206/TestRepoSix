@@ -1,0 +1,19 @@
+<page linkname = "Inventory_Detail" parameters = "string Item_Type, int Item_ID" displayname = "Inventory Detail"/>
+<content>
+<zml>
+  <layout>
+    <row>
+      <column width='100%'>
+        <dsp id='Inventory_Detail_Snippet' elementName='Inventory_Detail_Snippet'>
+          <![CDATA[htmlpage Inventory_Detail_Snippet()
+             content
+             <%{%>
+                 <file name:Inventory_Detail_Snippet.dshtml/>
+             <%}%>
+          ]]>
+        </dsp>
+      </column>
+    </row>
+  </layout>
+</zml>
+</content>

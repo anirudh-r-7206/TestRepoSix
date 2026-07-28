@@ -1,0 +1,85 @@
+report All_Customers
+{
+    quickview
+    (
+        layout
+        (
+            type = -1
+            datablock1
+            (
+                layout type = -1
+                fields
+                (
+                    Customer_Code
+                    Customer_Name
+                    Contact_Person
+                    Phone
+                    Email
+                    Area_or_City
+                    GST_or_Tax_Number
+                    Active
+                )
+            )
+        )
+        menu
+        (
+            header
+            (
+                Edit
+                Duplicate
+                Delete
+            )
+            record
+            (
+                Edit
+                Duplicate
+                Delete
+            )
+        )
+        action
+        (
+            on click
+            (
+                View Record
+            )
+            on right click
+            (
+                Edit
+                Delete
+                Duplicate
+                View Record
+            )
+        )
+    )
+    detailview
+    (
+        layout
+        (
+            type = 1
+            datablock1
+            (
+                layout type = -2
+                fields
+                (
+                    Customer_Code
+                    Customer_Name
+                    Contact_Person
+                    Phone
+                    Email
+                    Area_or_City
+                    GST_or_Tax_Number
+                    Active
+                )
+            )
+        )
+        menu
+        (
+            header
+            (
+                Edit
+                Duplicate
+                Delete
+            )
+        )
+    )
+}
