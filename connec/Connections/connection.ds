@@ -22,5 +22,10 @@ connections
 			connector = zohocrm2
 			permissions = {"all_attachment_operations","delete_attachment","get_all_attachments","upload_attachment","get_file","upload_files_to_zfs","all_global_picklist_operations","get_all_layouts","mass_change_owner","mass_change_owner_status","mass_convert_lead","mass_convert_lead_status","mass_delete_records","mass_delete_status","mass_update_records","mass_update_status","all_module_operations","get_all_modules","create_record","delete_record","get_all_records","get_record","search_records","sync_records","update_record","create_user","get_all_users","get_user","update_user"}
 		)
+		Basic_Key
+		(
+			displayname = "Basic Key"
+			custom connector = Basic_Key
+		)
 	
 }

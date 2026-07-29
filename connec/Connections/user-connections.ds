@@ -1,0 +1,13 @@
+connectors
+{
+	Basic_Key
+	(
+		displayname = "Basic Key"
+		description = "Custom connector that sends an API key in the x-api-key header. Enter the key value when authorizing the connection."
+		auth type = "api_key"
+		configurations
+		(
+			parameters = [{"key":"x-api-key","displayname":"API Key","location":"header"}]
+		)
+	)
+}
