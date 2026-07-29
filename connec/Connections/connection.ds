@@ -27,5 +27,10 @@ connections
 			displayname = "Basic Key"
 			custom connector = Basic_Key
 		)
+		API_Key_Connection_2
+		(
+			displayname = "API Key Connection 2"
+			custom connector = API_Key_Connection_2
+		)
 	
 }
