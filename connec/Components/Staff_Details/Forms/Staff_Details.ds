@@ -33,13 +33,6 @@ form Staff_Details
 	 			column = 1   
 				width = medium
 			)
-			Notes
-			(
-				type = text
-	 			row = 1
-	 			column = 1   
-				width = medium
-			)
 	
 			actions
 			{
