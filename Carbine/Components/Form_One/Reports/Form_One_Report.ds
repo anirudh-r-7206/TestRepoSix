@@ -1,0 +1,14 @@
+default list Form_One_Report
+{
+
+			displayName = "Form One Report"
+			show all rows from Form_One    
+			(
+				Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Single_Line as "Single Line"
+			)
+		
+}
