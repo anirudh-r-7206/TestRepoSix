@@ -1,0 +1,12 @@
+default list Add_Order_Report
+{
+
+			displayName = "Add Order Report"
+			show all rows from Add_Order    
+			(
+				Product_Name as "Product Name"
+				Price
+				Integration
+			)
+		
+}

@@ -1,0 +1,11 @@
+connections
+{
+
+		zoho_expense_connection
+		(
+			displayname = "Zoho Expense Connection"
+			connector = zoho_expense_connector
+			permissions = {"create_customer","create_expense","create_expense_report","create_project","create_user","delete_expense_report","get_all_accounts","get_all_active_users","get_all_currencies","get_all_customers","get_all_expense_categories","get_all_expense_reports","get_all_expenses","get_all_merchants","get_all_organizations","get_all_projects","get_all_taxes","get_all_users","get_customer","get_expense","get_expense_report","get_mercnant","get_project","get_user","search_customers","search_expenses","search_projects","search_users","update_customer","update_expense","update_expense_report","update_project","update_user"}
+		)
+	
+}

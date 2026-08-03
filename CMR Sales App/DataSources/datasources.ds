@@ -1,0 +1,243 @@
+datasources
+{
+
+		zoho_expense_expenses
+		{
+			displayname = "Zoho Expense Expenses"
+			module = expense_claim
+			connection = zoho_expense_connection
+			must have amount
+			(
+				type = decimal
+				displayname = "Amount"
+				source field name = "amount"
+			)
+			base_currency_total
+			(
+				type = decimal
+				displayname = "Base Currency Total"
+				source field name = "bcy_total"
+				report only = true
+			)
+			calculate_mileage_using
+			(
+				type = picklist
+				displayname = "Calculate Mileage Using"
+				source field name = "mileage_type"
+				values = {"manual":"Distance Traveled","non_mileage":"Non Mileage","odometer":"Odometer Reading"}
+			)
+			must have category
+			(
+				type = picklist
+				displayname = "Category"
+				source field name = "category_id"
+			)
+			claim_reimbursement
+			(
+				type = checkbox
+				displayname = "Claim Reimbursement"
+				source field name = "is_reimbursable"
+			)
+			created_time
+			(
+				type = datetime
+				displayname = "Created Time"
+				source field name = "created_time"
+				report only = true
+				display format = "yyyy-MM-dd'T'HH:mm:ssZ"
+			)
+			must have currency
+			(
+				type = picklist
+				displayname = "Currency"
+				source field name = "currency_id"
+			)
+			customer
+			(
+				type = picklist
+				displayname = "Customer"
+				source field name = "customer_id"
+			)
+			description
+			(
+				type = textarea
+				displayname = "Description"
+				source field name = "description"
+				search operators = {"like"}
+			)
+			distance
+			(
+				type = decimal
+				displayname = "Distance"
+				source field name = "distance"
+			)
+			due_days
+			(
+				type = number
+				displayname = "Due Days"
+				source field name = "due_days"
+				report only = true
+			)
+			end_reading
+			(
+				type = decimal
+				displayname = "End Reading"
+				source field name = "end_reading"
+			)
+			exchange_rate
+			(
+				type = decimal
+				displayname = "Exchange Rate"
+				source field name = "exchange_rate"
+				report only = true
+			)
+			must have expense_date
+			(
+				type = date
+				displayname = "Expense Date"
+				source field name = "date"
+				display format = "yyyy-MM-dd"
+			)
+			expense_id
+			(
+				type = text
+				displayname = "Expense Id"
+				source field name = "expense_id"
+				primary = true
+				report only = true
+			)
+			expense_type
+			(
+				type = text
+				displayname = "Expense Type"
+				source field name = "expense_type"
+				report only = true
+			)
+			gl_code
+			(
+				type = text
+				displayname = "GL Code"
+				source field name = "gl_code"
+				report only = true
+			)
+			is_expense_billable
+			(
+				type = checkbox
+				displayname = "Is Expense Billable"
+				source field name = "is_billable"
+			)
+			is_expired
+			(
+				type = checkbox
+				displayname = "Is Expired"
+				source field name = "is_expired"
+				report only = true
+			)
+			is_personal_expense
+			(
+				type = checkbox
+				displayname = "Is Personal Expense"
+				source field name = "is_personal"
+				report only = true
+			)
+			is_tax_inclusive
+			(
+				type = checkbox
+				displayname = "Is Tax Inclusive"
+				source field name = "is_inclusive_tax"
+			)
+			last_modified_time
+			(
+				type = datetime
+				displayname = "Last Modified Time"
+				source field name = "last_modified_time"
+				report only = true
+				display format = "yyyy-MM-dd'T'HH:mm:ssZ"
+			)
+			merchant
+			(
+				type = picklist
+				displayname = "Merchant"
+				source field name = "merchant_id"
+			)
+			merchant_name
+			(
+				type = text
+				displayname = "Merchant Name"
+				source field name = "merchant_name"
+				report only = true
+			)
+			mileage_rate
+			(
+				type = decimal
+				displayname = "Mileage Rate"
+				source field name = "mileage_rate"
+			)
+			mileage_unit
+			(
+				type = picklist
+				displayname = "Mileage Unit"
+				source field name = "mileage_unit"
+				report only = true
+				values = {"km","mile"}
+			)
+			paid_through_account
+			(
+				type = picklist
+				displayname = "Paid Through Account"
+				source field name = "paid_through_account_id"
+			)
+			payment_mode
+			(
+				type = text
+				displayname = "Payment Mode"
+				source field name = "payment_mode"
+			)
+			project
+			(
+				type = picklist
+				displayname = "Project"
+				source field name = "project_id"
+			)
+			reference_number
+			(
+				type = text
+				displayname = "Reference Number"
+				source field name = "reference_number"
+			)
+			report
+			(
+				type = picklist
+				displayname = "Report"
+				source field name = "report_id"
+			)
+			start_reading
+			(
+				type = decimal
+				displayname = "Start Reading"
+				source field name = "start_reading"
+			)
+			status
+			(
+				type = picklist
+				displayname = "Status"
+				source field name = "status"
+				report only = true
+				values = {"billable":"Billable","invoiced":"Invoiced","non-billable":"Non billable","reimbursed":"Reimbursed","unbilled":"Unbilled"}
+			)
+			tax
+			(
+				type = picklist
+				displayname = "Tax"
+				source field name = "tax_id"
+			)
+			total
+			(
+				type = decimal
+				displayname = "Total"
+				source field name = "total"
+				report only = true
+			)
+		}
+	
+}
